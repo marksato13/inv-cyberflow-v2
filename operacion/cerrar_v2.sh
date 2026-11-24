@@ -5,7 +5,7 @@
 # 3. relojes de fin   4. reúne en Sensor1 pruebas/<ID>: generador, servidor (recortado a la
 #    ventana), DNS, vigía y lanzamiento   5. conciliación, cobertura, extracción y verificación
 #    con ulimit   6. SHA256SUMS de capturas/<ID> y pruebas/<ID>.
-# No borra nada. La copia al portátil se hace después, con verificación de hashes (COMANDOS.md).
+# Se puede repetir sobre el mismo ID (rehace el análisis). No borra nada. La copia al portátil se hace después, con verificación de hashes (COMANDOS.md).
 set -euo pipefail
 ID=${1:?ID}
 CL=/home/adminclientes/cyberflow-v2; S1=/home/m4rk/cyberflow-v2
@@ -36,7 +36,7 @@ done
 
 # 4. Servidor: solo las líneas de la ventana [DESDE-300, HASTA+300] (el registro es acumulativo)
 for f in http-80 https-443; do
-  $SSH srvdmz "python3 - $((DESDE - 300)) $((HASTA + 300)) /home/adminsrvdmz/laboratorio/v2/registro/$f.jsonl" > "$E/servidor-$f.jsonl" <<'PY'
+  ssh -o BatchMode=yes -o ConnectTimeout=8 srvdmz "python3 -$((DESDE - 300)) $((HASTA + 300)) /home/adminsrvdmz/laboratorio/v2/registro/$f.jsonl" > "$E/servidor-$f.jsonl" <<'PY'
 import sys, json, datetime as d
 a, b, ruta = float(sys.argv[1]), float(sys.argv[2]), sys.argv[3]
 for l in open(ruta, encoding="utf-8"):
@@ -67,7 +67,7 @@ C=$S1/codigo; cd $P; mkdir -p cobertura
 \$T python3 \$C/captura/cobertura_v2.py --capturas $S1/capturas/$ID --transacciones generador/$ID/transacciones-*.jsonl \
   --salida cobertura/cobertura.json --csv cobertura/cobertura.csv; echo "cobertura rc=\$?"
 \$T python3 \$C/extraccion/extraer_v2.py $S1/capturas/$ID --salida extraccion; echo "extraer rc=\$?"
-\$T python3 \$C/extraccion/verificar_v2.py $S1/capturas/$ID --salida verificacion --max-filas 3000; echo "verificar rc=\$?"
+\$T python3 \$C/extraccion/verificar_v2.py $S1/capturas/$ID --salida extraccion --max-filas 3000; echo "verificar rc=\$?"
 EOF
 log analisis "$(grep -o '[a-z]* rc=[0-9]*' "$E/analisis-salida.txt" | tr '\n' ' ')"
 scp -q -o BatchMode=yes "$E/analisis-salida.txt" "$E/cierre.jsonl" sensor1:"$P/registros/" || true

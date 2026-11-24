@@ -422,7 +422,8 @@ def main(argv=None):
     if a.csv:
         filas = informe["por_transaccion"]
         with open(a.csv, "w", newline="", encoding="utf-8") as f:
-            escritor = csv.DictWriter(f, fieldnames=list(filas[0]) if filas else ["transaccion_id"])
+            campos = list(dict.fromkeys(k for fila in filas for k in fila)) or ["transaccion_id"]
+            escritor = csv.DictWriter(f, fieldnames=campos)  # filas con campos distintos según el protocolo
             escritor.writeheader()
             escritor.writerows(filas)
     print(json.dumps({"total": informe["total"], "errores": informe["errores"]}, ensure_ascii=False))

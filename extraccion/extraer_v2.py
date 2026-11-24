@@ -146,14 +146,41 @@ def leer_eve(archivo: Path):
         yield t, l, e
 
 
-def leer_contextos_crudos(rutas, inventario):
-    """Lee fichero a fichero y registra todas las IP antes de deduplicar."""
-    anterior = float("-inf")
+VENTANA_ORDEN_PCAP_S = 1.0
+ORDEN_PCAP = {"reordenadas": 0, "tardias_descartadas": 0, "desorden_max_s": 0.0}
+
+
+def tramas_ordenadas(rutas):
+    """Tramas en orden temporal. V1 ordenaba todo en memoria (sorted); aquí se usa un búfer de
+    VENTANA_ORDEN_PCAP_S. T11: 2,7 % de las tramas llegan hasta 0,6 ms hacia atrás (dos copias
+    del espejo y colas del kernel). Lo que supere la ventana se descarta y se cuenta."""
+    import heapq
+    ORDEN_PCAP.update(reordenadas=0, tardias_descartadas=0, desorden_max_s=0.0)
+    monton, n, maximo, emitido = [], 0, float("-inf"), float("-inf")
     for path in rutas:
         for ts, frame in iter_tramas(path):
-            if ts < anterior:
-                raise ValueError("PCAP fuera de orden temporal; ordenar los originales antes de extraer")
-            anterior = ts
+            if ts < maximo:
+                ORDEN_PCAP["reordenadas"] += 1
+                ORDEN_PCAP["desorden_max_s"] = max(ORDEN_PCAP["desorden_max_s"], maximo - ts)
+            if ts < emitido:
+                ORDEN_PCAP["tardias_descartadas"] += 1
+                continue
+            maximo = max(maximo, ts)
+            n += 1
+            heapq.heappush(monton, (ts, n, frame))
+            while monton[0][0] < maximo - VENTANA_ORDEN_PCAP_S:
+                t, _, f = heapq.heappop(monton)
+                emitido = t
+                yield t, f
+    while monton:
+        t, _, f = heapq.heappop(monton)
+        yield t, f
+
+
+def leer_contextos_crudos(rutas, inventario):
+    """Lee fichero a fichero y registra todas las IP antes de deduplicar."""
+    for ts, frame in tramas_ordenadas(rutas):
+        if True:
             ctx = v3.parse_con_contexto(ts, frame)
             if ctx is None:
                 continue
@@ -359,6 +386,7 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
     (salida / "inventario_ips.json").write_text(json.dumps(inventario_out, indent=2, ensure_ascii=False), encoding="utf-8")
     resumen = dict(cuentas)
     resumen["orden_eve"] = dict(ORDEN_EVE, ventana_s=VENTANA_ORDEN_EVE_S)
+    resumen["orden_pcap"] = dict(ORDEN_PCAP, ventana_s=VENTANA_ORDEN_PCAP_S)
     resumen.update({"ejecucion": archivo.name, "poblacion": sorted(poblacion), "fronteras_utc": [utc(f) for f in fronteras],
                     "pcap_ficheros": len(rutas), "paso_s": 10, "historia_maxima_s": 60})
     (salida / "resumen.json").write_text(json.dumps(resumen, indent=2, ensure_ascii=False), encoding="utf-8")
