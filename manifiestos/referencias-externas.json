@@ -26,7 +26,8 @@
    "captura/cobertura_v2.py": "40ad84a864b1f863"
   },
   "dc1_zona_dns": "cf-v2.lab (portal, intranet, correo, wiki, erp, archivos -> 10.10.30.10)",
-  "sensor1_cyberflow.local.toml_sha256_prefijo": "58f64dd388600801"
+  "sensor1_cyberflow.local.toml_sha256_prefijo": "64b0a8e7d3cab99e",
+  "core_stack_running_config": "Gi2/0/19: mtu 9198 (24-nov ~18:40 UTC; sin write memory)"
  },
  "v1_linea_base_recontada": {
   "fichero": "sensor1:/home/m4rk/cyberflow/artifacts/aprendizaje/base/particionado-nota-L.csv",
@@ -48,6 +49,12 @@
      "eve_sha256": "e0f5823459a92556bea75dff5431a6551e0776dc042d0807425a132fc1ead481",
      "inventario_sha256": "beef68e052f21fc2d9ed389b77419dd39feaf3158720151202acf543f5b69105"}
   },
+  "v2-evidencia-t8-sensor1.tgz": "15695530caf514edcfe80ceb3406d4a2a2e68d782135ad1c8ee18a39d2a5a549",
+  "V2-PRUEBA-20261124T185246Z (T8, espejo corregido)": {"pcap_ficheros": 151, "pcap_bytes": 156767073,
+     "eve_sha256": "d0ab64cb17217e8f178e42f991cdafea87ef678b0c0ef9059ea550cbeb52d9f3",
+     "manifiesto_sha256": "d3685b34fb289791f0de8b6317b5758d025577a4a378fc55e5e0798559427855",
+     "inventario_sha256": "8b70115fe88f0d3ce353c787e02beaab4806a3ec79654732978a9a760dd182c1",
+     "cobertura_sha256": "95c0e159ef0e86a9ad3db83431fd1fef7072512cfa95a48e033b7b3a26cdd571"},
   "cobertura.json": {
    "T1": "8ad5790093ca88b483dc40e629086b319b6331a1c96c9202ca6b51e629d9aaa6",
    "T2": "2cf3a1987c44e38404d3016514862592398670278d4771baf587ec2ec3074216"

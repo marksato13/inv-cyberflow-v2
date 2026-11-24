@@ -184,6 +184,58 @@ La sesión SPAN 1 tiene como origen `Gi1/0/23` y `Gi2/0/23` (both), y como desti
 - La reversión es `interface Gi2/0/19` + `no mtu`.
 - **V1 en sombra ve desde ahora la carga útil completa**: sus características de bytes cambian de distribución respecto a lo que aprendió (ver PENDIENTES).
 
+### T8: prueba corta repetida con el espejo corregido (`V2-PRUEBA-20261124T185246Z`)
+
+**Ventana:** 18:52:47–19:04:56 UTC. Se aplicó el programa `prueba-corta.json` (sha `0715c658…`) a los seis perfiles.
+
+**Desviación.** El generador arrancó 36 s después que el archivador, cuando COMANDOS §2 pide ≥ 2 min. El archivador ya capturaba antes de la primera transacción, así que la cobertura no se ve afectada; queda anotado.
+
+**Resultados:**
+
+| Comprobación | Resultado | Antes del arreglo (T1) |
+|---|---|---|
+| Transacciones | 399: 374 `ok`, 24 `error_intencional`, 1 `variacion_servidor`, **0 `fallo_inesperado`** | — |
+| Peticiones vistas en el PCAP | 399/399 (100 %); 0 transacciones no vistas | 100 % |
+| Carga útil servidor → clientes, sin copias (C7) | **85,96 %** (80,2 MB en el PCAP frente a 93,3 MB registrados) | 0,30 % |
+| Desfase aparente SYN − inicio | mediana 0,65 ms; máximo 1,73 ms (n = 388) | — |
+| EVE: HTTP frente al registro | 501 coinciden, 3 difieren, 8 sin transacción | — |
+| EVE: TLS | 112 eventos TLS 1.3 | — |
+| EVE: DNS | 126 NOERROR y 8 NXDOMAIN | — |
+| Volumen | PCAP 156,8 MB en 728 s = **12,9 MB/min ≈ 0,78 GB/h**; EVE 16,3 MB/h | — |
+
+**El 14 % de carga útil que falta.** Se concentra en `web_grande`, que suma 89 MB de los 93 MB. Esas descargas van a velocidad de línea, y con dos copias superan 1 Gbit/s en el destino del SPAN (T7). Es una **limitación física documentada**, no un fallo del software. Opciones antes de la captura definitiva:
+
+1. aceptar y reportar la pérdida;
+2. limitar la velocidad de `web_grande` en el servidor o el cliente;
+3. espejar un solo sentido o una sola VLAN.
+
+Las opciones 2 y 3 cambian el tráfico o la cobertura; las decide Mark.
+
+**Almacenamiento.** A este ritmo, 42 h ≈ **33 GB** de PCAP y 18 h ≈ 14 GB, y Sensor1 tiene **23 GB** libres. El ritmo de las jornadas puede ser menor que el de la prueba corta, pero el destino del almacenamiento ya es **bloqueante** para las 42 h; para el piloto, no.
+
+Evidencia privada: `v2-evidencia-t8-sensor1.tgz` (sha256 `15695530…`), manifiesto `d3685b34…`, inventario `8b70115f…` y `cobertura.json` `95c0e159…`.
+
+### T9: discrepancia de `rx_dropped`
+
+En 30 s, `rx_dropped` de `ens37` creció 421 de 15 343 paquetes (2,74 %). En el mismo intervalo, `rx_nohandler` creció 0, el *backlog* de `softnet_stat` tuvo 0 descartes, y tcpdump y Suricata marcaron 0 descartes.
+
+En el PCAP del mismo periodo, el 2,90 % de las tramas no lleva un protocolo que el kernel maneje: 425 son 802.1Q con contenido que no es IP, ARP ni IPv6, y 6 son Loopback 0x9000. El kernel 6.8 entrega esas tramas a los *sockets* de paquetes (tcpdump/Suricata) y **después** las descarta como «protocolo no manejado», contándolas en `rx_dropped`.
+
+**Conclusión:** `rx_dropped` **no mide pérdida de captura**. Como indicador de pérdida se usan los descartes de tcpdump y Suricata, y como contador físico los output drops de `Gi2/0/19`.
+
+### T10: relojes
+
+Todos los equipos están sincronizados por NTP (24-nov, ~18:53 UTC):
+
+| Equipo | Desfase | Fuente |
+|---|---|---|
+| srv-dmz | −0,153 ms | ntp.ubuntu.com, estrato 2 |
+| Clientes | −0,230 ms | ntp.ubuntu.com |
+| DC1 | +2,7 ms («fast») | a.ntp.br, estrato 3 |
+| Sensor1 | — | `NTPSynchronized=yes` |
+
+La medida directa por SSH no sirve: la asimetría de la sesión da ~170 ms. Entre Clientes y Sensor1, el desfase de T8 es ≤ 1,7 ms. Todo queda muy por debajo del paso de 10 s.
+
 ## 6. Pruebas sin red del repositorio
 
 `python -m unittest discover -s tests` da 20 de 20 en Windows (Python 3.14.3). Cubren:

@@ -6,9 +6,9 @@
   "captura/cobertura_v2.py": "40ad84a864b1f86378d61afb05c08298a7710efa247c699e4cd457a673652ab5",
   "docs/ACLARACIONES.md": "8235330c820a95a37fc5df4439bc7b7e5aad5048b7b2ffa4c563a032a8e78a97",
   "docs/COMANDOS.md": "df7b1d11ced9a0671fb7a4f998824df55b0a7860bd9c3c66584d2a3a2869d3eb",
-  "docs/INFORME-PRUEBAS-2026-11-24.md": "0840c39f712e1de2a05e5149b68c0cec7b296231a020a9b4b4f06ba29e93f4b5",
+  "docs/INFORME-PRUEBAS-2026-11-24.md": "059b685c4d51e4e5677efc38c37bc5148d66fde135eaab4e42a5f86fedbef8f7",
   "docs/MATRIZ-OBSERVACIONES.md": "6f9ccbab6126675437d99db84bef6a249ee69d1419b82c8fbbda5daeb35cfec8",
-  "docs/PENDIENTES.md": "8f389d780212395d1e9e11b394523c27f56149ef4f6b445edb0403b9fea3cf07",
+  "docs/PENDIENTES.md": "6907b6469e71194e7542104936056ede59126bd8f19790744b58c597cc6e31f4",
   "docs/PROCEDENCIA.md": "491161b7c038a7bc25283fd6d6a895d9e39e2439b9fb5737824d216033d1f351",
   "docs/PROTOCOLO.md": "a3d6df3e3e17952936de5af31deece99ab4eee3191f6a5cc05111bbd871f7e77",
   "extraccion/README.md": "efa76aa7899f743952bad8b5a9643d10067f7cef5533f11a5f88fcf63f7534e4",
@@ -16,7 +16,7 @@
   "generador/programa.py": "0096f920f4ea5bb0615e1d0634e81c8361938be687c758cd2521f48de78b59a2",
   "generador/transacciones.py": "a507e2d7d5034e042fbbde1090b3519e02e81a53c6d1dc1d035a80e3ee138518",
   "manifiestos/generar_manifiesto.py": "b3e9a11321b38a63c93dab379f761d675e05d3f2ada332224ef6e86649b69cfa",
-  "manifiestos/referencias-externas.json": "2e8fab0b64a68da066ee4df13ab7f49dd559842982926054c4821d421b4be3d6",
+  "manifiestos/referencias-externas.json": "a183a1a655e4fbb5b721e508b9ab4878f43c66e2c1830b0e7beb9534e7714a8d",
   "operacion/v2ctl.py": "a6066397908b1d12433c005da2c4ebe43a62cf4d0033565637f4d3d5b8a26693",
   "programas/README.md": "5dca350fc360188b95f91ace2849a9112867a11d85526f6a61ba70bf192c3bc7",
   "programas/generar_programas.py": "34a9ade7b3451d070cdf2ffad49629d4aaa78e4020e663c18706aec0b0ec8574",
@@ -34,6 +34,14 @@
  "python_generacion": "3.14.3",
  "referencias_externas": {
   "evidencia_privada": {
+   "V2-PRUEBA-20261124T185246Z (T8, espejo corregido)": {
+    "cobertura_sha256": "95c0e159ef0e86a9ad3db83431fd1fef7072512cfa95a48e033b7b3a26cdd571",
+    "eve_sha256": "d0ab64cb17217e8f178e42f991cdafea87ef678b0c0ef9059ea550cbeb52d9f3",
+    "inventario_sha256": "8b70115fe88f0d3ce353c787e02beaab4806a3ec79654732978a9a760dd182c1",
+    "manifiesto_sha256": "d3685b34fb289791f0de8b6317b5758d025577a4a378fc55e5e0798559427855",
+    "pcap_bytes": 156767073,
+    "pcap_ficheros": 151
+   },
    "capturas": {
     "V2-PRUEBA-20261124T055719Z (archivador T0)": {
      "pcap_bytes": 10758575,
@@ -60,7 +68,8 @@
    "filas-24nov/filas-afectadas-11.csv": "3554f9e3e852d516335dedbdeea065ac782ac2207227f19f4669ce410f7ac355",
    "ubicacion": "copia privada del autor (no publicada) + Sensor1 ~/cyberflow-v2/{capturas,pruebas} + Clientes ~/cyberflow-v2/ejecuciones",
    "v2-evidencia-clientes.tgz": "3799f29790cb24d404b5547f5b78baa88f3529bc6be0c55577fe0a55a870a37c",
-   "v2-evidencia-sensor1.tgz": "4f71d6bc75a34ac9aae863b8f03ee59d68ce37e4d79eac63e2f16fc31ed4f6dd"
+   "v2-evidencia-sensor1.tgz": "4f71d6bc75a34ac9aae863b8f03ee59d68ce37e4d79eac63e2f16fc31ed4f6dd",
+   "v2-evidencia-t8-sensor1.tgz": "15695530caf514edcfe80ceb3406d4a2a2e68d782135ad1c8ee18a39d2a5a549"
   },
   "fecha": "2026-11-24",
   "laboratorio_instalado_2026_11_24": {
@@ -70,12 +79,13 @@
     "generador/transacciones.py": "a507e2d7d5034e04",
     "operacion/v2ctl.py": "a6066397908b1d12"
    },
+   "core_stack_running_config": "Gi2/0/19: mtu 9198 (24-nov ~18:40 UTC; sin write memory)",
    "dc1_zona_dns": "cf-v2.lab (portal, intranet, correo, wiki, erp, archivos -> 10.10.30.10)",
    "sensor1:~/cyberflow-v2/codigo": {
     "captura/archivar_v2.py": "295ae8b82c3d279b",
     "captura/cobertura_v2.py": "40ad84a864b1f863"
    },
-   "sensor1_cyberflow.local.toml_sha256_prefijo": "58f64dd388600801"
+   "sensor1_cyberflow.local.toml_sha256_prefijo": "64b0a8e7d3cab99e"
   },
   "v1_linea_base_recontada": {
    "fichero": "sensor1:/home/m4rk/cyberflow/artifacts/aprendizaje/base/particionado-nota-L.csv",

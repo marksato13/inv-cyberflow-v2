@@ -25,18 +25,19 @@ Preparar una prueba no es pasarla, y pasarla no cierra una observación de los r
 | 11 | Proceso que borra el anillo | Comprobado | `cyberflow-limpieza.timer`: `find … -mmin +15 -delete`, cada 5 min |
 | 12 | **Espejo sin tramas de tamaño completo** (carga útil al 0,3 %) | **Comprobado (corregido en running-config)** | T7: `mtu 9198` en CORE-STACK `Gi2/0/19` (destino del SPAN) y enlace a 1 Gbit/s. A ≤ 10 MB/s llegan las dos copias completas; en ráfagas a velocidad de línea el destino satura. Falta `write memory` (Mark) |
 | 12b | Cambio de distribución de bytes en V1 en sombra al llegar la carga útil completa | Pendiente (decisión de Mark) | Desde el 24-nov ~18:40 UTC; valorar excluir del aprendizaje V1 o pausar sus timers |
-| 13 | Configuración del SPAN en ESXi (grupo de puertos, VLAN 4095, MTU, vDS) | Pendiente | No es visible desde las VM; acceso de Mark al host |
-| 14 | Discrepancia de `rx_dropped` | Pendiente | Δ del 4–6 % en las pruebas; unida al punto 12 |
+| 12c | Carga útil en descargas a velocidad de línea | Comprobado (limitación) | T8: 85,96 % del servidor. La saturación del destino del SPAN con dos copias está en `web_grande`; aceptar, limitar o espejar un sentido es decisión de Mark |
+| 13 | Configuración del SPAN (orígenes, destino, VLAN, camino en ESXi) | Comprobado | T6/T7: SPAN 1 de CORE-STACK, Gi1/0/23 y Gi2/0/23 (both) → Gi2/0/19 → vmnic2 → vSwitch2 → PG-CYBERFLOW-SPAN (VLAN 4095); estándar, sin vDS; VLAN 20 y 30 observadas |
+| 14 | Discrepancia de `rx_dropped` | Comprobado | T9: son tramas sin protocolo manejado (2,74 % frente a 2,90 % en el PCAP) y se entregan antes a tcpdump; no es pérdida |
 | 15 | Truncado del EVE por copytruncate a las 00:00 UTC | Implementado sin verificar | El archivador lo registra; programar las jornadas sin cruzar las 00:00 UTC |
-| 16 | Volumen GB/h con carga sostenida y destino del almacenamiento privado | Pendiente | Medir en el piloto (tras el punto 12). Sensor1 tiene 24 GB libres; decidir el disco destino |
+| 16 | Volumen GB/h con carga sostenida y destino del almacenamiento privado | Pendiente (**bloqueante para las 42 h**) | T8: 0,78 GB/h con la prueba corta, que da ~33 GB para 42 h, y Sensor1 tiene 23 GB libres. Hay que medirlo con el programa del piloto y decidir el disco destino (Mark) |
 | 17 | Condición de parada por espacio | Implementado sin verificar | `--libre-minimo-gb 4` |
 | 18 | Relojes: desfase entre Clientes y Sensor1 | Comprobado | \|desfase\| ≤ 0,52 ms en T1 y T2 |
-| 19 | Reloj de srv-dmz y DC1 frente a Sensor1 | Pendiente | Añadir sondas al archivador o medir con el SYN-ACK |
+| 19 | Reloj de srv-dmz y DC1 frente a Sensor1 | Comprobado (puntual) | T10: srv-dmz −0,15 ms, DC1 +2,7 ms, Clientes −0,23 ms frente a NTP. Falta automatizar la medida antes y después de cada jornada |
 | 20 | Eventos TLS | Comprobado (perfiles) | T1: 104 eventos TLS 1.3; queda pendiente por qué desde el bastión salió 0 de 13 |
 | 21 | Extracción V2: filtro por paquete de las entidades excluidas, deduplicación del espejo, paridad, márgenes, constantes | Pendiente | `extraccion/`: incorporar `extract_multilayer_v3` con procedencia y pruebas |
 | 22 | Población: inventario de las IP observadas con su regla | Pendiente | Tras el piloto |
-| 23 | Piloto de 30 min | Pendiente (preparado, no iniciado) | PROTOCOLO §10; C7 fallaría hasta resolver el punto 12 |
-| 24 | Decisión de Mark: acumulador y aprendizaje V1 durante las jornadas | Pendiente | Exclusión por ventana (hecha) o parar los timers (sudo) |
+| 23 | Piloto de 30 min | Pendiente (preparado, no iniciado) | PROTOCOLO §10; el punto 12 está resuelto, así que C7 ya puede medirse |
+| 24 | Decisión de Mark: acumulador y aprendizaje V1 durante las jornadas | Pendiente | Exclusión por ventana: hecha, incluidas T5–T8, y también excluye todo V1 del 24-nov a las 18:15 al 26-nov a las 00:00 por la deriva del punto 12b; o parar los timers (sudo) |
 | 25 | Decisión de Mark: multiplicadores definitivos (×1,25, ×1,5, ×4, periodos activos) | Pendiente | Validar en el piloto; no ajustar con métricas |
 | 26 | E1–E3 (18 h tras el congelado), ataques y campañas A/B | Pendiente (fuera de esta preparación) | No iniciados, según lo pedido |
 | 27 | Scripts de procesamiento, entrenamiento y evaluación | Pendiente | Se incorporarán después, con su procedencia |
