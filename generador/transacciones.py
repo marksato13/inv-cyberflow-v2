@@ -46,7 +46,7 @@ ESPERADO = {
 
 
 class Medidor:
-    """Socket con contadores de bytes de aplicación (carga útil TCP o TLS)."""
+    """Cuenta bytes de aplicación; en HTTPS son texto plano, no registros TLS."""
 
     def __init__(self, s):
         self.s = s
@@ -61,6 +61,60 @@ class Medidor:
         d = self.s.recv(n)
         self.rx += len(d)
         return d
+
+
+class TLSMedido:
+    """TLS con BIO: cuenta en el socket los registros cifrados, incluido el handshake."""
+
+    def __init__(self, s: socket.socket, ctx: ssl.SSLContext, servidor: str):
+        self.s = s
+        self.entrada = ssl.MemoryBIO()
+        self.salida = ssl.MemoryBIO()
+        self.tls = ctx.wrap_bio(self.entrada, self.salida, server_side=False,
+                                server_hostname=servidor)
+        self.tx = self.rx = 0
+
+    def handshake(self):
+        self._hacer(self.tls.do_handshake)
+
+    def _vaciar(self):
+        while True:
+            datos = self.salida.read()
+            if not datos:
+                break
+            self.s.sendall(datos)
+            self.tx += len(datos)
+
+    def _hacer(self, operacion):
+        while True:
+            try:
+                resultado = operacion()
+                self._vaciar()
+                return resultado
+            except ssl.SSLWantWriteError:
+                self._vaciar()
+            except ssl.SSLWantReadError:
+                self._vaciar()
+                datos = self.s.recv(65536)
+                self.rx += len(datos)
+                if datos:
+                    self.entrada.write(datos)
+                else:
+                    self.entrada.write_eof()
+
+    def sendall(self, datos: bytes):
+        pos = 0
+        while pos < len(datos):
+            pos += self._hacer(lambda: self.tls.write(datos[pos:]))
+
+    def recv(self, n: int):
+        return self._hacer(lambda: self.tls.read(n))
+
+    def version(self):
+        return self.tls.version()
+
+    def close(self):
+        self.s.close()
 
 
 class Cliente:
@@ -90,14 +144,20 @@ class Cliente:
         puerto = self.d["puerto_https"] if https else self.d["puerto_http"]
         reg.update(destino_ip=servidor, destino_puerto=puerto,
                    protocolo="https" if https else "http", ruta=ruta, metodo=metodo)
+        reg.setdefault("bytes_tcp_enviados", 0)
+        reg.setdefault("bytes_tcp_recibidos", 0)
         s = self._conectar(servidor, puerto, ESPERA_HTTP_S, reg)
+        m = None
+        tls = None
         try:
             if https:
                 ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
                 ctx.check_hostname = False
                 ctx.verify_mode = ssl.CERT_NONE  # certificado propio del laboratorio (igual que V1)
-                s = ctx.wrap_socket(s, server_hostname=servidor)
-                reg["tls_version"] = s.version()
+                tls = TLSMedido(s, ctx, servidor)
+                s = tls
+                tls.handshake()
+                reg["tls_version"] = tls.version()
             m = Medidor(s)
             cab = "%s %s HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n" % (metodo, ruta, servidor)
             if cuerpo is not None:
@@ -134,11 +194,15 @@ class Cliente:
             if largo is not None and cuerpo_rx < largo:
                 reg["incompleta"] = True
         finally:
-            try:
+            if tls is not None:
+                reg["bytes_tcp_enviados"] = tls.tx
+                reg["bytes_tcp_recibidos"] = tls.rx
+            elif m is not None:
+                reg["bytes_tcp_enviados"] = m.tx
+                reg["bytes_tcp_recibidos"] = m.rx
+            if m is not None:
                 reg["bytes_enviados"] = m.tx
                 reg["bytes_recibidos"] = m.rx
-            except NameError:
-                pass
             try:
                 s.close()
             except OSError:
@@ -214,7 +278,8 @@ class Cliente:
     def puerto_cerrado(self, reg):
         servidor = self.d["servidor"]
         puerto = self.rng.choice(self.d["puertos_cerrados"])
-        reg.update(destino_ip=servidor, destino_puerto=puerto, protocolo="tcp")
+        reg.update(destino_ip=servidor, destino_puerto=puerto, protocolo="tcp",
+                   bytes_tcp_enviados=0, bytes_tcp_recibidos=0)
         try:
             self._conectar(servidor, puerto, ESPERA_CERRADO_S, reg).close()
         except ConnectionRefusedError:
