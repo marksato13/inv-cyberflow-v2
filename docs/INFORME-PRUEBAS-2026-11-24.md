@@ -124,6 +124,25 @@ Ejecución y archivador `V2-PRUEBA-20261124T060910Z`. El archivador empezó 23 s
 2. Si C7 sigue fallando, revisar en ESXi el grupo de puertos del sensor: MTU del vSwitch y longitud de paquete reflejado si es un vDS.
 3. Hacer el cambio persistente con un drop-in de `cyberflow-capture-nic.service` y reiniciar `ppi-motor-capture` y `suricata` para que dimensionen sus búferes.
 
+### T5: repetición de T4 con `ens37` a MTU 9000 (Mark, sudo, temporal)
+
+Mark aplicó `ip link set dev ens37 mtu 9000` y comprobé que quedó activo. Repetí el GET de 4 MB desde 10.10.20.24:
+
+- Δ `rx_bytes` de `ens37`: 488 145 B. Δ paquetes: 4 462. Δ `rx_dropped`: 196.
+- Del flujo solo se ven 10 tramas del servidor; la mayor mide 966 B. Carga útil: 0,00 MB.
+- tcpdump y Suricata siguen con 0 descartes y los servicios siguen activos.
+
+**Conclusión:** el MTU del invitado **no** era la causa. Las tramas grandes no llegan a la VM: se pierden antes, en ESXi (vSwitch, grupo de puertos o sesión de espejo) o en el camino de reenvío.
+
+Hay que revisarlo en el host, fuera del alcance de las VM:
+
+- el MTU del vSwitch o vDS;
+- si es un vDS, la sesión de espejo: «Mirrored packet length» y el puerto de destino;
+- la seguridad del grupo de puertos del sensor (VLAN 4095, promiscuo);
+- los offloads (LRO/TSO) del vNIC de pfSense, que reenvía entre la VLAN 30 y la 20 y podría generar supertramas.
+
+El MTU 9000 no es persistente. Se puede mantener (no perjudica) o revertir con `sudo ip link set dev ens37 mtu 1500`.
+
 ## 6. Pruebas sin red del repositorio
 
 `python -m unittest discover -s tests` da 20 de 20 en Windows (Python 3.14.3). Cubren:

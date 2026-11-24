@@ -4,6 +4,8 @@ Cada bloque indica la máquina y la cuenta. Se accede por el bastión (`gadmin@1
 
 ## 0. Corrección del espejo (bloqueante; necesita sudo en Sensor1)
 
+> 24-nov, T5: el MTU 9000 en `ens37` **no** corrigió el problema. Las tramas grandes no llegan a la VM. **No apliques el drop-in persistente**: la corrección está en ESXi (INFORME §5, T5). Los comandos se conservan como registro de lo probado.
+
 [Sensor1 m4rk] Diagnóstico temporal, no persistente:
 
 ```bash
