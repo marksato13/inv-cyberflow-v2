@@ -52,15 +52,32 @@ def denominador(expr):
     return "según expresión"
 
 
-def referencia(archivo, ip, anchor, poblacion, fronteras, temp_dir=None):
-    """Prefijo PCAP/EVE hasta t_fin; camino de funciones usado por motor_decision."""
+def _epoch_nombre(p: Path):
+    import datetime as _dt
+    try:
+        return _dt.datetime.strptime(p.name[5:19], "%Y%m%d%H%M%S").replace(tzinfo=_dt.timezone.utc).timestamp()
+    except ValueError:
+        return None
+
+
+def referencia(archivo, ip, anchor, poblacion, fronteras, temp_dir=None, historia_s=None):
+    """Prefijo PCAP/EVE hasta t_fin; camino de funciones usado por motor_decision.
+
+    Con historia_s (el motor V1 usa --history-seconds 230) solo se usa [t_fin − historia, t_fin]
+    y solo se leen los PCAP cuyo nombre cae en esa ventana: es lo que ve el motor en operación,
+    y hace la verificación lineal en vez de cuadrática.
+    """
     _, _, piso = ex.marcar(anchor, float("-inf"), fronteras)
     # Al no existir frontera, se conserva el prefijo completo de la ejecución.
     if not fronteras or piso == float("-inf"):
         piso = float("-inf")
+    rutas = ex.rutas_pcap(archivo)
+    if historia_s:
+        piso = max(piso, anchor - historia_s)
+        rutas = [p for p in rutas if (e := _epoch_nombre(p)) is None or piso - 10 <= e <= anchor + 10]
     inv = {}
     contextos = []
-    for ctx in ex.leer_contextos_crudos(ex.rutas_pcap(archivo), inv):
+    for ctx in ex.leer_contextos_crudos(rutas, inv):
         if ctx.packet.timestamp > anchor:
             break
         if ctx.packet.timestamp >= piso:
@@ -71,6 +88,8 @@ def referencia(archivo, ip, anchor, poblacion, fronteras, temp_dir=None):
            if o.entity_ip == ip]
     with tempfile.NamedTemporaryFile(mode="w", suffix=".json", encoding="utf-8", dir=temp_dir or Path.cwd(), delete=False) as handle:
         for ts, line, event in ex.leer_eve(archivo):
+            if ts > anchor + ex.VENTANA_ORDEN_EVE_S:
+                break
             if piso <= ts <= anchor and (event.get("src_ip") in poblacion or event.get("dest_ip") in poblacion):
                 handle.write(line)
         path = Path(handle.name)
@@ -87,7 +106,17 @@ def referencia(archivo, ip, anchor, poblacion, fronteras, temp_dir=None):
     return encontrado or dict.fromkeys(v2.FEATURE_NAMES, 0.0)
 
 
-def verificar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[float], max_filas: int | None = None):
+def muestra(filas: list, n: int | None) -> list:
+    """n filas repartidas a lo largo de la ejecución (no las n primeras), incluidas la primera y la última."""
+    if n is None or n >= len(filas):
+        return filas
+    if n <= 1:
+        return filas[:n]
+    return [filas[round(i * (len(filas) - 1) / (n - 1))] for i in range(n)]
+
+
+def verificar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[float], max_filas: int | None = None,
+              historia_s: float | None = None):
     contrato = json.loads(SCHEMA.read_text(encoding="utf-8"))
     nombres = [f["name"] for f in contrato["features"]]
     expr = formulas()
@@ -111,9 +140,9 @@ def verificar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[
     conteos = Counter((r["ip"], r["bloque"]) for r in filas)
     errores = []
     verificadas = 0
-    for row in filas if max_filas is None else filas[:max_filas]:
+    for row in muestra(filas, max_filas):
         anchor = v2.parse_eve_timestamp(row["ventana_fin"])
-        esperado = referencia(archivo, row["ip"], anchor, poblacion, fronteras, salida)
+        esperado = referencia(archivo, row["ip"], anchor, poblacion, fronteras, salida, historia_s)
         diferentes = [n for n in nombres if float(row[n]) != float(esperado[n])]
         verificadas += 1
         if diferentes:
@@ -125,6 +154,9 @@ def verificar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[
     informe = {"esquema_ok": esquema_ok, "columnas": tabla, "constantes": constantes,
                "sin_futuro_ok": not errores, "paridad_motor_ok": funciones_motor and not errores,
                "camino_motor_mismas_funciones": funciones_motor,
+               "referencia": ("prefijo completo hasta t_fin" if not historia_s else
+                              "solo [t_fin - %g s, t_fin], como el motor en operación" % historia_s),
+               "filas_muestreadas": "repartidas a lo largo de la ejecución" if max_filas else "todas",
                "filas_verificadas": verificadas, "filas_totales": len(filas), "diferencias": errores,
                "filas_por_ip_bloque": [{"ip": ip, "bloque": bloque, "filas": n}
                                        for (ip, bloque), n in sorted(conteos.items())],
@@ -152,9 +184,11 @@ def main() -> int:
     ap.add_argument("--salida", type=Path, required=True)
     ap.add_argument("--poblacion", type=Path)
     ap.add_argument("--fronteras", type=Path)
-    ap.add_argument("--max-filas", type=int, help="limita la recomputación cuando se hace una auditoría parcial")
+    ap.add_argument("--max-filas", type=int, help="n filas repartidas a lo largo de la ejecución")
+    ap.add_argument("--historia-s", type=float, help="referencia con solo esta historia (motor V1: 230)")
     a = ap.parse_args()
-    resultado = verificar(a.archivo, a.salida, ex.poblacion_desde(a.poblacion), ex.fronteras_desde(a.fronteras), a.max_filas)
+    resultado = verificar(a.archivo, a.salida, ex.poblacion_desde(a.poblacion), ex.fronteras_desde(a.fronteras), a.max_filas,
+                          a.historia_s)
     print(json.dumps({k: resultado[k] for k in ("esquema_ok", "sin_futuro_ok", "paridad_motor_ok", "filas_verificadas")}, ensure_ascii=False))
     return 0 if resultado["esquema_ok"] and resultado["sin_futuro_ok"] and resultado["paridad_motor_ok"] else 1
 

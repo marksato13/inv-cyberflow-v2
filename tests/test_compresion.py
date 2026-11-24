@@ -49,6 +49,18 @@ class TestCompresion(unittest.TestCase):
             b.write_bytes(gzip.compress(datos))
             self.assertEqual(list(cob.paquetes(a)), list(cob.paquetes(b)))
 
+    def test_cobertura_acepta_inventario_comprimido(self):
+        """T11: el inventario nombra live-X.pcap pero en disco está live-X.pcap.gz."""
+        import json as js
+        with tempfile.TemporaryDirectory() as d:
+            pc = Path(d) / "pcap"
+            pc.mkdir()
+            (pc / "live-20261124000000.pcap.gz").write_bytes(gzip.compress(pcap_minimo(3)))
+            (Path(d) / "inventario.jsonl").write_text(js.dumps({"fichero": "live-20261124000000.pcap",
+                                                                 "fichero_archivado": "live-20261124000000.pcap.gz"}) + "\n")
+            r = cob.medir(d, [])
+            self.assertFalse([e for e in r["errores"] if "ausente" in e["motivo"]])
+
     def test_extraccion_lee_gz_igual_que_sin_comprimir(self):
         sys.path.insert(0, str(RAIZ / "extraccion"))
         import extraer_v2 as ex

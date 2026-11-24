@@ -351,7 +351,9 @@ def medir(capturas, transacciones):
             with inventario.open(encoding="utf-8") as entrada:
                 for numero, linea in enumerate(entrada, 1):
                     try:
-                        nombre = json.loads(linea)["fichero"]
+                        reg = json.loads(linea)
+                        # Si el archivador lo comprimió, el fichero en disco es fichero_archivado (.pcap.gz).
+                        nombre = reg.get("fichero_archivado") or reg["fichero"]
                     except (ValueError, KeyError, TypeError) as exc:
                         errores.append(dict(fichero=str(inventario),
                                             motivo=f"línea {numero} inválida: {exc}"))

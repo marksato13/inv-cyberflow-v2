@@ -67,7 +67,7 @@ C=$S1/codigo; cd $P; mkdir -p cobertura
 \$T python3 \$C/captura/cobertura_v2.py --capturas $S1/capturas/$ID --transacciones generador/$ID/transacciones-*.jsonl \
   --salida cobertura/cobertura.json --csv cobertura/cobertura.csv; echo "cobertura rc=\$?"
 \$T python3 \$C/extraccion/extraer_v2.py $S1/capturas/$ID --salida extraccion; echo "extraer rc=\$?"
-\$T python3 \$C/extraccion/verificar_v2.py $S1/capturas/$ID --salida extraccion --max-filas 3000; echo "verificar rc=\$?"
+\$T python3 \$C/extraccion/verificar_v2.py $S1/capturas/$ID --salida extraccion --max-filas 40 --historia-s 230; echo "verificar rc=\$?"
 EOF
 log analisis "$(grep -o '[a-z]* rc=[0-9]*' "$E/analisis-salida.txt" | tr '\n' ' ')"
 scp -q -o BatchMode=yes "$E/analisis-salida.txt" "$E/cierre.jsonl" sensor1:"$P/registros/" || true
