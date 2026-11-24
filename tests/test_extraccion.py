@@ -121,6 +121,28 @@ class ExtraccionTest(unittest.TestCase):
         self.assertGreater(float(f["flow_duration_mean_30s"]), 60)
         self.assertEqual(float(f["tcp_retransmission_ratio_10s"]), 1.0)
 
+    def test_flujo_largo_usa_el_horizonte_del_motor(self):
+        """Piloto 24-nov: un flujo de aplicacion vivo >230 s daba flow_duration_mean_30s = 223 s
+        en la extracción y 1,6 s en el motor, que solo conserva --history-seconds de paquetes."""
+        c, s = "10.10.20.21", "10.10.30.10"
+        frames = [trama(100.1, c, s, 50000, 443, 1),
+                  trama(100.2, s, c, 443, 50000, 2, vlan=30, flags=18),
+                  trama(300.1, c, s, 50000, 443, 3, seq=2, flags=24, payload=b"abc"),
+                  trama(400.1, c, s, 50000, 443, 4, seq=3, flags=24, payload=b"def")]
+        pcap(self.archivo / "pcap" / "live-0001.pcap", frames)
+        (self.archivo / "eve" / "eve-1.json").write_text("")
+        _, resumen, filas = self.extraer("largo")
+        self.assertEqual(resumen["horizonte_estado_flujos_s"], ex.HORIZONTE_MOTOR_S)
+        for row in filas:
+            anchor = ex.v2.parse_eve_timestamp(row["ventana_fin"])
+            motor = ver.referencia(self.archivo, row["ip"], anchor, self.pop, [], historia_s=ex.HORIZONTE_MOTOR_S)
+            for name in ex.v2.FEATURE_NAMES:
+                self.assertAlmostEqual(float(row[name]), motor[name], places=10,
+                                       msg=f"{name} en {row['ventana_fin']}")
+        f = next(r for r in filas if r["ventana_fin"] == ex.utc(410))
+        # A los 410 s el motor ya no tiene el SYN de 100,1 s: el flujo empieza en 300,1 s.
+        self.assertAlmostEqual(float(f["flow_duration_mean_30s"]), 100.0, places=3)
+
     def test_tramos_igual_a_procesado_completo(self):
         self.preparar()
         _, _, filas = self.extraer("tramos")

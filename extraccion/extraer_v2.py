@@ -23,6 +23,8 @@ sys.path.insert(0, str(ROOT / "origen_v1" / "scripts" / "features"))
 import extract_multilayer_v2 as v2  # noqa: E402
 import extract_multilayer_v3 as v3  # noqa: E402
 
+# --history-seconds del motor V1 en operación (Sensor1). Fija el horizonte del estado de flujos.
+HORIZONTE_MOTOR_S = 230.0
 DEFAULT_POPULATION = tuple(f"10.10.20.{i}" for i in range(21, 27))
 CONTROL = ("ejecucion", "ip", "ventana_inicio", "ventana_fin", "bloque",
            "motivo_marca", "n_paquetes_ventana", "n_eventos_l7_ventana")
@@ -235,19 +237,28 @@ def clave_secuencia(p):
     return repr((p.protocol, p.src_ip, p.src_port, p.dst_ip, p.dst_port, p.tcp_seq))
 
 
-def atribuir_con_estado(paquetes, estado, piso, anchor, bloque):
-    """Usa V1 con sus antecedentes mínimos, persistidos fuera de RAM."""
+def atribuir_con_estado(paquetes, estado, piso, anchor, bloque, horizonte_s=HORIZONTE_MOTOR_S):
+    """Usa V1 con sus antecedentes mínimos, persistidos fuera de RAM.
+
+    Paridad con el motor en operación: la ventana A se calcula con los paquetes de
+    [A − horizonte_s, A] (motor_decision.py poda su búfer a --history-seconds). El antecedente
+    de un flujo o de una secuencia TCP es su primer paquete DENTRO de ese horizonte, no el
+    primero de la ejecución: un flujo que empezó antes lo ve el motor empezar en el borde.
+    """
     semillas = {}
+    desde = max(anchor - horizonte_s, piso)
+    hasta = max(anchor - 60, piso)
     for p in paquetes:
         flujo = repr((bloque, v2.canonical_flow_key(p)))
-        fila = estado.execute("SELECT ts, dato FROM flujos WHERE clave=?", (flujo,)).fetchone()
-        if fila and fila[0] < max(anchor - 60, piso):
-            previo = pickle.loads(fila[1])
-            semillas[(flujo, "primero")] = previo
+        fila = estado.execute("SELECT ts, dato FROM flujos WHERE clave=? AND ts>=? ORDER BY ts LIMIT 1",
+                              (flujo, desde)).fetchone()
+        if fila and fila[0] < hasta:
+            semillas[(flujo, "primero")] = pickle.loads(fila[1])
         if p.protocol == 6 and p.tcp_payload_length > 0:
             clave_seq = repr((bloque, clave_secuencia(p)))
-            fila = estado.execute("SELECT ts, dato FROM secuencias WHERE clave=?", (clave_seq,)).fetchone()
-            if fila and fila[0] < max(anchor - 60, piso):
+            fila = estado.execute("SELECT ts, dato FROM secuencias WHERE clave=? AND ts>=? ORDER BY ts LIMIT 1",
+                                  (clave_seq, desde)).fetchone()
+            if fila and fila[0] < hasta:
                 semillas[(clave_seq, "secuencia")] = pickle.loads(fila[1])
     # La identidad evita introducir dos veces el mismo paquete histórico.
     previos = list({(p.timestamp, repr(p)): p for p in semillas.values()}.values())
@@ -255,7 +266,8 @@ def atribuir_con_estado(paquetes, estado, piso, anchor, bloque):
     return [o for o in observaciones if o.timestamp > anchor - 60 and o.timestamp >= piso]
 
 
-def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[float]) -> dict:
+def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[float],
+             horizonte_s: float = HORIZONTE_MOTOR_S) -> dict:
     rutas = rutas_pcap(archivo)
     salida.mkdir(parents=True, exist_ok=True)
     inventario = {}
@@ -278,8 +290,12 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
     if estado_path.exists():
         estado_path.unlink()
     estado = sqlite3.connect(estado_path)
-    estado.execute("CREATE TABLE flujos (clave TEXT PRIMARY KEY, ts REAL, dato BLOB)")
-    estado.execute("CREATE TABLE secuencias (clave TEXT PRIMARY KEY, ts REAL, dato BLOB)")
+    # Todos los paquetes del horizonte del motor (no solo el primero): la consulta toma el
+    # primero de cada clave dentro de [A − horizonte, A]. Se poda en cada ancla.
+    for tabla in ("flujos", "secuencias"):
+        estado.execute("CREATE TABLE %s (clave TEXT, ts REAL, dato BLOB)" % tabla)
+        estado.execute("CREATE INDEX %s_clave_ts ON %s (clave, ts)" % (tabla, tabla))
+        estado.execute("CREATE INDEX %s_ts ON %s (ts)" % (tabla, tabla))
 
     def registrar_finalizados(terminados):
         for p in terminados:
@@ -289,10 +305,10 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
             cuentas["paquetes_incluidos"] += 1
             dato = pickle.dumps(p, protocol=pickle.HIGHEST_PROTOCOL)
             bloque_p = sum(f <= p.timestamp for f in fronteras)
-            estado.execute("INSERT OR IGNORE INTO flujos VALUES (?,?,?)",
+            estado.execute("INSERT INTO flujos VALUES (?,?,?)",
                            (repr((bloque_p, v2.canonical_flow_key(p))), p.timestamp, dato))
             if p.protocol == 6 and p.tcp_payload_length > 0:
-                estado.execute("INSERT OR IGNORE INTO secuencias VALUES (?,?,?)",
+                estado.execute("INSERT INTO secuencias VALUES (?,?,?)",
                                (repr((bloque_p, clave_secuencia(p))), p.timestamp, dato))
 
     with filas_temporales.open("w", encoding="utf-8") as tmp:
@@ -322,7 +338,9 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
             deduplicados, _ = v3.deduplicar_espejo(list(contextos))
             paquetes = [p for p in deduplicados if p.timestamp > anchor - 60 and p.timestamp >= piso
                         and (p.src_ip in poblacion or p.dst_ip in poblacion)]
-            observaciones = atribuir_con_estado(paquetes, estado, piso, anchor, bloque)
+            for tabla in ("flujos", "secuencias"):
+                estado.execute("DELETE FROM %s WHERE ts < ?" % tabla, (anchor - horizonte_s - 1,))
+            observaciones = atribuir_con_estado(paquetes, estado, piso, anchor, bloque, horizonte_s)
             observaciones = [o for o in observaciones if o.entity_ip in poblacion]
             with tempfile.NamedTemporaryFile(mode="w", suffix=".json", encoding="utf-8", dir=salida, delete=False) as ef:
                 ef.writelines(line for _, line in eventos)
@@ -388,7 +406,8 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
     resumen["orden_eve"] = dict(ORDEN_EVE, ventana_s=VENTANA_ORDEN_EVE_S)
     resumen["orden_pcap"] = dict(ORDEN_PCAP, ventana_s=VENTANA_ORDEN_PCAP_S)
     resumen.update({"ejecucion": archivo.name, "poblacion": sorted(poblacion), "fronteras_utc": [utc(f) for f in fronteras],
-                    "pcap_ficheros": len(rutas), "paso_s": 10, "historia_maxima_s": 60})
+                    "pcap_ficheros": len(rutas), "paso_s": 10, "historia_maxima_s": 60,
+                    "horizonte_estado_flujos_s": horizonte_s})
     (salida / "resumen.json").write_text(json.dumps(resumen, indent=2, ensure_ascii=False), encoding="utf-8")
     return resumen
 
@@ -399,9 +418,11 @@ def main() -> int:
     ap.add_argument("--salida", type=Path, required=True)
     ap.add_argument("--poblacion", type=Path)
     ap.add_argument("--fronteras", type=Path)
+    ap.add_argument("--horizonte-motor-s", type=float, default=HORIZONTE_MOTOR_S,
+                    help="--history-seconds del motor en operación (230 en Sensor1)")
     args = ap.parse_args()
     print(json.dumps(procesar(args.archivo, args.salida, poblacion_desde(args.poblacion),
-                              fronteras_desde(args.fronteras)), ensure_ascii=False))
+                              fronteras_desde(args.fronteras), args.horizonte_motor_s), ensure_ascii=False))
     return 0
 
 
