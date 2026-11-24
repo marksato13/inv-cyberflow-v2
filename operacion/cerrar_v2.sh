@@ -36,7 +36,7 @@ done
 
 # 4. Servidor: solo las líneas de la ventana [DESDE-300, HASTA+300] (el registro es acumulativo)
 for f in http-80 https-443; do
-  ssh -o BatchMode=yes -o ConnectTimeout=8 srvdmz "python3 -$((DESDE - 300)) $((HASTA + 300)) /home/adminsrvdmz/laboratorio/v2/registro/$f.jsonl" > "$E/servidor-$f.jsonl" <<'PY'
+  ssh -o BatchMode=yes -o ConnectTimeout=8 srvdmz "python3 - $((DESDE - 300)) $((HASTA + 300)) /home/adminsrvdmz/laboratorio/v2/registro/$f.jsonl" > "$E/servidor-$f.jsonl" <<'PY'
 import sys, json, datetime as d
 a, b, ruta = float(sys.argv[1]), float(sys.argv[2]), sys.argv[3]
 for l in open(ruta, encoding="utf-8"):
