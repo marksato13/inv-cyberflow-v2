@@ -195,6 +195,7 @@ class Generador:
             reg["fin_utc"] = utc()
             reg["duracion_s"] = round(m1 - m0, 6)
             reg["tras_fin_programa"] = (m1 - t0) > dur
+            reg["parada_durante_accion"] = self.parar
             tx.clasificar(accion, reg, self.prog["destinos"])
             self.tx_log.escribir(reg)
             # Espera de V1 con el factor vigente; se corta en el próximo cambio de programa.

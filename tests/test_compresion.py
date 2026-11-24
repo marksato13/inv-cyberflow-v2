@@ -49,6 +49,22 @@ class TestCompresion(unittest.TestCase):
             b.write_bytes(gzip.compress(datos))
             self.assertEqual(list(cob.paquetes(a)), list(cob.paquetes(b)))
 
+    def test_extraccion_lee_gz_igual_que_sin_comprimir(self):
+        sys.path.insert(0, str(RAIZ / "extraccion"))
+        import extraer_v2 as ex
+        with tempfile.TemporaryDirectory() as d:
+            pc = Path(d) / "pcap"
+            pc.mkdir()
+            datos = pcap_minimo(9)
+            (pc / "live-20261124000000.pcap").write_bytes(datos)
+            (pc / "live-20261124000100.pcap.gz").write_bytes(gzip.compress(datos))
+            rutas = ex.rutas_pcap(Path(d))
+            self.assertEqual([p.name for p in rutas], ["live-20261124000000.pcap", "live-20261124000100.pcap.gz"])
+            self.assertEqual(list(ex.iter_tramas(rutas[0])), list(ex.iter_tramas(rutas[1])))
+            (pc / "live-20261124000000.pcap.gz").write_bytes(gzip.compress(datos))
+            with self.assertRaises(ValueError):
+                ex.rutas_pcap(Path(d))
+
 
 if __name__ == "__main__":
     unittest.main()

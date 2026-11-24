@@ -12,6 +12,8 @@ from pathlib import Path
 
 
 def ejecutar(orden: list[str]) -> str:
+    if orden and orden[0] == "ssh":  # nunca pedir contraseña ni quedarse colgado
+        orden = ["ssh", "-n", "-o", "BatchMode=yes", "-o", "ConnectTimeout=8"] + orden[1:]
     r = subprocess.run(orden, capture_output=True, text=True, timeout=20)
     if r.returncode:
         raise RuntimeError("%s: %s" % (r.returncode, r.stderr.strip()))
@@ -53,6 +55,11 @@ class Vigia:
                 self.parar("estado_inaccesible")
                 return False
             return True
+        if estado.get("estado") == "terminado":
+            # Fin normal del archivador (tras HASTA + margen). No se para nada: si el generador
+            # siguiera vivo, el hombre muerto del supervisor lo detiene y marca la ejecución incompleta.
+            self.registrar("archivador_terminado")
+            return False
         if estado.get("estado") != "ok":
             self.parar("archivador_%s_%s" % (estado.get("estado", "desconocido"), estado.get("motivo", "")))
             return False
@@ -76,7 +83,7 @@ class Vigia:
     def correr(self) -> int:
         while self.paso():
             self.dormir(self.a.cada)
-        return 1
+        return 1 if self.detenido else 0
 
 
 def main() -> int:

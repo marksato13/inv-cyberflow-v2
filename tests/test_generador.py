@@ -207,6 +207,16 @@ class TestClasificacion(unittest.TestCase):
         tx.clasificar("puerto_cerrado", r, self.D)
         self.assertEqual(r["clase"], "fallo_inesperado")
 
+    def test_corte_por_parada_es_no_verificable(self):
+        r = {"excepcion": "ConnectionResetError: reset", "parada_durante_accion": True}
+        tx.clasificar("web_grande", r, self.D)
+        self.assertEqual(r["clase"], "incompleta_no_verificable")
+
+    def test_parada_no_tapa_un_exito(self):
+        r = {"http_codigo": 200, "parada_durante_accion": True}
+        tx.clasificar("web_grande", r, self.D)
+        self.assertEqual(r["clase"], "ok")
+
 
 if __name__ == "__main__":
     unittest.main()

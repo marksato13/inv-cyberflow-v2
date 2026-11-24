@@ -331,7 +331,10 @@ def clasificar(accion: str, reg: dict, destinos: dict) -> None:
 
     clase: ``ok`` (lo esperado y no es un error), ``error_intencional`` (lo esperado y es un
     error buscado a propósito), ``variacion_servidor`` (resultado admitido por la aleatoriedad
-    documentada del servidor) o ``fallo_inesperado`` (cualquier otra cosa).
+    documentada del servidor), ``incompleta_no_verificable`` (la acción no salió como se esperaba
+    pero llegó una parada mientras corría: no se puede atribuir al sistema) o ``fallo_inesperado``
+    (cualquier otra cosa). El cruce con la captura y el registro del servidor (cobertura_v2) puede
+    rebajar después una transacción a no verificable; nunca la sube a correcta.
     """
     tipo, esperado, intencional = ESPERADO[accion]
     exc = reg.get("excepcion")
@@ -364,7 +367,9 @@ def clasificar(accion: str, reg: dict, destinos: dict) -> None:
         reg["resultado_observado"] = ("rc %s" % reg.get("icmp_rc")) if "icmp_rc" in reg else ("excepcion " + str(exc))
         ok = reg.get("icmp_rc") == 0 and not exc
     reg["coincide"] = bool(ok)
-    if not ok:
+    if not ok and reg.get("parada_durante_accion"):
+        reg["clase"] = "incompleta_no_verificable"
+    elif not ok:
         reg["clase"] = "fallo_inesperado"
     elif accion == "api_post" and reg.get("http_codigo") == 500:
         reg["clase"] = "variacion_servidor"
