@@ -315,7 +315,8 @@ def leer_eve(carpeta, indice, errores):
 def agregado(estados):
     filas = [e["r"] for e in estados]
     validas = [r for r in filas if r["estado"] == "verificable"]
-    comparables = [r for r in validas if isinstance(r["bytes_esperados"], int)]
+    comparables = [r for r in validas if isinstance(r["bytes_esperados"], int)
+                   and r["transferencia"] != "no comparable"]
     esperados = sum(r["bytes_esperados"] for r in comparables)
     vistos = sum(r["bytes_vistos"] for r in comparables)
     return dict(n=len(filas), conexion=sum(bool(r["conexion"]) for r in validas),
