@@ -35,6 +35,23 @@ def sha256(ruta: Path) -> str:
     return h.hexdigest()
 
 
+def comprimir_verificado(ruta: Path, sha_original: str) -> dict:
+    """gzip-1 sin pérdida: escribe RUTA.gz, comprueba que al descomprimir da el mismo sha256 y
+    solo entonces borra el original. Si la verificación falla, conserva el original y lo dice."""
+    gz = ruta.with_name(ruta.name + ".gz")
+    with open(ruta, "rb") as src, gzip.GzipFile(gz, "wb", compresslevel=1, mtime=0) as dst:
+        shutil.copyfileobj(src, dst, 1 << 20)
+    h = hashlib.sha256()
+    with gzip.open(gz, "rb") as f:
+        for trozo in iter(lambda: f.read(1 << 20), b""):
+            h.update(trozo)
+    if h.hexdigest() != sha_original:
+        gz.unlink()
+        return {"comprimido": False, "error_compresion": "sha256 tras descomprimir distinto"}
+    ruta.unlink()
+    return {"comprimido": True, "fichero_archivado": gz.name, "bytes_gz": gz.stat().st_size, "sha256_gz": sha256(gz)}
+
+
 def nombre_a_epoch(nombre: str) -> float | None:
     m = PATRON.match(nombre)
     if not m:
@@ -286,6 +303,8 @@ class Archivador:
             reg = {"fichero": n, "inicio_nombre_epoch": ep, "primer_paquete_epoch": primero,
                    "ultimo_paquete_epoch": ultimo, "bytes": dst.stat().st_size,
                    "sha256": sha256(dst), "copiado_utc": ahora_utc()}
+            if getattr(self.a, "comprimir", False):
+                reg.update(comprimir_verificado(dst, reg["sha256"]))
             self.jsonl(self.dir / "inventario.jsonl", reg)
             self.copiados.add(n)
             self.procesados.add(n)
@@ -428,6 +447,8 @@ def main() -> int:
     p.add_argument("--hasta-epoch", type=float, default=0.0)
     p.add_argument("--margen-final-s", type=float, default=60.0)
     p.add_argument("--libre-minimo-gb", type=float, default=4.0)
+    p.add_argument("--comprimir", action=argparse.BooleanOptionalAction, default=True,
+                   help="gzip-1 sin pérdida de cada PCAP, verificado por sha256 antes de borrar la copia sin comprimir")
     a = p.parse_args()
     a.eve = a.eve or [str(EVE)]
     arch = Archivador(a)

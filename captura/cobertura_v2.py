@@ -10,6 +10,7 @@ import argparse
 import bisect
 import csv
 import datetime as dt
+import gzip
 import json
 import re
 import socket
@@ -73,7 +74,7 @@ def paquetes(ruta):
     """Lee libpcap Ethernet clásico, microsegundos o nanosegundos."""
     magic = {b"\xd4\xc3\xb2\xa1": ("<", 1e6), b"\xa1\xb2\xc3\xd4": (">", 1e6),
              b"\x4d\x3c\xb2\xa1": ("<", 1e9), b"\xa1\xb2\x3c\x4d": (">", 1e9)}
-    with ruta.open("rb") as f:
+    with (gzip.open(ruta, "rb") if str(ruta).endswith(".gz") else ruta.open("rb")) as f:
         cab = f.read(24)
         if len(cab) != 24 or cab[:4] not in magic:
             raise ValueError("cabecera PCAP inválida o truncada")
@@ -331,7 +332,8 @@ def medir(capturas, transacciones):
     estados, indice = preparar(transacciones)
     errores = []
     carpeta = Path(capturas)
-    ficheros = sorted((carpeta / "pcap").glob("*.pcap"))
+    ficheros = sorted(list((carpeta / "pcap").glob("*.pcap")) + list((carpeta / "pcap").glob("*.pcap.gz")),
+                      key=lambda p: p.name)
     if not ficheros:
         errores.append(dict(fichero=str(carpeta / "pcap"), motivo="sin PCAP"))
     manifiesto = carpeta / "manifiesto.json"
