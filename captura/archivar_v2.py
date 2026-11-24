@@ -352,6 +352,18 @@ class Archivador:
             seguidor.pasada()
 
     def libre_gb(self) -> float:
+        # Prueba controlada de la parada por espacio sin llenar el disco del sensor: si existe
+        # <dir>/SIMULAR_LIBRE_GB se usa su valor y queda registrado como simulado.
+        sim = self.dir / "SIMULAR_LIBRE_GB"
+        if sim.exists():
+            try:
+                v = float(sim.read_text().strip())
+                if not getattr(self, "_sim_avisado", False):
+                    self.evento("libre_simulado", valor_gb=v)
+                    self._sim_avisado = True
+                return v
+            except ValueError:
+                pass
         st = os.statvfs(self.dir)
         return st.f_bavail * st.f_frsize / 1e9
 
