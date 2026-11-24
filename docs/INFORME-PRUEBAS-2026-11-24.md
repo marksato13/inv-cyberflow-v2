@@ -143,6 +143,20 @@ Hay que revisarlo en el host, fuera del alcance de las VM:
 
 El MTU 9000 no era persistente. **Revertido** por Mark a 1500 el 24-nov; `ppi-motor-capture`, `suricata` y `ppi-motor` siguieron activos (comprobado). `ens37` vuelve a su estado anterior.
 
+### T6: camino del espejo en ESXi y en el switch físico
+
+**Camino comprobado:**
+
+- Sensor1 está en `esxi-hv-siem` y srv-dmz en `esxi-hv-servicios`, de modo que el tráfico entre ellos cruza la red física.
+- El espejo es una sesión SPAN del switch físico. Según CDP, el puerto `GigabitEthernet1/0/23` de `CORE-STACK` (Cisco C9300L-24T-4G, 10.10.99.10) entra por `vmnic2` (I210-T1) en `vSwitch2`, y de ahí al grupo de puertos `PG-CYBERFLOW-SPAN` (VLAN 4095).
+- Clientes de `PG-CYBERFLOW-SPAN`: SENSOR1, SENSOR2 y VM-SURICATA (todos de CyberFlow).
+
+**Prueba.** Con `vSwitch2` y `vmnic2` a MTU 9000, una descarga de 4 MB hizo crecer en solo 756 162 B los bytes recibidos por **la propia NIC física** `vmnic2`, igual que `ens37`. `vmnic2` no tiene errores de recepción: 0 descartes, 0 errores de longitud, 0 CRC.
+
+**Conclusión:** el switch físico no entrega las tramas grandes al puerto de destino del SPAN. Ni ESXi ni el sensor las descartan. El MTU de `vSwitch2` se devolvió a 1500 y el CDP a `listen`, sus valores anteriores.
+
+**Dato relevante:** `vmnic2` negocia **100 Mbit/s** (full duplex) con un puerto gigabit. Una sesión SPAN de fuentes de 1 Gbit/s hacia un destino de 100 Mbit/s pierde las ráfagas. Esas ráfagas son justamente las tramas de datos de tamaño completo, mientras que los ACK y SYN, pequeños y espaciados, sobreviven. Es la hipótesis principal y se comprueba con los contadores de descartes de salida de Gi1/0/23 (COMANDOS §0).
+
 ## 6. Pruebas sin red del repositorio
 
 `python -m unittest discover -s tests` da 20 de 20 en Windows (Python 3.14.3). Cubren:

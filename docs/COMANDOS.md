@@ -2,7 +2,30 @@
 
 Cada bloque indica la máquina y la cuenta. Se accede por el bastión (`gadmin@10.10.10.30`), que tiene los alias `clientes` y `sensor1`. `ID` es el identificador de la ejecución y tiene la forma `V2-<JORNADA>-AAAAMMDDTHHMMSSZ`, por ejemplo `V2-P0-20261125T150000Z`. **Ningún identificador se reutiliza.**
 
-## 0. Corrección del espejo (bloqueante; necesita sudo en Sensor1)
+## 0. Corrección del espejo: switch físico CORE-STACK, Gi1/0/23 (destino del SPAN)
+
+[CORE-STACK consola/SSH, administrador] Diagnóstico de solo lectura:
+
+```
+show monitor session all
+show interfaces GigabitEthernet1/0/23 | include line protocol|duplex|output drops|output buffer|BW
+show interfaces GigabitEthernet1/0/23 status
+show running-config interface GigabitEthernet1/0/23
+```
+
+Interpretación:
+
+- Un `Total output drops` creciente durante una descarga confirma que el destino del SPAN no da abasto.
+- Si aparece `100Mb/s` o `a-100`, el enlace negoció a 100 Mbit/s.
+
+Corrección:
+
+1. Que el enlace con `vmnic2` (I210-T1 de `esxi-hv-siem`) negocie **1 Gbit/s**. Si el puerto tiene `speed 100`, quitarlo (`no speed`). Si no lo tiene, cambiar el cable por uno Cat5e o Cat6 y revisar el conector, porque a 100 Mbit/s solo se usan 2 pares.
+2. Comprobar que la sesión copia en los dos sentidos (`both`) y que el destino tiene `encapsulation replicate`.
+
+Después de corregirlo, repetir la verificación de la descarga de 4 MB. Aceptación: Δ`rx_bytes` en `ens37` ≥ 8 MB.
+
+## 0-bis. Pruebas ya hechas en el sensor y en ESXi (sin efecto)
 
 > 24-nov, T5: el MTU 9000 en `ens37` **no** corrigió el problema. Las tramas grandes no llegan a la VM. **No apliques el drop-in persistente**: la corrección está en ESXi (INFORME §5, T5). Los comandos se conservan como registro de lo probado.
 
