@@ -1,0 +1,232 @@
+{
+ "programa_id": "V2-PRUEBA-CORTA",
+ "jornada_id": "PRUEBA",
+ "version": "1.0.0",
+ "titulo": "Prueba técnica corta (4 min)",
+ "descripcion": "Comprueba acciones, registro, pausa, cambio de bloque y parada. Sin uso en métricas.",
+ "duracion_s": 240,
+ "bloques": [
+  {
+   "id": "B1",
+   "inicio_s": 0,
+   "fin_s": 120,
+   "particion": "prueba",
+   "semillas": {
+    "ofimatica": 153179208661813,
+    "navegacion": 218106766565195,
+    "descargas": 213912536277865,
+    "aplicacion": 196959970315169,
+    "ligero": 145497839879723,
+    "erratico": 175157947868640
+   }
+  },
+  {
+   "id": "B2",
+   "inicio_s": 120,
+   "fin_s": 240,
+   "particion": "prueba",
+   "semillas": {
+    "ofimatica": 94729376933099,
+    "navegacion": 275656498202253,
+    "descargas": 137096489636331,
+    "aplicacion": 197418455725045,
+    "ligero": 216757130554085,
+    "erratico": 244782793110082
+   }
+  }
+ ],
+ "fases": [
+  {
+   "id": "F1-alta",
+   "inicio_s": 0,
+   "fin_s": 60,
+   "factor": 1.0
+  },
+  {
+   "id": "F2-parada",
+   "inicio_s": 60,
+   "fin_s": 90,
+   "factor": 0.0
+  },
+  {
+   "id": "F3-pausa",
+   "inicio_s": 90,
+   "fin_s": 150,
+   "factor": 0.55
+  },
+  {
+   "id": "F4-alta",
+   "inicio_s": 150,
+   "fin_s": 240,
+   "factor": 1.0
+  }
+ ],
+ "pulsos": [
+  {
+   "id": "P1",
+   "inicio_s": 180,
+   "fin_s": 210,
+   "factor": 1.5,
+   "perfiles": [
+    "ofimatica",
+    "navegacion",
+    "aplicacion"
+   ]
+  }
+ ],
+ "perfiles": {
+  "ofimatica": {
+   "origen": "10.10.20.21",
+   "ritmo_s": 3.0,
+   "acciones": {
+    "web_pequena": 50,
+    "web_media": 20,
+    "dns": 25,
+    "api_ok": 15,
+    "api_auth": 3,
+    "api_404": 4,
+    "https": 20,
+    "ping": 5
+   },
+   "multiplicador": 1.0
+  },
+  "navegacion": {
+   "origen": "10.10.20.22",
+   "ritmo_s": 1.5,
+   "acciones": {
+    "web_pequena": 40,
+    "web_grande": 25,
+    "https": 35,
+    "dns": 30,
+    "dns_inexistente": 4,
+    "api_ok": 10,
+    "abandono": 6
+   },
+   "multiplicador": 1.0
+  },
+  "descargas": {
+   "origen": "10.10.20.23",
+   "ritmo_s": 8.0,
+   "acciones": {
+    "web_grande": 60,
+    "web_media": 25,
+    "https": 10,
+    "dns": 5
+   },
+   "multiplicador": 1.0
+  },
+  "aplicacion": {
+   "origen": "10.10.20.24",
+   "ritmo_s": 2.0,
+   "acciones": {
+    "api_ok": 45,
+    "api_post": 25,
+    "api_500": 6,
+    "api_lento": 8,
+    "https": 10,
+    "dns": 10
+   },
+   "multiplicador": 1.0
+  },
+  "ligero": {
+   "origen": "10.10.20.25",
+   "ritmo_s": 12.0,
+   "acciones": {
+    "dns": 40,
+    "api_ok": 25,
+    "web_pequena": 20,
+    "ping": 15
+   },
+   "multiplicador": 1.0
+  },
+  "erratico": {
+   "origen": "10.10.20.26",
+   "ritmo_s": 5.0,
+   "acciones": {
+    "web_pequena": 25,
+    "web_grande": 15,
+    "dns": 20,
+    "api_ok": 15,
+    "puerto_cerrado": 10,
+    "abandono": 8,
+    "ping": 7
+   },
+   "multiplicador": 1.0
+  }
+ },
+ "rafagas": {
+  "erratico": {
+   "probabilidad_por_iteracion": 0.02,
+   "duracion_s": [
+    20,
+    90
+   ],
+   "factor": 6.0
+  }
+ },
+ "destinos": {
+  "servidor": "10.10.30.10",
+  "puerto_http": 80,
+  "puerto_https": 443,
+  "dns_servidor": "10.10.10.20",
+  "dns_zona": "cf-v2.lab",
+  "dns_nombres": [
+   "portal",
+   "intranet",
+   "correo",
+   "wiki",
+   "erp",
+   "archivos"
+  ],
+  "dns_ip_esperada": "10.10.30.10",
+  "ping": "10.10.30.10",
+  "puertos_cerrados": [
+   8081,
+   9001,
+   4444,
+   31337
+  ]
+ },
+ "tamanos": {
+  "web_pequena": [
+   "/",
+   "/estatico/4k",
+   "/estatico/16k"
+  ],
+  "web_media": [
+   "/estatico/64k",
+   "/estatico/128k",
+   "/estatico/256k"
+  ],
+  "web_grande": [
+   "/estatico/1024k",
+   "/estatico/2048k",
+   "/estatico/4096k"
+  ],
+  "https": [
+   "/",
+   "/api/ok",
+   "/estatico/32k"
+  ],
+  "api_post_bytes": [
+   200,
+   8000
+  ],
+  "abandono": "/estatico/2048k"
+ },
+ "procedencia": {
+  "perfiles.*.ritmo_s": "V1 (PERFILES[*]['ritmo'])",
+  "perfiles.*.acciones": "V1 (PERFILES[*]['acciones'], pesos relativos)",
+  "perfiles.*.origen": "V1 (clientes_config.py: --base 10.10.20.21 + índice)",
+  "espera": "V1: expovariate(1/max(ritmo/factor, 0.05)); piso sobre la media. NUEVA: la espera se corta en cada cambio de fase/pulso y se vuelve a sortear",
+  "rafagas.erratico": "V1 (p=0.02 por iteración, 20-90 s, x6)",
+  "tamanos": "V1 (rutas y tamaños de cada acción)",
+  "destinos.servidor/puertos/ping/puertos_cerrados/dns_servidor": "V1",
+  "destinos.dns_zona/dns_nombres": "NUEVA: zona controlada cf-v2.lab en DC1 (V1 usaba nombres de otro dominio que DC1 no servía; NXDOMAIN nunca ocurría)",
+  "duracion_s/bloques/fases": "PLAN (Calendario: 2 bloques de 3 h por jornada) + NUEVA (tiempo transcurrido monotónico)",
+  "fases.factor 1.00/0.55/0.90": "V1 (factor_horario: 08-13 1.0, 13-15 0.55, 15-19 0.9) reordenado por PLAN (Patrones)",
+  "bloques.semillas": "NUEVA: sha256(SEMILLA_MAESTRA|programa|bloque|perfil), fijadas antes de capturar",
+  "fin": "NUEVA: al cumplirse duracion_s no se inician acciones; la acción en curso termina y se registra"
+ },
+ "uso": "prueba técnica; prohibido en métricas"
+}

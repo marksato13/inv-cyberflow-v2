@@ -1,0 +1,11 @@
+# Capturas y registros de ejecución: privados, nunca en el repositorio
+*.pcap
+*.pcapng
+eve*.json
+ejecuciones/
+capturas/
+pruebas/
+*.tgz
+*.zip
+__pycache__/
+*.pyc

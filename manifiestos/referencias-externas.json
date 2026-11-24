@@ -1,0 +1,56 @@
+{
+ "fecha": "2026-11-24",
+ "v1_origen": {
+  "repositorio": "https://github.com/marksato13/inv-cyberflow-sistema",
+  "commit": "d2c97728916c2484f770a7a16a984c4c6bd42175",
+  "sha256_prefijo": {
+   "scripts/laboratorio/clientes_lab.py": "ae5134a778e66d90",
+   "scripts/laboratorio/clientes_config.py": "9aa2e2e02b87225f",
+   "scripts/laboratorio/servidor_lab.py": "9e91d8b8203d0bd6",
+   "scripts/features/extract_multilayer_v3.py": "5adbfbf484555443",
+   "scripts/features/extract_multilayer_v2.py": "7130edae65afefa2",
+   "scripts/features/acumular_v3.py": "9c35b831453d2107",
+   "configs/features/multilayer-v2.json": "1445ccd4f33f2269",
+   "scripts/modeling/cyberflow_aprendizaje.py": "add0abc683ec7837"
+  }
+ },
+ "laboratorio_instalado_2026_11_24": {
+  "clientes:~/cyberflow-v2/codigo": {
+   "generador/clientes_lab_v2.py": "1177b5018c06d095",
+   "generador/programa.py": "0096f920f4ea5bb0",
+   "generador/transacciones.py": "a507e2d7d5034e04",
+   "operacion/v2ctl.py": "a6066397908b1d12"
+  },
+  "sensor1:~/cyberflow-v2/codigo": {
+   "captura/archivar_v2.py": "295ae8b82c3d279b",
+   "captura/cobertura_v2.py": "40ad84a864b1f863"
+  },
+  "dc1_zona_dns": "cf-v2.lab (portal, intranet, correo, wiki, erp, archivos -> 10.10.30.10)",
+  "sensor1_cyberflow.local.toml_sha256_prefijo": "58f64dd388600801"
+ },
+ "v1_linea_base_recontada": {
+  "fichero": "sensor1:/home/m4rk/cyberflow/artifacts/aprendizaje/base/particionado-nota-L.csv",
+  "sha256": "bdf6f6419ec19e711c7add9e8b5f1440b896b32270c25d69b7e8267d4f9aba7a",
+  "filas": 337980, "perfiles": 139892, "otras_38_ip": 197377, "kali": 711
+ },
+ "evidencia_privada": {
+  "ubicacion": "copia privada del autor (no publicada) + Sensor1 ~/cyberflow-v2/{capturas,pruebas} + Clientes ~/cyberflow-v2/ejecuciones",
+  "v2-evidencia-sensor1.tgz": "4f71d6bc75a34ac9aae863b8f03ee59d68ce37e4d79eac63e2f16fc31ed4f6dd",
+  "v2-evidencia-clientes.tgz": "3799f29790cb24d404b5547f5b78baa88f3529bc6be0c55577fe0a55a870a37c",
+  "filas-24nov/filas-afectadas-11.csv": "3554f9e3e852d516335dedbdeea065ac782ac2207227f19f4669ce410f7ac355",
+  "filas-24nov/candidatas-con-linea.tsv": "26d44136e0a256176d202b517911f5601f64b86d76d05c5ee3687c25f53a2173",
+  "capturas": {
+   "V2-PRUEBA-20261124T055719Z (archivador T0)": {"pcap_ficheros": 70, "pcap_bytes": 10758575},
+   "V2-PRUEBA-20261124T060306Z (archivador de T1)": {"pcap_ficheros": 67, "pcap_bytes": 17074373,
+     "eve_sha256": "c4ac2b80482e26fcf9604e6d85ea7c402da3f206d68c7c617f465474ef66da25",
+     "inventario_sha256": "0788bfbe8d2492f271bc1cf16f5ed0459a7f49643e7a77471c0780755cddfdfc"},
+   "V2-PRUEBA-20261124T060910Z (T2)": {"pcap_ficheros": 52, "pcap_bytes": 8863956,
+     "eve_sha256": "e0f5823459a92556bea75dff5431a6551e0776dc042d0807425a132fc1ead481",
+     "inventario_sha256": "beef68e052f21fc2d9ed389b77419dd39feaf3158720151202acf543f5b69105"}
+  },
+  "cobertura.json": {
+   "T1": "8ad5790093ca88b483dc40e629086b319b6331a1c96c9202ca6b51e629d9aaa6",
+   "T2": "2cf3a1987c44e38404d3016514862592398670278d4771baf587ec2ec3074216"
+  }
+ }
+}

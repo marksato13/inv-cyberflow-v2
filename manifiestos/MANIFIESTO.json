@@ -1,0 +1,104 @@
+{
+ "ficheros": {
+  ".gitignore": "f223122f3deead20752913d1d2f9029c154f2572b6a1e8284843d162822cd622",
+  "README.md": "46b29dd86303d547e0bd5f8abbe91fa08c3ec53ae1e01b93496c47fbcf6678d5",
+  "captura/archivar_v2.py": "295ae8b82c3d279b075da567b998831bc10e4ef8adb2f718f4d7afa1d76ae2bd",
+  "captura/cobertura_v2.py": "40ad84a864b1f86378d61afb05c08298a7710efa247c699e4cd457a673652ab5",
+  "docs/ACLARACIONES.md": "8235330c820a95a37fc5df4439bc7b7e5aad5048b7b2ffa4c563a032a8e78a97",
+  "docs/COMANDOS.md": "a72dd42564f021dff441252a96e5920f18ba5742eb2f24384d2eb71146036de5",
+  "docs/INFORME-PRUEBAS-2026-11-24.md": "e676fc399f99884fee4055862ff60f71e7eab011726e0219960f91be3de43d15",
+  "docs/MATRIZ-OBSERVACIONES.md": "6f9ccbab6126675437d99db84bef6a249ee69d1419b82c8fbbda5daeb35cfec8",
+  "docs/PENDIENTES.md": "ab9afd4c99ee20c5ff067fd8da0542fda87f615aaf334bae5d6ee86a9ba0d3a8",
+  "docs/PROCEDENCIA.md": "491161b7c038a7bc25283fd6d6a895d9e39e2439b9fb5737824d216033d1f351",
+  "docs/PROTOCOLO.md": "a3d6df3e3e17952936de5af31deece99ab4eee3191f6a5cc05111bbd871f7e77",
+  "extraccion/README.md": "efa76aa7899f743952bad8b5a9643d10067f7cef5533f11a5f88fcf63f7534e4",
+  "generador/clientes_lab_v2.py": "1177b5018c06d095e27930e6856c848613dfe9c03aeb7a6917e9d73f23dcc888",
+  "generador/programa.py": "0096f920f4ea5bb0615e1d0634e81c8361938be687c758cd2521f48de78b59a2",
+  "generador/transacciones.py": "a507e2d7d5034e042fbbde1090b3519e02e81a53c6d1dc1d035a80e3ee138518",
+  "manifiestos/generar_manifiesto.py": "b3e9a11321b38a63c93dab379f761d675e05d3f2ada332224ef6e86649b69cfa",
+  "manifiestos/referencias-externas.json": "2e8fab0b64a68da066ee4df13ab7f49dd559842982926054c4821d421b4be3d6",
+  "operacion/v2ctl.py": "a6066397908b1d12433c005da2c4ebe43a62cf4d0033565637f4d3d5b8a26693",
+  "programas/README.md": "5dca350fc360188b95f91ace2849a9112867a11d85526f6a61ba70bf192c3bc7",
+  "programas/generar_programas.py": "34a9ade7b3451d070cdf2ffad49629d4aaa78e4020e663c18706aec0b0ec8574",
+  "programas/jornada-J1.json": "80acc32ec9ff6ec1f306fa6d033f753618d24d19015c683da765ff155a596747",
+  "programas/jornada-J2.json": "020ba17f926d6ea6502db8f343f17b7864dfb57d1fc583fc6f0f5087c9bbc53a",
+  "programas/jornada-J3.json": "125e312c105d74ab1f9f6d0d700879392a7075ec73c0061cddbf379b9fd0dbef",
+  "programas/jornada-J4.json": "c72f4edcfc4888fb116d25d07e1584962e1062b32c379f55167854715c44da2f",
+  "programas/jornada-J5.json": "1241c8b255d09f2a924df7bef6cb9415b3eabb1b3d07746f7db4c921678b9c22",
+  "programas/jornada-J6.json": "7642b065baa923d720ef0d9c735e63a37ddc64057656d38e893db3f959b75249",
+  "programas/jornada-J7.json": "bf7edd9109bce5914545686489395eefaaa4f3a10ee3a417d6aeac1de0334d91",
+  "programas/piloto-30min.json": "16661aecdce14f3fd51c4bd741780a99b28674dc21eb184c1a065189f1c45136",
+  "programas/prueba-corta.json": "0715c658af4d37a4190b70a18dd361f7c0236ccd907b7d46df67ab2b0f04a75d",
+  "tests/test_generador.py": "25f4e7b8c931ca41bd7e3d011cc1b3109af3d7fd35aaf07f6c599cf11518fae6"
+ },
+ "python_generacion": "3.14.3",
+ "referencias_externas": {
+  "evidencia_privada": {
+   "capturas": {
+    "V2-PRUEBA-20261124T055719Z (archivador T0)": {
+     "pcap_bytes": 10758575,
+     "pcap_ficheros": 70
+    },
+    "V2-PRUEBA-20261124T060306Z (archivador de T1)": {
+     "eve_sha256": "c4ac2b80482e26fcf9604e6d85ea7c402da3f206d68c7c617f465474ef66da25",
+     "inventario_sha256": "0788bfbe8d2492f271bc1cf16f5ed0459a7f49643e7a77471c0780755cddfdfc",
+     "pcap_bytes": 17074373,
+     "pcap_ficheros": 67
+    },
+    "V2-PRUEBA-20261124T060910Z (T2)": {
+     "eve_sha256": "e0f5823459a92556bea75dff5431a6551e0776dc042d0807425a132fc1ead481",
+     "inventario_sha256": "beef68e052f21fc2d9ed389b77419dd39feaf3158720151202acf543f5b69105",
+     "pcap_bytes": 8863956,
+     "pcap_ficheros": 52
+    }
+   },
+   "cobertura.json": {
+    "T1": "8ad5790093ca88b483dc40e629086b319b6331a1c96c9202ca6b51e629d9aaa6",
+    "T2": "2cf3a1987c44e38404d3016514862592398670278d4771baf587ec2ec3074216"
+   },
+   "filas-24nov/candidatas-con-linea.tsv": "26d44136e0a256176d202b517911f5601f64b86d76d05c5ee3687c25f53a2173",
+   "filas-24nov/filas-afectadas-11.csv": "3554f9e3e852d516335dedbdeea065ac782ac2207227f19f4669ce410f7ac355",
+   "ubicacion": "copia privada del autor (no publicada) + Sensor1 ~/cyberflow-v2/{capturas,pruebas} + Clientes ~/cyberflow-v2/ejecuciones",
+   "v2-evidencia-clientes.tgz": "3799f29790cb24d404b5547f5b78baa88f3529bc6be0c55577fe0a55a870a37c",
+   "v2-evidencia-sensor1.tgz": "4f71d6bc75a34ac9aae863b8f03ee59d68ce37e4d79eac63e2f16fc31ed4f6dd"
+  },
+  "fecha": "2026-11-24",
+  "laboratorio_instalado_2026_11_24": {
+   "clientes:~/cyberflow-v2/codigo": {
+    "generador/clientes_lab_v2.py": "1177b5018c06d095",
+    "generador/programa.py": "0096f920f4ea5bb0",
+    "generador/transacciones.py": "a507e2d7d5034e04",
+    "operacion/v2ctl.py": "a6066397908b1d12"
+   },
+   "dc1_zona_dns": "cf-v2.lab (portal, intranet, correo, wiki, erp, archivos -> 10.10.30.10)",
+   "sensor1:~/cyberflow-v2/codigo": {
+    "captura/archivar_v2.py": "295ae8b82c3d279b",
+    "captura/cobertura_v2.py": "40ad84a864b1f863"
+   },
+   "sensor1_cyberflow.local.toml_sha256_prefijo": "58f64dd388600801"
+  },
+  "v1_linea_base_recontada": {
+   "fichero": "sensor1:/home/m4rk/cyberflow/artifacts/aprendizaje/base/particionado-nota-L.csv",
+   "filas": 337980,
+   "kali": 711,
+   "otras_38_ip": 197377,
+   "perfiles": 139892,
+   "sha256": "bdf6f6419ec19e711c7add9e8b5f1440b896b32270c25d69b7e8267d4f9aba7a"
+  },
+  "v1_origen": {
+   "commit": "d2c97728916c2484f770a7a16a984c4c6bd42175",
+   "repositorio": "https://github.com/marksato13/inv-cyberflow-sistema",
+   "sha256_prefijo": {
+    "configs/features/multilayer-v2.json": "1445ccd4f33f2269",
+    "scripts/features/acumular_v3.py": "9c35b831453d2107",
+    "scripts/features/extract_multilayer_v2.py": "7130edae65afefa2",
+    "scripts/features/extract_multilayer_v3.py": "5adbfbf484555443",
+    "scripts/laboratorio/clientes_config.py": "9aa2e2e02b87225f",
+    "scripts/laboratorio/clientes_lab.py": "ae5134a778e66d90",
+    "scripts/laboratorio/servidor_lab.py": "9e91d8b8203d0bd6",
+    "scripts/modeling/cyberflow_aprendizaje.py": "add0abc683ec7837"
+   }
+  }
+ },
+ "repositorio": "cyberflow-v2"
+}

@@ -1,0 +1,291 @@
+{
+ "programa_id": "V2-J6",
+ "jornada_id": "J6",
+ "version": "1.0.0",
+ "titulo": "Actividad reducida con periodos activos",
+ "descripcion": "Fases base x0.30; dos periodos activos de 15 min por bloque devuelven el nivel base (x1/0.30).",
+ "duracion_s": 21600,
+ "bloques": [
+  {
+   "id": "B1",
+   "inicio_s": 0,
+   "fin_s": 10800,
+   "particion": "entrenamiento",
+   "semillas": {
+    "ofimatica": 177639672813044,
+    "navegacion": 195551617188256,
+    "descargas": 178055651224652,
+    "aplicacion": 196217060713012,
+    "ligero": 189927797832219,
+    "erratico": 107681734145205
+   }
+  },
+  {
+   "id": "B2",
+   "inicio_s": 10800,
+   "fin_s": 21600,
+   "particion": "calibracion",
+   "semillas": {
+    "ofimatica": 81652482188702,
+    "navegacion": 131807792538861,
+    "descargas": 39036485825580,
+    "aplicacion": 113185085662845,
+    "ligero": 108448177661212,
+    "erratico": 146837335738074
+   }
+  }
+ ],
+ "fases": [
+  {
+   "id": "B1-alta",
+   "inicio_s": 0,
+   "fin_s": 3600,
+   "factor": 0.3
+  },
+  {
+   "id": "B1-pausa",
+   "inicio_s": 3600,
+   "fin_s": 7200,
+   "factor": 0.165
+  },
+  {
+   "id": "B1-media",
+   "inicio_s": 7200,
+   "fin_s": 10800,
+   "factor": 0.27
+  },
+  {
+   "id": "B2-alta",
+   "inicio_s": 10800,
+   "fin_s": 14400,
+   "factor": 0.3
+  },
+  {
+   "id": "B2-pausa",
+   "inicio_s": 14400,
+   "fin_s": 18000,
+   "factor": 0.165
+  },
+  {
+   "id": "B2-media",
+   "inicio_s": 18000,
+   "fin_s": 21600,
+   "factor": 0.27
+  }
+ ],
+ "pulsos": [
+  {
+   "id": "A1",
+   "inicio_s": 1800,
+   "fin_s": 2700,
+   "factor": 3.333333,
+   "perfiles": [
+    "ofimatica",
+    "navegacion",
+    "descargas",
+    "aplicacion",
+    "ligero",
+    "erratico"
+   ]
+  },
+  {
+   "id": "A2",
+   "inicio_s": 7200,
+   "fin_s": 8100,
+   "factor": 3.333333,
+   "perfiles": [
+    "ofimatica",
+    "navegacion",
+    "descargas",
+    "aplicacion",
+    "ligero",
+    "erratico"
+   ]
+  },
+  {
+   "id": "A3",
+   "inicio_s": 12600,
+   "fin_s": 13500,
+   "factor": 3.333333,
+   "perfiles": [
+    "ofimatica",
+    "navegacion",
+    "descargas",
+    "aplicacion",
+    "ligero",
+    "erratico"
+   ]
+  },
+  {
+   "id": "A4",
+   "inicio_s": 18000,
+   "fin_s": 18900,
+   "factor": 3.333333,
+   "perfiles": [
+    "ofimatica",
+    "navegacion",
+    "descargas",
+    "aplicacion",
+    "ligero",
+    "erratico"
+   ]
+  }
+ ],
+ "perfiles": {
+  "ofimatica": {
+   "origen": "10.10.20.21",
+   "ritmo_s": 3.0,
+   "acciones": {
+    "web_pequena": 50,
+    "web_media": 20,
+    "dns": 25,
+    "api_ok": 15,
+    "api_auth": 3,
+    "api_404": 4,
+    "https": 20,
+    "ping": 5
+   },
+   "multiplicador": 1.0
+  },
+  "navegacion": {
+   "origen": "10.10.20.22",
+   "ritmo_s": 1.5,
+   "acciones": {
+    "web_pequena": 40,
+    "web_grande": 25,
+    "https": 35,
+    "dns": 30,
+    "dns_inexistente": 4,
+    "api_ok": 10,
+    "abandono": 6
+   },
+   "multiplicador": 1.0
+  },
+  "descargas": {
+   "origen": "10.10.20.23",
+   "ritmo_s": 8.0,
+   "acciones": {
+    "web_grande": 60,
+    "web_media": 25,
+    "https": 10,
+    "dns": 5
+   },
+   "multiplicador": 1.0
+  },
+  "aplicacion": {
+   "origen": "10.10.20.24",
+   "ritmo_s": 2.0,
+   "acciones": {
+    "api_ok": 45,
+    "api_post": 25,
+    "api_500": 6,
+    "api_lento": 8,
+    "https": 10,
+    "dns": 10
+   },
+   "multiplicador": 1.0
+  },
+  "ligero": {
+   "origen": "10.10.20.25",
+   "ritmo_s": 12.0,
+   "acciones": {
+    "dns": 40,
+    "api_ok": 25,
+    "web_pequena": 20,
+    "ping": 15
+   },
+   "multiplicador": 1.0
+  },
+  "erratico": {
+   "origen": "10.10.20.26",
+   "ritmo_s": 5.0,
+   "acciones": {
+    "web_pequena": 25,
+    "web_grande": 15,
+    "dns": 20,
+    "api_ok": 15,
+    "puerto_cerrado": 10,
+    "abandono": 8,
+    "ping": 7
+   },
+   "multiplicador": 1.0
+  }
+ },
+ "rafagas": {
+  "erratico": {
+   "probabilidad_por_iteracion": 0.02,
+   "duracion_s": [
+    20,
+    90
+   ],
+   "factor": 6.0
+  }
+ },
+ "destinos": {
+  "servidor": "10.10.30.10",
+  "puerto_http": 80,
+  "puerto_https": 443,
+  "dns_servidor": "10.10.10.20",
+  "dns_zona": "cf-v2.lab",
+  "dns_nombres": [
+   "portal",
+   "intranet",
+   "correo",
+   "wiki",
+   "erp",
+   "archivos"
+  ],
+  "dns_ip_esperada": "10.10.30.10",
+  "ping": "10.10.30.10",
+  "puertos_cerrados": [
+   8081,
+   9001,
+   4444,
+   31337
+  ]
+ },
+ "tamanos": {
+  "web_pequena": [
+   "/",
+   "/estatico/4k",
+   "/estatico/16k"
+  ],
+  "web_media": [
+   "/estatico/64k",
+   "/estatico/128k",
+   "/estatico/256k"
+  ],
+  "web_grande": [
+   "/estatico/1024k",
+   "/estatico/2048k",
+   "/estatico/4096k"
+  ],
+  "https": [
+   "/",
+   "/api/ok",
+   "/estatico/32k"
+  ],
+  "api_post_bytes": [
+   200,
+   8000
+  ],
+  "abandono": "/estatico/2048k"
+ },
+ "procedencia": {
+  "perfiles.*.ritmo_s": "V1 (PERFILES[*]['ritmo'])",
+  "perfiles.*.acciones": "V1 (PERFILES[*]['acciones'], pesos relativos)",
+  "perfiles.*.origen": "V1 (clientes_config.py: --base 10.10.20.21 + índice)",
+  "espera": "V1: expovariate(1/max(ritmo/factor, 0.05)); piso sobre la media. NUEVA: la espera se corta en cada cambio de fase/pulso y se vuelve a sortear",
+  "rafagas.erratico": "V1 (p=0.02 por iteración, 20-90 s, x6)",
+  "tamanos": "V1 (rutas y tamaños de cada acción)",
+  "destinos.servidor/puertos/ping/puertos_cerrados/dns_servidor": "V1",
+  "destinos.dns_zona/dns_nombres": "NUEVA: zona controlada cf-v2.lab en DC1 (V1 usaba nombres de otro dominio que DC1 no servía; NXDOMAIN nunca ocurría)",
+  "duracion_s/bloques/fases": "PLAN (Calendario: 2 bloques de 3 h por jornada) + NUEVA (tiempo transcurrido monotónico)",
+  "fases.factor 1.00/0.55/0.90": "V1 (factor_horario: 08-13 1.0, 13-15 0.55, 15-19 0.9) reordenado por PLAN (Patrones)",
+  "bloques.semillas": "NUEVA: sha256(SEMILLA_MAESTRA|programa|bloque|perfil), fijadas antes de capturar",
+  "fin": "NUEVA: al cumplirse duracion_s no se inician acciones; la acción en curso termina y se registra",
+  "fases.global 0.30": "V1 (factor de fin de semana 0.3) aplicado por PLAN",
+  "pulsos (periodos activos)": "NUEVA: 2 x 15 min por bloque a nivel base; a validar en piloto"
+ },
+ "uso": "captura legítima de desarrollo (sesión sintética parcial; no representa una semana de 168 h)"
+}
