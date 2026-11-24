@@ -60,6 +60,34 @@ def entorno() -> dict:
             "codigo": {p.name: sha(p) for p in sorted(GEN.glob("*.py"))} | {"v2ctl.py": sha(Path(__file__))}}
 
 
+def relojes() -> dict:
+    seguimiento = sh(["chronyc", "tracking"]) if shutil.which("chronyc") else sh(["timedatectl", "timesync-status"])
+    return {"utc": utc(), "monotonic": time.monotonic(),
+            "timedatectl_show": sh(["timedatectl", "show"]), "seguimiento_ntp": seguimiento}
+
+
+def motivo_permiso(d: Path, iniciado_epoch: float, ahora=time.time,
+                   max_s: float = 90, gracia_s: float = 120) -> str | None:
+    """Permite inyectar el reloj y deja gracia solo antes del primer permiso."""
+    permiso = d / "PERMISO_CAPTURA"
+    if permiso.exists():
+        if ahora() - permiso.stat().st_mtime > max_s:
+            return "sin_permiso_captura"
+    elif ahora() - iniciado_epoch > gracia_s:
+        return "sin_permiso_captura"
+    return None
+
+
+def detener_sin_permiso(d: Path, hijos: dict, iniciado_epoch: float, ahora=time.time,
+                        max_s: float = 90, gracia_s: float = 120) -> str | None:
+    motivo = motivo_permiso(d, iniciado_epoch, ahora=ahora, max_s=max_s, gracia_s=gracia_s)
+    if motivo:
+        for h in hijos.values():
+            if h.poll() is None:
+                h.send_signal(signal.SIGTERM)
+    return motivo
+
+
 # -- preflight ---------------------------------------------------------------
 def preflight(prog: dict) -> list[tuple[str, bool, str]]:
     r = []
@@ -97,6 +125,8 @@ def supervisar(a) -> int:
     d = RAIZ / a.ejecucion
     prog = prg.cargar(a.programa)
     log = open(d / "supervisor.jsonl", "a", encoding="utf-8")
+    iniciado_epoch = time.time()
+    interrupcion = None
 
     def ev(tipo, **k):
         log.write(json.dumps(dict(k, tipo=tipo, utc=utc(), monotonic=time.monotonic()), sort_keys=True) + "\n")
@@ -113,7 +143,11 @@ def supervisar(a) -> int:
     (d / "pids.json").write_text(json.dumps({"supervisor": os.getpid(), **{k: v.pid for k, v in hijos.items()}}))
 
     def reenviar(signum, _f):
+        nonlocal interrupcion
+        motivo_f = d / "motivo-parada.txt"
+        interrupcion = motivo_f.read_text(encoding="utf-8").strip() if motivo_f.exists() else signal.Signals(signum).name
         ev("senal_recibida", nombre=signal.Signals(signum).name)
+        ev("interrupcion", motivo=interrupcion)
         for h in hijos.values():
             if h.poll() is None:
                 h.send_signal(signal.SIGTERM)
@@ -122,14 +156,23 @@ def supervisar(a) -> int:
     signal.signal(signal.SIGINT, reenviar)
     vivos = dict(hijos)
     while vivos:
+        if getattr(a, "requiere_permiso", False) and interrupcion is None:
+            interrupcion = detener_sin_permiso(d, vivos, iniciado_epoch, max_s=a.permiso_max_s,
+                                               gracia_s=a.permiso_gracia_s)
+            if interrupcion:
+                ev("interrupcion", motivo=interrupcion)
         for perfil, h in list(vivos.items()):
             rc = h.poll()
             if rc is not None:
                 ev("perfil_terminado", perfil=perfil, codigo=rc,
                    clasificacion="completo" if rc == 0 else ("parado" if rc == 3 else "interrupcion"))
                 del vivos[perfil]
-        time.sleep(1)
+        if vivos:
+            time.sleep(1)
+    (d / "relojes-fin.json").write_text(json.dumps(relojes(), indent=1, sort_keys=True))
     fin = {"ejecucion": a.ejecucion, "entorno_fin": entorno(),
+           "estado": "incompleta" if interrupcion or any(h.returncode != 0 for h in hijos.values()) else "completa",
+           "motivo": interrupcion,
            "codigos": {k: v.returncode for k, v in hijos.items()},
            "ficheros": {p.name: sha(p) for p in sorted(d.glob("*.jsonl")) if p.name != "supervisor.jsonl"}}
     (d / "manifiesto-fin.json").write_text(json.dumps(fin, indent=1, sort_keys=True))
@@ -158,8 +201,11 @@ def iniciar(a) -> int:
            "semillas": {b["id"]: b["semillas"] for b in prog["bloques"]},
            "preflight_forzado": bool(fallos), "entorno_inicio": entorno()}
     (d / "manifiesto-inicio.json").write_text(json.dumps(ini, indent=1, sort_keys=True))
+    (d / "relojes-inicio.json").write_text(json.dumps(relojes(), indent=1, sort_keys=True))
     sup = subprocess.Popen([sys.executable, str(Path(__file__).resolve()), "_supervisar",
-                            "--programa", str(d / "programa.json"), "--ejecucion", a.ejecucion],
+                            "--programa", str(d / "programa.json"), "--ejecucion", a.ejecucion,
+                            "--permiso-max-s", str(a.permiso_max_s), "--permiso-gracia-s", str(a.permiso_gracia_s),
+                            "--requiere-permiso" if a.requiere_permiso else "--sin-requiere-permiso"],
                            stdout=open(d / "supervisor-salida.txt", "a"), stderr=subprocess.STDOUT,
                            stdin=subprocess.DEVNULL, start_new_session=True)
     print(json.dumps({"ejecucion": a.ejecucion, "directorio": str(d), "supervisor_pid": sup.pid,
@@ -195,8 +241,21 @@ def estado(a) -> int:
 
 def parar(a) -> int:
     d = RAIZ / a.ejecucion
+    if a.motivo:
+        (d / "motivo-parada.txt").write_text(a.motivo, encoding="utf-8")
     pids = json.loads((d / "pids.json").read_text())
-    os.kill(pids["supervisor"], signal.SIGTERM)
+    supervisor_vivo = vivo(pids["supervisor"])
+    if supervisor_vivo:
+        os.kill(pids["supervisor"], signal.SIGTERM)
+    else:
+        for perfil, pid in pids.items():
+            if perfil != "supervisor" and vivo(pid):
+                os.kill(pid, signal.SIGTERM)
+        fin = d / "manifiesto-fin.json"
+        if not fin.exists():
+            fin.write_text(json.dumps({"ejecucion": a.ejecucion, "estado": "incompleta",
+                                       "motivo": a.motivo or "supervisor_ausente", "utc": utc()},
+                                      indent=1, sort_keys=True))
     for _ in range(60):  # la acción más larga posible ronda los 10 s de espera de red
         if not vivo(pids["supervisor"]):
             break
@@ -215,8 +274,16 @@ def main() -> int:
             s.add_argument("--ejecucion", required=True)
         if n == "iniciar":
             s.add_argument("--forzar", action="store_true", help="inicia aunque falle el preflight (queda registrado)")
+        if n != "preflight":
+            s.add_argument("--requiere-permiso", dest="requiere_permiso", action="store_true", default=True)
+            s.add_argument("--sin-requiere-permiso", dest="requiere_permiso", action="store_false")
+            s.add_argument("--permiso-max-s", type=float, default=90.0)
+            s.add_argument("--permiso-gracia-s", type=float, default=120.0)
     for n in ("estado", "parar"):
-        sub.add_parser(n).add_argument("--ejecucion", required=True)
+        s = sub.add_parser(n)
+        s.add_argument("--ejecucion", required=True)
+        if n == "parar":
+            s.add_argument("--motivo", default="")
     a = p.parse_args()
     if a.orden == "preflight":
         res = preflight(prg.cargar(a.programa))

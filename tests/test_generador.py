@@ -3,8 +3,9 @@ from __future__ import annotations
 
 import copy
 import json
+import shutil
 import sys
-import tempfile
+import uuid
 import unittest
 from pathlib import Path
 
@@ -31,7 +32,8 @@ class RelojFalso:
 
 def correr(prog, perfil, ejec=None, parar_en=None):
     reloj = RelojFalso()
-    d = Path(tempfile.mkdtemp())
+    d = RAIZ / "tests" / ("temporal-" + uuid.uuid4().hex)
+    d.mkdir(mode=0o777)
 
     def ejecutar(accion, reg):
         reloj.t += 0.2  # cada acción tarda 0,2 s simulados
@@ -56,6 +58,7 @@ def correr(prog, perfil, ejec=None, parar_en=None):
     estado = g.correr()
     txs = [json.loads(x) for x in (d / ("transacciones-%s.jsonl" % perfil)).read_text(encoding="utf-8").splitlines()]
     evs = [json.loads(x) for x in (d / ("eventos-%s.jsonl" % perfil)).read_text(encoding="utf-8").splitlines()]
+    shutil.rmtree(d)
     return estado, txs, evs
 
 
