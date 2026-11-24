@@ -130,7 +130,7 @@ El servidor no lleva registro propio; el resultado real lo registra el cliente.
 - En V2 el tráfico de gestión (bastión, SSH, sensor) se filtra **por paquete** antes de calcular las características.
 - Hay que decidir y documentar cómo se tratan las respuestas del servidor: la entidad servidor no es población principal.
 
-**Antes de la captura definitiva hay que verificar** (pendiente de implementar en `extraccion/`):
+**Antes de la captura definitiva hay que verificar** (implementado en `extraccion/`; comprobado en T11 y en el piloto):
 
 - paso de 10 s;
 - historias de 10, 30 y 60 s;
@@ -139,6 +139,34 @@ El servidor no lleva registro propio; el resultado real lo registra el cliente.
 - deduplicación del espejo: cada paquete aparece dos veces, en la VLAN 20 y en la VLAN 30 (comprobado en T1);
 - paridad entre entrenamiento y operación;
 - que no haya fugas de futuro.
+
+**Trazabilidad de cada ventana (implementada el 24-nov, `extraccion/metadatos_v2.py`).**
+Las 28 entradas del IF y los metadatos van en ficheros distintos, unidos solo por `ventana_id`
+(`<ejecución>|<IP>|<cierre UTC>`):
+
+| Fichero | Contenido |
+|---|---|
+| `extraccion/entradas_if.csv` | `ventana_id` + las 28 columnas del contrato, en su orden. Nada más |
+| `extraccion/ventanas_meta.csv` | ejecución, entidad, perfil, regla de población, inicio y cierre UTC, t del programa, bloque, partición, segmento, fase (y si la ventana cruza fase), pulsos, marca de la extracción, PCAP de la ventana y primero/último de la historia de 60 s, EVE y su sha256, transacciones en la ventana, estado de cobertura, estado de conciliación, hueco de captura, `excluir_entrenamiento` y sus motivos |
+| `extraccion/trazabilidad.json` | comprobación: ids únicos, relación 1:1 en el mismo orden, cabecera de entradas = las 28, ningún metadato entre las 28, campos obligatorios llenos; conteos por partición, bloque, perfil, cobertura, conciliación y regla de exclusión |
+
+Las fronteras de bloque salen del programa y del evento `inicio` de cada perfil
+(`metadatos_v2.py fronteras`) y se pasan a la extracción y a la verificación, así que ninguna
+historia cruza un bloque. Primera prueba con datos reales (T11, 155 ventanas): trazabilidad
+correcta, 0 obligatorios vacíos, desfase de arranque entre perfiles 18 ms.
+
+**Reglas de exclusión del entrenamiento** (una ventana excluida se conserva y se cuenta; no se borra):
+
+| Regla | Motivo |
+|---|---|
+| E1 | marca de arranque o de frontera de bloque: la historia de 60 s está incompleta |
+| E2 | hueco de captura PCAP o EVE que toca [cierre − 60 s, cierre] |
+| E3 | alguna transacción del perfil en la ventana con cobertura incompleta o no verificable |
+| E4 | alguna transacción del perfil en la ventana conciliada como `fallo_imprevisto` o no verificable |
+| E5 | ventana fuera del programa (márgenes de captura previo y final) |
+
+Las pausas programadas no excluyen: son inactividad legítima. Las etiquetas de ataque, cuando
+las haya, irán en `ventanas_meta.csv` con las reglas de `docs/ETIQUETADO-ATAQUES.md`.
 
 **TLS.** En T1 Suricata registró eventos TLS 1.3 para el tráfico de los perfiles: 104 eventos para 55 transacciones HTTPS. Desde el bastión había 0 de 13. No se fuerza ninguna versión.
 
@@ -216,6 +244,7 @@ se corrige y se registra el intento fallido. Ningún criterio mira resultados de
 | C9 | Pérdidas en toda la cadena | Δ output drops de Gi2/0/19 y de los orígenes, Δ`rx_missed_errors`/softnet y descartes de tcpdump/Suricata registrados antes y después. Se acepta Δdrops = 0; si no, se cuantifica y C7 decide | `contadores-lab-*.txt` |
 | C10 | Relojes | NTP sincronizado en los cuatro equipos al principio y al final; \|desfase aparente\| mediano ≤ 5 ms | `relojes-*`, `cobertura/` |
 | C11 | Extracción | `extraer_v2` y `verificar_v2` con rc 0; verificación 40/40 sin diferencias (historia del motor 230 s); inventario con todas las IP y su regla; constantes justificadas; tardías descartadas = 0 | `extraccion/` |
+| C11b | Trazabilidad de ventanas (añadido a las 23:05 UTC, durante el piloto y antes de cerrarlo, a petición de Mark) | `trazabilidad_ok`: cada ventana con ejecución, entidad, perfil, cierre, bloque, partición, fase, PCAP/EVE, cobertura, conciliación y exclusión; 1:1 con `entradas_if.csv`, que tiene exactamente las 28 columnas | `extraccion/trazabilidad.json` |
 | C12 | Volumen | GB/h de PCAP comprimido, EVE y registros por fase medidos; se recalcula la estimación de 42 h con estos valores | `volumen.jsonl` |
 | C13 | Aislamiento de V1 | Regla `*@` que cubre la ejecución; sets de srv-dmz vacíos, DC1 sin reglas y agente sin `--aplicar` al principio y al final | `preflight-lab.jsonl`, `contadores-lab-*.txt` |
 
