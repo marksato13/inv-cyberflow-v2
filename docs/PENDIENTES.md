@@ -33,7 +33,7 @@ Preparar una prueba no es pasarla, y pasarla no cierra una observación de los r
 | 17 | Condición de parada por espacio | Implementado sin verificar | `--libre-minimo-gb 4` |
 | 18 | Relojes: desfase entre Clientes y Sensor1 | Comprobado | \|desfase\| ≤ 0,52 ms en T1 y T2 |
 | 19 | Reloj de srv-dmz y DC1 frente a Sensor1 | Comprobado (puntual) | T10: srv-dmz −0,15 ms, DC1 +2,7 ms, Clientes −0,23 ms frente a NTP. Falta automatizar la medida antes y después de cada jornada |
-| 20 | Eventos TLS | Comprobado (perfiles) | T1: 104 eventos TLS 1.3; queda pendiente por qué desde el bastión salió 0 de 13 |
+| 20 | Eventos TLS | Comprobado (perfiles) | T1: 104 eventos TLS 1.3; T8, con el espejo corregido: 112 TLS 1.3. Queda pendiente por qué desde el bastión salió 0 de 13 (anterior al arreglo; repetir) |
 | 21 | Extracción V2: filtro por paquete de las entidades excluidas, deduplicación del espejo, paridad, márgenes, constantes | Pendiente | `extraccion/`: incorporar `extract_multilayer_v3` con procedencia y pruebas |
 | 22 | Población: inventario de las IP observadas con su regla | Pendiente | Tras el piloto |
 | 23 | Piloto de 30 min | Pendiente (preparado, no iniciado) | PROTOCOLO §10; el punto 12 está resuelto, así que C7 ya puede medirse |
