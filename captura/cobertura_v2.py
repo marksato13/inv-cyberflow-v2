@@ -119,7 +119,7 @@ def decodificar(ts, d):
     proto = d[pos + 9]
     o, de = socket.inet_ntoa(d[pos + 12:pos + 16]), socket.inet_ntoa(d[pos + 16:pos + 20])
     cuerpo = d[pos + ihl:pos + largo]
-    p = dict(ts=ts, vlan=vlan, origen=o, destino=de)
+    p = dict(ts=ts, vlan=vlan, origen=o, destino=de, ipid=struct.unpack_from("!H", d, pos + 4)[0])
     if proto == 6:
         if len(cuerpo) < 20:
             raise ValueError("cabecera TCP truncada")
@@ -164,7 +164,7 @@ def preparar(txs):
                  eve_tls_version=None, eve_tls_coincide=None)
         e = dict(t=t, r=r, inicio=epoch(t["inicio_utc"]), fin=epoch(t["fin_utc"]),
                  rangos=[[], []], por_vlan=[defaultdict(list), defaultdict(list)],
-                 control=[defaultdict(set), defaultdict(set)],
+                 control=[defaultdict(set), defaultdict(set)], segmentos=[set(), set()],
                  isn=[None, None], primer=None, dns_id=None, icmp_id=None)
         estados.append(e)
         indice[clave(t)].append(e)
@@ -206,27 +206,30 @@ def observar(e, sentido, p):
             base = e["isn"][sentido]
             a = (seq - base - 1) & 0xffffffff if base is not None else seq
             b = a + len(carga)
-            propias = e["por_vlan"][sentido][vlan]
-            copia = any(cubierto(v, a, b) for k, v in e["por_vlan"][sentido].items() if k != vlan)
-            repetida = cubierto(propias, a, b)
+            # Copia del espejo = el MISMO paquete IP (IP ID y bytes iguales), venga por la misma VLAN o
+            # por otra (el SPAN copia de dos puertos y el router lo reenvía por otra VLAN).
+            # Retransmisión = bytes ya vistos en un paquete IP distinto (IP ID nuevo).
+            firma = (p.get("ipid"), a, b)
+            vistos = e["segmentos"][sentido]
             nuevos = unir(e["rangos"][sentido], a, b)
-            if repetida:
-                r["retransmisiones"] += 1
-            elif copia:
+            if firma in vistos:
                 r["copias_espejo"] += 1
             elif nuevos < len(carga):
                 r["retransmisiones"] += 1
-            unir(propias, a, b)
+            vistos.add(firma)
+            unir(e["por_vlan"][sentido][vlan], a, b)
             if sentido == 1:
                 r["bytes_vistos"] = sum(y - x for x, y in e["rangos"][1])
         else:
-            firma = seq, flags & 0x17
-            propias = e["control"][sentido][vlan]
-            if firma in propias:
-                r["retransmisiones"] += 1
-            elif any(firma in v for k, v in e["control"][sentido].items() if k != vlan):
-                r["copias_espejo"] += 1
-            propias.add(firma)
+            # Solo cuentan SYN/FIN/RST (los ACK puros se repiten legítimamente con el mismo seq).
+            if flags & 0x07:
+                firma = seq, flags & 0x17
+                propias = e["control"][sentido]["todas"]
+                if (firma, p.get("ipid")) in propias:
+                    r["copias_espejo"] += 1
+                elif any(f == firma for f, _ in propias):
+                    r["retransmisiones"] += 1
+                propias.add((firma, p.get("ipid")))
         r["conexion"] = r["syn"] or r["syn_ack"] or r["rst"]
     elif p["proto"] == "udp" and len(p["carga"]) >= 12:
         ident, flags = struct.unpack_from("!HH", p["carga"])
@@ -385,7 +388,12 @@ def medir(capturas, transacciones):
         if e["t"].get("protocolo") in ("http", "https", "tcp"):
             r["huecos"] = huecos(e["rangos"][1], 0 if e["isn"][1] is not None else None)
             esperado = r["bytes_esperados"]
-            if isinstance(esperado, int):
+            if r["accion"] == "abandono":
+                # El cliente corta tras las cabeceras: el servidor envía más de lo que el cliente
+                # leyó, así que los bytes no son comparables; cuentan las fases (conexión, petición, respuesta).
+                r["fraccion"] = None
+                r["transferencia"] = "no comparable"
+            elif isinstance(esperado, int):
                 r["fraccion"] = r["bytes_vistos"] / esperado if esperado else None
                 r["transferencia"] = ("completa" if r["respuesta"] and r["huecos"] == 0
                                         and r["bytes_vistos"] >= esperado else "incompleta")

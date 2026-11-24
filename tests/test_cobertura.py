@@ -49,12 +49,20 @@ def trama(proto, origen, destino, po=0, pd=0, seq=0, flags=0x18, carga=b"",
     return eth + ip + transporte
 
 
-def tcp(t, sentido=0, seq=100, flags=0x18, carga=b"", vlan=20):
+_IPID = [0]
+
+
+def tcp(t, sentido=0, seq=100, flags=0x18, carga=b"", vlan=20, ipid=None):
+    """Cada llamada es un envío nuevo de la pila (IP ID nuevo); una copia del espejo se
+    construye repitiendo la misma trama (mismo IP ID), cambie o no la VLAN."""
     o, d = t["origen_ip"], t["destino_ip"]
     po, pd = t["origen_puerto"], t["destino_puerto"]
     if sentido:
         o, d, po, pd = d, o, pd, po
-    return trama("tcp", o, d, po, pd, seq, flags, carga, vlan)
+    if ipid is None:
+        _IPID[0] += 1
+        ipid = _IPID[0]
+    return trama("tcp", o, d, po, pd, seq, flags, carga, vlan, ident=ipid)
 
 
 def dns(t, ident, respuesta=False, rcode=0):
@@ -112,10 +120,20 @@ class Caso(unittest.TestCase):
 
     def test_copias_dos_vlan_y_una_sola(self):
         t = tx("a")
-        self.pcap([(1000.1, tcp(t, 1, seq=200, flags=0x12, vlan=30)),
-                   (1000.11, tcp(t, 1, seq=200, flags=0x12, vlan=20)),
-                   (1000.2, tcp(t, 1, seq=201, carga=b"DATA", vlan=30)),
-                   (1000.21, tcp(t, 1, seq=201, carga=b"DATA", vlan=20))])
+        self.pcap([(1000.1, tcp(t, 1, seq=200, flags=0x12, vlan=30, ipid=7)),
+                   (1000.11, tcp(t, 1, seq=200, flags=0x12, vlan=20, ipid=7)),
+                   (1000.2, tcp(t, 1, seq=201, carga=b"DATA", vlan=30, ipid=8)),
+                   (1000.21, tcp(t, 1, seq=201, carga=b"DATA", vlan=20, ipid=8))])
+        r = self.medir(t)["por_transaccion"][0]
+        self.assertEqual((r["bytes_vistos"], r["copias_espejo"], r["retransmisiones"]), (4, 2, 0))
+
+    def test_copia_misma_vlan_no_es_retransmision(self):
+        """T11: el SPAN copia de Gi1/0/23 y Gi2/0/23; el mismo paquete puede llegar dos veces por la misma VLAN."""
+        t = tx("a")
+        self.pcap([(1000.1, tcp(t, 1, seq=200, flags=0x12, ipid=7)),
+                   (1000.1001, tcp(t, 1, seq=200, flags=0x12, ipid=7)),
+                   (1000.2, tcp(t, 1, seq=201, carga=b"DATA", ipid=8)),
+                   (1000.2001, tcp(t, 1, seq=201, carga=b"DATA", ipid=8))])
         r = self.medir(t)["por_transaccion"][0]
         self.assertEqual((r["bytes_vistos"], r["copias_espejo"], r["retransmisiones"]), (4, 2, 0))
         self.pcap([(1000.1, tcp(t, 1, seq=200, flags=0x12, vlan=30)),
