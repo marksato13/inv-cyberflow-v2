@@ -44,6 +44,7 @@ for h in srvdmz dcadmin@10.10.10.20; do
   $SSH "$h" 'date -u +%FT%T.%NZ; timedatectl show; (chronyc tracking 2>/dev/null || timedatectl timesync-status)' > "$E/relojes-inicio-${h#*@}.txt" 2>&1 || true
 done
 log relojes "srvdmz y dc1"
+bash "$B/operacion/contadores_lab.sh" "$E/contadores-lab-inicio.txt" >/dev/null; log contadores inicio
 
 # 4. Registro DNS independiente en DC1 (unidad transitoria con tope de vida)
 $SSH dcadmin@10.10.10.20 "sudo -n mkdir -p /var/log/cyberflow-v2 && sudo -n systemd-run --unit=cf-v2-dns-${ID,,} --property=RuntimeMaxSec=$((DUR + 3600)) /usr/bin/python3 $DC/servidor/registro_dns_v2.py --interfaz ens224 --salida /var/log/cyberflow-v2/dns-$ID.jsonl --poblacion $POBL" \

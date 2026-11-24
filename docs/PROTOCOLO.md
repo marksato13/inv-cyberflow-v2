@@ -181,7 +181,7 @@ Para que V2 no entre en el aprendizaje de V1, cada ejecución añade a `excluir_
 
 **Congelado:** al terminar el desarrollo se congelan el modelo, α, las reglas, la vía rápida y las versiones, antes de E1–E3.
 
-## 10. Piloto de 30 min (preparado, no iniciado)
+## 10. Piloto de 30 min
 
 Programa `programas/piloto-30min.json` (sha256 en el manifiesto): seis perfiles, dos bloques (resiembra a los 900 s) y estas fases:
 
@@ -196,24 +196,30 @@ Programa `programas/piloto-30min.json` (sha256 en el manifiesto): seis perfiles,
 
 Ofimática y navegación van a ×1,25. **No se usa en métricas.** Comandos en `docs/COMANDOS.md`.
 
-### Comprobaciones del piloto y criterio de aceptación
+### Comprobaciones del piloto y criterio de aceptación (versión 2, fijada el 24-nov a las 22:45 UTC, antes de lanzarlo)
 
-Todos los criterios se fijan antes de ejecutarlo.
+Sustituye a la versión 1 (C7 «hoy fallaría», C8 «sin cruzar las 00:00»). Se lanza con
+`bash lanzar_v2.sh piloto-30min.json PILOTO 2` y se cierra con `bash cerrar_v2.sh <ID>`.
+Un criterio que falle no se corrige repitiendo el piloto hasta que pase: se documenta la causa,
+se corrige y se registra el intento fallido. Ningún criterio mira resultados del detector.
 
-| # | Comprobación | Criterio de aceptación |
-|---|---|---|
-| C1 | Los seis perfiles terminan solos | `supervisor.jsonl`: seis veces `perfil_terminado` con código 0, y `fin` en t ≥ 1800 s |
-| C2 | Fases y pausa | Ninguna transacción con `inicio_t_s` entre 900 y 1080; un evento `fase` por fase y perfil (6 × 6) |
-| C3 | Pulsos y periodo activo | Las transacciones de P1 llevan `pulsos=["P1"]` y factor ×1,5 sobre F5; las de A1, factor ≈ 1,0 |
-| C4 | Resiembra | Dos eventos `bloque` por perfil, con las semillas del programa |
-| C5 | Clasificación | 0 `fallo_inesperado`. Si aparece alguno, se analiza y se documenta antes de la captura |
-| C6 | Cobertura de peticiones y respuestas | 100 % de las transacciones con su SYN, consulta DNS o eco en el PCAP archivado, y con respuesta (`cobertura_v2.py`) |
-| C7 | Carga útil | Bytes del servidor al cliente en el PCAP (sin copias del espejo) ≥ 95 % de los `bytes_recibidos` del registro. **Hoy fallaría** (bloqueante del MTU) |
-| C8 | Captura sin huecos | Ningún `hueco_rotacion` ni `pcap_perdido_antes_de_copiar`; truncado del EVE solo si cruza las 00:00 UTC |
-| C9 | Pérdidas | tcpdump y Suricata con 0 descartes; Δ`rx_dropped` registrado (aceptable si C7 se cumple) |
-| C10 | Relojes | NTP sincronizado al principio y al final; \|desfase aparente\| ≤ 5 ms |
-| C11 | EVE | Eventos `http` con el mismo código que el registro en ≥ 99 %; rcode NXDOMAIN para todo `dns_inexistente`; eventos TLS presentes |
-| C12 | Volumen | GB/h de PCAP y EVE medidos; proyección a 6 h por debajo del espacio libre menos 4 GB |
-| C13 | Aislamiento de V1 | Regla `*@inicio/fin` añadida antes del aprendizaje de las 00:30 UTC |
+| # | Comprobación | Criterio de aceptación | Fuente |
+|---|---|---|---|
+| C1 | Los seis perfiles terminan solos | Seis `perfil_terminado` con código 0; `manifiesto-fin` estado `completa` | `supervisor.jsonl`, `manifiesto-fin.json` |
+| C2 | Fases y pausa | Ninguna transacción con `inicio_t_s` en [900, 1080); un evento `fase` por fase y perfil (6 × 6) | `transacciones-*`, `eventos-*` |
+| C3 | Pulsos y periodo activo | Transacciones con `pulsos` que incluyen P1 solo en [1320, 1440) y A1 solo en [1200, 1260); su factor coincide con el programa | `transacciones-*` frente a `programa.json` |
+| C4 | Resiembra | Dos eventos `bloque` por perfil, con las semillas del programa | `eventos-*` |
+| C5 | Clasificación del cliente | 0 `fallo_inesperado` | `transacciones-*` |
+| C6 | Conciliación con el registro independiente | 0 `fallo_imprevisto` y 0 `incompleta_no_verificable` entre cliente y srv-dmz/DC1 | `conciliacion/` |
+| C7 | Cobertura de la captura | Fases: conexión, petición y respuesta vistas en el 100 % de lo que aplica; bytes de respuesta vistos / bytes TCP recibidos ≥ 95 % **en el total, en cada acción comparable y en cada perfil**; 0 `no verificable` | `cobertura/` |
+| C8 | Archivado | Manifiesto del archivador `completa`: 0 huecos PCAP, 0 huecos EVE, 0 líneas corruptas | `capturas/<ID>/manifiesto.json` |
+| C9 | Pérdidas en toda la cadena | Δ output drops de Gi2/0/19 y de los orígenes, Δ`rx_missed_errors`/softnet y descartes de tcpdump/Suricata registrados antes y después. Se acepta Δdrops = 0; si no, se cuantifica y C7 decide | `contadores-lab-*.txt` |
+| C10 | Relojes | NTP sincronizado en los cuatro equipos al principio y al final; \|desfase aparente\| mediano ≤ 5 ms | `relojes-*`, `cobertura/` |
+| C11 | Extracción | `extraer_v2` y `verificar_v2` con rc 0; verificación 40/40 sin diferencias (historia del motor 230 s); inventario con todas las IP y su regla; constantes justificadas; tardías descartadas = 0 | `extraccion/` |
+| C12 | Volumen | GB/h de PCAP comprimido, EVE y registros por fase medidos; se recalcula la estimación de 42 h con estos valores | `volumen.jsonl` |
+| C13 | Aislamiento de V1 | Regla `*@` que cubre la ejecución; sets de srv-dmz vacíos, DC1 sin reglas y agente sin `--aplicar` al principio y al final | `preflight-lab.jsonl`, `contadores-lab-*.txt` |
 
-Hasta que se corrija el MTU del espejo, C7 no puede cumplirse y el piloto no debe usarse para validar la captura. Las demás comprobaciones ya pasaron en T1 y T2 con el programa de prueba corta.
+Lo que el piloto no puede mostrar se prueba aparte: rotación y sustitución del EVE, PCAP borrado
+antes de copiarse y línea partida o corrupta (`captura/prueba_rotacion_lab.py`); parada por
+espacio y por caída del archivador (prueba de parada coordinada); cruce de las 00:00 UTC (la
+rotación real ocurre en la primera noche de las 42 h y se clasifica con `eve/huecos.jsonl`).

@@ -29,7 +29,8 @@ log manifiestos ok
 $SSH dcadmin@10.10.10.20 "sudo -n systemctl stop cf-v2-dns-${ID,,} 2>/dev/null; sudo -n systemctl reset-failed cf-v2-dns-${ID,,} 2>/dev/null; sudo -n cat /var/log/cyberflow-v2/dns-$ID.jsonl" > "$E/dns-$ID.jsonl"
 log registro_dns "$(wc -l < "$E/dns-$ID.jsonl") lineas"
 
-# 3. Relojes de fin
+# 3. Contadores (switch, sensor, aislamiento V1) y relojes de fin
+[ -f "$E/contadores-lab-fin.txt" ] || bash "$(dirname "$0")/contadores_lab.sh" "$E/contadores-lab-fin.txt" >/dev/null
 for h in srvdmz dcadmin@10.10.10.20; do
   $SSH "$h" 'date -u +%FT%T.%NZ; timedatectl show; (chronyc tracking 2>/dev/null || timedatectl timesync-status)' > "$E/relojes-fin-${h#*@}.txt" 2>&1 || true
 done
