@@ -6,7 +6,8 @@ set -u
 INI=${1:?inicio_epoch}; FIN=${2:?fin_epoch}; GB=${3:?gb_necesarios}
 fallos=0
 ok() { printf '{"comprobacion":"%s","resultado":"%s","detalle":"%s"}\n' "$1" "$2" "$(echo "$3" | tr -d '"\r' | tr '\n' ' ' | cut -c1-300)"; [ "$2" = ok ] || fallos=$((fallos+1)); }
-sw() { timeout 30 ssh -n -o BatchMode=yes -o ConnectTimeout=8 sw-core-stack "$1" 2>&1 | grep -v -E '^\*|^ *$|closed by remote' | tr -d '\r'; }
+sw() { timeout 30 ssh -n -o BatchMode=yes -o ConnectTimeout=8 sw-core-stack "$1" 2>&1 | tr -d '\r' | sed -E 's/Connection to [0-9.]+ closed by remote host\.//' | grep -v -E '^\*|^ *$'; }
+# (el aviso de cierre del switch llega pegado a la última línea, sin salto: se recorta, no se descarta la línea)
 
 # 1. Espejo: sesión, destino a 1000, MTU del destino
 m=$(sw "show monitor session 1")

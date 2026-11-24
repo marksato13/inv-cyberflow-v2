@@ -174,6 +174,32 @@ class TestGenerador(unittest.TestCase):
         self.assertAlmostEqual(sum(muestras) / len(muestras), 0.05, delta=0.003)
 
 
+class TestTLSCierre(unittest.TestCase):
+    """T11 (intento 2): srv-dmz cierra TLS sin close_notify; V1 lo trataba como fin de datos."""
+
+    def _tls(self, exc):
+        import ssl
+        t = tx.TLSMedido.__new__(tx.TLSMedido)
+        t.cierre = None
+
+        def hacer(_op):
+            raise exc
+        t._hacer = hacer
+        return t
+
+    def test_eof_abrupto_es_fin_de_datos(self):
+        import ssl
+        t = self._tls(ssl.SSLEOFError())
+        self.assertEqual(t.recv(10), b"")
+        self.assertEqual(t.cierre, "sin_close_notify")
+
+    def test_close_notify_es_fin_de_datos(self):
+        import ssl
+        t = self._tls(ssl.SSLZeroReturnError())
+        self.assertEqual(t.recv(10), b"")
+        self.assertEqual(t.cierre, "close_notify")
+
+
 class TestClasificacion(unittest.TestCase):
     D = gp.DESTINOS
 

@@ -73,6 +73,7 @@ class TLSMedido:
         self.tls = ctx.wrap_bio(self.entrada, self.salida, server_side=False,
                                 server_hostname=servidor)
         self.tx = self.rx = 0
+        self.cierre = None
 
     def handshake(self):
         self._hacer(self.tls.do_handshake)
@@ -108,7 +109,16 @@ class TLSMedido:
             pos += self._hacer(lambda: self.tls.write(datos[pos:]))
 
     def recv(self, n: int):
-        return self._hacer(lambda: self.tls.read(n))
+        # Paridad con V1 (ssl.wrap_socket con suppress_ragged_eofs=True): un cierre TCP sin
+        # close_notify es fin de datos, no error. La integridad la sigue juzgando Content-Length.
+        try:
+            return self._hacer(lambda: self.tls.read(n))
+        except ssl.SSLZeroReturnError:
+            self.cierre = "close_notify"
+            return b""
+        except ssl.SSLEOFError:
+            self.cierre = "sin_close_notify"
+            return b""
 
     def version(self):
         return self.tls.version()
@@ -195,6 +205,7 @@ class Cliente:
                 reg["incompleta"] = True
         finally:
             if tls is not None:
+                reg["tls_cierre"] = tls.cierre
                 reg["bytes_tcp_enviados"] = tls.tx
                 reg["bytes_tcp_recibidos"] = tls.rx
             elif m is not None:
