@@ -141,7 +141,7 @@ Hay que revisarlo en el host, fuera del alcance de las VM:
 - la seguridad del grupo de puertos del sensor (VLAN 4095, promiscuo);
 - los offloads (LRO/TSO) del vNIC de pfSense, que reenvía entre la VLAN 30 y la 20 y podría generar supertramas.
 
-El MTU 9000 no es persistente. Se puede mantener (no perjudica) o revertir con `sudo ip link set dev ens37 mtu 1500`.
+El MTU 9000 no era persistente. **Revertido** por Mark a 1500 el 24-nov; `ppi-motor-capture`, `suricata` y `ppi-motor` siguieron activos (comprobado). `ens37` vuelve a su estado anterior.
 
 ## 6. Pruebas sin red del repositorio
 
