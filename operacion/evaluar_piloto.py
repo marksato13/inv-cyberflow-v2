@@ -69,6 +69,13 @@ def main() -> int:
             mal_pulso.append(t["transaccion_id"])
         f = tramo(t["inicio_t_s"])
         esperado = f["factor"] * prog["perfiles"][t["perfil"]].get("multiplicador", 1.0) * math.prod(p["factor"] for p in activos)
+        if t.get("en_rafaga"):
+            raf = prog.get("rafagas", {}).get(t["perfil"])
+            if raf is None:                      # ráfaga en un perfil que no la tiene programada
+                mal_factor.append((t["transaccion_id"], t.get("factor"), "rafaga_no_programada"))
+                continue
+            esperado *= raf["factor"]
+            n_pulso["rafaga"] = n_pulso.get("rafaga", 0) + 1
         if f and abs(t.get("factor", -1) - esperado) > 1e-3 * max(1, esperado):
             mal_factor.append((t["transaccion_id"], t.get("factor"), round(esperado, 6)))
     R["C3"] = {"ok": not mal_pulso and not mal_factor and all(n_pulso.get(p["id"], 0) > 0 for p in prog["pulsos"]),
@@ -101,7 +108,9 @@ def main() -> int:
     R["C9"] = {"ok": None, "revisar": True, "fuente": ["registros/contadores-lab-inicio.txt", "registros/contadores-lab-fin.txt"]}
     R["C10"] = {"ok": None, "revisar": True, "ntp_clientes_fin": (man_g.get("entorno_fin") or {}).get("ntp_sincronizado")}
 
-    sal = (P / "registros" / "analisis-salida.txt")
+    sal = P / "registros" / "reanalisis-salida.txt"
+    if not sal.exists():
+        sal = P / "registros" / "analisis-salida.txt"
     rcs = dict(re.findall(r"([a-z]+) rc=(\d+)", sal.read_text(encoding="utf-8", errors="replace"))) if sal.exists() else {}
     ver = cargar(P / "extraccion" / "verificacion.json") or cargar(P / "extraccion" / "verificar.json") or {}
     res = cargar(P / "extraccion" / "resumen.json") or {}
