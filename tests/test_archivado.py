@@ -129,6 +129,24 @@ class TestArchivado(unittest.TestCase):
         s.vaciar_retirados(cerrar_todo=True)
         self.assertIn("linea_incompleta", [r["tipo"] for r in self.huecos()])
 
+    def test_gzip_a_medio_escribir_se_reintenta(self):
+        """logrotate comprime eve.json.1 sin delaycompress: el .gz puede estar incompleto."""
+        s = self.seguidores()
+        self.eve.write_bytes(b'{"n":1}\n')
+        s.pasada()
+        completo = self.eve.read_bytes() + b'{"n":2}\n'
+        gz = Path(str(self.eve) + ".1.gz")
+        gz.write_bytes(gzip.compress(completo)[:12])          # a medio escribir
+        self.eve.write_bytes(b'{"n":3}\n')                   # truncado y nuevo contenido
+        s.pasada()
+        self.assertEqual(sorted(self.salida().splitlines()), [b'{"n":1}', b'{"n":3}'])
+        self.assertEqual(len(s.rotacion_pendiente), 1)
+        gz.write_bytes(gzip.compress(completo))              # logrotate termina
+        s.pasada()
+        self.assertEqual(sorted(self.salida().splitlines()), [b'{"n":1}', b'{"n":2}', b'{"n":3}'])
+        self.assertEqual(s.rotacion_pendiente, [])
+        self.assertEqual(self.arch.eve_huecos, 0)
+
     def test_inodo_retirado_sigue_vaciandose(self):
         """Prueba de rotación en Sensor1: el escritor siguió 1,5 s en el inodo viejo (388 líneas)."""
         s = self.seguidores()
@@ -160,6 +178,9 @@ class TestArchivado(unittest.TestCase):
         s.pasada()
         self.eve.write_bytes(b"")
         s.pasada()
+        self.assertEqual(self.huecos(), [])            # se reintenta mientras logrotate trabaja
+        with patch.object(ar, "REINTENTO_ROTADA_S", -1):
+            s.pasada()
         self.assertEqual(self.huecos()[-1]["tipo"], "copytruncate_irrecuperable")
         self.assertEqual(self.arch.eve_huecos, 1)
 

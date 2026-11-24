@@ -22,6 +22,7 @@ STATS = Path("/var/log/suricata/stats.log")
 PATRON = re.compile(r"^live-(\d{14})\.pcap$")
 ROTACION_S = 5
 GRACIA_RETIRADO_S = 30  # tiempo sin crecer antes de cerrar un inodo EVE sustituido
+REINTENTO_ROTADA_S = 120  # cuánto se reintenta leer eve.json.1[.gz] mientras logrotate comprime
 
 
 def ahora_utc() -> str:
@@ -123,6 +124,7 @@ class SeguidorEve:
         self.ancla = b""
         self.ausente = False
         self.retirados: list[list] = []  # [descriptor, offset, último crecimiento]
+        self.rotacion_pendiente: list[list] = []  # [offset antes del truncado, instante]
         self.abrir(inicial=True)
 
     def abrir(self, inicial: bool = False) -> None:
@@ -160,28 +162,49 @@ class SeguidorEve:
     def hueco(self, tipo: str, causa: str, recuperados=b"", perdidos=0) -> None:
         self.arch.hueco_eve(tipo, self.ruta, causa, recuperados, perdidos)
 
-    def recuperar_rotada(self) -> None:
-        previa = self.off
-        patron = self.arch.a.eve_rotada_patron
-        base = Path(patron.format(ruta=str(self.ruta)))
-        candidatas = [base, Path(str(base) + ".gz")]
-        for p in candidatas:
-            try:
-                with (gzip.open(p, "rb") if p.suffix == ".gz" else open(p, "rb")) as f:
-                    datos = f.read()
-            except FileNotFoundError:
+    def _leer_rotada(self, p: Path, previa: int):
+        """Lee en flujo desde el byte `previa` (el EVE real rota a cientos de MB; no se carga
+        entero). Devuelve (resto, None) o (None, motivo) si aún no se puede leer."""
+        try:
+            f = gzip.open(p, "rb") if p.suffix == ".gz" else open(p, "rb")
+        except FileNotFoundError:
+            return None, "ausente"
+        try:
+            with f:
+                saltados = 0
+                while saltados < previa:
+                    trozo = f.read(min(1 << 20, previa - saltados))
+                    if not trozo:
+                        return None, "corta:%d" % saltados
+                    saltados += len(trozo)
+                partes = []
+                while (trozo := f.read(1 << 20)):
+                    partes.append(trozo)
+                return b"".join(partes), None
+        except (EOFError, OSError, gzip.BadGzipFile) as e:   # .gz a medio escribir por logrotate
+            return None, "ilegible:%s" % e
+
+    def recuperar_rotada(self, previa: int, ultimo_intento: bool) -> bool:
+        """True si queda resuelta (recuperada o declarada irrecuperable); False para reintentar."""
+        base = Path(self.arch.a.eve_rotada_patron.format(ruta=str(self.ruta)))
+        motivos = []
+        for p in (base, Path(str(base) + ".gz")):
+            resto, motivo = self._leer_rotada(p, previa)
+            if resto is None:
+                motivos.append("%s %s" % (p.name, motivo))
                 continue
-            if len(datos) < previa:
-                self.hueco("copytruncate_irrecuperable", "copia rotada menor que offset", perdidos=previa - len(datos))
-                return
-            resto = datos[previa:]
             corte = resto.rfind(b"\n") + 1
             for linea in resto[:corte].splitlines(keepends=True):
                 self.arch.linea_eve(self.ruta, linea)
             self.hueco("copytruncate_recuperado" if corte == len(resto) else "copytruncate_parcial",
                        str(p), recuperados=resto[:corte], perdidos=len(resto) - corte)
-            return
-        self.hueco("copytruncate_irrecuperable", "copia rotada ausente", perdidos=0)
+            return True
+        if not ultimo_intento:
+            return False
+        corta = [m for m in motivos if "corta:" in m]
+        self.hueco("copytruncate_irrecuperable", "; ".join(motivos) or "copia rotada ausente",
+                   perdidos=0 if not corta else 1)
+        return True
 
     def vaciar_retirados(self, cerrar_todo: bool = False) -> None:
         for r in list(self.retirados):
@@ -230,9 +253,14 @@ class SeguidorEve:
             if estuvo_ausente:
                 self.hueco("eve_reaparecido", "ruta sustituida tras ausencia", perdidos=0)
         elif st.st_size < self.off or self.ancla_cambiada(st.st_size):
-            self.recuperar_rotada()
+            # copytruncate: lo que faltaba por leer está en la copia rotada. Se sigue leyendo el
+            # fichero truncado desde 0 y la copia se reintenta hasta REINTENTO_ROTADA_S.
+            self.rotacion_pendiente.append([self.off, time.time()])
             self.off = 0
             self.ancla = b""
+        for r in list(self.rotacion_pendiente):
+            if self.recuperar_rotada(r[0], ultimo_intento=time.time() - r[1] > REINTENTO_ROTADA_S):
+                self.rotacion_pendiente.remove(r)
         self.leer()
         self.ausente = False
 
@@ -395,6 +423,9 @@ class Archivador:
         try:
             self.pasada_eve()
             for s in self.seguidores:
+                for r in list(s.rotacion_pendiente):
+                    s.recuperar_rotada(r[0], ultimo_intento=True)
+                s.rotacion_pendiente.clear()
                 s.vaciar_retirados(cerrar_todo=True)
                 if s.fd:
                     pendiente = os.fstat(s.fd.fileno()).st_size - s.off
