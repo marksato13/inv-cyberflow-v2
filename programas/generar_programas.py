@@ -166,9 +166,66 @@ def todas() -> dict[str, dict]:
                               + pulsos_lista("R", [12900, 16500, 19800], 180, 4.0, ["descargas", "aplicacion", "erratico"])),
                       extra_proc={"fases.global 0.30": "V1 (factor de fin de semana 0.3) aplicado por PLAN",
                                   "pulsos (ráfagas ocasionales)": "NUEVA: 3 pulsos de 3 min x4 por bloque, sin acciones nuevas; a validar en piloto"})
+    p["C42"] = captura_continua({k: p[k] for k in ("J1", "J2", "J3", "J4", "J5", "J6", "J7")})
     p["P0"] = piloto()
     p["PRUEBA-CORTA"] = prueba_corta()
     return p
+
+
+def captura_continua(jornadas: dict[str, dict]) -> dict:
+    """42 h continuas: J1..J7 como segmentos consecutivos de 6 h de UNA sola ejecución.
+
+    Sin reinicio ni hueco en las transiciones. Cada segmento conserva sus fases, pulsos y
+    multiplicadores (los multiplicadores de perfil pasan a ``multiplicador_perfil`` de sus
+    fases, porque en un único programa el multiplicador global de perfil es 1). Los 14
+    bloques de 3 h mantienen la partición nominal del PLAN: 24 h entrenamiento, 9 h
+    calibración y 9 h desarrollo. Las semillas son nuevas (programa distinto) y quedan fijas.
+    Una acción se atribuye a la fase y al bloque en que EMPIEZA (lo registra el generador).
+    """
+    pid = "V2-C42"
+    seg = 21600
+    fases, pulsos, tramos = [], [], []
+    for i, jid in enumerate(sorted(jornadas)):
+        j = jornadas[jid]
+        off = i * seg
+        mult = {p: v["multiplicador"] for p, v in j["perfiles"].items() if v["multiplicador"] != 1.0}
+        for f in j["fases"]:
+            g = {"id": "%s-%s" % (jid, f["id"]), "segmento": jid, "inicio_s": f["inicio_s"] + off,
+                 "fin_s": f["fin_s"] + off, "factor": f["factor"]}
+            if mult:
+                g["multiplicador_perfil"] = dict(mult)
+            fases.append(g)
+        for pz in j["pulsos"]:
+            pulsos.append(dict(pz, id="%s-%s" % (jid, pz["id"]), segmento=jid,
+                               inicio_s=pz["inicio_s"] + off, fin_s=pz["fin_s"] + off))
+        for b in j["bloques"]:
+            tramos.append(("%s-%s" % (jid, b["id"]), b["inicio_s"] + off, b["fin_s"] + off, b["particion"]))
+    blq = bloques(pid, tramos)
+    for b, (bid, *_r) in zip(blq, tramos):
+        b["segmento"] = bid.split("-")[0]
+    horas = {}
+    for b in blq:
+        horas[b["particion"]] = horas.get(b["particion"], 0) + (b["fin_s"] - b["inicio_s"]) // 3600
+    return {
+        "programa_id": pid, "jornada_id": "C42", "version": "1.0.0",
+        "titulo": "Captura legítima continua de 42 h (J1..J7 consecutivos)",
+        "descripcion": "Siete segmentos de 6 h en una sola ejecución, sin reinicio en las transiciones. "
+                       "Sesiones sintéticas parciales: no representan siete días naturales.",
+        "duracion_s": seg * len(jornadas),
+        "segmentos": [{"id": jid, "titulo": jornadas[jid]["titulo"], "inicio_s": i * seg, "fin_s": (i + 1) * seg,
+                       "programa_origen_sha256": hashlib.sha256(serializar(jornadas[jid])).hexdigest()}
+                      for i, jid in enumerate(sorted(jornadas))],
+        "bloques": blq, "horas_por_particion": horas,
+        "fases": fases, "pulsos": pulsos, "perfiles": perfiles(),
+        "rafagas": copy.deepcopy(RAFAGAS_V1), "destinos": copy.deepcopy(DESTINOS), "tamanos": copy.deepcopy(TAMANOS),
+        "procedencia": dict(PROCEDENCIA_COMUN, **{
+            "segmentos": "PLAN actualizado: 42 h continuas, J1..J7 consecutivos de 6 h",
+            "fases.multiplicador_perfil": "PLAN (propuestas 1.25 de J2/J3, a validar en el piloto), trasladadas del multiplicador de perfil de cada segmento",
+            "bloques.semillas": "NUEVA: sha256(SEMILLA_MAESTRA|V2-C42|<segmento>-<bloque>|perfil)",
+            "atribucion": "NUEVA: una acción pertenece a la fase y bloque en que empieza; las filas que cruzan una frontera de bloque las marca la extracción"}),
+        "uso": "captura legítima de entrenamiento (24 h), calibración (9 h) y desarrollo (9 h); "
+               "la evaluación independiente de 18 h, los ataques y las campañas A/B van aparte",
+    }
 
 
 def piloto() -> dict:
@@ -220,7 +277,7 @@ def main() -> int:
     a = ap.parse_args()
     sys.path.insert(0, str(AQUI.parent / "generador"))
     import programa as prg
-    nombres = {"P0": "piloto-30min.json", "PRUEBA-CORTA": "prueba-corta.json"}
+    nombres = {"P0": "piloto-30min.json", "PRUEBA-CORTA": "prueba-corta.json", "C42": "captura-42h.json"}
     distintos = 0
     for k, prog in todas().items():
         prg.validar(prog)
