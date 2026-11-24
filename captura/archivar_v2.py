@@ -21,6 +21,7 @@ EVE = Path("/var/log/suricata/eve.json")
 STATS = Path("/var/log/suricata/stats.log")
 PATRON = re.compile(r"^live-(\d{14})\.pcap$")
 ROTACION_S = 5
+GRACIA_RETIRADO_S = 30  # tiempo sin crecer antes de cerrar un inodo EVE sustituido
 
 
 def ahora_utc() -> str:
@@ -121,6 +122,7 @@ class SeguidorEve:
         self.off = 0
         self.ancla = b""
         self.ausente = False
+        self.retirados: list[list] = []  # [descriptor, offset, último crecimiento]
         self.abrir(inicial=True)
 
     def abrir(self, inicial: bool = False) -> None:
@@ -181,7 +183,28 @@ class SeguidorEve:
             return
         self.hueco("copytruncate_irrecuperable", "copia rotada ausente", perdidos=0)
 
+    def vaciar_retirados(self, cerrar_todo: bool = False) -> None:
+        for r in list(self.retirados):
+            fd, off, t_crec = r
+            fd.seek(off)
+            datos = fd.read()
+            corte = datos.rfind(b"\n") + 1
+            if corte:
+                for linea in datos[:corte].splitlines(keepends=True):
+                    self.arch.linea_eve(self.ruta, linea)
+                r[1] = off + corte
+                r[2] = time.time()
+                self.hueco("retirado_vaciado", "líneas escritas en el inodo anterior tras el cambio",
+                           recuperados=datos[:corte], perdidos=0)
+            if cerrar_todo or time.time() - r[2] > GRACIA_RETIRADO_S:
+                pendiente = os.fstat(fd.fileno()).st_size - r[1]
+                if pendiente > 0:
+                    self.hueco("linea_incompleta", "inodo anterior cerrado con línea sin terminar", perdidos=pendiente)
+                fd.close()
+                self.retirados.remove(r)
+
     def pasada(self) -> None:
+        self.vaciar_retirados()
         try:
             st = self.ruta.stat()
         except FileNotFoundError:
@@ -197,10 +220,10 @@ class SeguidorEve:
         elif st.st_ino != self.ino:
             estuvo_ausente = self.ausente
             recuperado = self.leer()  # el descriptor viejo permite vaciar rename+create
-            parcial = os.fstat(self.fd.fileno()).st_size - self.off
-            if parcial:
-                self.hueco("linea_incompleta", "inodo sustituido", perdidos=parcial)
-            self.fd.close()
+            # El escritor (Suricata hasta su SIGHUP) puede seguir escribiendo en el inodo viejo:
+            # se retira, no se cierra, y se sigue vaciando hasta que deje de crecer.
+            self.retirados.append([self.fd, self.off, time.time()])
+            self.fd = None
             self.abrir()
             self.hueco("inodo_cambiado", "rename+create o sustitución; descriptor anterior leído",
                        recuperados=recuperado, perdidos=0)
@@ -227,6 +250,7 @@ class Archivador:
         self.eve_out = open(self.dir / "eve" / ("eve-%s.json" % a.ejecucion), "ab")
         self.copiados: set[str] = set()
         self.procesados: set[str] = set()
+        self.vistos: set[str] = set()
         self.ultimo_epoch = None
         self.ultima_marca = None
         self.ultimo_pcap = None
@@ -278,6 +302,14 @@ class Archivador:
 
     def pasada_pcap(self) -> None:
         nombres = sorted(n for n in os.listdir(self.a.anillo) if PATRON.match(n))
+        presentes = set(nombres)
+        for n in sorted(self.vistos - presentes - self.procesados):
+            # Se vio (abierto o cerrado) y desapareció sin copiarse: pérdida segura.
+            ep = nombre_a_epoch(n)
+            if ep is not None and ep >= self.desde - ROTACION_S:
+                self.hueco_pcap("borrado_antes_de_copiar", fichero=n)
+            self.procesados.add(n)
+        self.vistos |= presentes
         for n in nombres[:-1]:  # cerrado solo si hay uno posterior
             if n in self.procesados:
                 continue
@@ -292,7 +324,9 @@ class Archivador:
                 self.procesados.add(n)
                 continue
             primero, ultimo = marcas_pcap(dst)
-            if self.ultimo_epoch is not None and ep - self.ultimo_epoch > 2 * ROTACION_S:
+            # Con el ruido de fondo del espejo siempre hay paquetes: falta un fichero si el
+            # siguiente nombre llega a 2 rotaciones (antes se exigía más de 2 y uno solo pasaba).
+            if self.ultimo_epoch is not None and ep - self.ultimo_epoch >= 2 * ROTACION_S:
                 self.hueco_pcap("salto_nombres", anterior_epoch=self.ultimo_epoch, siguiente=n,
                                 segundos=ep - self.ultimo_epoch)
             if self.ultima_marca is not None and primero is not None and primero - self.ultima_marca > 2 * ROTACION_S:
@@ -349,6 +383,7 @@ class Archivador:
         try:
             self.pasada_eve()
             for s in self.seguidores:
+                s.vaciar_retirados(cerrar_todo=True)
                 if s.fd:
                     pendiente = os.fstat(s.fd.fileno()).st_size - s.off
                     if pendiente > 0:

@@ -65,6 +65,21 @@ class TestCompresion(unittest.TestCase):
             with self.assertRaises(ValueError):
                 ex.rutas_pcap(Path(d))
 
+    def test_eve_desordenado_se_reordena_y_el_tardio_se_cuenta(self):
+        sys.path.insert(0, str(RAIZ / "extraccion"))
+        import json as js
+        import extraer_v2 as ex
+        def ev(t):
+            return js.dumps({"timestamp": "2026-11-24T00:%02d:%02d.000000+0000" % divmod(t, 60), "event_type": "dns"})
+        with tempfile.TemporaryDirectory() as d:
+            (Path(d) / "eve").mkdir()
+            orden = [10, 5, 12, 200, 300, 20]   # 5 llega 5 s tarde; 20 llega 280 s tarde
+            (Path(d) / "eve" / "eve-X.json").write_text("\n".join(ev(t) for t in orden) + "\n")
+            ts = [t for t, _, _ in ex.leer_eve(Path(d))]
+            self.assertEqual(ts, sorted(ts))
+            self.assertEqual(len(ts), 5)
+            self.assertEqual(ex.ORDEN_EVE["tardios_descartados"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -53,6 +53,8 @@ class TestArchivado(unittest.TestCase):
         for s in self.arch.seguidores:
             if s.fd and not s.fd.closed:
                 s.fd.close()
+            for r in s.retirados:
+                r[0].close()
         shutil.rmtree(self.base)
 
     def seguidores(self):
@@ -122,7 +124,27 @@ class TestArchivado(unittest.TestCase):
         s.ino = os.fstat(s.fd.fileno()).st_ino
         s.pasada()
         self.assertEqual(self.salida(), b'{"n":2}\n')
+        # La línea sin terminar del inodo viejo se declara al retirarlo, no antes.
+        self.assertNotIn("linea_incompleta", [r["tipo"] for r in self.huecos()])
+        s.vaciar_retirados(cerrar_todo=True)
         self.assertIn("linea_incompleta", [r["tipo"] for r in self.huecos()])
+
+    def test_inodo_retirado_sigue_vaciandose(self):
+        """Prueba de rotación en Sensor1: el escritor siguió 1,5 s en el inodo viejo (388 líneas)."""
+        s = self.seguidores()
+        self.eve.write_bytes(b'{"n":1}\n')
+        s.pasada()
+        s.fd.close()
+        self.eve.rename(self.base / "viejo")
+        s.fd = open(self.base / "viejo", "rb")
+        s.ino = os.fstat(s.fd.fileno()).st_ino
+        self.eve.write_bytes(b'{"n":3}\n')
+        s.pasada()
+        with open(self.base / "viejo", "ab") as f:   # escritor aún sin SIGHUP
+            f.write(b'{"n":2}\n')
+        s.pasada()
+        self.assertEqual(sorted(self.salida().splitlines()), [b'{"n":1}', b'{"n":2}', b'{"n":3}'])
+        self.assertEqual(self.arch.eve_huecos, 0)
 
     def test_linea_corrupta_aparte(self):
         s = self.seguidores()

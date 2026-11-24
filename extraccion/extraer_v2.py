@@ -108,18 +108,42 @@ def iter_tramas(path: Path):
             yield seg + frac / divisor, trama
 
 
+VENTANA_ORDEN_EVE_S = 60.0
+ORDEN_EVE = {"reordenados": 0, "tardios_descartados": 0, "desorden_max_s": 0.0}
+
+
 def leer_eve(archivo: Path):
-    anterior = float("-inf")
+    """EVE en orden temporal con un búfer acotado de VENTANA_ORDEN_EVE_S.
+
+    Suricata escribe con varios hilos y el archivador vacía el inodo anterior tras una
+    rotación, así que el fichero no está estrictamente ordenado. Lo que llegue con más
+    retraso que la ventana no puede colocarse sin romper el flujo: se descarta y se cuenta.
+    """
+    import heapq
+    ORDEN_EVE.update(reordenados=0, tardios_descartados=0, desorden_max_s=0.0)
+    monton, n, maximo, emitido = [], 0, float("-inf"), float("-inf")
     for path in sorted((archivo / "eve").glob("eve-*.json")):
         with path.open(encoding="utf-8") as handle:
             for line in handle:
                 evento = json.loads(line)
                 if evento.get("event_type") in {"http", "dns", "tls"} and evento.get("timestamp"):
                     ts = v2.parse_eve_timestamp(evento["timestamp"])
-                    if ts < anterior:
-                        raise ValueError("EVE fuera de orden temporal")
-                    anterior = ts
-                    yield ts, line, evento
+                    if ts < maximo:
+                        ORDEN_EVE["reordenados"] += 1
+                        ORDEN_EVE["desorden_max_s"] = max(ORDEN_EVE["desorden_max_s"], maximo - ts)
+                    if ts < emitido:
+                        ORDEN_EVE["tardios_descartados"] += 1
+                        continue
+                    maximo = max(maximo, ts)
+                    n += 1
+                    heapq.heappush(monton, (ts, n, line, evento))
+                    while monton and monton[0][0] < maximo - VENTANA_ORDEN_EVE_S:
+                        t, _, l, e = heapq.heappop(monton)
+                        emitido = t
+                        yield t, l, e
+    while monton:
+        t, _, l, e = heapq.heappop(monton)
+        yield t, l, e
 
 
 def leer_contextos_crudos(rutas, inventario):
@@ -334,6 +358,7 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
                                "interlocutores_principales": item["interlocutores"].most_common(5)})
     (salida / "inventario_ips.json").write_text(json.dumps(inventario_out, indent=2, ensure_ascii=False), encoding="utf-8")
     resumen = dict(cuentas)
+    resumen["orden_eve"] = dict(ORDEN_EVE, ventana_s=VENTANA_ORDEN_EVE_S)
     resumen.update({"ejecucion": archivo.name, "poblacion": sorted(poblacion), "fronteras_utc": [utc(f) for f in fronteras],
                     "pcap_ficheros": len(rutas), "paso_s": 10, "historia_maxima_s": 60})
     (salida / "resumen.json").write_text(json.dumps(resumen, indent=2, ensure_ascii=False), encoding="utf-8")
