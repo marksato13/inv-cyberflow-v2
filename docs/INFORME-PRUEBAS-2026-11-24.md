@@ -157,6 +157,33 @@ El MTU 9000 no era persistente. **Revertido** por Mark a 1500 el 24-nov; `ppi-mo
 
 **Dato relevante:** `vmnic2` negocia **100 Mbit/s** (full duplex) con un puerto gigabit. Una sesión SPAN de fuentes de 1 Gbit/s hacia un destino de 100 Mbit/s pierde las ráfagas. Esas ráfagas son justamente las tramas de datos de tamaño completo, mientras que los ACK y SYN, pequeños y espaciados, sobreviven. Es la hipótesis principal y se comprueba con los contadores de descartes de salida de Gi1/0/23 (COMANDOS §0).
 
+### T7: corrección en el switch CORE-STACK (24-nov, ~18:30–18:45 UTC)
+
+La sesión SPAN 1 tiene como origen `Gi1/0/23` y `Gi2/0/23` (both), y como destino **`Gi2/0/19`** (encapsulation replicate). En la prueba T6 se había atribuido por error el destino a `Gi1/0/23`, que en realidad es un origen.
+
+1. **Velocidad.** `Gi2/0/19` negociaba a 100 Mbit/s. Un `shutdown`/`no shutdown` lo dejó a 1000 Mbit/s y `vmnic2` también pasó a 1000. Con eso solo no bastó: `ens37` recibió +329 KB.
+2. **Dónde se pierde.** Durante una descarga de 4 MB, el origen `Gi2/0/23` pasó +4 652 KB de entrada y +4 622 KB de salida, pero el destino `Gi2/0/19` solo sacó +532 KB y `vmnic2` recibió +502 KB. **Las tramas se pierden dentro del switch.**
+3. **Corrección.** Se puso `mtu 9198` **solo en `Gi2/0/19`**, el puerto dedicado al destino del SPAN. Con ese cambio llegan tramas de 1518 B en las VLAN 20 y 30.
+
+**Resultados después de la corrección:**
+
+| Descarga de 4 MB | Δ `ens37` | Dos copias completas |
+|---|---|---|
+| Sin límite (unos 2 Gbit/s de copias en ráfaga) | 5 084 KB | ≈ 8 700 KB |
+| Con límite de 10 MB/s | 8 711 KB | ≈ 8 700 KB |
+| Con límite de 40 MB/s | 8 310 KB | ≈ 8 700 KB |
+
+**Conclusión:**
+
+- La pérdida sistemática de tramas completas queda **corregida**.
+- Queda una limitación física: si las dos copias suman más de 1 Gbit/s en ráfaga, el destino satura (los output drops de `Gi2/0/19` crecen). Se cumple el criterio de aceptación (Δ ≥ 8 MB) a ≤ 10 MB/s, y a 40 MB/s se pierde ~4 %. Las ráfagas a velocidad de línea pierden copias.
+
+**Pendiente:**
+
+- El cambio está en la *running-config*; falta `write memory` (decisión de Mark).
+- La reversión es `interface Gi2/0/19` + `no mtu`.
+- **V1 en sombra ve desde ahora la carga útil completa**: sus características de bytes cambian de distribución respecto a lo que aprendió (ver PENDIENTES).
+
 ## 6. Pruebas sin red del repositorio
 
 `python -m unittest discover -s tests` da 20 de 20 en Windows (Python 3.14.3). Cubren:

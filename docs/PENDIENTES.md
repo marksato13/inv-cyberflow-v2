@@ -23,7 +23,8 @@ Preparar una prueba no es pasarla, y pasarla no cierra una observación de los r
 | 9 | Registro por transacción con lo esperado frente a lo observado | Comprobado | T1: 395 transacciones, 0 fallos inesperados |
 | 10 | Archivado de PCAP y EVE fuera del anillo, con hashes | Comprobado | T1 y T2: manifiesto e inventario |
 | 11 | Proceso que borra el anillo | Comprobado | `cyberflow-limpieza.timer`: `find … -mmin +15 -delete`, cada 5 min |
-| 12 | **Espejo sin tramas de tamaño completo** (carga útil al 0,3 %) | **Pendiente (bloqueante)** | MTU 9000 en `ens37` probado el 24-nov (T5) **sin efecto**: las tramas no llegan a la VM. Tampoco tuvo efecto el MTU 9000 de vSwitch2 (T6): `vmnic2` ya no recibe las tramas. **La causa está en el switch físico** (CORE-STACK Gi1/0/23, destino del SPAN, enlace a **100 Mbit/s**); es acceso de Mark (COMANDOS §0) |
+| 12 | **Espejo sin tramas de tamaño completo** (carga útil al 0,3 %) | **Comprobado (corregido en running-config)** | T7: `mtu 9198` en CORE-STACK `Gi2/0/19` (destino del SPAN) y enlace a 1 Gbit/s. A ≤ 10 MB/s llegan las dos copias completas; en ráfagas a velocidad de línea el destino satura. Falta `write memory` (Mark) |
+| 12b | Cambio de distribución de bytes en V1 en sombra al llegar la carga útil completa | Pendiente (decisión de Mark) | Desde el 24-nov ~18:40 UTC; valorar excluir del aprendizaje V1 o pausar sus timers |
 | 13 | Configuración del SPAN en ESXi (grupo de puertos, VLAN 4095, MTU, vDS) | Pendiente | No es visible desde las VM; acceso de Mark al host |
 | 14 | Discrepancia de `rx_dropped` | Pendiente | Δ del 4–6 % en las pruebas; unida al punto 12 |
 | 15 | Truncado del EVE por copytruncate a las 00:00 UTC | Implementado sin verificar | El archivador lo registra; programar las jornadas sin cruzar las 00:00 UTC |

@@ -2,7 +2,23 @@
 
 Cada bloque indica la máquina y la cuenta. Se accede por el bastión (`gadmin@10.10.10.30`), que tiene los alias `clientes` y `sensor1`. `ID` es el identificador de la ejecución y tiene la forma `V2-<JORNADA>-AAAAMMDDTHHMMSSZ`, por ejemplo `V2-P0-20261125T150000Z`. **Ningún identificador se reutiliza.**
 
-## 0. Corrección del espejo: switch físico CORE-STACK, Gi1/0/23 (destino del SPAN)
+## 0. Corrección del espejo: APLICADA el 24-nov (T7)
+
+[CORE-STACK, nivel 15] Aplicado en la *running-config*:
+
+```
+interface GigabitEthernet2/0/19
+ mtu 9198
+```
+
+Antes se hizo `shutdown`/`no shutdown` para renegociar a 1000.
+
+Para hacerlo persistente: `write memory`.
+Para revertirlo: `interface GigabitEthernet2/0/19` + `no mtu`.
+
+El destino real del SPAN es `Gi2/0/19`; `Gi1/0/23` y `Gi2/0/23` son los orígenes. El texto de abajo es el diagnóstico previo y conserva esa atribución errónea.
+
+## 0-a. Diagnóstico previo (histórico)
 
 [CORE-STACK consola/SSH, administrador] Diagnóstico de solo lectura:
 
