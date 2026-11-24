@@ -210,6 +210,7 @@ class Cliente:
 
     def _dns(self, reg: dict, nombre: str) -> None:
         tid = self.rng.randint(0, 65535)
+        reg["dns_id"] = tid
         cabecera = struct.pack("!HHHHHH", tid, 0x0100, 1, 0, 0, 0)
         pregunta = b"".join(bytes([len(p)]) + p.encode() for p in nombre.split(".")) + b"\x00"
         paquete = cabecera + pregunta + struct.pack("!HH", 1, 1)

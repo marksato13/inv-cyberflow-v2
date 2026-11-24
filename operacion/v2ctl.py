@@ -113,10 +113,11 @@ def preflight(prog: dict) -> list[tuple[str, bool, str]]:
         tx.clasificar(accion, reg, prog["destinos"])
         r.append(("sonda %s" % accion, reg["clase"] != "fallo_inesperado",
                   "%s / esperado %s" % (reg["resultado_observado"], reg["resultado_esperado"])))
-    # Aviso: el EVE de Suricata rota a las 00:00 UTC (copytruncate).
+    # Solo informativo: cruzar 00:00 UTC está permitido; el archivador sigue el EVE a través de la
+    # rotación (copytruncate) y registra cualquier hueco en eve/huecos.jsonl.
     fin = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(seconds=prog["duracion_s"])
     cruza = fin.date() != datetime.datetime.now(datetime.timezone.utc).date()
-    r.append(("no cruza 00:00 UTC si empieza ahora", not cruza, "fin estimado %s" % fin.isoformat(timespec="seconds")))
+    r.append(("no cruza 00:00 UTC (informativo, no bloquea)", not cruza, "fin estimado %s" % fin.isoformat(timespec="seconds")))
     return r
 
 

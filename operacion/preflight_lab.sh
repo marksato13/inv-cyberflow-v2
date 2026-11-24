@@ -55,7 +55,7 @@ c=$(ssh -n dcadmin@10.10.10.20 'sudo -n nft list ruleset | wc -l; timedatectl sh
 [ "$(echo "$c" | sed -n 2p)" = yes ] && ok ntp_dc1 ok yes || ok ntp_dc1 fallo "$c"
 
 # 6. Clientes: NTP y ninguna ejecución V2 viva
-k=$(ssh -n clientes 'timedatectl show -p NTPSynchronized --value; pgrep -fc "clientes_lab_v2|v2ctl.py _supervisar"')
+k=$(ssh -n clientes 'timedatectl show -p NTPSynchronized --value; pgrep -fc "[c]lientes_lab_v2|[v]2ctl.py _supervisar"')
 [ "$(echo "$k" | sed -n 1p)" = yes ] && ok ntp_clientes ok yes || ok ntp_clientes fallo "$k"
 [ "$(echo "$k" | sed -n 2p)" = 0 ] && ok clientes_libre ok "sin generadores vivos" || ok clientes_libre fallo "$k"
 
