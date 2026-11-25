@@ -1,0 +1,16 @@
+ejecucion V2-E1-20261125T185323Z
+tcpdump: listening on ens35, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+1599 packets captured
+1599 packets received by filter
+0 packets dropped by kernel
+{"tramas_total": 1145101, "tramas_experimentales": 12906, "paquetes_experimentales_distintos": 6453, "copias_por_paquete": {"1": 2, "2": 6450, "4": 1}, "patrones_distintos": {"(10, 30)": 14, "(10, 20)": 66, "(20, 30)": 104, "(30,)": 2}, "paquetes_con_copia_faltante": 0, "paquetes_con_copias_de_mas": 1, "pico_1s": {"s": 1795633746, "tramas": 4456, "bytes": 4622616, "mbps": 36.98}, "pico_10ms": {"t": 1795633746.1, "bytes": 142996, "mbps_equivalentes": 114.4}, "intervalos_10ms_a_linea": 0, "bytes_por_vlan": {"10": 59493096, "99": 38525156, "100": 25961692, "60": 15774242, "20": 9438672, "30": 4712980, "95": 1121778, "70": 1121628, "50": 846455, "40": 676960, "90": 582392, "85": 579516, "80": 579516, "88": 579516, "1": 39000, "None": 33760}}
+{"conexiones": 52, "sentidos": 104, "bytes_extremo": 3340224, "bytes_no_vistos_sensor": 0, "sentidos_con_faltas": 0, "extremo_syn": 52, "sensor_syn": 104, "extremo_synack": 52, "sensor_synack": 104, "extremo_fin": 104, "sensor_fin": 208, "extremo_rst": 2, "sensor_rst": 4, "extremo_ack_puro": 994, "sensor_ack_puro": 1988, "faltas": 0}
+fin V2-E1-20261125T185323Z
+ejecucion V2-E2-20261125T194609Z
+tcpdump: listening on ens35, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+8068 packets captured
+8068 packets received by filter
+0 packets dropped by kernel
+{"tramas_total": 978048, "tramas_experimentales": 37056, "paquetes_experimentales_distintos": 18513, "copias_por_paquete": {"1": 2, "2": 18495, "4": 16}, "patrones_distintos": {"(10, 30)": 10, "(10, 20)": 366, "(20, 30)": 538, "(30,)": 2}, "paquetes_con_copia_faltante": 0, "paquetes_con_copias_de_mas": 16, "pico_1s": {"s": 1795636412, "tramas": 8029, "bytes": 8017802, "mbps": 64.14}, "pico_10ms": {"t": 1795636412.94, "bytes": 141152, "mbps_equivalentes": 112.9}, "intervalos_10ms_a_linea": 0, "bytes_por_vlan": {"10": 49702237, "99": 32221792, "100": 21179544, "20": 18807015, "30": 14936078, "60": 13114988, "95": 934840, "70": 934456, "50": 714012, "40": 557960, "80": 483304, "85": 483304, "88": 483304, "90": 483304, "1": 32500, "None": 28160}}
+{"conexiones": 269, "sentidos": 538, "bytes_extremo": 12634360, "bytes_no_vistos_sensor": 0, "sentidos_con_faltas": 0, "extremo_syn": 269, "sensor_syn": 538, "extremo_synack": 269, "sensor_synack": 538, "extremo_fin": 538, "sensor_fin": 1076, "extremo_rst": 32, "sensor_rst": 64, "extremo_ack_puro": 4723, "sensor_ack_puro": 9446, "faltas": 0}
+fin V2-E2-20261125T194609Z

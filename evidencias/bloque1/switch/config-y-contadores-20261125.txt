@@ -1,0 +1,258 @@
+# capturado 2026-11-25T19:49:48Z desde el bastion, solo lectura
+
+### show version | include IOS XE Software|Model Number|cisco C9300
+
+
+
+Cisco IOS XE Software, Version 17.09.03
+cisco C9300L-24T-4G (X86) processor with 1309193K/6147K bytes of memory.
+Model Number                       : C9300L-24T-4G
+Model Number                       : C9300L-24T-4G
+
+### show switch
+
+
+
+Switch/Stack Mac Address : e80a.b908.8b80 - Local Mac Address
+Mac persistency wait time: Indefinite
+                                             H/W   Current
+Switch#   Role    Mac Address     Priority Version  State 
+-------------------------------------------------------------------------------------
+ 2       Standby  e80a.b916.d000     14     V05     Ready                               
+
+
+
+### show monitor session all detail
+
+
+
+
+Session 1
+---------
+Type                     : Local Session
+Description              : -
+Source Ports             : 
+    RX Only              : None
+    TX Only              : None
+    Both                 : Gi1/0/23,Gi2/0/23
+Source Subinterfaces     : 
+    RX Only              : None
+    TX Only              : None
+    Both                 : None
+Source VLANs             :
+    RX Only              : None
+    TX Only              : None
+    Both                 : None
+Source Drop-cause        : None
+Source EFPs              :
+    RX Only              : None
+    TX Only              : None
+    Both                 : None
+Source RSPAN VLAN        : None
+Destination Ports        : Gi2/0/19
+    Encapsulation        : Replicate
+          Ingress        : Disabled
+Filter VLANs             : None
+Filter SGT               : None
+Dest RSPAN VLAN          : None
+IP Access-group          : None
+MAC Access-group         : None
+IPv6 Access-group        : None
+
+
+### show running-config | section monitor
+
+
+
+ monitoring
+monitor session 1 source interface Gi1/0/23
+monitor session 1 source interface Gi2/0/23
+monitor session 1 destination interface Gi2/0/19 encapsulation replicate
+
+### show running-config interface GigabitEthernet1/0/23
+
+
+
+Building configuration...
+
+Current configuration : 292 bytes
+!
+interface GigabitEthernet1/0/23
+ description FW:HV-EDGE-B:NIC:TRUNK
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,40,50,60,70,80,85,88,90,95,99,100
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree portfast trunk
+ spanning-tree bpduguard enable
+end
+
+### show running-config interface GigabitEthernet2/0/23
+
+
+
+
+Building configuration...
+
+Current configuration : 292 bytes
+!
+interface GigabitEthernet2/0/23
+ description FW:HV-EDGE-A:NIC:TRUNK
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,40,50,60,70,80,85,88,90,95,99,100
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree portfast trunk
+ spanning-tree bpduguard enable
+end
+
+### show running-config interface GigabitEthernet2/0/19
+
+
+
+
+Building configuration...
+
+Current configuration : 234 bytes
+!
+interface GigabitEthernet2/0/19
+ description SPAN:SONDA-SPAN:NIC1:DST
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ mtu 9198
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+end
+
+### show interfaces GigabitEthernet2/0/19
+
+
+
+
+GigabitEthernet2/0/19 is up, line protocol is down (monitoring)
+  Hardware is Gigabit Ethernet, address is e80a.b916.d013 (bia e80a.b916.d013)
+  Description: SPAN:SONDA-SPAN:NIC1:DST
+  MTU 9198 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full-duplex, 1000Mb/s, media type is 10/100/1000BaseTX
+  input flow-control is on, output flow-control is unsupported 
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input never, output 3d04h, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/2000/0/0 (size/max/drops/flushes); Total output drops: 215768
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 483000 bits/sec, 389 packets/sec
+     48 packets input, 3324 bytes, 0 no buffer
+     Received 48 broadcasts (12 multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 12 multicast, 0 pause input
+     0 input packets with dribble condition detected
+     52103469 packets output, 10992043840 bytes, 0 underruns
+     Output 2289186 broadcasts (10931597 multicasts)
+     0 output errors, 0 collisions, 5 interface resets
+     0 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier, 0 pause output
+
+### show interfaces GigabitEthernet2/0/19 counters errors
+
+
+
+
+
+Port           Align-Err     FCS-Err    Xmit-Err     Rcv-Err  UnderSize  OutDiscards 
+Gi2/0/19               0           0           0           0          0       215768 
+
+Port         Single-Col  Multi-Col   Late-Col  Excess-Col  Carri-Sen      Runts 
+Gi2/0/19              0          0          0           0          0          0 
+
+Port           OverSize 
+
+### show platform hardware fed switch 2 qos queue config interface GigabitEthernet2/0/19
+
+
+
+
+Asic:0 Core:0 DATA Port:18 GPN:115 LinkSpeed:0x1
+AFD:Disabled FlatAFD:Disabled QoSMap:0 HW Queues: 144 - 151
+  DrainFast:Disabled PortSoftStart:2 - 1800  
+   DTS  Hardmax  Softmax   PortSMin  GlblSMin  PortStEnd   QEnable
+  ----- --------  --------  --------  --------  ---------  -------
+ 0   1  6   200   7   800  19   475   0     0   3  2400      En
+ 1   1  5     0   8  1200  19   712   8   300   3  2400      En
+ 2   1  5     0   6     0   0     0   0     0   3  2400      En
+ 3   1  5     0   6     0   0     0   0     0   3  2400      En
+ 4   1  5     0   6     0   0     0   0     0   3  2400      En
+ 5   1  5     0   6     0   0     0   0     0   3  2400      En
+ 6   1  5     0   6     0   0     0   0     0   3  2400      En
+ 7   1  5     0   6     0   0     0   0     0   3  2400      En
+ Priority   Shaped/shared   weight  shaping_step  sharpedWeight
+ --------   -------------   ------  ------------   -------------
+ 0      0     Shared            50           0           0
+ 1      0     Shared            75           0           0
+ 2      0     Shared         10000           0           0
+ 3      0     Shared         10000           0           0
+ 4      0     Shared         10000           0           0
+ 5      0     Shared         10000           0           0
+ 6      0     Shared         10000           0           0
+ 7      0     Shared         10000           0           0
+ Port       Port            Port    Port
+ Priority   Shaped/shared   weight  shaping_step
+ --------   -------------   ------  ------------
+        2     Shaped           254         255
+
+   Weight0 Max_Th0 Min_Th0 Weigth1 Max_Th1 Min_Th1  Weight2 Max_Th2 Min_Th2
+   ------- ------- ------- ------- ------- -------  ------- ------- ------
+ 0       0     796       0       0     890       0       0    1000       0
+ 1       0     956       0       0    1068       0       0    1200       0
+ 2       0       0       0       0       0       0       0       0       0
+ 3       0       0       0       0       0       0       0       0       0
+ 4       0       0       0       0       0       0       0       0       0
+ 5       0       0       0       0       0       0       0       0       0
+ 6       0       0       0       0       0       0       0       0       0
+
+### show platform hardware fed switch 2 qos queue stats interface GigabitEthernet2/0/19
+
+
+
+
+----------------------------------------------------------------------------------------------
+AQM Global counters
+GlobalHardLimit: 3327   |   GlobalHardBufCount: 0
+GlobalSoftLimit: 16521   |   GlobalSoftBufCount: 0
+
+----------------------------------------------------------------------------------------------
+High Watermark Soft Buffers:  Port Monitor Disabled
+----------------------------------------------------------------------------------------------
+Asic:0 Core:0 DATA Port:18 Hardware Enqueue Counters
+-------------------------------------------------------------------------
+ Q Buffers          Enqueue-TH0          Enqueue-TH1          Enqueue-TH2
+   (Count)              (Bytes)              (Bytes)              (Bytes)
+-- ------- -------------------- -------------------- --------------------
+ 0       0            433405511            592853212            348868388
+ 1       0                    0                    0          10721589596
+ 2       0                    0                    0                    0
+ 3       0                    0                    0                    0
+ 4       0                    0                    0                    0
+ 5       0                    0                    0                    0
+ 6       0                    0                    0                    0
+ 7       0                    0                    0                    0
+Asic:0 Core:0 DATA Port:18 Hardware Drop Counters
+-----------------------------------------------------------------------------------------------------------
+ Q             Drop-TH0             Drop-TH1             Drop-TH2             SBufDrop              QebDrop
+                (Bytes)              (Bytes)              (Bytes)              (Bytes)              (Bytes)
+-- -------------------- -------------------- -------------------- -------------------- --------------------
+ 0                    0                    0                    0                    0                    0
+ 1                    0                    0            321963376                    0                    0
+ 2                    0                    0                    0                    0                    0
+ 3                    0                    0                    0                    0                    0
+ 4                    0                    0                    0                    0                    0
+ 5                    0                    0                    0                    0                    0
+ 6                    0                    0                    0                    0                    0

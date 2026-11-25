@@ -109,6 +109,9 @@ log reunido "$P"
 # 5. Análisis en Sensor1, con memoria acotada y sin cargar ficheros enteros
 ssh -o BatchMode=yes sensor1 "bash -s" <<EOF > "$E/analisis-salida.txt" 2>&1 || true
 set -u; ulimit -v 4000000
+# stderr (time -v) por el mismo flujo que stdout: si van separados por ssh se entremezclan y una
+# línea «verificar rc=0» llegó partida («Si…verificar rc=0»), y estado_global dio analisis incompleto (E2, 25-nov).
+exec 2>&1
 C=$S1/codigo; cd $P; mkdir -p cobertura
 /usr/bin/time -v true >/dev/null 2>&1 && T="/usr/bin/time -v" || T=""
 \$T python3 \$C/operacion/conciliar_v2.py --transacciones generador/$ID/transacciones-*.jsonl \

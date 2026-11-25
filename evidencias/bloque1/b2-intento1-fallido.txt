@@ -1,0 +1,1 @@
+intento 1 fallido 18:51Z: ssh colgado por el patron mkdir && ... & ; tcpdump del extremo detenido sin generador

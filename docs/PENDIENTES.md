@@ -42,3 +42,11 @@ Preparar una prueba no es pasarla, y pasarla no cierra una observación de los r
 | 26 | E1–E3 (18 h tras el congelado), ataques y campañas A/B | Pendiente (fuera de esta preparación) | No iniciados, según lo pedido |
 | 27 | Scripts de procesamiento, entrenamiento y evaluación | Pendiente | Se incorporarán después, con su procedencia |
 | 28 | Código público de V1 con nombres de otro dominio en `clientes_lab.py` | Pendiente | Anotado; no se ha tocado V1 |
+| 29 | Bloque 1 (25-nov): causa de los descartes de Gi2/0/19 en T1/T2 | Comprobado | Transferencias de gestión que cruzan el cortafuegos (vigía `tail -n 2000`), duplicadas por el espejo; B1 reproduce y anula; vigía corregido `cc70836`; E1/E2 con 0 descartes durante la captura. `BLOQUE1-CALIDAD-CAPTURA.md` |
+| 30 | Copias faltantes de gestión sin descarte contado (B1: 1 843 frente a 145) | Pendiente | Causa sin resolver (¿vSwitch ESXi?, ¿replicación SPAN no contada?). Mientras tanto, la ausencia de incrementos no prueba ausencia de pérdida; para lo experimental valen copias + extremo + cobertura |
+| 31 | `rx_dropped` de `ens37` creciente | Pendiente | Probablemente tramas sin manejador; no demostrado |
+| 32 | Decisión de Mark: política de calidad del espejo (clases, localización, propagación, parada) | Pendiente | Propuesta en `BLOQUE1-CALIDAD-CAPTURA.md` §5; criterio C9 vigente sin cambios |
+| 33 | Decisión de Mark: filtro de VLAN en la sesión SPAN o `qos queue-softmax-multiplier` | Pendiente | No aplicado; la sesión la comparte otro consumidor del espejo |
+| 34 | Sondeo fino del contador (≈6 s) durante las 49 h | Implementado sin verificar en horas | `sondear_span.sh` probado en B1/E1/E2 (≤ 35 min); falta reconexión automática y su integración en `lanzar_v2.sh` |
+| 35 | Norma: sin transferencias de gestión grandes por el cortafuegos durante una captura (o ≤ 160 Mb/s) | Implementado sin verificar en horas | B1-R4; añadir a PROTOCOLO y COMANDOS |
+| 36 | `cerrar_v2.sh`: stderr de `time -v` entremezclado con `rc=` | Comprobado (corregido) | E2 salió `analisis: incompleto` por eso; `exec 2>&1`; pendiente de ejercitar en el lab |

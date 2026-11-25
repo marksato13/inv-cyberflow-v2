@@ -1,0 +1,873 @@
+{
+ "V2-B1-20261125T182207Z-gestion": {
+  "carpeta": "/home/m4rk/cyberflow-v2/capturas/V2-B1-20261125T182207Z/pcap",
+  "ficheros": 277,
+  "tramas_total": 873656,
+  "tramas_experimentales": 729204,
+  "paquetes_experimentales_distintos": 390149,
+  "copias_por_paquete": {
+   "1": 51094,
+   "2": 339055
+  },
+  "patrones_distintos": {
+   "(10,)": 626,
+   "(10, 60)": 27,
+   "(10, 30)": 2,
+   "(10, 10)": 58,
+   "(10, 99)": 2,
+   "(60,)": 5
+  },
+  "paquetes_con_copia_faltante": 1843,
+  "paquetes_con_copias_de_mas": 7428,
+  "copia_faltante_por_segundo": {
+   "1795631289": 731,
+   "1795631350": 455,
+   "1795631381": 546,
+   "1795631793": 8,
+   "1795631794": 33,
+   "1795631855": 15,
+   "1795631856": 29,
+   "1795631917": 26
+  },
+  "copia_faltante_por_vlan": {
+   "10": 1540,
+   "60": 303
+  },
+  "bytes_por_vlan": {
+   "10": 166312536,
+   "60": 90199378,
+   "99": 24902343,
+   "100": 17551602,
+   "20": 3270173,
+   "95": 738220,
+   "70": 737452,
+   "30": 636604,
+   "50": 566262,
+   "40": 448232,
+   "90": 381384,
+   "88": 381196,
+   "85": 381196,
+   "80": 381196,
+   "1": 25500,
+   "None": 22240
+  },
+  "bytes_por_vlan_experimental": {
+   "10": 165045121,
+   "60": 88582880,
+   "99": 24199494,
+   "30": 254004
+  },
+  "pico_1s": {
+   "s": 1795631917,
+   "tramas": 28590,
+   "bytes": 37660517,
+   "mbps": 301.28
+  },
+  "pico_10ms": {
+   "t": 1795631641.4,
+   "bytes": 1278886,
+   "mbps_equivalentes": 1023.1
+  },
+  "intervalos_10ms_a_linea": 15,
+  "intervalos_10ms_a_linea_primeros": [
+   1795631289.54,
+   1795631565.35,
+   1795631565.36,
+   1795631565.38,
+   1795631565.39,
+   1795631565.41,
+   1795631641.35,
+   1795631641.4,
+   1795631641.44,
+   1795631641.46,
+   1795631641.47,
+   1795631717.59,
+   1795631717.6,
+   1795631717.62,
+   1795631717.64
+  ],
+  "nota": "pérdida total de un paquete (todas sus copias) no es observable aquí",
+  "rafagas_10ms": []
+ },
+ "V2-B1-20261125T182207Z": {
+  "carpeta": "/home/m4rk/cyberflow-v2/capturas/V2-B1-20261125T182207Z/pcap",
+  "ficheros": 277,
+  "tramas_total": 873656,
+  "tramas_experimentales": 3138,
+  "paquetes_experimentales_distintos": 1570,
+  "copias_por_paquete": {
+   "1": 2,
+   "2": 1568
+  },
+  "patrones_distintos": {
+   "(10, 30)": 2,
+   "(30,)": 2
+  },
+  "paquetes_con_copia_faltante": 0,
+  "paquetes_con_copias_de_mas": 0,
+  "copia_faltante_por_segundo": null,
+  "copia_faltante_por_vlan": null,
+  "bytes_por_vlan": {
+   "10": 166312536,
+   "60": 90199378,
+   "99": 24902343,
+   "100": 17551602,
+   "20": 3270173,
+   "95": 738220,
+   "70": 737452,
+   "30": 636604,
+   "50": 566262,
+   "40": 448232,
+   "90": 381384,
+   "88": 381196,
+   "85": 381196,
+   "80": 381196,
+   "1": 25500,
+   "None": 22240
+  },
+  "bytes_por_vlan_experimental": {
+   "30": 254232,
+   "10": 254004
+  },
+  "pico_1s": {
+   "s": 1795631917,
+   "tramas": 28590,
+   "bytes": 37660517,
+   "mbps": 301.28
+  },
+  "pico_10ms": {
+   "t": 1795631641.4,
+   "bytes": 1278886,
+   "mbps_equivalentes": 1023.1
+  },
+  "intervalos_10ms_a_linea": 15,
+  "intervalos_10ms_a_linea_primeros": [
+   1795631289.54,
+   1795631565.35,
+   1795631565.36,
+   1795631565.38,
+   1795631565.39,
+   1795631565.41,
+   1795631641.35,
+   1795631641.4,
+   1795631641.44,
+   1795631641.46,
+   1795631641.47,
+   1795631717.59,
+   1795631717.6,
+   1795631717.62,
+   1795631717.64
+  ],
+  "nota": "pérdida total de un paquete (todas sus copias) no es observable aquí",
+  "rafagas_10ms": []
+ },
+ "V2-E1-20261125T185323Z": {
+  "carpeta": "/home/m4rk/cyberflow-v2/capturas/V2-E1-20261125T185323Z/pcap",
+  "ficheros": 421,
+  "tramas_total": 1145101,
+  "tramas_experimentales": 12906,
+  "paquetes_experimentales_distintos": 6453,
+  "copias_por_paquete": {
+   "1": 2,
+   "2": 6450,
+   "4": 1
+  },
+  "patrones_distintos": {
+   "(10, 30)": 14,
+   "(10, 20)": 66,
+   "(20, 30)": 104,
+   "(30,)": 2
+  },
+  "paquetes_con_copia_faltante": 0,
+  "paquetes_con_copias_de_mas": 1,
+  "copia_faltante_por_segundo": {},
+  "copia_faltante_por_vlan": {},
+  "bytes_por_vlan": {
+   "10": 59493096,
+   "99": 38525156,
+   "100": 25961692,
+   "60": 15774242,
+   "20": 9438672,
+   "30": 4712980,
+   "95": 1121778,
+   "70": 1121628,
+   "50": 846455,
+   "40": 676960,
+   "90": 582392,
+   "85": 579516,
+   "80": 579516,
+   "88": 579516,
+   "1": 39000,
+   "None": 33760
+  },
+  "bytes_por_vlan_experimental": {
+   "30": 4131008,
+   "20": 3688620,
+   "10": 461232
+  },
+  "pico_1s": {
+   "s": 1795633746,
+   "tramas": 4456,
+   "bytes": 4622616,
+   "mbps": 36.98
+  },
+  "pico_10ms": {
+   "t": 1795633746.1,
+   "bytes": 142996,
+   "mbps_equivalentes": 114.4
+  },
+  "intervalos_10ms_a_linea": 0,
+  "intervalos_10ms_a_linea_primeros": [],
+  "nota": "pérdida total de un paquete (todas sus copias) no es observable aquí",
+  "rafagas_10ms": []
+ },
+ "V2-E2-20261125T194609Z": {
+  "carpeta": "/home/m4rk/cyberflow-v2/capturas/V2-E2-20261125T194609Z/pcap",
+  "ficheros": 352,
+  "tramas_total": 978048,
+  "tramas_experimentales": 37056,
+  "paquetes_experimentales_distintos": 18513,
+  "copias_por_paquete": {
+   "1": 2,
+   "2": 18495,
+   "4": 16
+  },
+  "patrones_distintos": {
+   "(10, 30)": 10,
+   "(10, 20)": 366,
+   "(20, 30)": 538,
+   "(30,)": 2
+  },
+  "paquetes_con_copia_faltante": 0,
+  "paquetes_con_copias_de_mas": 16,
+  "copia_faltante_por_segundo": {},
+  "copia_faltante_por_vlan": {},
+  "bytes_por_vlan": {
+   "10": 49702237,
+   "99": 32221792,
+   "100": 21179544,
+   "20": 18807015,
+   "30": 14936078,
+   "60": 13114988,
+   "95": 934840,
+   "70": 934456,
+   "50": 714012,
+   "40": 557960,
+   "80": 483304,
+   "85": 483304,
+   "88": 483304,
+   "90": 483304,
+   "1": 32500,
+   "None": 28160
+  },
+  "bytes_por_vlan_experimental": {
+   "30": 14451746,
+   "20": 14129224,
+   "10": 428298
+  },
+  "pico_1s": {
+   "s": 1795636412,
+   "tramas": 8029,
+   "bytes": 8017802,
+   "mbps": 64.14
+  },
+  "pico_10ms": {
+   "t": 1795636412.94,
+   "bytes": 141152,
+   "mbps_equivalentes": 112.9
+  },
+  "intervalos_10ms_a_linea": 0,
+  "intervalos_10ms_a_linea_primeros": [],
+  "nota": "pérdida total de un paquete (todas sus copias) no es observable aquí",
+  "rafagas_10ms": []
+ },
+ "V2-T1-20261125T062528Z": {
+  "carpeta": "/home/m4rk/cyberflow-v2/capturas/V2-T1-20261125T062528Z/pcap",
+  "ficheros": 441,
+  "tramas_total": 441557,
+  "tramas_experimentales": 13082,
+  "paquetes_experimentales_distintos": 6541,
+  "copias_por_paquete": {
+   "1": 2,
+   "2": 6538,
+   "4": 1
+  },
+  "patrones_distintos": {
+   "(10, 20)": 68,
+   "(20, 30)": 112,
+   "(10, 30)": 8,
+   "(30,)": 2
+  },
+  "paquetes_con_copia_faltante": 0,
+  "paquetes_con_copias_de_mas": 1,
+  "copia_faltante_por_segundo": null,
+  "copia_faltante_por_vlan": null,
+  "bytes_por_vlan": {
+   "10": 27358388,
+   "60": 26981474,
+   "100": 24166992,
+   "20": 9561959,
+   "30": 4742359,
+   "99": 1297199,
+   "95": 1172888,
+   "70": 1172552,
+   "50": 917012,
+   "40": 695172,
+   "90": 606388,
+   "85": 606200,
+   "88": 606200,
+   "80": 606200,
+   "1": 40500,
+   "None": 35360
+  },
+  "bytes_por_vlan_experimental": {
+   "30": 4134543,
+   "20": 3699337,
+   "10": 454630
+  },
+  "pico_1s": {
+   "s": 1795588960,
+   "tramas": 5887,
+   "bytes": 6510447,
+   "mbps": 52.08
+  },
+  "pico_10ms": {
+   "t": 1795588499.75,
+   "bytes": 1243742,
+   "mbps_equivalentes": 995.0
+  },
+  "intervalos_10ms_a_linea": 0,
+  "intervalos_10ms_a_linea_primeros": [],
+  "nota": "pérdida total de un paquete (todas sus copias) no es observable aquí",
+  "rafagas_10ms": [
+   {
+    "t": 1795588499.75,
+    "bytes": 1243742,
+    "mbps_equivalentes": 995.0,
+    "por_vlan": {
+     "60": 922814,
+     "10": 317528,
+     "100": 3400
+    },
+    "por_tipo": {
+     "no_experimental": 1243742
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795589416.31,
+    "bytes": 1235458,
+    "mbps_equivalentes": 988.4,
+    "por_vlan": {
+     "60": 780436,
+     "10": 450942,
+     "100": 4080
+    },
+    "por_tipo": {
+     "no_experimental": 1235458
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795589110.69,
+    "bytes": 1233722,
+    "mbps_equivalentes": 987.0,
+    "por_vlan": {
+     "60": 884434,
+     "10": 345208,
+     "100": 4080
+    },
+    "por_tipo": {
+     "no_experimental": 1233722
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795588194.22,
+    "bytes": 1227556,
+    "mbps_equivalentes": 982.0,
+    "por_vlan": {
+     "60": 972310,
+     "10": 251166,
+     "100": 4080
+    },
+    "por_tipo": {
+     "no_experimental": 1227556
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795590026.45,
+    "bytes": 1221914,
+    "mbps_equivalentes": 977.5,
+    "por_vlan": {
+     "60": 923734,
+     "10": 294100,
+     "100": 4080
+    },
+    "por_tipo": {
+     "no_experimental": 1221914
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795589110.68,
+    "bytes": 1174386,
+    "mbps_equivalentes": 939.5,
+    "por_vlan": {
+     "60": 705322,
+     "10": 464720,
+     "100": 4344
+    },
+    "por_tipo": {
+     "no_experimental": 1174386
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795590026.44,
+    "bytes": 1158918,
+    "mbps_equivalentes": 927.1,
+    "por_vlan": {
+     "60": 642486,
+     "10": 512648,
+     "100": 3784
+    },
+    "por_tipo": {
+     "no_experimental": 1158918
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795588805.74,
+    "bytes": 1106360,
+    "mbps_equivalentes": 885.1,
+    "por_vlan": {
+     "60": 815802,
+     "10": 287158,
+     "100": 3400
+    },
+    "por_tipo": {
+     "no_experimental": 1106360
+    },
+    "pares_ajenos_distintos": 4
+   },
+   {
+    "t": 1795588805.73,
+    "bytes": 1032106,
+    "mbps_equivalentes": 825.7,
+    "por_vlan": {
+     "60": 566414,
+     "10": 462028,
+     "100": 3664
+    },
+    "por_tipo": {
+     "no_experimental": 1032106
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795589722.13,
+    "bytes": 981840,
+    "mbps_equivalentes": 785.5,
+    "por_vlan": {
+     "60": 622084,
+     "10": 355752,
+     "100": 4004
+    },
+    "por_tipo": {
+     "no_experimental": 981840
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795589722.14,
+    "bytes": 946180,
+    "mbps_equivalentes": 756.9,
+    "por_vlan": {
+     "60": 885600,
+     "10": 56088,
+     "100": 4248,
+     "99": 244
+    },
+    "por_tipo": {
+     "no_experimental": 946180
+    },
+    "pares_ajenos_distintos": 5
+   },
+   {
+    "t": 1795588499.74,
+    "bytes": 677302,
+    "mbps_equivalentes": 541.8,
+    "por_vlan": {
+     "60": 353392,
+     "10": 321446,
+     "100": 2464
+    },
+    "por_tipo": {
+     "no_experimental": 677302
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795589416.32,
+    "bytes": 560524,
+    "mbps_equivalentes": 448.4,
+    "por_vlan": {
+     "60": 421304,
+     "10": 137860,
+     "100": 1360
+    },
+    "por_tipo": {
+     "no_experimental": 560524
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795588194.23,
+    "bytes": 560476,
+    "mbps_equivalentes": 448.4,
+    "por_vlan": {
+     "60": 507640,
+     "10": 49948,
+     "100": 2888
+    },
+    "por_tipo": {
+     "no_experimental": 560476
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795589416.3,
+    "bytes": 510084,
+    "mbps_equivalentes": 408.1,
+    "por_vlan": {
+     "60": 282770,
+     "10": 224506,
+     "100": 2808
+    },
+    "por_tipo": {
+     "no_experimental": 510084
+    },
+    "pares_ajenos_distintos": 3
+   }
+  ]
+ },
+ "V2-T2-20261125T070500Z": {
+  "carpeta": "/home/m4rk/cyberflow-v2/capturas/V2-T2-20261125T070500Z/pcap",
+  "ficheros": 350,
+  "tramas_total": 384677,
+  "tramas_experimentales": 38022,
+  "paquetes_experimentales_distintos": 18997,
+  "copias_por_paquete": {
+   "1": 4,
+   "2": 18977,
+   "4": 16
+  },
+  "patrones_distintos": {
+   "(10, 30)": 10,
+   "(30,)": 4,
+   "(10, 20)": 366,
+   "(20, 30)": 538
+  },
+  "paquetes_con_copia_faltante": 0,
+  "paquetes_con_copias_de_mas": 16,
+  "copia_faltante_por_segundo": null,
+  "copia_faltante_por_vlan": null,
+  "bytes_por_vlan": {
+   "10": 24386436,
+   "60": 22493211,
+   "100": 19940878,
+   "20": 18843238,
+   "30": 14993024,
+   "99": 1054252,
+   "70": 932032,
+   "95": 931600,
+   "50": 712938,
+   "40": 562880,
+   "90": 484524,
+   "80": 481648,
+   "88": 481648,
+   "85": 481648,
+   "1": 33000,
+   "None": 28000
+  },
+  "bytes_por_vlan_experimental": {
+   "30": 14510788,
+   "20": 14169724,
+   "10": 446602
+  },
+  "pico_1s": {
+   "s": 1795590745,
+   "tramas": 8793,
+   "bytes": 9755282,
+   "mbps": 78.04
+  },
+  "pico_10ms": {
+   "t": 1795591084.71,
+   "bytes": 1220874,
+   "mbps_equivalentes": 976.7
+  },
+  "intervalos_10ms_a_linea": 0,
+  "intervalos_10ms_a_linea_primeros": [],
+  "nota": "pérdida total de un paquete (todas sus copias) no es observable aquí",
+  "rafagas_10ms": [
+   {
+    "t": 1795591084.71,
+    "bytes": 1220874,
+    "mbps_equivalentes": 976.7,
+    "por_vlan": {
+     "60": 854834,
+     "10": 362640,
+     "100": 3400
+    },
+    "por_tipo": {
+     "no_experimental": 1220874
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795590472.28,
+    "bytes": 1220634,
+    "mbps_equivalentes": 976.5,
+    "por_vlan": {
+     "60": 1038406,
+     "10": 178148,
+     "100": 4080
+    },
+    "por_tipo": {
+     "no_experimental": 1220634
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795591696.55,
+    "bytes": 1180342,
+    "mbps_equivalentes": 944.3,
+    "por_vlan": {
+     "60": 987928,
+     "10": 188674,
+     "100": 3740
+    },
+    "por_tipo": {
+     "no_experimental": 1180342
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795591390.41,
+    "bytes": 1167836,
+    "mbps_equivalentes": 934.3,
+    "por_vlan": {
+     "60": 783342,
+     "10": 378798,
+     "100": 5696
+    },
+    "por_tipo": {
+     "no_experimental": 1167836
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795590778.55,
+    "bytes": 1095322,
+    "mbps_equivalentes": 876.3,
+    "por_vlan": {
+     "60": 743766,
+     "10": 347660,
+     "100": 3896
+    },
+    "por_tipo": {
+     "no_experimental": 1095322
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795592006.56,
+    "bytes": 1090320,
+    "mbps_equivalentes": 872.3,
+    "por_vlan": {
+     "10": 544426,
+     "60": 542618,
+     "100": 3276
+    },
+    "por_tipo": {
+     "no_experimental": 1090320
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795592006.57,
+    "bytes": 1021454,
+    "mbps_equivalentes": 817.2,
+    "por_vlan": {
+     "60": 629494,
+     "10": 389240,
+     "100": 2720
+    },
+    "por_tipo": {
+     "no_experimental": 1021454
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795590472.27,
+    "bytes": 961428,
+    "mbps_equivalentes": 769.1,
+    "por_vlan": {
+     "60": 487936,
+     "10": 469660,
+     "100": 3832
+    },
+    "por_tipo": {
+     "no_experimental": 961428
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795590778.56,
+    "bytes": 891676,
+    "mbps_equivalentes": 713.3,
+    "por_vlan": {
+     "60": 766420,
+     "10": 121856,
+     "100": 3400
+    },
+    "por_tipo": {
+     "no_experimental": 891676
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795590460.65,
+    "bytes": 876228,
+    "mbps_equivalentes": 701.0,
+    "por_vlan": {
+     "60": 562792,
+     "10": 310376,
+     "100": 3060
+    },
+    "por_tipo": {
+     "no_experimental": 876228
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795591390.42,
+    "bytes": 806146,
+    "mbps_equivalentes": 644.9,
+    "por_vlan": {
+     "60": 528364,
+     "10": 275742,
+     "100": 2040
+    },
+    "por_tipo": {
+     "no_experimental": 806146
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795591696.54,
+    "bytes": 743922,
+    "mbps_equivalentes": 595.1,
+    "por_vlan": {
+     "60": 393858,
+     "10": 347808,
+     "100": 2256
+    },
+    "por_tipo": {
+     "no_experimental": 743922
+    },
+    "pares_ajenos_distintos": 3
+   },
+   {
+    "t": 1795590460.64,
+    "bytes": 666326,
+    "mbps_equivalentes": 533.1,
+    "por_vlan": {
+     "60": 332670,
+     "10": 331532,
+     "100": 2124
+    },
+    "por_tipo": {
+     "no_experimental": 666326
+    },
+    "pares_ajenos_distintos": 5
+   },
+   {
+    "t": 1795591084.7,
+    "bytes": 652476,
+    "mbps_equivalentes": 522.0,
+    "por_vlan": {
+     "60": 334164,
+     "10": 315888,
+     "100": 2424
+    },
+    "por_tipo": {
+     "no_experimental": 652476
+    },
+    "pares_ajenos_distintos": 3
+   }
+  ]
+ },
+ "extremo-V2-E1-20261125T185323Z": {
+  "conexiones": 52,
+  "totales": {
+   "sentidos": 104,
+   "bytes_extremo": 3340224,
+   "bytes_no_vistos_sensor": 0,
+   "sentidos_con_faltas": 0,
+   "extremo_syn": 52,
+   "sensor_syn": 104,
+   "extremo_synack": 52,
+   "sensor_synack": 104,
+   "extremo_fin": 104,
+   "sensor_fin": 208,
+   "extremo_rst": 2,
+   "sensor_rst": 4,
+   "extremo_ack_puro": 994,
+   "sensor_ack_puro": 1988
+  },
+  "faltas": [],
+  "ventana": [
+   1795632975.642028,
+   1795634651.586568
+  ],
+  "limitaciones": [
+   "TSO/GSO/GRO/LRO activos en el extremo: se comparan rangos de bytes y control",
+   "ACK puros entrantes del extremo pueden estar agrupados (GRO): orientativo",
+   "DNS no se contrasta (el extremo es el servidor web)",
+   "una conexión que empieza o acaba fuera de la captura del extremo queda parcial"
+  ]
+ },
+ "extremo-V2-E2-20261125T194609Z": {
+  "conexiones": 269,
+  "totales": {
+   "sentidos": 538,
+   "bytes_extremo": 12634360,
+   "bytes_no_vistos_sensor": 0,
+   "sentidos_con_faltas": 0,
+   "extremo_syn": 269,
+   "sensor_syn": 538,
+   "extremo_synack": 269,
+   "sensor_synack": 538,
+   "extremo_fin": 538,
+   "sensor_fin": 1076,
+   "extremo_rst": 32,
+   "sensor_rst": 64,
+   "extremo_ack_puro": 4723,
+   "sensor_ack_puro": 9446
+  },
+  "faltas": [],
+  "ventana": [
+   1795636135.954253,
+   1795637572.541673
+  ],
+  "limitaciones": [
+   "TSO/GSO/GRO/LRO activos en el extremo: se comparan rangos de bytes y control",
+   "ACK puros entrantes del extremo pueden estar agrupados (GRO): orientativo",
+   "DNS no se contrasta (el extremo es el servidor web)",
+   "una conexión que empieza o acaba fuera de la captura del extremo queda parcial"
+  ]
+ }
+}

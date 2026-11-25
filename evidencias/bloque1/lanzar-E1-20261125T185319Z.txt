@@ -1,0 +1,12 @@
+{"utc":"2026-11-25T18:53:23.048Z","paso":"identificador","detalle":"V2-E1-20261125T185323Z programa=prueba-perfiles-aislados.json sha256=d93f81a808491838eb685460a9f3e9ef2f1353b160339961695f1e4c0a893603 duracion=1800 tope_inicial=1795642073 retraso_prueba=0 "}
+{"utc":"2026-11-25T18:53:23.945Z","paso":"exclusion_v1","detalle":"{cubierto: true, regla: *@2026-11-24T18:15:00+00:00/2026-11-26T00:00:00+00:00, cambio: false} "}
+{"utc":"2026-11-25T18:53:32.301Z","paso":"preflight","detalle":"ok "}
+{"utc":"2026-11-25T18:53:38.358Z","paso":"relojes","detalle":"srvdmz y dc1 "}
+{"utc":"2026-11-25T18:53:43.567Z","paso":"contadores","detalle":"inicio "}
+Running as unit: cf-v2-dns-v2-e1-20261125t185323z.service; invocation ID: 1ba9d263251348d39b75891cd9538035
+{"utc":"2026-11-25T18:53:43.791Z","paso":"registro_dns","detalle":"cf-v2-dns-v2-e1-20261125t185323z "}
+{"utc":"2026-11-25T18:53:45.184Z","paso":"exclusion_v1_confirmada","detalle":"{cubierto: true, regla: *@2026-11-24T18:15:00+00:00/2026-11-26T00:00:00+00:00, cambio: false} "}
+{"utc":"2026-11-25T18:53:45.190Z","paso":"archivador","detalle":"ok confirmado=1795632824 inicio=1795632974 tope=1795638494 "}
+{"utc":"2026-11-25T18:56:16.708Z","paso":"generador","detalle":"{ejecucion: V2-E1-20261125T185323Z, directorio: /home/adminclientes/cyberflow-v2/ejecuciones/V2-E1-20261125T185323Z, supervisor_pid: 74549, programa_sha256: d93f81a808491838eb685460a9f3e9ef2f1353b160339961695f1e4c0a893603, inicio_utc: 2026-11-25T18:56:16.660281Z} "}
+{"utc":"2026-11-25T18:56:16.717Z","paso":"vigia","detalle":"pid 1139415 "}
+V2-E1-20261125T185323Z
