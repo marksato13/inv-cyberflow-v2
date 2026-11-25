@@ -51,7 +51,7 @@ class TestMetadatos(unittest.TestCase):
             for k, fin in enumerate((20, 40, 50, 80)):
                 fila = {c: 0 for c in ex.v2.FEATURE_NAMES}
                 fila.update(ejecucion="V2-X-1", ip="10.10.20.21", ventana_inicio=iso(T0 + fin - 10), ventana_fin=iso(T0 + fin),
-                            bloque=0 if fin <= 30 else 1, motivo_marca="frontera" if fin == 40 else "",
+                            bloque=0 if fin <= 30 else 1, motivo_marca="arranque,frontera" if fin >= 40 else "arranque",
                             n_paquetes_ventana=1, n_eventos_l7_ventana=0)
                 w.writerow(fila)
         return cap, x, gen, d
@@ -71,9 +71,11 @@ class TestMetadatos(unittest.TestCase):
             meta = list(csv.DictReader(open(x / "ventanas_meta.csv", newline="")))
             por_cierre = {round(float(m["t_programa_s"])): m for m in meta}
             self.assertEqual(por_cierre[20]["particion"], "entrenamiento")
-            self.assertEqual(por_cierre[20]["excluir_entrenamiento"], "False")
+            self.assertEqual(por_cierre[20]["excluir_entrenamiento"], "True")
+            self.assertIn("E1:arranque", por_cierre[20]["motivos_exclusion"])
             self.assertEqual(por_cierre[20]["pcap_ventana"], "live-a.pcap.gz")
             self.assertIn("E1:frontera", por_cierre[40]["motivos_exclusion"])
+            self.assertIn("E1:arranque", por_cierre[40]["motivos_exclusion"])
             self.assertEqual(por_cierre[40]["particion"], "calibracion")
             self.assertIn("E3:cobertura_no verificable", por_cierre[50]["motivos_exclusion"])
             self.assertIn("E5:fuera_del_programa", por_cierre[80]["motivos_exclusion"])

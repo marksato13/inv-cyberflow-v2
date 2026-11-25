@@ -25,9 +25,10 @@ import extract_multilayer_v3 as v3  # noqa: E402
 
 # --history-seconds del motor V1 en operación (Sensor1). Fija el horizonte del estado de flujos.
 HORIZONTE_MOTOR_S = 230.0
+GUARDA_ESTADO_S = HORIZONTE_MOTOR_S
 DEFAULT_POPULATION = tuple(f"10.10.20.{i}" for i in range(21, 27))
 CONTROL = ("ejecucion", "ip", "ventana_inicio", "ventana_fin", "bloque",
-           "motivo_marca", "n_paquetes_ventana", "n_eventos_l7_ventana")
+           "motivo_marca", "antecedentes_desde_utc", "n_paquetes_ventana", "n_eventos_l7_ventana")
 FIELDS = CONTROL + v2.FEATURE_NAMES
 GESTION = {"10.10.10.30", "10.10.20.20", "10.10.20.30"}
 SERVICIOS = {"10.10.30.10", "10.10.10.20"}
@@ -199,13 +200,13 @@ def leer_contextos_crudos(rutas, inventario):
             yield ctx
 
 
-def finalizar_pendientes(pendientes, corte, cuentas, fronteras=()):
+def finalizar_pendientes(pendientes, corte, cuentas, fronteras=(), estado="continuo"):
     """Cierra copias anteriores a corte, dejando 5 ms de solape."""
     if not pendientes or pendientes[0].packet.timestamp >= corte:
         return [], pendientes
     por_bloque = {}
     for ctx in pendientes:
-        bloque = sum(f <= ctx.packet.timestamp for f in fronteras)
+        bloque = sum(f <= ctx.packet.timestamp for f in fronteras) if estado == "por-bloque" else 0
         por_bloque.setdefault(bloque, []).append(ctx)
     conservados = []
     for grupo in por_bloque.values():
@@ -222,13 +223,13 @@ def finalizar_pendientes(pendientes, corte, cuentas, fronteras=()):
     return terminados, siguientes
 
 
-def marcar(anchor, inicio, fronteras):
+def marcar(anchor, inicio, fronteras, guarda_s=GUARDA_ESTADO_S, estado="continuo"):
     bloque = sum(f <= anchor for f in fronteras)
-    piso = max([inicio] + [f for f in fronteras if f <= anchor])
+    piso = max([inicio] + [f for f in fronteras if f <= anchor]) if estado == "por-bloque" else inicio
     motivos = []
-    if anchor - inicio < 60:
+    if anchor - inicio < guarda_s:
         motivos.append("arranque")
-    if any(anchor - 60 < f <= anchor for f in fronteras):
+    if any(anchor - guarda_s < f <= anchor for f in fronteras):
         motivos.append("frontera")
     return bloque, ",".join(motivos), piso
 
@@ -237,7 +238,7 @@ def clave_secuencia(p):
     return repr((p.protocol, p.src_ip, p.src_port, p.dst_ip, p.dst_port, p.tcp_seq))
 
 
-def atribuir_con_estado(paquetes, estado, piso, anchor, bloque, horizonte_s=HORIZONTE_MOTOR_S):
+def atribuir_con_estado(paquetes, estado, piso, anchor, bloque, horizonte_s=HORIZONTE_MOTOR_S, modo="continuo"):
     """Usa V1 con sus antecedentes mínimos, persistidos fuera de RAM.
 
     Paridad con el motor en operación: la ventana A se calcula con los paquetes de
@@ -249,13 +250,13 @@ def atribuir_con_estado(paquetes, estado, piso, anchor, bloque, horizonte_s=HORI
     desde = max(anchor - horizonte_s, piso)
     hasta = max(anchor - 60, piso)
     for p in paquetes:
-        flujo = repr((bloque, v2.canonical_flow_key(p)))
+        flujo = repr((bloque, v2.canonical_flow_key(p))) if modo == "por-bloque" else repr(v2.canonical_flow_key(p))
         fila = estado.execute("SELECT ts, dato FROM flujos WHERE clave=? AND ts>=? ORDER BY ts LIMIT 1",
                               (flujo, desde)).fetchone()
         if fila and fila[0] < hasta:
             semillas[(flujo, "primero")] = pickle.loads(fila[1])
         if p.protocol == 6 and p.tcp_payload_length > 0:
-            clave_seq = repr((bloque, clave_secuencia(p)))
+            clave_seq = repr((bloque, clave_secuencia(p))) if modo == "por-bloque" else clave_secuencia(p)
             fila = estado.execute("SELECT ts, dato FROM secuencias WHERE clave=? AND ts>=? ORDER BY ts LIMIT 1",
                                   (clave_seq, desde)).fetchone()
             if fila and fila[0] < hasta:
@@ -267,7 +268,12 @@ def atribuir_con_estado(paquetes, estado, piso, anchor, bloque, horizonte_s=HORI
 
 
 def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[float],
-             horizonte_s: float = HORIZONTE_MOTOR_S) -> dict:
+             horizonte_s: float = HORIZONTE_MOTOR_S, estado_modo: str = "continuo",
+             guarda_s: float = GUARDA_ESTADO_S) -> dict:
+    if estado_modo not in ("continuo", "por-bloque"):
+        raise ValueError("--estado debe ser continuo o por-bloque")
+    if guarda_s < horizonte_s:
+        raise ValueError("--guarda-s debe ser al menos el horizonte del motor")
     rutas = rutas_pcap(archivo)
     salida.mkdir(parents=True, exist_ok=True)
     inventario = {}
@@ -306,10 +312,10 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
             dato = pickle.dumps(p, protocol=pickle.HIGHEST_PROTOCOL)
             bloque_p = sum(f <= p.timestamp for f in fronteras)
             estado.execute("INSERT INTO flujos VALUES (?,?,?)",
-                           (repr((bloque_p, v2.canonical_flow_key(p))), p.timestamp, dato))
+                           ((repr((bloque_p, v2.canonical_flow_key(p))) if estado_modo == "por-bloque" else repr(v2.canonical_flow_key(p))), p.timestamp, dato))
             if p.protocol == 6 and p.tcp_payload_length > 0:
                 estado.execute("INSERT INTO secuencias VALUES (?,?,?)",
-                               (repr((bloque_p, clave_secuencia(p))), p.timestamp, dato))
+                               ((repr((bloque_p, clave_secuencia(p))) if estado_modo == "por-bloque" else clave_secuencia(p)), p.timestamp, dato))
 
     with filas_temporales.open("w", encoding="utf-8") as tmp:
         while p_next is not None or e_next is not None:
@@ -318,7 +324,7 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
                 contextos.append(p_next)
                 pendientes.append(p_next)
                 p_next = next(p_iter, None)
-            terminados, pendientes = finalizar_pendientes(pendientes, anchor - 0.005, cuentas, fronteras)
+            terminados, pendientes = finalizar_pendientes(pendientes, anchor - 0.005, cuentas, fronteras, estado_modo)
             registrar_finalizados(terminados)
             while e_next is not None and e_next[0] <= anchor:
                 ts, line, ev = e_next
@@ -328,7 +334,7 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
                 else:
                     cuentas["eventos_descartados_poblacion"] += 1
                 e_next = next(e_iter, None)
-            bloque, motivo, piso = marcar(anchor, inicio, fronteras)
+            bloque, motivo, piso = marcar(anchor, inicio, fronteras, guarda_s, estado_modo)
             while contextos and (contextos[0].packet.timestamp < anchor - 60 - 0.005 or
                                  contextos[0].packet.timestamp < piso):
                 contextos.popleft()
@@ -340,7 +346,7 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
                         and (p.src_ip in poblacion or p.dst_ip in poblacion)]
             for tabla in ("flujos", "secuencias"):
                 estado.execute("DELETE FROM %s WHERE ts < ?" % tabla, (anchor - horizonte_s - 1,))
-            observaciones = atribuir_con_estado(paquetes, estado, piso, anchor, bloque, horizonte_s)
+            observaciones = atribuir_con_estado(paquetes, estado, piso, anchor, bloque, horizonte_s, estado_modo)
             observaciones = [o for o in observaciones if o.entity_ip in poblacion]
             with tempfile.NamedTemporaryFile(mode="w", suffix=".json", encoding="utf-8", dir=salida, delete=False) as ef:
                 ef.writelines(line for _, line in eventos)
@@ -368,12 +374,13 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
                 fila = {"ejecucion": archivo.name, "ip": ip,
                         "ventana_inicio": utc(anchor - 10), "ventana_fin": utc(anchor),
                         "bloque": bloque, "motivo_marca": motivo,
+                         "antecedentes_desde_utc": utc(max(inicio, anchor - horizonte_s)),
                         "n_paquetes_ventana": sum(o.entity_ip == ip and v2.in_window(o.timestamp, anchor, 10) for o in observaciones),
                         "n_eventos_l7_ventana": sum(a.entity_ip == ip and v2.in_window(a.timestamp, anchor, 10) for a in apps)}
                 fila.update({name: r[name] for name in v2.FEATURE_NAMES})
                 tmp.write(json.dumps(fila, allow_nan=True) + "\n")
             anchor += 10
-    terminados, _ = finalizar_pendientes(pendientes, float("inf"), cuentas, fronteras)
+    terminados, _ = finalizar_pendientes(pendientes, float("inf"), cuentas, fronteras, estado_modo)
     registrar_finalizados(terminados)
     with (salida / "filas.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=FIELDS)
@@ -407,7 +414,8 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
     resumen["orden_pcap"] = dict(ORDEN_PCAP, ventana_s=VENTANA_ORDEN_PCAP_S)
     resumen.update({"ejecucion": archivo.name, "poblacion": sorted(poblacion), "fronteras_utc": [utc(f) for f in fronteras],
                     "pcap_ficheros": len(rutas), "paso_s": 10, "historia_maxima_s": 60,
-                    "horizonte_estado_flujos_s": horizonte_s})
+                    "horizonte_estado_flujos_s": horizonte_s, "guarda_estado_s": guarda_s,
+                    "estado": estado_modo})
     (salida / "resumen.json").write_text(json.dumps(resumen, indent=2, ensure_ascii=False), encoding="utf-8")
     return resumen
 
@@ -420,9 +428,11 @@ def main() -> int:
     ap.add_argument("--fronteras", type=Path)
     ap.add_argument("--horizonte-motor-s", type=float, default=HORIZONTE_MOTOR_S,
                     help="--history-seconds del motor en operación (230 en Sensor1)")
+    ap.add_argument("--estado", choices=("continuo", "por-bloque"), default="continuo")
+    ap.add_argument("--guarda-s", type=float, default=GUARDA_ESTADO_S)
     args = ap.parse_args()
     print(json.dumps(procesar(args.archivo, args.salida, poblacion_desde(args.poblacion),
-                              fronteras_desde(args.fronteras), args.horizonte_motor_s), ensure_ascii=False))
+                              fronteras_desde(args.fronteras), args.horizonte_motor_s, args.estado, args.guarda_s), ensure_ascii=False))
     return 0
 
 

@@ -4,13 +4,16 @@ import ipaddress
 import json
 import socket
 import struct
+import sys
 import shutil
 import unittest
 import uuid
 from pathlib import Path
+from unittest.mock import patch
 
 from extraccion import extraer_v2 as ex
 from extraccion import verificar_v2 as ver
+from extraccion import comparar_modos as comp
 
 
 def trama(ts, src, dst, sport, dport, ipid, vlan=20, ttl=64, seq=1, flags=2, payload=b""):
@@ -73,9 +76,9 @@ class ExtraccionTest(unittest.TestCase):
                            "dest_ip": s, "http": {"status": 500}})
         (self.archivo / "eve" / "eve-1.json").write_text("".join(json.dumps(e) + "\n" for e in sorted(events, key=lambda e: e["timestamp"])))
 
-    def extraer(self, nombre, fronteras=()):
+    def extraer(self, nombre, fronteras=(), estado="continuo"):
         salida = self.root / nombre
-        resumen = ex.procesar(self.archivo, salida, self.pop, list(fronteras))
+        resumen = ex.procesar(self.archivo, salida, self.pop, list(fronteras), estado_modo=estado)
         with (salida / "filas.csv").open(newline="", encoding="utf-8") as f:
             filas = list(csv.DictReader(f))
         return salida, resumen, filas
@@ -99,7 +102,7 @@ class ExtraccionTest(unittest.TestCase):
         self.assertEqual(base, doble)
         self.assertEqual(resumen["copias_espejo_quitadas"], 4)
 
-    def test_frontera_no_mezcla_bloques_y_marca(self):
+    def test_frontera_etiqueta_y_marca(self):
         self.preparar(frontera=True)
         _, _, filas = self.extraer("particion", (160.0,))
         f = next(r for r in filas if r["ventana_fin"] == ex.utc(170))
@@ -107,6 +110,74 @@ class ExtraccionTest(unittest.TestCase):
         self.assertIn("frontera", f["motivo_marca"])
         self.assertEqual(f["n_paquetes_ventana"], "0")
         self.assertEqual(float(f["flow_attempt_rate_10s"]), 0)
+
+    def preparar_flujo_cruzado(self):
+        c, s = "10.10.20.21", "10.10.30.10"
+        frames = [trama(100.1, c, s, 50000, 443, 1),
+                  trama(280.1, c, s, 50000, 443, 2, seq=2, flags=24, payload=b"a"),
+                  trama(305.1, c, s, 50000, 443, 3, seq=3, flags=24, payload=b"b"),
+                  trama(399.1, c, s, 50000, 443, 4, seq=4, flags=24, payload=b"c"),
+                  trama(529.1, c, s, 50001, 443, 5),
+                  trama(550.1, c, s, 50001, 443, 6, seq=2, flags=24, payload=b"d")]
+        pcap(self.archivo / "pcap" / "live-0001.pcap", frames)
+        (self.archivo / "eve" / "eve-1.json").write_text("")
+
+    def test_flujo_cruza_frontera_y_compara_modos(self):
+        self.preparar_flujo_cruzado()
+        continuo, resumen, filas = self.extraer("continuo", (300.0,))
+        bloque, _, filas_bloque = self.extraer("por-bloque", (300.0,), "por-bloque")
+        self.assertEqual(resumen["estado"], "continuo")
+        self.assertEqual(resumen["guarda_estado_s"], 230)
+        self.assertTrue(ver.verificar(self.archivo, continuo, self.pop, [300.0])["sin_futuro_ok"])
+        self.assertTrue(ver.verificar(self.archivo, bloque, self.pop, [300.0], estado="por-bloque")["sin_futuro_ok"])
+        por_ancla = {r["ventana_fin"]: r for r in filas}
+        por_ancla_b = {r["ventana_fin"]: r for r in filas_bloque}
+        self.assertNotEqual(float(por_ancla[ex.utc(310)]["flow_duration_mean_30s"]),
+                            float(por_ancla_b[ex.utc(310)]["flow_duration_mean_30s"]))
+        self.assertEqual(por_ancla[ex.utc(310)]["antecedentes_desde_utc"], ex.utc(100.1))
+        for r in filas:
+            anchor = ex.v2.parse_eve_timestamp(r["ventana_fin"])
+            if anchor >= 300:
+                esperado = ver.referencia(self.archivo, r["ip"], anchor, self.pop, [300.0])
+                for name in ex.v2.FEATURE_NAMES:
+                    self.assertAlmostEqual(float(r[name]), esperado[name], places=10,
+                                           msg=f"{name} en {r['ventana_fin']}")
+        resultado = comp.comparar(continuo / "filas.csv", bloque / "filas.csv", [300.0], self.root)
+        self.assertGreater(resultado["filas_distintas"], 0)
+        self.assertEqual(resultado["distintas_fuera_de_guarda"], 0)
+        self.assertGreaterEqual(resultado["distancia_maxima_frontera_ancla_s"], 0)
+        self.assertEqual(json.loads((self.root / "comparacion_modos.json").read_text()), resultado)
+        # Los CSV precalculados pueden llegar en distinto orden.
+        desordenado = self.root / "desordenado.csv"
+        with desordenado.open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(handle, fieldnames=ex.FIELDS)
+            writer.writeheader()
+            writer.writerows(reversed(filas_bloque))
+        self.assertEqual(comp.comparar(continuo / "filas.csv", desordenado, [300.0], self.root), resultado)
+
+    def test_comparar_modos_cli(self):
+        self.preparar_flujo_cruzado()
+        fr = self.root / "fronteras.json"
+        fr.write_text(json.dumps({"fronteras": [300.0]}))
+        salida = self.root / "comparacion-cli"
+        with patch.object(sys, "argv", ["comparar_modos.py", str(self.archivo),
+                                        "--salida", str(salida), "--fronteras", str(fr)]):
+            self.assertEqual(comp.main(), 0)
+        informe = json.loads((salida / "comparacion_modos.json").read_text())
+        self.assertGreater(informe["filas_distintas"], 0)
+        self.assertEqual(informe["distintas_fuera_de_guarda"], 0)
+
+    def test_guarda_cubre_horizonte_y_frontera(self):
+        self.preparar_flujo_cruzado()
+        with self.assertRaisesRegex(ValueError, "--guarda-s"):
+            ex.procesar(self.archivo, self.root / "invalido", self.pop, [300.0], guarda_s=60)
+        _, _, filas = self.extraer("guarda", (300.0,))
+        por_ancla = {r["ventana_fin"]: r for r in filas}
+        for anchor in (370, 520):
+            self.assertIn("frontera", por_ancla[ex.utc(anchor)]["motivo_marca"])
+        self.assertNotIn("frontera", por_ancla[ex.utc(530)]["motivo_marca"])
+        self.assertIn("arranque", por_ancla[ex.utc(110)]["motivo_marca"])
+        self.assertNotIn("arranque", por_ancla[ex.utc(340)]["motivo_marca"])
 
     def test_sin_futuro_y_paridad_motor(self):
         self.preparar()

@@ -6,7 +6,7 @@ Dos órdenes:
   fronteras  --generador G --salida fronteras.json
       Fronteras de bloque (resiembra/partición) en epoch UTC: arranque real de cada perfil
       (evento «inicio» de eventos-<perfil>.jsonl) + inicio_s de cada bloque del programa.
-      Se pasan a extraer_v2.py --fronteras para que ninguna ventana mezcle bloques.
+      Se pasan a extraer_v2.py --fronteras para etiquetar y marcar la guarda.
 
   metadatos  --capturas C --extraccion X --generador G [--cobertura cobertura.csv] [--conciliacion conciliacion.jsonl]
       Lee X/filas.csv y escribe:
@@ -18,7 +18,7 @@ Dos órdenes:
                               obligatorios llenos, ninguna columna de metadatos entre las 28
 
 Reglas de exclusión del entrenamiento (se aplican aquí y se documentan en PROTOCOLO §7):
-  E1 marca de arranque o de frontera de bloque (historia de 60 s incompleta)
+  E1 guarda de estado de 230 s desde arranque o frontera de bloque
   E2 hueco de captura PCAP o EVE que toca [cierre − 60 s, cierre]
   E3 alguna transacción del perfil en la ventana con cobertura «no verificable» o «incompleta»
   E4 alguna transacción del perfil en la ventana conciliada como fallo_imprevisto o no verificable
@@ -40,11 +40,12 @@ sys.path.insert(0, str(AQUI))
 import extraer_v2 as ex  # noqa: E402
 
 v2 = ex.v2
-HISTORIA_S = 60.0
+HISTORIA_S = 60.0  # Ventanas de variables y huecos E2, no guarda E1.
+GUARDA_E1_S = ex.GUARDA_ESTADO_S
 PASO_S = 10.0
 META = ("ventana_id", "ejecucion", "entidad_ip", "perfil", "regla_poblacion", "ventana_inicio_utc",
         "ventana_cierre_utc", "t_programa_s", "bloque_id", "particion", "segmento", "fase_id", "cruza_fase",
-        "pulsos", "marca_extraccion", "n_paquetes_ventana", "n_eventos_l7_ventana",
+        "pulsos", "marca_extraccion", "antecedentes_desde_utc", "n_paquetes_ventana", "n_eventos_l7_ventana",
         "pcap_ventana", "pcap_historia_n", "pcap_historia_primero", "pcap_historia_ultimo",
         "eve_fichero", "eve_sha256", "tx_en_ventana", "cobertura_estado", "conciliacion_estado",
         "hueco_captura", "excluir_entrenamiento", "motivos_exclusion")
@@ -108,6 +109,11 @@ def cmd_metadatos(a) -> int:
     cap, x, gen = Path(a.capturas), Path(a.extraccion), Path(a.generador)
     prog = json.loads((gen / "programa.json").read_text(encoding="utf-8"))
     ide = cap.name
+    resumen_path = x / "resumen.json"
+    if resumen_path.exists():
+        guarda = json.loads(resumen_path.read_text(encoding="utf-8")).get("guarda_estado_s", GUARDA_E1_S)
+        if guarda < GUARDA_E1_S:
+            raise ValueError("la guarda E1 debe cubrir el horizonte de estado")
     t0 = arranques(gen)
     ip_perfil = {p["origen"]: k for k, p in prog["perfiles"].items()}
     man = json.loads((cap / "manifiesto.json").read_text(encoding="utf-8")) if (cap / "manifiesto.json").exists() else {}
@@ -184,7 +190,7 @@ def cmd_metadatos(a) -> int:
             hueco = any(h0 <= cierre and h1 >= cierre - HISTORIA_S for h0, h1 in huecos)
             motivos = []
             if r.get("motivo_marca"):
-                motivos.append("E1:" + r["motivo_marca"])
+                motivos.extend("E1:" + marca for marca in r["motivo_marca"].split(",") if marca)
             if hueco:
                 motivos.append("E2:hueco_captura")
             if est_cob not in ("ok", "sin_transacciones"):
@@ -201,6 +207,7 @@ def cmd_metadatos(a) -> int:
                  "segmento": b.get("segmento", ""), "fase_id": fa.get("id", "fuera"),
                  "cruza_fase": bool(fa and fa_ini and fa.get("id") != fa_ini.get("id")),
                  "pulsos": ",".join(pulsos), "marca_extraccion": r.get("motivo_marca", ""),
+                  "antecedentes_desde_utc": r.get("antecedentes_desde_utc", ""),
                  "n_paquetes_ventana": r["n_paquetes_ventana"], "n_eventos_l7_ventana": r["n_eventos_l7_ventana"],
                  "pcap_ventana": ",".join(pv), "pcap_historia_n": len(ph),
                  "pcap_historia_primero": ph[0] if ph else "", "pcap_historia_ultimo": ph[-1] if ph else "",
