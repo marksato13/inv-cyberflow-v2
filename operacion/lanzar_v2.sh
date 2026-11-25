@@ -53,7 +53,7 @@ log registro_dns "cf-v2-dns-${ID,,}"
 
 # 5. Archivador en Sensor1 (EVE + PCAP comprimido, parada por espacio)
 # (el & solo debe afectar al archivador: con «a && b && c &» ssh espera a la subcapa y no regresa)
-$SSH sensor1 "mkdir -p $S1/capturas; cd $S1/codigo/captura; setsid nohup python3 archivar_v2.py --ejecucion $ID --hasta-epoch $FIN --eve /var/log/suricata/eve.json --libre-minimo-gb 4 > $S1/capturas/archivador-$ID.txt 2>&1 < /dev/null &" \
+$SSH sensor1 "mkdir -p $S1/capturas; cd $S1/codigo/captura; setsid nohup python3 archivar_v2.py --ejecucion $ID --hasta-epoch $FIN --eve /var/log/suricata/v2/eve.json --libre-minimo-gb 4 > $S1/capturas/archivador-$ID.txt 2>&1 < /dev/null &" \
   || deshacer "no arrancó el archivador"
 for i in $(seq 1 30); do
   st=$($SSH sensor1 "cat $S1/capturas/$ID/estado.json 2>/dev/null" || true)
