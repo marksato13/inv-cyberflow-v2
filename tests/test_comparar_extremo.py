@@ -92,6 +92,17 @@ class CompararExtremo(unittest.TestCase):
         self.assertEqual(r["sensor"]["copias"], 2 * len(filas))
         self.assertEqual(r["por_clase"]["datos"]["sin_sensor"]["total"], 0)
 
+    def test_rst_identicos_y_copias_a_5_ms(self):
+        # E3: dos RST idénticos (ipid 0) del cliente y copias separadas 5,1 ms bajo ráfaga
+        filas = base()[:5] + [trama(10.5, seq=113, flags=0x04, ipid=0), trama(10.5, seq=113, flags=0x04, ipid=0)]
+        sensor = sensor_de(filas)
+        sensor = [(ts + (.0049 if i == 7 else 0), d) for i, (ts, d) in enumerate(sensor)]
+        codigo, r = self.correr(filas, sensor)
+        self.assertEqual(r["por_clase"]["rst"]["extremo"], 2)
+        self.assertEqual(r["por_clase"]["rst"]["sensor"], 2)
+        self.assertEqual(r["por_clase"]["datos"]["sin_extremo"]["total"], 0)
+        self.assertEqual(codigo, 0, r["discrepancias"])
+
     def test_dato_sin_evento_sensor(self):
         filas = base()
         codigo, r = self.correr(filas, sensor_de([x for i, x in enumerate(filas) if i != 3]))

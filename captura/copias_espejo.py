@@ -183,7 +183,7 @@ def percentil(valores, q):
 
 
 def analizar(carpeta: Path, ips: set[str] | None = None, desde=None, hasta=None,
-             ventana_copia_s=0.005, inventario: Path | None = None,
+             ventana_copia_s=0.02, inventario: Path | None = None,
              referencia: Path | None = None, margen_referencia_s=0.005,
              max_anomalias=20000, subredes: list[str] | None = None,
              rutas: Path | None = None) -> dict:
@@ -245,11 +245,20 @@ def analizar(carpeta: Path, ips: set[str] | None = None, desde=None, hasta=None,
     for clave, copias in por_clave.items():
         copias.sort()
         grupos = []
+        # Una copia del espejo nunca se repite con la misma VLAN y el mismo TTL: si el grupo ya
+        # tiene una trama con su (VLAN, TTL), es otra transmisión idéntica (p. ej. dos RST con
+        # ipid 0). Cada trama va al grupo abierto más antiguo, dentro de la ventana, que aún no
+        # tiene su (VLAN, TTL). Misma VLAN con TTL distinto sigue siendo copia (vlan_incorrecta).
         for copia in copias:
-            if not grupos or copia[0] - grupos[-1][0][0] > ventana_copia_s:
+            destino = None
+            for g in grupos:
+                if copia[0] - g[0][0] <= ventana_copia_s and (copia[1], copia[2]) not in {(x[1], x[2]) for x in g}:
+                    destino = g
+                    break
+            if destino is None:
                 grupos.append([copia])
             else:
-                grupos[-1].append(copia)
+                destino.append(copia)
         ambiguos = set()
         for i in range(1, len(grupos)):
             if grupos[i][0][0] - grupos[i - 1][0][0] < 2 * ventana_copia_s:
@@ -275,7 +284,10 @@ def analizar(carpeta: Path, ips: set[str] | None = None, desde=None, hasta=None,
             clave[1], clave[2], multicast, redes, cfg.get("difusion_multidifusion", "no_determinable"))
         vistos = [x[1] for x in grupo]
         faltan = list((collections.Counter(esperado or []) - collections.Counter(vistos)).elements())
-        if ambiguo:
+        completo = bool(esperado) and collections.Counter(vistos) == collections.Counter(esperado)
+        # un grupo completo junto a otro muy próximo no es ambiguo: las tramas son idénticas y
+        # cualquier reparto da los mismos totales; el vecino incompleto sí lo es
+        if ambiguo and not completo:
             clase = "ambiguo"
         elif esperado is None:
             clase = "no_determinable"
@@ -460,7 +472,7 @@ def main(argv=None) -> int:
     poblacion.add_argument("--subredes", help="CIDR separados por coma")
     ap.add_argument("--desde", type=float)
     ap.add_argument("--hasta", type=float)
-    ap.add_argument("--ventana-copia-s", type=float, default=.005)
+    ap.add_argument("--ventana-copia-s", type=float, default=.02)
     ap.add_argument("--inventario", type=Path)
     ap.add_argument("--referencia", type=Path)
     ap.add_argument("--margen-referencia-s", type=float, default=.005)

@@ -73,8 +73,22 @@ class CopiasEspejoTest(unittest.TestCase):
         r = self.analizar([trama(100), trama(100.0001, vlan=20, ttl=63),
                           trama(101, ipid=2), trama(101.0001, ipid=2, vlan=30, ttl=63),
                           trama(101.0002, ipid=2, vlan=30, ttl=63)])
-        self.assertEqual(self.clases(r), {"vlan_incorrecta": 1, "copias_de_mas": 1})
+        # la tercera trama (VLAN 30, TTL 63) repite (VLAN, TTL): o es una copia de más o es otra
+        # transmisión sin su copia de VLAN 20; no se puede distinguir → ambiguo, no se oculta
+        self.assertEqual(self.clases(r), {"vlan_incorrecta": 1, "completo": 1, "ambiguo": 1})
         self.assertEqual(r["indicios"]["orden_incorrecto"], 1)
+
+    def test_transmisiones_identicas_no_se_funden(self):
+        # E3: el cliente envía dos RST idénticos (ipid 0) en el mismo instante; llegan 4 copias
+        r = self.analizar([trama(100, ipid=0, flags=4, payload=b""), trama(100, ipid=0, flags=4, payload=b""),
+                          trama(100.0001, ipid=0, vlan=30, ttl=63, flags=4, payload=b""),
+                          trama(100.0001, ipid=0, vlan=30, ttl=63, flags=4, payload=b"")])
+        self.assertEqual(self.clases(r), {"completo": 2})
+
+    def test_copias_separadas_mas_de_5_ms(self):
+        # E3: bajo ráfaga la segunda copia llegó 5,1 ms después de la primera
+        r = self.analizar([trama(100), trama(100.0051, vlan=30, ttl=63)])
+        self.assertEqual(self.clases(r), {"completo": 1})
 
     def test_indicios_no_cambian_clase(self):
         r = self.analizar([trama(100, vlan=20, ttl=64, payload=b"abc"),

@@ -69,9 +69,10 @@ def agrupar(paquetes, ventana):
     por_identidad = collections.defaultdict(list)
     eventos = []
     for p in sorted(paquetes, key=lambda x: x.ts):
+        # una copia del espejo nunca se repite en la misma VLAN: si ya está, es otra transmisión
         previos = por_identidad[p.identidad]
-        e = previos[-1] if previos else None
-        if e is not None and p.ts - e.ts <= ventana:
+        e = next((x for x in previos if p.ts - x.ts <= ventana and p.vlan not in x.vlan), None)
+        if e is not None:
             e.copias += 1
             e.vlan.add(p.vlan)
         else:
@@ -357,7 +358,7 @@ def main(argv=None):
     ap.add_argument("--servidor", default="10.10.30.10")
     ap.add_argument("--salida", type=Path, required=True)
     ap.add_argument("--margen-s", type=float, default=2.0)
-    ap.add_argument("--ventana-copia-s", type=float, default=.005)
+    ap.add_argument("--ventana-copia-s", type=float, default=.02)
     ap.add_argument("--margen-par-s", type=float, default=.05)
     a = ap.parse_args(argv)
     if min(a.margen_s, a.ventana_copia_s, a.margen_par_s) < 0:
