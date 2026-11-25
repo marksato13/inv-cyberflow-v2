@@ -97,6 +97,8 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
             motivos.append("%s:%s" % (nombre, estados[nombre]))
     if estados["analisis"] == "incompleto" and any(rcs.get(p) not in (None, "0") for p in pasos):
         motivos.append("analisis:fallo")
+    if (leer(pruebas / "extraccion" / "trazabilidad.json") or {}).get("trazabilidad_ok") is False:
+        motivos.append("analisis:trazabilidad_fallida")
     if criterios:
         for clave in claves:
             dato = criterios.get(clave)
