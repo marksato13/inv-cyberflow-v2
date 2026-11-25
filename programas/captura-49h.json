@@ -1,0 +1,1231 @@
+{
+  "bloques": [
+    {
+      "fin_s": 12600,
+      "id": "J1-B1",
+      "inicio_s": 0,
+      "jornada": "J1",
+      "particion": "entrenamiento",
+      "semillas": {
+        "P1": {
+          "contenido": 278413364558327,
+          "espera": 274483329163417,
+          "red": 104644592032180
+        },
+        "P2": {
+          "contenido": 191004079311021,
+          "espera": 138393148077973,
+          "red": 170174207469298
+        },
+        "P3": {
+          "contenido": 109012514986615,
+          "espera": 85899359873723,
+          "red": 264099551936148
+        },
+        "P4": {
+          "contenido": 174889022712300,
+          "espera": 45789166369493,
+          "red": 262847074438804
+        },
+        "P5": {
+          "contenido": 129900185039835,
+          "espera": 121192960627564,
+          "red": 261085834266954
+        },
+        "P6": {
+          "contenido": 188797572129596,
+          "espera": 177642630445240,
+          "red": 28839950023976
+        }
+      }
+    },
+    {
+      "fin_s": 25200,
+      "id": "J1-B2",
+      "inicio_s": 12600,
+      "jornada": "J1",
+      "particion": "entrenamiento",
+      "semillas": {
+        "P1": {
+          "contenido": 143082143194970,
+          "espera": 5396774739682,
+          "red": 79721695044885
+        },
+        "P2": {
+          "contenido": 260059884977168,
+          "espera": 41948726774458,
+          "red": 222255734192682
+        },
+        "P3": {
+          "contenido": 74806576339460,
+          "espera": 132978327274014,
+          "red": 157306888260156
+        },
+        "P4": {
+          "contenido": 18586833166593,
+          "espera": 52495545491869,
+          "red": 56332536625616
+        },
+        "P5": {
+          "contenido": 157702578380345,
+          "espera": 17264737908187,
+          "red": 266053186849195
+        },
+        "P6": {
+          "contenido": 52827474244439,
+          "espera": 133647952343387,
+          "red": 44394991637711
+        }
+      }
+    },
+    {
+      "fin_s": 37800,
+      "id": "J2-B1",
+      "inicio_s": 25200,
+      "jornada": "J2",
+      "particion": "entrenamiento",
+      "semillas": {
+        "P1": {
+          "contenido": 72558861848679,
+          "espera": 165137139852404,
+          "red": 191168148663055
+        },
+        "P2": {
+          "contenido": 20203263851804,
+          "espera": 222112764983022,
+          "red": 140955533636625
+        },
+        "P3": {
+          "contenido": 165567991292960,
+          "espera": 219340513244892,
+          "red": 270926819115768
+        },
+        "P4": {
+          "contenido": 261658589061774,
+          "espera": 232060955628683,
+          "red": 128274425593757
+        },
+        "P5": {
+          "contenido": 100878002680599,
+          "espera": 19544337920602,
+          "red": 260147918250567
+        },
+        "P6": {
+          "contenido": 74539703000810,
+          "espera": 207244598555468,
+          "red": 205769663252546
+        }
+      }
+    },
+    {
+      "fin_s": 50400,
+      "id": "J2-B2",
+      "inicio_s": 37800,
+      "jornada": "J2",
+      "particion": "calibracion",
+      "semillas": {
+        "P1": {
+          "contenido": 85456512981255,
+          "espera": 227803993263776,
+          "red": 104049224892684
+        },
+        "P2": {
+          "contenido": 24493496676237,
+          "espera": 171588268133383,
+          "red": 185034663956903
+        },
+        "P3": {
+          "contenido": 222668374058514,
+          "espera": 212146933599542,
+          "red": 151214897827802
+        },
+        "P4": {
+          "contenido": 227361182746740,
+          "espera": 68329068091744,
+          "red": 102713993005019
+        },
+        "P5": {
+          "contenido": 239185451751034,
+          "espera": 35977394250742,
+          "red": 253830450253259
+        },
+        "P6": {
+          "contenido": 165957216863411,
+          "espera": 66975528794404,
+          "red": 170661128860465
+        }
+      }
+    },
+    {
+      "fin_s": 63000,
+      "id": "J3-B1",
+      "inicio_s": 50400,
+      "jornada": "J3",
+      "particion": "entrenamiento",
+      "semillas": {
+        "P1": {
+          "contenido": 75355892646433,
+          "espera": 15497981340223,
+          "red": 112132267463657
+        },
+        "P2": {
+          "contenido": 22388945487201,
+          "espera": 106824539836892,
+          "red": 154802875307063
+        },
+        "P3": {
+          "contenido": 100916342075710,
+          "espera": 237853030432770,
+          "red": 99733477150508
+        },
+        "P4": {
+          "contenido": 115747964585031,
+          "espera": 238085755871222,
+          "red": 932637733224
+        },
+        "P5": {
+          "contenido": 4290305220195,
+          "espera": 1696356348560,
+          "red": 8386197946929
+        },
+        "P6": {
+          "contenido": 148300748908167,
+          "espera": 91093465827211,
+          "red": 65341960863859
+        }
+      }
+    },
+    {
+      "fin_s": 75600,
+      "id": "J3-B2",
+      "inicio_s": 63000,
+      "jornada": "J3",
+      "particion": "desarrollo",
+      "semillas": {
+        "P1": {
+          "contenido": 111277927034761,
+          "espera": 186298101138770,
+          "red": 178618090027439
+        },
+        "P2": {
+          "contenido": 179398171948427,
+          "espera": 206816078427590,
+          "red": 205146561315488
+        },
+        "P3": {
+          "contenido": 86316861339909,
+          "espera": 184167848411628,
+          "red": 80261175961217
+        },
+        "P4": {
+          "contenido": 90496046430996,
+          "espera": 40347935696982,
+          "red": 242235388855336
+        },
+        "P5": {
+          "contenido": 55553258663358,
+          "espera": 70904825228326,
+          "red": 196870608299126
+        },
+        "P6": {
+          "contenido": 199196101948640,
+          "espera": 160442182862009,
+          "red": 217325512942350
+        }
+      }
+    },
+    {
+      "fin_s": 88200,
+      "id": "J4-B1",
+      "inicio_s": 75600,
+      "jornada": "J4",
+      "particion": "entrenamiento",
+      "semillas": {
+        "P1": {
+          "contenido": 230389418909120,
+          "espera": 34235863209483,
+          "red": 11204157367349
+        },
+        "P2": {
+          "contenido": 187604069566904,
+          "espera": 12144410672290,
+          "red": 235143768126691
+        },
+        "P3": {
+          "contenido": 110757127853932,
+          "espera": 213500930629558,
+          "red": 222637334582818
+        },
+        "P4": {
+          "contenido": 106059029825487,
+          "espera": 175402861602330,
+          "red": 167009708751798
+        },
+        "P5": {
+          "contenido": 173208231020318,
+          "espera": 112118266985216,
+          "red": 130810529420533
+        },
+        "P6": {
+          "contenido": 110510543095542,
+          "espera": 177606364841790,
+          "red": 197358336652254
+        }
+      }
+    },
+    {
+      "fin_s": 100800,
+      "id": "J4-B2",
+      "inicio_s": 88200,
+      "jornada": "J4",
+      "particion": "calibracion",
+      "semillas": {
+        "P1": {
+          "contenido": 113634076260471,
+          "espera": 105797692251037,
+          "red": 117633961589700
+        },
+        "P2": {
+          "contenido": 16237310666657,
+          "espera": 109944541816133,
+          "red": 1350608107096
+        },
+        "P3": {
+          "contenido": 275853289779446,
+          "espera": 56439223558660,
+          "red": 196609189340665
+        },
+        "P4": {
+          "contenido": 276264362153663,
+          "espera": 47483392658428,
+          "red": 164585800948432
+        },
+        "P5": {
+          "contenido": 66136293972349,
+          "espera": 52558478659569,
+          "red": 59845483388471
+        },
+        "P6": {
+          "contenido": 8040773838505,
+          "espera": 190349268187735,
+          "red": 279353148602639
+        }
+      }
+    },
+    {
+      "fin_s": 113400,
+      "id": "J5-B1",
+      "inicio_s": 100800,
+      "jornada": "J5",
+      "particion": "entrenamiento",
+      "semillas": {
+        "P1": {
+          "contenido": 4488464876001,
+          "espera": 39512307397158,
+          "red": 18725744957983
+        },
+        "P2": {
+          "contenido": 69061639497503,
+          "espera": 190154496260029,
+          "red": 263811555359147
+        },
+        "P3": {
+          "contenido": 200421107070390,
+          "espera": 47950309309642,
+          "red": 63632523216628
+        },
+        "P4": {
+          "contenido": 123305753036566,
+          "espera": 8710117447230,
+          "red": 111308823747467
+        },
+        "P5": {
+          "contenido": 114321708820338,
+          "espera": 242121059448269,
+          "red": 89941438774827
+        },
+        "P6": {
+          "contenido": 175272169283899,
+          "espera": 232576060172266,
+          "red": 138017348175322
+        }
+      }
+    },
+    {
+      "fin_s": 126000,
+      "id": "J5-B2",
+      "inicio_s": 113400,
+      "jornada": "J5",
+      "particion": "desarrollo",
+      "semillas": {
+        "P1": {
+          "contenido": 210923474205603,
+          "espera": 274391530411105,
+          "red": 281228565934911
+        },
+        "P2": {
+          "contenido": 233205406557922,
+          "espera": 114006821162115,
+          "red": 42600585729177
+        },
+        "P3": {
+          "contenido": 159012078727671,
+          "espera": 27367487158393,
+          "red": 231894367284322
+        },
+        "P4": {
+          "contenido": 254195218092063,
+          "espera": 48862776456097,
+          "red": 116311495148522
+        },
+        "P5": {
+          "contenido": 32727159042420,
+          "espera": 89558900401179,
+          "red": 128620631950568
+        },
+        "P6": {
+          "contenido": 104226961420933,
+          "espera": 209532625200018,
+          "red": 136137920707266
+        }
+      }
+    },
+    {
+      "fin_s": 138600,
+      "id": "J6-B1",
+      "inicio_s": 126000,
+      "jornada": "J6",
+      "particion": "entrenamiento",
+      "semillas": {
+        "P1": {
+          "contenido": 212729690470591,
+          "espera": 85137721690503,
+          "red": 124818081210329
+        },
+        "P2": {
+          "contenido": 274186537160147,
+          "espera": 182286728633258,
+          "red": 44752161286846
+        },
+        "P3": {
+          "contenido": 239353413150589,
+          "espera": 236831249008938,
+          "red": 174837583964491
+        },
+        "P4": {
+          "contenido": 275935367177256,
+          "espera": 99083972290125,
+          "red": 264345864787147
+        },
+        "P5": {
+          "contenido": 236203677527716,
+          "espera": 54226897199632,
+          "red": 212728167604318
+        },
+        "P6": {
+          "contenido": 76242724891422,
+          "espera": 215484183295994,
+          "red": 237308227338779
+        }
+      }
+    },
+    {
+      "fin_s": 151200,
+      "id": "J6-B2",
+      "inicio_s": 138600,
+      "jornada": "J6",
+      "particion": "calibracion",
+      "semillas": {
+        "P1": {
+          "contenido": 18274877036023,
+          "espera": 32817342998840,
+          "red": 180038486096174
+        },
+        "P2": {
+          "contenido": 45067584051863,
+          "espera": 256271486535051,
+          "red": 186468508773075
+        },
+        "P3": {
+          "contenido": 240104262130265,
+          "espera": 124530547820359,
+          "red": 261403997895272
+        },
+        "P4": {
+          "contenido": 21604104380300,
+          "espera": 86892789472568,
+          "red": 163718573249728
+        },
+        "P5": {
+          "contenido": 90015094594230,
+          "espera": 129875514522472,
+          "red": 148370157805767
+        },
+        "P6": {
+          "contenido": 148002988826043,
+          "espera": 237268050153996,
+          "red": 7887314138251
+        }
+      }
+    },
+    {
+      "fin_s": 163800,
+      "id": "J7-B1",
+      "inicio_s": 151200,
+      "jornada": "J7",
+      "particion": "entrenamiento",
+      "semillas": {
+        "P1": {
+          "contenido": 63013709120340,
+          "espera": 48929336998952,
+          "red": 247917102089245
+        },
+        "P2": {
+          "contenido": 186603333779402,
+          "espera": 159580509366660,
+          "red": 4371488482801
+        },
+        "P3": {
+          "contenido": 178017449045751,
+          "espera": 25124988575509,
+          "red": 64806762771493
+        },
+        "P4": {
+          "contenido": 155036847848117,
+          "espera": 144855635918337,
+          "red": 94303069117774
+        },
+        "P5": {
+          "contenido": 155657369054320,
+          "espera": 101542903780444,
+          "red": 248219967568990
+        },
+        "P6": {
+          "contenido": 145626923759963,
+          "espera": 57382771182933,
+          "red": 85104877778395
+        }
+      }
+    },
+    {
+      "fin_s": 176400,
+      "id": "J7-B2",
+      "inicio_s": 163800,
+      "jornada": "J7",
+      "particion": "desarrollo",
+      "semillas": {
+        "P1": {
+          "contenido": 266823899008688,
+          "espera": 38058101477326,
+          "red": 113017561177604
+        },
+        "P2": {
+          "contenido": 134967867155401,
+          "espera": 109284104414632,
+          "red": 143344405580911
+        },
+        "P3": {
+          "contenido": 132230100874604,
+          "espera": 266259052897965,
+          "red": 35496167244829
+        },
+        "P4": {
+          "contenido": 90044298579946,
+          "espera": 254002127387572,
+          "red": 277860434720779
+        },
+        "P5": {
+          "contenido": 234913743692452,
+          "espera": 241812760495931,
+          "red": 187123033534638
+        },
+        "P6": {
+          "contenido": 6939233956528,
+          "espera": 272752854982332,
+          "red": 86611077667499
+        }
+      }
+    }
+  ],
+  "destinos": {
+    "dns_ip_esperada": "10.10.30.10",
+    "dns_nombres": [
+      "portal",
+      "intranet",
+      "correo",
+      "wiki",
+      "erp",
+      "archivos"
+    ],
+    "dns_servidor": "10.10.10.20",
+    "dns_zona": "cf-v2.lab",
+    "puerto_http": 80,
+    "puerto_https": 443,
+    "servidor": "10.10.30.10"
+  },
+  "distribuciones": {
+    "F1": {
+      "maximo_exclusivo": 5000000,
+      "mu": 14.45,
+      "sigma": 0.35
+    },
+    "H1": {
+      "desviacion": 25032,
+      "maximo_exclusivo": 2000000,
+      "media": 10710,
+      "minimo": 100
+    },
+    "H2": {
+      "desviacion": 126168,
+      "maximo_exclusivo": 2000000,
+      "media": 7758,
+      "minimo": 50
+    },
+    "H3": {
+      "escala": 2,
+      "forma": 1.1,
+      "maximo_exclusivo": 55,
+      "restar": 2
+    }
+  },
+  "duracion_s": 176400,
+  "equivalencia": {},
+  "factores": {
+    "aumentado": 2,
+    "base": 1,
+    "reducido": 0.3333333333333333
+  },
+  "horas_por_particion": {
+    "calibracion": 10.5,
+    "desarrollo": 10.5,
+    "entrenamiento": 28
+  },
+  "jornadas": [
+    {
+      "fin_s": 25200,
+      "id": "J1",
+      "inicio_s": 0,
+      "patron": "base",
+      "titulo": "Jornada 1: base"
+    },
+    {
+      "fin_s": 50400,
+      "id": "J2",
+      "inicio_s": 25200,
+      "patron": "web_aumentado",
+      "titulo": "Jornada 2: web_aumentado"
+    },
+    {
+      "fin_s": 75600,
+      "id": "J3",
+      "inicio_s": 50400,
+      "patron": "archivo_app_aumentado",
+      "titulo": "Jornada 3: archivo_app_aumentado"
+    },
+    {
+      "fin_s": 100800,
+      "id": "J4",
+      "inicio_s": 75600,
+      "patron": "rafagas_web_app",
+      "titulo": "Jornada 4: rafagas_web_app"
+    },
+    {
+      "fin_s": 126000,
+      "id": "J5",
+      "inicio_s": 100800,
+      "patron": "base_repetida",
+      "titulo": "Jornada 5: base_repetida"
+    },
+    {
+      "fin_s": 151200,
+      "id": "J6",
+      "inicio_s": 126000,
+      "patron": "reducido_periodos",
+      "titulo": "Jornada 6: reducido_periodos"
+    },
+    {
+      "fin_s": 176400,
+      "id": "J7",
+      "inicio_s": 151200,
+      "patron": "reducido_rafagas",
+      "titulo": "Jornada 7: reducido_rafagas"
+    }
+  ],
+  "niveles": [
+    {
+      "fin_s": 25200,
+      "id": "N001",
+      "inicio_s": 0,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 50400,
+      "id": "N002",
+      "inicio_s": 25200,
+      "perfiles": {
+        "P1": "aumentado",
+        "P2": "aumentado",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 75600,
+      "id": "N003",
+      "inicio_s": 50400,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "aumentado",
+        "P4": "aumentado",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 78900,
+      "id": "N004",
+      "inicio_s": 75600,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 79200,
+      "id": "N005",
+      "inicio_s": 78900,
+      "perfiles": {
+        "P1": "aumentado",
+        "P2": "aumentado",
+        "P3": "base",
+        "P4": "aumentado",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 82500,
+      "id": "N006",
+      "inicio_s": 79200,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 82800,
+      "id": "N007",
+      "inicio_s": 82500,
+      "perfiles": {
+        "P1": "aumentado",
+        "P2": "aumentado",
+        "P3": "base",
+        "P4": "aumentado",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 86100,
+      "id": "N008",
+      "inicio_s": 82800,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 86400,
+      "id": "N009",
+      "inicio_s": 86100,
+      "perfiles": {
+        "P1": "aumentado",
+        "P2": "aumentado",
+        "P3": "base",
+        "P4": "aumentado",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 89700,
+      "id": "N010",
+      "inicio_s": 86400,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 90000,
+      "id": "N011",
+      "inicio_s": 89700,
+      "perfiles": {
+        "P1": "aumentado",
+        "P2": "aumentado",
+        "P3": "base",
+        "P4": "aumentado",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 93300,
+      "id": "N012",
+      "inicio_s": 90000,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 93600,
+      "id": "N013",
+      "inicio_s": 93300,
+      "perfiles": {
+        "P1": "aumentado",
+        "P2": "aumentado",
+        "P3": "base",
+        "P4": "aumentado",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 96900,
+      "id": "N014",
+      "inicio_s": 93600,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 97200,
+      "id": "N015",
+      "inicio_s": 96900,
+      "perfiles": {
+        "P1": "aumentado",
+        "P2": "aumentado",
+        "P3": "base",
+        "P4": "aumentado",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 100500,
+      "id": "N016",
+      "inicio_s": 97200,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 100800,
+      "id": "N017",
+      "inicio_s": 100500,
+      "perfiles": {
+        "P1": "aumentado",
+        "P2": "aumentado",
+        "P3": "base",
+        "P4": "aumentado",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 126000,
+      "id": "N018",
+      "inicio_s": 100800,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 127800,
+      "id": "N019",
+      "inicio_s": 126000,
+      "perfiles": {
+        "P1": "reducido",
+        "P2": "reducido",
+        "P3": "reducido",
+        "P4": "reducido",
+        "P5": "reducido",
+        "P6": "reducido"
+      }
+    },
+    {
+      "fin_s": 128700,
+      "id": "N020",
+      "inicio_s": 127800,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 133200,
+      "id": "N021",
+      "inicio_s": 128700,
+      "perfiles": {
+        "P1": "reducido",
+        "P2": "reducido",
+        "P3": "reducido",
+        "P4": "reducido",
+        "P5": "reducido",
+        "P6": "reducido"
+      }
+    },
+    {
+      "fin_s": 134100,
+      "id": "N022",
+      "inicio_s": 133200,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 140400,
+      "id": "N023",
+      "inicio_s": 134100,
+      "perfiles": {
+        "P1": "reducido",
+        "P2": "reducido",
+        "P3": "reducido",
+        "P4": "reducido",
+        "P5": "reducido",
+        "P6": "reducido"
+      }
+    },
+    {
+      "fin_s": 141300,
+      "id": "N024",
+      "inicio_s": 140400,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 145800,
+      "id": "N025",
+      "inicio_s": 141300,
+      "perfiles": {
+        "P1": "reducido",
+        "P2": "reducido",
+        "P3": "reducido",
+        "P4": "reducido",
+        "P5": "reducido",
+        "P6": "reducido"
+      }
+    },
+    {
+      "fin_s": 146700,
+      "id": "N026",
+      "inicio_s": 145800,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 151200,
+      "id": "N027",
+      "inicio_s": 146700,
+      "perfiles": {
+        "P1": "reducido",
+        "P2": "reducido",
+        "P3": "reducido",
+        "P4": "reducido",
+        "P5": "reducido",
+        "P6": "reducido"
+      }
+    },
+    {
+      "fin_s": 153600,
+      "id": "N028",
+      "inicio_s": 151200,
+      "perfiles": {
+        "P1": "reducido",
+        "P2": "reducido",
+        "P3": "reducido",
+        "P4": "reducido",
+        "P5": "reducido",
+        "P6": "reducido"
+      }
+    },
+    {
+      "fin_s": 153780,
+      "id": "N029",
+      "inicio_s": 153600,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 157200,
+      "id": "N030",
+      "inicio_s": 153780,
+      "perfiles": {
+        "P1": "reducido",
+        "P2": "reducido",
+        "P3": "reducido",
+        "P4": "reducido",
+        "P5": "reducido",
+        "P6": "reducido"
+      }
+    },
+    {
+      "fin_s": 157380,
+      "id": "N031",
+      "inicio_s": 157200,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 160800,
+      "id": "N032",
+      "inicio_s": 157380,
+      "perfiles": {
+        "P1": "reducido",
+        "P2": "reducido",
+        "P3": "reducido",
+        "P4": "reducido",
+        "P5": "reducido",
+        "P6": "reducido"
+      }
+    },
+    {
+      "fin_s": 160980,
+      "id": "N033",
+      "inicio_s": 160800,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 166200,
+      "id": "N034",
+      "inicio_s": 160980,
+      "perfiles": {
+        "P1": "reducido",
+        "P2": "reducido",
+        "P3": "reducido",
+        "P4": "reducido",
+        "P5": "reducido",
+        "P6": "reducido"
+      }
+    },
+    {
+      "fin_s": 166380,
+      "id": "N035",
+      "inicio_s": 166200,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 169800,
+      "id": "N036",
+      "inicio_s": 166380,
+      "perfiles": {
+        "P1": "reducido",
+        "P2": "reducido",
+        "P3": "reducido",
+        "P4": "reducido",
+        "P5": "reducido",
+        "P6": "reducido"
+      }
+    },
+    {
+      "fin_s": 169980,
+      "id": "N037",
+      "inicio_s": 169800,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 173400,
+      "id": "N038",
+      "inicio_s": 169980,
+      "perfiles": {
+        "P1": "reducido",
+        "P2": "reducido",
+        "P3": "reducido",
+        "P4": "reducido",
+        "P5": "reducido",
+        "P6": "reducido"
+      }
+    },
+    {
+      "fin_s": 173580,
+      "id": "N039",
+      "inicio_s": 173400,
+      "perfiles": {
+        "P1": "base",
+        "P2": "base",
+        "P3": "base",
+        "P4": "base",
+        "P5": "base",
+        "P6": "base"
+      }
+    },
+    {
+      "fin_s": 176400,
+      "id": "N040",
+      "inicio_s": 173580,
+      "perfiles": {
+        "P1": "reducido",
+        "P2": "reducido",
+        "P3": "reducido",
+        "P4": "reducido",
+        "P5": "reducido",
+        "P6": "reducido"
+      }
+    }
+  ],
+  "perfiles": {
+    "P1": {
+      "media_espera_s": 30,
+      "modelo": "consulta",
+      "origen": "10.10.20.21"
+    },
+    "P2": {
+      "alternancia": [
+        "http",
+        "https"
+      ],
+      "media_espera_s": 30,
+      "modelo": "navegacion",
+      "origen": "10.10.20.22",
+      "parsing_media_s": 0.13
+    },
+    "P3": {
+      "media_espera_s": 180,
+      "modelo": "archivo",
+      "origen": "10.10.20.23"
+    },
+    "P4": {
+      "media_espera_s": 10,
+      "modelo": "transaccional",
+      "origen": "10.10.20.24"
+    },
+    "P5": {
+      "media_espera_s": 90,
+      "modelo": "consulta",
+      "origen": "10.10.20.25"
+    },
+    "P6": {
+      "media_espera_s": 10,
+      "modelo": "intermitente",
+      "off_s": 120,
+      "on_s": 60,
+      "origen": "10.10.20.26"
+    }
+  },
+  "procedencia": {
+    "contrato": "docs/CONTRATO-GENERADOR-49H.md v3.0.0",
+    "destinos.dns_nombres/zona": "NUEVA: seis nombres en cf-v2.lab",
+    "destinos.endpoints": "NUEVA: /contenido/<n>, /app/consulta, /app/envio",
+    "factores/jornadas/bloques/niveles": "D1 y NUEVA: calendario §7",
+    "perfiles.*.origen": "V1: alias de cliente; P1–P6 10.10.20.21–26",
+    "perfiles.P1/P2.H1/H2/H3/parsing": "PUB S2 (ns-3)",
+    "perfiles.P3.F1/pausa": "PUB S3/S6 (MathWorks/IEEE); HTTP ADAP",
+    "perfiles.P4.media_espera_s": "PUB S5 (SPECweb2009); exponencial ADAP S4",
+    "perfiles.P5/P6/on_off": "D1 (diseño experimental)",
+    "post_bytes": "V1: U{200,…,8000}",
+    "semillas": "NUEVA: sha256(cyberflow-v2|49h|2026-11-25|programa_id|bloque|perfil|flujo)"
+  },
+  "programa_id": "V2-C49",
+  "tipo": "captura",
+  "version": "3.0.0"
+}

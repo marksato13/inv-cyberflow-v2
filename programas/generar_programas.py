@@ -1,296 +1,241 @@
 #!/usr/bin/env python3
-"""Genera los programas JSON de las siete jornadas, el piloto de 30 min y la prueba corta.
-
-Los JSON generados son los artefactos que se congelan (con su sha256 en el manifiesto);
-este script documenta cómo se derivaron. Volver a ejecutarlo debe producir bytes idénticos
-(``--comprobar`` lo verifica).
-
-Procedencia de cada parámetro (campo ``procedencia`` de cada programa):
-  V1      = scripts/laboratorio/clientes_lab.py en inv-cyberflow-sistema@d2c97728916c2484f770a7a16a984c4c6bd42175
-  PLAN    = Plan_nueva_evaluacion_CyberFlow.xlsx v0.2 (hojas Calendario y Patrones): propuesta, no estándar
-  NUEVA   = decisión nueva de V2, a validar en el piloto
-  PILOTO  = ajuste derivado del piloto (ninguno todavía)
-"""
+"""Genera programas v3 deterministas para captura, piloto y pruebas."""
 from __future__ import annotations
 
 import argparse
-import copy
 import hashlib
 import json
-import sys
 from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
-SEMILLA_MAESTRA = "cyberflow-v2|programas|2026-11-24"
-
-ORIGEN = {"ofimatica": "10.10.20.21", "navegacion": "10.10.20.22", "descargas": "10.10.20.23",
-          "aplicacion": "10.10.20.24", "ligero": "10.10.20.25", "erratico": "10.10.20.26"}
-
-# V1: ritmo (s) y pesos relativos, sin cambios.
-PERFILES_V1 = {
-    "ofimatica": (3.0, {"web_pequena": 50, "web_media": 20, "dns": 25, "api_ok": 15,
-                        "api_auth": 3, "api_404": 4, "https": 20, "ping": 5}),
-    "navegacion": (1.5, {"web_pequena": 40, "web_grande": 25, "https": 35, "dns": 30,
-                         "dns_inexistente": 4, "api_ok": 10, "abandono": 6}),
-    "descargas": (8.0, {"web_grande": 60, "web_media": 25, "https": 10, "dns": 5}),
-    "aplicacion": (2.0, {"api_ok": 45, "api_post": 25, "api_500": 6, "api_lento": 8,
-                         "https": 10, "dns": 10}),
-    "ligero": (12.0, {"dns": 40, "api_ok": 25, "web_pequena": 20, "ping": 15}),
-    "erratico": (5.0, {"web_pequena": 25, "web_grande": 15, "dns": 20, "api_ok": 15,
-                       "puerto_cerrado": 10, "abandono": 8, "ping": 7}),
-}
-
-DESTINOS = {
-    "servidor": "10.10.30.10", "puerto_http": 80, "puerto_https": 443,
-    "dns_servidor": "10.10.10.20", "dns_zona": "cf-v2.lab",
-    "dns_nombres": ["portal", "intranet", "correo", "wiki", "erp", "archivos"],
-    "dns_ip_esperada": "10.10.30.10", "ping": "10.10.30.10",
-    "puertos_cerrados": [8081, 9001, 4444, 31337],
-}
-TAMANOS = {
-    "web_pequena": ["/", "/estatico/4k", "/estatico/16k"],
-    "web_media": ["/estatico/64k", "/estatico/128k", "/estatico/256k"],
-    "web_grande": ["/estatico/1024k", "/estatico/2048k", "/estatico/4096k"],
-    "https": ["/", "/api/ok", "/estatico/32k"],
-    "api_post_bytes": [200, 8000],
-    "abandono": "/estatico/2048k",
-}
-RAFAGAS_V1 = {"erratico": {"probabilidad_por_iteracion": 0.02, "duracion_s": [20, 90], "factor": 6.0}}
-
-PROCEDENCIA_COMUN = {
-    "perfiles.*.ritmo_s": "V1 (PERFILES[*]['ritmo'])",
-    "perfiles.*.acciones": "V1 (PERFILES[*]['acciones'], pesos relativos)",
-    "perfiles.*.origen": "V1 (clientes_config.py: --base 10.10.20.21 + índice)",
-    "espera": "V1: expovariate(1/max(ritmo/factor, 0.05)); piso sobre la media. NUEVA: la espera se corta en cada cambio de fase/pulso y se vuelve a sortear",
-    "rafagas.erratico": "V1 (p=0.02 por iteración, 20-90 s, x6)",
-    "tamanos": "V1 (rutas y tamaños de cada acción)",
-    "destinos.servidor/puertos/ping/puertos_cerrados/dns_servidor": "V1",
-    "destinos.dns_zona/dns_nombres": "NUEVA: zona controlada cf-v2.lab en DC1 (V1 usaba nombres de otro dominio que DC1 no servía; NXDOMAIN nunca ocurría)",
-    "duracion_s/bloques/fases": "PLAN (Calendario: 2 bloques de 3 h por jornada) + NUEVA (tiempo transcurrido monotónico)",
-    "fases.factor 1.00/0.55/0.90": "V1 (factor_horario: 08-13 1.0, 13-15 0.55, 15-19 0.9) reordenado por PLAN (Patrones)",
-    "bloques.semillas": "NUEVA: sha256(SEMILLA_MAESTRA|programa|bloque|perfil), fijadas antes de capturar",
-    "fin": "NUEVA: al cumplirse duracion_s no se inician acciones; la acción en curso termina y se registra",
-}
-
-PARTICION = {  # PLAN, hoja Calendario
-    "J1": ("entrenamiento", "entrenamiento"), "J2": ("entrenamiento", "calibracion"),
-    "J3": ("entrenamiento", "desarrollo"), "J4": ("entrenamiento", "calibracion"),
-    "J5": ("entrenamiento", "desarrollo"), "J6": ("entrenamiento", "calibracion"),
-    "J7": ("entrenamiento", "desarrollo"),
+PERFILES = tuple("P%d" % n for n in range(1, 7))
+FLUJOS = ("espera", "contenido", "red")
+PARTICIONES = (("entrenamiento", "entrenamiento"),
+               ("entrenamiento", "calibracion"),
+               ("entrenamiento", "desarrollo"),
+               ("entrenamiento", "calibracion"),
+               ("entrenamiento", "desarrollo"),
+               ("entrenamiento", "calibracion"),
+               ("entrenamiento", "desarrollo"))
+DESTINOS = {"servidor": "10.10.30.10", "puerto_http": 80, "puerto_https": 443,
+            "dns_servidor": "10.10.10.20", "dns_zona": "cf-v2.lab",
+            "dns_nombres": ["portal", "intranet", "correo", "wiki", "erp", "archivos"],
+            "dns_ip_esperada": "10.10.30.10"}
+DISTRIBUCIONES = {
+    "H1": {"media": 10710, "desviacion": 25032, "minimo": 100, "maximo_exclusivo": 2000000},
+    "H2": {"media": 7758, "desviacion": 126168, "minimo": 50, "maximo_exclusivo": 2000000},
+    "H3": {"escala": 2, "forma": 1.1, "maximo_exclusivo": 55, "restar": 2},
+    "F1": {"mu": 14.45, "sigma": 0.35, "maximo_exclusivo": 5000000}}
+PERFILES_BASE = {
+    "P1": ("consulta", 30),
+    "P2": ("navegacion", 30),
+    "P3": ("archivo", 180),
+    "P4": ("transaccional", 10),
+    "P5": ("consulta", 90),
+    "P6": ("intermitente", 10)}
+PROCEDENCIA = {
+    "contrato": "docs/CONTRATO-GENERADOR-49H.md v3.0.0",
+    "perfiles.P1/P2.H1/H2/H3/parsing": "PUB S2 (ns-3)",
+    "perfiles.P3.F1/pausa": "PUB S3/S6 (MathWorks/IEEE); HTTP ADAP",
+    "perfiles.P4.media_espera_s": "PUB S5 (SPECweb2009); exponencial ADAP S4",
+    "perfiles.P5/P6/on_off": "D1 (diseño experimental)",
+    "perfiles.*.origen": "V1: alias de cliente; P1–P6 10.10.20.21–26",
+    "destinos.dns_nombres/zona": "NUEVA: seis nombres en cf-v2.lab",
+    "destinos.endpoints": "NUEVA: /contenido/<n>, /app/consulta, /app/envio",
+    "factores/jornadas/bloques/niveles": "D1 y NUEVA: calendario §7",
+    "semillas": "NUEVA: sha256(cyberflow-v2|49h|2026-11-25|programa_id|bloque|perfil|flujo)",
+    "post_bytes": "V1: U{200,…,8000}",
 }
 
 
-def semilla(prog_id: str, bloque: str, perfil: str) -> int:
-    h = hashlib.sha256(("%s|%s|%s|%s" % (SEMILLA_MAESTRA, prog_id, bloque, perfil)).encode()).hexdigest()
-    return int(h[:12], 16)
+
+def semilla(programa_id, bloque, perfil, flujo):
+    texto = "cyberflow-v2|49h|2026-11-25|%s|%s|%s|%s" % (
+        programa_id, bloque, perfil, flujo)
+    return int(hashlib.sha256(texto.encode()).hexdigest()[:12], 16)
 
 
-def perfiles(mult: dict | None = None) -> dict:
-    mult = mult or {}
-    return {p: {"origen": ORIGEN[p], "ritmo_s": r, "acciones": dict(a), "multiplicador": mult.get(p, 1.0)}
-            for p, (r, a) in PERFILES_V1.items()}
+def comun(programa_id, tipo, duracion):
+    perfiles = {}
+    for i, (modelo, media) in PERFILES_BASE.items():
+        p = {"origen": "10.10.20.%d" % (20 + int(i[1:])),
+             "modelo": modelo, "media_espera_s": media}
+        if i == "P2":
+            p.update(parsing_media_s=0.13, alternancia=["http", "https"])
+        if i == "P6":
+            p.update(on_s=60, off_s=120)
+        perfiles[i] = p
+    factores = {"reducido": 1 / 3, "base": 1, "aumentado": 2}
+    if tipo == "prueba":
+        factores["inactivo"] = 0
+    return {"programa_id": programa_id, "version": "3.0.0", "tipo": tipo,
+            "duracion_s": duracion, "jornadas": [], "bloques": [], "niveles": [],
+            "factores": factores, "perfiles": perfiles,
+            "distribuciones": DISTRIBUCIONES, "destinos": DESTINOS,
+            "procedencia": PROCEDENCIA, "equivalencia": {}}
 
 
-def bloques(prog_id: str, tramos: list[tuple[str, int, int, str]]) -> list[dict]:
-    return [{"id": b, "inicio_s": a, "fin_s": z, "particion": part,
-             "semillas": {p: semilla(prog_id, b, p) for p in PERFILES_V1}} for b, a, z, part in tramos]
+def jornada(prog, jid, inicio, fin, patron, titulo=None):
+    prog["jornadas"].append({"id": jid, "inicio_s": inicio, "fin_s": fin,
+                             "titulo": titulo or patron, "patron": patron})
 
 
-def fases_base(global_: float = 1.0) -> list[dict]:
-    """Dos bloques de 3 h; en cada uno 60 min x1.00, 60 min x0.55, 60 min x0.90 (PLAN)."""
-    out = []
-    for b in (0, 1):
-        for i, (nombre, f) in enumerate((("alta", 1.00), ("pausa", 0.55), ("media", 0.90))):
-            a = b * 10800 + i * 3600
-            out.append({"id": "B%d-%s" % (b + 1, nombre), "inicio_s": a, "fin_s": a + 3600,
-                        "factor": round(f * global_, 6)})
-    return out
+def bloque(prog, bid, jid, inicio, fin, particion):
+    prog["bloques"].append({"id": bid, "jornada": jid, "inicio_s": inicio, "fin_s": fin,
+                            "particion": particion,
+                            "semillas": {p: {f: semilla(prog["programa_id"], bid, p, f)
+                                            for f in FLUJOS} for p in PERFILES}})
 
 
-def jornada(jid: str, titulo: str, descripcion: str, mult=None, global_=1.0, pulsos=(), extra_proc=None) -> dict:
-    pid = "V2-%s" % jid
-    p1, p2 = PARTICION[jid]
-    prog = {
-        "programa_id": pid, "jornada_id": jid, "version": "1.0.0", "titulo": titulo,
-        "descripcion": descripcion, "duracion_s": 21600,
-        "bloques": bloques(pid, [("B1", 0, 10800, p1), ("B2", 10800, 21600, p2)]),
-        "fases": fases_base(global_), "pulsos": list(pulsos), "perfiles": perfiles(mult),
-        "rafagas": copy.deepcopy(RAFAGAS_V1), "destinos": copy.deepcopy(DESTINOS),
-        "tamanos": copy.deepcopy(TAMANOS),
-        "procedencia": dict(PROCEDENCIA_COMUN, **(extra_proc or {})),
-        "uso": "captura legítima de desarrollo (sesión sintética parcial; no representa una semana de 168 h)",
-    }
+def niveles(prog, base_por_jornada, ventanas):
+    """Divide el calendario en los bordes de todas las ventanas programadas."""
+    bordes = {0, prog["duracion_s"]}
+    for j in prog["jornadas"]:
+        bordes.update((j["inicio_s"], j["fin_s"]))
+    for inicio, fin, _perfiles, _nivel in ventanas:
+        bordes.update((inicio, fin))
+    for i, (a, b) in enumerate(zip(sorted(bordes), sorted(bordes)[1:]), 1):
+        j = next(j for j in prog["jornadas"] if j["inicio_s"] <= a < j["fin_s"])
+        valores = {p: base_por_jornada[j["id"]] for p in PERFILES}
+        for va, vb, ps, nivel in ventanas:
+            if va <= a < vb:
+                valores.update({p: nivel for p in ps})
+        prog["niveles"].append({"id": "N%03d" % i, "inicio_s": a,
+                                "fin_s": b, "perfiles": valores})
+
+
+def captura():
+    prog = comun("V2-C49", "captura", 176400)
+    ventanas = []
+    bases = {}
+    for i in range(7):
+        jid = "J%d" % (i + 1)
+        a, m, fin = i * 25200, i * 25200 + 12600, (i + 1) * 25200
+        patron = ("base", "web_aumentado", "archivo_app_aumentado", "rafagas_web_app",
+                  "base_repetida", "reducido_periodos", "reducido_rafagas")[i]
+        jornada(prog, jid, a, fin, patron, "Jornada %d: %s" % (i + 1, patron))
+        bloque(prog, jid + "-B1", jid, a, m, PARTICIONES[i][0])
+        bloque(prog, jid + "-B2", jid, m, fin, PARTICIONES[i][1])
+        bases[jid] = "reducido" if i >= 5 else "base"
+        if i == 1:
+            ventanas.append((a, fin, ("P1", "P2"), "aumentado"))
+        if i == 2:
+            ventanas.append((a, fin, ("P3", "P4"), "aumentado"))
+        if i == 3:
+            for h in range(1, 8):
+                ventanas.append((a + h * 3600 - 300, a + h * 3600,
+                                 ("P1", "P2", "P4"), "aumentado"))
+        if i == 5:
+            for mitad in (a, m):
+                for ini in (30, 120):
+                    ventanas.append((mitad + ini * 60, mitad + (ini + 15) * 60,
+                                     PERFILES, "base"))
+        if i == 6:
+            for mitad in (a, m):
+                for ini in (40, 100, 160):
+                    ventanas.append((mitad + ini * 60, mitad + (ini + 3) * 60,
+                                     PERFILES, "base"))
+    niveles(prog, bases, ventanas)
+    prog["horas_por_particion"] = {"entrenamiento": 28, "calibracion": 10.5,
+                                    "desarrollo": 10.5}
     return prog
 
 
-def pulsos_ultimos_5min(perfiles_: list[str], factor: float) -> list[dict]:
-    return [{"id": "P%d" % (h + 1), "inicio_s": h * 3600 + 3300, "fin_s": (h + 1) * 3600,
-             "factor": factor, "perfiles": perfiles_} for h in range(6)]
+def piloto():
+    prog = comun("V2-P49", "piloto", 1680)
+    ventanas = []
+    bases = {}
+    for i in range(7):
+        jid, a = "J%d" % (i + 1), i * 240
+        patron = ("base", "web_aumentado", "archivo_app_aumentado", "rafagas_web_app",
+                  "base_repetida", "reducido_periodos", "reducido_rafagas")[i]
+        jornada(prog, jid, a, a + 240, patron)
+        bloque(prog, jid + "-B1", jid, a, a + 120, "piloto")
+        bloque(prog, jid + "-B2", jid, a + 120, a + 240, "piloto")
+        bases[jid] = "reducido" if i >= 5 else "base"
+        prog["equivalencia"][jid] = {
+            "tipo": "prueba abreviada", "programa_definitivo": "V2-C49",
+            "jornada_definitiva": jid, "patron": patron,
+            "compresion": "7 h a 240 s; bloques de 3,5 h a 120 s; ventanas abreviadas"}
+        if i == 1:
+            ventanas.append((a, a + 240, ("P1", "P2"), "aumentado"))
+        if i == 2:
+            ventanas.append((a, a + 240, ("P3", "P4"), "aumentado"))
+        if i == 3:
+            for x, y in ((90, 120), (210, 240)):
+                ventanas.append((a + x, a + y, ("P1", "P2", "P4"), "aumentado"))
+        if i == 5:
+            for x, y in ((30, 60), (150, 180)):
+                ventanas.append((a + x, a + y, PERFILES, "base"))
+        if i == 6:
+            for x, y in ((40, 55), (160, 175)):
+                ventanas.append((a + x, a + y, PERFILES, "base"))
+    niveles(prog, bases, ventanas)
+    return prog
 
 
-def pulsos_lista(prefijo: str, inicios: list[int], dur: int, factor: float, perfiles_: list[str]) -> list[dict]:
-    return [{"id": "%s%d" % (prefijo, i + 1), "inicio_s": a, "fin_s": a + dur, "factor": factor,
-             "perfiles": perfiles_} for i, a in enumerate(inicios)]
+def aislados():
+    prog = comun("V2-T1", "prueba", 1800)
+    jornada(prog, "A", 0, 1800, "perfiles_aislados")
+    for i in range(2):
+        bloque(prog, "A-B%d" % (i + 1), "A", i * 900, (i + 1) * 900, "prueba")
+    prog["niveles"] = [{"id": "N%03d" % (i + 1), "inicio_s": i * 300,
+                        "fin_s": (i + 1) * 300,
+                        "perfiles": {p: "base" if p == PERFILES[i] else "inactivo"
+                                    for p in PERFILES}} for i in range(6)]
+    prog["equivalencia"] = {"A": {"tipo": "prueba dirigida", "programa_definitivo": "V2-C49",
+                                  "jornada_definitiva": "J1",
+                                  "patron": "un perfil activo por tramo de 300 s",
+                                  "compresion": "sin equivalencia temporal directa"}}
+    return prog
 
 
-TODOS = list(PERFILES_V1)
-RESTITUYE = round(1 / 0.30, 6)
+def transiciones():
+    prog = comun("V2-T2", "prueba", 1440)
+    jornada(prog, "A", 0, 720, "reducido_base_aumentado")
+    jornada(prog, "B", 720, 1440, "reducido_con_rafagas")
+    for i in range(4):
+        bloque(prog, ("A" if i < 2 else "B") + "-B%d" % (i % 2 + 1),
+               "A" if i < 2 else "B", i * 360, (i + 1) * 360, "prueba")
+    ventanas = [(240, 480, PERFILES, "base"), (480, 720, PERFILES, "aumentado"),
+                (840, 900, PERFILES, "base"),
+                (1080, 1140, ("P1", "P2", "P4"), "aumentado"),
+                (1260, 1320, PERFILES, "base")]
+    niveles(prog, {"A": "reducido", "B": "reducido"}, ventanas)
+    prog["equivalencia"] = {
+        "A": {"tipo": "prueba dirigida", "programa_definitivo": "V2-C49",
+              "jornada_definitiva": "J1", "patron": "niveles sucesivos",
+              "compresion": "tramos de 240 s"},
+        "B": {"tipo": "prueba dirigida", "programa_definitivo": "V2-C49",
+              "jornada_definitiva": "J6 y J4", "patron": "periodos y ráfaga",
+              "compresion": "ventanas de 60 s"}}
+    return prog
 
 
-def todas() -> dict[str, dict]:
-    p = {}
-    p["J1"] = jornada("J1", "Habitual con pausas",
-                      "Seis perfiles con pesos V1 y multiplicador 1. La fase 'pausa' (x0.55) reproduce la pausa de V1.")
-    p["J2"] = jornada("J2", "Más navegación y ofimática",
-                      "Seis perfiles; ofimática y navegación x1.25.", mult={"ofimatica": 1.25, "navegacion": 1.25},
-                      extra_proc={"perfiles.ofimatica/navegacion.multiplicador": "PLAN (propuesta 1.25, a validar en piloto)"})
-    p["J3"] = jornada("J3", "Más descargas y aplicación",
-                      "Seis perfiles; descargas y aplicación x1.25.", mult={"descargas": 1.25, "aplicacion": 1.25},
-                      extra_proc={"perfiles.descargas/aplicacion.multiplicador": "PLAN (propuesta 1.25, a validar en piloto)"})
-    p["J4"] = jornada("J4", "Habitual con ráfagas legítimas programadas",
-                      "Seis perfiles; últimos 5 min de cada hora x1.5 en ofimática, navegación y aplicación.",
-                      pulsos=pulsos_ultimos_5min(["ofimatica", "navegacion", "aplicacion"], 1.5),
-                      extra_proc={"pulsos": "PLAN (propuesta: últimos 5 min de cada hora x1.5)"})
-    p["J5"] = jornada("J5", "Mezcla habitual con secuencias nuevas",
-                      "Misma mezcla que J1 con otras semillas: no reutiliza la secuencia de eventos.")
-    p["J6"] = jornada("J6", "Actividad reducida con periodos activos",
-                      "Fases base x0.30; dos periodos activos de 15 min por bloque devuelven el nivel base (x1/0.30).",
-                      global_=0.30,
-                      pulsos=pulsos_lista("A", [1800, 7200, 12600, 18000], 900, RESTITUYE, TODOS),
-                      extra_proc={"fases.global 0.30": "V1 (factor de fin de semana 0.3) aplicado por PLAN",
-                                  "pulsos (periodos activos)": "NUEVA: 2 x 15 min por bloque a nivel base; a validar en piloto"})
-    p["J7"] = jornada("J7", "Actividad reducida con ráfagas ocasionales",
-                      "Fases base x0.30; ráfagas V1 de errático y tres pulsos breves (3 min x4) por bloque en perfiles alternos.",
-                      global_=0.30,
-                      pulsos=(pulsos_lista("Q", [2400, 6000, 9300], 180, 4.0, ["ofimatica", "navegacion", "ligero"])
-                              + pulsos_lista("R", [12900, 16500, 19800], 180, 4.0, ["descargas", "aplicacion", "erratico"])),
-                      extra_proc={"fases.global 0.30": "V1 (factor de fin de semana 0.3) aplicado por PLAN",
-                                  "pulsos (ráfagas ocasionales)": "NUEVA: 3 pulsos de 3 min x4 por bloque, sin acciones nuevas; a validar en piloto"})
-    p["C42"] = captura_continua({k: p[k] for k in ("J1", "J2", "J3", "J4", "J5", "J6", "J7")})
-    p["P0"] = piloto()
-    p["PRUEBA-CORTA"] = prueba_corta()
-    return p
+def todas():
+    return {"captura-49h.json": captura(), "piloto-30min.json": piloto(),
+            "prueba-perfiles-aislados.json": aislados(),
+            "prueba-niveles-transiciones.json": transiciones()}
 
 
-def captura_continua(jornadas: dict[str, dict]) -> dict:
-    """42 h continuas: J1..J7 como segmentos consecutivos de 6 h de UNA sola ejecución.
-
-    Sin reinicio ni hueco en las transiciones. Cada segmento conserva sus fases, pulsos y
-    multiplicadores (los multiplicadores de perfil pasan a ``multiplicador_perfil`` de sus
-    fases, porque en un único programa el multiplicador global de perfil es 1). Los 14
-    bloques de 3 h mantienen la partición nominal del PLAN: 24 h entrenamiento, 9 h
-    calibración y 9 h desarrollo. Las semillas son nuevas (programa distinto) y quedan fijas.
-    Una acción se atribuye a la fase y al bloque en que EMPIEZA (lo registra el generador).
-    """
-    pid = "V2-C42"
-    seg = 21600
-    fases, pulsos, tramos = [], [], []
-    for i, jid in enumerate(sorted(jornadas)):
-        j = jornadas[jid]
-        off = i * seg
-        mult = {p: v["multiplicador"] for p, v in j["perfiles"].items() if v["multiplicador"] != 1.0}
-        for f in j["fases"]:
-            g = {"id": "%s-%s" % (jid, f["id"]), "segmento": jid, "inicio_s": f["inicio_s"] + off,
-                 "fin_s": f["fin_s"] + off, "factor": f["factor"]}
-            if mult:
-                g["multiplicador_perfil"] = dict(mult)
-            fases.append(g)
-        for pz in j["pulsos"]:
-            pulsos.append(dict(pz, id="%s-%s" % (jid, pz["id"]), segmento=jid,
-                               inicio_s=pz["inicio_s"] + off, fin_s=pz["fin_s"] + off))
-        for b in j["bloques"]:
-            tramos.append(("%s-%s" % (jid, b["id"]), b["inicio_s"] + off, b["fin_s"] + off, b["particion"]))
-    blq = bloques(pid, tramos)
-    for b, (bid, *_r) in zip(blq, tramos):
-        b["segmento"] = bid.split("-")[0]
-    horas = {}
-    for b in blq:
-        horas[b["particion"]] = horas.get(b["particion"], 0) + (b["fin_s"] - b["inicio_s"]) // 3600
-    return {
-        "programa_id": pid, "jornada_id": "C42", "version": "1.0.0",
-        "titulo": "Captura legítima continua de 42 h (J1..J7 consecutivos)",
-        "descripcion": "Siete segmentos de 6 h en una sola ejecución, sin reinicio en las transiciones. "
-                       "Sesiones sintéticas parciales: no representan siete días naturales.",
-        "duracion_s": seg * len(jornadas),
-        "segmentos": [{"id": jid, "titulo": jornadas[jid]["titulo"], "inicio_s": i * seg, "fin_s": (i + 1) * seg,
-                       "programa_origen_sha256": hashlib.sha256(serializar(jornadas[jid])).hexdigest()}
-                      for i, jid in enumerate(sorted(jornadas))],
-        "bloques": blq, "horas_por_particion": horas,
-        "fases": fases, "pulsos": pulsos, "perfiles": perfiles(),
-        "rafagas": copy.deepcopy(RAFAGAS_V1), "destinos": copy.deepcopy(DESTINOS), "tamanos": copy.deepcopy(TAMANOS),
-        "procedencia": dict(PROCEDENCIA_COMUN, **{
-            "segmentos": "PLAN actualizado: 42 h continuas, J1..J7 consecutivos de 6 h",
-            "fases.multiplicador_perfil": "PLAN (propuestas 1.25 de J2/J3, a validar en el piloto), trasladadas del multiplicador de perfil de cada segmento",
-            "bloques.semillas": "NUEVA: sha256(SEMILLA_MAESTRA|V2-C42|<segmento>-<bloque>|perfil)",
-            "atribucion": "NUEVA: una acción pertenece a la fase y bloque en que empieza; las filas que cruzan una frontera de bloque las marca la extracción"}),
-        "uso": "captura legítima de entrenamiento (24 h), calibración (9 h) y desarrollo (9 h); "
-               "la evaluación independiente de 18 h, los ataques y las campañas A/B van aparte",
-    }
+def serializar(prog):
+    return (json.dumps(prog, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
 
 
-def piloto() -> dict:
-    """30 min con los seis perfiles y todos los tipos de cambio que usan las jornadas."""
-    pid = "V2-P0"
-    f = [("F1-alta", 0, 300, 1.00), ("F2-pausa", 300, 600, 0.55), ("F3-media", 600, 900, 0.90),
-         ("F4-parada", 900, 1080, 0.0), ("F5-reducida", 1080, 1500, 0.30), ("F6-alta", 1500, 1800, 1.00)]
-    return {
-        "programa_id": pid, "jornada_id": "P0", "version": "1.0.0",
-        "titulo": "Piloto de instrumentación (30 min)",
-        "descripcion": "Seis perfiles; cambios de fase, pausa total, reducida, pulso y cambio de bloque/semilla. Sin uso en métricas.",
-        "duracion_s": 1800,
-        "bloques": bloques(pid, [("B1", 0, 900, "piloto"), ("B2", 900, 1800, "piloto")]),
-        "fases": [{"id": i, "inicio_s": a, "fin_s": z, "factor": x} for i, a, z, x in f],
-        "pulsos": pulsos_lista("P", [1320], 120, 1.5, ["ofimatica", "navegacion", "aplicacion"])
-                  + pulsos_lista("A", [1200], 60, RESTITUYE, TODOS),
-        "perfiles": perfiles({"ofimatica": 1.25, "navegacion": 1.25}),
-        "rafagas": copy.deepcopy(RAFAGAS_V1), "destinos": copy.deepcopy(DESTINOS), "tamanos": copy.deepcopy(TAMANOS),
-        "procedencia": dict(PROCEDENCIA_COMUN, **{"fases/pulsos": "NUEVA: comprimido para comprobar cada tipo de cambio"}),
-        "uso": "piloto de instrumentación; prohibido en métricas, entrenamiento o calibración",
-    }
-
-
-def prueba_corta() -> dict:
-    """4 min para las pruebas técnicas cortas de preparación (no es el piloto)."""
-    pid = "V2-PRUEBA-CORTA"
-    f = [("F1-alta", 0, 60, 1.0), ("F2-parada", 60, 90, 0.0), ("F3-pausa", 90, 150, 0.55), ("F4-alta", 150, 240, 1.0)]
-    return {
-        "programa_id": pid, "jornada_id": "PRUEBA", "version": "1.0.0",
-        "titulo": "Prueba técnica corta (4 min)",
-        "descripcion": "Comprueba acciones, registro, pausa, cambio de bloque y parada. Sin uso en métricas.",
-        "duracion_s": 240,
-        "bloques": bloques(pid, [("B1", 0, 120, "prueba"), ("B2", 120, 240, "prueba")]),
-        "fases": [{"id": i, "inicio_s": a, "fin_s": z, "factor": x} for i, a, z, x in f],
-        "pulsos": pulsos_lista("P", [180], 30, 1.5, ["ofimatica", "navegacion", "aplicacion"]),
-        "perfiles": perfiles(), "rafagas": copy.deepcopy(RAFAGAS_V1),
-        "destinos": copy.deepcopy(DESTINOS), "tamanos": copy.deepcopy(TAMANOS),
-        "procedencia": dict(PROCEDENCIA_COMUN), "uso": "prueba técnica; prohibido en métricas",
-    }
-
-
-def serializar(prog: dict) -> bytes:
-    return (json.dumps(prog, ensure_ascii=False, indent=1, sort_keys=False) + "\n").encode("utf-8")
-
-
-def main() -> int:
+def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--comprobar", action="store_true", help="falla si algún JSON en disco difiere")
-    a = ap.parse_args()
-    sys.path.insert(0, str(AQUI.parent / "generador"))
-    import programa as prg
-    nombres = {"P0": "piloto-30min.json", "PRUEBA-CORTA": "prueba-corta.json", "C42": "captura-42h.json"}
-    distintos = 0
-    for k, prog in todas().items():
-        prg.validar(prog)
-        ruta = AQUI / nombres.get(k, "jornada-%s.json" % k)
+    ap.add_argument("--comprobar", action="store_true")
+    args = ap.parse_args()
+    for nombre, prog in todas().items():
         datos = serializar(prog)
-        if a.comprobar:
+        ruta = AQUI / nombre
+        if args.comprobar:
             if not ruta.exists() or ruta.read_bytes() != datos:
-                print("DIFIERE", ruta.name)
-                distintos += 1
+                print("difiere: %s" % nombre)
+                return 1
         else:
             ruta.write_bytes(datos)
-        print("%-24s %s" % (ruta.name, hashlib.sha256(datos).hexdigest()))
-    return 1 if distintos else 0
+    return 0
 
 
 if __name__ == "__main__":

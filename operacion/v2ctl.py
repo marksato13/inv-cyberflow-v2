@@ -100,19 +100,41 @@ def preflight(prog: dict) -> list[tuple[str, bool, str]]:
     r.append(("reloj sincronizado (NTP)", sh(["timedatectl", "show", "-p", "NTPSynchronized", "--value"]) == "yes", ""))
     libre = shutil.disk_usage(str(Path.home())).free
     r.append(("espacio libre > 1 GB", libre > 1e9, "%.1f GB" % (libre / 1e9)))
-    # Sondas: una transacción de cada tipo de servicio desde el primer alias activo.
+    # Una sonda por acción v3; las peticiones usan la IP devuelta por DNS.
     import random
     perfil0 = next(iter(prog["perfiles"]))
-    c = tx.Cliente(prog["perfiles"][perfil0]["origen"], prog["destinos"], prog["tamanos"], random.Random(0))
-    for accion in ("api_ok", "https", "dns", "dns_inexistente", "puerto_cerrado", "ping", "api_auth", "api_404", "api_500"):
-        reg = {"timeout": False, "incompleta": False, "excepcion": None}
-        try:
-            getattr(c, accion)(reg)
-        except Exception as e:  # noqa: BLE001
-            reg["excepcion"] = "%s: %s" % (type(e).__name__, e)
-        tx.clasificar(accion, reg, prog["destinos"])
-        r.append(("sonda %s" % accion, reg["clase"] != "fallo_inesperado",
-                  "%s / esperado %s" % (reg["resultado_observado"], reg["resultado_esperado"])))
+    c = tx.Cliente(prog["perfiles"][perfil0]["origen"], prog["destinos"],
+                   random.Random(0), random.Random(1))
+    nombre = "portal." + prog["destinos"]["dns_zona"]
+    dns = {"timeout": False, "incompleta": False, "excepcion": None}
+    try:
+        ip = c.dns(dns, nombre)
+    except Exception as e:
+        dns["excepcion"] = "%s: %s" % (type(e).__name__, e)
+        ip = None
+    tx.clasificar("dns", dns, prog["destinos"])
+    r.append(("sonda dns", dns["clase"] == "ok",
+              "%s / esperado %s" % (dns["resultado_observado"], dns["resultado_esperado"])))
+    if ip:
+        acciones = (
+            ("obtener HTTP", "obtener", lambda reg: c.obtener(reg, ip, 100)),
+            ("obtener HTTPS", "obtener", lambda reg: c.obtener(reg, ip, 100, https=True)),
+            ("consulta", "consulta", lambda reg: c.consulta(reg, ip, 1)),
+            ("envio", "envio", lambda reg: c.envio(reg, ip, b"p" * 200)),
+        )
+        for nombre_sonda, accion, ejecutar in acciones:
+            reg = {"timeout": False, "incompleta": False, "excepcion": None}
+            try:
+                ejecutar(reg)
+            except Exception as e:
+                reg["excepcion"] = "%s: %s" % (type(e).__name__, e)
+            tx.clasificar(accion, reg, prog["destinos"])
+            r.append(("sonda %s" % nombre_sonda, reg["clase"] == "ok",
+                      "%s / esperado %s" % (reg["resultado_observado"],
+                                             reg["resultado_esperado"])))
+    else:
+        for nombre_sonda in ("obtener HTTP", "obtener HTTPS", "consulta", "envio"):
+            r.append(("sonda %s" % nombre_sonda, False, "sin IP resuelta por DNS"))
     # Solo informativo: cruzar 00:00 UTC está permitido; el archivador sigue el EVE a través de la
     # rotación (copytruncate) y registra cualquier hueco en eve/huecos.jsonl.
     fin = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(seconds=prog["duracion_s"])

@@ -1,0 +1,283 @@
+{
+  "bloques": [
+    {
+      "fin_s": 900,
+      "id": "A-B1",
+      "inicio_s": 0,
+      "jornada": "A",
+      "particion": "prueba",
+      "semillas": {
+        "P1": {
+          "contenido": 145547798299715,
+          "espera": 88916332522479,
+          "red": 136420742889199
+        },
+        "P2": {
+          "contenido": 267694491878034,
+          "espera": 146756527208756,
+          "red": 114131717942496
+        },
+        "P3": {
+          "contenido": 42534060772320,
+          "espera": 76747317904003,
+          "red": 49020235401574
+        },
+        "P4": {
+          "contenido": 267623604964280,
+          "espera": 180151225139339,
+          "red": 231506559179352
+        },
+        "P5": {
+          "contenido": 100065110689310,
+          "espera": 100891373271646,
+          "red": 28800387602873
+        },
+        "P6": {
+          "contenido": 276524399417917,
+          "espera": 120226104168922,
+          "red": 131385631364432
+        }
+      }
+    },
+    {
+      "fin_s": 1800,
+      "id": "A-B2",
+      "inicio_s": 900,
+      "jornada": "A",
+      "particion": "prueba",
+      "semillas": {
+        "P1": {
+          "contenido": 261704785210337,
+          "espera": 269998600962682,
+          "red": 37014792610956
+        },
+        "P2": {
+          "contenido": 98209950660225,
+          "espera": 32475305514851,
+          "red": 170734946880036
+        },
+        "P3": {
+          "contenido": 276926461812661,
+          "espera": 112218935011672,
+          "red": 208571035361786
+        },
+        "P4": {
+          "contenido": 138303268181270,
+          "espera": 258046381611045,
+          "red": 34386030351394
+        },
+        "P5": {
+          "contenido": 24706279654526,
+          "espera": 146798598664846,
+          "red": 105976670592185
+        },
+        "P6": {
+          "contenido": 47762853344519,
+          "espera": 155699394011373,
+          "red": 182757811492410
+        }
+      }
+    }
+  ],
+  "destinos": {
+    "dns_ip_esperada": "10.10.30.10",
+    "dns_nombres": [
+      "portal",
+      "intranet",
+      "correo",
+      "wiki",
+      "erp",
+      "archivos"
+    ],
+    "dns_servidor": "10.10.10.20",
+    "dns_zona": "cf-v2.lab",
+    "puerto_http": 80,
+    "puerto_https": 443,
+    "servidor": "10.10.30.10"
+  },
+  "distribuciones": {
+    "F1": {
+      "maximo_exclusivo": 5000000,
+      "mu": 14.45,
+      "sigma": 0.35
+    },
+    "H1": {
+      "desviacion": 25032,
+      "maximo_exclusivo": 2000000,
+      "media": 10710,
+      "minimo": 100
+    },
+    "H2": {
+      "desviacion": 126168,
+      "maximo_exclusivo": 2000000,
+      "media": 7758,
+      "minimo": 50
+    },
+    "H3": {
+      "escala": 2,
+      "forma": 1.1,
+      "maximo_exclusivo": 55,
+      "restar": 2
+    }
+  },
+  "duracion_s": 1800,
+  "equivalencia": {
+    "A": {
+      "compresion": "sin equivalencia temporal directa",
+      "jornada_definitiva": "J1",
+      "patron": "un perfil activo por tramo de 300 s",
+      "programa_definitivo": "V2-C49",
+      "tipo": "prueba dirigida"
+    }
+  },
+  "factores": {
+    "aumentado": 2,
+    "base": 1,
+    "inactivo": 0,
+    "reducido": 0.3333333333333333
+  },
+  "jornadas": [
+    {
+      "fin_s": 1800,
+      "id": "A",
+      "inicio_s": 0,
+      "patron": "perfiles_aislados",
+      "titulo": "perfiles_aislados"
+    }
+  ],
+  "niveles": [
+    {
+      "fin_s": 300,
+      "id": "N001",
+      "inicio_s": 0,
+      "perfiles": {
+        "P1": "base",
+        "P2": "inactivo",
+        "P3": "inactivo",
+        "P4": "inactivo",
+        "P5": "inactivo",
+        "P6": "inactivo"
+      }
+    },
+    {
+      "fin_s": 600,
+      "id": "N002",
+      "inicio_s": 300,
+      "perfiles": {
+        "P1": "inactivo",
+        "P2": "base",
+        "P3": "inactivo",
+        "P4": "inactivo",
+        "P5": "inactivo",
+        "P6": "inactivo"
+      }
+    },
+    {
+      "fin_s": 900,
+      "id": "N003",
+      "inicio_s": 600,
+      "perfiles": {
+        "P1": "inactivo",
+        "P2": "inactivo",
+        "P3": "base",
+        "P4": "inactivo",
+        "P5": "inactivo",
+        "P6": "inactivo"
+      }
+    },
+    {
+      "fin_s": 1200,
+      "id": "N004",
+      "inicio_s": 900,
+      "perfiles": {
+        "P1": "inactivo",
+        "P2": "inactivo",
+        "P3": "inactivo",
+        "P4": "base",
+        "P5": "inactivo",
+        "P6": "inactivo"
+      }
+    },
+    {
+      "fin_s": 1500,
+      "id": "N005",
+      "inicio_s": 1200,
+      "perfiles": {
+        "P1": "inactivo",
+        "P2": "inactivo",
+        "P3": "inactivo",
+        "P4": "inactivo",
+        "P5": "base",
+        "P6": "inactivo"
+      }
+    },
+    {
+      "fin_s": 1800,
+      "id": "N006",
+      "inicio_s": 1500,
+      "perfiles": {
+        "P1": "inactivo",
+        "P2": "inactivo",
+        "P3": "inactivo",
+        "P4": "inactivo",
+        "P5": "inactivo",
+        "P6": "base"
+      }
+    }
+  ],
+  "perfiles": {
+    "P1": {
+      "media_espera_s": 30,
+      "modelo": "consulta",
+      "origen": "10.10.20.21"
+    },
+    "P2": {
+      "alternancia": [
+        "http",
+        "https"
+      ],
+      "media_espera_s": 30,
+      "modelo": "navegacion",
+      "origen": "10.10.20.22",
+      "parsing_media_s": 0.13
+    },
+    "P3": {
+      "media_espera_s": 180,
+      "modelo": "archivo",
+      "origen": "10.10.20.23"
+    },
+    "P4": {
+      "media_espera_s": 10,
+      "modelo": "transaccional",
+      "origen": "10.10.20.24"
+    },
+    "P5": {
+      "media_espera_s": 90,
+      "modelo": "consulta",
+      "origen": "10.10.20.25"
+    },
+    "P6": {
+      "media_espera_s": 10,
+      "modelo": "intermitente",
+      "off_s": 120,
+      "on_s": 60,
+      "origen": "10.10.20.26"
+    }
+  },
+  "procedencia": {
+    "contrato": "docs/CONTRATO-GENERADOR-49H.md v3.0.0",
+    "destinos.dns_nombres/zona": "NUEVA: seis nombres en cf-v2.lab",
+    "destinos.endpoints": "NUEVA: /contenido/<n>, /app/consulta, /app/envio",
+    "factores/jornadas/bloques/niveles": "D1 y NUEVA: calendario §7",
+    "perfiles.*.origen": "V1: alias de cliente; P1–P6 10.10.20.21–26",
+    "perfiles.P1/P2.H1/H2/H3/parsing": "PUB S2 (ns-3)",
+    "perfiles.P3.F1/pausa": "PUB S3/S6 (MathWorks/IEEE); HTTP ADAP",
+    "perfiles.P4.media_espera_s": "PUB S5 (SPECweb2009); exponencial ADAP S4",
+    "perfiles.P5/P6/on_off": "D1 (diseño experimental)",
+    "post_bytes": "V1: U{200,…,8000}",
+    "semillas": "NUEVA: sha256(cyberflow-v2|49h|2026-11-25|programa_id|bloque|perfil|flujo)"
+  },
+  "programa_id": "V2-T1",
+  "tipo": "prueba",
+  "version": "3.0.0"
+}

@@ -11,7 +11,6 @@ from __future__ import annotations
 import argparse
 import glob
 import json
-import math
 import re
 from pathlib import Path
 
@@ -46,46 +45,59 @@ def main() -> int:
                "perfiles_terminados": len(term), "codigos": {s["perfil"]: s["codigo"] for s in term},
                "manifiesto": man_g.get("estado")}
 
-    pausa = next(f for f in prog["fases"] if f["factor"] == 0)
-    en_pausa = [t["transaccion_id"] for t in tx if pausa["inicio_s"] <= t["inicio_t_s"] < pausa["fin_s"]]
-    fases_ev = {p: [e["fase_id"] for e in v if e.get("tipo") == "fase"] for p, v in ev.items()}
-    esperadas = [f["id"] for f in prog["fases"]]
-    R["C2"] = {"ok": not en_pausa and all(v == esperadas for v in fases_ev.values()) and len(fases_ev) == 6,
-               "tx_en_pausa": len(en_pausa), "fases_por_perfil": {p: len(v) for p, v in fases_ev.items()},
-               "secuencia_ok": {p: v == esperadas for p, v in fases_ev.items()}}
+    def tramo_en(tramos, segundo):
+        return next((tr for tr in tramos
+                     if tr["inicio_s"] <= segundo < tr["fin_s"]), None)
 
-    def tramo(t):
-        return next((f for f in prog["fases"] if f["inicio_s"] <= t < f["fin_s"]), None)
-    mal_pulso, mal_factor, n_pulso = [], [], {}
+    mal_nivel = []
+    en_off = []
     for t in tx:
-        ps = t.get("pulsos") or []
-        for pid in ps:
-            n_pulso[pid] = n_pulso.get(pid, 0) + 1
-            pu = next(p for p in prog["pulsos"] if p["id"] == pid)
-            if not (pu["inicio_s"] <= t["inicio_t_s"] < pu["fin_s"]) or t["perfil"] not in pu["perfiles"]:
-                mal_pulso.append(t["transaccion_id"])
-        activos = [p for p in prog["pulsos"] if p["inicio_s"] <= t["inicio_t_s"] < p["fin_s"] and t["perfil"] in p["perfiles"]]
-        if sorted(p["id"] for p in activos) != sorted(ps):
-            mal_pulso.append(t["transaccion_id"])
-        f = tramo(t["inicio_t_s"])
-        esperado = f["factor"] * prog["perfiles"][t["perfil"]].get("multiplicador", 1.0) * math.prod(p["factor"] for p in activos)
-        if t.get("en_rafaga"):
-            raf = prog.get("rafagas", {}).get(t["perfil"])
-            if raf is None:                      # ráfaga en un perfil que no la tiene programada
-                mal_factor.append((t["transaccion_id"], t.get("factor"), "rafaga_no_programada"))
-                continue
-            esperado *= raf["factor"]
-            n_pulso["rafaga"] = n_pulso.get("rafaga", 0) + 1
-        if f and abs(t.get("factor", -1) - esperado) > 1e-3 * max(1, esperado):
-            mal_factor.append((t["transaccion_id"], t.get("factor"), round(esperado, 6)))
-    R["C3"] = {"ok": not mal_pulso and not mal_factor and all(n_pulso.get(p["id"], 0) > 0 for p in prog["pulsos"]),
-               "tx_por_pulso": n_pulso, "pulso_mal_asignado": len(mal_pulso), "factor_distinto": len(mal_factor),
-               "ejemplos_factor": mal_factor[:5]}
+        perfil = t["perfil"]
+        segundo = t["inicio_t_s"]
+        tramo = tramo_en(prog["niveles"], segundo)
+        esperado = tramo["perfiles"][perfil] if tramo else None
+        if esperado is None or t.get("nivel") != esperado or (
+                abs(t.get("factor", -1) - prog["factores"][esperado]) > 1e-9):
+            mal_nivel.append(t["transaccion_id"])
+        if perfil == "P6" and segundo % 180 >= 60:
+            en_off.append(t["transaccion_id"])
+    R["C2"] = {"ok": not mal_nivel and not en_off,
+               "nivel_distinto": len(mal_nivel), "p6_en_off": len(en_off),
+               "ejemplos": (mal_nivel + en_off)[:5]}
 
-    bloques = {p: [(e["bloque_id"], e["semilla"]) for e in v if e.get("tipo") == "bloque"] for p, v in ev.items()}
-    esperado_b = {p: [(b["id"], b["semillas"][p]) for b in prog["bloques"]] for p in prog["perfiles"]}
-    R["C4"] = {"ok": bloques == esperado_b, "bloques": {p: [b for b, _ in v] for p, v in bloques.items()},
-               "semillas_coinciden": {p: bloques.get(p) == esperado_b[p] for p in esperado_b}}
+    def tiempo_on(inicio, fin):
+        total = 0.0
+        ciclo = int(inicio // 180) * 180
+        while ciclo < fin:
+            total += max(0.0, min(fin, ciclo + 60) - max(inicio, ciclo))
+            ciclo += 180
+        return total
+
+    tramos_vacios = []
+    for tramo in prog["niveles"]:
+        duracion = tramo["fin_s"] - tramo["inicio_s"]
+        for perfil, nivel in tramo["perfiles"].items():
+            factor = prog["factores"][nivel]
+            if factor <= 0:
+                continue
+            media = prog["perfiles"][perfil]["media_espera_s"] / factor
+            duracion_util = (tiempo_on(tramo["inicio_s"], tramo["fin_s"])
+                             if perfil == "P6" else duracion)
+            if duracion_util >= 3 * media:
+                n = sum(tramo["inicio_s"] <= t["inicio_t_s"] < tramo["fin_s"]
+                        and t["perfil"] == perfil for t in tx)
+                if n == 0:
+                    tramos_vacios.append((tramo["id"], perfil))
+    R["C3"] = {"ok": not tramos_vacios, "tramos_vacios": tramos_vacios}
+
+    bloques = {p: [(e["bloque_id"], e.get("semillas"))
+                   for e in v if e.get("tipo") == "bloque"] for p, v in ev.items()}
+    esperado_b = {p: [(b["id"], b["semillas"][p])
+                      for b in prog["bloques"]] for p in prog["perfiles"]}
+    R["C4"] = {"ok": bloques == esperado_b,
+               "bloques": {p: [b for b, _ in v] for p, v in bloques.items()},
+               "semillas_coinciden": {p: bloques.get(p) == esperado_b[p]
+                                      for p in esperado_b}}
 
     clases = {}
     for t in tx:

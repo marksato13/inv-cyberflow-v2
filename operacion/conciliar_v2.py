@@ -1,22 +1,9 @@
 #!/usr/bin/env python3
-"""Concilia cada transacción del cliente con el registro independiente del servidor.
+"""Concilia cada intercambio v3 del cliente con HTTP/HTTPS o DNS.
 
-Entradas: transacciones-*.jsonl (Clientes), registro HTTP/HTTPS de srv-dmz (JSONL de
-servidor_lab_v2.py) y registro DNS de DC1 (registro_dns_v2.py).
-
-Emparejamiento:
-* HTTP/HTTPS: (IP cliente, puerto origen) y solapamiento temporal ±margen; el puerto origen
-  lo fija el cliente con getsockname() antes de conectar.
-* DNS: (IP cliente, puerto origen, identificador DNS) y ±margen; se exige consulta y respuesta.
-* puerto_cerrado y ping no pasan por el servidor de aplicación: «sin_registro_por_diseno»
-  (se verifican con la captura, en cobertura_v2).
-
-Clase conciliada (orden de prioridad):
-* incompleta_no_verificable: falta el registro del servidor en una ventana que no cubre el
-  registro, la acción se cortó por una parada, o el emparejamiento es ambiguo.
-* fallo_imprevisto: cliente y servidor no concuerdan, o el resultado no es el esperado.
-* variacion_servidor: el resultado es el admitido por un sorteo registrado del servidor.
-* error_intencional / correcto: lo esperado.
+HTTP se empareja por IP y puerto origen, ventana temporal y, para P2,
+peticion_en_conexion. DNS añade el identificador de consulta.
+Una parada o correspondencia ambigua queda no verificable.
 """
 from __future__ import annotations
 
@@ -27,10 +14,9 @@ import json
 from pathlib import Path
 
 MARGEN_S = 5.0
-HTTP = {"web_pequena", "web_media", "web_grande", "https", "api_ok", "api_lento", "api_post",
-        "api_auth", "api_404", "api_500", "abandono"}
-DNS = {"dns", "dns_inexistente"}
-INTENCIONAL = {"api_auth", "api_404", "api_500", "abandono", "puerto_cerrado", "dns_inexistente"}
+HTTP = {"obtener", "consulta", "envio"}
+DNS = {"dns"}
+INTENCIONAL = set()
 
 
 def ts(s: str) -> float:
@@ -101,6 +87,8 @@ def conciliar_tx(t: dict, ihttp, idns, cub_http, cub_dns) -> dict:
     if acc in HTTP:
         cub = cub_http
         c = candidatos(ihttp.get((t["origen_ip"], int(puerto)), []), ini, fin, "inicio_utc", "fin_utc")
+        if t.get("perfil") == "P2" and t.get("peticion_en_conexion") is not None:
+            c = [r for r in c if r.get("peticion_en_conexion") == t["peticion_en_conexion"]]
     else:
         cub = cub_dns
         c = candidatos(idns.get((t["origen_ip"], int(puerto), int(t.get("dns_id", -1))), []), ini, fin, "utc")
@@ -116,8 +104,8 @@ def conciliar_tx(t: dict, ihttp, idns, cub_http, cub_dns) -> dict:
             return out | {"clase": "incompleta_no_verificable", "motivo": "dns_ambiguo_%d_%d" % (len(consultas), len(resp))}
         rc = resp[0].get("rcode")
         out["servidor_rcode"] = rc
-        esperado = "NXDOMAIN" if acc == "dns_inexistente" else "NOERROR"
-        concuerda = (rc == esperado) and (t.get("dns_rcode") == (3 if esperado == "NXDOMAIN" else 0))
+        esperado = "NOERROR"
+        concuerda = rc == esperado and t.get("dns_rcode") == 0
         if not concuerda or t.get("clase") == "fallo_inesperado":
             return out | {"clase": "fallo_imprevisto", "motivo": "dns_discrepa"}
         return out | {"clase": "error_intencional" if acc in INTENCIONAL else "correcto", "motivo": "conciliada"}
@@ -125,26 +113,15 @@ def conciliar_tx(t: dict, ihttp, idns, cub_http, cub_dns) -> dict:
         return out | {"clase": "incompleta_no_verificable", "motivo": "http_ambiguo_%d" % len(c)}
     s = c[0]
     out.update(servidor_codigo=s.get("codigo"), servidor_resultado=s.get("resultado"),
-               servidor_aleatorio=s.get("aleatorio"))
+               peticion_en_conexion=s.get("peticion_en_conexion"))
     cod_cli = t.get("http_codigo")
-    if acc == "abandono":
-        # El cliente corta tras las cabeceras: el servidor debe verlo incompleto o completo (si
-        # llegó a enviar todo antes del corte); lo que no puede es un código distinto.
-        ok = bool(t.get("cortada_por_cliente")) and s.get("codigo") == cod_cli
-        return out | {"clase": "error_intencional" if ok else "fallo_imprevisto",
-                      "motivo": "conciliada" if ok else "abandono_discrepa"}
     if s.get("codigo") != cod_cli:
         return out | {"clase": "fallo_imprevisto", "motivo": "codigo_discrepa"}
     if s.get("resultado") != "completa" or t.get("incompleta"):
         return out | {"clase": "fallo_imprevisto", "motivo": "transferencia_incompleta"}
     if t.get("clase") == "fallo_inesperado":
         return out | {"clase": "fallo_imprevisto", "motivo": "cliente_fallo"}
-    if acc == "api_post" and cod_cli == 500:
-        al = s.get("aleatorio") or {}
-        if al.get("tipo") == "post_u" and al.get("codigo") == 500:
-            return out | {"clase": "variacion_servidor", "motivo": "sorteo_post_registrado"}
-        return out | {"clase": "fallo_imprevisto", "motivo": "500_sin_sorteo"}
-    return out | {"clase": "error_intencional" if acc in INTENCIONAL else "correcto", "motivo": "conciliada"}
+    return out | {"clase": "correcto", "motivo": "conciliada"}
 
 
 def conciliar(transacciones, http, dns) -> dict:

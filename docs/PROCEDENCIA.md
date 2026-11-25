@@ -17,3 +17,19 @@
 | `captura/cobertura_v2.py` | — | — | Nuevo: cruza el registro con el PCAP y el EVE |
 | (sin cambios, en el laboratorio) `servidor_lab.py` | `laboratorio/configuracion/srvdmz/servidor_lab.py` | `9e91d8b8…` | Ninguno. Su aleatoriedad (POST → 500 con p = 0,1; `/api/lento` de 1,5 a 4 s) está documentada en el protocolo |
 | (pendiente) extracción | `scripts/features/extract_multilayer_v3.py`, `extract_multilayer_v2.py`, `acumular_v3.py`, `configs/features/multilayer-v2.json` | `5adbfbf4…`, `7130edae…`, `9c35b831…`, `1445ccd4…` | Se incorporarán a `extraccion/` con esta misma tabla. Cambios previstos: filtrar el tráfico excluido por paquete, deduplicar el espejo y no acumular en la línea base de V1 |
+
+
+## Generador v3 (25-nov-2026)
+
+El contrato CONTRATO-GENERADOR-49H.md sustituye la conducta V1/v2 descrita arriba.
+Se conserva de V1 el transporte con sockets, medición de bytes TLS por BIO, consulta DNS
+directa y tiempos de espera de red. generador/transacciones.py usa ahora /contenido/<n>,
+/app/consulta y /app/envio, con P2 en conexión HTTP/1.1 persistente.
+generador/distribuciones.py implementa H1, H2, H3 y F1 según §4.
+generador/clientes_lab_v2.py usa tres flujos MT19937 por perfil y bloque; su reloj
+monotónico, espera y ejecución siguen inyectables. El calendario y las semillas son
+generados determinísticamente por programas/generar_programas.py. Las semillas se
+derivan de la cadena maestra fijada en §8 del contrato; no dependen de resultados del IF.
+Las herramientas de operación, conciliación, cobertura y evaluación aceptan las
+acciones y los niveles v3. Los registros antiguos siguen documentados en esta sección
+histórica y no definen el comportamiento de v3.
