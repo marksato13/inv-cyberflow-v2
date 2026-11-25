@@ -44,10 +44,17 @@ def ultimo_kernel_drops(raw: str) -> int | None:
 
 
 def enlace(raw: str) -> tuple[bool | None, int | None]:
-    protocolo = re.search(r"line protocol is (up|down)", raw, re.I)
+    # Un destino de SPAN se ve como «is up, line protocol is down (monitoring)»: es el estado
+    # normal. Inválido = interfaz caída o protocolo caído sin «(monitoring)», o no 1000 Full.
+    interfaz = re.search(r"^\S+ is (up|down|administratively down)", raw, re.I | re.M)
+    protocolo = re.search(r"line protocol is (up|down)( \(monitoring\))?", raw, re.I)
     velocidad = re.search(r"Full-duplex,\s*1000Mb/s", raw, re.I)
     drops = re.search(r"output drops:\s*(\d+)|(\d+)\s+output drops", raw, re.I)
-    valido = (protocolo.group(1).lower() == "up" and bool(velocidad)) if protocolo else None
+    if not (interfaz and protocolo):
+        valido = None
+    else:
+        proto_ok = protocolo.group(1).lower() == "up" or bool(protocolo.group(2))
+        valido = interfaz.group(1).lower() == "up" and proto_ok and bool(velocidad)
     return valido, int(drops.group(1) or drops.group(2)) if drops else None
 
 

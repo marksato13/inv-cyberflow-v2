@@ -151,3 +151,14 @@ class TestHombreMuerto(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def test_enlace_span_monitoring_es_valido():
+    v = vg
+    raw = ("GigabitEthernet2/0/19 is up, line protocol is down (monitoring)\n"
+           "  Full-duplex, 1000Mb/s, media type is 10/100/1000BaseTX\n"
+           "  Input queue: 0/2000/0/0 (size/max/drops/flushes); Total output drops: 215521\n")
+    assert v.enlace(raw) == (True, 215521)
+    assert v.enlace(raw.replace("1000Mb/s", "100Mb/s"))[0] is False
+    assert v.enlace(raw.replace(" (monitoring)", ""))[0] is False
+    assert v.enlace(raw.replace("is up,", "is down,"))[0] is False
