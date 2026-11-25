@@ -4,8 +4,8 @@
 # Ejemplos:
 #   bash lanzar_v2.sh piloto-30min.json PILOTO 2
 #   bash lanzar_v2.sh captura-42h.json C42 12
-# Orden: identificador -> exclusión V1 -> preflight -> relojes -> registro DNS (DC1) ->
-#        archivador (Sensor1) -> espera >= 2 min de captura previa -> generador (Clientes) -> vigía.
+# Orden: identificador -> exclusión V1 -> preflight -> relojes -> registro DNS + PCAP (DC1) ->
+#        sondeo del espejo (bastión) -> archivador (Sensor1) -> espera >= 2 min de captura previa -> generador (Clientes) -> vigía.
 # Si algo falla antes del generador, no se lanza nada más y se deshace lo arrancado.
 set -euo pipefail
 PROG=${1:?programa}; TAG=${2:?etiqueta}; GB=${3:?gb_necesarios}
@@ -28,6 +28,7 @@ T_ARCH=$(date +%s); TOPE_INICIAL=$((T_ARCH + 3600 + PREVIO_S + DUR + MARGEN_FIN_
 log identificador "$ID programa=$PROG sha256=$SHA duracion=$DUR tope_inicial=$TOPE_INICIAL retraso_prueba=$RETRASO_PRUEBA_S"
 
 deshacer() { log deshacer "$1"
+  [ -f "$E/sondeo-span.pid" ] && kill -TERM "$(cat "$E/sondeo-span.pid")" 2>/dev/null || true
   $SSH dcadmin@10.10.10.20 "sudo -n systemctl stop cf-v2-dns-${ID,,}" 2>/dev/null || true
   $SSH sensor1 "pkill -TERM -f '[a]rchivar_v2.py --ejecucion $ID'" 2>/dev/null || true
   exit 1; }
@@ -49,9 +50,18 @@ log relojes "srvdmz y dc1"
 bash "$B/operacion/contadores_lab.sh" "$E/contadores-lab-inicio.txt" >/dev/null; log contadores inicio
 
 # 4. Registro DNS independiente en DC1 (unidad transitoria con tope de vida)
-$SSH dcadmin@10.10.10.20 "sudo -n mkdir -p /var/log/cyberflow-v2 && sudo -n systemd-run --unit=cf-v2-dns-${ID,,} --property=RuntimeMaxSec=$((DUR + 3600)) /usr/bin/python3 $DC/servidor/registro_dns_v2.py --interfaz ens224 --salida /var/log/cyberflow-v2/dns-$ID.jsonl --poblacion $POBL" \
+$SSH dcadmin@10.10.10.20 "sudo -n mkdir -p /var/log/cyberflow-v2 && sudo -n systemd-run --unit=cf-v2-dns-${ID,,} --property=RuntimeMaxSec=$((DUR + 3600)) /usr/bin/python3 $DC/servidor/registro_dns_v2.py --interfaz ens224 --salida /var/log/cyberflow-v2/dns-$ID.jsonl --pcap /var/log/cyberflow-v2/dns-$ID.pcap --poblacion $POBL" \
   || deshacer "no arrancó el registro DNS"
 log registro_dns "cf-v2-dns-${ID,,}"
+
+# 4b. Supervisión continua del destino SPAN (Gi2/0/19), antes del archivador: así cubre la captura
+# previa, la generación y el margen final. Se para en cerrar_v2.sh; el tope es una red de seguridad.
+setsid nohup python3 "$B/operacion/sondeo_span.py" --salida "$E/sondeo-span.jsonl" \
+  --hasta-epoch $((TOPE_INICIAL + 900)) --cada-s 2 --pid "$E/sondeo-span.pid" \
+  > "$E/sondeo-span-salida.txt" 2>&1 < /dev/null &
+for i in $(seq 1 15); do grep -q '"tipo": "muestra"' "$E/sondeo-span.jsonl" 2>/dev/null && break; sleep 2; done
+grep -q '"tipo": "muestra"' "$E/sondeo-span.jsonl" 2>/dev/null || deshacer "el sondeo del espejo no dio ninguna muestra"
+log sondeo_span "pid $(cat "$E/sondeo-span.pid" 2>/dev/null)"
 
 # 5. Archivador en Sensor1 (EVE + PCAP comprimido, parada por espacio)
 # (el & solo debe afectar al archivador: con «a && b && c &» ssh espera a la subcapa y no regresa)

@@ -31,6 +31,9 @@ if [ "$g$a" != sisi ]; then
   exit 1
 fi
 log manifiestos ok
+# Sondeo del espejo: se para ahora (la captura ya terminó) y se analiza sobre el periodo real de
+# captura. La falta de sondeo NO equivale a «sin descartes»: analizar_sondeo da 3 sin registro.
+if [ -f "$E/sondeo-span.pid" ]; then kill -TERM "$(cat "$E/sondeo-span.pid")" 2>/dev/null || true; sleep 3; fi
 $SSH sensor1 "cat $S1/capturas/$ID/manifiesto.json" > "$E/manifiesto-archivador.json"
 $SSH clientes "cat $CL/ejecuciones/$ID/manifiesto-fin.json" > "$E/manifiesto-generador.json"
 $SSH clientes "cat $CL/ejecuciones/$ID/supervisor.jsonl" > "$E/supervisor-generador.jsonl"
@@ -56,7 +59,17 @@ if all(v is not None for v in valores):
 else:
     desde, hasta = l["planificado"]["archivador_desde_epoch"], l["planificado"]["captura_hasta_epoch"]
 (E / "intervalo-servidor.txt").write_text(f"{desde} {hasta}\n")
+pp, up = real.get("primer_paquete_epoch"), real.get("ultimo_paquete_epoch")
+(E / "intervalo-captura.txt").write_text(f"{pp} {up}\n" if pp and up else "")
 PY
+RC_SONDEO=0
+if [ -s "$E/intervalo-captura.txt" ]; then
+  read -r CAP_DESDE CAP_HASTA < "$E/intervalo-captura.txt"
+  python3 "$(dirname "$0")/analizar_sondeo.py" "$E/sondeo-span.jsonl" --desde "$CAP_DESDE" --hasta "$CAP_HASTA" > "$E/calidad-espejo-sondeo.json" || RC_SONDEO=$?
+else
+  python3 "$(dirname "$0")/analizar_sondeo.py" "$E/sondeo-span.jsonl" > "$E/calidad-espejo-sondeo.json" || RC_SONDEO=$?
+fi
+log sondeo_span "analizar_sondeo rc=$RC_SONDEO (0 sin descartes, 1 con descartes, 2 indeterminado, 3 sin registro)"
 read -r DESDE HASTA < "$E/intervalo-servidor.txt"
 if [ -f "$E/intervalo-exclusion.txt" ]; then
   read -r EX_DESDE EX_HASTA < "$E/intervalo-exclusion.txt"
@@ -77,6 +90,8 @@ log exclusion_v1 "$(cat "$E/exclusion-v1.json")"
 # 2. Registro DNS
 $SSH dcadmin@10.10.10.20 "sudo -n systemctl stop cf-v2-dns-${ID,,} 2>/dev/null; sudo -n systemctl reset-failed cf-v2-dns-${ID,,} 2>/dev/null; sudo -n cat /var/log/cyberflow-v2/dns-$ID.jsonl" > "$E/dns-$ID.jsonl"
 log registro_dns "$(wc -l < "$E/dns-$ID.jsonl") lineas"
+$SSH dcadmin@10.10.10.20 "sudo -n cat /var/log/cyberflow-v2/dns-$ID.pcap 2>/dev/null" > "$E/dns-$ID.pcap" || true
+log registro_dns_pcap "$(wc -c < "$E/dns-$ID.pcap") bytes"
 
 # 3. Contadores (switch, sensor, aislamiento V1) y relojes de fin
 [ -f "$E/contadores-lab-fin.txt" ] || bash "$(dirname "$0")/contadores_lab.sh" "$E/contadores-lab-fin.txt" >/dev/null
@@ -131,6 +146,12 @@ paso cobertura \$T python3 \$C/captura/cobertura_v2.py --capturas $S1/capturas/$
 paso fronteras python3 \$C/extraccion/metadatos_v2.py fronteras --generador generador/$ID --salida fronteras.json
 paso extraer \$T python3 \$C/extraccion/extraer_v2.py $S1/capturas/$ID --salida extraccion --fronteras fronteras.json
 paso verificar \$T python3 \$C/extraccion/verificar_v2.py $S1/capturas/$ID --salida extraccion --fronteras fronteras.json --max-filas 40 --historia-s 230
+# Calidad de captura (bloque 1): se registran como pasos, pero NO entran en el dictamen vigente
+# (estado_global.PASOS_OBLIGATORIOS); su efecto es la propuesta de política de docs/BLOQUE1-CIERRE.md.
+paso calidad_copias nice python3 \$C/captura/copias_espejo.py $S1/capturas/$ID/pcap --salida calidad-copias-espejo.json --detalle-umbral 0.4
+DNSP=""; [ -s registros/dns-$ID.pcap ] && DNSP="--pcap registros/dns-$ID.pcap"
+paso calidad_dns nice python3 \$C/captura/contraste_dns.py --transacciones generador/$ID/transacciones-*.jsonl --dc1 registros/dns-$ID.jsonl \
+  --capturas $S1/capturas/$ID \$DNSP --salida calidad-contraste-dns.json --csv calidad-contraste-dns.csv
 paso metadatos python3 \$C/extraccion/metadatos_v2.py metadatos --capturas $S1/capturas/$ID --extraccion extraccion --generador generador/$ID \
   --cobertura cobertura/cobertura.csv --conciliacion conciliacion/conciliacion.jsonl
 EOF
