@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Servidor web del laboratorio para CyberFlow V2: HTTP y HTTPS con errores controlados y registro.
+"""Servidor web del laboratorio para CyberFlow V2: HTTP y HTTPS con registro.
 
 Derivado de origen_v1/scripts/laboratorio/servidor_lab.py @ d2c97728916c2484f770a7a16a984c4c6bd42175
 (sha256 9e91d8b8…). Cambios respecto a V1, todos sin alterar las respuestas:
@@ -18,11 +18,19 @@ Derivado de origen_v1/scripts/laboratorio/servidor_lab.py @ d2c97728916c2484f770
 4. ``--version`` para que el arranque deje constancia.
 
 Solo biblioteca estándar.
+
+Cambios de v3 respecto a v2:
+
+1. /contenido/<n> sirve bytes deterministas en trozos de 64 KiB y respeta --limite-bps.
+2. /app/consulta devuelve un JSON de 512 bytes; /app/envio confirma longitud y SHA-256.
+3. Los POST dejan de sortear errores 500. --semilla solo afecta a /api/lento.
+4. El registro incluye tipo, ref y el límite de velocidad de /contenido.
 """
 from __future__ import annotations
 
 import argparse
 import datetime
+import hashlib
 import itertools
 import json
 import os
@@ -31,11 +39,14 @@ import ssl
 import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import parse_qs, urlsplit
 
-VERSION = "v2.0.0"
+VERSION = "v3.0.0"
 RELLENO = (b"CyberFlow laboratorio. Cuerpo de relleno para dar tamano a la "
            b"respuesta sin depender de ficheros en disco. ")
 TROZO = 16384
+TROZO_CONTENIDO = 65536
+BLOQUE_CONTENIDO = random.Random("cyberflow-v2-contenido").randbytes(1 << 20)
 
 
 def ahora_utc() -> str:
@@ -88,12 +99,14 @@ class Manejador(BaseHTTPRequestHandler):
         self._bytes_cab = sum(len(x) for x in self._headers_buffer) + 2  # + CRLF final
         self.end_headers()
 
-    def _escribir(self, cuerpo: bytes) -> int:
-        limite = self.server.cfg["limite_bps"] if self._ruta.startswith("/estatico/") else 0
+    def _limite(self) -> int:
+        return self.server.cfg["limite_bps"] if self._ruta.startswith(("/estatico/", "/contenido/")) else 0
+
+    def _escribir_trozos(self, trozos) -> int:
+        limite = self._limite()
         enviados = 0
         t0 = time.monotonic()
-        for i in range(0, len(cuerpo), TROZO if limite else max(len(cuerpo), 1)):
-            trozo = cuerpo[i:i + (TROZO if limite else len(cuerpo))]
+        for trozo in trozos:
             self.wfile.write(trozo)
             enviados += len(trozo)
             if limite:
@@ -101,6 +114,10 @@ class Manejador(BaseHTTPRequestHandler):
                 if espera > 0:
                     time.sleep(espera)
         return enviados
+
+    def _escribir(self, cuerpo: bytes) -> int:
+        paso = TROZO if self._limite() else max(len(cuerpo), 1)
+        return self._escribir_trozos(cuerpo[i:i + paso] for i in range(0, len(cuerpo), paso))
 
     def _responder(self, codigo: int, cuerpo: bytes, tipo: str = "text/plain") -> None:
         self._codigo = codigo
@@ -122,6 +139,10 @@ class Manejador(BaseHTTPRequestHandler):
         self._excepcion = None
         self._aleatorio = None
         self._recibidos_cuerpo = 0
+        self._esperado = None
+        self._entrada_incompleta = False
+        self._tipo = None
+        self._ref = None
 
     def _fin(self) -> None:
         esperado = getattr(self, "_esperado", None)
@@ -135,9 +156,10 @@ class Manejador(BaseHTTPRequestHandler):
             "bytes_cuerpo_recibidos": self._recibidos_cuerpo,
             "bytes_cabeceras_enviadas": self._bytes_cab, "bytes_cuerpo_enviados": self._enviados,
             "bytes_cuerpo_esperados": esperado,
-            "resultado": "incompleta" if (self._excepcion or (esperado is not None and self._enviados < esperado)) else "completa",
+            "resultado": "incompleta" if (self._entrada_incompleta or self._excepcion or
+                                       (esperado is not None and self._enviados < esperado)) else "completa",
             "aleatorio": self._aleatorio, "excepcion": self._excepcion,
-            "limite_bps": self.server.cfg["limite_bps"] if self._ruta.startswith("/estatico/") else 0,
+            "limite_bps": self._limite(), "tipo": self._tipo, "ref": self._ref,
         })
 
     def do_GET(self) -> None:  # noqa: N802
@@ -161,6 +183,31 @@ class Manejador(BaseHTTPRequestHandler):
             kb = max(1, min(kb, 4096))
             self._esperado = kb * 1024
             self._responder(200, (RELLENO * ((kb * 1024) // len(RELLENO) + 1))[:kb * 1024])
+        elif ruta.startswith("/contenido/"):
+            self._tipo = parse_qs(urlsplit(self.path).query, keep_blank_values=True).get("tipo", [None])[0]
+            valor = ruta[len("/contenido/"):]
+            cifras = valor.lstrip("0")
+            if (not valor.isascii() or not valor.isdecimal() or not cifras or
+                    len(cifras) > 7 or int(cifras) > 5_000_000):
+                self._responder(400, b'{"error":"tamano invalido"}', "application/json")
+                return
+            n = int(cifras)
+            self._esperado = n
+            self._codigo = 200
+            try:
+                self._cabeceras(200, [("Content-Type", "application/octet-stream"), ("Content-Length", str(n))])
+                self._enviados = self._escribir_trozos(
+                    BLOQUE_CONTENIDO[i % len(BLOQUE_CONTENIDO):
+                                     i % len(BLOQUE_CONTENIDO) + min(TROZO_CONTENIDO, n - i)]
+                    for i in range(0, n, TROZO_CONTENIDO))
+            except (BrokenPipeError, ConnectionResetError, ssl.SSLError) as e:
+                self._excepcion = type(e).__name__
+        elif ruta == "/app/consulta":
+            self._ref = parse_qs(urlsplit(self.path).query, keep_blank_values=True).get("ref", [""])[0][:64]
+            cuerpo = json.dumps({"ref": self._ref, "estado": "ok"}, ensure_ascii=True,
+                                separators=(",", ":")).encode("ascii").ljust(512, b" ")
+            self._esperado = 512
+            self._responder(200, cuerpo, "application/json")
         elif ruta == "/api/ok":
             self._esperado = None
             self._responder(200, b'{"estado":"ok"}', "application/json")
@@ -187,14 +234,44 @@ class Manejador(BaseHTTPRequestHandler):
     def do_POST(self) -> None:  # noqa: N802
         self._inicio()
         try:
-            longitud = int(self.headers.get("Content-Length", 0) or 0)
-            if longitud:
-                self._recibidos_cuerpo = len(self.rfile.read(longitud))
-            u = self.server.sorteo(lambda r: r.random())
-            codigo = 201 if u > 0.1 else 500
-            self._aleatorio = {"tipo": "post_u", "valor": round(u, 9), "codigo": codigo}
-            self._esperado = None
-            self._responder(codigo, b'{"recibido":true}', "application/json")
+            cabecera = self.headers.get("Content-Length")
+            if cabecera is None:
+                if self._ruta == "/app/envio":
+                    self.close_connection = True
+                    self._responder(411, b'{"error":"falta Content-Length"}', "application/json")
+                    return
+                cabecera = "0"
+            try:
+                longitud = int(cabecera)
+                if longitud < 0:
+                    raise ValueError
+            except ValueError:
+                self.close_connection = True
+                self._responder(400, b'{"error":"Content-Length invalido"}', "application/json")
+                return
+            resumen = hashlib.sha256()
+            restante = longitud
+            while restante:
+                try:
+                    trozo = self.rfile.read(min(restante, TROZO_CONTENIDO))
+                except (ConnectionResetError, BrokenPipeError, ssl.SSLError) as e:
+                    self._excepcion = type(e).__name__
+                    self._entrada_incompleta = True
+                    self.close_connection = True
+                    return
+                if not trozo:
+                    self._entrada_incompleta = True
+                    self.close_connection = True
+                    return
+                self._recibidos_cuerpo += len(trozo)
+                resumen.update(trozo)
+                restante -= len(trozo)
+            if self._ruta == "/app/envio":
+                cuerpo = json.dumps({"recibido": longitud, "sha256": resumen.hexdigest()},
+                                    separators=(",", ":")).encode("ascii")
+            else:
+                cuerpo = b'{"recibido":true}'
+            self._responder(201, cuerpo, "application/json")
         finally:
             self._fin()
 
@@ -219,7 +296,7 @@ def main() -> int:
     p.add_argument("--clave")
     p.add_argument("--registro", help="fichero JSONL de peticiones (se abre en modo añadir)")
     p.add_argument("--semilla", type=int, default=None, help="semilla del generador del servidor (se registra)")
-    p.add_argument("--limite-bps", type=int, default=0, help="ritmo máximo de /estatico por conexión, bytes/s (0 = V1)")
+    p.add_argument("--limite-bps", type=int, default=0, help="ritmo máximo de /estatico y /contenido por conexión, bytes/s (0 = sin límite)")
     p.add_argument("--version", action="version", version=VERSION)
     a = p.parse_args()
     semilla = a.semilla if a.semilla is not None else int.from_bytes(os.urandom(6), "big")
