@@ -26,16 +26,17 @@ class TestMetadatos(unittest.TestCase):
         cap, x, gen = d / "capturas" / "V2-X-1", d / "x", d / "gen"
         for p in (cap / "eve", x, gen):
             p.mkdir(parents=True)
-        prog = {"duracion_s": 60, "bloques": [{"id": "B1", "inicio_s": 0, "fin_s": 30, "particion": "entrenamiento"},
-                                               {"id": "B2", "inicio_s": 30, "fin_s": 60, "particion": "calibracion"}],
-                "fases": [{"id": "F1", "inicio_s": 0, "fin_s": 60, "factor": 1}],
-                "pulsos": [], "perfiles": {"ofimatica": {"origen": "10.10.20.21"}}}
+        prog = {"duracion_s": 60, "bloques": [{"id": "B1", "jornada": "J1", "inicio_s": 0, "fin_s": 30, "particion": "entrenamiento"},
+                                               {"id": "B2", "jornada": "J1", "inicio_s": 30, "fin_s": 60, "particion": "calibracion"}],
+                "niveles": [{"id": "N1", "inicio_s": 0, "fin_s": 40, "perfiles": {"P1": "base"}},
+                            {"id": "N2", "inicio_s": 40, "fin_s": 60, "perfiles": {"P1": "aumentado"}}],
+                "perfiles": {"P1": {"origen": "10.10.20.21"}}}
         (gen / "programa.json").write_text(json.dumps(prog))
-        (gen / "eventos-ofimatica.jsonl").write_text(json.dumps({"tipo": "inicio", "perfil": "ofimatica",
+        (gen / "eventos-P1.jsonl").write_text(json.dumps({"tipo": "inicio", "perfil": "P1",
                                                                  "utc": iso(T0), "t_s": 0}) + "\n")
         txs = [("t1", 12, 13), ("t2", 41, 42)]
-        (gen / "transacciones-ofimatica.jsonl").write_text("".join(json.dumps(
-            {"transaccion_id": i, "perfil": "ofimatica", "inicio_utc": iso(T0 + a), "fin_utc": iso(T0 + b)}) + "\n" for i, a, b in txs))
+        (gen / "transacciones-P1.jsonl").write_text("".join(json.dumps(
+            {"transaccion_id": i, "perfil": "P1", "inicio_utc": iso(T0 + a), "fin_utc": iso(T0 + b)}) + "\n" for i, a, b in txs))
         with open(d / "cob.csv", "w", newline="") as f:
             w = csv.DictWriter(f, fieldnames=["transaccion_id", "estado", "transferencia"])
             w.writeheader(); w.writerow({"transaccion_id": "t1", "estado": "verificable", "transferencia": "completa"})
@@ -79,6 +80,10 @@ class TestMetadatos(unittest.TestCase):
             self.assertEqual(por_cierre[40]["particion"], "calibracion")
             self.assertIn("E3:cobertura_no verificable", por_cierre[50]["motivos_exclusion"])
             self.assertIn("E5:fuera_del_programa", por_cierre[80]["motivos_exclusion"])
+            self.assertEqual((por_cierre[20]["nivel"], por_cierre[20]["cruza_nivel"]), ("base", "False"))
+            self.assertEqual((por_cierre[50]["nivel"], por_cierre[50]["cruza_nivel"]), ("aumentado", "False"))
+            self.assertEqual(por_cierre[40]["jornada_id"], "J1")
+            self.assertEqual(por_cierre[80]["nivel"], "fuera")
 
     def test_fronteras_desde_programa_y_arranque(self):
         with tempfile.TemporaryDirectory() as d:

@@ -12,7 +12,7 @@ Dos órdenes:
       Lee X/filas.csv y escribe:
         X/entradas_if.csv     ventana_id + las 28 columnas, en el orden del contrato y nada más
         X/ventanas_meta.csv   ventana_id + ejecución, entidad, perfil, cierre temporal, bloque,
-                              partición, fase, pulsos, PCAP/EVE de origen, cobertura,
+                              partición, jornada, nivel, ON/OFF de P6, PCAP/EVE de origen, cobertura,
                               conciliación, huecos y exclusión con su motivo
         X/trazabilidad.json   comprobación: 1:1 entre ambos ficheros, ids únicos, campos
                               obligatorios llenos, ninguna columna de metadatos entre las 28
@@ -44,13 +44,13 @@ HISTORIA_S = 60.0  # Ventanas de variables y huecos E2, no guarda E1.
 GUARDA_E1_S = ex.GUARDA_ESTADO_S
 PASO_S = 10.0
 META = ("ventana_id", "ejecucion", "entidad_ip", "perfil", "regla_poblacion", "ventana_inicio_utc",
-        "ventana_cierre_utc", "t_programa_s", "bloque_id", "particion", "segmento", "fase_id", "cruza_fase",
-        "pulsos", "marca_extraccion", "antecedentes_desde_utc", "n_paquetes_ventana", "n_eventos_l7_ventana",
+        "ventana_cierre_utc", "t_programa_s", "bloque_id", "particion", "jornada_id", "nivel", "cruza_nivel",
+        "p6_on", "marca_extraccion", "antecedentes_desde_utc", "n_paquetes_ventana", "n_eventos_l7_ventana",
         "pcap_ventana", "pcap_historia_n", "pcap_historia_primero", "pcap_historia_ultimo",
         "eve_fichero", "eve_sha256", "tx_en_ventana", "cobertura_estado", "conciliacion_estado",
         "hueco_captura", "excluir_entrenamiento", "motivos_exclusion")
 OBLIGATORIOS = ("ventana_id", "ejecucion", "entidad_ip", "perfil", "ventana_cierre_utc", "bloque_id",
-                "particion", "fase_id", "eve_fichero", "cobertura_estado", "conciliacion_estado",
+                "particion", "nivel", "eve_fichero", "cobertura_estado", "conciliacion_estado",
                 "excluir_entrenamiento")
 
 
@@ -172,11 +172,17 @@ def cmd_metadatos(a) -> int:
             trel = cierre - base
             dentro = 0 <= trel - PASO_S and trel <= prog["duracion_s"]
             b = tramo(prog["bloques"], trel - PASO_S / 2) or {}
-            fa = tramo(prog["fases"], trel - PASO_S / 2) or {}
-            fa_ini = tramo(prog["fases"], max(trel - PASO_S, 0)) or {}
-            pulsos = sorted({p["id"] for p in prog.get("pulsos", [])
-                             if p.get("inicio_s", 0) < trel and p.get("fin_s", 0) > trel - PASO_S
-                             and (not p.get("perfiles") or perfil in p.get("perfiles"))})
+            # Programa v3: nivel del perfil en mitad de la ventana y al abrirla; ON/OFF de P6.
+            def nivel_t(t):
+                nv = tramo(prog["niveles"], t)
+                return nv["perfiles"].get(perfil, "fuera") if nv else "fuera"
+            niv = nivel_t(trel - PASO_S / 2)
+            niv_ini = nivel_t(max(trel - PASO_S, 0))
+            p6 = ""
+            if perfil == "P6":
+                cfg = prog["perfiles"]["P6"]
+                ciclo = cfg.get("on_s", 60) + cfg.get("off_s", 120)
+                p6 = "on" if (trel - PASO_S / 2) % ciclo < cfg.get("on_s", 60) else "off"
             # transacciones del perfil que solapan la ventana
             lst, ini = tx.get(perfil, []), inicios_tx.get(perfil, [])
             j = bisect.bisect_left(ini, cierre - PASO_S - max_dur.get(perfil, 0))
@@ -204,9 +210,9 @@ def cmd_metadatos(a) -> int:
                  "regla_poblacion": inv_ips.get(ip, ""), "ventana_inicio_utc": r["ventana_inicio"],
                  "ventana_cierre_utc": r["ventana_fin"], "t_programa_s": round(trel, 3),
                  "bloque_id": b.get("id", "fuera"), "particion": b.get("particion", "fuera"),
-                 "segmento": b.get("segmento", ""), "fase_id": fa.get("id", "fuera"),
-                 "cruza_fase": bool(fa and fa_ini and fa.get("id") != fa_ini.get("id")),
-                 "pulsos": ",".join(pulsos), "marca_extraccion": r.get("motivo_marca", ""),
+                 "jornada_id": b.get("jornada", ""), "nivel": niv,
+                 "cruza_nivel": niv != niv_ini,
+                 "p6_on": p6, "marca_extraccion": r.get("motivo_marca", ""),
                   "antecedentes_desde_utc": r.get("antecedentes_desde_utc", ""),
                  "n_paquetes_ventana": r["n_paquetes_ventana"], "n_eventos_l7_ventana": r["n_eventos_l7_ventana"],
                  "pcap_ventana": ",".join(pv), "pcap_historia_n": len(ph),
