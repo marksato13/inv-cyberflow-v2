@@ -17,9 +17,10 @@ from pathlib import Path
 
 LINEA_BPS = 1e9
 EXTRA_TRAMA = 20
-IP_EXPERIMENTALES = tuple(
-    [f"10.10.20.{n}" for n in range(21, 27)] + ["10.10.30.10", "10.10.10.20"]
-)
+# Población por omisión: las IP de los perfiles. Todo el tráfico experimental (HTTP/HTTPS con
+# srv-dmz y DNS con DC1) tiene un cliente en un extremo. Incluir DC1 o srv-dmz enteros metía tráfico
+# ajeno al estudio (DC1 con equipos de la VLAN 60 de otro proyecto: E1, 318 «falta_copia»).
+IP_EXPERIMENTALES = tuple(f"10.10.20.{n}" for n in range(21, 27))
 MAGIC = {b"\xd4\xc3\xb2\xa1": ("<", 1e6), b"\xa1\xb2\xc3\xd4": (">", 1e6),
          b"\x4d\x3c\xb2\xa1": ("<", 1e9), b"\xa1\xb2\x3c\x4d": (">", 1e9)}
 NOMBRE = re.compile(r"^live-\d{14}\.pcap(?:\.gz)?$")
