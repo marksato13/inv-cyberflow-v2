@@ -34,6 +34,20 @@ class TestRegistroDNS(unittest.TestCase):
         self.assertEqual((q["id"], q["respuesta"], q["nombre"], q["tipo"]), (0x1234, False, "portal.cf-v2.lab", "A"))
         a = r.analizar_dns(mensaje(0x1234, 0x8180, "portal.cf-v2.lab", ["10.10.30.10"]))
         self.assertEqual((a["respuesta"], a["rcode"], a["a"]), (True, "NOERROR", ["10.10.30.10"]))
+        self.assertEqual(a["ttl"], [60])
+
+    def test_pcap_nanosegundos(self):
+        import tempfile, os
+        with tempfile.TemporaryDirectory() as d:
+            ruta = os.path.join(d, "x.pcap")
+            w = r.Pcap(ruta)
+            w.escribir(1764000000.123456789, b"\x00" * 60)
+            w.f.close()
+            b = open(ruta, "rb").read()
+            self.assertEqual(struct.unpack("<I", b[:4])[0], 0xA1B23C4D)
+            seg, ns, n1, n2 = struct.unpack("<IIII", b[24:40])
+            self.assertEqual((seg, n1, n2), (1764000000, 60, 60))
+            self.assertAlmostEqual(ns, 123456789, delta=1000)
 
     def test_nxdomain(self):
         a = r.analizar_dns(mensaje(7, 0x8183, "noexiste.cf-v2.lab"))
