@@ -56,6 +56,36 @@ class TestEstadoGlobal(unittest.TestCase):
     def evaluar(self):
         return eg.evaluar(self.id, self.p, self.e, self.c)
 
+    def pasos(self, **rc):
+        base = dict.fromkeys(eg.PASOS_OBLIGATORIOS, 0)
+        base.update(rc)
+        with (self.e / "pasos-analisis.jsonl").open("w") as f:
+            for k, v in base.items():
+                if v is not None:
+                    f.write(json.dumps({"paso": k, "rc": v}) + "\n")
+
+    def test_pasos_estructurados_aprobada(self):
+        self.pasos()
+        r = self.evaluar()
+        self.assertEqual((r["global"], r["dictamen"], r["codigo_salida"]), ("aprobada", "aprobado", 0))
+
+    def test_fallo_cobertura_no_queda_oculto(self):
+        # antes de 26-nov cobertura y fronteras no entraban en el dictamen
+        self.pasos(cobertura=1)
+        r = self.evaluar()
+        self.assertEqual((r["global"], r["codigo_salida"]), ("no_aprobada", 1))
+        self.assertIn("analisis:fallo:cobertura", r["motivos"])
+
+    def test_paso_ausente_indeterminada(self):
+        self.pasos(fronteras=None)
+        r = self.evaluar()
+        self.assertEqual((r["global"], r["codigo_salida"]), ("indeterminada", 2))
+        self.assertIn("falta:paso:fronteras", r["motivos"])
+
+    def test_fallo_deliberado_97(self):
+        self.pasos(extraer=97)
+        self.assertEqual(self.evaluar()["dictamen"], "fallido")
+
     def test_aprobada(self):
         self.assertEqual(self.evaluar()["global"], "aprobada")
 

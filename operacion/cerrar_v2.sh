@@ -107,32 +107,49 @@ tar -C "$E" -cf - . | ssh -o BatchMode=yes sensor1 "tar -C $P/registros -xf -"
 log reunido "$P"
 
 # 5. Análisis en Sensor1, con memoria acotada y sin cargar ficheros enteros
-ssh -o BatchMode=yes sensor1 "bash -s" <<EOF > "$E/analisis-salida.txt" 2>&1 || true
+ssh -o BatchMode=yes sensor1 "CF_FALLO_PASO='${CF_FALLO_PASO:-}' bash -s" <<EOF > "$E/analisis-salida.txt" 2>&1 || true
 set -u; ulimit -v 4000000
 # stderr (time -v) por el mismo flujo que stdout: si van separados por ssh se entremezclan y una
 # línea «verificar rc=0» llegó partida («Si…verificar rc=0»), y estado_global dio analisis incompleto (E2, 25-nov).
 exec 2>&1
-C=$S1/codigo; cd $P; mkdir -p cobertura
+C=$S1/codigo; cd $P; mkdir -p cobertura registros
+# Registro estructurado de pasos (una línea JSON por paso, con rc e instantes): es lo que lee
+# estado_global.py; el texto «paso rc=N» queda solo para leerlo una persona. Un análisis repetido
+# aparta el registro anterior en vez de mezclarlo.
+[ -f registros/pasos-analisis.jsonl ] && mv registros/pasos-analisis.jsonl registros/pasos-analisis.\$(date -u +%Y%m%dT%H%M%SZ).jsonl
+paso() { local n=\$1; shift; local t0=\$(date +%s.%N) rc
+  if [ "\$CF_FALLO_PASO" = "\$n" ]; then echo "FALLO DELIBERADO de \$n (CF_FALLO_PASO)"; rc=97; else "\$@"; rc=\$?; fi
+  printf '{"paso":"%s","rc":%d,"inicio_epoch":%s,"fin_epoch":%s,"obligatorio":true,"fallo_deliberado":%s}\n' \
+    "\$n" "\$rc" "\$t0" "\$(date +%s.%N)" "\$([ "\$CF_FALLO_PASO" = "\$n" ] && echo true || echo false)" >> registros/pasos-analisis.jsonl
+  echo "\$n rc=\$rc"; }
 /usr/bin/time -v true >/dev/null 2>&1 && T="/usr/bin/time -v" || T=""
-\$T python3 \$C/operacion/conciliar_v2.py --transacciones generador/$ID/transacciones-*.jsonl \
+paso conciliar \$T python3 \$C/operacion/conciliar_v2.py --transacciones generador/$ID/transacciones-*.jsonl \
   --servidor registros/servidor-http-80.jsonl registros/servidor-https-443.jsonl \
-  --dns registros/dns-$ID.jsonl --salida conciliacion; echo "conciliar rc=\$?"
-\$T python3 \$C/captura/cobertura_v2.py --capturas $S1/capturas/$ID --transacciones generador/$ID/transacciones-*.jsonl \
-  --salida cobertura/cobertura.json --csv cobertura/cobertura.csv; echo "cobertura rc=\$?"
-python3 \$C/extraccion/metadatos_v2.py fronteras --generador generador/$ID --salida fronteras.json; echo "fronteras rc=\$?"
-\$T python3 \$C/extraccion/extraer_v2.py $S1/capturas/$ID --salida extraccion --fronteras fronteras.json; echo "extraer rc=\$?"
-\$T python3 \$C/extraccion/verificar_v2.py $S1/capturas/$ID --salida extraccion --fronteras fronteras.json --max-filas 40 --historia-s 230; echo "verificar rc=\$?"
-python3 \$C/extraccion/metadatos_v2.py metadatos --capturas $S1/capturas/$ID --extraccion extraccion --generador generador/$ID \
-  --cobertura cobertura/cobertura.csv --conciliacion conciliacion/conciliacion.jsonl; echo "metadatos rc=\$?"
+  --dns registros/dns-$ID.jsonl --salida conciliacion
+paso cobertura \$T python3 \$C/captura/cobertura_v2.py --capturas $S1/capturas/$ID --transacciones generador/$ID/transacciones-*.jsonl \
+  --salida cobertura/cobertura.json --csv cobertura/cobertura.csv
+paso fronteras python3 \$C/extraccion/metadatos_v2.py fronteras --generador generador/$ID --salida fronteras.json
+paso extraer \$T python3 \$C/extraccion/extraer_v2.py $S1/capturas/$ID --salida extraccion --fronteras fronteras.json
+paso verificar \$T python3 \$C/extraccion/verificar_v2.py $S1/capturas/$ID --salida extraccion --fronteras fronteras.json --max-filas 40 --historia-s 230
+paso metadatos python3 \$C/extraccion/metadatos_v2.py metadatos --capturas $S1/capturas/$ID --extraccion extraccion --generador generador/$ID \
+  --cobertura cobertura/cobertura.csv --conciliacion conciliacion/conciliacion.jsonl
 EOF
-log analisis "$(grep -o '[a-z]* rc=[0-9]*' "$E/analisis-salida.txt" | tr '\n' ' ')"
+log analisis "$(grep -o '^[a-z]* rc=[0-9]*' "$E/analisis-salida.txt" | tr '\n' ' ')"
+$SSH sensor1 "cat $P/registros/pasos-analisis.jsonl" > "$E/pasos-analisis.jsonl" || true
 scp -q -o BatchMode=yes "$E/analisis-salida.txt" "$E/cierre.jsonl" sensor1:"$P/registros/" || true
 
 # Dictamen de criterios y resultado global, también para ejecuciones incompletas.
 ssh -n -o BatchMode=yes sensor1 "python3 $S1/codigo/operacion/evaluar_piloto.py --pruebas $P --capturas $S1/capturas/$ID" > "$E/criterios-salida.txt" 2>&1 || true
-ssh -n -o BatchMode=yes sensor1 "python3 $S1/codigo/operacion/estado_global.py $ID --pruebas $P --ejecucion-dir $P/registros --captura-dir $S1/capturas/$ID" > "$E/resultado-global.json"
+RC_GLOBAL=0
+ssh -n -o BatchMode=yes sensor1 "python3 $S1/codigo/operacion/estado_global.py $ID --pruebas $P --ejecucion-dir $P/registros --captura-dir $S1/capturas/$ID --codigo-salida" > "$E/resultado-global.json" || RC_GLOBAL=$?
 log estado_global "$(cat "$E/resultado-global.json")"
 
 # 6. Hashes de todo lo que se va a copiar
 ssh -n -o BatchMode=yes sensor1 "cd $S1 && find capturas/$ID pruebas/$ID -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > pruebas/$ID/SHA256SUMS && wc -l < pruebas/$ID/SHA256SUMS && du -sh capturas/$ID pruebas/$ID"
 log hashes "pruebas/$ID/SHA256SUMS"
+
+# Código de salida = dictamen escrito: 0 aprobado, 1 fallido, 2 indeterminado; otro valor (p. ej.
+# 255 de ssh) = el dictamen no se pudo obtener, que tampoco es un aprobado.
+case "$RC_GLOBAL" in 0|1|2) ;; *) log estado_global_error "rc=$RC_GLOBAL"; RC_GLOBAL=3 ;; esac
+log fin "codigo_salida=$RC_GLOBAL"
+exit "$RC_GLOBAL"
