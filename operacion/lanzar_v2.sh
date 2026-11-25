@@ -96,10 +96,11 @@ setsid nohup python3 "$B/operacion/vigia_v2.py" --ejecucion "$ID" \
   --v2ctl-remoto "$CL/codigo/operacion/v2ctl.py" \
   --registro "$E/vigia.jsonl" > "$E/vigia-salida.txt" 2>&1 < /dev/null &
 log vigia "pid $!"
-python3 - "$E" "$ID" "$PROG" "$SHA" "$T_ARCH" "$T_CONF" "$INI" "$FIN_GEN" "$FIN" "$TOPE" "$DUR" "$RETRASO_PRUEBA_S" <<'PY'
+VER_CODIGO=$(cat "$B/VERSION" 2>/dev/null || echo no_registrada)
+python3 - "$E" "$ID" "$PROG" "$SHA" "$T_ARCH" "$T_CONF" "$INI" "$FIN_GEN" "$FIN" "$TOPE" "$DUR" "$RETRASO_PRUEBA_S" "$VER_CODIGO" <<'PY'
 import json, sys
-e, i, p, sha, ta, conf, ini, fin_gen, fin, tope, dur, retraso = sys.argv[1:]
-json.dump({"ejecucion": i, "programa": p, "programa_sha256": sha,
+e, i, p, sha, ta, conf, ini, fin_gen, fin, tope, dur, retraso, ver = sys.argv[1:]
+json.dump({"ejecucion": i, "programa": p, "programa_sha256": sha, "codigo_version": ver,
            "planificado": {"archivador_desde_epoch": int(ta), "generador_inicio_epoch": int(ini),
                            "generador_fin_epoch": int(fin_gen), "captura_hasta_epoch": int(fin),
                            "tope_epoch": int(tope)},
