@@ -389,12 +389,7 @@ def medir(capturas, transacciones):
         if e["t"].get("protocolo") in ("http", "https", "tcp"):
             r["huecos"] = huecos(e["rangos"][1], 0 if e["isn"][1] is not None else None)
             esperado = r["bytes_esperados"]
-            if r["accion"] == "abandono":
-                # El cliente corta tras las cabeceras: el servidor envía más de lo que el cliente
-                # leyó, así que los bytes no son comparables; cuentan las fases (conexión, petición, respuesta).
-                r["fraccion"] = None
-                r["transferencia"] = "no comparable"
-            elif isinstance(esperado, int):
+            if isinstance(esperado, int):
                 r["fraccion"] = r["bytes_vistos"] / esperado if esperado else None
                 r["transferencia"] = ("completa" if r["respuesta"] and r["huecos"] == 0
                                         and r["bytes_vistos"] >= esperado else "incompleta")

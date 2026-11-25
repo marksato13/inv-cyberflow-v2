@@ -9,3 +9,10 @@ pruebas/
 *.zip
 __pycache__/
 *.pyc
+
+# Temporales de pytest en el entorno Windows restringido
+pytest-cache-files-*/
+tests/tmp*/
+tests/_scratch/
+tests/_trymkdir/
+tests/_temporales_pytest/

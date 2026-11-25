@@ -1,16 +1,10 @@
 #!/usr/bin/env python3
-"""Estimación del almacenamiento por fase y segmento a partir de un programa V2 (cota superior).
+"""Estimación aproximada de almacenamiento para los programas v3.
 
-Modelo (por perfil, en cada segundo t del programa):
-  acciones/s ≈ factor(t) / ritmo_s          (cota superior: ignora la duración de cada acción)
-  bytes/acción = Σ peso_a · tamaño_a / Σ peso   (tamaños de la tabla TAMANOS; ver TAM_ACCION)
-  ráfaga de errático: factor medio extra = 1 + p·E[duración]·(factor_ráfaga−1)/(ritmo/factor) acotado
-PCAP ≈ (bytes de aplicación · copias del espejo · (1 + sobrecarga) ) + fondo medido.
-EVE ≈ eventos por acción · bytes por evento + fondo medido.
-
-Los parámetros empíricos (sobrecarga, fondo, bytes por evento) se pasan por argumento y se
-calibran con una ejecución real (``--calibrar`` con el manifiesto y las transacciones de esa
-ejecución). No usa ninguna métrica del detector.
+Cuenta ciclos por perfil según el factor programado y su media de espera,
+sin descontar la duración de las acciones. Incluye DNS y objetos secundarios
+de P2 mediante sus medias publicadas. Los parámetros de captura se calibran
+con datos medidos; no se usan métricas del detector.
 """
 from __future__ import annotations
 
@@ -23,45 +17,46 @@ AQUI = Path(__file__).resolve().parent
 sys.path.insert(0, str(AQUI.parent / "generador"))
 import programa as prg  # noqa: E402
 
-KB = 1024
-# bytes de respuesta típicos por acción (cuerpo + cabeceras ~160 B); abandono = cota (descarga entera)
-TAM_ACCION = {
-    "web_pequena": (60 + 4 * KB + 16 * KB) / 3 + 160, "web_media": (64 + 128 + 256) * KB / 3 + 160,
-    "web_grande": (1024 + 2048 + 4096) * KB / 3 + 160, "https": (60 + 15 + 32 * KB) / 3 + 160 + 3000,
-    "api_ok": 175, "api_post": 180 + 4100, "api_auth": 120, "api_404": 180, "api_500": 190, "api_lento": 190,
-    "dns": 120, "dns_inexistente": 120, "ping": 98, "puerto_cerrado": 60, "abandono": 2048 * KB,
-}
+# Medias de planificación; las muestras reales se concilian por transacción.
+PARETO_N = sum((x - 2) * ((2 / x) ** 1.1 - (2 / (x + 1)) ** 1.1)
+               for x in range(2, 55)) / (1 - (2 / 55) ** 1.1)
 
 
-def bytes_por_accion(perfil: dict) -> float:
-    w = perfil["acciones"]
-    return sum(TAM_ACCION[a] * p for a, p in w.items()) / sum(w.values())
+def bytes_por_ciclo(nombre: str) -> float:
+    h1, h2, f1 = 10710, 7758, 2_000_000
+    if nombre == "P2":
+        return 120 + h1 + PARETO_N * h2 + (2 + PARETO_N) * 160 + 1500
+    if nombre == "P3":
+        return 120 + f1 + 160
+    if nombre == "P4":
+        return 120 + 2 * 512 + 80 + 4100 + 3 * 160
+    return 120 + h1 + 160
+
+
+def acciones_por_ciclo(nombre: str) -> float:
+    return 2 + PARETO_N if nombre == "P2" else 4 if nombre == "P4" else 2
 
 
 def estimar(prog: dict, copias: float, sobrecarga: float, fondo_pcap_gbh: float, fondo_eve_mbh: float,
             eve_b_por_accion: float, paso: int = 10) -> dict:
     res, total = [], {"pcap_gb": 0.0, "eve_gb": 0.0, "app_gb": 0.0, "acciones": 0.0}
-    claves = prog["fases"]
+    claves = prog["niveles"]
     for f in claves:
         app = acc = 0.0
         for t in range(int(f["inicio_s"]), int(f["fin_s"]), paso):
             for nombre, p in prog["perfiles"].items():
-                fac, _, _ = prg.factor(prog, nombre, t)
-                if fac <= 0:
+                fac = prog["factores"][f["perfiles"][nombre]]
+                if fac <= 0 or (nombre == "P6" and not prg.on_p6(prog, t)):
                     continue
-                r = prog.get("rafagas", {}).get(nombre)
-                if r:
-                    med = sum(r["duracion_s"]) / 2
-                    it_s = fac / p["ritmo_s"]
-                    frac = min(1.0, r["probabilidad_por_iteracion"] * it_s * med)  # fracción del tiempo en ráfaga
-                    fac *= (1 - frac) + frac * r["factor"]
-                a = fac / p["ritmo_s"] * paso
-                acc += a
-                app += a * bytes_por_accion(p)
+                ciclos = fac / p["media_espera_s"] * paso
+                if nombre == "P4":
+                    ciclos /= 3  # tres pausas por secuencia DNS→consulta→envío→consulta
+                acc += ciclos * acciones_por_ciclo(nombre)
+                app += ciclos * bytes_por_ciclo(nombre)
         dur_h = (f["fin_s"] - f["inicio_s"]) / 3600
         pcap = app * copias * (1 + sobrecarga) / 1e9 + fondo_pcap_gbh * dur_h
         eve = (acc * eve_b_por_accion) / 1e9 + fondo_eve_mbh * dur_h / 1e3
-        res.append({"fase": f["id"], "segmento": f.get("segmento"), "horas": round(dur_h, 3),
+        res.append({"fase": f["id"], "segmento": prg.tramo_en(prog["jornadas"], f["inicio_s"])["id"], "horas": round(dur_h, 3),
                     "acciones": round(acc), "app_gb": round(app / 1e9, 3), "pcap_gb": round(pcap, 3),
                     "pcap_gb_h": round(pcap / dur_h, 3), "eve_gb": round(eve, 4)})
         total["pcap_gb"] += pcap
