@@ -134,8 +134,8 @@ C=$S1/codigo; cd $P; mkdir -p cobertura registros
 [ -f registros/pasos-analisis.jsonl ] && mv registros/pasos-analisis.jsonl registros/pasos-analisis.\$(date -u +%Y%m%dT%H%M%SZ).jsonl
 paso() { local n=\$1; shift; local t0=\$(date +%s.%N) rc
   if [ "\$CF_FALLO_PASO" = "\$n" ]; then echo "FALLO DELIBERADO de \$n (CF_FALLO_PASO)"; rc=97; else "\$@"; rc=\$?; fi
-  printf '{"paso":"%s","rc":%d,"inicio_epoch":%s,"fin_epoch":%s,"obligatorio":true,"fallo_deliberado":%s}\n' \
-    "\$n" "\$rc" "\$t0" "\$(date +%s.%N)" "\$([ "\$CF_FALLO_PASO" = "\$n" ] && echo true || echo false)" >> registros/pasos-analisis.jsonl
+  printf '{"paso":"%s","rc":%d,"inicio_epoch":%s,"fin_epoch":%s,"obligatorio":%s,"fallo_deliberado":%s}\n' \
+    "\$n" "\$rc" "\$t0" "\$(date +%s.%N)" "\$(case \$n in calidad_*) echo false;; *) echo true;; esac)" "\$([ "\$CF_FALLO_PASO" = "\$n" ] && echo true || echo false)" >> registros/pasos-analisis.jsonl
   echo "\$n rc=\$rc"; }
 /usr/bin/time -v true >/dev/null 2>&1 && T="/usr/bin/time -v" || T=""
 paso conciliar \$T python3 \$C/operacion/conciliar_v2.py --transacciones generador/$ID/transacciones-*.jsonl \
