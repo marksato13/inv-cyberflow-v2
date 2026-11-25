@@ -24,7 +24,8 @@ def ejecutar(tmp_path, pasos, duracion=1.2, cada=0.08, tiempo_max=1):
         "--hasta-epoch", str(time.time() + duracion), "--cada-s", str(cada),
         "--tiempo-max-respuesta-s", str(tiempo_max), "--comando-ssh", comando,
         "--pid", str(pid),
-    ], cwd=RAIZ, capture_output=True, text=True, timeout=duracion + 8)
+    ], cwd=RAIZ, capture_output=True, text=True, timeout=duracion + 8,
+        stdin=subprocess.DEVNULL)
     assert proceso.returncode == 0, proceso.stderr
     assert not pid.exists()
     eventos = [json.loads(linea) for linea in registro.read_text(encoding="utf-8").splitlines()]
@@ -36,7 +37,7 @@ def ejecutar(tmp_path, pasos, duracion=1.2, cada=0.08, tiempo_max=1):
 
 def analizar(registro, *opciones):
     proceso = subprocess.run([sys.executable, str(ANALIZAR), str(registro), *map(str, opciones)],
-                             cwd=RAIZ, capture_output=True, text=True, timeout=5)
+                             cwd=RAIZ, capture_output=True, text=True, timeout=5, stdin=subprocess.DEVNULL)
     return proceso.returncode, json.loads(proceso.stdout)
 
 
