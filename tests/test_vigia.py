@@ -66,6 +66,58 @@ class TestVigia(unittest.TestCase):
         self.assertTrue(v.paso())
         self.assertTrue(any("touch" in x[2] for x in self.ordenes))
 
+    def test_fin_real_escribe_hasta_y_sigue_hasta_archivador(self):
+        self.a.margen_fin_s = 120
+        self.a.hasta_remoto = "/captura/HASTA_EPOCH"
+        def comando(orden):
+            self.ordenes.append(orden)
+            if orden[1] == "sensor1" and orden[2].startswith("cat "):
+                return json.dumps({"estado": "ok", "utc": "1970-01-01T00:16:40Z"})
+            if orden[1] == "clientes" and " estado " in orden[2]:
+                return json.dumps({"terminado": True, "fin_utc": "1970-01-01T00:16:30Z",
+                                   "estado": "completa"})
+            return ""
+        v = vg.Vigia(self.a, ejecutor=comando, reloj=lambda: 1000.0)
+        self.assertTrue(v.paso())
+        escrituras = [o[2] for o in self.ordenes if o[1] == "sensor1" and "HASTA_EPOCH" in o[2]]
+        self.assertEqual(len(escrituras), 1)
+        self.assertIn("1110.0", escrituras[0])
+        self.assertIn("mv", escrituras[0])
+        self.assertTrue(v.hasta_escrito)
+
+    def test_enlace_100_para(self):
+        def comando(orden):
+            self.ordenes.append(orden)
+            if orden[1] == "sensor1" and orden[2].startswith("cat "):
+                return json.dumps({"estado": "ok", "utc": "1970-01-01T00:16:40Z", "libre_gb": 10})
+            if orden[1] == "sw-core-stack":
+                return "GigabitEthernet2/0/19 is up, line protocol is up\nFull-duplex, 100Mb/s\n0 output drops"
+            return ""
+        v = vg.Vigia(self.a, ejecutor=comando, reloj=lambda: 1000.0)
+        self.assertFalse(v.paso())
+        self.assertIn("enlace_invalido", self.paradas()[0][2])
+
+    def test_drops_crecientes_invalidan_sin_parar(self):
+        reloj = [1000.0]
+        drops = [0]
+        def comando(orden):
+            self.ordenes.append(orden)
+            if orden[1] == "sensor1" and orden[2].startswith("cat "):
+                return json.dumps({"estado": "ok", "utc": "1970-01-01T00:16:40Z", "libre_gb": 10})
+            if orden[1] == "sw-core-stack":
+                return "GigabitEthernet2/0/19 is up, line protocol is up\nFull-duplex, 1000Mb/s\n%d output drops" % drops[0]
+            if orden[2] == "date +%s.%N":
+                return str(reloj[0])
+            return ""
+        self.a.supervision_cada_s = 1
+        v = vg.Vigia(self.a, ejecutor=comando, reloj=lambda: reloj[0])
+        self.assertTrue(v.paso())
+        reloj[0], drops[0] = 1001.0, 2
+        self.assertTrue(v.paso())
+        invalidaciones = [json.loads(x) for x in (self.tmp / "invalidaciones.jsonl").read_text().splitlines()]
+        self.assertEqual(invalidaciones[0]["categoria"], "perdida_antes_sensor")
+        self.assertEqual(self.paradas(), [])
+
 
 class TestHombreMuerto(unittest.TestCase):
     def test_gracia_y_caducidad_con_reloj_inyectado(self):
@@ -99,3 +151,14 @@ class TestHombreMuerto(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def test_enlace_span_monitoring_es_valido():
+    v = vg
+    raw = ("GigabitEthernet2/0/19 is up, line protocol is down (monitoring)\n"
+           "  Full-duplex, 1000Mb/s, media type is 10/100/1000BaseTX\n"
+           "  Input queue: 0/2000/0/0 (size/max/drops/flushes); Total output drops: 215521\n")
+    assert v.enlace(raw) == (True, 215521)
+    assert v.enlace(raw.replace("1000Mb/s", "100Mb/s"))[0] is False
+    assert v.enlace(raw.replace(" (monitoring)", ""))[0] is False
+    assert v.enlace(raw.replace("is up,", "is down,"))[0] is False

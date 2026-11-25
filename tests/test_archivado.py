@@ -223,6 +223,36 @@ class TestArchivado(unittest.TestCase):
         self.assertEqual((estado["estado"], estado["motivo"]), ("fallo", "espacio"))
         self.assertEqual(man["estado"], "incompleta")
 
+    def test_hasta_releido_solo_crece(self):
+        ruta = self.arch.dir / "HASTA_EPOCH"
+        ruta.write_text("2000")
+        self.arch.actualizar_hasta()
+        ruta.write_text("1990")
+        self.arch.actualizar_hasta()
+        self.assertEqual(self.a.hasta_epoch, 2000)
+        eventos = [json.loads(l) for l in (self.arch.dir / "eventos.jsonl").read_text().splitlines()]
+        cambios = [x for x in eventos if x["tipo"] == "hasta_actualizado"]
+        self.assertEqual([(x["anterior"], x["nuevo"]) for x in cambios], [(0, 2000)])
+
+    def test_tope_se_ajusta_tras_confirmacion(self):
+        self.a.hasta_max_epoch = 3000
+        (self.arch.dir / "HASTA_MAX_EPOCH").write_text("2500")
+        self.arch.actualizar_tope()
+        self.assertEqual(self.a.hasta_max_epoch, 2500)
+        (self.arch.dir / "HASTA_EPOCH").write_text("2600")
+        self.arch.actualizar_hasta()
+        self.assertEqual(self.a.hasta_epoch, 0)
+
+    def test_tope_sin_fin_generador_cierra_incompleta(self):
+        self.a.hasta_max_epoch = 1
+        with patch.object(ar, "contadores", return_value={"utc": "inicio", "nic_rx_dropped": 0}), \
+             patch.object(ar, "relojes", return_value={}), \
+             patch.object(self.arch, "libre_gb", return_value=10):
+            self.assertEqual(self.arch.correr(), 1)
+        man = json.loads((self.arch.dir / "manifiesto.json").read_text())
+        self.assertEqual((man["estado"], man["motivo"]), ("incompleta", "tope_sin_fin_generador"))
+        self.assertIsNone(man["hasta_efectivo_epoch"])
+
 
 if __name__ == "__main__":
     unittest.main()
