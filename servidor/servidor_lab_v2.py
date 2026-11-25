@@ -41,7 +41,7 @@ import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlsplit
 
-VERSION = "v3.0.0"
+VERSION = "v3.0.1"
 RELLENO = (b"CyberFlow laboratorio. Cuerpo de relleno para dar tamano a la "
            b"respuesta sin depender de ficheros en disco. ")
 TROZO = 16384
@@ -196,10 +196,13 @@ class Manejador(BaseHTTPRequestHandler):
             self._codigo = 200
             try:
                 self._cabeceras(200, [("Content-Type", "application/octet-stream"), ("Content-Length", str(n))])
+                # Con límite, trozos de 16 KiB como /estatico: los de 64 KiB salen a ritmo de línea
+                # y, duplicados por el SPAN, desbordaban Gi2/0/19 (output drops en T1, 25-nov).
+                paso = TROZO if self._limite() else TROZO_CONTENIDO
                 self._enviados = self._escribir_trozos(
                     BLOQUE_CONTENIDO[i % len(BLOQUE_CONTENIDO):
-                                     i % len(BLOQUE_CONTENIDO) + min(TROZO_CONTENIDO, n - i)]
-                    for i in range(0, n, TROZO_CONTENIDO))
+                                     i % len(BLOQUE_CONTENIDO) + min(paso, n - i)]
+                    for i in range(0, n, paso))
             except (BrokenPipeError, ConnectionResetError, ssl.SSLError) as e:
                 self._excepcion = type(e).__name__
         elif ruta == "/app/consulta":
