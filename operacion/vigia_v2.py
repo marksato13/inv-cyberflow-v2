@@ -127,8 +127,12 @@ class Vigia:
         except Exception as e:
             reg["enlace_error"] = str(e)
         try:
+            # Se filtra EN Sensor1 y solo viaja la última línea stats: traer 2000 líneas (~1 MB)
+            # al bastión cruza el cortafuegos, el espejo la ve dos veces y desbordaba Gi2/0/19
+            # (prueba B1 del 25-nov: R1 sin filtrar 4/5 con descartes; R2 filtrada 0/5).
             reg["kernel_drops"] = ultimo_kernel_drops(self.ejecutor(
-                ["ssh", "sensor1", "tail -n 2000 /var/log/suricata/v2/eve.json"]))
+                ["ssh", "sensor1", "tail -n 2000 /var/log/suricata/v2/eve.json"
+                 " | grep -F '\"event_type\":\"stats\"' | tail -n 1"]))
         except Exception as e:
             reg["eve_error"] = str(e)
         reg["libre_gb"] = estado.get("libre_gb")
