@@ -84,6 +84,17 @@ El programa de 42 h tiene una carga media de 0,653 frente a 0,645 del piloto, y 
 
 ## 4. Lo que el piloto no prueba y sigue pendiente
 
+**BLOQUEANTE nuevo (25-nov, 00:16 UTC, después del piloto).**
+- El enlace del espejo Gi2/0/19 ↔ `vmnic2` (Intel I210, esxi-hv-siem) se cayó dos veces y volvió a **100 Mbit/s**.
+- El preflight detuvo la prueba de parada `V2-PARADA-ESPACIO-20261125T002106Z` antes de arrancar el generador (`span_destino_velocidad` y `vmnic2_velocidad` en fallo).
+- El `shutdown`/`no shutdown` que en T7 había subido el enlace a 1000 esta vez no funcionó. Con `speed 1000` el enlace **no sube**: un par del cable o un conector está mal.
+- Se volvió a la negociación automática (`no speed`): enlace a 100 Full, espejo funcionando. Ningún cambio de velocidad quedó guardado.
+- Hace falta revisar o cambiar el cable. Sin 1000 Mbit/s no se lanzan las pruebas de parada ni las 42 h.
+
+**Aplicado el 25-nov por Mark:**
+- salida EVE dedicada en `/var/log/suricata/v2/eve.json`, que crece igual que `eve.json` e incluye `kernel_drops` en `stats`; el lanzador la usa desde `48c2faf`;
+- `write memory` en CORE-STACK, con `mtu 9198` en la startup y respaldo en `flash:startup-antes-v2-20261124.cfg`.
+
 | Elemento | Estado | Qué falta |
 |---|---|---|
 | Rotación diaria del EVE (copytruncate) | Recuperación de la copia rotada en flujo y reintentada 120 s (`cfa58f9`), probada en la prueba de rotación. Siguen pudiendo perderse 1–2 líneas por rotación sin poder detectarlo | Salida EVE dedicada en `/var/log/suricata/v2/` (sudo de Mark; propuesta en Sensor1 `~/suricata-v2/suricata.yaml.propuesta`). La primera noche de las 42 h cruza las 00:00 UTC |
