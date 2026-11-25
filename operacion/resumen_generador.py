@@ -23,6 +23,47 @@ def jsonl(p: Path):
     return [json.loads(l) for l in p.read_text(encoding="utf-8").splitlines() if l.strip()]
 
 
+def tramos_perfil(prog: dict, perfil: str) -> list:
+    """Intervalos máximos de nivel constante para un perfil: [(inicio, fin, nivel)]."""
+    out = []
+    for n in prog["niveles"]:
+        nv = n["perfiles"][perfil]
+        if out and out[-1][2] == nv and out[-1][1] == n["inicio_s"]:
+            out[-1] = (out[-1][0], n["fin_s"], nv)
+        else:
+            out.append((n["inicio_s"], n["fin_s"], nv))
+    return out
+
+
+def tiempo_activo(prog: dict, perfil: str, a: float, b: float) -> float:
+    if perfil != "P6":
+        return b - a
+    p = prog["perfiles"]["P6"]
+    ciclo, on = p["on_s"] + p["off_s"], p["on_s"]
+    total, k = 0.0, int(a // ciclo)
+    while k * ciclo < b:
+        total += max(0.0, min(b, k * ciclo + on) - max(a, k * ciclo))
+        k += 1
+    return total
+
+
+def ritmo(prog: dict, perfil: str, cfg: dict, tx: list) -> list:
+    if perfil == "P4":   # una pausa antes de cada operación (consulta, envío, consulta)
+        inicios = [t["inicio_t_s"] for t in tx if t["accion"] in ("consulta", "envio")]
+    else:                # una pausa antes de cada ciclo, que empieza por su DNS
+        inicios = [t["inicio_t_s"] for t in tx if t["accion"] == "dns"]
+    filas = []
+    for a, b, nv in tramos_perfil(prog, perfil):
+        fac = prog["factores"].get(nv, 0)
+        activo = tiempo_activo(prog, perfil, a, b)
+        esperado = activo * fac / cfg["media_espera_s"]
+        obs = sum(1 for x in inicios if a <= x < b)
+        filas.append({"inicio_s": a, "fin_s": b, "nivel": nv, "factor": fac, "tiempo_activo_s": round(activo, 1),
+                      "inicios_observados": obs, "inicios_esperados": round(esperado, 2),
+                      "z_poisson": round((obs - esperado) / esperado ** 0.5, 2) if esperado > 0 else None})
+    return filas
+
+
 def resumen(d: Path) -> dict:
     prog = json.loads((d / "programa.json").read_text(encoding="utf-8"))
     out = {"programa_id": prog["programa_id"], "perfiles": {}}
@@ -35,16 +76,12 @@ def resumen(d: Path) -> dict:
              "por_clase": dict(collections.Counter(t.get("clase") for t in tx)),
              "ciclos": len({t["secuencia_id"] for t in tx}),
              "eventos": dict(collections.Counter(e["tipo"] for e in ev))}
-        # Pausas: la que precede a cada ciclo (P1-P3, P5, P6) o a cada operación (P4).
-        niveles = collections.defaultdict(list)
-        for t in tx:
-            primera = t["accion"] == "dns" or (perfil == "P4" and t["paso"] in ("envio", "consulta_final"))
-            if primera:
-                niveles[t["nivel"]].append(t["espera_previa_s"])
-        r["pausas"] = {n: {"n": len(v), "media_obs_s": round(statistics.fmean(v), 3) if v else None,
-                           "media_programada_s": round(cfg["media_espera_s"] / prog["factores"][n], 3)
-                           if prog["factores"].get(n) else None}
-                       for n, v in sorted(niveles.items())}
+        # Ritmo por tramo. NO se usa la media de espera_previa_s: incluye el tiempo inactivo previo al
+        # tramo y las pausas cortadas en bordes (se resortean), así que no estima la media programada.
+        # Como cada tramo arranca con una pausa nueva y las pausas son exponenciales, el número de
+        # inicios en un tramo es ~Poisson(tiempo_activo × factor / media) (se ignora la duración de
+        # las acciones, pequeña frente a la media). Se compara observado con esperado.
+        r["ritmo_por_tramo"] = ritmo(prog, perfil, cfg, tx)
         obt = [t for t in tx if t["accion"] in ("obtener", "consulta", "envio")]
         r["tamanos"] = {"n": len(obt),
                         "pedidos_iguales_recibidos": sum(1 for t in obt if t["accion"] == "envio" or
