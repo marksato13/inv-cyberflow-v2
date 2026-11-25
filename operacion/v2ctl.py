@@ -225,7 +225,14 @@ def vivo(pid: int) -> bool:
 def estado(a) -> int:
     d = RAIZ / a.ejecucion
     pids = json.loads((d / "pids.json").read_text()) if (d / "pids.json").exists() else {}
-    out = {"ejecucion": a.ejecucion, "terminada": (d / "manifiesto-fin.json").exists(), "perfiles": {}}
+    fin = d / "manifiesto-fin.json"
+    manifiesto = json.loads(fin.read_text()) if fin.exists() else {}
+    out = {"ejecucion": a.ejecucion, "terminado": fin.exists(), "terminada": fin.exists(),
+           "fin_utc": (manifiesto.get("entorno_fin") or {}).get("utc") or manifiesto.get("utc"),
+           "estado": manifiesto.get("estado"), "perfiles": {}}
+    if getattr(a, "json", False):
+        print(json.dumps(out, sort_keys=True))
+        return 0
     for k, pid in pids.items():
         info = {"pid": pid, "vivo": vivo(pid)}
         f = d / ("transacciones-%s.jsonl" % k)
@@ -283,6 +290,8 @@ def main() -> int:
     for n in ("estado", "parar"):
         s = sub.add_parser(n)
         s.add_argument("--ejecucion", required=True)
+        if n == "estado":
+            s.add_argument("--json", action="store_true")
         if n == "parar":
             s.add_argument("--motivo", default="")
     a = p.parse_args()

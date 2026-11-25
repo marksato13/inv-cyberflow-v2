@@ -289,6 +289,39 @@ class Archivador:
         self.vol_minuto = int(time.time() // 60)
         self.seguidores = []
         self.ini = None
+        self.hasta_planificado_epoch = a.hasta_epoch
+        self.primer_paquete_epoch = None
+        self.ultimo_paquete_epoch = None
+
+    def actualizar_hasta(self) -> None:
+        ruta = self.dir / "HASTA_EPOCH"
+        try:
+            nuevo = float(ruta.read_text(encoding="utf-8").strip())
+        except FileNotFoundError:
+            return
+        except ValueError:
+            self.evento("hasta_invalido")
+            return
+        if not (0 < nuevo <= (getattr(self.a, "hasta_max_epoch", 0) or float("inf"))):
+            self.evento("hasta_invalido", valor=nuevo)
+            return
+        anterior = self.a.hasta_epoch
+        if nuevo > anterior:
+            self.a.hasta_epoch = nuevo
+            self.evento("hasta_actualizado", anterior=anterior, nuevo=nuevo)
+
+    def actualizar_tope(self) -> None:
+        try:
+            nuevo = float((self.dir / "HASTA_MAX_EPOCH").read_text(encoding="utf-8").strip())
+        except FileNotFoundError:
+            return
+        except ValueError:
+            self.evento("tope_invalido")
+            return
+        if nuevo > 0 and nuevo != getattr(self.a, "hasta_max_epoch", 0):
+            anterior = getattr(self.a, "hasta_max_epoch", 0)
+            self.a.hasta_max_epoch = nuevo
+            self.evento("tope_actualizado", anterior=anterior, nuevo=nuevo)
 
     def jsonl(self, ruta: Path, obj: dict) -> None:
         with open(ruta, "a", encoding="utf-8") as f:
@@ -362,6 +395,9 @@ class Archivador:
                                 siguiente_epoch=primero, segundos=primero - self.ultima_marca)
             if ultimo is not None:
                 self.ultima_marca = ultimo
+                self.ultimo_paquete_epoch = ultimo if self.ultimo_paquete_epoch is None else max(self.ultimo_paquete_epoch, ultimo)
+            if primero is not None:
+                self.primer_paquete_epoch = primero if self.primer_paquete_epoch is None else min(self.primer_paquete_epoch, primero)
             reg = {"fichero": n, "inicio_nombre_epoch": ep, "primer_paquete_epoch": primero,
                    "ultimo_paquete_epoch": ultimo, "bytes": dst.stat().st_size,
                    "sha256": sha256(dst), "copiado_utc": ahora_utc()}
@@ -450,6 +486,10 @@ class Archivador:
                "eve_huecos": self.eve_huecos, "eve_corruptas": self.eve_corruptas,
                "inventario_sha256": sha256(self.dir / "inventario.jsonl"),
                "inicio": self.ini["utc"] if self.ini else None, "fin": fin["utc"],
+               "hasta_planificado_epoch": self.hasta_planificado_epoch,
+               "hasta_efectivo_epoch": self.a.hasta_epoch or None,
+               "primer_paquete_epoch": self.primer_paquete_epoch,
+               "ultimo_paquete_epoch": self.ultimo_paquete_epoch,
                "delta_nic_rx_dropped": (fin["nic_rx_dropped"] - self.ini["nic_rx_dropped"])
                if self.ini and None not in (fin.get("nic_rx_dropped"), self.ini.get("nic_rx_dropped")) else None,
                "delta_nic_rx_packets": (fin["nic_rx_packets"] - self.ini["nic_rx_packets"])
@@ -474,6 +514,8 @@ class Archivador:
                         hasta_epoch=self.a.hasta_epoch, version_script_sha256=sha256(Path(__file__)))
             self.estado("ok")
             while True:
+                self.actualizar_tope()
+                self.actualizar_hasta()
                 self.pasada_pcap()
                 self.pasada_eve()
                 self.volumen()
@@ -503,6 +545,9 @@ class Archivador:
                     incompleta, motivo = True, "pcap_final_no_cerrado"
                     self.hueco_pcap("final_no_copiado", hasta_epoch=self.a.hasta_epoch)
                     break
+                if getattr(self.a, "hasta_max_epoch", 0) and time.time() >= self.a.hasta_max_epoch:
+                    incompleta, motivo = True, "tope_sin_fin_generador"
+                    break
                 time.sleep(min(self.a.cada, 5.0))
         except Exception as e:
             incompleta, motivo = True, "%s: %s" % (type(e).__name__, e)
@@ -523,6 +568,7 @@ def main() -> int:
     p.add_argument("--cada", type=float, default=5.0)
     p.add_argument("--margen-previo", type=float, default=30.0)
     p.add_argument("--hasta-epoch", type=float, default=0.0)
+    p.add_argument("--hasta-max-epoch", type=float, default=0.0)
     p.add_argument("--margen-final-s", type=float, default=60.0)
     p.add_argument("--libre-minimo-gb", type=float, default=4.0)
     p.add_argument("--comprimir", action=argparse.BooleanOptionalAction, default=True,

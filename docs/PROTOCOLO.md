@@ -252,3 +252,43 @@ Lo que el piloto no puede mostrar se prueba aparte: rotación y sustitución del
 antes de copiarse y línea partida o corrupta (`captura/prueba_rotacion_lab.py`); parada por
 espacio y por caída del archivador (prueba de parada coordinada); cruce de las 00:00 UTC (la
 rotación real ocurre en la primera noche de las 42 h y se clasifica con `eve/huecos.jsonl`).
+
+## Tiempos, fin dinámico y condiciones de parada/invalidación
+
+El margen previo de 150 s empieza en la confirmación `estado=ok` del archivador,
+no al emitir el comando remoto. `RETRASO_PRUEBA_S` puede posponer el inicio para
+la prueba de arranque tardío y queda en `lanzamiento.json`. El bloque
+`planificado` contiene el inicio y fin estimados, captura y tope; `real` se
+completa al cierre con las marcas de paquetes y del supervisor. Nunca se infiere
+una marca real a partir de una planificación.
+
+El archivador arranca con `hasta_epoch=0`, relee `HASTA_EPOCH` en cada pasada y
+solo acepta aumentos. Cuando termina el generador, el vigía escribe atómicamente
+`fin_generador_real + margen_fin_s`. El archivador sigue hasta cubrir esa marca
+y copiar el PCAP final (con 15 s de gracia para la siguiente rotación). El tope
+inicial conservador se ajusta en `HASTA_MAX_EPOCH` al confirmar el archivador,
+usando el fin previsto desde esa confirmación más el margen y una hora de
+holgura. El tope de seguridad cierra `incompleta` con motivo
+`tope_sin_fin_generador` si nunca llega un fin válido. La exclusión de V1 se
+instala al arranque hasta el tope con 600 s adicionales y se comprueba o amplía
+al cierre con el mínimo y máximo de las marcas reales, también con 600 s.
+
+El vigía supervisa cada 300 s. La primera muestra fija la línea base de
+contadores; una subida invalida el intervalo entre muestras. Cada registro de
+`invalidaciones.jsonl` incluye `desde_epoch`, `hasta_epoch` y categoría.
+`supervision.jsonl` conserva mediciones y errores de lectura.
+
+| Tipo | Condición | Acción y clasificación |
+|---|---|---|
+| PARADA | Archivador distinto de `ok`; latido mayor que 60 s; estado inaccesible tres veces seguidas | Parar generador |
+| PARADA | Gi2/0/19 con protocolo caído o distinto de 1000Mb/s Full | Parar generador |
+| PARADA | Libre en Sensor1 menor que 4 GB | Parar generador |
+| INVALIDACIÓN | Aumentan `output drops` de Gi2/0/19 | `perdida_antes_sensor`; continuar |
+| INVALIDACIÓN | Aumentan `capture.kernel_drops` en la EVE dedicada o los huecos EVE/PCAP del archivador | `perdida_en_sensor`; continuar |
+| INVALIDACIÓN | Desfase de Sensor1 o Clientes frente al bastión mayor que 1 s | `desfase_reloj`; continuar |
+
+`resultado-global.json` separa generador, archivador, vigía, supervisión,
+análisis y exclusión V1. Solo se aprueba con todas las evidencias y C1–C13
+(incluido C11b) evaluados en verdadero. Una prueba incompleta, parada,
+invalidación o criterio falso produce `no_aprobada`; evidencia ausente o
+criterio sin evaluar produce `indeterminada`.
