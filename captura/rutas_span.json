@@ -1,0 +1,18 @@
+{
+  "monitor_session": 1,
+  "equipo": "Catalyst 9300",
+  "fuentes": [
+    {"interfaz": "Gi1/0/23", "direccion": "both"},
+    {"interfaz": "Gi2/0/23", "direccion": "both"}
+  ],
+  "destino": {"interfaz": "Gi2/0/19", "encapsulation": "replicate"},
+  "subredes": [
+    {"subred": "10.10.10.0/24", "vlan": 10, "puerta_enlace": "10.10.10.1"},
+    {"subred": "10.10.20.0/24", "vlan": 20, "puerta_enlace": "10.10.20.1"},
+    {"subred": "10.10.30.0/24", "vlan": 30, "puerta_enlace": "10.10.30.1"},
+    {"subred": "10.10.60.0/24", "vlan": 60, "puerta_enlace": "10.10.60.1"},
+    {"subred": "10.10.99.0/24", "vlan": 99, "puerta_enlace": "10.10.99.1"}
+  ],
+  "otras_vlan_tronco": [40, 50, 70, 80, 85, 88, 90, 95, 100],
+  "difusion_multidifusion": "no_determinable"
+}

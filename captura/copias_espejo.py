@@ -1,229 +1,484 @@
 #!/usr/bin/env python3
-"""Copias del espejo por paquete y carga del destino SPAN en una captura V2.
-
-    python3 copias_espejo.py <dir_pcap> --salida copias.json [--ips 10.10.20.21,...] [--desde E --hasta E]
-
-Por qué: con la sesión SPAN actual (fuentes Gi1/0/23 y Gi2/0/23 en ambos sentidos) cada paquete
-experimental que atraviesa el cortafuegos se ve en el espejo una vez por cada tramo de VLAN que
-recorre (p. ej. VLAN 20 hacia el cortafuegos y VLAN 30 desde él). Si el destino SPAN descarta,
-algún paquete llega con menos copias de las que tienen sus iguales. Esto es una evidencia directa,
-en el propio sensor, de pérdida ANTES del sensor que afecta al tráfico experimental; no la detecta
-el «100 % de bytes de aplicación» porque las copias se unen al deduplicar.
-
-Qué mide (solo biblioteca estándar, en flujo, memoria proporcional al tráfico experimental):
-- paquetes experimentales (IP origen o destino en --ips) agrupados por identidad
-  (origen, destino, proto, puertos, ipid, seq, ack, flags, largo); para cada uno, las VLAN vistas;
-- patrón esperado por par de VLAN (el patrón más frecuente de cada flujo dirigido);
-- paquetes con menos copias que el patrón de su flujo, con su instante (copia faltante);
-- carga total del destino por 1 s y por 10 ms (bytes de trama + 20 B de preámbulo/IFG por trama):
-  un intervalo de 10 ms con ≥ 1 250 000 B equivale a ≥ 1 Gb/s ofrecido en el puerto destino;
-- desglose de bytes por VLAN y experimental/no experimental.
-Limitación: un paquete que pierde TODAS sus copias no aparece aquí; eso solo se ve contrastando con
-los extremos (capturas en clientes/servidor) o por huecos TCP no retransmitidos.
-"""
+"""Comprueba las copias SPAN contra la ruta configurada de cada paquete."""
 from __future__ import annotations
 
 import argparse
+import bisect
 import collections
 import gzip
+import hashlib
+import ipaddress
 import json
+import math
+import re
 import socket
 import struct
 from pathlib import Path
 
 LINEA_BPS = 1e9
-EXTRA_TRAMA = 20  # preámbulo + SFD + IFG
-EXPERIMENTALES = ("10.10.20.21,10.10.20.22,10.10.20.23,10.10.20.24,10.10.20.25,10.10.20.26,"
-                  "10.10.30.10")
+EXTRA_TRAMA = 20
+IP_EXPERIMENTALES = tuple(
+    [f"10.10.20.{n}" for n in range(21, 27)] + ["10.10.30.10", "10.10.10.20"]
+)
+MAGIC = {b"\xd4\xc3\xb2\xa1": ("<", 1e6), b"\xa1\xb2\xc3\xd4": (">", 1e6),
+         b"\x4d\x3c\xb2\xa1": ("<", 1e9), b"\xa1\xb2\x3c\x4d": (">", 1e9)}
+NOMBRE = re.compile(r"^live-\d{14}\.pcap(?:\.gz)?$")
+
+
+class EntradaError(Exception):
+    def __init__(self, tipo: str, detalle: str):
+        super().__init__(detalle)
+        self.tipo = tipo
 
 
 def tramas(ruta: Path):
-    magic = {b"\xd4\xc3\xb2\xa1": ("<", 1e6), b"\xa1\xb2\xc3\xd4": (">", 1e6),
-             b"\x4d\x3c\xb2\xa1": ("<", 1e9), b"\xa1\xb2\x3c\x4d": (">", 1e9)}
-    with (gzip.open(ruta, "rb") if ruta.name.endswith(".gz") else ruta.open("rb")) as f:
-        cab = f.read(24)
-        if len(cab) < 24 or cab[:4] not in magic:
-            return
-        orden, escala = magic[cab[:4]]
-        while True:
-            c = f.read(16)
-            if len(c) < 16:
-                return
-            s, sub, incl, orig = struct.unpack(orden + "IIII", c)
-            d = f.read(incl)
-            if len(d) < incl:
-                return
-            yield s + sub / escala, orig, d
+    """Produce registros válidos y falla expresamente ante corrupción o truncamiento."""
+    try:
+        with (gzip.open(ruta, "rb") if ruta.suffix == ".gz" else ruta.open("rb")) as f:
+            cab = f.read(24)
+            if len(cab) != 24 or cab[:4] not in MAGIC:
+                raise EntradaError("ilegible", "cabecera libpcap inválida")
+            orden, escala = MAGIC[cab[:4]]
+            mayor, menor = struct.unpack_from(orden + "HH", cab, 4)
+            snaplen = struct.unpack_from(orden + "I", cab, 16)[0]
+            if (mayor, menor) != (2, 4) or snaplen == 0:
+                raise EntradaError("ilegible", "versión o snaplen libpcap inválidos")
+            if struct.unpack_from(orden + "I", cab, 20)[0] != 1:
+                raise EntradaError("ilegible", "enlace distinto de Ethernet")
+            while True:
+                reg = f.read(16)
+                if not reg:
+                    break
+                if len(reg) != 16:
+                    raise EntradaError("truncado", "cabecera de registro incompleta")
+                seg, frac, incl, orig = struct.unpack(orden + "IIII", reg)
+                if incl > snaplen or incl > orig:
+                    raise EntradaError("ilegible", "longitud de registro inválida")
+                dato = f.read(incl)
+                if len(dato) != incl:
+                    raise EntradaError("truncado", "trama incompleta")
+                yield seg + frac / escala, orig, dato
+    except (OSError, EOFError, gzip.BadGzipFile) as e:
+        raise EntradaError("ilegible", str(e)) from e
 
 
 def identidad(d: bytes):
-    """(vlan, clave, origen, destino) de un IPv4 TCP/UDP/ICMP; None si no aplica."""
+    """Devuelve VLAN, identidad, IP, TTL y tipo de destino para IPv4 completo."""
     if len(d) < 14:
         return None
     tipo, pos, vlan = struct.unpack_from("!H", d, 12)[0], 14, None
-    while tipo in (0x8100, 0x88a8) and len(d) >= pos + 4:
+    while tipo in (0x8100, 0x88a8):
+        if len(d) < pos + 4:
+            return None
         vlan = struct.unpack_from("!H", d, pos)[0] & 4095
         tipo = struct.unpack_from("!H", d, pos + 2)[0]
         pos += 4
-    if tipo != 0x0800 or len(d) < pos + 20:
-        return vlan, None, None, None
+    if tipo != 0x0800 or len(d) < pos + 20 or d[pos] >> 4 != 4:
+        return vlan, None, None, None, None, None, None, None
     ihl = (d[pos] & 15) * 4
+    if ihl < 20 or len(d) < pos + ihl:
+        return vlan, None, None, None, None, None, None, None
     largo, ipid = struct.unpack_from("!HH", d, pos + 2)
-    proto = d[pos + 9]
-    o, de = socket.inet_ntoa(d[pos + 12:pos + 16]), socket.inet_ntoa(d[pos + 16:pos + 20])
+    if largo < ihl or len(d) < pos + largo:
+        return vlan, None, None, None, None, None, None, None
+    proto, ttl = d[pos + 9], d[pos + 8]
+    origen = socket.inet_ntoa(d[pos + 12:pos + 16])
+    destino = socket.inet_ntoa(d[pos + 16:pos + 20])
     c = pos + ihl
-    extra = ()
-    if proto == 6 and len(d) >= c + 14:
+    if proto == 6 and largo >= ihl + 20:
         po, pd, seq, ack = struct.unpack_from("!HHII", d, c)
         extra = (po, pd, seq, ack, d[c + 13])
-    elif proto == 17 and len(d) >= c + 8:
+    elif proto == 17 and largo >= ihl + 8:
         extra = struct.unpack_from("!HH", d, c)
-    elif proto == 1 and len(d) >= c + 8:
-        extra = struct.unpack_from("!BBHH", d, c)
-    return vlan, (o, de, proto, ipid, largo) + extra, o, de
+    elif proto == 1 and largo >= ihl + 4:
+        extra = struct.unpack_from("!BB", d, c)
+    else:
+        extra = ()
+    clave = (proto, origen, destino, extra, ipid, largo)
+    multicast = ipaddress.ip_address(destino).is_multicast or destino == "255.255.255.255" or destino.endswith(".255")
+    carga = hashlib.blake2s(d[c:pos + largo], digest_size=8).digest()
+    mac = d[:12]
+    return vlan, clave, origen, destino, ttl, multicast, carga, mac
 
 
-def analizar(carpeta: Path, ips: set, desde=None, hasta=None) -> dict:
-    ficheros = sorted(p for p in carpeta.iterdir() if p.name.startswith("live-") and ".pcap" in p.name)
-    vistos = {}                                  # clave -> [ts_primero, [vlans]]
-    por_s = collections.defaultdict(lambda: [0, 0, 0, 0])   # s -> [tramas, bytes, exp_tramas, exp_bytes]
+def configuracion(ruta: Path | None = None):
+    ruta = ruta or Path(__file__).with_name("rutas_span.json")
+    cfg = json.loads(ruta.read_text(encoding="utf-8"))
+    redes = [(ipaddress.ip_network(x["subred"]), x["vlan"], x["puerta_enlace"])
+             for x in cfg["subredes"]]
+    return cfg, redes
+
+
+def ruta_esperada(origen: str, destino: str, multicast: bool, redes,
+                  difusion="no_determinable"):
+    def buscar(ip):
+        return next(((str(red), vlan, puerta) for red, vlan, puerta in redes
+                     if ipaddress.ip_address(ip) in red), None)
+    a, b = buscar(origen), buscar(destino)
+    etiqueta = f"{a[0] if a else '?'}>{b[0] if b else '?'}"
+    if multicast:
+        if difusion == "dos_copias" and a:
+            return etiqueta, [a[1], a[1]], None
+        return etiqueta, None, "difusión o multidifusión"
+    if not a or not b:
+        return etiqueta, None, "dirección fuera de las subredes configuradas"
+    if origen == a[2] and destino == b[2]:
+        return etiqueta, None, "ambos extremos son puertas de enlace"
+    if origen == a[2]:
+        return etiqueta, [b[1]], None
+    if destino == b[2]:
+        return etiqueta, [a[1]], None
+    if a[0] == b[0]:
+        return etiqueta, [], None
+    return etiqueta, [a[1], b[1]], None
+
+
+def inventario_entrada(carpeta: Path, inventario: Path | None):
+    inv = inventario or (carpeta.parent / "inventario.jsonl")
+    man = carpeta.parent / "manifiesto.json"
+    registros, problemas = {}, []
+    if inv.exists():
+        try:
+            for linea in inv.read_text(encoding="utf-8").splitlines():
+                if linea.strip():
+                    item = json.loads(linea)
+                    nombre = item.get("fichero_archivado", item["fichero"])
+                    if not NOMBRE.fullmatch(nombre):
+                        raise ValueError(f"nombre PCAP inválido: {nombre}")
+                    registros[nombre] = item
+        except (OSError, ValueError, KeyError) as e:
+            problemas.append({"tipo": "inventario_ilegible", "fichero": str(inv), "detalle": str(e)})
+    elif inventario:
+        problemas.append({"tipo": "inventario_ausente", "fichero": str(inv)})
+    if man.exists() and inventario is None:
+        try:
+            manifiesto = json.loads(man.read_text(encoding="utf-8"))
+            if not inv.exists():
+                problemas.append({"tipo": "inventario_ausente", "fichero": str(inv)})
+            if not manifiesto.get("pcap_completo", True) or manifiesto.get("pcap_huecos", 0):
+                problemas.append({"tipo": "manifiesto_incompleto", "fichero": str(man),
+                                   "detalle": f"pcap_huecos={manifiesto.get('pcap_huecos')}"})
+            if inv.exists() and manifiesto.get("pcap_ficheros") != len(registros):
+                problemas.append({"tipo": "inventario_incompleto", "fichero": str(inv),
+                                   "esperados": manifiesto.get("pcap_ficheros"),
+                                   "registrados": len(registros)})
+        except (OSError, ValueError) as e:
+            problemas.append({"tipo": "manifiesto_ilegible", "fichero": str(man), "detalle": str(e)})
+    if inv.exists() or inventario:
+        ficheros = [carpeta / n for n in sorted(registros)]
+    else:
+        ficheros = sorted(x for x in carpeta.iterdir() if NOMBRE.fullmatch(x.name))
+    return ficheros, registros, problemas
+
+
+def percentil(valores, q):
+    if not valores:
+        return None
+    orden = sorted(valores)
+    return orden[math.ceil(q * len(orden)) - 1]
+
+
+def analizar(carpeta: Path, ips: set[str] | None = None, desde=None, hasta=None,
+             ventana_copia_s=0.005, inventario: Path | None = None,
+             referencia: Path | None = None, margen_referencia_s=0.005,
+             max_anomalias=20000, subredes: list[str] | None = None,
+             rutas: Path | None = None) -> dict:
+    if ventana_copia_s <= 0 or margen_referencia_s < 0 or max_anomalias < 0:
+        raise ValueError("ventanas y máximo de anomalías inválidos")
+    cfg, redes = configuracion(rutas)
+    redes_poblacion = [ipaddress.ip_network(x) for x in subredes or []]
+    ips = set(IP_EXPERIMENTALES) if ips is None and not subredes else set(ips or ())
+    def en_poblacion(o, d):
+        return o in ips or d in ips or any(ipaddress.ip_address(x) in red for x in (o, d)
+                                          for red in redes_poblacion)
+
+    ficheros, inventario, problemas = inventario_entrada(carpeta, inventario)
+    por_clave = collections.defaultdict(list)
+    por_s = collections.defaultdict(lambda: [0, 0, 0, 0])
     por_10ms = collections.Counter()
-    por_vlan = collections.Counter()
-    por_vlan_exp = collections.Counter()
-    total = exp = 0
-    for f in ficheros:
-        for ts, orig, d in tramas(f):
-            if (desde and ts < desde) or (hasta and ts > hasta):
-                continue
-            b = orig + EXTRA_TRAMA
-            r = identidad(d)
-            vlan = r[0] if r else None
-            es_exp = bool(r and r[1] and (r[2] in ips or r[3] in ips))
-            s = int(ts)
-            a = por_s[s]
-            a[0] += 1
-            a[1] += b
-            por_10ms[int(ts * 100)] += b
-            por_vlan[str(vlan)] += b
-            total += 1
-            if es_exp:
-                exp += 1
-                a[2] += 1
-                a[3] += b
-                por_vlan_exp[str(vlan)] += b
-                e = vistos.get(r[1])
-                if e is None:
-                    vistos[r[1]] = [ts, [vlan]]
-                else:
-                    e[1].append(vlan)
-    # patrón esperado por flujo dirigido (origen, destino, proto, puertos)
-    def flujo(k):
-        return k[:3] + (k[5:7] if len(k) > 6 else ())
-    patrones = collections.defaultdict(collections.Counter)
-    for k, (ts, vl) in vistos.items():
-        patrones[flujo(k)][tuple(sorted(vl, key=str))] += 1
-    esperado = {fl: c.most_common(1)[0][0] for fl, c in patrones.items()}
-    distribucion = collections.Counter()
-    faltantes, sobrantes = [], 0
-    for k, (ts, vl) in vistos.items():
-        esp = esperado[flujo(k)]
-        distribucion[len(vl)] += 1
-        if len(vl) < len(esp):
-            falta = sorted((collections.Counter(esp) - collections.Counter(vl)).elements(), key=str)
-            faltantes.append({"ts": round(ts, 6), "flujo": "%s>%s/%s" % k[:3], "vlans_vistas": vl,
-                              "vlans_faltan": falta, "largo_ip": k[4]})
-        elif len(vl) > len(esp):
-            sobrantes += 1
-    faltantes.sort(key=lambda x: x["ts"])
+    por_vlan, por_vlan_exp = collections.Counter(), collections.Counter()
+    total = exp = leidas = 0
+    for fichero in ficheros:
+        meta = inventario.get(fichero.name, {})
+        intervalo = {"primer_paquete_epoch": meta.get("primer_paquete_epoch"),
+                     "ultimo_paquete_epoch": meta.get("ultimo_paquete_epoch")}
+        if not fichero.exists():
+            problemas.append({"tipo": "ausente", "fichero": fichero.name, **intervalo})
+            continue
+        primero_leido = ultimo_leido = None
+        try:
+            for ts, orig, d in tramas(fichero):
+                primero_leido = ts if primero_leido is None else primero_leido
+                ultimo_leido = ts
+                leidas += 1
+                if (desde is not None and ts < desde) or (hasta is not None and ts > hasta):
+                    continue
+                total += 1
+                dato = identidad(d)
+                vlan = dato[0] if dato else None
+                es_exp = bool(dato and dato[1] and en_poblacion(dato[2], dato[3]))
+                bytes_trama = orig + EXTRA_TRAMA
+                s = int(ts)
+                por_s[s][0] += 1
+                por_s[s][1] += bytes_trama
+                por_10ms[int(ts * 100)] += bytes_trama
+                por_vlan[str(vlan)] += bytes_trama
+                if es_exp:
+                    exp += 1
+                    por_s[s][2] += 1
+                    por_s[s][3] += bytes_trama
+                    por_vlan_exp[str(vlan)] += bytes_trama
+                    por_clave[dato[1]].append((ts, vlan, dato[4], fichero.name,
+                                                dato[5], dato[6], dato[7]))
+        except EntradaError as e:
+            if intervalo["primer_paquete_epoch"] is None:
+                intervalo["primer_paquete_epoch"] = primero_leido
+            if intervalo["ultimo_paquete_epoch"] is None:
+                intervalo["ultimo_paquete_epoch"] = ultimo_leido
+            problemas.append({"tipo": e.tipo, "fichero": fichero.name, "detalle": str(e), **intervalo})
+
+    eventos = []
+    for clave, copias in por_clave.items():
+        copias.sort()
+        grupos = []
+        for copia in copias:
+            if not grupos or copia[0] - grupos[-1][0][0] > ventana_copia_s:
+                grupos.append([copia])
+            else:
+                grupos[-1].append(copia)
+        ambiguos = set()
+        for i in range(1, len(grupos)):
+            if grupos[i][0][0] - grupos[i - 1][0][0] < 2 * ventana_copia_s:
+                ambiguos.update((i - 1, i))
+        for i, grupo in enumerate(grupos):
+            eventos.append((clave, grupo, i in ambiguos))
+    eventos.sort(key=lambda x: x[1][0][0])
+    clases = collections.Counter()
+    rutas_resumen = collections.defaultdict(collections.Counter)
+    faltantes_ruta = collections.defaultdict(collections.Counter)
+    por_vlan_faltante = collections.Counter()
+    por_segundo = collections.defaultdict(collections.Counter)
+    por_fichero = collections.defaultdict(collections.Counter)
+    separaciones = []
+    anomalías, total_anomalias = [], 0
+    indicios = {"ttl_incorrecto": 0, "orden_incorrecto": 0,
+                "carga_distinta": 0, "mac_igual": 0}
+    marcas_sensor = collections.defaultdict(list)
+    for clave, grupo, ambiguo in eventos:
+        ts, _, _, fichero, multicast, _, _ = grupo[0]
+        marcas_sensor[clave].append(ts)
+        etiqueta, esperado, motivo = ruta_esperada(
+            clave[1], clave[2], multicast, redes, cfg.get("difusion_multidifusion", "no_determinable"))
+        vistos = [x[1] for x in grupo]
+        faltan = list((collections.Counter(esperado or []) - collections.Counter(vistos)).elements())
+        if ambiguo:
+            clase = "ambiguo"
+        elif esperado is None:
+            clase = "no_determinable"
+        elif not esperado:
+            clase = "inesperado"
+        elif len(grupo) > len(esperado):
+            clase = "copias_de_mas"
+        elif collections.Counter(vistos) == collections.Counter(esperado):
+            clase = "completo"
+        elif collections.Counter(vistos) - collections.Counter(esperado):
+            clase = "vlan_incorrecta"
+        else:
+            clase = "falta_copia"
+        clases[clase] += 1
+        rutas_resumen[etiqueta][clase] += 1
+        por_segundo[str(int(ts))][clase] += 1
+        por_fichero[fichero][clase] += 1
+        if esperado is not None and clase not in ("ambiguo", "no_determinable"):
+            por_vlan_faltante.update(map(str, faltan))
+            faltantes_ruta[etiqueta].update(map(str, faltan))
+        if len(grupo) == 2 and not ambiguo:
+            separaciones.append(grupo[1][0] - grupo[0][0])
+        if esperado and len(esperado) == 2 and len(grupo) >= 2:
+            if grupo[0][2] - grupo[1][2] != 1:
+                indicios["ttl_incorrecto"] += 1
+            if vistos[:2] != esperado:
+                indicios["orden_incorrecto"] += 1
+            if grupo[0][5] != grupo[1][5]:
+                indicios["carga_distinta"] += 1
+            if grupo[0][6] == grupo[1][6]:
+                indicios["mac_igual"] += 1
+        if clase != "completo":
+            total_anomalias += 1
+            if len(anomalías) < max_anomalias:
+                anomalías.append({"ts": ts, "clase": clase, "ruta": etiqueta,
+                                   "fichero": fichero, "vlans_vistas": vistos,
+                                   "vlans_esperadas": esperado, "vlans_faltan": faltan,
+                                   "motivo": motivo, "identidad": list(clave)})
+
+    referencia_resumen = None
+    if referencia:
+        ref_claves = collections.defaultdict(list)
+        if not referencia.exists():
+            problemas.append({"tipo": "ausente", "fichero": str(referencia),
+                               "origen": "referencia"})
+        else:
+            try:
+                for ts, _, d in tramas(referencia):
+                    dato = identidad(d)
+                    if dato and dato[1] and en_poblacion(dato[2], dato[3]):
+                        ref_claves[dato[1]].append(ts)
+            except EntradaError as e:
+                problemas.append({"tipo": e.tipo, "fichero": str(referencia),
+                                   "detalle": str(e), "origen": "referencia"})
+        sin_copia, ejemplos, ref_total = 0, [], 0
+        for clave, tiempos in ref_claves.items():
+            tiempos.sort()
+            sensor = sorted(marcas_sensor.get(clave, []))
+            previo = None
+            for ts in tiempos:
+                if previo is not None and ts - previo <= ventana_copia_s:
+                    continue
+                previo = ts
+                ref_total += 1
+                i = bisect.bisect_left(sensor, ts - margen_referencia_s)
+                if i == len(sensor) or sensor[i] > ts + margen_referencia_s:
+                    sin_copia += 1
+                    if len(ejemplos) < max_anomalias:
+                        ejemplos.append({"ts": ts, "identidad": list(clave)})
+        referencia_resumen = {"eventos_vistos": ref_total,
+                              "eventos_con_copia_sensor": ref_total - sin_copia,
+                              "eventos_sin_copia_sensor": sin_copia,
+                              "sin_copia_ejemplos": ejemplos}
+
     pico_s = max(por_s.items(), key=lambda kv: kv[1][1], default=(None, [0, 0, 0, 0]))
     pico_10 = max(por_10ms.items(), key=lambda kv: kv[1], default=(None, 0))
-    umbral_10ms = LINEA_BPS / 8 / 100
-    saturados = sorted(k / 100 for k, v in por_10ms.items() if v >= umbral_10ms)
+    umbral = LINEA_BPS / 8 / 100
+    saturados = sorted(k / 100 for k, v in por_10ms.items() if v >= umbral)
     return {
-        "carpeta": str(carpeta), "ficheros": len(ficheros), "desde": desde, "hasta": hasta,
-        "tramas_total": total, "tramas_experimentales": exp,
-        "paquetes_experimentales_distintos": len(vistos),
-        "copias_por_paquete": dict(sorted(distribucion.items())),
-        "patron_esperado_por_flujo": {"%s>%s/%s" % fl[:3] + ("" if len(fl) < 4 else ":%s>%s" % fl[3:5]): list(v)
-                                      for fl, v in list(esperado.items())[:40]},
-        "patrones_distintos": dict(collections.Counter(str(v) for v in esperado.values())),
-        "paquetes_con_copia_faltante": len(faltantes),
-        "copia_faltante_por_segundo": dict(sorted(collections.Counter(str(int(x["ts"])) for x in faltantes).items())),
-        "copia_faltante_por_vlan": dict(collections.Counter(str(v) for x in faltantes for v in x["vlans_faltan"])),
-        "paquetes_con_copias_de_mas": sobrantes,
-        "faltantes": faltantes[:20000],
+        "version": 2, "resultado_global": "incompleto" if problemas else "examinado_completo",
+        "entrada_completa": not problemas,
+        "integridad_entrada": {"problemas": problemas, "ficheros_esperados": len(ficheros),
+                               "ficheros_con_problemas": len({x["fichero"] for x in problemas})},
+        "parametros": {"carpeta": str(carpeta), "ips": sorted(ips), "subredes": subredes or [],
+                       "desde": desde, "hasta": hasta, "ventana_copia_s": ventana_copia_s,
+                       "margen_referencia_s": margen_referencia_s, "configuracion": str(rutas or Path(__file__).with_name("rutas_span.json"))},
+        "configuracion_espejo": cfg,
+        "denominadores": {"tramas_leidas": leidas, "tramas_en_ventana": total,
+                          "tramas_en_poblacion": exp,
+                          "eventos": len(eventos), "eventos_por_clase": dict(clases)},
+        "por_ruta": {k: {"eventos": sum(v.values()), "clases": dict(v),
+                        "faltantes_por_vlan": dict(faltantes_ruta[k]),
+                        "fraccion_falta_por_vlan": {
+                            vlan: n / sum(v.values()) for vlan, n in faltantes_ruta[k].items()}}
+                     for k, v in sorted(rutas_resumen.items())},
+        "por_vlan_faltante": dict(por_vlan_faltante),
+        "eventos_por_segundo": {k: dict(v) for k, v in sorted(por_segundo.items())},
+        "eventos_por_fichero": {f.name: {"eventos": sum(por_fichero[f.name].values()),
+                                         "clases": dict(por_fichero[f.name])}
+                               for f in ficheros},
+        "separaciones_copias_s": {"pares": len(separaciones), "p50": percentil(separaciones, .5),
+                                 "p99": percentil(separaciones, .99),
+                                 "max": max(separaciones, default=None)},
+        "indicios": indicios,
+        "anomalias_total": total_anomalias, "anomalias": anomalías,
+        "referencia": referencia_resumen,
+        "limitaciones": ["Un evento ausente en todas sus copias no se detecta sin --referencia.",
+                         "La referencia sólo cuenta identidades sin copia dentro del margen temporal; no prueba entrega de otras capas."],
         "bytes_por_vlan": dict(por_vlan.most_common()),
         "bytes_por_vlan_experimental": dict(por_vlan_exp.most_common()),
         "pico_1s": {"s": pico_s[0], "tramas": pico_s[1][0], "bytes": pico_s[1][1],
                     "mbps": round(pico_s[1][1] * 8 / 1e6, 2)},
-        "pico_10ms": {"t": (pico_10[0] / 100) if pico_10[0] else None, "bytes": pico_10[1],
+        "pico_10ms": {"t": pico_10[0] / 100 if pico_10[0] is not None else None,
+                      "bytes": pico_10[1],
                       "mbps_equivalentes": round(pico_10[1] * 8 * 100 / 1e6, 1)},
-        "intervalos_10ms_a_linea": len(saturados), "intervalos_10ms_a_linea_primeros": saturados[:200],
+        "intervalos_10ms_a_linea": len(saturados),
+        "intervalos_10ms_a_linea_primeros": saturados[:200],
         "por_segundo": {str(k): v for k, v in sorted(por_s.items())},
-        "nota": "pérdida total de un paquete (todas sus copias) no es observable aquí",
     }
 
 
-def detallar(carpeta: Path, ips: set, umbral_bytes_10ms: float, desde=None, hasta=None, maximo=60) -> list:
-    """Segunda pasada: composición (VLAN, experimental o no, top de pares IP) de los intervalos de
-    10 ms con carga ≥ umbral. Los pares IP ajenos al estudio se devuelven solo como recuento."""
-    ficheros = sorted(p for p in carpeta.iterdir() if p.name.startswith("live-") and ".pcap" in p.name)
+def detallar(carpeta: Path, ips: set[str], umbral: float, desde=None, hasta=None, maximo=60,
+             subredes=None):
+    """Desglosa las ráfagas del destino con una segunda lectura en flujo."""
+    ficheros, _, _ = inventario_entrada(carpeta, None)
+    redes = [ipaddress.ip_network(x) for x in subredes or []]
     carga = collections.Counter()
     for f in ficheros:
-        for ts, orig, d in tramas(f):
-            if (desde and ts < desde) or (hasta and ts > hasta):
-                continue
-            carga[int(ts * 100)] += orig + EXTRA_TRAMA
-    elegidos = {k for k, v in carga.items() if v >= umbral_bytes_10ms}
-    det = {k: {"vlan": collections.Counter(), "exp": collections.Counter(), "pares_exp": collections.Counter(),
-               "pares_ajenos": set()} for k in elegidos}
+        if not f.exists():
+            continue
+        try:
+            for ts, orig, d in tramas(f):
+                if (desde is not None and ts < desde) or (hasta is not None and ts > hasta):
+                    continue
+                carga[int(ts * 100)] += orig + EXTRA_TRAMA
+        except EntradaError:
+            continue
+    elegidos = sorted((k for k, v in carga.items() if v >= umbral), key=lambda k: -carga[k])[:maximo]
+    detalle = {k: {"vlan": collections.Counter(), "exp": collections.Counter(),
+                   "pares_exp": collections.Counter(), "pares_ajenos": set()} for k in elegidos}
     for f in ficheros:
-        for ts, orig, d in tramas(f):
-            k = int(ts * 100)
-            if k not in det:
-                continue
-            r = identidad(d)
-            b = orig + EXTRA_TRAMA
-            x = det[k]
-            x["vlan"][str(r[0] if r else None)] += b
-            es_exp = bool(r and r[1] and (r[2] in ips or r[3] in ips))
-            x["exp"]["experimental" if es_exp else "no_experimental"] += b
-            if es_exp:
-                x["pares_exp"]["%s>%s" % (r[2], r[3])] += b
-            elif r and r[1]:
-                x["pares_ajenos"].add((r[2], r[3]))
+        if not f.exists():
+            continue
+        try:
+            for ts, orig, d in tramas(f):
+                if (desde is not None and ts < desde) or (hasta is not None and ts > hasta):
+                    continue
+                k = int(ts * 100)
+                if k not in detalle:
+                    continue
+                b = orig + EXTRA_TRAMA
+                x = detalle[k]
+                r = identidad(d)
+                x["vlan"][str(r[0] if r else None)] += b
+                es_exp = bool(r and r[1] and
+                              (r[2] in ips or r[3] in ips or
+                               any(ipaddress.ip_address(ip) in red for ip in (r[2], r[3]) for red in redes)))
+                x["exp"]["experimental" if es_exp else "no_experimental"] += b
+                if es_exp:
+                    x["pares_exp"][f"{r[2]}>{r[3]}"] += b
+                elif r and r[1]:
+                    x["pares_ajenos"].add((r[2], r[3]))
+        except EntradaError:
+            continue
     salida = []
-    for k in sorted(det, key=lambda k: -carga[k])[:maximo]:
-        x = det[k]
-        salida.append({"t": k / 100, "bytes": carga[k], "mbps_equivalentes": round(carga[k] * 8 * 100 / 1e6, 1),
+    for k in elegidos:
+        x = detalle[k]
+        salida.append({"t": k / 100, "bytes": carga[k],
+                       "mbps_equivalentes": round(carga[k] * 8 * 100 / 1e6, 1),
                        "por_vlan": dict(x["vlan"].most_common()), "por_tipo": dict(x["exp"]),
                        "pares_experimentales": dict(x["pares_exp"].most_common(5)),
                        "pares_ajenos_distintos": len(x["pares_ajenos"])})
     return salida
 
 
-def main() -> int:
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("carpeta", type=Path)
     ap.add_argument("--salida", type=Path, required=True)
-    ap.add_argument("--ips", default=EXPERIMENTALES)
+    poblacion = ap.add_mutually_exclusive_group()
+    poblacion.add_argument("--ips", help="IP separadas por coma")
+    poblacion.add_argument("--subredes", help="CIDR separados por coma")
     ap.add_argument("--desde", type=float)
     ap.add_argument("--hasta", type=float)
-    ap.add_argument("--detalle-umbral", type=float, default=0.5,
-                    help="fracción de línea en 10 ms a partir de la cual se detalla el intervalo (0 = no)")
-    a = ap.parse_args()
-    r = analizar(a.carpeta, set(a.ips.split(",")), a.desde, a.hasta)
+    ap.add_argument("--ventana-copia-s", type=float, default=.005)
+    ap.add_argument("--inventario", type=Path)
+    ap.add_argument("--referencia", type=Path)
+    ap.add_argument("--margen-referencia-s", type=float, default=.005)
+    ap.add_argument("--max-anomalias", type=int, default=20000)
+    ap.add_argument("--detalle-umbral", type=float, default=.5)
+    a = ap.parse_args(argv)
+    ips = set(a.ips.split(",")) if a.ips else None
+    subredes = a.subredes.split(",") if a.subredes else None
+    resultado = analizar(a.carpeta, ips, a.desde, a.hasta, a.ventana_copia_s,
+                         a.inventario, a.referencia, a.margen_referencia_s,
+                         a.max_anomalias, subredes)
     if a.detalle_umbral > 0:
-        r["detalle_10ms"] = detallar(a.carpeta, set(a.ips.split(",")), a.detalle_umbral * LINEA_BPS / 8 / 100,
-                                     a.desde, a.hasta)
-        r["intervalos_10ms_sobre_umbral_detalle"] = len(r["detalle_10ms"])
-    a.salida.write_text(json.dumps(r, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    resumen = {k: r[k] for k in ("tramas_total", "tramas_experimentales", "paquetes_experimentales_distintos",
-                                 "copias_por_paquete", "patrones_distintos", "paquetes_con_copia_faltante",
-                                 "paquetes_con_copias_de_mas", "pico_1s", "pico_10ms", "intervalos_10ms_a_linea",
-                                 "bytes_por_vlan")}
-    print(json.dumps(resumen, ensure_ascii=False))
-    return 0
+        ips_detalle = ips if ips is not None else (set() if subredes else set(IP_EXPERIMENTALES))
+        resultado["detalle_10ms"] = detallar(a.carpeta, ips_detalle,
+                                             a.detalle_umbral * LINEA_BPS / 8 / 100,
+                                             a.desde, a.hasta, subredes=subredes)
+        resultado["intervalos_10ms_sobre_umbral_detalle"] = len(resultado["detalle_10ms"])
+    a.salida.write_text(json.dumps(resultado, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print(json.dumps({"resultado_global": resultado["resultado_global"],
+                      "denominadores": resultado["denominadores"],
+                      "integridad_entrada": resultado["integridad_entrada"]}, ensure_ascii=False))
+    return 0 if resultado["entrada_completa"] else 3
 
 
 if __name__ == "__main__":
