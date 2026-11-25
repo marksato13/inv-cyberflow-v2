@@ -100,9 +100,25 @@ El programa de 42 h tiene una carga media de 0,653 frente a 0,645 del piloto, y 
 | Rotación diaria del EVE (copytruncate) | Recuperación de la copia rotada en flujo y reintentada 120 s (`cfa58f9`), probada en la prueba de rotación. Siguen pudiendo perderse 1–2 líneas por rotación sin poder detectarlo | Salida EVE dedicada en `/var/log/suricata/v2/` (sudo de Mark; propuesta en Sensor1 `~/suricata-v2/suricata.yaml.propuesta`). La primera noche de las 42 h cruza las 00:00 UTC |
 | MTU 9198 de Gi2/0/19 | Solo en la running-config | `write memory` en CORE-STACK (Mark). Si el switch se reinicia sin guardar, C7 vuelve a fallar |
 | Descartes de Suricata | `stats.log` no publica `capture.kernel_drops`; `kernel_packets` sí avanza | Se acepta tcpdump (0) + Δ drops del switch (0) + C7 (100 %) como prueba de cadena. Si se quiere el contador, hay que activarlo en la configuración (sudo) |
-| Parada coordinada por espacio, por archivador muerto y por vigía muerto | Script `operacion/prueba_parada.sh` (`3b93216`) | **Sin ejecutar.** Siguiente prueba técnica (3 × ~8 min) |
+| Parada coordinada por espacio, por archivador muerto y por vigía muerto | **Hecha el 25-nov** con `operacion/prueba_parada.sh` (ver §6) | — |
 | Etiquetado de ataques | Reglas v1 escritas (`docs/ETIQUETADO-ATAQUES.md`) | Programa que las calcule y lista de familias con sus parámetros, antes de la primera campaña |
 | Copias del SPAN (dos orígenes, Gi1/0/23 y Gi2/0/23, y dos VLAN) | Se quitan bien: 818 244 copias en el piloto, 0 diferencias en la verificación | Decisión de Mark si se reduce: afecta a VM-SURICATA |
+
+**Cable cambiado por Mark (25-nov, ~02:35 UTC).** `vmnic2` volvió a 1000 Full y el preflight pasó.
+El primer intento de prueba de parada (`V2-PARADA-ESPACIO-20261125T002106Z`, 00:21 UTC) se canceló en
+el preflight por la velocidad del enlace, como debía.
+
+## 6. Pruebas de parada coordinada (25-nov), con la prueba corta de 240 s
+
+| Caso | Ejecución | Provocado (UTC) | Generador | Archivador |
+|---|---|---|---|---|
+| Espacio (`SIMULAR_LIBRE_GB=2`) | `V2-PARADA-ESPACIO-20261125T025649Z` | 03:00:25 | se detiene a las 03:00:29 (+4 s): `incompleta`, `archivador_fallo_espacio` | detecta el problema a las 03:00:27 (+2 s): `fallo`/`espacio`, manifiesto `incompleta`, 0 huecos |
+| Archivador muerto (`kill -9`) | `V2-PARADA-ARCHIVADOR-20261125T030053Z` | 03:04:26 (último latido 03:04:25) | el vigía detecta `latido_viejo` a las 03:05:36 (+71 s; tolerancia `--latido-max-s 60`) y los seis perfiles terminan con código 3 a las 03:05:37 | sin manifiesto (`kill -9` no lo deja cerrar). Por eso la ejecución se clasifica `incompleta` |
+| Vigía muerto (`kill -9`) | `V2-PARADA-VIGIA-20261125T030610Z` | 03:09:42 (última renovación 03:09:37) | el permiso caduca y el generador para solo a las 03:11:07 (+90 s): `incompleta`, `sin_permiso_captura` | sigue hasta su fin programado: `completa`, 0 huecos |
+
+En los tres casos el generador se detiene sin intervención y el motivo queda escrito.
+Ventana máxima de tráfico sin archivar: unos 70 s cuando el archivador muere. Esa ejecución se
+declara incompleta y no se usa.
 
 ## 5. Evidencia
 
