@@ -7,11 +7,16 @@ set -u
 S1=$HOME/cyberflow-v2; C=$S1/codigo; R=$S1/bloque1/reanalisis; mkdir -p "$R"
 cd "$R"
 echo "codigo $(cat $C/VERSION)" > version.txt
-for ID in V2-B1-20261125T182207Z V2-T1-20261125T062528Z V2-T2-20261125T070500Z V2-E1-20261125T185323Z V2-E2-20261125T194609Z; do
+CLI=10.10.20.21,10.10.20.22,10.10.20.23,10.10.20.24,10.10.20.25,10.10.20.26; GES=10.10.10.30,10.10.60.11
+IDS=${IDS:-"V2-B1-20261125T182207Z V2-T1-20261125T062528Z V2-T2-20261125T070500Z V2-E1-20261125T185323Z V2-E2-20261125T194609Z"}
+for ID in $IDS; do
   CAP=$S1/capturas/$ID; P=$S1/pruebas/$ID
   # E1 se reanalizó con cerrar_v2.sh en la prueba del cierre: sus datos de pruebas/ originales están en .original-cd06fcf
   [ -d "$P.original-cd06fcf" ] && P=$P.original-cd06fcf
   nice python3 $C/captura/copias_espejo.py $CAP/pcap --salida copias-$ID.json --detalle-umbral 0.4; echo "$ID copias rc=$?"
+  # extracto publicable: experimental completo, gestión solo cabeceras, el resto fuera
+  mkdir -p $S1/bloque1/paquete/$ID/pcap
+  nice python3 $C/captura/extracto_pcap.py $CAP/pcap --salida $S1/bloque1/paquete/$ID/pcap/live-00000000000000.pcap.gz     --completas $CLI --cabeceras $GES > extracto-$ID.json; echo "$ID extracto rc=$?"
   nice python3 $C/captura/clases_tramas.py $CAP --salida clases-$ID.json > /dev/null; echo "$ID clases rc=$?"
   if [ -f "$P/registros/dns-$ID.jsonl" ]; then
     nice python3 $C/captura/contraste_dns.py --transacciones $P/generador/$ID/transacciones-*.jsonl \
@@ -22,7 +27,9 @@ for ID in V2-B1-20261125T182207Z V2-T1-20261125T062528Z V2-T2-20261125T070500Z V
       --salida extremo-$ID.json > /dev/null; echo "$ID extremo rc=$?"
   fi
 done
-# B1: tráfico de gestión (bastión 10.10.10.30 <-> Sensor1 10.10.60.11), el que provocó los descartes
+# B1: tráfico de gestión
+# (bastión 10.10.10.30 <-> Sensor1 10.10.60.11), el que provocó los descartes
+[[ " $IDS " == *" V2-B1-20261125T182207Z "* ]] || { sha256sum *.json *.csv > SHA256SUMS; exit 0; }
 ID=V2-B1-20261125T182207Z
 nice python3 $C/captura/copias_espejo.py $S1/capturas/$ID/pcap --ips 10.10.10.30,10.10.60.11 \
   --salida copias-$ID-gestion.json --detalle-umbral 0.4 --max-anomalias 50000; echo "$ID copias-gestion rc=$?"

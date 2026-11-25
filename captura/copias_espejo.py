@@ -80,7 +80,10 @@ def identidad(d: bytes):
     if ihl < 20 or len(d) < pos + ihl:
         return vlan, None, None, None, None, None, None, None
     largo, ipid = struct.unpack_from("!HH", d, pos + 2)
-    if largo < ihl or len(d) < pos + largo:
+    # Una trama recortada (extracto publicado con solo cabeceras: caplen < longitud real) conserva la
+    # identidad, que solo usa cabeceras; la huella de la carga queda en None y no se compara.
+    recortada = len(d) < pos + largo
+    if largo < ihl or len(d) < pos + ihl + {6: 20, 17: 8, 1: 4}.get(d[pos + 9], 0):
         return vlan, None, None, None, None, None, None, None
     proto, ttl = d[pos + 9], d[pos + 8]
     origen = socket.inet_ntoa(d[pos + 12:pos + 16])
@@ -97,7 +100,7 @@ def identidad(d: bytes):
         extra = ()
     clave = (proto, origen, destino, extra, ipid, largo)
     multicast = ipaddress.ip_address(destino).is_multicast or destino == "255.255.255.255" or destino.endswith(".255")
-    carga = hashlib.blake2s(d[c:pos + largo], digest_size=8).digest()
+    carga = None if recortada else hashlib.blake2s(d[c:pos + largo], digest_size=8).digest()
     mac = d[:12]
     return vlan, clave, origen, destino, ttl, multicast, carga, mac
 
