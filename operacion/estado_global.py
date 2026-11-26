@@ -23,6 +23,18 @@ def lineas(ruta: Path):
         return None
 
 
+# Qué exige el dictamen a cada tipo de ejecución, además de lo común (generador, archivador, vigía,
+# supervisión, exclusión V1, espejo, calidad_*, referencias, transferencias, análisis y criterios):
+#  - prolongadas: comprobaciones que solo una captura larga puede hacer (rotación, deriva, 49 h…);
+#  - otra_comprobacion: lo que depende de otro bloque aún abierto (deduplicación, relojes de DC1,
+#    kernel_drops de Suricata). Pendiente => indeterminada, nunca aprobada.
+REQUISITOS = {
+    "verificacion_dirigida": {"prolongadas": False, "otra_comprobacion": False},
+    "piloto_final": {"prolongadas": False, "otra_comprobacion": True},
+    "captura_definitiva": {"prolongadas": True, "otra_comprobacion": True},
+}
+
+
 def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
             captura: Path | None = None) -> dict:
     e = ejecucion or pruebas / "registros"
@@ -144,7 +156,14 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
                 prolongada[k] = v["requiere_duracion_prolongada"]
             if v.get("pendiente_otra_comprobacion"):
                 otra[k] = v["pendiente_otra_comprobacion"]
-    larga = (lz.get("duracion_s") or 0) >= 86400
+    # Requisitos por TIPO de ejecución (Bloque 1, r4; docs/BLOQUE1-REVISION-4 §6). Lanzamientos
+    # anteriores a r4 no declaran tipo: se infiere de la duración y se dice que es inferido.
+    tipo, tipo_inferido = lz.get("tipo_ejecucion"), False
+    if tipo is None:
+        tipo, tipo_inferido = ("captura_definitiva" if (lz.get("duracion_s") or 0) >= 86400
+                               else "verificacion_dirigida"), True
+    req = REQUISITOS.get(tipo)
+    larga = bool(req and req["prolongadas"]) or (lz.get("duracion_s") or 0) >= 86400 or req is None
     motivos = []
     fallos = {
         "generador": ("incompleta",),
@@ -197,16 +216,24 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
                       or criterios[k].get("ok") is not True and criterios[k].get("ok") is not False]
     if not (e / "lanzamiento.json").exists():
         faltantes.append("lanzamiento")
+    if req is None:
+        faltantes.append("tipo_ejecucion")           # tipo desconocido: se exige todo y no se aprueba
     if larga:
         faltantes += ["prolongada:%s" % k for k in sorted(prolongada)]
+    if req is None or req["otra_comprobacion"]:
+        faltantes += ["otra:%s" % k for k in sorted(otra)]
     motivos.extend("falta:%s" % k for k in faltantes)
     global_estado = "no_aprobada" if any(not m.startswith("falta:") for m in motivos) else (
         "indeterminada" if any(m.startswith("falta:") for m in motivos) else "aprobada")
     return {"ejecucion": identificador, **estados, "global": global_estado,
             "dictamen": DICTAMEN[global_estado], "codigo_salida": CODIGO[global_estado],
             "alcance": ("ejecucion_prolongada" if larga else
+                        "piloto_final: requisitos de una ejecución corta y las comprobaciones de otros "
+                        "bloques; las de duración prolongada siguen pendientes aparte" if req["otra_comprobacion"] else
                         "verificacion_corta: aprobada se refiere SOLO a los requisitos aplicables; "
                         "las comprobaciones de duración prolongada siguen pendientes aparte"),
+            "tipo_ejecucion": tipo, "tipo_inferido_por_duracion": tipo_inferido,
+            "requisitos": req or "tipo desconocido: se exigen todos",
             "motivos": motivos, "pasos": rcs, "fuente_pasos": fuente_pasos,
             "criterios_revisados": bool(revisados),
             "pendientes_duracion_prolongada": prolongada,

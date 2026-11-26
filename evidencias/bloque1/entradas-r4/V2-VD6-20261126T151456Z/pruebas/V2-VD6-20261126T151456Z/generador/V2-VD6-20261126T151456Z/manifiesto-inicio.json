@@ -1,0 +1,174 @@
+{
+ "duracion_s": 1440,
+ "ejecucion": "V2-VD6-20261126T151456Z",
+ "entorno_inicio": {
+  "codigo": {
+   "clientes_lab_v2.py": "4e54513d195f4289854b2d2cdba591a9db6a1ae596d2d7f8e31154638ae4448d",
+   "distribuciones.py": "3e8429a5b68f5b8cdd7c18834b07d689808cdfe3807f1f9fe3dd079665196649",
+   "programa.py": "4c86bdda6203d181d83b052a755f37b781e14ac7ffdb53b98e84b65cea013b2e",
+   "transacciones.py": "7eef88868e5e407bd1e65e4ceba319324253888eeb90013edae90708ba8e36a1",
+   "v2ctl.py": "5394d6d0df87c1fe12aa1430db524e605faa337c44faa08322d398f1d44f45d7"
+  },
+  "host": "clientesadmin",
+  "monotonic": 345996.218213032,
+  "ntp_sincronizado": "yes",
+  "python": "3.12.3",
+  "timesync": "Server: 198.51.100.26 (ntp.ubuntu.com)\nPoll interval: 34min 8s (min: 32s; max 34min 8s)\n         Leap: normal\n      Version: 4\n      Stratum: 2\n    Reference: 1D586304\n    Precision: 1us (-25)\nRoot distance: 3.799ms (max: 5s)\n       Offset: -542us\n        Delay: 153.060ms\n       Jitter: 415us\n Packet count: 172\n    Frequency: +4,568ppm",
+  "utc": "2026-11-26T15:20:14.310382Z"
+ },
+ "jornada_id": null,
+ "perfiles": {
+  "P1": "10.10.20.21",
+  "P2": "10.10.20.22",
+  "P3": "10.10.20.23",
+  "P4": "10.10.20.24",
+  "P5": "10.10.20.25",
+  "P6": "10.10.20.26"
+ },
+ "preflight_fallos_forzados": [],
+ "preflight_forzado": false,
+ "programa_id": "V2-T2",
+ "programa_origen": "/home/adminclientes/cyberflow-v2/codigo/programas/prueba-niveles-transiciones.json",
+ "programa_sha256": "3089fc531745d9271818ee20c0d9915bd045801669dd2042a766e269cd7ee160",
+ "semillas": {
+  "A-B1": {
+   "P1": {
+    "contenido": 201120024962618,
+    "espera": 136003571094918,
+    "red": 165964523959726
+   },
+   "P2": {
+    "contenido": 192169813602840,
+    "espera": 192246151223716,
+    "red": 158806973225047
+   },
+   "P3": {
+    "contenido": 28937890365592,
+    "espera": 119686028820887,
+    "red": 97875495249884
+   },
+   "P4": {
+    "contenido": 61135589210694,
+    "espera": 10471460941874,
+    "red": 64238019437773
+   },
+   "P5": {
+    "contenido": 186012813362816,
+    "espera": 190871278566341,
+    "red": 76115433368920
+   },
+   "P6": {
+    "contenido": 107832996828434,
+    "espera": 87742301397674,
+    "red": 8563477634208
+   }
+  },
+  "A-B2": {
+   "P1": {
+    "contenido": 165303315230200,
+    "espera": 229310797455351,
+    "red": 171132021510108
+   },
+   "P2": {
+    "contenido": 110358074927372,
+    "espera": 13466351232504,
+    "red": 62486784583013
+   },
+   "P3": {
+    "contenido": 191324726188705,
+    "espera": 119323144876139,
+    "red": 54647513790870
+   },
+   "P4": {
+    "contenido": 266950473510709,
+    "espera": 83730116869556,
+    "red": 247982204012751
+   },
+   "P5": {
+    "contenido": 103878746269079,
+    "espera": 240993488865212,
+    "red": 260313833632497
+   },
+   "P6": {
+    "contenido": 235951425718614,
+    "espera": 137206552963741,
+    "red": 171715871525002
+   }
+  },
+  "B-B1": {
+   "P1": {
+    "contenido": 50893607244931,
+    "espera": 237765376651254,
+    "red": 7970599460869
+   },
+   "P2": {
+    "contenido": 231459488352546,
+    "espera": 76084570631074,
+    "red": 258043224538268
+   },
+   "P3": {
+    "contenido": 113979539425547,
+    "espera": 30548017704872,
+    "red": 197156995290095
+   },
+   "P4": {
+    "contenido": 19912493929870,
+    "espera": 137494567805510,
+    "red": 258031682387776
+   },
+   "P5": {
+    "contenido": 123449301877519,
+    "espera": 132601287718565,
+    "red": 132040363223225
+   },
+   "P6": {
+    "contenido": 268378484319537,
+    "espera": 167692124114587,
+    "red": 179354340398639
+   }
+  },
+  "B-B2": {
+   "P1": {
+    "contenido": 180692775229075,
+    "espera": 24089017464879,
+    "red": 175391671994688
+   },
+   "P2": {
+    "contenido": 265435434947712,
+    "espera": 64013774799015,
+    "red": 239543216502336
+   },
+   "P3": {
+    "contenido": 135618383441533,
+    "espera": 129876143806337,
+    "red": 31416943610360
+   },
+   "P4": {
+    "contenido": 225836445144910,
+    "espera": 226639901027566,
+    "red": 3836325203582
+   },
+   "P5": {
+    "contenido": 83108410399353,
+    "espera": 91196707572180,
+    "red": 136532787888093
+   },
+   "P6": {
+    "contenido": 123623775711829,
+    "espera": 219623287383801,
+    "red": 18017275668313
+   }
+  }
+ },
+ "sondas": {
+  "margen_exigido_s": 240.0,
+  "modo": "previas",
+  "registro": "preflight.jsonl",
+  "resumen_previas": {
+   "margen_real_s": 244.81635403633118,
+   "margen_s": 240.0,
+   "sondas": 5,
+   "ultima_sonda_fin_epoch": 1795706169.491645
+  }
+ }
+}

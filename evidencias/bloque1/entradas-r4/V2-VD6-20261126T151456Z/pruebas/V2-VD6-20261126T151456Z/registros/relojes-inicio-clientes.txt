@@ -1,0 +1,29 @@
+2026-11-26T15:15:18.100012642Z
+Timezone=Etc/UTC
+LocalRTC=no
+CanNTP=yes
+NTP=yes
+NTPSynchronized=yes
+TimeUSec=Thu 2026-11-26 15:15:18 UTC
+RTCTimeUSec=Thu 2026-11-26 15:15:18 UTC
+       Server: 198.51.100.26 (ntp.ubuntu.com)
+Poll interval: 34min 8s (min: 32s; max 34min 8s)
+         Leap: normal
+      Version: 4
+      Stratum: 2
+    Reference: 1D586304
+    Precision: 1us (-25)
+Root distance: 3.799ms (max: 5s)
+       Offset: -542us
+        Delay: 153.060ms
+       Jitter: 415us
+ Packet count: 172
+    Frequency: +4,568ppm
+== carga
+0.13 0.04 0.01 1/213 172768
+2
+== espacio
+Mounted on      Avail
+/          7081881600
+/          7081881600
+/          7081881600

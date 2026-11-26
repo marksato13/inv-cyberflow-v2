@@ -1,0 +1,10 @@
+{
+ "version": 1,
+ "desde_epoch": 1795706056.0,
+ "hasta_epoch": 1795708023.0,
+ "registro": "/home/gadmin/cyberflow-v2/transferencias.jsonl",
+ "registro_existe": true,
+ "copias_en_captura": [],
+ "rechazadas_en_captura": 0,
+ "estado": "sin_copias"
+}

@@ -1,0 +1,13 @@
+{"monotonic": 342309.088168261, "perfil": "P1", "pid": 157504, "tipo": "perfil_lanzado", "utc": "2026-11-26T14:18:47.180330Z"}
+{"monotonic": 342309.092100408, "perfil": "P2", "pid": 157505, "tipo": "perfil_lanzado", "utc": "2026-11-26T14:18:47.184266Z"}
+{"monotonic": 342309.094286301, "perfil": "P3", "pid": 157506, "tipo": "perfil_lanzado", "utc": "2026-11-26T14:18:47.186454Z"}
+{"monotonic": 342309.098087877, "perfil": "P4", "pid": 157507, "tipo": "perfil_lanzado", "utc": "2026-11-26T14:18:47.190255Z"}
+{"monotonic": 342309.100254438, "perfil": "P5", "pid": 157508, "tipo": "perfil_lanzado", "utc": "2026-11-26T14:18:47.192423Z"}
+{"monotonic": 342309.103251851, "perfil": "P6", "pid": 157509, "tipo": "perfil_lanzado", "utc": "2026-11-26T14:18:47.195421Z"}
+{"clasificacion": "completo", "codigo": 0, "monotonic": 343749.697595641, "perfil": "P1", "tipo": "perfil_terminado", "utc": "2026-11-26T14:42:47.789737Z"}
+{"clasificacion": "completo", "codigo": 0, "monotonic": 343749.697755588, "perfil": "P2", "tipo": "perfil_terminado", "utc": "2026-11-26T14:42:47.789930Z"}
+{"clasificacion": "completo", "codigo": 0, "monotonic": 343749.697811589, "perfil": "P3", "tipo": "perfil_terminado", "utc": "2026-11-26T14:42:47.789984Z"}
+{"clasificacion": "completo", "codigo": 0, "monotonic": 343749.69785009, "perfil": "P4", "tipo": "perfil_terminado", "utc": "2026-11-26T14:42:47.790028Z"}
+{"clasificacion": "completo", "codigo": 0, "monotonic": 343749.697885532, "perfil": "P5", "tipo": "perfil_terminado", "utc": "2026-11-26T14:42:47.790064Z"}
+{"clasificacion": "completo", "codigo": 0, "monotonic": 343749.697925936, "perfil": "P6", "tipo": "perfil_terminado", "utc": "2026-11-26T14:42:47.790104Z"}
+{"codigos": {"P1": 0, "P2": 0, "P3": 0, "P4": 0, "P5": 0, "P6": 0}, "monotonic": 343749.802944227, "tipo": "fin", "utc": "2026-11-26T14:42:47.895109Z"}

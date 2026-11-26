@@ -20,6 +20,10 @@ PREVIO_S=150; MARGEN_FIN_S=120; HOLGURA_S=3600; MARGEN_SONDA_S=240
 EXT=/home/adminsrvdmz/cyberflow-v2/extremo        # srv-dmz: referencia independiente HTTP/HTTPS
 # Solo la población con srv-dmz (privacidad y volumen): nada de terceros entra en el fichero.
 FILTRO_EXT="host 10.10.30.10 and tcp and (port 80 or port 443) and (host 10.10.20.21 or host 10.10.20.22 or host 10.10.20.23 or host 10.10.20.24 or host 10.10.20.25 or host 10.10.20.26)"
+# Tipo de ejecución (obligatorio): fija los requisitos del dictamen (estado_global.REQUISITOS).
+TIPO=${CF_TIPO_EJECUCION:-}
+case "$TIPO" in verificacion_dirigida|piloto_final|captura_definitiva) ;;
+  *) echo "CF_TIPO_EJECUCION debe ser verificacion_dirigida, piloto_final o captura_definitiva" >&2; exit 2;; esac
 RETRASO_PRUEBA_S=${RETRASO_PRUEBA_S:-0}
 [[ $RETRASO_PRUEBA_S =~ ^[0-9]+$ ]] || { echo "RETRASO_PRUEBA_S debe ser entero no negativo" >&2; exit 2; }
 SSH="ssh -n -o BatchMode=yes -o ConnectTimeout=8"
@@ -156,10 +160,10 @@ setsid nohup python3 "$B/operacion/vigia_v2.py" --ejecucion "$ID" \
   --registro "$E/vigia.jsonl" > "$E/vigia-salida.txt" 2>&1 < /dev/null &
 log vigia "pid $!"
 VER_CODIGO=$(cat "$B/VERSION" 2>/dev/null || echo no_registrada)
-python3 - "$E" "$ID" "$PROG" "$SHA" "$T_ARCH" "$T_CONF" "$INI" "$FIN_GEN" "$FIN" "$TOPE" "$DUR" "$RETRASO_PRUEBA_S" "$VER_CODIGO" "$MARGEN_SONDA_S" "$NO_ANTES" "$EXT/$ID.pcap" <<'PY'
+python3 - "$E" "$ID" "$PROG" "$SHA" "$T_ARCH" "$T_CONF" "$INI" "$FIN_GEN" "$FIN" "$TOPE" "$DUR" "$RETRASO_PRUEBA_S" "$VER_CODIGO" "$MARGEN_SONDA_S" "$NO_ANTES" "$EXT/$ID.pcap" "$TIPO" <<'PY'
 import json, sys
-e, i, p, sha, ta, conf, ini, fin_gen, fin, tope, dur, retraso, ver, margen, no_antes, ext = sys.argv[1:]
-json.dump({"ejecucion": i, "programa": p, "programa_sha256": sha, "codigo_version": ver,
+e, i, p, sha, ta, conf, ini, fin_gen, fin, tope, dur, retraso, ver, margen, no_antes, ext, tipo = sys.argv[1:]
+json.dump({"ejecucion": i, "tipo_ejecucion": tipo, "programa": p, "programa_sha256": sha, "codigo_version": ver,
            "planificado": {"archivador_desde_epoch": int(ta), "generador_inicio_epoch": int(ini),
                            "generador_fin_epoch": int(fin_gen), "captura_hasta_epoch": int(fin),
                            "tope_epoch": int(tope)},

@@ -1,0 +1,1 @@
+{"ventanas": 664, "trazabilidad_ok": true, "excluidas": 371, "exclusion_por_regla": {"E1": 365, "E5": 26}}

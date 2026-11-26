@@ -1,0 +1,4 @@
+{"desde_epoch": 1795689791.7333786, "ejecucion": "V2-VD3-20261126T104230Z", "hasta_epoch": 0.0, "pid": 846406, "tipo": "inicio", "utc": "2026-11-26T10:43:41.854597Z", "version_script_sha256": "037c228a3aa8f486e3a9747ac3fbcce3eb71eb204a6c4f9bb6c29e3648cb4506"}
+{"anterior": 1795698661.0, "nuevo": 1795695224.0, "tipo": "tope_actualizado", "utc": "2026-11-26T10:43:46.942522Z"}
+{"anterior": 0.0, "nuevo": 1795691626.835214, "tipo": "hasta_actualizado", "utc": "2026-11-26T11:11:59.538736Z"}
+{"estado": "completa", "motivo": "fin_programado", "tipo": "fin", "utc": "2026-11-26T11:14:05.111389Z"}

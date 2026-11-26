@@ -1,0 +1,179 @@
+{"tipo": "inicio", "ejecucion": "V2-VD4-20261126T141333Z", "cada_s": 20, "generador_desde": 1795702723.0, "generador_hasta": 1795704163.0, "minimo_gb_srvdmz": 1.0, "minimo_gb_dc1": 1.0, "sin_progreso_s": 180, "sin_lectura_s": 90, "utc_epoch": 1795702483.560165}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [8545], "libre_b": 10200854528, "utc_epoch": 1795702484.4022746}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [1047, 298], "libre_b": 35256123392, "utc_epoch": 1795702485.0127366}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [8545], "libre_b": 10200846336, "utc_epoch": 1795702505.3676682}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [1195, 298], "libre_b": 35256111104, "utc_epoch": 1795702505.9031765}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [8545], "libre_b": 10200846336, "utc_epoch": 1795702526.2740517}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [1195, 298], "libre_b": 35256098816, "utc_epoch": 1795702526.7690675}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [8545], "libre_b": 10200846336, "utc_epoch": 1795702547.6163018}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [1195, 298], "libre_b": 35256041472, "utc_epoch": 1795702548.1340857}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [8545], "libre_b": 10200842240, "utc_epoch": 1795702568.495437}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [1343, 298], "libre_b": 35256004608, "utc_epoch": 1795702569.0249197}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [8545], "libre_b": 10200842240, "utc_epoch": 1795702589.3869174}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [1343, 298], "libre_b": 35255939072, "utc_epoch": 1795702589.8845837}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [8545], "libre_b": 10200838144, "utc_epoch": 1795702610.7307272}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [1343, 298], "libre_b": 35255930880, "utc_epoch": 1795702611.2501762}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [8545], "libre_b": 10200834048, "utc_epoch": 1795702631.6155438}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [1491, 298], "libre_b": 35255922688, "utc_epoch": 1795702632.1388934}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [8545], "libre_b": 10200834048, "utc_epoch": 1795702652.4911337}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [1491, 298], "libre_b": 35255910400, "utc_epoch": 1795702652.9551651}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [8545], "libre_b": 10200834048, "utc_epoch": 1795702673.7952783}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [1491, 298], "libre_b": 35255902208, "utc_epoch": 1795702674.330622}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [8545], "libre_b": 10200829952, "utc_epoch": 1795702694.6889324}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [1639, 298], "libre_b": 35255894016, "utc_epoch": 1795702695.139978}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [8545], "libre_b": 10200829952, "utc_epoch": 1795702715.4923525}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [1639, 298], "libre_b": 35255877632, "utc_epoch": 1795702716.0066214}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [8545], "libre_b": 10200829952, "utc_epoch": 1795702736.8638983}
+{"tipo": "incidente", "equipo": "srvdmz", "incidente": "sin_progreso", "bytes": 8545, "sin_crecer_desde_epoch": 1795702483.5602944, "utc_epoch": 1795702736.8640656}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [1639, 298], "libre_b": 35255869440, "utc_epoch": 1795702737.3636954}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [14516], "libre_b": 10200817664, "utc_epoch": 1795702757.7288268}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [2550, 572], "libre_b": 35255861248, "utc_epoch": 1795702758.3085878}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [17521], "libre_b": 10200813568, "utc_epoch": 1795702778.6588554}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [3317, 846], "libre_b": 35255836672, "utc_epoch": 1795702779.2646089}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [48487], "libre_b": 10245095424, "utc_epoch": 1795702800.1257234}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [4227, 1114], "libre_b": 35255795712, "utc_epoch": 1795702800.702998}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [50075], "libre_b": 10245087232, "utc_epoch": 1795702821.080862}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [4227, 1114], "libre_b": 35255750656, "utc_epoch": 1795702821.6348724}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [50075], "libre_b": 10245083136, "utc_epoch": 1795702841.9869397}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [4227, 1114], "libre_b": 35255738368, "utc_epoch": 1795702842.5674}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [51663], "libre_b": 10245083136, "utc_epoch": 1795702863.4149935}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [5138, 1384], "libre_b": 35255726080, "utc_epoch": 1795702863.9457989}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [100939], "libre_b": 10245017600, "utc_epoch": 1795702884.3146954}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [5906, 1658], "libre_b": 35255713792, "utc_epoch": 1795702884.8844962}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [128938], "libre_b": 10244984832, "utc_epoch": 1795702905.3347054}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [6670, 1928], "libre_b": 35255705600, "utc_epoch": 1795702905.9023554}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [130526], "libre_b": 10244980736, "utc_epoch": 1795702926.778337}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [7579, 2198], "libre_b": 35255693312, "utc_epoch": 1795702927.2810314}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [134963], "libre_b": 10244972544, "utc_epoch": 1795702947.6468952}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [7579, 2198], "libre_b": 35255689216, "utc_epoch": 1795702948.1726067}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [151079], "libre_b": 10244952064, "utc_epoch": 1795702968.520236}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [9877, 3014], "libre_b": 35255672832, "utc_epoch": 1795702969.0583334}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [196725], "libre_b": 10244898816, "utc_epoch": 1795702989.9079003}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [13857, 4382], "libre_b": 35255652352, "utc_epoch": 1795702990.4707422}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [5117995], "libre_b": 10239975424, "utc_epoch": 1795703010.8395488}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [15397, 4934], "libre_b": 35255644160, "utc_epoch": 1795703011.327539}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [5148259], "libre_b": 10239938560, "utc_epoch": 1795703031.6950157}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [17700, 5758], "libre_b": 35255627776, "utc_epoch": 1795703032.1974363}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [5180259], "libre_b": 10239901696, "utc_epoch": 1795703053.043082}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [22449, 7398], "libre_b": 35255611392, "utc_epoch": 1795703053.5656435}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [5435999], "libre_b": 10239635456, "utc_epoch": 1795703073.918788}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [23991, 7954], "libre_b": 35255595008, "utc_epoch": 1795703074.4626513}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [5456597], "libre_b": 10239606784, "utc_epoch": 1795703094.8106854}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [26300, 8784], "libre_b": 35255570432, "utc_epoch": 1795703095.3321757}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [5512277], "libre_b": 10239549440, "utc_epoch": 1795703116.180135}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [31049, 10428], "libre_b": 35255558144, "utc_epoch": 1795703116.7586064}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [5576003], "libre_b": 10239479808, "utc_epoch": 1795703137.1062756}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [35651, 12072], "libre_b": 35255541760, "utc_epoch": 1795703137.6390262}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [5586279], "libre_b": 10239467520, "utc_epoch": 1795703157.996731}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [37180, 12614], "libre_b": 35255521280, "utc_epoch": 1795703158.5249007}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [5599783], "libre_b": 10239447040, "utc_epoch": 1795703179.3745065}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [38866, 13166], "libre_b": 35255504896, "utc_epoch": 1795703179.8914433}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [5608595], "libre_b": 10239434752, "utc_epoch": 1795703200.2383213}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [38866, 13166], "libre_b": 35255496704, "utc_epoch": 1795703200.7714293}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [5650452], "libre_b": 10239373312, "utc_epoch": 1795703221.1390958}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [40405, 13718], "libre_b": 35255476224, "utc_epoch": 1795703221.7102706}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [5813838], "libre_b": 10239205376, "utc_epoch": 1795703242.5669265}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [45916, 15626], "libre_b": 35255451648, "utc_epoch": 1795703243.083113}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [6345658], "libre_b": 10238660608, "utc_epoch": 1795703263.4462972}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [48976, 16712], "libre_b": 35255439360, "utc_epoch": 1795703263.9525135}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [6716073], "libre_b": 10238271488, "utc_epoch": 1795703284.3154256}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [60608, 20798], "libre_b": 35255410688, "utc_epoch": 1795703284.863747}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [6802261], "libre_b": 10238185472, "utc_epoch": 1795703305.7145832}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [67517, 23266], "libre_b": 35255398400, "utc_epoch": 1795703306.2179756}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [6884004], "libre_b": 10238099456, "utc_epoch": 1795703326.5837662}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [74433, 25744], "libre_b": 35255377920, "utc_epoch": 1795703327.0896776}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [7204626], "libre_b": 10237763584, "utc_epoch": 1795703347.4389844}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [79943, 27934], "libre_b": 35255336960, "utc_epoch": 1795703348.0042806}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [9060103], "libre_b": 10235895808, "utc_epoch": 1795703368.8568466}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [84552, 29306], "libre_b": 35255324672, "utc_epoch": 1795703369.4254816}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [9083922], "libre_b": 10235867136, "utc_epoch": 1795703389.771346}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [88382, 30668], "libre_b": 35255308288, "utc_epoch": 1795703390.3090968}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [9303723], "libre_b": 10235621376, "utc_epoch": 1795703410.6719558}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [95454, 33154], "libre_b": 35255287808, "utc_epoch": 1795703411.2009547}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [9444932], "libre_b": 10235478016, "utc_epoch": 1795703432.0671391}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [97746, 33966], "libre_b": 35255279616, "utc_epoch": 1795703432.591195}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [9449326], "libre_b": 10235473920, "utc_epoch": 1795703452.9458477}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [98514, 34240], "libre_b": 35255189504, "utc_epoch": 1795703453.493192}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [9460631], "libre_b": 10235457536, "utc_epoch": 1795703473.852626}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [100193, 34784], "libre_b": 35255128064, "utc_epoch": 1795703474.3527458}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [10452915], "libre_b": 10234462208, "utc_epoch": 1795703495.217791}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [100955, 35054], "libre_b": 35255115776, "utc_epoch": 1795703495.7078907}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [10732983], "libre_b": 10234175488, "utc_epoch": 1795703516.064004}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [100955, 35054], "libre_b": 35255103488, "utc_epoch": 1795703516.5747824}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [10732983], "libre_b": 10234171392, "utc_epoch": 1795703536.944498}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [101103, 35054], "libre_b": 35255095296, "utc_epoch": 1795703537.4247348}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [12700605], "libre_b": 10232201216, "utc_epoch": 1795703558.2948205}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [103409, 35880], "libre_b": 35255083008, "utc_epoch": 1795703558.7748053}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [12742858], "libre_b": 10232152064, "utc_epoch": 1795703579.1630528}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [104947, 36432], "libre_b": 35255074816, "utc_epoch": 1795703579.7107832}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [12752142], "libre_b": 10232135680, "utc_epoch": 1795703600.0639834}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [107395, 37254], "libre_b": 35255058432, "utc_epoch": 1795703600.606571}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [12769394], "libre_b": 10232119296, "utc_epoch": 1795703621.4559314}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [109693, 38074], "libre_b": 35255046144, "utc_epoch": 1795703621.9596477}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [12779114], "libre_b": 10232107008, "utc_epoch": 1795703642.3133554}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [111994, 38896], "libre_b": 35255033856, "utc_epoch": 1795703642.8191233}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [12788970], "libre_b": 10232090624, "utc_epoch": 1795703663.1711686}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [112142, 38896], "libre_b": 35255021568, "utc_epoch": 1795703663.8109667}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [12799633], "libre_b": 10232082432, "utc_epoch": 1795703684.6666584}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [112909, 39174], "libre_b": 35255001088, "utc_epoch": 1795703685.1425705}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [12801221], "libre_b": 10232078336, "utc_epoch": 1795703705.4969063}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [113825, 39448], "libre_b": 35254902784, "utc_epoch": 1795703705.716768}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [12806598], "libre_b": 10232070144, "utc_epoch": 1795703726.0798578}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [114596, 39726], "libre_b": 35254865920, "utc_epoch": 1795703726.6371305}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [12806598], "libre_b": 10232070144, "utc_epoch": 1795703747.4786303}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [114596, 39726], "libre_b": 35254853632, "utc_epoch": 1795703748.0190473}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [12806598], "libre_b": 10232070144, "utc_epoch": 1795703768.3670728}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [114744, 39726], "libre_b": 35254837248, "utc_epoch": 1795703768.8954716}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [12985394], "libre_b": 10231881728, "utc_epoch": 1795703789.2442756}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [116276, 40272], "libre_b": 35254829056, "utc_epoch": 1795703789.7405682}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13024873], "libre_b": 10231844864, "utc_epoch": 1795703810.5807803}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [119343, 41368], "libre_b": 35254808576, "utc_epoch": 1795703811.0790648}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13048351], "libre_b": 10231816192, "utc_epoch": 1795703831.4437618}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [120252, 41638], "libre_b": 35254775808, "utc_epoch": 1795703831.9978778}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13068096], "libre_b": 10231783424, "utc_epoch": 1795703852.3541386}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [123313, 42728], "libre_b": 35254763520, "utc_epoch": 1795703852.907809}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13116293], "libre_b": 10231730176, "utc_epoch": 1795703873.7468882}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [130203, 45176], "libre_b": 35254747136, "utc_epoch": 1795703874.2720678}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13118412], "libre_b": 10231726080, "utc_epoch": 1795703894.632583}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [130351, 45176], "libre_b": 35254734848, "utc_epoch": 1795703895.1445003}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13124657], "libre_b": 10231713792, "utc_epoch": 1795703915.4888418}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [131115, 45446], "libre_b": 35254718464, "utc_epoch": 1795703916.0653057}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13126245], "libre_b": 10231709696, "utc_epoch": 1795703936.9201863}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [131115, 45446], "libre_b": 35254714368, "utc_epoch": 1795703937.5273397}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13193800], "libre_b": 10231635968, "utc_epoch": 1795703957.8954494}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [132025, 45714], "libre_b": 35254681600, "utc_epoch": 1795703958.3847399}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13195386], "libre_b": 10231631872, "utc_epoch": 1795703978.7385154}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [132793, 45988], "libre_b": 35254677504, "utc_epoch": 1795703979.2297304}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13202865], "libre_b": 10231623680, "utc_epoch": 1795704000.1794283}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [134333, 46540], "libre_b": 35254661120, "utc_epoch": 1795704000.7027895}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13223559], "libre_b": 10231599104, "utc_epoch": 1795704021.0627244}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [138317, 47908], "libre_b": 35254644736, "utc_epoch": 1795704021.572405}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13287631], "libre_b": 10231525376, "utc_epoch": 1795704041.9360955}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [142154, 49278], "libre_b": 35254632448, "utc_epoch": 1795704042.4604633}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13289219], "libre_b": 10231525376, "utc_epoch": 1795704063.3177347}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [142922, 49552], "libre_b": 35254616064, "utc_epoch": 1795704063.7993693}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13292685], "libre_b": 10231521280, "utc_epoch": 1795704084.1501832}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [143070, 49552], "libre_b": 35254603776, "utc_epoch": 1795704084.702452}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13292685], "libre_b": 10231517184, "utc_epoch": 1795704105.0612664}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [143070, 49552], "libre_b": 35254591488, "utc_epoch": 1795704105.6330512}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13292685], "libre_b": 10231517184, "utc_epoch": 1795704126.489439}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [143218, 49552], "libre_b": 35254587392, "utc_epoch": 1795704127.118886}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": true, "proceso": true, "bytes": [13313495], "libre_b": 10231496704, "utc_epoch": 1795704147.4707546}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": true, "proceso": true, "bytes": [143979, 49820], "libre_b": 35254571008, "utc_epoch": 1795704148.038341}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [13316560], "libre_b": 10231484416, "utc_epoch": 1795704168.39449}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [144751, 50098], "libre_b": 35254562816, "utc_epoch": 1795704168.912149}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [13316560], "libre_b": 10231484416, "utc_epoch": 1795704189.7550626}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [144899, 50098], "libre_b": 35254554624, "utc_epoch": 1795704190.3757696}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [13316560], "libre_b": 10231484416, "utc_epoch": 1795704210.739492}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [144899, 50098], "libre_b": 35254546432, "utc_epoch": 1795704211.2457469}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [13316560], "libre_b": 10231480320, "utc_epoch": 1795704231.602148}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [144899, 50098], "libre_b": 35254534144, "utc_epoch": 1795704232.1520028}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [13316560], "libre_b": 10231480320, "utc_epoch": 1795704253.0192578}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [145047, 50098], "libre_b": 35254513664, "utc_epoch": 1795704253.5549893}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [13316560], "libre_b": 10231476224, "utc_epoch": 1795704273.9118552}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [145047, 50098], "libre_b": 35254497280, "utc_epoch": 1795704274.4029777}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [13316560], "libre_b": 10231472128, "utc_epoch": 1795704294.7683272}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [145047, 50098], "libre_b": 35254489088, "utc_epoch": 1795704295.278491}
+{"tipo": "muestra", "equipo": "srvdmz", "en_generacion": false, "proceso": true, "bytes": [13316560], "libre_b": 10231472128, "utc_epoch": 1795704316.1463697}
+{"tipo": "muestra", "equipo": "dc1", "en_generacion": false, "proceso": true, "bytes": [145195, 50098], "libre_b": 35254476800, "utc_epoch": 1795704316.656602}
+{"tipo": "fin", "motivo": "parado_por_cierre", "utc_epoch": 1795704322.657755}

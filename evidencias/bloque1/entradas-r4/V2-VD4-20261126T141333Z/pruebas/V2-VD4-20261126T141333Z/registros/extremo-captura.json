@@ -1,0 +1,10 @@
+{
+ "fichero_origen": "/home/adminsrvdmz/cyberflow-v2/extremo/V2-VD4-20261126T141333Z.pcap",
+ "capturados": 8269,
+ "recibidos_por_filtro": 8269,
+ "descartados_nucleo": 0,
+ "sha256_origen": "07c4a644986f911c42e8563d4c7b8999e44e3f07ee23a58f900c6a06316c1f7c",
+ "bytes": 13316560,
+ "sigue_vivo": false,
+ "estado": "ok"
+}

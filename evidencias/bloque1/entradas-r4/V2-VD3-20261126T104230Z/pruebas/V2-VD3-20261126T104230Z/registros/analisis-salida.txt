@@ -1,0 +1,112 @@
+{"total": 598, "clases": {"correcto": 598}, "motivos_no_ok": {}}
+	Command being timed: "python3 /home/m4rk/cyberflow-v2/codigo/operacion/conciliar_v2.py --transacciones generador/V2-VD3-20261126T104230Z/transacciones-P1.jsonl generador/V2-VD3-20261126T104230Z/transacciones-P2.jsonl generador/V2-VD3-20261126T104230Z/transacciones-P3.jsonl generador/V2-VD3-20261126T104230Z/transacciones-P4.jsonl generador/V2-VD3-20261126T104230Z/transacciones-P5.jsonl generador/V2-VD3-20261126T104230Z/transacciones-P6.jsonl --servidor registros/servidor-http-80.jsonl registros/servidor-https-443.jsonl --dns registros/dns-V2-VD3-20261126T104230Z.jsonl --salida conciliacion"
+	User time (seconds): 0.10
+	System time (seconds): 0.01
+	Percent of CPU this job got: 98%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.12
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 19968
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3328
+	Voluntary context switches: 1
+	Involuntary context switches: 7
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 336
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+conciliar rc=0
+{"total": {"n": 598, "conexion": 276, "peticion": 581, "respuesta": 585, "completas": 264, "bytes_esperados": 12428520, "bytes_vistos": 12431280, "fraccion": 1.000222069884427, "no_comparables": 182, "no_verificables": 0, "copias_espejo": 11230, "retransmisiones": 0, "huecos": 0}, "errores": []}
+	Command being timed: "python3 /home/m4rk/cyberflow-v2/codigo/captura/cobertura_v2.py --capturas /home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z --transacciones generador/V2-VD3-20261126T104230Z/transacciones-P1.jsonl generador/V2-VD3-20261126T104230Z/transacciones-P2.jsonl generador/V2-VD3-20261126T104230Z/transacciones-P3.jsonl generador/V2-VD3-20261126T104230Z/transacciones-P4.jsonl generador/V2-VD3-20261126T104230Z/transacciones-P5.jsonl generador/V2-VD3-20261126T104230Z/transacciones-P6.jsonl --salida cobertura/cobertura.json --csv cobertura/cobertura.csv"
+	User time (seconds): 10.03
+	System time (seconds): 0.08
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:10.15
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 26664
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 10702
+	Voluntary context switches: 55
+	Involuntary context switches: 173
+	Swaps: 0
+	File system inputs: 3376
+	File system outputs: 1840
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+cobertura rc=0
+{"fronteras": 3, "dispersion_t0_s": 0.05}
+fronteras rc=0
+{"copias_espejo_quitadas": 416345, "paquetes_descartados_poblacion": 412958, "paquetes_incluidos": 15751, "eventos_incluidos": 1416, "eventos_descartados_poblacion": 431, "filas": 645, "orden_eve": {"reordenados": 6, "tardios_descartados": 0, "desorden_max_s": 0.000782012939453125, "ventana_s": 60.0}, "orden_pcap": {"reordenadas": 11574, "tardias_descartadas": 0, "desorden_max_s": 0.003615140914916992, "ventana_s": 1.0}, "ejecucion": "V2-VD3-20261126T104230Z", "poblacion": ["10.10.20.21", "10.10.20.22", "10.10.20.23", "10.10.20.24", "10.10.20.25", "10.10.20.26"], "fronteras_utc": ["2026-11-26T10:53:46.370044+00:00", "2026-11-26T10:59:46.370044+00:00", "2026-11-26T11:05:46.370044+00:00"], "pcap_ficheros": 369, "paso_s": 10, "historia_maxima_s": 60, "horizonte_estado_flujos_s": 230.0, "guarda_estado_s": 230.0, "estado": "continuo"}
+	Command being timed: "python3 /home/m4rk/cyberflow-v2/codigo/extraccion/extraer_v2.py /home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z --salida extraccion --fronteras fronteras.json"
+	User time (seconds): 51.68
+	System time (seconds): 0.17
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:51.88
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 63020
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 19200
+	Voluntary context switches: 37
+	Involuntary context switches: 352
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 21320
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+extraer rc=0
+{"esquema_ok": true, "sin_futuro_ok": true, "paridad_motor_ok": true, "filas_verificadas": 40}
+	Command being timed: "python3 /home/m4rk/cyberflow-v2/codigo/extraccion/verificar_v2.py /home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z --salida extraccion --fronteras fronteras.json --max-filas 40 --historia-s 230"
+	User time (seconds): 625.77
+	System time (seconds): 1.72
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 10:27.65
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 107200
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 269646
+	Voluntary context switches: 1
+	Involuntary context switches: 5271
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 9312
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+verificar rc=0
+{"resultado_global": "examinado_completo", "denominadores": {"tramas_leidas": 891512, "tramas_en_ventana": 891512, "tramas_en_poblacion": 31534, "eventos": 15767, "eventos_por_clase": {"completo": 15767}}, "integridad_entrada": {"problemas": [], "ficheros_esperados": 369, "ficheros_con_problemas": 0}}
+calidad_copias rc=0
+{"total": {"transacciones": 182, "comprobadas": 182, "sin_discrepancias": 182, "discrepancias": 0, "no_determinables": 0, "indeterminado_dc1": 0, "ambiguas": 0, "consultas_dc1": 182, "respuestas_dc1": 182, "timeouts": 0, "timeouts_con_consulta_dc1": 0, "timeouts_con_consulta_sensor1": 0}, "sin_transaccion": 8}
+calidad_dns rc=0
+{"modo": "rangos", "discrepancias": 0}
+calidad_extremo rc=0
+{"ventanas": 645, "trazabilidad_ok": true, "excluidas": 373, "exclusion_por_regla": {"E1": 353, "E5": 26, "E3": 21}}
+metadatos rc=0
+{"estado": "sin_contaminacion", "tocadas_utiles": 0, "tocadas_en_guarda_planificada": 23}
+calidad_sonda rc=0

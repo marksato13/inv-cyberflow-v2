@@ -9,7 +9,7 @@ OP=~/cyberflow-v2/codigo/operacion; S1=/home/m4rk/cyberflow-v2
 B=~/cyberflow-v2/bloque1/verificacion; mkdir -p "$B"
 SSH="ssh -n -o BatchMode=yes -o ConnectTimeout=8"
 L="$B/lanzar-$TAG.txt"
-( cd "$OP" && bash lanzar_v2.sh "$PROG" "$TAG" "$GB" ) > "$L" 2>&1; RC=$?; echo "lanzar rc=$RC"
+( cd "$OP" && CF_TIPO_EJECUCION=verificacion_dirigida bash lanzar_v2.sh "$PROG" "$TAG" "$GB" ) > "$L" 2>&1; RC=$?; echo "lanzar rc=$RC"
 ID=$(grep -o "V2-$TAG-[0-9TZ]*" "$L" | head -1); echo "ejecucion $ID"
 [ -n "$ID" ] && [ "$RC" = 0 ] || { echo "lanzamiento fallido: no se espera ni se cierra"; exit 1; }
 for i in $(seq 1 240); do

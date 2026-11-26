@@ -1,6 +1,7 @@
 # Capturas y registros de ejecución: privados, nunca en el repositorio
 *.pcap
 *.pcapng
+*.pcap.gz
 # Excepciones: PCAP saneados y revisados, publicados como evidencia (BLOQUE1-REVISION-2-2026-11-26.md)
 !evidencias/bloque1/dns-entradas/dns-e3-pcap/dns-dc1-V2-E3-20261125T230032Z.saneado.pcap
 !evidencias/bloque1/rx-dropped-r2/extracto-sin-manejador.pcap
@@ -19,3 +20,15 @@ tests/tmp*/
 tests/_scratch/
 tests/_trymkdir/
 tests/_temporales_pytest/
+
+# --- Excepciones: al final, porque en .gitignore manda la última regla que coincide ---
+# Bloque 1, revisión 4 (docs/BLOQUE1-REVISION-4-2026-11-26.md). Solo estas carpetas, ya saneadas y
+# barridas; los PCAP/EVE filtrados de VD2–VD6 van en la release bloque1-r4, no aquí.
+#  - texto de las entradas (pruebas/ y capturas/ de cada ejecución), sin PCAP ni EVE:
+!evidencias/bloque1/entradas-r4/*/pruebas/
+!evidencias/bloque1/entradas-r4/*/capturas/
+!evidencias/bloque1/entradas-r4/*/informes-filtrado/eve.json
+#  - extracto completo de P2 (6 conexiones): PCAP saneado y EVE de esas conexiones
+!evidencias/bloque1/extractos-539c48e/p2-V2-VD2-20261126T090705Z/capturas/
+!evidencias/bloque1/extractos-539c48e/p2-V2-VD2-20261126T090705Z/capturas/*/pcap/extracto-*.pcap
+!evidencias/bloque1/extractos-539c48e/p2-V2-VD2-20261126T090705Z/capturas/*/eve/eve-extracto.json

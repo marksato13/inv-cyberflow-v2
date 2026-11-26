@@ -1,0 +1,13821 @@
+{
+ "version": 2,
+ "resultado_global": "examinado_completo",
+ "entrada_completa": true,
+ "integridad_entrada": {
+  "problemas": [],
+  "ficheros_esperados": 369,
+  "ficheros_con_problemas": 0
+ },
+ "parametros": {
+  "carpeta": "/home/m4rk/cyberflow-v2/capturas/V2-VD4-20261126T141333Z/pcap",
+  "ips": [
+   "10.10.20.21",
+   "10.10.20.22",
+   "10.10.20.23",
+   "10.10.20.24",
+   "10.10.20.25",
+   "10.10.20.26"
+  ],
+  "subredes": [],
+  "desde": null,
+  "hasta": null,
+  "ventana_copia_s": 0.02,
+  "margen_referencia_s": 0.005,
+  "configuracion": "/home/m4rk/cyberflow-v2/codigo/captura/rutas_span.json"
+ },
+ "configuracion_espejo": {
+  "monitor_session": 1,
+  "equipo": "Catalyst 9300",
+  "fuentes": [
+   {
+    "interfaz": "Gi1/0/23",
+    "direccion": "both"
+   },
+   {
+    "interfaz": "Gi2/0/23",
+    "direccion": "both"
+   }
+  ],
+  "destino": {
+   "interfaz": "Gi2/0/19",
+   "encapsulation": "replicate"
+  },
+  "subredes": [
+   {
+    "subred": "10.10.10.0/24",
+    "vlan": 10,
+    "puerta_enlace": "10.10.10.1"
+   },
+   {
+    "subred": "10.10.20.0/24",
+    "vlan": 20,
+    "puerta_enlace": "10.10.20.1"
+   },
+   {
+    "subred": "10.10.30.0/24",
+    "vlan": 30,
+    "puerta_enlace": "10.10.30.1"
+   },
+   {
+    "subred": "10.10.60.0/24",
+    "vlan": 60,
+    "puerta_enlace": "10.10.60.1"
+   },
+   {
+    "subred": "10.10.99.0/24",
+    "vlan": 99,
+    "puerta_enlace": "10.10.99.1"
+   }
+  ],
+  "otras_vlan_tronco": [
+   40,
+   50,
+   70,
+   80,
+   85,
+   88,
+   90,
+   95,
+   100
+  ],
+  "difusion_multidifusion": "no_determinable"
+ },
+ "denominadores": {
+  "tramas_leidas": 889146,
+  "tramas_en_ventana": 889146,
+  "tramas_en_poblacion": 32838,
+  "eventos": 16419,
+  "eventos_por_clase": {
+   "completo": 16419
+  }
+ },
+ "por_ruta": {
+  "10.10.10.0/24>10.10.20.0/24": {
+   "eventos": 183,
+   "clases": {
+    "completo": 183
+   },
+   "faltantes_por_vlan": {},
+   "fraccion_falta_por_vlan": {}
+  },
+  "10.10.20.0/24>10.10.10.0/24": {
+   "eventos": 183,
+   "clases": {
+    "completo": 183
+   },
+   "faltantes_por_vlan": {},
+   "fraccion_falta_por_vlan": {}
+  },
+  "10.10.20.0/24>10.10.30.0/24": {
+   "eventos": 5395,
+   "clases": {
+    "completo": 5395
+   },
+   "faltantes_por_vlan": {},
+   "fraccion_falta_por_vlan": {}
+  },
+  "10.10.30.0/24>10.10.20.0/24": {
+   "eventos": 10658,
+   "clases": {
+    "completo": 10658
+   },
+   "faltantes_por_vlan": {},
+   "fraccion_falta_por_vlan": {}
+  }
+ },
+ "por_vlan_faltante": {},
+ "eventos_por_segundo": {
+  "1795702482": {
+   "completo": 49
+  },
+  "1795702749": {
+   "completo": 12
+  },
+  "1795702753": {
+   "completo": 14
+  },
+  "1795702768": {
+   "completo": 17
+  },
+  "1795702784": {
+   "completo": 48
+  },
+  "1795702807": {
+   "completo": 10
+  },
+  "1795702847": {
+   "completo": 12
+  },
+  "1795702873": {
+   "completo": 20
+  },
+  "1795702880": {
+   "completo": 89
+  },
+  "1795702894": {
+   "completo": 10
+  },
+  "1795702902": {
+   "completo": 69
+  },
+  "1795702910": {
+   "completo": 12
+  },
+  "1795702941": {
+   "completo": 12
+  },
+  "1795702946": {
+   "completo": 10
+  },
+  "1795702952": {
+   "completo": 15
+  },
+  "1795702956": {
+   "completo": 33
+  },
+  "1795702962": {
+   "completo": 18
+  },
+  "1795702969": {
+   "completo": 12
+  },
+  "1795702970": {
+   "completo": 33
+  },
+  "1795702973": {
+   "completo": 29
+  },
+  "1795702980": {
+   "completo": 12
+  },
+  "1795702984": {
+   "completo": 10
+  },
+  "1795702986": {
+   "completo": 53
+  },
+  "1795702995": {
+   "completo": 10
+  },
+  "1795703002": {
+   "completo": 2761
+  },
+  "1795703003": {
+   "completo": 1706
+  },
+  "1795703006": {
+   "completo": 38
+  },
+  "1795703017": {
+   "completo": 35
+  },
+  "1795703022": {
+   "completo": 14
+  },
+  "1795703023": {
+   "completo": 28
+  },
+  "1795703034": {
+   "completo": 16
+  },
+  "1795703036": {
+   "completo": 29
+  },
+  "1795703037": {
+   "completo": 17
+  },
+  "1795703038": {
+   "completo": 18
+  },
+  "1795703043": {
+   "completo": 16
+  },
+  "1795703045": {
+   "completo": 26
+  },
+  "1795703052": {
+   "completo": 12
+  },
+  "1795703058": {
+   "completo": 16
+  },
+  "1795703061": {
+   "completo": 10
+  },
+  "1795703065": {
+   "completo": 13
+  },
+  "1795703066": {
+   "completo": 48
+  },
+  "1795703070": {
+   "completo": 259
+  },
+  "1795703080": {
+   "completo": 12
+  },
+  "1795703083": {
+   "completo": 22
+  },
+  "1795703084": {
+   "completo": 24
+  },
+  "1795703086": {
+   "completo": 12
+  },
+  "1795703087": {
+   "completo": 12
+  },
+  "1795703100": {
+   "completo": 32
+  },
+  "1795703105": {
+   "completo": 10
+  },
+  "1795703107": {
+   "completo": 20
+  },
+  "1795703109": {
+   "completo": 65
+  },
+  "1795703111": {
+   "completo": 10
+  },
+  "1795703112": {
+   "completo": 24
+  },
+  "1795703117": {
+   "completo": 38
+  },
+  "1795703122": {
+   "completo": 18
+  },
+  "1795703125": {
+   "completo": 37
+  },
+  "1795703127": {
+   "completo": 12
+  },
+  "1795703129": {
+   "completo": 14
+  },
+  "1795703133": {
+   "completo": 10
+  },
+  "1795703136": {
+   "completo": 39
+  },
+  "1795703143": {
+   "completo": 12
+  },
+  "1795703146": {
+   "completo": 22
+  },
+  "1795703158": {
+   "completo": 20
+  },
+  "1795703164": {
+   "completo": 10
+  },
+  "1795703165": {
+   "completo": 14
+  },
+  "1795703169": {
+   "completo": 12
+  },
+  "1795703180": {
+   "completo": 26
+  },
+  "1795703203": {
+   "completo": 78
+  },
+  "1795703204": {
+   "completo": 33
+  },
+  "1795703205": {
+   "completo": 12
+  },
+  "1795703211": {
+   "completo": 10
+  },
+  "1795703214": {
+   "completo": 10
+  },
+  "1795703225": {
+   "completo": 81
+  },
+  "1795703227": {
+   "completo": 12
+  },
+  "1795703229": {
+   "completo": 67
+  },
+  "1795703230": {
+   "completo": 36
+  },
+  "1795703231": {
+   "completo": 12
+  },
+  "1795703232": {
+   "completo": 16
+  },
+  "1795703234": {
+   "completo": 10
+  },
+  "1795703237": {
+   "completo": 54
+  },
+  "1795703241": {
+   "completo": 23
+  },
+  "1795703243": {
+   "completo": 12
+  },
+  "1795703244": {
+   "completo": 30
+  },
+  "1795703254": {
+   "completo": 14
+  },
+  "1795703255": {
+   "completo": 10
+  },
+  "1795703256": {
+   "completo": 10
+  },
+  "1795703261": {
+   "completo": 581
+  },
+  "1795703265": {
+   "completo": 24
+  },
+  "1795703267": {
+   "completo": 16
+  },
+  "1795703268": {
+   "completo": 30
+  },
+  "1795703269": {
+   "completo": 28
+  },
+  "1795703270": {
+   "completo": 30
+  },
+  "1795703271": {
+   "completo": 12
+  },
+  "1795703272": {
+   "completo": 102
+  },
+  "1795703274": {
+   "completo": 67
+  },
+  "1795703275": {
+   "completo": 224
+  },
+  "1795703277": {
+   "completo": 36
+  },
+  "1795703278": {
+   "completo": 24
+  },
+  "1795703279": {
+   "completo": 12
+  },
+  "1795703281": {
+   "completo": 32
+  },
+  "1795703283": {
+   "completo": 16
+  },
+  "1795703284": {
+   "completo": 10
+  },
+  "1795703285": {
+   "completo": 28
+  },
+  "1795703286": {
+   "completo": 56
+  },
+  "1795703289": {
+   "completo": 54
+  },
+  "1795703291": {
+   "completo": 12
+  },
+  "1795703292": {
+   "completo": 10
+  },
+  "1795703293": {
+   "completo": 12
+  },
+  "1795703296": {
+   "completo": 19
+  },
+  "1795703297": {
+   "completo": 14
+  },
+  "1795703300": {
+   "completo": 10
+  },
+  "1795703304": {
+   "completo": 12
+  },
+  "1795703308": {
+   "completo": 18
+  },
+  "1795703309": {
+   "completo": 17
+  },
+  "1795703315": {
+   "completo": 10
+  },
+  "1795703317": {
+   "completo": 44
+  },
+  "1795703318": {
+   "completo": 31
+  },
+  "1795703320": {
+   "completo": 24
+  },
+  "1795703321": {
+   "completo": 43
+  },
+  "1795703322": {
+   "completo": 22
+  },
+  "1795703326": {
+   "completo": 28
+  },
+  "1795703328": {
+   "completo": 19
+  },
+  "1795703329": {
+   "completo": 30
+  },
+  "1795703333": {
+   "completo": 38
+  },
+  "1795703336": {
+   "completo": 14
+  },
+  "1795703343": {
+   "completo": 37
+  },
+  "1795703344": {
+   "completo": 47
+  },
+  "1795703346": {
+   "completo": 343
+  },
+  "1795703347": {
+   "completo": 12
+  },
+  "1795703348": {
+   "completo": 10
+  },
+  "1795703349": {
+   "completo": 10
+  },
+  "1795703350": {
+   "completo": 46
+  },
+  "1795703352": {
+   "completo": 1449
+  },
+  "1795703353": {
+   "completo": 215
+  },
+  "1795703358": {
+   "completo": 125
+  },
+  "1795703359": {
+   "completo": 24
+  },
+  "1795703368": {
+   "completo": 10
+  },
+  "1795703370": {
+   "completo": 10
+  },
+  "1795703371": {
+   "completo": 12
+  },
+  "1795703380": {
+   "completo": 12
+  },
+  "1795703383": {
+   "completo": 16
+  },
+  "1795703384": {
+   "completo": 18
+  },
+  "1795703385": {
+   "completo": 26
+  },
+  "1795703389": {
+   "completo": 12
+  },
+  "1795703390": {
+   "completo": 40
+  },
+  "1795703391": {
+   "completo": 64
+  },
+  "1795703392": {
+   "completo": 129
+  },
+  "1795703393": {
+   "completo": 17
+  },
+  "1795703399": {
+   "completo": 10
+  },
+  "1795703400": {
+   "completo": 12
+  },
+  "1795703401": {
+   "completo": 20
+  },
+  "1795703404": {
+   "completo": 16
+  },
+  "1795703407": {
+   "completo": 31
+  },
+  "1795703408": {
+   "completo": 89
+  },
+  "1795703409": {
+   "completo": 15
+  },
+  "1795703410": {
+   "completo": 20
+  },
+  "1795703413": {
+   "completo": 10
+  },
+  "1795703418": {
+   "completo": 16
+  },
+  "1795703421": {
+   "completo": 12
+  },
+  "1795703425": {
+   "completo": 128
+  },
+  "1795703427": {
+   "completo": 14
+  },
+  "1795703432": {
+   "completo": 10
+  },
+  "1795703436": {
+   "completo": 11
+  },
+  "1795703437": {
+   "completo": 8
+  },
+  "1795703462": {
+   "completo": 15
+  },
+  "1795703464": {
+   "completo": 15
+  },
+  "1795703465": {
+   "completo": 18
+  },
+  "1795703475": {
+   "completo": 12
+  },
+  "1795703494": {
+   "completo": 127
+  },
+  "1795703495": {
+   "completo": 1059
+  },
+  "1795703538": {
+   "completo": 1904
+  },
+  "1795703547": {
+   "completo": 12
+  },
+  "1795703553": {
+   "completo": 40
+  },
+  "1795703565": {
+   "completo": 10
+  },
+  "1795703569": {
+   "completo": 12
+  },
+  "1795703571": {
+   "completo": 12
+  },
+  "1795703574": {
+   "completo": 68
+  },
+  "1795703589": {
+   "completo": 15
+  },
+  "1795703593": {
+   "completo": 10
+  },
+  "1795703597": {
+   "completo": 28
+  },
+  "1795703601": {
+   "completo": 22
+  },
+  "1795703605": {
+   "completo": 12
+  },
+  "1795703606": {
+   "completo": 17
+  },
+  "1795703615": {
+   "completo": 17
+  },
+  "1795703620": {
+   "completo": 10
+  },
+  "1795703622": {
+   "completo": 15
+  },
+  "1795703625": {
+   "completo": 12
+  },
+  "1795703640": {
+   "completo": 16
+  },
+  "1795703641": {
+   "completo": 23
+  },
+  "1795703681": {
+   "completo": 24
+  },
+  "1795703683": {
+   "completo": 10
+  },
+  "1795703696": {
+   "completo": 12
+  },
+  "1795703709": {
+   "completo": 18
+  },
+  "1795703772": {
+   "completo": 57
+  },
+  "1795703781": {
+   "completo": 134
+  },
+  "1795703786": {
+   "completo": 18
+  },
+  "1795703797": {
+   "completo": 10
+  },
+  "1795703804": {
+   "completo": 15
+  },
+  "1795703809": {
+   "completo": 69
+  },
+  "1795703811": {
+   "completo": 37
+  },
+  "1795703816": {
+   "completo": 10
+  },
+  "1795703819": {
+   "completo": 12
+  },
+  "1795703829": {
+   "completo": 18
+  },
+  "1795703835": {
+   "completo": 10
+  },
+  "1795703837": {
+   "completo": 12
+  },
+  "1795703838": {
+   "completo": 16
+  },
+  "1795703844": {
+   "completo": 25
+  },
+  "1795703845": {
+   "completo": 18
+  },
+  "1795703848": {
+   "completo": 12
+  },
+  "1795703854": {
+   "completo": 12
+  },
+  "1795703855": {
+   "completo": 17
+  },
+  "1795703856": {
+   "completo": 26
+  },
+  "1795703858": {
+   "completo": 10
+  },
+  "1795703859": {
+   "completo": 26
+  },
+  "1795703861": {
+   "completo": 15
+  },
+  "1795703862": {
+   "completo": 18
+  },
+  "1795703863": {
+   "completo": 33
+  },
+  "1795703864": {
+   "completo": 16
+  },
+  "1795703865": {
+   "completo": 21
+  },
+  "1795703892": {
+   "completo": 10
+  },
+  "1795703897": {
+   "completo": 10
+  },
+  "1795703901": {
+   "completo": 12
+  },
+  "1795703903": {
+   "completo": 14
+  },
+  "1795703929": {
+   "completo": 10
+  },
+  "1795703951": {
+   "completo": 110
+  },
+  "1795703960": {
+   "completo": 12
+  },
+  "1795703994": {
+   "completo": 15
+  },
+  "1795703996": {
+   "completo": 13
+  },
+  "1795703997": {
+   "completo": 15
+  },
+  "1795704002": {
+   "completo": 17
+  },
+  "1795704003": {
+   "completo": 12
+  },
+  "1795704007": {
+   "completo": 10
+  },
+  "1795704011": {
+   "completo": 23
+  },
+  "1795704014": {
+   "completo": 17
+  },
+  "1795704021": {
+   "completo": 12
+  },
+  "1795704022": {
+   "completo": 21
+  },
+  "1795704024": {
+   "completo": 20
+  },
+  "1795704025": {
+   "completo": 23
+  },
+  "1795704026": {
+   "completo": 24
+  },
+  "1795704028": {
+   "completo": 10
+  },
+  "1795704032": {
+   "completo": 18
+  },
+  "1795704037": {
+   "completo": 42
+  },
+  "1795704045": {
+   "completo": 12
+  },
+  "1795704080": {
+   "completo": 12
+  },
+  "1795704127": {
+   "completo": 34
+  },
+  "1795704161": {
+   "completo": 16
+  }
+ },
+ "eventos_por_fichero": {
+  "live-20261126141408.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141413.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141418.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141423.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141428.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141433.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141438.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141443.pcap.gz": {
+   "eventos": 49,
+   "clases": {
+    "completo": 49
+   }
+  },
+  "live-20261126141448.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141453.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141458.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141503.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141508.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141513.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141518.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141523.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141528.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141533.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141538.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141543.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141548.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141553.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141558.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141603.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141608.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141613.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141618.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141623.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141628.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141633.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141638.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141643.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141648.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141653.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141658.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141703.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141708.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141713.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141718.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141724.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141729.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141734.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141739.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141744.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141749.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141754.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141759.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141804.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141809.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141814.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141819.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141824.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141829.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141834.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141839.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141844.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141849.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141854.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141859.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141904.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141909.pcap.gz": {
+   "eventos": 26,
+   "clases": {
+    "completo": 26
+   }
+  },
+  "live-20261126141914.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141919.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141924.pcap.gz": {
+   "eventos": 17,
+   "clases": {
+    "completo": 17
+   }
+  },
+  "live-20261126141929.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141934.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141939.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141944.pcap.gz": {
+   "eventos": 48,
+   "clases": {
+    "completo": 48
+   }
+  },
+  "live-20261126141949.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141954.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126141959.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142004.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126142009.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142014.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142019.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142024.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142029.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142034.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142039.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142044.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126142049.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142054.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142100.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142105.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142110.pcap.gz": {
+   "eventos": 20,
+   "clases": {
+    "completo": 20
+   }
+  },
+  "live-20261126142115.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142120.pcap.gz": {
+   "eventos": 89,
+   "clases": {
+    "completo": 89
+   }
+  },
+  "live-20261126142125.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142130.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126142135.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142140.pcap.gz": {
+   "eventos": 69,
+   "clases": {
+    "completo": 69
+   }
+  },
+  "live-20261126142145.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142150.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126142155.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142200.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142205.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142210.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142215.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142220.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126142225.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126142230.pcap.gz": {
+   "eventos": 15,
+   "clases": {
+    "completo": 15
+   }
+  },
+  "live-20261126142235.pcap.gz": {
+   "eventos": 33,
+   "clases": {
+    "completo": 33
+   }
+  },
+  "live-20261126142240.pcap.gz": {
+   "eventos": 18,
+   "clases": {
+    "completo": 18
+   }
+  },
+  "live-20261126142245.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126142250.pcap.gz": {
+   "eventos": 62,
+   "clases": {
+    "completo": 62
+   }
+  },
+  "live-20261126142255.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142300.pcap.gz": {
+   "eventos": 22,
+   "clases": {
+    "completo": 22
+   }
+  },
+  "live-20261126142305.pcap.gz": {
+   "eventos": 53,
+   "clases": {
+    "completo": 53
+   }
+  },
+  "live-20261126142310.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142315.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126142320.pcap.gz": {
+   "eventos": 4467,
+   "clases": {
+    "completo": 4467
+   }
+  },
+  "live-20261126142325.pcap.gz": {
+   "eventos": 38,
+   "clases": {
+    "completo": 38
+   }
+  },
+  "live-20261126142330.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142335.pcap.gz": {
+   "eventos": 35,
+   "clases": {
+    "completo": 35
+   }
+  },
+  "live-20261126142340.pcap.gz": {
+   "eventos": 42,
+   "clases": {
+    "completo": 42
+   }
+  },
+  "live-20261126142345.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142350.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142355.pcap.gz": {
+   "eventos": 80,
+   "clases": {
+    "completo": 80
+   }
+  },
+  "live-20261126142400.pcap.gz": {
+   "eventos": 16,
+   "clases": {
+    "completo": 16
+   }
+  },
+  "live-20261126142405.pcap.gz": {
+   "eventos": 26,
+   "clases": {
+    "completo": 26
+   }
+  },
+  "live-20261126142410.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126142415.pcap.gz": {
+   "eventos": 16,
+   "clases": {
+    "completo": 16
+   }
+  },
+  "live-20261126142420.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126142425.pcap.gz": {
+   "eventos": 61,
+   "clases": {
+    "completo": 61
+   }
+  },
+  "live-20261126142430.pcap.gz": {
+   "eventos": 259,
+   "clases": {
+    "completo": 259
+   }
+  },
+  "live-20261126142435.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142440.pcap.gz": {
+   "eventos": 48,
+   "clases": {
+    "completo": 48
+   }
+  },
+  "live-20261126142445.pcap.gz": {
+   "eventos": 34,
+   "clases": {
+    "completo": 34
+   }
+  },
+  "live-20261126142450.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142455.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142500.pcap.gz": {
+   "eventos": 32,
+   "clases": {
+    "completo": 32
+   }
+  },
+  "live-20261126142505.pcap.gz": {
+   "eventos": 85,
+   "clases": {
+    "completo": 85
+   }
+  },
+  "live-20261126142510.pcap.gz": {
+   "eventos": 44,
+   "clases": {
+    "completo": 44
+   }
+  },
+  "live-20261126142515.pcap.gz": {
+   "eventos": 38,
+   "clases": {
+    "completo": 38
+   }
+  },
+  "live-20261126142520.pcap.gz": {
+   "eventos": 18,
+   "clases": {
+    "completo": 18
+   }
+  },
+  "live-20261126142525.pcap.gz": {
+   "eventos": 63,
+   "clases": {
+    "completo": 63
+   }
+  },
+  "live-20261126142530.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126142535.pcap.gz": {
+   "eventos": 39,
+   "clases": {
+    "completo": 39
+   }
+  },
+  "live-20261126142540.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126142545.pcap.gz": {
+   "eventos": 22,
+   "clases": {
+    "completo": 22
+   }
+  },
+  "live-20261126142550.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142555.pcap.gz": {
+   "eventos": 20,
+   "clases": {
+    "completo": 20
+   }
+  },
+  "live-20261126142600.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142605.pcap.gz": {
+   "eventos": 36,
+   "clases": {
+    "completo": 36
+   }
+  },
+  "live-20261126142610.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142615.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142620.pcap.gz": {
+   "eventos": 26,
+   "clases": {
+    "completo": 26
+   }
+  },
+  "live-20261126142625.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142630.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142635.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142640.pcap.gz": {
+   "eventos": 111,
+   "clases": {
+    "completo": 111
+   }
+  },
+  "live-20261126142645.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126142650.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126142655.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126142700.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142705.pcap.gz": {
+   "eventos": 160,
+   "clases": {
+    "completo": 160
+   }
+  },
+  "live-20261126142710.pcap.gz": {
+   "eventos": 74,
+   "clases": {
+    "completo": 74
+   }
+  },
+  "live-20261126142716.pcap.gz": {
+   "eventos": 54,
+   "clases": {
+    "completo": 54
+   }
+  },
+  "live-20261126142721.pcap.gz": {
+   "eventos": 65,
+   "clases": {
+    "completo": 65
+   }
+  },
+  "live-20261126142726.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142731.pcap.gz": {
+   "eventos": 24,
+   "clases": {
+    "completo": 24
+   }
+  },
+  "live-20261126142736.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126142741.pcap.gz": {
+   "eventos": 581,
+   "clases": {
+    "completo": 581
+   }
+  },
+  "live-20261126142746.pcap.gz": {
+   "eventos": 98,
+   "clases": {
+    "completo": 98
+   }
+  },
+  "live-20261126142751.pcap.gz": {
+   "eventos": 348,
+   "clases": {
+    "completo": 348
+   }
+  },
+  "live-20261126142756.pcap.gz": {
+   "eventos": 159,
+   "clases": {
+    "completo": 159
+   }
+  },
+  "live-20261126142801.pcap.gz": {
+   "eventos": 86,
+   "clases": {
+    "completo": 86
+   }
+  },
+  "live-20261126142806.pcap.gz": {
+   "eventos": 110,
+   "clases": {
+    "completo": 110
+   }
+  },
+  "live-20261126142811.pcap.gz": {
+   "eventos": 34,
+   "clases": {
+    "completo": 34
+   }
+  },
+  "live-20261126142816.pcap.gz": {
+   "eventos": 43,
+   "clases": {
+    "completo": 43
+   }
+  },
+  "live-20261126142821.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126142826.pcap.gz": {
+   "eventos": 35,
+   "clases": {
+    "completo": 35
+   }
+  },
+  "live-20261126142831.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142836.pcap.gz": {
+   "eventos": 85,
+   "clases": {
+    "completo": 85
+   }
+  },
+  "live-20261126142841.pcap.gz": {
+   "eventos": 89,
+   "clases": {
+    "completo": 89
+   }
+  },
+  "live-20261126142846.pcap.gz": {
+   "eventos": 77,
+   "clases": {
+    "completo": 77
+   }
+  },
+  "live-20261126142851.pcap.gz": {
+   "eventos": 38,
+   "clases": {
+    "completo": 38
+   }
+  },
+  "live-20261126142856.pcap.gz": {
+   "eventos": 14,
+   "clases": {
+    "completo": 14
+   }
+  },
+  "live-20261126142901.pcap.gz": {
+   "eventos": 84,
+   "clases": {
+    "completo": 84
+   }
+  },
+  "live-20261126142906.pcap.gz": {
+   "eventos": 421,
+   "clases": {
+    "completo": 421
+   }
+  },
+  "live-20261126142911.pcap.gz": {
+   "eventos": 1664,
+   "clases": {
+    "completo": 1664
+   }
+  },
+  "live-20261126142916.pcap.gz": {
+   "eventos": 149,
+   "clases": {
+    "completo": 149
+   }
+  },
+  "live-20261126142921.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126142926.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126142931.pcap.gz": {
+   "eventos": 22,
+   "clases": {
+    "completo": 22
+   }
+  },
+  "live-20261126142936.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126142941.pcap.gz": {
+   "eventos": 60,
+   "clases": {
+    "completo": 60
+   }
+  },
+  "live-20261126142946.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126142951.pcap.gz": {
+   "eventos": 250,
+   "clases": {
+    "completo": 250
+   }
+  },
+  "live-20261126142956.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126143001.pcap.gz": {
+   "eventos": 48,
+   "clases": {
+    "completo": 48
+   }
+  },
+  "live-20261126143006.pcap.gz": {
+   "eventos": 135,
+   "clases": {
+    "completo": 135
+   }
+  },
+  "live-20261126143011.pcap.gz": {
+   "eventos": 30,
+   "clases": {
+    "completo": 30
+   }
+  },
+  "live-20261126143016.pcap.gz": {
+   "eventos": 16,
+   "clases": {
+    "completo": 16
+   }
+  },
+  "live-20261126143021.pcap.gz": {
+   "eventos": 123,
+   "clases": {
+    "completo": 123
+   }
+  },
+  "live-20261126143026.pcap.gz": {
+   "eventos": 31,
+   "clases": {
+    "completo": 31
+   }
+  },
+  "live-20261126143031.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126143036.pcap.gz": {
+   "eventos": 19,
+   "clases": {
+    "completo": 19
+   }
+  },
+  "live-20261126143041.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143046.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143051.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143056.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143101.pcap.gz": {
+   "eventos": 30,
+   "clases": {
+    "completo": 30
+   }
+  },
+  "live-20261126143106.pcap.gz": {
+   "eventos": 18,
+   "clases": {
+    "completo": 18
+   }
+  },
+  "live-20261126143111.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143116.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126143121.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143126.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143131.pcap.gz": {
+   "eventos": 1179,
+   "clases": {
+    "completo": 1179
+   }
+  },
+  "live-20261126143136.pcap.gz": {
+   "eventos": 7,
+   "clases": {
+    "completo": 7
+   }
+  },
+  "live-20261126143141.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143146.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143151.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143156.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143201.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143206.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143211.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143216.pcap.gz": {
+   "eventos": 1904,
+   "clases": {
+    "completo": 1904
+   }
+  },
+  "live-20261126143221.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143226.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126143231.pcap.gz": {
+   "eventos": 40,
+   "clases": {
+    "completo": 40
+   }
+  },
+  "live-20261126143236.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143241.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143246.pcap.gz": {
+   "eventos": 22,
+   "clases": {
+    "completo": 22
+   }
+  },
+  "live-20261126143251.pcap.gz": {
+   "eventos": 80,
+   "clases": {
+    "completo": 80
+   }
+  },
+  "live-20261126143256.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143301.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143306.pcap.gz": {
+   "eventos": 15,
+   "clases": {
+    "completo": 15
+   }
+  },
+  "live-20261126143311.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126143316.pcap.gz": {
+   "eventos": 28,
+   "clases": {
+    "completo": 28
+   }
+  },
+  "live-20261126143321.pcap.gz": {
+   "eventos": 34,
+   "clases": {
+    "completo": 34
+   }
+  },
+  "live-20261126143326.pcap.gz": {
+   "eventos": 17,
+   "clases": {
+    "completo": 17
+   }
+  },
+  "live-20261126143331.pcap.gz": {
+   "eventos": 17,
+   "clases": {
+    "completo": 17
+   }
+  },
+  "live-20261126143336.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126143341.pcap.gz": {
+   "eventos": 27,
+   "clases": {
+    "completo": 27
+   }
+  },
+  "live-20261126143346.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143351.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143356.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143401.pcap.gz": {
+   "eventos": 39,
+   "clases": {
+    "completo": 39
+   }
+  },
+  "live-20261126143406.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143411.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143416.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143421.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143426.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143431.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143436.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143441.pcap.gz": {
+   "eventos": 34,
+   "clases": {
+    "completo": 34
+   }
+  },
+  "live-20261126143446.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143451.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143456.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126143501.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143506.pcap.gz": {
+   "eventos": 18,
+   "clases": {
+    "completo": 18
+   }
+  },
+  "live-20261126143511.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143516.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143521.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143526.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143532.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143537.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143542.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143547.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143552.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143557.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143602.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143607.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143612.pcap.gz": {
+   "eventos": 57,
+   "clases": {
+    "completo": 57
+   }
+  },
+  "live-20261126143617.pcap.gz": {
+   "eventos": 112,
+   "clases": {
+    "completo": 112
+   }
+  },
+  "live-20261126143622.pcap.gz": {
+   "eventos": 22,
+   "clases": {
+    "completo": 22
+   }
+  },
+  "live-20261126143627.pcap.gz": {
+   "eventos": 18,
+   "clases": {
+    "completo": 18
+   }
+  },
+  "live-20261126143632.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143637.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126143642.pcap.gz": {
+   "eventos": 15,
+   "clases": {
+    "completo": 15
+   }
+  },
+  "live-20261126143647.pcap.gz": {
+   "eventos": 69,
+   "clases": {
+    "completo": 69
+   }
+  },
+  "live-20261126143652.pcap.gz": {
+   "eventos": 37,
+   "clases": {
+    "completo": 37
+   }
+  },
+  "live-20261126143657.pcap.gz": {
+   "eventos": 22,
+   "clases": {
+    "completo": 22
+   }
+  },
+  "live-20261126143702.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143707.pcap.gz": {
+   "eventos": 18,
+   "clases": {
+    "completo": 18
+   }
+  },
+  "live-20261126143712.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126143717.pcap.gz": {
+   "eventos": 28,
+   "clases": {
+    "completo": 28
+   }
+  },
+  "live-20261126143722.pcap.gz": {
+   "eventos": 43,
+   "clases": {
+    "completo": 43
+   }
+  },
+  "live-20261126143727.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126143732.pcap.gz": {
+   "eventos": 29,
+   "clases": {
+    "completo": 29
+   }
+  },
+  "live-20261126143737.pcap.gz": {
+   "eventos": 77,
+   "clases": {
+    "completo": 77
+   }
+  },
+  "live-20261126143742.pcap.gz": {
+   "eventos": 88,
+   "clases": {
+    "completo": 88
+   }
+  },
+  "live-20261126143747.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143752.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143757.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143802.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143807.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143812.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126143817.pcap.gz": {
+   "eventos": 22,
+   "clases": {
+    "completo": 22
+   }
+  },
+  "live-20261126143822.pcap.gz": {
+   "eventos": 14,
+   "clases": {
+    "completo": 14
+   }
+  },
+  "live-20261126143827.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143832.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143837.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143842.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143847.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126143852.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143857.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143902.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143907.pcap.gz": {
+   "eventos": 78,
+   "clases": {
+    "completo": 78
+   }
+  },
+  "live-20261126143912.pcap.gz": {
+   "eventos": 32,
+   "clases": {
+    "completo": 32
+   }
+  },
+  "live-20261126143917.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126143922.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143927.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143932.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143937.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143942.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143947.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126143952.pcap.gz": {
+   "eventos": 15,
+   "clases": {
+    "completo": 15
+   }
+  },
+  "live-20261126143957.pcap.gz": {
+   "eventos": 28,
+   "clases": {
+    "completo": 28
+   }
+  },
+  "live-20261126144002.pcap.gz": {
+   "eventos": 29,
+   "clases": {
+    "completo": 29
+   }
+  },
+  "live-20261126144007.pcap.gz": {
+   "eventos": 33,
+   "clases": {
+    "completo": 33
+   }
+  },
+  "live-20261126144012.pcap.gz": {
+   "eventos": 17,
+   "clases": {
+    "completo": 17
+   }
+  },
+  "live-20261126144017.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126144022.pcap.gz": {
+   "eventos": 88,
+   "clases": {
+    "completo": 88
+   }
+  },
+  "live-20261126144028.pcap.gz": {
+   "eventos": 10,
+   "clases": {
+    "completo": 10
+   }
+  },
+  "live-20261126144033.pcap.gz": {
+   "eventos": 18,
+   "clases": {
+    "completo": 18
+   }
+  },
+  "live-20261126144038.pcap.gz": {
+   "eventos": 42,
+   "clases": {
+    "completo": 42
+   }
+  },
+  "live-20261126144043.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126144048.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144053.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144058.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144103.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144108.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144113.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144118.pcap.gz": {
+   "eventos": 12,
+   "clases": {
+    "completo": 12
+   }
+  },
+  "live-20261126144123.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144128.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144133.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144138.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144143.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144148.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144153.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144158.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144203.pcap.gz": {
+   "eventos": 34,
+   "clases": {
+    "completo": 34
+   }
+  },
+  "live-20261126144208.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144213.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144218.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144223.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144228.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144233.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144238.pcap.gz": {
+   "eventos": 16,
+   "clases": {
+    "completo": 16
+   }
+  },
+  "live-20261126144243.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144248.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144253.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144258.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144303.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144308.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144313.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144318.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144323.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144328.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144333.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144338.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144343.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144348.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144353.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144358.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144403.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144408.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144413.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144418.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144423.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144428.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144433.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144438.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144444.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144449.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  },
+  "live-20261126144454.pcap.gz": {
+   "eventos": 0,
+   "clases": {}
+  }
+ },
+ "separaciones_copias_s": {
+  "pares": 16389,
+  "p50": 0.00010609626770019531,
+  "p99": 0.0004849433898925781,
+  "max": 0.003064870834350586
+ },
+ "indicios": {
+  "ttl_incorrecto": 242,
+  "orden_incorrecto": 242,
+  "carga_distinta": 0,
+  "mac_igual": 0
+ },
+ "anomalias_total": 0,
+ "anomalias": [],
+ "referencia": null,
+ "limitaciones": [
+  "Un evento ausente en todas sus copias no se detecta sin --referencia.",
+  "La referencia sólo cuenta identidades sin copia dentro del margen temporal; no prueba entrega de otras capas."
+ ],
+ "bytes_por_vlan": {
+  "10": 46062548,
+  "99": 27468086,
+  "100": 20227012,
+  "20": 18904346,
+  "30": 16069490,
+  "60": 13346520,
+  "95": 981360,
+  "70": 980976,
+  "50": 824242,
+  "40": 592070,
+  "90": 513786,
+  "80": 507216,
+  "85": 507216,
+  "88": 507216,
+  "1": 33500,
+  "None": 29600
+ },
+ "bytes_por_vlan_experimental": {
+  "20": 14136250,
+  "30": 14083248,
+  "10": 53002
+ },
+ "pico_1s": {
+  "s": 1795703002,
+  "tramas": 5862,
+  "bytes": 6581960,
+  "mbps": 52.66
+ },
+ "pico_10ms": {
+  "t": 1795703352.72,
+  "bytes": 152012,
+  "mbps_equivalentes": 121.6
+ },
+ "intervalos_10ms_a_linea": 0,
+ "intervalos_10ms_a_linea_primeros": [],
+ "por_segundo": {
+  "1795702447": [
+   602,
+   68124,
+   0,
+   0
+  ],
+  "1795702448": [
+   138,
+   24558,
+   0,
+   0
+  ],
+  "1795702449": [
+   704,
+   83769,
+   0,
+   0
+  ],
+  "1795702450": [
+   172,
+   25940,
+   0,
+   0
+  ],
+  "1795702451": [
+   741,
+   85963,
+   0,
+   0
+  ],
+  "1795702452": [
+   209,
+   32028,
+   0,
+   0
+  ],
+  "1795702453": [
+   202,
+   31640,
+   0,
+   0
+  ],
+  "1795702454": [
+   764,
+   88518,
+   0,
+   0
+  ],
+  "1795702455": [
+   200,
+   30604,
+   0,
+   0
+  ],
+  "1795702456": [
+   730,
+   90270,
+   0,
+   0
+  ],
+  "1795702457": [
+   158,
+   23847,
+   0,
+   0
+  ],
+  "1795702458": [
+   686,
+   80373,
+   0,
+   0
+  ],
+  "1795702459": [
+   190,
+   28844,
+   0,
+   0
+  ],
+  "1795702460": [
+   680,
+   82756,
+   0,
+   0
+  ],
+  "1795702461": [
+   126,
+   18255,
+   0,
+   0
+  ],
+  "1795702462": [
+   766,
+   89615,
+   0,
+   0
+  ],
+  "1795702463": [
+   154,
+   22780,
+   0,
+   0
+  ],
+  "1795702464": [
+   756,
+   91649,
+   0,
+   0
+  ],
+  "1795702465": [
+   496,
+   170263,
+   0,
+   0
+  ],
+  "1795702466": [
+   155,
+   38007,
+   0,
+   0
+  ],
+  "1795702467": [
+   793,
+   92917,
+   0,
+   0
+  ],
+  "1795702468": [
+   168,
+   27400,
+   0,
+   0
+  ],
+  "1795702469": [
+   776,
+   87988,
+   0,
+   0
+  ],
+  "1795702470": [
+   144,
+   25144,
+   0,
+   0
+  ],
+  "1795702471": [
+   816,
+   91848,
+   0,
+   0
+  ],
+  "1795702472": [
+   164,
+   26787,
+   0,
+   0
+  ],
+  "1795702473": [
+   778,
+   89376,
+   0,
+   0
+  ],
+  "1795702474": [
+   177,
+   28282,
+   0,
+   0
+  ],
+  "1795702475": [
+   840,
+   106920,
+   0,
+   0
+  ],
+  "1795702476": [
+   156,
+   27256,
+   0,
+   0
+  ],
+  "1795702477": [
+   831,
+   98101,
+   0,
+   0
+  ],
+  "1795702478": [
+   126,
+   26524,
+   0,
+   0
+  ],
+  "1795702479": [
+   169,
+   26814,
+   0,
+   0
+  ],
+  "1795702480": [
+   881,
+   128054,
+   0,
+   0
+  ],
+  "1795702481": [
+   258,
+   52760,
+   0,
+   0
+  ],
+  "1795702482": [
+   1061,
+   170027,
+   98,
+   18374
+  ],
+  "1795702483": [
+   380,
+   89833,
+   0,
+   0
+  ],
+  "1795702484": [
+   800,
+   96804,
+   0,
+   0
+  ],
+  "1795702485": [
+   168,
+   26309,
+   0,
+   0
+  ],
+  "1795702486": [
+   722,
+   90727,
+   0,
+   0
+  ],
+  "1795702487": [
+   172,
+   24156,
+   0,
+   0
+  ],
+  "1795702488": [
+   754,
+   88236,
+   0,
+   0
+  ],
+  "1795702489": [
+   209,
+   31336,
+   0,
+   0
+  ],
+  "1795702490": [
+   684,
+   86473,
+   0,
+   0
+  ],
+  "1795702491": [
+   160,
+   25072,
+   0,
+   0
+  ],
+  "1795702492": [
+   527,
+   62602,
+   0,
+   0
+  ],
+  "1795702493": [
+   423,
+   53082,
+   0,
+   0
+  ],
+  "1795702494": [
+   142,
+   22664,
+   0,
+   0
+  ],
+  "1795702495": [
+   744,
+   89207,
+   0,
+   0
+  ],
+  "1795702496": [
+   99,
+   18324,
+   0,
+   0
+  ],
+  "1795702497": [
+   704,
+   86332,
+   0,
+   0
+  ],
+  "1795702498": [
+   176,
+   26068,
+   0,
+   0
+  ],
+  "1795702499": [
+   778,
+   88928,
+   0,
+   0
+  ],
+  "1795702500": [
+   140,
+   21756,
+   0,
+   0
+  ],
+  "1795702501": [
+   810,
+   93061,
+   0,
+   0
+  ],
+  "1795702502": [
+   152,
+   29452,
+   0,
+   0
+  ],
+  "1795702503": [
+   733,
+   97277,
+   0,
+   0
+  ],
+  "1795702504": [
+   170,
+   26040,
+   0,
+   0
+  ],
+  "1795702505": [
+   798,
+   109061,
+   0,
+   0
+  ],
+  "1795702506": [
+   206,
+   28624,
+   0,
+   0
+  ],
+  "1795702507": [
+   188,
+   27560,
+   0,
+   0
+  ],
+  "1795702508": [
+   694,
+   84269,
+   0,
+   0
+  ],
+  "1795702509": [
+   160,
+   24563,
+   0,
+   0
+  ],
+  "1795702510": [
+   776,
+   91086,
+   0,
+   0
+  ],
+  "1795702511": [
+   183,
+   29381,
+   0,
+   0
+  ],
+  "1795702512": [
+   784,
+   94460,
+   0,
+   0
+  ],
+  "1795702513": [
+   152,
+   24223,
+   0,
+   0
+  ],
+  "1795702514": [
+   767,
+   94510,
+   0,
+   0
+  ],
+  "1795702515": [
+   154,
+   23804,
+   0,
+   0
+  ],
+  "1795702516": [
+   764,
+   94577,
+   0,
+   0
+  ],
+  "1795702517": [
+   160,
+   23468,
+   0,
+   0
+  ],
+  "1795702518": [
+   758,
+   87444,
+   0,
+   0
+  ],
+  "1795702519": [
+   202,
+   32030,
+   0,
+   0
+  ],
+  "1795702520": [
+   163,
+   24630,
+   0,
+   0
+  ],
+  "1795702521": [
+   753,
+   86190,
+   0,
+   0
+  ],
+  "1795702522": [
+   160,
+   23480,
+   0,
+   0
+  ],
+  "1795702523": [
+   766,
+   88184,
+   0,
+   0
+  ],
+  "1795702524": [
+   156,
+   26186,
+   0,
+   0
+  ],
+  "1795702525": [
+   841,
+   104932,
+   0,
+   0
+  ],
+  "1795702526": [
+   222,
+   44953,
+   0,
+   0
+  ],
+  "1795702527": [
+   704,
+   82484,
+   0,
+   0
+  ],
+  "1795702528": [
+   158,
+   22380,
+   0,
+   0
+  ],
+  "1795702529": [
+   792,
+   95232,
+   0,
+   0
+  ],
+  "1795702530": [
+   138,
+   22932,
+   0,
+   0
+  ],
+  "1795702531": [
+   668,
+   76901,
+   0,
+   0
+  ],
+  "1795702532": [
+   152,
+   25666,
+   0,
+   0
+  ],
+  "1795702533": [
+   148,
+   19692,
+   0,
+   0
+  ],
+  "1795702534": [
+   802,
+   94508,
+   0,
+   0
+  ],
+  "1795702535": [
+   168,
+   31704,
+   0,
+   0
+  ],
+  "1795702536": [
+   837,
+   103725,
+   0,
+   0
+  ],
+  "1795702537": [
+   201,
+   29106,
+   0,
+   0
+  ],
+  "1795702538": [
+   766,
+   93502,
+   0,
+   0
+  ],
+  "1795702539": [
+   175,
+   26470,
+   0,
+   0
+  ],
+  "1795702540": [
+   849,
+   144198,
+   0,
+   0
+  ],
+  "1795702541": [
+   179,
+   33934,
+   0,
+   0
+  ],
+  "1795702542": [
+   741,
+   86848,
+   0,
+   0
+  ],
+  "1795702543": [
+   186,
+   27172,
+   0,
+   0
+  ],
+  "1795702544": [
+   756,
+   89723,
+   0,
+   0
+  ],
+  "1795702545": [
+   168,
+   27003,
+   0,
+   0
+  ],
+  "1795702546": [
+   520,
+   77007,
+   0,
+   0
+  ],
+  "1795702547": [
+   520,
+   66877,
+   0,
+   0
+  ],
+  "1795702548": [
+   85,
+   13032,
+   0,
+   0
+  ],
+  "1795702549": [
+   714,
+   81588,
+   0,
+   0
+  ],
+  "1795702550": [
+   298,
+   79432,
+   0,
+   0
+  ],
+  "1795702551": [
+   712,
+   89612,
+   0,
+   0
+  ],
+  "1795702552": [
+   182,
+   28041,
+   0,
+   0
+  ],
+  "1795702553": [
+   763,
+   88190,
+   0,
+   0
+  ],
+  "1795702554": [
+   130,
+   20828,
+   0,
+   0
+  ],
+  "1795702555": [
+   758,
+   95230,
+   0,
+   0
+  ],
+  "1795702556": [
+   194,
+   31772,
+   0,
+   0
+  ],
+  "1795702557": [
+   708,
+   84979,
+   0,
+   0
+  ],
+  "1795702558": [
+   158,
+   21404,
+   0,
+   0
+  ],
+  "1795702559": [
+   500,
+   57225,
+   0,
+   0
+  ],
+  "1795702560": [
+   406,
+   52243,
+   0,
+   0
+  ],
+  "1795702561": [
+   201,
+   31120,
+   0,
+   0
+  ],
+  "1795702562": [
+   780,
+   96747,
+   0,
+   0
+  ],
+  "1795702563": [
+   168,
+   25325,
+   0,
+   0
+  ],
+  "1795702564": [
+   776,
+   89472,
+   0,
+   0
+  ],
+  "1795702565": [
+   134,
+   21950,
+   0,
+   0
+  ],
+  "1795702566": [
+   660,
+   79314,
+   0,
+   0
+  ],
+  "1795702567": [
+   192,
+   30617,
+   0,
+   0
+  ],
+  "1795702568": [
+   856,
+   114936,
+   0,
+   0
+  ],
+  "1795702569": [
+   260,
+   67600,
+   0,
+   0
+  ],
+  "1795702570": [
+   838,
+   137064,
+   0,
+   0
+  ],
+  "1795702571": [
+   166,
+   25495,
+   0,
+   0
+  ],
+  "1795702572": [
+   660,
+   78815,
+   0,
+   0
+  ],
+  "1795702573": [
+   212,
+   31032,
+   0,
+   0
+  ],
+  "1795702574": [
+   140,
+   21896,
+   0,
+   0
+  ],
+  "1795702575": [
+   700,
+   86135,
+   0,
+   0
+  ],
+  "1795702576": [
+   218,
+   34847,
+   0,
+   0
+  ],
+  "1795702577": [
+   698,
+   83218,
+   0,
+   0
+  ],
+  "1795702578": [
+   140,
+   23297,
+   0,
+   0
+  ],
+  "1795702579": [
+   809,
+   92468,
+   0,
+   0
+  ],
+  "1795702580": [
+   142,
+   23640,
+   0,
+   0
+  ],
+  "1795702581": [
+   776,
+   89214,
+   0,
+   0
+  ],
+  "1795702582": [
+   162,
+   24108,
+   0,
+   0
+  ],
+  "1795702583": [
+   667,
+   84481,
+   0,
+   0
+  ],
+  "1795702584": [
+   154,
+   25952,
+   0,
+   0
+  ],
+  "1795702585": [
+   718,
+   85026,
+   0,
+   0
+  ],
+  "1795702586": [
+   152,
+   26786,
+   0,
+   0
+  ],
+  "1795702587": [
+   156,
+   22336,
+   0,
+   0
+  ],
+  "1795702588": [
+   710,
+   84746,
+   0,
+   0
+  ],
+  "1795702589": [
+   256,
+   53368,
+   0,
+   0
+  ],
+  "1795702590": [
+   752,
+   88896,
+   0,
+   0
+  ],
+  "1795702591": [
+   204,
+   28986,
+   0,
+   0
+  ],
+  "1795702592": [
+   686,
+   84720,
+   0,
+   0
+  ],
+  "1795702593": [
+   160,
+   22536,
+   0,
+   0
+  ],
+  "1795702594": [
+   802,
+   93588,
+   0,
+   0
+  ],
+  "1795702595": [
+   210,
+   35248,
+   0,
+   0
+  ],
+  "1795702596": [
+   704,
+   85764,
+   0,
+   0
+  ],
+  "1795702597": [
+   194,
+   29832,
+   0,
+   0
+  ],
+  "1795702598": [
+   760,
+   91961,
+   0,
+   0
+  ],
+  "1795702599": [
+   120,
+   15308,
+   0,
+   0
+  ],
+  "1795702600": [
+   323,
+   40006,
+   0,
+   0
+  ],
+  "1795702601": [
+   606,
+   79005,
+   0,
+   0
+  ],
+  "1795702602": [
+   154,
+   28575,
+   0,
+   0
+  ],
+  "1795702603": [
+   804,
+   93172,
+   0,
+   0
+  ],
+  "1795702604": [
+   164,
+   31010,
+   0,
+   0
+  ],
+  "1795702605": [
+   783,
+   96904,
+   0,
+   0
+  ],
+  "1795702606": [
+   192,
+   30647,
+   0,
+   0
+  ],
+  "1795702607": [
+   772,
+   91163,
+   0,
+   0
+  ],
+  "1795702608": [
+   142,
+   21496,
+   0,
+   0
+  ],
+  "1795702609": [
+   826,
+   98657,
+   0,
+   0
+  ],
+  "1795702610": [
+   214,
+   42220,
+   0,
+   0
+  ],
+  "1795702611": [
+   710,
+   85324,
+   0,
+   0
+  ],
+  "1795702612": [
+   186,
+   29566,
+   0,
+   0
+  ],
+  "1795702613": [
+   201,
+   27926,
+   0,
+   0
+  ],
+  "1795702614": [
+   625,
+   75475,
+   0,
+   0
+  ],
+  "1795702615": [
+   222,
+   31795,
+   0,
+   0
+  ],
+  "1795702616": [
+   640,
+   79152,
+   0,
+   0
+  ],
+  "1795702617": [
+   150,
+   24529,
+   0,
+   0
+  ],
+  "1795702618": [
+   788,
+   89920,
+   0,
+   0
+  ],
+  "1795702619": [
+   158,
+   22563,
+   0,
+   0
+  ],
+  "1795702620": [
+   758,
+   87076,
+   0,
+   0
+  ],
+  "1795702621": [
+   198,
+   29204,
+   0,
+   0
+  ],
+  "1795702622": [
+   708,
+   90100,
+   0,
+   0
+  ],
+  "1795702623": [
+   156,
+   21724,
+   0,
+   0
+  ],
+  "1795702624": [
+   710,
+   85356,
+   0,
+   0
+  ],
+  "1795702625": [
+   154,
+   24040,
+   0,
+   0
+  ],
+  "1795702626": [
+   156,
+   22980,
+   0,
+   0
+  ],
+  "1795702627": [
+   797,
+   94060,
+   0,
+   0
+  ],
+  "1795702628": [
+   153,
+   27852,
+   0,
+   0
+  ],
+  "1795702629": [
+   698,
+   85138,
+   0,
+   0
+  ],
+  "1795702630": [
+   164,
+   25340,
+   0,
+   0
+  ],
+  "1795702631": [
+   864,
+   113620,
+   0,
+   0
+  ],
+  "1795702632": [
+   161,
+   29706,
+   0,
+   0
+  ],
+  "1795702633": [
+   807,
+   94938,
+   0,
+   0
+  ],
+  "1795702634": [
+   134,
+   25178,
+   0,
+   0
+  ],
+  "1795702635": [
+   714,
+   81068,
+   0,
+   0
+  ],
+  "1795702636": [
+   214,
+   31368,
+   0,
+   0
+  ],
+  "1795702637": [
+   790,
+   91176,
+   0,
+   0
+  ],
+  "1795702638": [
+   148,
+   26643,
+   0,
+   0
+  ],
+  "1795702639": [
+   526,
+   62936,
+   0,
+   0
+  ],
+  "1795702640": [
+   350,
+   47125,
+   0,
+   0
+  ],
+  "1795702641": [
+   152,
+   22320,
+   0,
+   0
+  ],
+  "1795702642": [
+   714,
+   83876,
+   0,
+   0
+  ],
+  "1795702643": [
+   144,
+   27112,
+   0,
+   0
+  ],
+  "1795702644": [
+   762,
+   90824,
+   0,
+   0
+  ],
+  "1795702645": [
+   186,
+   27603,
+   0,
+   0
+  ],
+  "1795702646": [
+   674,
+   81676,
+   0,
+   0
+  ],
+  "1795702647": [
+   170,
+   23340,
+   0,
+   0
+  ],
+  "1795702648": [
+   726,
+   89010,
+   0,
+   0
+  ],
+  "1795702649": [
+   148,
+   23840,
+   0,
+   0
+  ],
+  "1795702650": [
+   775,
+   91962,
+   0,
+   0
+  ],
+  "1795702651": [
+   158,
+   25048,
+   0,
+   0
+  ],
+  "1795702652": [
+   650,
+   90995,
+   0,
+   0
+  ],
+  "1795702653": [
+   344,
+   47614,
+   0,
+   0
+  ],
+  "1795702654": [
+   178,
+   28256,
+   0,
+   0
+  ],
+  "1795702655": [
+   692,
+   85652,
+   0,
+   0
+  ],
+  "1795702656": [
+   186,
+   30436,
+   0,
+   0
+  ],
+  "1795702657": [
+   729,
+   84948,
+   0,
+   0
+  ],
+  "1795702658": [
+   154,
+   24974,
+   0,
+   0
+  ],
+  "1795702659": [
+   778,
+   90828,
+   0,
+   0
+  ],
+  "1795702660": [
+   178,
+   26193,
+   0,
+   0
+  ],
+  "1795702661": [
+   782,
+   92308,
+   0,
+   0
+  ],
+  "1795702662": [
+   146,
+   20944,
+   0,
+   0
+  ],
+  "1795702663": [
+   755,
+   90882,
+   0,
+   0
+  ],
+  "1795702664": [
+   150,
+   29800,
+   0,
+   0
+  ],
+  "1795702665": [
+   786,
+   94632,
+   0,
+   0
+  ],
+  "1795702666": [
+   184,
+   29404,
+   0,
+   0
+  ],
+  "1795702667": [
+   304,
+   40756,
+   0,
+   0
+  ],
+  "1795702668": [
+   623,
+   76299,
+   0,
+   0
+  ],
+  "1795702669": [
+   130,
+   18107,
+   0,
+   0
+  ],
+  "1795702670": [
+   678,
+   82488,
+   0,
+   0
+  ],
+  "1795702671": [
+   162,
+   24122,
+   0,
+   0
+  ],
+  "1795702672": [
+   728,
+   93716,
+   0,
+   0
+  ],
+  "1795702673": [
+   250,
+   45432,
+   0,
+   0
+  ],
+  "1795702674": [
+   708,
+   86902,
+   0,
+   0
+  ],
+  "1795702675": [
+   194,
+   28988,
+   0,
+   0
+  ],
+  "1795702676": [
+   829,
+   102334,
+   0,
+   0
+  ],
+  "1795702677": [
+   154,
+   26632,
+   0,
+   0
+  ],
+  "1795702678": [
+   702,
+   82881,
+   0,
+   0
+  ],
+  "1795702679": [
+   179,
+   27854,
+   0,
+   0
+  ],
+  "1795702680": [
+   278,
+   35494,
+   0,
+   0
+  ],
+  "1795702681": [
+   588,
+   74272,
+   0,
+   0
+  ],
+  "1795702682": [
+   142,
+   24052,
+   0,
+   0
+  ],
+  "1795702683": [
+   699,
+   82204,
+   0,
+   0
+  ],
+  "1795702684": [
+   184,
+   29512,
+   0,
+   0
+  ],
+  "1795702685": [
+   770,
+   91072,
+   0,
+   0
+  ],
+  "1795702686": [
+   80,
+   13652,
+   0,
+   0
+  ],
+  "1795702687": [
+   804,
+   91300,
+   0,
+   0
+  ],
+  "1795702688": [
+   134,
+   22508,
+   0,
+   0
+  ],
+  "1795702689": [
+   796,
+   92541,
+   0,
+   0
+  ],
+  "1795702690": [
+   172,
+   28976,
+   0,
+   0
+  ],
+  "1795702691": [
+   700,
+   82416,
+   0,
+   0
+  ],
+  "1795702692": [
+   140,
+   23752,
+   0,
+   0
+  ],
+  "1795702693": [
+   439,
+   53716,
+   0,
+   0
+  ],
+  "1795702694": [
+   535,
+   82566,
+   0,
+   0
+  ],
+  "1795702695": [
+   154,
+   26600,
+   0,
+   0
+  ],
+  "1795702696": [
+   842,
+   101858,
+   0,
+   0
+  ],
+  "1795702697": [
+   158,
+   25040,
+   0,
+   0
+  ],
+  "1795702698": [
+   670,
+   78836,
+   0,
+   0
+  ],
+  "1795702699": [
+   219,
+   34320,
+   0,
+   0
+  ],
+  "1795702700": [
+   764,
+   93511,
+   0,
+   0
+  ],
+  "1795702701": [
+   158,
+   23183,
+   0,
+   0
+  ],
+  "1795702702": [
+   704,
+   85032,
+   0,
+   0
+  ],
+  "1795702703": [
+   100,
+   15784,
+   0,
+   0
+  ],
+  "1795702704": [
+   690,
+   84516,
+   0,
+   0
+  ],
+  "1795702705": [
+   209,
+   30953,
+   0,
+   0
+  ],
+  "1795702706": [
+   746,
+   87708,
+   0,
+   0
+  ],
+  "1795702707": [
+   160,
+   22204,
+   0,
+   0
+  ],
+  "1795702708": [
+   168,
+   24876,
+   0,
+   0
+  ],
+  "1795702709": [
+   776,
+   89148,
+   0,
+   0
+  ],
+  "1795702710": [
+   150,
+   25792,
+   0,
+   0
+  ],
+  "1795702711": [
+   795,
+   93300,
+   0,
+   0
+  ],
+  "1795702712": [
+   138,
+   21803,
+   0,
+   0
+  ],
+  "1795702713": [
+   696,
+   82268,
+   0,
+   0
+  ],
+  "1795702714": [
+   170,
+   25824,
+   0,
+   0
+  ],
+  "1795702715": [
+   891,
+   124197,
+   0,
+   0
+  ],
+  "1795702716": [
+   190,
+   32372,
+   0,
+   0
+  ],
+  "1795702717": [
+   730,
+   85648,
+   0,
+   0
+  ],
+  "1795702718": [
+   136,
+   21668,
+   0,
+   0
+  ],
+  "1795702719": [
+   692,
+   82188,
+   0,
+   0
+  ],
+  "1795702720": [
+   140,
+   21804,
+   0,
+   0
+  ],
+  "1795702721": [
+   412,
+   51808,
+   0,
+   0
+  ],
+  "1795702722": [
+   494,
+   59989,
+   0,
+   0
+  ],
+  "1795702723": [
+   192,
+   26676,
+   0,
+   0
+  ],
+  "1795702724": [
+   781,
+   93368,
+   0,
+   0
+  ],
+  "1795702725": [
+   240,
+   54546,
+   0,
+   0
+  ],
+  "1795702726": [
+   813,
+   100012,
+   0,
+   0
+  ],
+  "1795702727": [
+   314,
+   75112,
+   0,
+   0
+  ],
+  "1795702728": [
+   986,
+   141553,
+   0,
+   0
+  ],
+  "1795702729": [
+   288,
+   54129,
+   0,
+   0
+  ],
+  "1795702730": [
+   1073,
+   190085,
+   0,
+   0
+  ],
+  "1795702731": [
+   238,
+   48899,
+   0,
+   0
+  ],
+  "1795702732": [
+   711,
+   85961,
+   0,
+   0
+  ],
+  "1795702733": [
+   164,
+   25524,
+   0,
+   0
+  ],
+  "1795702734": [
+   136,
+   19456,
+   0,
+   0
+  ],
+  "1795702735": [
+   834,
+   99033,
+   0,
+   0
+  ],
+  "1795702736": [
+   282,
+   62263,
+   0,
+   0
+  ],
+  "1795702737": [
+   724,
+   81427,
+   0,
+   0
+  ],
+  "1795702738": [
+   170,
+   23688,
+   0,
+   0
+  ],
+  "1795702739": [
+   700,
+   81648,
+   0,
+   0
+  ],
+  "1795702740": [
+   128,
+   20556,
+   0,
+   0
+  ],
+  "1795702741": [
+   1002,
+   154349,
+   0,
+   0
+  ],
+  "1795702742": [
+   263,
+   55434,
+   0,
+   0
+  ],
+  "1795702743": [
+   704,
+   84878,
+   0,
+   0
+  ],
+  "1795702744": [
+   156,
+   23630,
+   0,
+   0
+  ],
+  "1795702745": [
+   685,
+   87638,
+   0,
+   0
+  ],
+  "1795702746": [
+   152,
+   25362,
+   0,
+   0
+  ],
+  "1795702747": [
+   182,
+   27075,
+   0,
+   0
+  ],
+  "1795702748": [
+   752,
+   87844,
+   0,
+   0
+  ],
+  "1795702749": [
+   185,
+   28276,
+   24,
+   3916
+  ],
+  "1795702750": [
+   770,
+   88792,
+   0,
+   0
+  ],
+  "1795702751": [
+   174,
+   27076,
+   0,
+   0
+  ],
+  "1795702752": [
+   912,
+   137470,
+   0,
+   0
+  ],
+  "1795702753": [
+   338,
+   69595,
+   28,
+   8990
+  ],
+  "1795702754": [
+   690,
+   80760,
+   0,
+   0
+  ],
+  "1795702755": [
+   152,
+   23728,
+   0,
+   0
+  ],
+  "1795702756": [
+   768,
+   94624,
+   0,
+   0
+  ],
+  "1795702757": [
+   258,
+   54132,
+   0,
+   0
+  ],
+  "1795702758": [
+   764,
+   105993,
+   0,
+   0
+  ],
+  "1795702759": [
+   204,
+   29408,
+   0,
+   0
+  ],
+  "1795702760": [
+   138,
+   21944,
+   0,
+   0
+  ],
+  "1795702761": [
+   792,
+   94613,
+   0,
+   0
+  ],
+  "1795702762": [
+   178,
+   30611,
+   0,
+   0
+  ],
+  "1795702763": [
+   832,
+   122587,
+   0,
+   0
+  ],
+  "1795702764": [
+   288,
+   64308,
+   0,
+   0
+  ],
+  "1795702765": [
+   802,
+   98728,
+   0,
+   0
+  ],
+  "1795702766": [
+   136,
+   21216,
+   0,
+   0
+  ],
+  "1795702767": [
+   784,
+   90084,
+   0,
+   0
+  ],
+  "1795702768": [
+   205,
+   35162,
+   34,
+   6830
+  ],
+  "1795702769": [
+   991,
+   225459,
+   0,
+   0
+  ],
+  "1795702770": [
+   154,
+   36808,
+   0,
+   0
+  ],
+  "1795702771": [
+   680,
+   77709,
+   0,
+   0
+  ],
+  "1795702772": [
+   160,
+   27372,
+   0,
+   0
+  ],
+  "1795702773": [
+   162,
+   25317,
+   0,
+   0
+  ],
+  "1795702774": [
+   834,
+   119207,
+   0,
+   0
+  ],
+  "1795702775": [
+   334,
+   74612,
+   0,
+   0
+  ],
+  "1795702776": [
+   802,
+   96728,
+   0,
+   0
+  ],
+  "1795702777": [
+   188,
+   26474,
+   0,
+   0
+  ],
+  "1795702778": [
+   766,
+   108796,
+   0,
+   0
+  ],
+  "1795702779": [
+   156,
+   23441,
+   0,
+   0
+  ],
+  "1795702780": [
+   718,
+   86457,
+   0,
+   0
+  ],
+  "1795702781": [
+   162,
+   24570,
+   0,
+   0
+  ],
+  "1795702782": [
+   707,
+   87145,
+   0,
+   0
+  ],
+  "1795702783": [
+   182,
+   26732,
+   0,
+   0
+  ],
+  "1795702784": [
+   848,
+   157768,
+   96,
+   66024
+  ],
+  "1795702785": [
+   226,
+   45886,
+   0,
+   0
+  ],
+  "1795702786": [
+   397,
+   82708,
+   0,
+   0
+  ],
+  "1795702787": [
+   756,
+   89016,
+   0,
+   0
+  ],
+  "1795702788": [
+   183,
+   40250,
+   0,
+   0
+  ],
+  "1795702789": [
+   790,
+   99713,
+   0,
+   0
+  ],
+  "1795702790": [
+   155,
+   33078,
+   0,
+   0
+  ],
+  "1795702791": [
+   783,
+   92598,
+   0,
+   0
+  ],
+  "1795702792": [
+   201,
+   32904,
+   0,
+   0
+  ],
+  "1795702793": [
+   714,
+   92875,
+   0,
+   0
+  ],
+  "1795702794": [
+   289,
+   75609,
+   0,
+   0
+  ],
+  "1795702795": [
+   732,
+   92492,
+   0,
+   0
+  ],
+  "1795702796": [
+   218,
+   43502,
+   0,
+   0
+  ],
+  "1795702797": [
+   500,
+   78674,
+   0,
+   0
+  ],
+  "1795702798": [
+   628,
+   94942,
+   0,
+   0
+  ],
+  "1795702799": [
+   218,
+   44355,
+   0,
+   0
+  ],
+  "1795702800": [
+   744,
+   96925,
+   0,
+   0
+  ],
+  "1795702801": [
+   188,
+   26228,
+   0,
+   0
+  ],
+  "1795702802": [
+   690,
+   83740,
+   0,
+   0
+  ],
+  "1795702803": [
+   173,
+   29557,
+   0,
+   0
+  ],
+  "1795702804": [
+   652,
+   75612,
+   0,
+   0
+  ],
+  "1795702805": [
+   156,
+   23947,
+   0,
+   0
+  ],
+  "1795702806": [
+   758,
+   88408,
+   0,
+   0
+  ],
+  "1795702807": [
+   204,
+   28148,
+   20,
+   3336
+  ],
+  "1795702808": [
+   910,
+   138124,
+   0,
+   0
+  ],
+  "1795702809": [
+   290,
+   58184,
+   0,
+   0
+  ],
+  "1795702810": [
+   766,
+   89837,
+   0,
+   0
+  ],
+  "1795702811": [
+   176,
+   25484,
+   0,
+   0
+  ],
+  "1795702812": [
+   140,
+   21509,
+   0,
+   0
+  ],
+  "1795702813": [
+   748,
+   88926,
+   0,
+   0
+  ],
+  "1795702814": [
+   152,
+   28206,
+   0,
+   0
+  ],
+  "1795702815": [
+   690,
+   80848,
+   0,
+   0
+  ],
+  "1795702816": [
+   220,
+   34364,
+   0,
+   0
+  ],
+  "1795702817": [
+   768,
+   89972,
+   0,
+   0
+  ],
+  "1795702818": [
+   161,
+   26746,
+   0,
+   0
+  ],
+  "1795702819": [
+   926,
+   147728,
+   0,
+   0
+  ],
+  "1795702820": [
+   324,
+   85096,
+   0,
+   0
+  ],
+  "1795702821": [
+   834,
+   137754,
+   0,
+   0
+  ],
+  "1795702822": [
+   166,
+   25680,
+   0,
+   0
+  ],
+  "1795702823": [
+   696,
+   83817,
+   0,
+   0
+  ],
+  "1795702824": [
+   163,
+   28419,
+   0,
+   0
+  ],
+  "1795702825": [
+   190,
+   29131,
+   0,
+   0
+  ],
+  "1795702826": [
+   756,
+   89564,
+   0,
+   0
+  ],
+  "1795702827": [
+   160,
+   25692,
+   0,
+   0
+  ],
+  "1795702828": [
+   706,
+   82608,
+   0,
+   0
+  ],
+  "1795702829": [
+   168,
+   28070,
+   0,
+   0
+  ],
+  "1795702830": [
+   824,
+   116090,
+   0,
+   0
+  ],
+  "1795702831": [
+   422,
+   88565,
+   0,
+   0
+  ],
+  "1795702832": [
+   674,
+   83952,
+   0,
+   0
+  ],
+  "1795702833": [
+   162,
+   23568,
+   0,
+   0
+  ],
+  "1795702834": [
+   804,
+   94819,
+   0,
+   0
+  ],
+  "1795702835": [
+   158,
+   29752,
+   0,
+   0
+  ],
+  "1795702836": [
+   728,
+   89146,
+   0,
+   0
+  ],
+  "1795702837": [
+   156,
+   21092,
+   0,
+   0
+  ],
+  "1795702838": [
+   94,
+   16780,
+   0,
+   0
+  ],
+  "1795702839": [
+   719,
+   88074,
+   0,
+   0
+  ],
+  "1795702840": [
+   172,
+   27720,
+   0,
+   0
+  ],
+  "1795702841": [
+   916,
+   136238,
+   0,
+   0
+  ],
+  "1795702842": [
+   392,
+   88008,
+   0,
+   0
+  ],
+  "1795702843": [
+   723,
+   85072,
+   0,
+   0
+  ],
+  "1795702844": [
+   156,
+   26014,
+   0,
+   0
+  ],
+  "1795702845": [
+   664,
+   82820,
+   0,
+   0
+  ],
+  "1795702846": [
+   172,
+   26472,
+   0,
+   0
+  ],
+  "1795702847": [
+   794,
+   93512,
+   24,
+   3908
+  ],
+  "1795702848": [
+   134,
+   21352,
+   0,
+   0
+  ],
+  "1795702849": [
+   798,
+   109495,
+   0,
+   0
+  ],
+  "1795702850": [
+   196,
+   34247,
+   0,
+   0
+  ],
+  "1795702851": [
+   164,
+   21674,
+   0,
+   0
+  ],
+  "1795702852": [
+   809,
+   101732,
+   0,
+   0
+  ],
+  "1795702853": [
+   384,
+   91036,
+   0,
+   0
+  ],
+  "1795702854": [
+   738,
+   96587,
+   0,
+   0
+  ],
+  "1795702855": [
+   136,
+   24975,
+   0,
+   0
+  ],
+  "1795702856": [
+   767,
+   94522,
+   0,
+   0
+  ],
+  "1795702857": [
+   208,
+   31849,
+   0,
+   0
+  ],
+  "1795702858": [
+   782,
+   88172,
+   0,
+   0
+  ],
+  "1795702859": [
+   152,
+   21440,
+   0,
+   0
+  ],
+  "1795702860": [
+   772,
+   97662,
+   0,
+   0
+  ],
+  "1795702861": [
+   192,
+   28528,
+   0,
+   0
+  ],
+  "1795702862": [
+   760,
+   104715,
+   0,
+   0
+  ],
+  "1795702863": [
+   219,
+   38694,
+   0,
+   0
+  ],
+  "1795702864": [
+   636,
+   104065,
+   0,
+   0
+  ],
+  "1795702865": [
+   618,
+   100312,
+   0,
+   0
+  ],
+  "1795702866": [
+   142,
+   24052,
+   0,
+   0
+  ],
+  "1795702867": [
+   802,
+   90740,
+   0,
+   0
+  ],
+  "1795702868": [
+   140,
+   22964,
+   0,
+   0
+  ],
+  "1795702869": [
+   776,
+   88016,
+   0,
+   0
+  ],
+  "1795702870": [
+   176,
+   27442,
+   0,
+   0
+  ],
+  "1795702871": [
+   642,
+   76656,
+   0,
+   0
+  ],
+  "1795702872": [
+   142,
+   23241,
+   0,
+   0
+  ],
+  "1795702873": [
+   848,
+   110524,
+   40,
+   20140
+  ],
+  "1795702874": [
+   140,
+   25540,
+   0,
+   0
+  ],
+  "1795702875": [
+   842,
+   113577,
+   0,
+   0
+  ],
+  "1795702876": [
+   390,
+   88615,
+   0,
+   0
+  ],
+  "1795702877": [
+   611,
+   75466,
+   0,
+   0
+  ],
+  "1795702878": [
+   258,
+   33365,
+   0,
+   0
+  ],
+  "1795702879": [
+   191,
+   29174,
+   0,
+   0
+  ],
+  "1795702880": [
+   1033,
+   198940,
+   178,
+   81524
+  ],
+  "1795702881": [
+   179,
+   30577,
+   0,
+   0
+  ],
+  "1795702882": [
+   717,
+   85638,
+   0,
+   0
+  ],
+  "1795702883": [
+   195,
+   37859,
+   0,
+   0
+  ],
+  "1795702884": [
+   838,
+   112748,
+   0,
+   0
+  ],
+  "1795702885": [
+   192,
+   31453,
+   0,
+   0
+  ],
+  "1795702886": [
+   730,
+   100594,
+   0,
+   0
+  ],
+  "1795702887": [
+   406,
+   89972,
+   0,
+   0
+  ],
+  "1795702888": [
+   644,
+   74822,
+   0,
+   0
+  ],
+  "1795702889": [
+   156,
+   24972,
+   0,
+   0
+  ],
+  "1795702890": [
+   483,
+   61774,
+   0,
+   0
+  ],
+  "1795702891": [
+   481,
+   60340,
+   0,
+   0
+  ],
+  "1795702892": [
+   143,
+   22956,
+   0,
+   0
+  ],
+  "1795702893": [
+   784,
+   92844,
+   0,
+   0
+  ],
+  "1795702894": [
+   197,
+   30347,
+   20,
+   3336
+  ],
+  "1795702895": [
+   701,
+   88162,
+   0,
+   0
+  ],
+  "1795702896": [
+   212,
+   35579,
+   0,
+   0
+  ],
+  "1795702897": [
+   833,
+   100600,
+   0,
+   0
+  ],
+  "1795702898": [
+   363,
+   87053,
+   0,
+   0
+  ],
+  "1795702899": [
+   804,
+   96297,
+   0,
+   0
+  ],
+  "1795702900": [
+   169,
+   24926,
+   0,
+   0
+  ],
+  "1795702901": [
+   727,
+   89761,
+   0,
+   0
+  ],
+  "1795702902": [
+   277,
+   84572,
+   138,
+   55286
+  ],
+  "1795702903": [
+   793,
+   92317,
+   0,
+   0
+  ],
+  "1795702904": [
+   162,
+   32726,
+   0,
+   0
+  ],
+  "1795702905": [
+   187,
+   37330,
+   0,
+   0
+  ],
+  "1795702906": [
+   797,
+   93884,
+   0,
+   0
+  ],
+  "1795702907": [
+   161,
+   29079,
+   0,
+   0
+  ],
+  "1795702908": [
+   675,
+   78258,
+   0,
+   0
+  ],
+  "1795702909": [
+   401,
+   90076,
+   0,
+   0
+  ],
+  "1795702910": [
+   905,
+   130660,
+   24,
+   3908
+  ],
+  "1795702911": [
+   205,
+   32522,
+   0,
+   0
+  ],
+  "1795702912": [
+   737,
+   90614,
+   0,
+   0
+  ],
+  "1795702913": [
+   165,
+   25918,
+   0,
+   0
+  ],
+  "1795702914": [
+   693,
+   86435,
+   0,
+   0
+  ],
+  "1795702915": [
+   190,
+   26716,
+   0,
+   0
+  ],
+  "1795702916": [
+   720,
+   92852,
+   0,
+   0
+  ],
+  "1795702917": [
+   188,
+   30788,
+   0,
+   0
+  ],
+  "1795702918": [
+   166,
+   24712,
+   0,
+   0
+  ],
+  "1795702919": [
+   703,
+   86015,
+   0,
+   0
+  ],
+  "1795702920": [
+   307,
+   75110,
+   0,
+   0
+  ],
+  "1795702921": [
+   796,
+   109468,
+   0,
+   0
+  ],
+  "1795702922": [
+   138,
+   22578,
+   0,
+   0
+  ],
+  "1795702923": [
+   772,
+   91224,
+   0,
+   0
+  ],
+  "1795702924": [
+   180,
+   27633,
+   0,
+   0
+  ],
+  "1795702925": [
+   814,
+   100190,
+   0,
+   0
+  ],
+  "1795702926": [
+   220,
+   43700,
+   0,
+   0
+  ],
+  "1795702927": [
+   812,
+   93407,
+   0,
+   0
+  ],
+  "1795702928": [
+   143,
+   26169,
+   0,
+   0
+  ],
+  "1795702929": [
+   791,
+   93509,
+   0,
+   0
+  ],
+  "1795702930": [
+   170,
+   30325,
+   0,
+   0
+  ],
+  "1795702931": [
+   416,
+   79590,
+   0,
+   0
+  ],
+  "1795702932": [
+   673,
+   97437,
+   0,
+   0
+  ],
+  "1795702933": [
+   221,
+   36741,
+   0,
+   0
+  ],
+  "1795702934": [
+   762,
+   90847,
+   0,
+   0
+  ],
+  "1795702935": [
+   162,
+   25877,
+   0,
+   0
+  ],
+  "1795702936": [
+   838,
+   100072,
+   0,
+   0
+  ],
+  "1795702937": [
+   120,
+   17792,
+   0,
+   0
+  ],
+  "1795702938": [
+   728,
+   83034,
+   0,
+   0
+  ],
+  "1795702939": [
+   184,
+   25832,
+   0,
+   0
+  ],
+  "1795702940": [
+   683,
+   86845,
+   0,
+   0
+  ],
+  "1795702941": [
+   292,
+   58496,
+   24,
+   5890
+  ],
+  "1795702942": [
+   708,
+   85340,
+   0,
+   0
+  ],
+  "1795702943": [
+   382,
+   92444,
+   0,
+   0
+  ],
+  "1795702944": [
+   513,
+   70336,
+   0,
+   0
+  ],
+  "1795702945": [
+   409,
+   51673,
+   0,
+   0
+  ],
+  "1795702946": [
+   130,
+   23644,
+   20,
+   3336
+  ],
+  "1795702947": [
+   870,
+   116540,
+   0,
+   0
+  ],
+  "1795702948": [
+   185,
+   27846,
+   0,
+   0
+  ],
+  "1795702949": [
+   696,
+   83460,
+   0,
+   0
+  ],
+  "1795702950": [
+   150,
+   27517,
+   0,
+   0
+  ],
+  "1795702951": [
+   806,
+   92936,
+   0,
+   0
+  ],
+  "1795702952": [
+   172,
+   33978,
+   30,
+   5654
+  ],
+  "1795702953": [
+   700,
+   87235,
+   0,
+   0
+  ],
+  "1795702954": [
+   395,
+   92693,
+   0,
+   0
+  ],
+  "1795702955": [
+   716,
+   97991,
+   0,
+   0
+  ],
+  "1795702956": [
+   210,
+   42416,
+   66,
+   17588
+  ],
+  "1795702957": [
+   542,
+   67472,
+   0,
+   0
+  ],
+  "1795702958": [
+   380,
+   50958,
+   0,
+   0
+  ],
+  "1795702959": [
+   160,
+   24074,
+   0,
+   0
+  ],
+  "1795702960": [
+   780,
+   90424,
+   0,
+   0
+  ],
+  "1795702961": [
+   172,
+   28264,
+   0,
+   0
+  ],
+  "1795702962": [
+   714,
+   95294,
+   36,
+   12006
+  ],
+  "1795702963": [
+   190,
+   26784,
+   0,
+   0
+  ],
+  "1795702964": [
+   766,
+   92122,
+   0,
+   0
+  ],
+  "1795702965": [
+   326,
+   73910,
+   0,
+   0
+  ],
+  "1795702966": [
+   910,
+   123884,
+   0,
+   0
+  ],
+  "1795702967": [
+   154,
+   22416,
+   0,
+   0
+  ],
+  "1795702968": [
+   850,
+   111888,
+   0,
+   0
+  ],
+  "1795702969": [
+   222,
+   36560,
+   24,
+   3908
+  ],
+  "1795702970": [
+   798,
+   108768,
+   66,
+   20776
+  ],
+  "1795702971": [
+   164,
+   37435,
+   0,
+   0
+  ],
+  "1795702972": [
+   409,
+   51496,
+   0,
+   0
+  ],
+  "1795702973": [
+   619,
+   88044,
+   58,
+   18332
+  ],
+  "1795702974": [
+   162,
+   30257,
+   0,
+   0
+  ],
+  "1795702975": [
+   728,
+   87640,
+   0,
+   0
+  ],
+  "1795702976": [
+   304,
+   71964,
+   0,
+   0
+  ],
+  "1795702977": [
+   878,
+   123272,
+   0,
+   0
+  ],
+  "1795702978": [
+   171,
+   26274,
+   0,
+   0
+  ],
+  "1795702979": [
+   717,
+   90068,
+   0,
+   0
+  ],
+  "1795702980": [
+   183,
+   33816,
+   24,
+   3924
+  ],
+  "1795702981": [
+   810,
+   98892,
+   0,
+   0
+  ],
+  "1795702982": [
+   149,
+   29111,
+   0,
+   0
+  ],
+  "1795702983": [
+   782,
+   90772,
+   0,
+   0
+  ],
+  "1795702984": [
+   214,
+   36306,
+   20,
+   3624
+  ],
+  "1795702985": [
+   672,
+   85332,
+   0,
+   0
+  ],
+  "1795702986": [
+   272,
+   72324,
+   106,
+   46996
+  ],
+  "1795702987": [
+   305,
+   62764,
+   0,
+   0
+  ],
+  "1795702988": [
+   775,
+   116094,
+   0,
+   0
+  ],
+  "1795702989": [
+   265,
+   52283,
+   0,
+   0
+  ],
+  "1795702990": [
+   814,
+   101588,
+   0,
+   0
+  ],
+  "1795702991": [
+   160,
+   23352,
+   0,
+   0
+  ],
+  "1795702992": [
+   754,
+   87349,
+   0,
+   0
+  ],
+  "1795702993": [
+   186,
+   25876,
+   0,
+   0
+  ],
+  "1795702994": [
+   686,
+   85288,
+   0,
+   0
+  ],
+  "1795702995": [
+   184,
+   30290,
+   20,
+   3336
+  ],
+  "1795702996": [
+   786,
+   94600,
+   0,
+   0
+  ],
+  "1795702997": [
+   198,
+   30640,
+   0,
+   0
+  ],
+  "1795702998": [
+   808,
+   105670,
+   0,
+   0
+  ],
+  "1795702999": [
+   341,
+   61053,
+   0,
+   0
+  ],
+  "1795703000": [
+   234,
+   53274,
+   0,
+   0
+  ],
+  "1795703001": [
+   698,
+   83144,
+   0,
+   0
+  ],
+  "1795703002": [
+   5862,
+   6581960,
+   5513,
+   6514190
+  ],
+  "1795703003": [
+   4245,
+   3988052,
+   3421,
+   3886184
+  ],
+  "1795703004": [
+   140,
+   23784,
+   0,
+   0
+  ],
+  "1795703005": [
+   718,
+   87055,
+   0,
+   0
+  ],
+  "1795703006": [
+   186,
+   63522,
+   76,
+   41402
+  ],
+  "1795703007": [
+   794,
+   91487,
+   0,
+   0
+  ],
+  "1795703008": [
+   163,
+   29230,
+   0,
+   0
+  ],
+  "1795703009": [
+   696,
+   82144,
+   0,
+   0
+  ],
+  "1795703010": [
+   419,
+   101845,
+   0,
+   0
+  ],
+  "1795703011": [
+   929,
+   126731,
+   0,
+   0
+  ],
+  "1795703012": [
+   148,
+   26448,
+   0,
+   0
+  ],
+  "1795703013": [
+   222,
+   30060,
+   0,
+   0
+  ],
+  "1795703014": [
+   646,
+   77488,
+   0,
+   0
+  ],
+  "1795703015": [
+   162,
+   27191,
+   0,
+   0
+  ],
+  "1795703016": [
+   754,
+   90531,
+   0,
+   0
+  ],
+  "1795703017": [
+   316,
+   70739,
+   70,
+   31784
+  ],
+  "1795703018": [
+   758,
+   90509,
+   0,
+   0
+  ],
+  "1795703019": [
+   150,
+   20360,
+   0,
+   0
+  ],
+  "1795703020": [
+   702,
+   84220,
+   0,
+   0
+  ],
+  "1795703021": [
+   324,
+   74940,
+   0,
+   0
+  ],
+  "1795703022": [
+   831,
+   123294,
+   28,
+   4672
+  ],
+  "1795703023": [
+   179,
+   46873,
+   56,
+   28264
+  ],
+  "1795703024": [
+   744,
+   88700,
+   0,
+   0
+  ],
+  "1795703025": [
+   152,
+   22236,
+   0,
+   0
+  ],
+  "1795703026": [
+   546,
+   69928,
+   0,
+   0
+  ],
+  "1795703027": [
+   408,
+   50516,
+   0,
+   0
+  ],
+  "1795703028": [
+   146,
+   23765,
+   0,
+   0
+  ],
+  "1795703029": [
+   720,
+   85072,
+   0,
+   0
+  ],
+  "1795703030": [
+   134,
+   20924,
+   0,
+   0
+  ],
+  "1795703031": [
+   896,
+   120163,
+   0,
+   0
+  ],
+  "1795703032": [
+   266,
+   58472,
+   0,
+   0
+  ],
+  "1795703033": [
+   946,
+   145381,
+   0,
+   0
+  ],
+  "1795703034": [
+   219,
+   46078,
+   32,
+   8330
+  ],
+  "1795703035": [
+   988,
+   179643,
+   0,
+   0
+  ],
+  "1795703036": [
+   428,
+   92929,
+   58,
+   10970
+  ],
+  "1795703037": [
+   738,
+   101818,
+   34,
+   15050
+  ],
+  "1795703038": [
+   208,
+   36125,
+   36,
+   7860
+  ],
+  "1795703039": [
+   443,
+   51872,
+   0,
+   0
+  ],
+  "1795703040": [
+   396,
+   48204,
+   0,
+   0
+  ],
+  "1795703041": [
+   205,
+   37415,
+   0,
+   0
+  ],
+  "1795703042": [
+   692,
+   89731,
+   0,
+   0
+  ],
+  "1795703043": [
+   196,
+   41300,
+   32,
+   14862
+  ],
+  "1795703044": [
+   790,
+   96484,
+   0,
+   0
+  ],
+  "1795703045": [
+   221,
+   40730,
+   52,
+   8772
+  ],
+  "1795703046": [
+   776,
+   108243,
+   0,
+   0
+  ],
+  "1795703047": [
+   360,
+   80815,
+   0,
+   0
+  ],
+  "1795703048": [
+   769,
+   91176,
+   0,
+   0
+  ],
+  "1795703049": [
+   162,
+   24385,
+   0,
+   0
+  ],
+  "1795703050": [
+   700,
+   83260,
+   0,
+   0
+  ],
+  "1795703051": [
+   158,
+   24484,
+   0,
+   0
+  ],
+  "1795703052": [
+   787,
+   114229,
+   24,
+   3908
+  ],
+  "1795703053": [
+   238,
+   37211,
+   0,
+   0
+  ],
+  "1795703054": [
+   140,
+   23719,
+   0,
+   0
+  ],
+  "1795703055": [
+   708,
+   86348,
+   0,
+   0
+  ],
+  "1795703056": [
+   188,
+   30572,
+   0,
+   0
+  ],
+  "1795703057": [
+   787,
+   101424,
+   0,
+   0
+  ],
+  "1795703058": [
+   411,
+   103294,
+   32,
+   13994
+  ],
+  "1795703059": [
+   736,
+   92942,
+   0,
+   0
+  ],
+  "1795703060": [
+   138,
+   22844,
+   0,
+   0
+  ],
+  "1795703061": [
+   792,
+   94164,
+   20,
+   3336
+  ],
+  "1795703062": [
+   196,
+   31111,
+   0,
+   0
+  ],
+  "1795703063": [
+   754,
+   102802,
+   0,
+   0
+  ],
+  "1795703064": [
+   182,
+   37535,
+   0,
+   0
+  ],
+  "1795703065": [
+   750,
+   96692,
+   26,
+   7896
+  ],
+  "1795703066": [
+   248,
+   56988,
+   96,
+   28872
+  ],
+  "1795703067": [
+   160,
+   22307,
+   0,
+   0
+  ],
+  "1795703068": [
+   738,
+   96869,
+   0,
+   0
+  ],
+  "1795703069": [
+   280,
+   56609,
+   0,
+   0
+  ],
+  "1795703070": [
+   1414,
+   612727,
+   518,
+   485350
+  ],
+  "1795703071": [
+   192,
+   27600,
+   0,
+   0
+  ],
+  "1795703072": [
+   764,
+   89876,
+   0,
+   0
+  ],
+  "1795703073": [
+   278,
+   55848,
+   0,
+   0
+  ],
+  "1795703074": [
+   768,
+   91116,
+   0,
+   0
+  ],
+  "1795703075": [
+   122,
+   17907,
+   0,
+   0
+  ],
+  "1795703076": [
+   682,
+   83060,
+   0,
+   0
+  ],
+  "1795703077": [
+   232,
+   36200,
+   0,
+   0
+  ],
+  "1795703078": [
+   752,
+   88970,
+   0,
+   0
+  ],
+  "1795703079": [
+   164,
+   25108,
+   0,
+   0
+  ],
+  "1795703080": [
+   575,
+   95963,
+   24,
+   3914
+  ],
+  "1795703081": [
+   832,
+   222083,
+   0,
+   0
+  ],
+  "1795703082": [
+   226,
+   58952,
+   0,
+   0
+  ],
+  "1795703083": [
+   864,
+   113029,
+   44,
+   15030
+  ],
+  "1795703084": [
+   196,
+   41238,
+   48,
+   13746
+  ],
+  "1795703085": [
+   772,
+   91660,
+   0,
+   0
+  ],
+  "1795703086": [
+   192,
+   29732,
+   24,
+   3924
+  ],
+  "1795703087": [
+   724,
+   92746,
+   24,
+   7554
+  ],
+  "1795703088": [
+   142,
+   24850,
+   0,
+   0
+  ],
+  "1795703089": [
+   808,
+   93424,
+   0,
+   0
+  ],
+  "1795703090": [
+   139,
+   24011,
+   0,
+   0
+  ],
+  "1795703091": [
+   871,
+   118164,
+   0,
+   0
+  ],
+  "1795703092": [
+   302,
+   69656,
+   0,
+   0
+  ],
+  "1795703093": [
+   711,
+   91843,
+   0,
+   0
+  ],
+  "1795703094": [
+   418,
+   88214,
+   0,
+   0
+  ],
+  "1795703095": [
+   184,
+   25731,
+   0,
+   0
+  ],
+  "1795703096": [
+   754,
+   87764,
+   0,
+   0
+  ],
+  "1795703097": [
+   208,
+   28952,
+   0,
+   0
+  ],
+  "1795703098": [
+   712,
+   84267,
+   0,
+   0
+  ],
+  "1795703099": [
+   176,
+   29416,
+   0,
+   0
+  ],
+  "1795703100": [
+   750,
+   117270,
+   64,
+   33170
+  ],
+  "1795703101": [
+   196,
+   26598,
+   0,
+   0
+  ],
+  "1795703102": [
+   826,
+   109586,
+   0,
+   0
+  ],
+  "1795703103": [
+   394,
+   85236,
+   0,
+   0
+  ],
+  "1795703104": [
+   822,
+   102997,
+   0,
+   0
+  ],
+  "1795703105": [
+   195,
+   37008,
+   20,
+   3336
+  ],
+  "1795703106": [
+   762,
+   93878,
+   0,
+   0
+  ],
+  "1795703107": [
+   226,
+   43306,
+   40,
+   14562
+  ],
+  "1795703108": [
+   237,
+   31690,
+   0,
+   0
+  ],
+  "1795703109": [
+   678,
+   120680,
+   130,
+   46022
+  ],
+  "1795703110": [
+   174,
+   33980,
+   0,
+   0
+  ],
+  "1795703111": [
+   806,
+   94937,
+   20,
+   3336
+  ],
+  "1795703112": [
+   190,
+   44639,
+   48,
+   20078
+  ],
+  "1795703113": [
+   844,
+   105510,
+   0,
+   0
+  ],
+  "1795703114": [
+   388,
+   94673,
+   0,
+   0
+  ],
+  "1795703115": [
+   872,
+   119240,
+   0,
+   0
+  ],
+  "1795703116": [
+   218,
+   38114,
+   0,
+   0
+  ],
+  "1795703117": [
+   912,
+   148472,
+   76,
+   44520
+  ],
+  "1795703118": [
+   136,
+   22024,
+   0,
+   0
+  ],
+  "1795703119": [
+   744,
+   89737,
+   0,
+   0
+  ],
+  "1795703120": [
+   148,
+   27543,
+   0,
+   0
+  ],
+  "1795703121": [
+   372,
+   44240,
+   0,
+   0
+  ],
+  "1795703122": [
+   526,
+   72784,
+   36,
+   9904
+  ],
+  "1795703123": [
+   162,
+   26368,
+   0,
+   0
+  ],
+  "1795703124": [
+   782,
+   95525,
+   0,
+   0
+  ],
+  "1795703125": [
+   504,
+   133501,
+   74,
+   21688
+  ],
+  "1795703126": [
+   724,
+   99048,
+   0,
+   0
+  ],
+  "1795703127": [
+   199,
+   31821,
+   24,
+   3904
+  ],
+  "1795703128": [
+   786,
+   93592,
+   0,
+   0
+  ],
+  "1795703129": [
+   182,
+   32639,
+   28,
+   10346
+  ],
+  "1795703130": [
+   762,
+   93274,
+   0,
+   0
+  ],
+  "1795703131": [
+   194,
+   30424,
+   0,
+   0
+  ],
+  "1795703132": [
+   682,
+   81283,
+   0,
+   0
+  ],
+  "1795703133": [
+   176,
+   27289,
+   20,
+   3336
+  ],
+  "1795703134": [
+   776,
+   92336,
+   0,
+   0
+  ],
+  "1795703135": [
+   196,
+   36245,
+   0,
+   0
+  ],
+  "1795703136": [
+   418,
+   129944,
+   78,
+   43338
+  ],
+  "1795703137": [
+   1042,
+   146859,
+   0,
+   0
+  ],
+  "1795703138": [
+   138,
+   23413,
+   0,
+   0
+  ],
+  "1795703139": [
+   698,
+   80552,
+   0,
+   0
+  ],
+  "1795703140": [
+   180,
+   28610,
+   0,
+   0
+  ],
+  "1795703141": [
+   750,
+   88640,
+   0,
+   0
+  ],
+  "1795703142": [
+   104,
+   19724,
+   0,
+   0
+  ],
+  "1795703143": [
+   761,
+   90684,
+   24,
+   3916
+  ],
+  "1795703144": [
+   144,
+   27132,
+   0,
+   0
+  ],
+  "1795703145": [
+   776,
+   90702,
+   0,
+   0
+  ],
+  "1795703146": [
+   220,
+   44816,
+   44,
+   18756
+  ],
+  "1795703147": [
+   774,
+   109725,
+   0,
+   0
+  ],
+  "1795703148": [
+   344,
+   81568,
+   0,
+   0
+  ],
+  "1795703149": [
+   416,
+   49740,
+   0,
+   0
+  ],
+  "1795703150": [
+   446,
+   56235,
+   0,
+   0
+  ],
+  "1795703151": [
+   175,
+   31891,
+   0,
+   0
+  ],
+  "1795703152": [
+   794,
+   92584,
+   0,
+   0
+  ],
+  "1795703153": [
+   176,
+   30829,
+   0,
+   0
+  ],
+  "1795703154": [
+   754,
+   86152,
+   0,
+   0
+  ],
+  "1795703155": [
+   258,
+   49916,
+   0,
+   0
+  ],
+  "1795703156": [
+   712,
+   90123,
+   0,
+   0
+  ],
+  "1795703157": [
+   278,
+   52640,
+   0,
+   0
+  ],
+  "1795703158": [
+   818,
+   115507,
+   40,
+   17480
+  ],
+  "1795703159": [
+   369,
+   86772,
+   0,
+   0
+  ],
+  "1795703160": [
+   788,
+   91836,
+   0,
+   0
+  ],
+  "1795703161": [
+   200,
+   29912,
+   0,
+   0
+  ],
+  "1795703162": [
+   662,
+   78252,
+   0,
+   0
+  ],
+  "1795703163": [
+   256,
+   37016,
+   0,
+   0
+  ],
+  "1795703164": [
+   194,
+   28580,
+   20,
+   3336
+  ],
+  "1795703165": [
+   817,
+   99288,
+   28,
+   4268
+  ],
+  "1795703166": [
+   156,
+   24901,
+   0,
+   0
+  ],
+  "1795703167": [
+   817,
+   95674,
+   0,
+   0
+  ],
+  "1795703168": [
+   144,
+   25677,
+   0,
+   0
+  ],
+  "1795703169": [
+   802,
+   97928,
+   24,
+   3924
+  ],
+  "1795703170": [
+   420,
+   101866,
+   0,
+   0
+  ],
+  "1795703171": [
+   856,
+   110833,
+   0,
+   0
+  ],
+  "1795703172": [
+   152,
+   26427,
+   0,
+   0
+  ],
+  "1795703173": [
+   726,
+   86429,
+   0,
+   0
+  ],
+  "1795703174": [
+   140,
+   23552,
+   0,
+   0
+  ],
+  "1795703175": [
+   338,
+   41416,
+   0,
+   0
+  ],
+  "1795703176": [
+   464,
+   58196,
+   0,
+   0
+  ],
+  "1795703177": [
+   221,
+   35645,
+   0,
+   0
+  ],
+  "1795703178": [
+   742,
+   100156,
+   0,
+   0
+  ],
+  "1795703179": [
+   242,
+   38666,
+   0,
+   0
+  ],
+  "1795703180": [
+   734,
+   104484,
+   52,
+   18040
+  ],
+  "1795703181": [
+   366,
+   82701,
+   0,
+   0
+  ],
+  "1795703182": [
+   790,
+   108366,
+   0,
+   0
+  ],
+  "1795703183": [
+   162,
+   25236,
+   0,
+   0
+  ],
+  "1795703184": [
+   772,
+   89808,
+   0,
+   0
+  ],
+  "1795703185": [
+   188,
+   30100,
+   0,
+   0
+  ],
+  "1795703186": [
+   844,
+   115126,
+   0,
+   0
+  ],
+  "1795703187": [
+   176,
+   27070,
+   0,
+   0
+  ],
+  "1795703188": [
+   578,
+   69588,
+   0,
+   0
+  ],
+  "1795703189": [
+   282,
+   36269,
+   0,
+   0
+  ],
+  "1795703190": [
+   144,
+   23245,
+   0,
+   0
+  ],
+  "1795703191": [
+   814,
+   96568,
+   0,
+   0
+  ],
+  "1795703192": [
+   319,
+   72783,
+   0,
+   0
+  ],
+  "1795703193": [
+   748,
+   107680,
+   0,
+   0
+  ],
+  "1795703194": [
+   174,
+   24768,
+   0,
+   0
+  ],
+  "1795703195": [
+   783,
+   93832,
+   0,
+   0
+  ],
+  "1795703196": [
+   169,
+   28392,
+   0,
+   0
+  ],
+  "1795703197": [
+   874,
+   108487,
+   0,
+   0
+  ],
+  "1795703198": [
+   142,
+   23076,
+   0,
+   0
+  ],
+  "1795703199": [
+   798,
+   95256,
+   0,
+   0
+  ],
+  "1795703200": [
+   240,
+   44112,
+   0,
+   0
+  ],
+  "1795703201": [
+   764,
+   88568,
+   0,
+   0
+  ],
+  "1795703202": [
+   149,
+   25971,
+   0,
+   0
+  ],
+  "1795703203": [
+   725,
+   147851,
+   156,
+   45352
+  ],
+  "1795703204": [
+   616,
+   118456,
+   66,
+   31082
+  ],
+  "1795703205": [
+   204,
+   32109,
+   24,
+   3916
+  ],
+  "1795703206": [
+   710,
+   88444,
+   0,
+   0
+  ],
+  "1795703207": [
+   162,
+   25372,
+   0,
+   0
+  ],
+  "1795703208": [
+   778,
+   91770,
+   0,
+   0
+  ],
+  "1795703209": [
+   128,
+   16912,
+   0,
+   0
+  ],
+  "1795703210": [
+   757,
+   90095,
+   0,
+   0
+  ],
+  "1795703211": [
+   176,
+   27148,
+   20,
+   4076
+  ],
+  "1795703212": [
+   718,
+   86776,
+   0,
+   0
+  ],
+  "1795703213": [
+   170,
+   29270,
+   0,
+   0
+  ],
+  "1795703214": [
+   778,
+   92092,
+   20,
+   3336
+  ],
+  "1795703215": [
+   424,
+   98695,
+   0,
+   0
+  ],
+  "1795703216": [
+   858,
+   116522,
+   0,
+   0
+  ],
+  "1795703217": [
+   228,
+   35376,
+   0,
+   0
+  ],
+  "1795703218": [
+   193,
+   31104,
+   0,
+   0
+  ],
+  "1795703219": [
+   694,
+   86896,
+   0,
+   0
+  ],
+  "1795703220": [
+   192,
+   40115,
+   0,
+   0
+  ],
+  "1795703221": [
+   852,
+   100788,
+   0,
+   0
+  ],
+  "1795703222": [
+   142,
+   21836,
+   0,
+   0
+  ],
+  "1795703223": [
+   716,
+   87496,
+   0,
+   0
+  ],
+  "1795703224": [
+   166,
+   28340,
+   0,
+   0
+  ],
+  "1795703225": [
+   882,
+   219344,
+   162,
+   135476
+  ],
+  "1795703226": [
+   332,
+   81694,
+   0,
+   0
+  ],
+  "1795703227": [
+   820,
+   110260,
+   24,
+   3904
+  ],
+  "1795703228": [
+   161,
+   25000,
+   0,
+   0
+  ],
+  "1795703229": [
+   841,
+   167864,
+   134,
+   76714
+  ],
+  "1795703230": [
+   243,
+   55105,
+   72,
+   26242
+  ],
+  "1795703231": [
+   186,
+   36072,
+   24,
+   3904
+  ],
+  "1795703232": [
+   706,
+   98878,
+   32,
+   14450
+  ],
+  "1795703233": [
+   208,
+   30886,
+   0,
+   0
+  ],
+  "1795703234": [
+   805,
+   107045,
+   20,
+   3336
+  ],
+  "1795703235": [
+   174,
+   27282,
+   0,
+   0
+  ],
+  "1795703236": [
+   720,
+   86545,
+   0,
+   0
+  ],
+  "1795703237": [
+   476,
+   142654,
+   108,
+   62476
+  ],
+  "1795703238": [
+   872,
+   118792,
+   0,
+   0
+  ],
+  "1795703239": [
+   194,
+   27666,
+   0,
+   0
+  ],
+  "1795703240": [
+   688,
+   88528,
+   0,
+   0
+  ],
+  "1795703241": [
+   274,
+   67753,
+   46,
+   21034
+  ],
+  "1795703242": [
+   766,
+   88940,
+   0,
+   0
+  ],
+  "1795703243": [
+   188,
+   29933,
+   24,
+   3902
+  ],
+  "1795703244": [
+   468,
+   88310,
+   60,
+   29412
+  ],
+  "1795703245": [
+   563,
+   73695,
+   0,
+   0
+  ],
+  "1795703246": [
+   142,
+   25974,
+   0,
+   0
+  ],
+  "1795703247": [
+   860,
+   112530,
+   0,
+   0
+  ],
+  "1795703248": [
+   318,
+   69810,
+   0,
+   0
+  ],
+  "1795703249": [
+   802,
+   115284,
+   0,
+   0
+  ],
+  "1795703250": [
+   146,
+   26788,
+   0,
+   0
+  ],
+  "1795703251": [
+   742,
+   93177,
+   0,
+   0
+  ],
+  "1795703252": [
+   133,
+   21496,
+   0,
+   0
+  ],
+  "1795703253": [
+   770,
+   87720,
+   0,
+   0
+  ],
+  "1795703254": [
+   218,
+   35070,
+   28,
+   4054
+  ],
+  "1795703255": [
+   798,
+   98204,
+   20,
+   3560
+  ],
+  "1795703256": [
+   172,
+   32917,
+   20,
+   3334
+  ],
+  "1795703257": [
+   640,
+   75188,
+   0,
+   0
+  ],
+  "1795703258": [
+   336,
+   43392,
+   0,
+   0
+  ],
+  "1795703259": [
+   256,
+   58030,
+   0,
+   0
+  ],
+  "1795703260": [
+   902,
+   128396,
+   0,
+   0
+  ],
+  "1795703261": [
+   1336,
+   1111359,
+   1162,
+   1081590
+  ],
+  "1795703262": [
+   676,
+   83324,
+   0,
+   0
+  ],
+  "1795703263": [
+   278,
+   53472,
+   0,
+   0
+  ],
+  "1795703264": [
+   698,
+   85336,
+   0,
+   0
+  ],
+  "1795703265": [
+   208,
+   46853,
+   48,
+   21058
+  ],
+  "1795703266": [
+   709,
+   88297,
+   0,
+   0
+  ],
+  "1795703267": [
+   206,
+   39379,
+   32,
+   8050
+  ],
+  "1795703268": [
+   732,
+   117550,
+   60,
+   36378
+  ],
+  "1795703269": [
+   263,
+   69555,
+   56,
+   34224
+  ],
+  "1795703270": [
+   785,
+   144904,
+   60,
+   30020
+  ],
+  "1795703271": [
+   377,
+   70764,
+   24,
+   3916
+  ],
+  "1795703272": [
+   444,
+   188078,
+   204,
+   142442
+  ],
+  "1795703273": [
+   774,
+   93928,
+   0,
+   0
+  ],
+  "1795703274": [
+   278,
+   123106,
+   134,
+   98400
+  ],
+  "1795703275": [
+   1264,
+   432092,
+   448,
+   329198
+  ],
+  "1795703276": [
+   140,
+   26376,
+   0,
+   0
+  ],
+  "1795703277": [
+   842,
+   136720,
+   72,
+   39318
+  ],
+  "1795703278": [
+   298,
+   58092,
+   48,
+   9656
+  ],
+  "1795703279": [
+   796,
+   90736,
+   24,
+   3160
+  ],
+  "1795703280": [
+   148,
+   27892,
+   0,
+   0
+  ],
+  "1795703281": [
+   790,
+   119986,
+   64,
+   35026
+  ],
+  "1795703282": [
+   338,
+   77709,
+   0,
+   0
+  ],
+  "1795703283": [
+   918,
+   142714,
+   32,
+   14348
+  ],
+  "1795703284": [
+   274,
+   51276,
+   20,
+   3336
+  ],
+  "1795703285": [
+   216,
+   43970,
+   56,
+   13256
+  ],
+  "1795703286": [
+   790,
+   143340,
+   112,
+   55444
+  ],
+  "1795703287": [
+   186,
+   28793,
+   0,
+   0
+  ],
+  "1795703288": [
+   666,
+   79116,
+   0,
+   0
+  ],
+  "1795703289": [
+   274,
+   83536,
+   108,
+   54744
+  ],
+  "1795703290": [
+   812,
+   98398,
+   0,
+   0
+  ],
+  "1795703291": [
+   192,
+   32438,
+   24,
+   6430
+  ],
+  "1795703292": [
+   780,
+   93079,
+   20,
+   3334
+  ],
+  "1795703293": [
+   313,
+   72624,
+   24,
+   3908
+  ],
+  "1795703294": [
+   882,
+   128584,
+   0,
+   0
+  ],
+  "1795703295": [
+   195,
+   32275,
+   0,
+   0
+  ],
+  "1795703296": [
+   830,
+   113657,
+   38,
+   12090
+  ],
+  "1795703297": [
+   197,
+   42491,
+   28,
+   10982
+  ],
+  "1795703298": [
+   436,
+   56204,
+   0,
+   0
+  ],
+  "1795703299": [
+   468,
+   58376,
+   0,
+   0
+  ],
+  "1795703300": [
+   154,
+   26797,
+   20,
+   3336
+  ],
+  "1795703301": [
+   725,
+   89326,
+   0,
+   0
+  ],
+  "1795703302": [
+   174,
+   25728,
+   0,
+   0
+  ],
+  "1795703303": [
+   780,
+   92636,
+   0,
+   0
+  ],
+  "1795703304": [
+   338,
+   81709,
+   24,
+   3924
+  ],
+  "1795703305": [
+   1040,
+   152216,
+   0,
+   0
+  ],
+  "1795703306": [
+   155,
+   27606,
+   0,
+   0
+  ],
+  "1795703307": [
+   775,
+   89172,
+   0,
+   0
+  ],
+  "1795703308": [
+   300,
+   68552,
+   36,
+   15964
+  ],
+  "1795703309": [
+   734,
+   91218,
+   34,
+   6694
+  ],
+  "1795703310": [
+   76,
+   16076,
+   0,
+   0
+  ],
+  "1795703311": [
+   641,
+   78585,
+   0,
+   0
+  ],
+  "1795703312": [
+   233,
+   34308,
+   0,
+   0
+  ],
+  "1795703313": [
+   152,
+   23957,
+   0,
+   0
+  ],
+  "1795703314": [
+   792,
+   95056,
+   0,
+   0
+  ],
+  "1795703315": [
+   309,
+   63846,
+   20,
+   3336
+  ],
+  "1795703316": [
+   946,
+   147742,
+   0,
+   0
+  ],
+  "1795703317": [
+   324,
+   103112,
+   88,
+   64346
+  ],
+  "1795703318": [
+   746,
+   104345,
+   62,
+   13560
+  ],
+  "1795703319": [
+   159,
+   22510,
+   0,
+   0
+  ],
+  "1795703320": [
+   756,
+   107638,
+   48,
+   20658
+  ],
+  "1795703321": [
+   261,
+   64884,
+   86,
+   32340
+  ],
+  "1795703322": [
+   808,
+   114606,
+   44,
+   18768
+  ],
+  "1795703323": [
+   176,
+   26404,
+   0,
+   0
+  ],
+  "1795703324": [
+   676,
+   81587,
+   0,
+   0
+  ],
+  "1795703325": [
+   164,
+   24188,
+   0,
+   0
+  ],
+  "1795703326": [
+   354,
+   93200,
+   56,
+   27254
+  ],
+  "1795703327": [
+   884,
+   147971,
+   0,
+   0
+  ],
+  "1795703328": [
+   176,
+   36016,
+   38,
+   13572
+  ],
+  "1795703329": [
+   882,
+   119051,
+   60,
+   19070
+  ],
+  "1795703330": [
+   136,
+   23576,
+   0,
+   0
+  ],
+  "1795703331": [
+   766,
+   88280,
+   0,
+   0
+  ],
+  "1795703332": [
+   188,
+   32706,
+   0,
+   0
+  ],
+  "1795703333": [
+   842,
+   141180,
+   76,
+   49840
+  ],
+  "1795703334": [
+   146,
+   25177,
+   0,
+   0
+  ],
+  "1795703335": [
+   740,
+   87228,
+   0,
+   0
+  ],
+  "1795703336": [
+   168,
+   27316,
+   28,
+   4232
+  ],
+  "1795703337": [
+   806,
+   113973,
+   0,
+   0
+  ],
+  "1795703338": [
+   369,
+   85530,
+   0,
+   0
+  ],
+  "1795703339": [
+   294,
+   51744,
+   0,
+   0
+  ],
+  "1795703340": [
+   940,
+   157263,
+   0,
+   0
+  ],
+  "1795703341": [
+   442,
+   97506,
+   0,
+   0
+  ],
+  "1795703342": [
+   764,
+   90250,
+   0,
+   0
+  ],
+  "1795703343": [
+   190,
+   48172,
+   74,
+   25792
+  ],
+  "1795703344": [
+   868,
+   119651,
+   94,
+   28742
+  ],
+  "1795703345": [
+   162,
+   25088,
+   0,
+   0
+  ],
+  "1795703346": [
+   1372,
+   598594,
+   686,
+   512906
+  ],
+  "1795703347": [
+   328,
+   60445,
+   24,
+   3924
+  ],
+  "1795703348": [
+   778,
+   99349,
+   20,
+   4450
+  ],
+  "1795703349": [
+   188,
+   31571,
+   20,
+   3336
+  ],
+  "1795703350": [
+   778,
+   138370,
+   92,
+   54398
+  ],
+  "1795703351": [
+   196,
+   38650,
+   0,
+   0
+  ],
+  "1795703352": [
+   3682,
+   3311764,
+   2898,
+   3177920
+  ],
+  "1795703353": [
+   882,
+   563230,
+   430,
+   505560
+  ],
+  "1795703354": [
+   152,
+   27852,
+   0,
+   0
+  ],
+  "1795703355": [
+   714,
+   87289,
+   0,
+   0
+  ],
+  "1795703356": [
+   173,
+   26962,
+   0,
+   0
+  ],
+  "1795703357": [
+   826,
+   99520,
+   0,
+   0
+  ],
+  "1795703358": [
+   413,
+   181722,
+   250,
+   150464
+  ],
+  "1795703359": [
+   792,
+   116274,
+   48,
+   20758
+  ],
+  "1795703360": [
+   116,
+   28609,
+   0,
+   0
+  ],
+  "1795703361": [
+   763,
+   85990,
+   0,
+   0
+  ],
+  "1795703362": [
+   196,
+   37620,
+   0,
+   0
+  ],
+  "1795703363": [
+   998,
+   155254,
+   0,
+   0
+  ],
+  "1795703364": [
+   192,
+   38266,
+   0,
+   0
+  ],
+  "1795703365": [
+   806,
+   96084,
+   0,
+   0
+  ],
+  "1795703366": [
+   152,
+   22907,
+   0,
+   0
+  ],
+  "1795703367": [
+   155,
+   20768,
+   0,
+   0
+  ],
+  "1795703368": [
+   919,
+   125074,
+   20,
+   4458
+  ],
+  "1795703369": [
+   252,
+   50650,
+   0,
+   0
+  ],
+  "1795703370": [
+   698,
+   87837,
+   20,
+   3336
+  ],
+  "1795703371": [
+   212,
+   33906,
+   24,
+   3582
+  ],
+  "1795703372": [
+   768,
+   89432,
+   0,
+   0
+  ],
+  "1795703373": [
+   163,
+   24599,
+   0,
+   0
+  ],
+  "1795703374": [
+   1027,
+   165833,
+   0,
+   0
+  ],
+  "1795703375": [
+   216,
+   40152,
+   0,
+   0
+  ],
+  "1795703376": [
+   786,
+   94093,
+   0,
+   0
+  ],
+  "1795703377": [
+   106,
+   13740,
+   0,
+   0
+  ],
+  "1795703378": [
+   819,
+   97552,
+   0,
+   0
+  ],
+  "1795703379": [
+   150,
+   23170,
+   0,
+   0
+  ],
+  "1795703380": [
+   375,
+   48910,
+   24,
+   3916
+  ],
+  "1795703381": [
+   611,
+   80030,
+   0,
+   0
+  ],
+  "1795703382": [
+   156,
+   23484,
+   0,
+   0
+  ],
+  "1795703383": [
+   740,
+   94698,
+   32,
+   11386
+  ],
+  "1795703384": [
+   204,
+   42698,
+   36,
+   12232
+  ],
+  "1795703385": [
+   1010,
+   161000,
+   52,
+   12724
+  ],
+  "1795703386": [
+   554,
+   193386,
+   0,
+   0
+  ],
+  "1795703387": [
+   814,
+   113043,
+   0,
+   0
+  ],
+  "1795703388": [
+   158,
+   23091,
+   0,
+   0
+  ],
+  "1795703389": [
+   928,
+   127367,
+   24,
+   3924
+  ],
+  "1795703390": [
+   238,
+   64536,
+   80,
+   33990
+  ],
+  "1795703391": [
+   808,
+   200210,
+   128,
+   117370
+  ],
+  "1795703392": [
+   454,
+   124844,
+   258,
+   91976
+  ],
+  "1795703393": [
+   608,
+   78262,
+   34,
+   7278
+  ],
+  "1795703394": [
+   220,
+   31659,
+   0,
+   0
+  ],
+  "1795703395": [
+   158,
+   26688,
+   0,
+   0
+  ],
+  "1795703396": [
+   940,
+   138927,
+   0,
+   0
+  ],
+  "1795703397": [
+   262,
+   54824,
+   0,
+   0
+  ],
+  "1795703398": [
+   852,
+   100224,
+   0,
+   0
+  ],
+  "1795703399": [
+   194,
+   33821,
+   20,
+   3336
+  ],
+  "1795703400": [
+   872,
+   117343,
+   24,
+   3916
+  ],
+  "1795703401": [
+   213,
+   39090,
+   40,
+   13632
+  ],
+  "1795703402": [
+   783,
+   95599,
+   0,
+   0
+  ],
+  "1795703403": [
+   151,
+   27106,
+   0,
+   0
+  ],
+  "1795703404": [
+   767,
+   100230,
+   32,
+   12336
+  ],
+  "1795703405": [
+   155,
+   30388,
+   0,
+   0
+  ],
+  "1795703406": [
+   761,
+   87167,
+   0,
+   0
+  ],
+  "1795703407": [
+   393,
+   89489,
+   62,
+   17636
+  ],
+  "1795703408": [
+   433,
+   210670,
+   178,
+   154032
+  ],
+  "1795703409": [
+   825,
+   101942,
+   30,
+   5548
+  ],
+  "1795703410": [
+   343,
+   77408,
+   40,
+   14776
+  ],
+  "1795703411": [
+   695,
+   80674,
+   0,
+   0
+  ],
+  "1795703412": [
+   184,
+   27619,
+   0,
+   0
+  ],
+  "1795703413": [
+   739,
+   95242,
+   20,
+   3336
+  ],
+  "1795703414": [
+   163,
+   27868,
+   0,
+   0
+  ],
+  "1795703415": [
+   699,
+   86144,
+   0,
+   0
+  ],
+  "1795703416": [
+   191,
+   28006,
+   0,
+   0
+  ],
+  "1795703417": [
+   765,
+   89193,
+   0,
+   0
+  ],
+  "1795703418": [
+   238,
+   41262,
+   32,
+   9214
+  ],
+  "1795703419": [
+   865,
+   145380,
+   0,
+   0
+  ],
+  "1795703420": [
+   314,
+   63158,
+   0,
+   0
+  ],
+  "1795703421": [
+   162,
+   26540,
+   24,
+   3904
+  ],
+  "1795703422": [
+   806,
+   95757,
+   0,
+   0
+  ],
+  "1795703423": [
+   147,
+   29322,
+   0,
+   0
+  ],
+  "1795703424": [
+   702,
+   85360,
+   0,
+   0
+  ],
+  "1795703425": [
+   451,
+   295741,
+   256,
+   258904
+  ],
+  "1795703426": [
+   704,
+   87844,
+   0,
+   0
+  ],
+  "1795703427": [
+   152,
+   29225,
+   28,
+   10292
+  ],
+  "1795703428": [
+   763,
+   87361,
+   0,
+   0
+  ],
+  "1795703429": [
+   139,
+   20590,
+   0,
+   0
+  ],
+  "1795703430": [
+   929,
+   157569,
+   0,
+   0
+  ],
+  "1795703431": [
+   381,
+   84755,
+   0,
+   0
+  ],
+  "1795703432": [
+   846,
+   106862,
+   20,
+   3336
+  ],
+  "1795703433": [
+   142,
+   21937,
+   0,
+   0
+  ],
+  "1795703434": [
+   228,
+   33740,
+   0,
+   0
+  ],
+  "1795703435": [
+   636,
+   78280,
+   0,
+   0
+  ],
+  "1795703436": [
+   194,
+   35714,
+   22,
+   4048
+  ],
+  "1795703437": [
+   827,
+   99804,
+   16,
+   2416
+  ],
+  "1795703438": [
+   205,
+   37277,
+   0,
+   0
+  ],
+  "1795703439": [
+   761,
+   88118,
+   0,
+   0
+  ],
+  "1795703440": [
+   326,
+   84600,
+   0,
+   0
+  ],
+  "1795703441": [
+   911,
+   136314,
+   0,
+   0
+  ],
+  "1795703442": [
+   305,
+   62872,
+   0,
+   0
+  ],
+  "1795703443": [
+   711,
+   84229,
+   0,
+   0
+  ],
+  "1795703444": [
+   135,
+   23632,
+   0,
+   0
+  ],
+  "1795703445": [
+   657,
+   77774,
+   0,
+   0
+  ],
+  "1795703446": [
+   211,
+   36225,
+   0,
+   0
+  ],
+  "1795703447": [
+   460,
+   56560,
+   0,
+   0
+  ],
+  "1795703448": [
+   450,
+   54105,
+   0,
+   0
+  ],
+  "1795703449": [
+   168,
+   23660,
+   0,
+   0
+  ],
+  "1795703450": [
+   882,
+   135228,
+   0,
+   0
+  ],
+  "1795703451": [
+   127,
+   26436,
+   0,
+   0
+  ],
+  "1795703452": [
+   955,
+   156380,
+   0,
+   0
+  ],
+  "1795703453": [
+   290,
+   61820,
+   0,
+   0
+  ],
+  "1795703454": [
+   690,
+   81948,
+   0,
+   0
+  ],
+  "1795703455": [
+   168,
+   25432,
+   0,
+   0
+  ],
+  "1795703456": [
+   784,
+   91231,
+   0,
+   0
+  ],
+  "1795703457": [
+   194,
+   31951,
+   0,
+   0
+  ],
+  "1795703458": [
+   718,
+   85034,
+   0,
+   0
+  ],
+  "1795703459": [
+   152,
+   23909,
+   0,
+   0
+  ],
+  "1795703460": [
+   200,
+   26096,
+   0,
+   0
+  ],
+  "1795703461": [
+   712,
+   98228,
+   0,
+   0
+  ],
+  "1795703462": [
+   229,
+   43994,
+   30,
+   4448
+  ],
+  "1795703463": [
+   874,
+   123894,
+   0,
+   0
+  ],
+  "1795703464": [
+   384,
+   81756,
+   30,
+   5714
+  ],
+  "1795703465": [
+   784,
+   104588,
+   36,
+   14304
+  ],
+  "1795703466": [
+   162,
+   24532,
+   0,
+   0
+  ],
+  "1795703467": [
+   721,
+   88272,
+   0,
+   0
+  ],
+  "1795703468": [
+   157,
+   27206,
+   0,
+   0
+  ],
+  "1795703469": [
+   791,
+   98175,
+   0,
+   0
+  ],
+  "1795703470": [
+   208,
+   36136,
+   0,
+   0
+  ],
+  "1795703471": [
+   758,
+   87472,
+   0,
+   0
+  ],
+  "1795703472": [
+   285,
+   76084,
+   0,
+   0
+  ],
+  "1795703473": [
+   638,
+   129618,
+   0,
+   0
+  ],
+  "1795703474": [
+   520,
+   83191,
+   0,
+   0
+  ],
+  "1795703475": [
+   282,
+   58140,
+   24,
+   3696
+  ],
+  "1795703476": [
+   846,
+   120076,
+   0,
+   0
+  ],
+  "1795703477": [
+   148,
+   23780,
+   0,
+   0
+  ],
+  "1795703478": [
+   746,
+   86524,
+   0,
+   0
+  ],
+  "1795703479": [
+   176,
+   25293,
+   0,
+   0
+  ],
+  "1795703480": [
+   784,
+   91872,
+   0,
+   0
+  ],
+  "1795703481": [
+   156,
+   22436,
+   0,
+   0
+  ],
+  "1795703482": [
+   748,
+   90044,
+   0,
+   0
+  ],
+  "1795703483": [
+   164,
+   36286,
+   0,
+   0
+  ],
+  "1795703484": [
+   791,
+   94037,
+   0,
+   0
+  ],
+  "1795703485": [
+   180,
+   32364,
+   0,
+   0
+  ],
+  "1795703486": [
+   657,
+   114552,
+   0,
+   0
+  ],
+  "1795703487": [
+   468,
+   74855,
+   0,
+   0
+  ],
+  "1795703488": [
+   190,
+   29603,
+   0,
+   0
+  ],
+  "1795703489": [
+   766,
+   89754,
+   0,
+   0
+  ],
+  "1795703490": [
+   156,
+   25069,
+   0,
+   0
+  ],
+  "1795703491": [
+   732,
+   91902,
+   0,
+   0
+  ],
+  "1795703492": [
+   222,
+   42012,
+   0,
+   0
+  ],
+  "1795703493": [
+   772,
+   90976,
+   0,
+   0
+  ],
+  "1795703494": [
+   506,
+   235916,
+   254,
+   187432
+  ],
+  "1795703495": [
+   2902,
+   2608990,
+   2118,
+   2509404
+  ],
+  "1795703496": [
+   164,
+   26976,
+   0,
+   0
+  ],
+  "1795703497": [
+   941,
+   138006,
+   0,
+   0
+  ],
+  "1795703498": [
+   336,
+   71396,
+   0,
+   0
+  ],
+  "1795703499": [
+   750,
+   85516,
+   0,
+   0
+  ],
+  "1795703500": [
+   182,
+   28425,
+   0,
+   0
+  ],
+  "1795703501": [
+   146,
+   21836,
+   0,
+   0
+  ],
+  "1795703502": [
+   694,
+   81372,
+   0,
+   0
+  ],
+  "1795703503": [
+   184,
+   32602,
+   0,
+   0
+  ],
+  "1795703504": [
+   688,
+   82906,
+   0,
+   0
+  ],
+  "1795703505": [
+   136,
+   21327,
+   0,
+   0
+  ],
+  "1795703506": [
+   744,
+   91978,
+   0,
+   0
+  ],
+  "1795703507": [
+   161,
+   29110,
+   0,
+   0
+  ],
+  "1795703508": [
+   909,
+   128291,
+   0,
+   0
+  ],
+  "1795703509": [
+   338,
+   74648,
+   0,
+   0
+  ],
+  "1795703510": [
+   762,
+   91168,
+   0,
+   0
+  ],
+  "1795703511": [
+   148,
+   22944,
+   0,
+   0
+  ],
+  "1795703512": [
+   708,
+   80820,
+   0,
+   0
+  ],
+  "1795703513": [
+   151,
+   25664,
+   0,
+   0
+  ],
+  "1795703514": [
+   525,
+   64587,
+   0,
+   0
+  ],
+  "1795703515": [
+   480,
+   71209,
+   0,
+   0
+  ],
+  "1795703516": [
+   190,
+   30940,
+   0,
+   0
+  ],
+  "1795703517": [
+   760,
+   87884,
+   0,
+   0
+  ],
+  "1795703518": [
+   234,
+   35903,
+   0,
+   0
+  ],
+  "1795703519": [
+   777,
+   110437,
+   0,
+   0
+  ],
+  "1795703520": [
+   338,
+   74604,
+   0,
+   0
+  ],
+  "1795703521": [
+   798,
+   93025,
+   0,
+   0
+  ],
+  "1795703522": [
+   216,
+   46070,
+   0,
+   0
+  ],
+  "1795703523": [
+   794,
+   95080,
+   0,
+   0
+  ],
+  "1795703524": [
+   202,
+   30534,
+   0,
+   0
+  ],
+  "1795703525": [
+   672,
+   83684,
+   0,
+   0
+  ],
+  "1795703526": [
+   160,
+   23936,
+   0,
+   0
+  ],
+  "1795703527": [
+   388,
+   45636,
+   0,
+   0
+  ],
+  "1795703528": [
+   480,
+   55812,
+   0,
+   0
+  ],
+  "1795703529": [
+   175,
+   30930,
+   0,
+   0
+  ],
+  "1795703530": [
+   776,
+   107670,
+   0,
+   0
+  ],
+  "1795703531": [
+   368,
+   83219,
+   0,
+   0
+  ],
+  "1795703532": [
+   700,
+   83920,
+   0,
+   0
+  ],
+  "1795703533": [
+   170,
+   27620,
+   0,
+   0
+  ],
+  "1795703534": [
+   790,
+   92370,
+   0,
+   0
+  ],
+  "1795703535": [
+   134,
+   26912,
+   0,
+   0
+  ],
+  "1795703536": [
+   824,
+   113363,
+   0,
+   0
+  ],
+  "1795703537": [
+   146,
+   22964,
+   0,
+   0
+  ],
+  "1795703538": [
+   4670,
+   4245884,
+   3808,
+   4137616
+  ],
+  "1795703539": [
+   195,
+   29957,
+   0,
+   0
+  ],
+  "1795703540": [
+   494,
+   62736,
+   0,
+   0
+  ],
+  "1795703541": [
+   446,
+   59411,
+   0,
+   0
+  ],
+  "1795703542": [
+   314,
+   63064,
+   0,
+   0
+  ],
+  "1795703543": [
+   882,
+   122028,
+   0,
+   0
+  ],
+  "1795703544": [
+   121,
+   19339,
+   0,
+   0
+  ],
+  "1795703545": [
+   799,
+   98906,
+   0,
+   0
+  ],
+  "1795703546": [
+   160,
+   29110,
+   0,
+   0
+  ],
+  "1795703547": [
+   786,
+   93006,
+   24,
+   3914
+  ],
+  "1795703548": [
+   186,
+   30416,
+   0,
+   0
+  ],
+  "1795703549": [
+   701,
+   90197,
+   0,
+   0
+  ],
+  "1795703550": [
+   182,
+   34778,
+   0,
+   0
+  ],
+  "1795703551": [
+   716,
+   85529,
+   0,
+   0
+  ],
+  "1795703552": [
+   138,
+   22237,
+   0,
+   0
+  ],
+  "1795703553": [
+   1047,
+   193132,
+   80,
+   35926
+  ],
+  "1795703554": [
+   364,
+   72655,
+   0,
+   0
+  ],
+  "1795703555": [
+   155,
+   26238,
+   0,
+   0
+  ],
+  "1795703556": [
+   782,
+   92028,
+   0,
+   0
+  ],
+  "1795703557": [
+   244,
+   45996,
+   0,
+   0
+  ],
+  "1795703558": [
+   852,
+   105072,
+   0,
+   0
+  ],
+  "1795703559": [
+   134,
+   19164,
+   0,
+   0
+  ],
+  "1795703560": [
+   740,
+   91180,
+   0,
+   0
+  ],
+  "1795703561": [
+   108,
+   17128,
+   0,
+   0
+  ],
+  "1795703562": [
+   754,
+   88137,
+   0,
+   0
+  ],
+  "1795703563": [
+   172,
+   23536,
+   0,
+   0
+  ],
+  "1795703564": [
+   802,
+   108589,
+   0,
+   0
+  ],
+  "1795703565": [
+   366,
+   87246,
+   20,
+   3334
+  ],
+  "1795703566": [
+   790,
+   93900,
+   0,
+   0
+  ],
+  "1795703567": [
+   154,
+   28006,
+   0,
+   0
+  ],
+  "1795703568": [
+   208,
+   27248,
+   0,
+   0
+  ],
+  "1795703569": [
+   665,
+   81162,
+   24,
+   3916
+  ],
+  "1795703570": [
+   162,
+   27210,
+   0,
+   0
+  ],
+  "1795703571": [
+   790,
+   97660,
+   24,
+   6164
+  ],
+  "1795703572": [
+   192,
+   28537,
+   0,
+   0
+  ],
+  "1795703573": [
+   771,
+   94436,
+   0,
+   0
+  ],
+  "1795703574": [
+   300,
+   102896,
+   136,
+   76288
+  ],
+  "1795703575": [
+   782,
+   111053,
+   0,
+   0
+  ],
+  "1795703576": [
+   383,
+   86540,
+   0,
+   0
+  ],
+  "1795703577": [
+   686,
+   83124,
+   0,
+   0
+  ],
+  "1795703578": [
+   189,
+   38656,
+   0,
+   0
+  ],
+  "1795703579": [
+   826,
+   98916,
+   0,
+   0
+  ],
+  "1795703580": [
+   164,
+   24643,
+   0,
+   0
+  ],
+  "1795703581": [
+   676,
+   82723,
+   0,
+   0
+  ],
+  "1795703582": [
+   203,
+   30287,
+   0,
+   0
+  ],
+  "1795703583": [
+   200,
+   40747,
+   0,
+   0
+  ],
+  "1795703584": [
+   760,
+   94400,
+   0,
+   0
+  ],
+  "1795703585": [
+   142,
+   24640,
+   0,
+   0
+  ],
+  "1795703586": [
+   712,
+   94358,
+   0,
+   0
+  ],
+  "1795703587": [
+   426,
+   95012,
+   0,
+   0
+  ],
+  "1795703588": [
+   782,
+   91676,
+   0,
+   0
+  ],
+  "1795703589": [
+   174,
+   30602,
+   30,
+   6278
+  ],
+  "1795703590": [
+   729,
+   89646,
+   0,
+   0
+  ],
+  "1795703591": [
+   154,
+   26936,
+   0,
+   0
+  ],
+  "1795703592": [
+   766,
+   87672,
+   0,
+   0
+  ],
+  "1795703593": [
+   190,
+   30704,
+   20,
+   3336
+  ],
+  "1795703594": [
+   632,
+   74497,
+   0,
+   0
+  ],
+  "1795703595": [
+   136,
+   21552,
+   0,
+   0
+  ],
+  "1795703596": [
+   309,
+   44486,
+   0,
+   0
+  ],
+  "1795703597": [
+   660,
+   94520,
+   56,
+   11446
+  ],
+  "1795703598": [
+   432,
+   100560,
+   0,
+   0
+  ],
+  "1795703599": [
+   792,
+   112312,
+   0,
+   0
+  ],
+  "1795703600": [
+   192,
+   34084,
+   0,
+   0
+  ],
+  "1795703601": [
+   740,
+   100843,
+   44,
+   17646
+  ],
+  "1795703602": [
+   183,
+   30868,
+   0,
+   0
+  ],
+  "1795703603": [
+   684,
+   85139,
+   0,
+   0
+  ],
+  "1795703604": [
+   156,
+   23064,
+   0,
+   0
+  ],
+  "1795703605": [
+   812,
+   99388,
+   24,
+   6064
+  ],
+  "1795703606": [
+   210,
+   36396,
+   34,
+   6966
+  ],
+  "1795703607": [
+   770,
+   89224,
+   0,
+   0
+  ],
+  "1795703608": [
+   195,
+   28211,
+   0,
+   0
+  ],
+  "1795703609": [
+   424,
+   83278,
+   0,
+   0
+  ],
+  "1795703610": [
+   772,
+   112716,
+   0,
+   0
+  ],
+  "1795703611": [
+   136,
+   23112,
+   0,
+   0
+  ],
+  "1795703612": [
+   773,
+   97285,
+   0,
+   0
+  ],
+  "1795703613": [
+   148,
+   22823,
+   0,
+   0
+  ],
+  "1795703614": [
+   904,
+   121722,
+   0,
+   0
+  ],
+  "1795703615": [
+   177,
+   32208,
+   34,
+   7048
+  ],
+  "1795703616": [
+   778,
+   92966,
+   0,
+   0
+  ],
+  "1795703617": [
+   185,
+   33660,
+   0,
+   0
+  ],
+  "1795703618": [
+   746,
+   89084,
+   0,
+   0
+  ],
+  "1795703619": [
+   148,
+   22486,
+   0,
+   0
+  ],
+  "1795703620": [
+   928,
+   138298,
+   20,
+   3336
+  ],
+  "1795703621": [
+   416,
+   88114,
+   0,
+   0
+  ],
+  "1795703622": [
+   374,
+   55979,
+   30,
+   5922
+  ],
+  "1795703623": [
+   540,
+   67940,
+   0,
+   0
+  ],
+  "1795703624": [
+   158,
+   22727,
+   0,
+   0
+  ],
+  "1795703625": [
+   710,
+   90968,
+   24,
+   3916
+  ],
+  "1795703626": [
+   176,
+   27752,
+   0,
+   0
+  ],
+  "1795703627": [
+   760,
+   91522,
+   0,
+   0
+  ],
+  "1795703628": [
+   112,
+   16460,
+   0,
+   0
+  ],
+  "1795703629": [
+   686,
+   80305,
+   0,
+   0
+  ],
+  "1795703630": [
+   160,
+   26176,
+   0,
+   0
+  ],
+  "1795703631": [
+   720,
+   96490,
+   0,
+   0
+  ],
+  "1795703632": [
+   450,
+   94682,
+   0,
+   0
+  ],
+  "1795703633": [
+   770,
+   90888,
+   0,
+   0
+  ],
+  "1795703634": [
+   160,
+   24432,
+   0,
+   0
+  ],
+  "1795703635": [
+   560,
+   68472,
+   0,
+   0
+  ],
+  "1795703636": [
+   300,
+   41116,
+   0,
+   0
+  ],
+  "1795703637": [
+   170,
+   27496,
+   0,
+   0
+  ],
+  "1795703638": [
+   854,
+   106188,
+   0,
+   0
+  ],
+  "1795703639": [
+   148,
+   22762,
+   0,
+   0
+  ],
+  "1795703640": [
+   806,
+   100166,
+   32,
+   8758
+  ],
+  "1795703641": [
+   246,
+   62804,
+   46,
+   20080
+  ],
+  "1795703642": [
+   882,
+   121091,
+   0,
+   0
+  ],
+  "1795703643": [
+   346,
+   77759,
+   0,
+   0
+  ],
+  "1795703644": [
+   796,
+   111903,
+   0,
+   0
+  ],
+  "1795703645": [
+   440,
+   123811,
+   0,
+   0
+  ],
+  "1795703646": [
+   826,
+   116682,
+   0,
+   0
+  ],
+  "1795703647": [
+   184,
+   29547,
+   0,
+   0
+  ],
+  "1795703648": [
+   789,
+   94174,
+   0,
+   0
+  ],
+  "1795703649": [
+   156,
+   23868,
+   0,
+   0
+  ],
+  "1795703650": [
+   194,
+   27493,
+   0,
+   0
+  ],
+  "1795703651": [
+   694,
+   83392,
+   0,
+   0
+  ],
+  "1795703652": [
+   166,
+   25740,
+   0,
+   0
+  ],
+  "1795703653": [
+   776,
+   92089,
+   0,
+   0
+  ],
+  "1795703654": [
+   154,
+   25728,
+   0,
+   0
+  ],
+  "1795703655": [
+   684,
+   83248,
+   0,
+   0
+  ],
+  "1795703656": [
+   306,
+   66882,
+   0,
+   0
+  ],
+  "1795703657": [
+   912,
+   126452,
+   0,
+   0
+  ],
+  "1795703658": [
+   218,
+   34750,
+   0,
+   0
+  ],
+  "1795703659": [
+   725,
+   90052,
+   0,
+   0
+  ],
+  "1795703660": [
+   162,
+   26782,
+   0,
+   0
+  ],
+  "1795703661": [
+   673,
+   81456,
+   0,
+   0
+  ],
+  "1795703662": [
+   168,
+   32836,
+   0,
+   0
+  ],
+  "1795703663": [
+   212,
+   37392,
+   0,
+   0
+  ],
+  "1795703664": [
+   700,
+   92264,
+   0,
+   0
+  ],
+  "1795703665": [
+   166,
+   23718,
+   0,
+   0
+  ],
+  "1795703666": [
+   694,
+   85052,
+   0,
+   0
+  ],
+  "1795703667": [
+   254,
+   53346,
+   0,
+   0
+  ],
+  "1795703668": [
+   902,
+   135633,
+   0,
+   0
+  ],
+  "1795703669": [
+   150,
+   24579,
+   0,
+   0
+  ],
+  "1795703670": [
+   782,
+   91017,
+   0,
+   0
+  ],
+  "1795703671": [
+   177,
+   26946,
+   0,
+   0
+  ],
+  "1795703672": [
+   704,
+   88756,
+   0,
+   0
+  ],
+  "1795703673": [
+   154,
+   23192,
+   0,
+   0
+  ],
+  "1795703674": [
+   848,
+   104698,
+   0,
+   0
+  ],
+  "1795703675": [
+   259,
+   57905,
+   0,
+   0
+  ],
+  "1795703676": [
+   337,
+   46503,
+   0,
+   0
+  ],
+  "1795703677": [
+   611,
+   71734,
+   0,
+   0
+  ],
+  "1795703678": [
+   232,
+   47954,
+   0,
+   0
+  ],
+  "1795703679": [
+   881,
+   126657,
+   0,
+   0
+  ],
+  "1795703680": [
+   270,
+   48646,
+   0,
+   0
+  ],
+  "1795703681": [
+   825,
+   115119,
+   48,
+   19746
+  ],
+  "1795703682": [
+   168,
+   26908,
+   0,
+   0
+  ],
+  "1795703683": [
+   852,
+   111244,
+   20,
+   3336
+  ],
+  "1795703684": [
+   247,
+   41481,
+   0,
+   0
+  ],
+  "1795703685": [
+   760,
+   92060,
+   0,
+   0
+  ],
+  "1795703686": [
+   196,
+   28707,
+   0,
+   0
+  ],
+  "1795703687": [
+   692,
+   81908,
+   0,
+   0
+  ],
+  "1795703688": [
+   158,
+   22740,
+   0,
+   0
+  ],
+  "1795703689": [
+   673,
+   111303,
+   0,
+   0
+  ],
+  "1795703690": [
+   563,
+   104272,
+   0,
+   0
+  ],
+  "1795703691": [
+   260,
+   52507,
+   0,
+   0
+  ],
+  "1795703692": [
+   794,
+   93068,
+   0,
+   0
+  ],
+  "1795703693": [
+   140,
+   22344,
+   0,
+   0
+  ],
+  "1795703694": [
+   706,
+   84642,
+   0,
+   0
+  ],
+  "1795703695": [
+   167,
+   26188,
+   0,
+   0
+  ],
+  "1795703696": [
+   703,
+   91817,
+   24,
+   3916
+  ],
+  "1795703697": [
+   147,
+   35258,
+   0,
+   0
+  ],
+  "1795703698": [
+   809,
+   96560,
+   0,
+   0
+  ],
+  "1795703699": [
+   245,
+   44765,
+   0,
+   0
+  ],
+  "1795703700": [
+   841,
+   117665,
+   0,
+   0
+  ],
+  "1795703701": [
+   338,
+   79162,
+   0,
+   0
+  ],
+  "1795703702": [
+   906,
+   123545,
+   0,
+   0
+  ],
+  "1795703703": [
+   142,
+   24072,
+   0,
+   0
+  ],
+  "1795703704": [
+   471,
+   168110,
+   0,
+   0
+  ],
+  "1795703705": [
+   894,
+   151333,
+   0,
+   0
+  ],
+  "1795703706": [
+   194,
+   32915,
+   0,
+   0
+  ],
+  "1795703707": [
+   786,
+   91116,
+   0,
+   0
+  ],
+  "1795703708": [
+   154,
+   22448,
+   0,
+   0
+  ],
+  "1795703709": [
+   725,
+   94230,
+   36,
+   11762
+  ],
+  "1795703710": [
+   199,
+   35724,
+   0,
+   0
+  ],
+  "1795703711": [
+   760,
+   85660,
+   0,
+   0
+  ],
+  "1795703712": [
+   274,
+   61819,
+   0,
+   0
+  ],
+  "1795703713": [
+   926,
+   128854,
+   0,
+   0
+  ],
+  "1795703714": [
+   164,
+   23540,
+   0,
+   0
+  ],
+  "1795703715": [
+   700,
+   86582,
+   0,
+   0
+  ],
+  "1795703716": [
+   182,
+   27824,
+   0,
+   0
+  ],
+  "1795703717": [
+   196,
+   28677,
+   0,
+   0
+  ],
+  "1795703718": [
+   674,
+   81468,
+   0,
+   0
+  ],
+  "1795703719": [
+   172,
+   25012,
+   0,
+   0
+  ],
+  "1795703720": [
+   792,
+   93083,
+   0,
+   0
+  ],
+  "1795703721": [
+   274,
+   78370,
+   0,
+   0
+  ],
+  "1795703722": [
+   724,
+   85941,
+   0,
+   0
+  ],
+  "1795703723": [
+   206,
+   46082,
+   0,
+   0
+  ],
+  "1795703724": [
+   896,
+   135680,
+   0,
+   0
+  ],
+  "1795703725": [
+   238,
+   48378,
+   0,
+   0
+  ],
+  "1795703726": [
+   806,
+   103376,
+   0,
+   0
+  ],
+  "1795703727": [
+   140,
+   20945,
+   0,
+   0
+  ],
+  "1795703728": [
+   728,
+   89398,
+   0,
+   0
+  ],
+  "1795703729": [
+   113,
+   21542,
+   0,
+   0
+  ],
+  "1795703730": [
+   310,
+   38551,
+   0,
+   0
+  ],
+  "1795703731": [
+   550,
+   70610,
+   0,
+   0
+  ],
+  "1795703732": [
+   164,
+   24928,
+   0,
+   0
+  ],
+  "1795703733": [
+   678,
+   79192,
+   0,
+   0
+  ],
+  "1795703734": [
+   249,
+   49960,
+   0,
+   0
+  ],
+  "1795703735": [
+   978,
+   153568,
+   0,
+   0
+  ],
+  "1795703736": [
+   270,
+   57704,
+   0,
+   0
+  ],
+  "1795703737": [
+   794,
+   94351,
+   0,
+   0
+  ],
+  "1795703738": [
+   205,
+   36656,
+   0,
+   0
+  ],
+  "1795703739": [
+   768,
+   93172,
+   0,
+   0
+  ],
+  "1795703740": [
+   174,
+   25132,
+   0,
+   0
+  ],
+  "1795703741": [
+   688,
+   85458,
+   0,
+   0
+  ],
+  "1795703742": [
+   164,
+   25500,
+   0,
+   0
+  ],
+  "1795703743": [
+   182,
+   26949,
+   0,
+   0
+  ],
+  "1795703744": [
+   764,
+   88148,
+   0,
+   0
+  ],
+  "1795703745": [
+   176,
+   33374,
+   0,
+   0
+  ],
+  "1795703746": [
+   926,
+   149274,
+   0,
+   0
+  ],
+  "1795703747": [
+   264,
+   58244,
+   0,
+   0
+  ],
+  "1795703748": [
+   684,
+   81872,
+   0,
+   0
+  ],
+  "1795703749": [
+   168,
+   24596,
+   0,
+   0
+  ],
+  "1795703750": [
+   781,
+   91948,
+   0,
+   0
+  ],
+  "1795703751": [
+   164,
+   25984,
+   0,
+   0
+  ],
+  "1795703752": [
+   819,
+   99556,
+   0,
+   0
+  ],
+  "1795703753": [
+   150,
+   28612,
+   0,
+   0
+  ],
+  "1795703754": [
+   734,
+   84496,
+   0,
+   0
+  ],
+  "1795703755": [
+   174,
+   27224,
+   0,
+   0
+  ],
+  "1795703756": [
+   557,
+   66750,
+   0,
+   0
+  ],
+  "1795703757": [
+   487,
+   82760,
+   0,
+   0
+  ],
+  "1795703758": [
+   386,
+   73889,
+   0,
+   0
+  ],
+  "1795703759": [
+   760,
+   89496,
+   0,
+   0
+  ],
+  "1795703760": [
+   154,
+   23828,
+   0,
+   0
+  ],
+  "1795703761": [
+   804,
+   97937,
+   0,
+   0
+  ],
+  "1795703762": [
+   156,
+   23727,
+   0,
+   0
+  ],
+  "1795703763": [
+   678,
+   81299,
+   0,
+   0
+  ],
+  "1795703764": [
+   136,
+   20244,
+   0,
+   0
+  ],
+  "1795703765": [
+   656,
+   77860,
+   0,
+   0
+  ],
+  "1795703766": [
+   182,
+   37358,
+   0,
+   0
+  ],
+  "1795703767": [
+   859,
+   107330,
+   0,
+   0
+  ],
+  "1795703768": [
+   358,
+   78584,
+   0,
+   0
+  ],
+  "1795703769": [
+   612,
+   111710,
+   0,
+   0
+  ],
+  "1795703770": [
+   518,
+   62528,
+   0,
+   0
+  ],
+  "1795703771": [
+   140,
+   21904,
+   0,
+   0
+  ],
+  "1795703772": [
+   902,
+   169308,
+   114,
+   74482
+  ],
+  "1795703773": [
+   170,
+   27876,
+   0,
+   0
+  ],
+  "1795703774": [
+   768,
+   88503,
+   0,
+   0
+  ],
+  "1795703775": [
+   144,
+   24296,
+   0,
+   0
+  ],
+  "1795703776": [
+   810,
+   92972,
+   0,
+   0
+  ],
+  "1795703777": [
+   163,
+   29054,
+   0,
+   0
+  ],
+  "1795703778": [
+   746,
+   93332,
+   0,
+   0
+  ],
+  "1795703779": [
+   230,
+   44903,
+   0,
+   0
+  ],
+  "1795703780": [
+   922,
+   146992,
+   0,
+   0
+  ],
+  "1795703781": [
+   403,
+   310930,
+   268,
+   287594
+  ],
+  "1795703782": [
+   251,
+   34786,
+   0,
+   0
+  ],
+  "1795703783": [
+   576,
+   70448,
+   0,
+   0
+  ],
+  "1795703784": [
+   164,
+   23317,
+   0,
+   0
+  ],
+  "1795703785": [
+   715,
+   89018,
+   0,
+   0
+  ],
+  "1795703786": [
+   198,
+   40612,
+   36,
+   15696
+  ],
+  "1795703787": [
+   776,
+   91176,
+   0,
+   0
+  ],
+  "1795703788": [
+   210,
+   37192,
+   0,
+   0
+  ],
+  "1795703789": [
+   834,
+   107289,
+   0,
+   0
+  ],
+  "1795703790": [
+   184,
+   33442,
+   0,
+   0
+  ],
+  "1795703791": [
+   932,
+   150968,
+   0,
+   0
+  ],
+  "1795703792": [
+   210,
+   34125,
+   0,
+   0
+  ],
+  "1795703793": [
+   768,
+   93435,
+   0,
+   0
+  ],
+  "1795703794": [
+   200,
+   29596,
+   0,
+   0
+  ],
+  "1795703795": [
+   674,
+   78184,
+   0,
+   0
+  ],
+  "1795703796": [
+   244,
+   33424,
+   0,
+   0
+  ],
+  "1795703797": [
+   261,
+   51475,
+   20,
+   3336
+  ],
+  "1795703798": [
+   737,
+   97864,
+   0,
+   0
+  ],
+  "1795703799": [
+   130,
+   23458,
+   0,
+   0
+  ],
+  "1795703800": [
+   732,
+   89309,
+   0,
+   0
+  ],
+  "1795703801": [
+   141,
+   25534,
+   0,
+   0
+  ],
+  "1795703802": [
+   938,
+   152906,
+   0,
+   0
+  ],
+  "1795703803": [
+   254,
+   46734,
+   0,
+   0
+  ],
+  "1795703804": [
+   740,
+   98364,
+   30,
+   4464
+  ],
+  "1795703805": [
+   137,
+   23070,
+   0,
+   0
+  ],
+  "1795703806": [
+   720,
+   85628,
+   0,
+   0
+  ],
+  "1795703807": [
+   138,
+   21944,
+   0,
+   0
+  ],
+  "1795703808": [
+   718,
+   85614,
+   0,
+   0
+  ],
+  "1795703809": [
+   364,
+   127374,
+   138,
+   77258
+  ],
+  "1795703810": [
+   210,
+   36529,
+   0,
+   0
+  ],
+  "1795703811": [
+   828,
+   114184,
+   74,
+   24956
+  ],
+  "1795703812": [
+   188,
+   27136,
+   0,
+   0
+  ],
+  "1795703813": [
+   928,
+   139541,
+   0,
+   0
+  ],
+  "1795703814": [
+   292,
+   61248,
+   0,
+   0
+  ],
+  "1795703815": [
+   778,
+   92855,
+   0,
+   0
+  ],
+  "1795703816": [
+   108,
+   17805,
+   20,
+   3336
+  ],
+  "1795703817": [
+   747,
+   85864,
+   0,
+   0
+  ],
+  "1795703818": [
+   196,
+   28449,
+   0,
+   0
+  ],
+  "1795703819": [
+   750,
+   95331,
+   24,
+   3908
+  ],
+  "1795703820": [
+   164,
+   27717,
+   0,
+   0
+  ],
+  "1795703821": [
+   706,
+   83476,
+   0,
+   0
+  ],
+  "1795703822": [
+   162,
+   23756,
+   0,
+   0
+  ],
+  "1795703823": [
+   256,
+   33983,
+   0,
+   0
+  ],
+  "1795703824": [
+   678,
+   97605,
+   0,
+   0
+  ],
+  "1795703825": [
+   366,
+   82739,
+   0,
+   0
+  ],
+  "1795703826": [
+   706,
+   88069,
+   0,
+   0
+  ],
+  "1795703827": [
+   160,
+   23448,
+   0,
+   0
+  ],
+  "1795703828": [
+   877,
+   118734,
+   0,
+   0
+  ],
+  "1795703829": [
+   186,
+   43188,
+   36,
+   17240
+  ],
+  "1795703830": [
+   814,
+   97891,
+   0,
+   0
+  ],
+  "1795703831": [
+   236,
+   50536,
+   0,
+   0
+  ],
+  "1795703832": [
+   766,
+   88672,
+   0,
+   0
+  ],
+  "1795703833": [
+   104,
+   15720,
+   0,
+   0
+  ],
+  "1795703834": [
+   720,
+   86956,
+   0,
+   0
+  ],
+  "1795703835": [
+   178,
+   36858,
+   20,
+   3336
+  ],
+  "1795703836": [
+   794,
+   134633,
+   0,
+   0
+  ],
+  "1795703837": [
+   438,
+   57878,
+   24,
+   3906
+  ],
+  "1795703838": [
+   190,
+   39584,
+   32,
+   13300
+  ],
+  "1795703839": [
+   833,
+   100099,
+   0,
+   0
+  ],
+  "1795703840": [
+   171,
+   30930,
+   0,
+   0
+  ],
+  "1795703841": [
+   754,
+   88522,
+   0,
+   0
+  ],
+  "1795703842": [
+   192,
+   27221,
+   0,
+   0
+  ],
+  "1795703843": [
+   746,
+   87924,
+   0,
+   0
+  ],
+  "1795703844": [
+   226,
+   33180,
+   50,
+   7436
+  ],
+  "1795703845": [
+   740,
+   102767,
+   36,
+   11440
+  ],
+  "1795703846": [
+   158,
+   28020,
+   0,
+   0
+  ],
+  "1795703847": [
+   976,
+   151691,
+   0,
+   0
+  ],
+  "1795703848": [
+   270,
+   46452,
+   24,
+   3904
+  ],
+  "1795703849": [
+   734,
+   85684,
+   0,
+   0
+  ],
+  "1795703850": [
+   142,
+   22487,
+   0,
+   0
+  ],
+  "1795703851": [
+   168,
+   26712,
+   0,
+   0
+  ],
+  "1795703852": [
+   813,
+   111281,
+   0,
+   0
+  ],
+  "1795703853": [
+   138,
+   29268,
+   0,
+   0
+  ],
+  "1795703854": [
+   762,
+   92969,
+   24,
+   4592
+  ],
+  "1795703855": [
+   162,
+   34009,
+   34,
+   7442
+  ],
+  "1795703856": [
+   830,
+   118552,
+   52,
+   23400
+  ],
+  "1795703857": [
+   172,
+   29587,
+   0,
+   0
+  ],
+  "1795703858": [
+   978,
+   164253,
+   20,
+   3336
+  ],
+  "1795703859": [
+   364,
+   78143,
+   52,
+   16628
+  ],
+  "1795703860": [
+   830,
+   101332,
+   0,
+   0
+  ],
+  "1795703861": [
+   172,
+   33572,
+   30,
+   4464
+  ],
+  "1795703862": [
+   830,
+   107009,
+   36,
+   10566
+  ],
+  "1795703863": [
+   238,
+   45330,
+   66,
+   15002
+  ],
+  "1795703864": [
+   593,
+   83786,
+   32,
+   8136
+  ],
+  "1795703865": [
+   401,
+   60364,
+   42,
+   11648
+  ],
+  "1795703866": [
+   206,
+   35171,
+   0,
+   0
+  ],
+  "1795703867": [
+   617,
+   70732,
+   0,
+   0
+  ],
+  "1795703868": [
+   160,
+   25796,
+   0,
+   0
+  ],
+  "1795703869": [
+   882,
+   136438,
+   0,
+   0
+  ],
+  "1795703870": [
+   266,
+   52880,
+   0,
+   0
+  ],
+  "1795703871": [
+   772,
+   90489,
+   0,
+   0
+  ],
+  "1795703872": [
+   226,
+   38864,
+   0,
+   0
+  ],
+  "1795703873": [
+   783,
+   105717,
+   0,
+   0
+  ],
+  "1795703874": [
+   160,
+   27812,
+   0,
+   0
+  ],
+  "1795703875": [
+   786,
+   93044,
+   0,
+   0
+  ],
+  "1795703876": [
+   170,
+   29129,
+   0,
+   0
+  ],
+  "1795703877": [
+   660,
+   78216,
+   0,
+   0
+  ],
+  "1795703878": [
+   196,
+   28628,
+   0,
+   0
+  ],
+  "1795703879": [
+   170,
+   26112,
+   0,
+   0
+  ],
+  "1795703880": [
+   940,
+   135898,
+   0,
+   0
+  ],
+  "1795703881": [
+   304,
+   60234,
+   0,
+   0
+  ],
+  "1795703882": [
+   786,
+   94971,
+   0,
+   0
+  ],
+  "1795703883": [
+   98,
+   14623,
+   0,
+   0
+  ],
+  "1795703884": [
+   766,
+   87460,
+   0,
+   0
+  ],
+  "1795703885": [
+   138,
+   25293,
+   0,
+   0
+  ],
+  "1795703886": [
+   694,
+   83148,
+   0,
+   0
+  ],
+  "1795703887": [
+   179,
+   27334,
+   0,
+   0
+  ],
+  "1795703888": [
+   692,
+   82524,
+   0,
+   0
+  ],
+  "1795703889": [
+   202,
+   45527,
+   0,
+   0
+  ],
+  "1795703890": [
+   838,
+   98532,
+   0,
+   0
+  ],
+  "1795703891": [
+   148,
+   25700,
+   0,
+   0
+  ],
+  "1795703892": [
+   760,
+   136880,
+   20,
+   4398
+  ],
+  "1795703893": [
+   514,
+   68748,
+   0,
+   0
+  ],
+  "1795703894": [
+   258,
+   51113,
+   0,
+   0
+  ],
+  "1795703895": [
+   703,
+   91647,
+   0,
+   0
+  ],
+  "1795703896": [
+   202,
+   34305,
+   0,
+   0
+  ],
+  "1795703897": [
+   776,
+   91966,
+   20,
+   3336
+  ],
+  "1795703898": [
+   202,
+   32608,
+   0,
+   0
+  ],
+  "1795703899": [
+   706,
+   84249,
+   0,
+   0
+  ],
+  "1795703900": [
+   110,
+   18096,
+   0,
+   0
+  ],
+  "1795703901": [
+   694,
+   85628,
+   24,
+   3908
+  ],
+  "1795703902": [
+   212,
+   32956,
+   0,
+   0
+  ],
+  "1795703903": [
+   924,
+   152196,
+   28,
+   6362
+  ],
+  "1795703904": [
+   234,
+   44292,
+   0,
+   0
+  ],
+  "1795703905": [
+   480,
+   56936,
+   0,
+   0
+  ],
+  "1795703906": [
+   464,
+   58736,
+   0,
+   0
+  ],
+  "1795703907": [
+   146,
+   23903,
+   0,
+   0
+  ],
+  "1795703908": [
+   728,
+   87751,
+   0,
+   0
+  ],
+  "1795703909": [
+   130,
+   20600,
+   0,
+   0
+  ],
+  "1795703910": [
+   774,
+   89521,
+   0,
+   0
+  ],
+  "1795703911": [
+   180,
+   27760,
+   0,
+   0
+  ],
+  "1795703912": [
+   704,
+   82892,
+   0,
+   0
+  ],
+  "1795703913": [
+   148,
+   26300,
+   0,
+   0
+  ],
+  "1795703914": [
+   1012,
+   146396,
+   0,
+   0
+  ],
+  "1795703915": [
+   322,
+   79798,
+   0,
+   0
+  ],
+  "1795703916": [
+   770,
+   88972,
+   0,
+   0
+  ],
+  "1795703917": [
+   170,
+   25848,
+   0,
+   0
+  ],
+  "1795703918": [
+   729,
+   84293,
+   0,
+   0
+  ],
+  "1795703919": [
+   191,
+   30412,
+   0,
+   0
+  ],
+  "1795703920": [
+   281,
+   54352,
+   0,
+   0
+  ],
+  "1795703921": [
+   708,
+   90962,
+   0,
+   0
+  ],
+  "1795703922": [
+   179,
+   27614,
+   0,
+   0
+  ],
+  "1795703923": [
+   732,
+   92255,
+   0,
+   0
+  ],
+  "1795703924": [
+   169,
+   32050,
+   0,
+   0
+  ],
+  "1795703925": [
+   909,
+   138379,
+   0,
+   0
+  ],
+  "1795703926": [
+   323,
+   64067,
+   0,
+   0
+  ],
+  "1795703927": [
+   754,
+   91588,
+   0,
+   0
+  ],
+  "1795703928": [
+   164,
+   26278,
+   0,
+   0
+  ],
+  "1795703929": [
+   808,
+   97712,
+   20,
+   3336
+  ],
+  "1795703930": [
+   159,
+   25994,
+   0,
+   0
+  ],
+  "1795703931": [
+   697,
+   83027,
+   0,
+   0
+  ],
+  "1795703932": [
+   193,
+   26622,
+   0,
+   0
+  ],
+  "1795703933": [
+   171,
+   28313,
+   0,
+   0
+  ],
+  "1795703934": [
+   688,
+   82877,
+   0,
+   0
+  ],
+  "1795703935": [
+   103,
+   18013,
+   0,
+   0
+  ],
+  "1795703936": [
+   934,
+   152971,
+   0,
+   0
+  ],
+  "1795703937": [
+   290,
+   57248,
+   0,
+   0
+  ],
+  "1795703938": [
+   804,
+   92092,
+   0,
+   0
+  ],
+  "1795703939": [
+   207,
+   35333,
+   0,
+   0
+  ],
+  "1795703940": [
+   768,
+   91204,
+   0,
+   0
+  ],
+  "1795703941": [
+   176,
+   33183,
+   0,
+   0
+  ],
+  "1795703942": [
+   762,
+   87568,
+   0,
+   0
+  ],
+  "1795703943": [
+   152,
+   21958,
+   0,
+   0
+  ],
+  "1795703944": [
+   743,
+   95579,
+   0,
+   0
+  ],
+  "1795703945": [
+   150,
+   27696,
+   0,
+   0
+  ],
+  "1795703946": [
+   454,
+   53094,
+   0,
+   0
+  ],
+  "1795703947": [
+   586,
+   90566,
+   0,
+   0
+  ],
+  "1795703948": [
+   280,
+   52944,
+   0,
+   0
+  ],
+  "1795703949": [
+   804,
+   100958,
+   0,
+   0
+  ],
+  "1795703950": [
+   358,
+   81124,
+   0,
+   0
+  ],
+  "1795703951": [
+   1284,
+   331507,
+   220,
+   142490
+  ],
+  "1795703952": [
+   160,
+   28120,
+   0,
+   0
+  ],
+  "1795703953": [
+   768,
+   91076,
+   0,
+   0
+  ],
+  "1795703954": [
+   172,
+   25485,
+   0,
+   0
+  ],
+  "1795703955": [
+   760,
+   94079,
+   0,
+   0
+  ],
+  "1795703956": [
+   164,
+   28093,
+   0,
+   0
+  ],
+  "1795703957": [
+   774,
+   105825,
+   0,
+   0
+  ],
+  "1795703958": [
+   160,
+   24252,
+   0,
+   0
+  ],
+  "1795703959": [
+   442,
+   55364,
+   0,
+   0
+  ],
+  "1795703960": [
+   522,
+   71405,
+   24,
+   3912
+  ],
+  "1795703961": [
+   156,
+   28108,
+   0,
+   0
+  ],
+  "1795703962": [
+   1022,
+   155619,
+   0,
+   0
+  ],
+  "1795703963": [
+   213,
+   48794,
+   0,
+   0
+  ],
+  "1795703964": [
+   707,
+   87870,
+   0,
+   0
+  ],
+  "1795703965": [
+   183,
+   29637,
+   0,
+   0
+  ],
+  "1795703966": [
+   726,
+   90338,
+   0,
+   0
+  ],
+  "1795703967": [
+   147,
+   27886,
+   0,
+   0
+  ],
+  "1795703968": [
+   731,
+   86314,
+   0,
+   0
+  ],
+  "1795703969": [
+   67,
+   10202,
+   0,
+   0
+  ],
+  "1795703970": [
+   787,
+   91990,
+   0,
+   0
+  ],
+  "1795703971": [
+   185,
+   31202,
+   0,
+   0
+  ],
+  "1795703972": [
+   459,
+   55821,
+   0,
+   0
+  ],
+  "1795703973": [
+   555,
+   98396,
+   0,
+   0
+  ],
+  "1795703974": [
+   294,
+   57348,
+   0,
+   0
+  ],
+  "1795703975": [
+   780,
+   95793,
+   0,
+   0
+  ],
+  "1795703976": [
+   166,
+   28455,
+   0,
+   0
+  ],
+  "1795703977": [
+   794,
+   91873,
+   0,
+   0
+  ],
+  "1795703978": [
+   266,
+   51368,
+   0,
+   0
+  ],
+  "1795703979": [
+   798,
+   95030,
+   0,
+   0
+  ],
+  "1795703980": [
+   187,
+   28294,
+   0,
+   0
+  ],
+  "1795703981": [
+   785,
+   110334,
+   0,
+   0
+  ],
+  "1795703982": [
+   170,
+   25858,
+   0,
+   0
+  ],
+  "1795703983": [
+   797,
+   96571,
+   0,
+   0
+  ],
+  "1795703984": [
+   331,
+   71388,
+   0,
+   0
+  ],
+  "1795703985": [
+   805,
+   117366,
+   0,
+   0
+  ],
+  "1795703986": [
+   148,
+   21872,
+   0,
+   0
+  ],
+  "1795703987": [
+   157,
+   28277,
+   0,
+   0
+  ],
+  "1795703988": [
+   808,
+   98804,
+   0,
+   0
+  ],
+  "1795703989": [
+   181,
+   32542,
+   0,
+   0
+  ],
+  "1795703990": [
+   795,
+   98496,
+   0,
+   0
+  ],
+  "1795703991": [
+   162,
+   28158,
+   0,
+   0
+  ],
+  "1795703992": [
+   738,
+   88200,
+   0,
+   0
+  ],
+  "1795703993": [
+   142,
+   23940,
+   0,
+   0
+  ],
+  "1795703994": [
+   737,
+   88866,
+   30,
+   4198
+  ],
+  "1795703995": [
+   316,
+   73726,
+   0,
+   0
+  ],
+  "1795703996": [
+   946,
+   130340,
+   26,
+   4202
+  ],
+  "1795703997": [
+   170,
+   34605,
+   30,
+   8350
+  ],
+  "1795703998": [
+   732,
+   84705,
+   0,
+   0
+  ],
+  "1795703999": [
+   240,
+   48152,
+   0,
+   0
+  ],
+  "1795704000": [
+   616,
+   76320,
+   0,
+   0
+  ],
+  "1795704001": [
+   360,
+   46532,
+   0,
+   0
+  ],
+  "1795704002": [
+   170,
+   29806,
+   34,
+   8558
+  ],
+  "1795704003": [
+   756,
+   92856,
+   24,
+   3344
+  ],
+  "1795704004": [
+   206,
+   31027,
+   0,
+   0
+  ],
+  "1795704005": [
+   760,
+   91225,
+   0,
+   0
+  ],
+  "1795704006": [
+   271,
+   56624,
+   0,
+   0
+  ],
+  "1795704007": [
+   901,
+   136084,
+   20,
+   3332
+  ],
+  "1795704008": [
+   154,
+   23648,
+   0,
+   0
+  ],
+  "1795704009": [
+   750,
+   88668,
+   0,
+   0
+  ],
+  "1795704010": [
+   188,
+   29012,
+   0,
+   0
+  ],
+  "1795704011": [
+   774,
+   123394,
+   46,
+   23444
+  ],
+  "1795704012": [
+   348,
+   113165,
+   0,
+   0
+  ],
+  "1795704013": [
+   857,
+   149918,
+   0,
+   0
+  ],
+  "1795704014": [
+   229,
+   43147,
+   34,
+   6830
+  ],
+  "1795704015": [
+   142,
+   25876,
+   0,
+   0
+  ],
+  "1795704016": [
+   738,
+   89304,
+   0,
+   0
+  ],
+  "1795704017": [
+   214,
+   45457,
+   0,
+   0
+  ],
+  "1795704018": [
+   838,
+   117098,
+   0,
+   0
+  ],
+  "1795704019": [
+   252,
+   52277,
+   0,
+   0
+  ],
+  "1795704020": [
+   808,
+   105104,
+   0,
+   0
+  ],
+  "1795704021": [
+   204,
+   39404,
+   24,
+   3904
+  ],
+  "1795704022": [
+   784,
+   105953,
+   42,
+   16882
+  ],
+  "1795704023": [
+   147,
+   29247,
+   0,
+   0
+  ],
+  "1795704024": [
+   740,
+   95840,
+   40,
+   14062
+  ],
+  "1795704025": [
+   210,
+   47663,
+   46,
+   20114
+  ],
+  "1795704026": [
+   750,
+   111148,
+   48,
+   20472
+  ],
+  "1795704027": [
+   140,
+   25736,
+   0,
+   0
+  ],
+  "1795704028": [
+   436,
+   54477,
+   20,
+   3336
+  ],
+  "1795704029": [
+   624,
+   107358,
+   0,
+   0
+  ],
+  "1795704030": [
+   287,
+   55429,
+   0,
+   0
+  ],
+  "1795704031": [
+   800,
+   96224,
+   0,
+   0
+  ],
+  "1795704032": [
+   200,
+   35772,
+   36,
+   10472
+  ],
+  "1795704033": [
+   764,
+   94656,
+   0,
+   0
+  ],
+  "1795704034": [
+   188,
+   26872,
+   0,
+   0
+  ],
+  "1795704035": [
+   680,
+   84471,
+   0,
+   0
+  ],
+  "1795704036": [
+   128,
+   18960,
+   0,
+   0
+  ],
+  "1795704037": [
+   837,
+   136010,
+   84,
+   48506
+  ],
+  "1795704038": [
+   184,
+   36765,
+   0,
+   0
+  ],
+  "1795704039": [
+   730,
+   91243,
+   0,
+   0
+  ],
+  "1795704040": [
+   311,
+   67136,
+   0,
+   0
+  ],
+  "1795704041": [
+   873,
+   137546,
+   0,
+   0
+  ],
+  "1795704042": [
+   406,
+   69082,
+   0,
+   0
+  ],
+  "1795704043": [
+   179,
+   30936,
+   0,
+   0
+  ],
+  "1795704044": [
+   770,
+   93672,
+   0,
+   0
+  ],
+  "1795704045": [
+   164,
+   26296,
+   24,
+   3916
+  ],
+  "1795704046": [
+   730,
+   89112,
+   0,
+   0
+  ],
+  "1795704047": [
+   143,
+   21476,
+   0,
+   0
+  ],
+  "1795704048": [
+   720,
+   87643,
+   0,
+   0
+  ],
+  "1795704049": [
+   175,
+   27397,
+   0,
+   0
+  ],
+  "1795704050": [
+   712,
+   88761,
+   0,
+   0
+  ],
+  "1795704051": [
+   264,
+   60230,
+   0,
+   0
+  ],
+  "1795704052": [
+   972,
+   142180,
+   0,
+   0
+  ],
+  "1795704053": [
+   155,
+   32907,
+   0,
+   0
+  ],
+  "1795704054": [
+   646,
+   81191,
+   0,
+   0
+  ],
+  "1795704055": [
+   178,
+   25139,
+   0,
+   0
+  ],
+  "1795704056": [
+   156,
+   23617,
+   0,
+   0
+  ],
+  "1795704057": [
+   648,
+   75456,
+   0,
+   0
+  ],
+  "1795704058": [
+   182,
+   23832,
+   0,
+   0
+  ],
+  "1795704059": [
+   752,
+   96804,
+   0,
+   0
+  ],
+  "1795704060": [
+   168,
+   24544,
+   0,
+   0
+  ],
+  "1795704061": [
+   718,
+   84924,
+   0,
+   0
+  ],
+  "1795704062": [
+   286,
+   62219,
+   0,
+   0
+  ],
+  "1795704063": [
+   1027,
+   160256,
+   0,
+   0
+  ],
+  "1795704064": [
+   196,
+   33362,
+   0,
+   0
+  ],
+  "1795704065": [
+   758,
+   92006,
+   0,
+   0
+  ],
+  "1795704066": [
+   156,
+   23980,
+   0,
+   0
+  ],
+  "1795704067": [
+   702,
+   86272,
+   0,
+   0
+  ],
+  "1795704068": [
+   164,
+   24716,
+   0,
+   0
+  ],
+  "1795704069": [
+   136,
+   20360,
+   0,
+   0
+  ],
+  "1795704070": [
+   758,
+   89408,
+   0,
+   0
+  ],
+  "1795704071": [
+   134,
+   22925,
+   0,
+   0
+  ],
+  "1795704072": [
+   852,
+   107866,
+   0,
+   0
+  ],
+  "1795704073": [
+   228,
+   46406,
+   0,
+   0
+  ],
+  "1795704074": [
+   984,
+   148878,
+   0,
+   0
+  ],
+  "1795704075": [
+   176,
+   32044,
+   0,
+   0
+  ],
+  "1795704076": [
+   820,
+   97856,
+   0,
+   0
+  ],
+  "1795704077": [
+   132,
+   21224,
+   0,
+   0
+  ],
+  "1795704078": [
+   698,
+   81429,
+   0,
+   0
+  ],
+  "1795704079": [
+   221,
+   32988,
+   0,
+   0
+  ],
+  "1795704080": [
+   799,
+   100606,
+   24,
+   7124
+  ],
+  "1795704081": [
+   138,
+   24044,
+   0,
+   0
+  ],
+  "1795704082": [
+   258,
+   35044,
+   0,
+   0
+  ],
+  "1795704083": [
+   649,
+   88344,
+   0,
+   0
+  ],
+  "1795704084": [
+   242,
+   45638,
+   0,
+   0
+  ],
+  "1795704085": [
+   930,
+   139981,
+   0,
+   0
+  ],
+  "1795704086": [
+   274,
+   58912,
+   0,
+   0
+  ],
+  "1795704087": [
+   637,
+   75348,
+   0,
+   0
+  ],
+  "1795704088": [
+   180,
+   24888,
+   0,
+   0
+  ],
+  "1795704089": [
+   754,
+   86432,
+   0,
+   0
+  ],
+  "1795704090": [
+   174,
+   26730,
+   0,
+   0
+  ],
+  "1795704091": [
+   728,
+   93848,
+   0,
+   0
+  ],
+  "1795704092": [
+   180,
+   30289,
+   0,
+   0
+  ],
+  "1795704093": [
+   672,
+   82468,
+   0,
+   0
+  ],
+  "1795704094": [
+   184,
+   26572,
+   0,
+   0
+  ],
+  "1795704095": [
+   466,
+   59219,
+   0,
+   0
+  ],
+  "1795704096": [
+   594,
+   92530,
+   0,
+   0
+  ],
+  "1795704097": [
+   347,
+   76629,
+   0,
+   0
+  ],
+  "1795704098": [
+   772,
+   90048,
+   0,
+   0
+  ],
+  "1795704099": [
+   178,
+   26916,
+   0,
+   0
+  ],
+  "1795704100": [
+   736,
+   87708,
+   0,
+   0
+  ],
+  "1795704101": [
+   142,
+   24876,
+   0,
+   0
+  ],
+  "1795704102": [
+   780,
+   90533,
+   0,
+   0
+  ],
+  "1795704103": [
+   232,
+   49950,
+   0,
+   0
+  ],
+  "1795704104": [
+   808,
+   107168,
+   0,
+   0
+  ],
+  "1795704105": [
+   180,
+   29272,
+   0,
+   0
+  ],
+  "1795704106": [
+   800,
+   93984,
+   0,
+   0
+  ],
+  "1795704107": [
+   196,
+   41886,
+   0,
+   0
+  ],
+  "1795704108": [
+   746,
+   123792,
+   0,
+   0
+  ],
+  "1795704109": [
+   373,
+   48344,
+   0,
+   0
+  ],
+  "1795704110": [
+   177,
+   32748,
+   0,
+   0
+  ],
+  "1795704111": [
+   691,
+   82015,
+   0,
+   0
+  ],
+  "1795704112": [
+   195,
+   27704,
+   0,
+   0
+  ],
+  "1795704113": [
+   692,
+   91880,
+   0,
+   0
+  ],
+  "1795704114": [
+   166,
+   26220,
+   0,
+   0
+  ],
+  "1795704115": [
+   800,
+   96849,
+   0,
+   0
+  ],
+  "1795704116": [
+   175,
+   35797,
+   0,
+   0
+  ],
+  "1795704117": [
+   686,
+   80997,
+   0,
+   0
+  ],
+  "1795704118": [
+   206,
+   34510,
+   0,
+   0
+  ],
+  "1795704119": [
+   919,
+   149276,
+   0,
+   0
+  ],
+  "1795704120": [
+   150,
+   22236,
+   0,
+   0
+  ],
+  "1795704121": [
+   636,
+   76770,
+   0,
+   0
+  ],
+  "1795704122": [
+   312,
+   39872,
+   0,
+   0
+  ],
+  "1795704123": [
+   146,
+   23425,
+   0,
+   0
+  ],
+  "1795704124": [
+   740,
+   89340,
+   0,
+   0
+  ],
+  "1795704125": [
+   196,
+   40972,
+   0,
+   0
+  ],
+  "1795704126": [
+   746,
+   95138,
+   0,
+   0
+  ],
+  "1795704127": [
+   240,
+   73832,
+   68,
+   44340
+  ],
+  "1795704128": [
+   690,
+   81883,
+   0,
+   0
+  ],
+  "1795704129": [
+   134,
+   18792,
+   0,
+   0
+  ],
+  "1795704130": [
+   1026,
+   162806,
+   0,
+   0
+  ],
+  "1795704131": [
+   210,
+   38552,
+   0,
+   0
+  ],
+  "1795704132": [
+   700,
+   86084,
+   0,
+   0
+  ],
+  "1795704133": [
+   188,
+   34875,
+   0,
+   0
+  ],
+  "1795704134": [
+   843,
+   106468,
+   0,
+   0
+  ],
+  "1795704135": [
+   150,
+   31404,
+   0,
+   0
+  ],
+  "1795704136": [
+   166,
+   24862,
+   0,
+   0
+  ],
+  "1795704137": [
+   718,
+   83536,
+   0,
+   0
+  ],
+  "1795704138": [
+   148,
+   20764,
+   0,
+   0
+  ],
+  "1795704139": [
+   702,
+   81916,
+   0,
+   0
+  ],
+  "1795704140": [
+   196,
+   28672,
+   0,
+   0
+  ],
+  "1795704141": [
+   910,
+   148162,
+   0,
+   0
+  ],
+  "1795704142": [
+   262,
+   49456,
+   0,
+   0
+  ],
+  "1795704143": [
+   676,
+   82703,
+   0,
+   0
+  ],
+  "1795704144": [
+   150,
+   20681,
+   0,
+   0
+  ],
+  "1795704145": [
+   698,
+   85576,
+   0,
+   0
+  ],
+  "1795704146": [
+   170,
+   28861,
+   0,
+   0
+  ],
+  "1795704147": [
+   852,
+   114267,
+   0,
+   0
+  ],
+  "1795704148": [
+   188,
+   27448,
+   0,
+   0
+  ],
+  "1795704149": [
+   132,
+   20233,
+   0,
+   0
+  ],
+  "1795704150": [
+   770,
+   89420,
+   0,
+   0
+  ],
+  "1795704151": [
+   174,
+   28684,
+   0,
+   0
+  ],
+  "1795704152": [
+   946,
+   142827,
+   0,
+   0
+  ],
+  "1795704153": [
+   202,
+   46320,
+   0,
+   0
+  ],
+  "1795704154": [
+   746,
+   88016,
+   0,
+   0
+  ],
+  "1795704155": [
+   136,
+   25876,
+   0,
+   0
+  ],
+  "1795704156": [
+   793,
+   94388,
+   0,
+   0
+  ],
+  "1795704157": [
+   196,
+   33492,
+   0,
+   0
+  ],
+  "1795704158": [
+   672,
+   83628,
+   0,
+   0
+  ],
+  "1795704159": [
+   134,
+   19664,
+   0,
+   0
+  ],
+  "1795704160": [
+   774,
+   95940,
+   0,
+   0
+  ],
+  "1795704161": [
+   166,
+   27802,
+   32,
+   6942
+  ],
+  "1795704162": [
+   417,
+   56851,
+   0,
+   0
+  ],
+  "1795704163": [
+   500,
+   71938,
+   0,
+   0
+  ],
+  "1795704164": [
+   464,
+   108938,
+   0,
+   0
+  ],
+  "1795704165": [
+   720,
+   94140,
+   0,
+   0
+  ],
+  "1795704166": [
+   188,
+   26008,
+   0,
+   0
+  ],
+  "1795704167": [
+   704,
+   84471,
+   0,
+   0
+  ],
+  "1795704168": [
+   264,
+   56624,
+   0,
+   0
+  ],
+  "1795704169": [
+   786,
+   91364,
+   0,
+   0
+  ],
+  "1795704170": [
+   88,
+   12544,
+   0,
+   0
+  ],
+  "1795704171": [
+   680,
+   80836,
+   0,
+   0
+  ],
+  "1795704172": [
+   208,
+   28830,
+   0,
+   0
+  ],
+  "1795704173": [
+   772,
+   93968,
+   0,
+   0
+  ],
+  "1795704174": [
+   166,
+   24420,
+   0,
+   0
+  ],
+  "1795704175": [
+   715,
+   127526,
+   0,
+   0
+  ],
+  "1795704176": [
+   502,
+   72699,
+   0,
+   0
+  ],
+  "1795704177": [
+   154,
+   23831,
+   0,
+   0
+  ],
+  "1795704178": [
+   734,
+   89235,
+   0,
+   0
+  ],
+  "1795704179": [
+   208,
+   38026,
+   0,
+   0
+  ],
+  "1795704180": [
+   804,
+   98521,
+   0,
+   0
+  ],
+  "1795704181": [
+   160,
+   25456,
+   0,
+   0
+  ],
+  "1795704182": [
+   770,
+   88689,
+   0,
+   0
+  ],
+  "1795704183": [
+   148,
+   25646,
+   0,
+   0
+  ],
+  "1795704184": [
+   732,
+   90276,
+   0,
+   0
+  ],
+  "1795704185": [
+   140,
+   24220,
+   0,
+   0
+  ],
+  "1795704186": [
+   766,
+   105474,
+   0,
+   0
+  ],
+  "1795704187": [
+   130,
+   18508,
+   0,
+   0
+  ],
+  "1795704188": [
+   515,
+   67031,
+   0,
+   0
+  ],
+  "1795704189": [
+   521,
+   75514,
+   0,
+   0
+  ],
+  "1795704190": [
+   194,
+   28935,
+   0,
+   0
+  ],
+  "1795704191": [
+   754,
+   90124,
+   0,
+   0
+  ],
+  "1795704192": [
+   160,
+   22020,
+   0,
+   0
+  ],
+  "1795704193": [
+   798,
+   95046,
+   0,
+   0
+  ],
+  "1795704194": [
+   150,
+   22600,
+   0,
+   0
+  ],
+  "1795704195": [
+   774,
+   111902,
+   0,
+   0
+  ],
+  "1795704196": [
+   286,
+   53286,
+   0,
+   0
+  ],
+  "1795704197": [
+   735,
+   86764,
+   0,
+   0
+  ],
+  "1795704198": [
+   166,
+   24874,
+   0,
+   0
+  ],
+  "1795704199": [
+   746,
+   90320,
+   0,
+   0
+  ],
+  "1795704200": [
+   156,
+   26137,
+   0,
+   0
+  ],
+  "1795704201": [
+   699,
+   82314,
+   0,
+   0
+  ],
+  "1795704202": [
+   229,
+   29926,
+   0,
+   0
+  ],
+  "1795704203": [
+   103,
+   20302,
+   0,
+   0
+  ],
+  "1795704204": [
+   690,
+   85512,
+   0,
+   0
+  ],
+  "1795704205": [
+   162,
+   24833,
+   0,
+   0
+  ],
+  "1795704206": [
+   759,
+   107198,
+   0,
+   0
+  ],
+  "1795704207": [
+   172,
+   28740,
+   0,
+   0
+  ],
+  "1795704208": [
+   734,
+   86157,
+   0,
+   0
+  ],
+  "1795704209": [
+   142,
+   22999,
+   0,
+   0
+  ],
+  "1795704210": [
+   876,
+   115804,
+   0,
+   0
+  ],
+  "1795704211": [
+   172,
+   28249,
+   0,
+   0
+  ],
+  "1795704212": [
+   768,
+   88712,
+   0,
+   0
+  ],
+  "1795704213": [
+   142,
+   23496,
+   0,
+   0
+  ],
+  "1795704214": [
+   712,
+   87610,
+   0,
+   0
+  ],
+  "1795704215": [
+   164,
+   26360,
+   0,
+   0
+  ],
+  "1795704216": [
+   166,
+   25581,
+   0,
+   0
+  ],
+  "1795704217": [
+   886,
+   121814,
+   0,
+   0
+  ],
+  "1795704218": [
+   174,
+   25693,
+   0,
+   0
+  ],
+  "1795704219": [
+   818,
+   104517,
+   0,
+   0
+  ],
+  "1795704220": [
+   122,
+   19488,
+   0,
+   0
+  ],
+  "1795704221": [
+   764,
+   86972,
+   0,
+   0
+  ],
+  "1795704222": [
+   174,
+   28744,
+   0,
+   0
+  ],
+  "1795704223": [
+   780,
+   92060,
+   0,
+   0
+  ],
+  "1795704224": [
+   174,
+   25116,
+   0,
+   0
+  ],
+  "1795704225": [
+   721,
+   99610,
+   0,
+   0
+  ],
+  "1795704226": [
+   258,
+   46303,
+   0,
+   0
+  ],
+  "1795704227": [
+   648,
+   91630,
+   0,
+   0
+  ],
+  "1795704228": [
+   354,
+   45624,
+   0,
+   0
+  ],
+  "1795704229": [
+   174,
+   25323,
+   0,
+   0
+  ],
+  "1795704230": [
+   774,
+   91003,
+   0,
+   0
+  ],
+  "1795704231": [
+   238,
+   48921,
+   0,
+   0
+  ],
+  "1795704232": [
+   732,
+   85388,
+   0,
+   0
+  ],
+  "1795704233": [
+   142,
+   28600,
+   0,
+   0
+  ],
+  "1795704234": [
+   778,
+   88500,
+   0,
+   0
+  ],
+  "1795704235": [
+   184,
+   30974,
+   0,
+   0
+  ],
+  "1795704236": [
+   704,
+   83596,
+   0,
+   0
+  ],
+  "1795704237": [
+   198,
+   39116,
+   0,
+   0
+  ],
+  "1795704238": [
+   783,
+   92318,
+   0,
+   0
+  ],
+  "1795704239": [
+   138,
+   25528,
+   0,
+   0
+  ],
+  "1795704240": [
+   830,
+   104262,
+   0,
+   0
+  ],
+  "1795704241": [
+   180,
+   32884,
+   0,
+   0
+  ],
+  "1795704242": [
+   167,
+   26902,
+   0,
+   0
+  ],
+  "1795704243": [
+   680,
+   82608,
+   0,
+   0
+  ],
+  "1795704244": [
+   200,
+   29712,
+   0,
+   0
+  ],
+  "1795704245": [
+   772,
+   94560,
+   0,
+   0
+  ],
+  "1795704246": [
+   164,
+   27849,
+   0,
+   0
+  ],
+  "1795704247": [
+   714,
+   83636,
+   0,
+   0
+  ],
+  "1795704248": [
+   265,
+   52678,
+   0,
+   0
+  ],
+  "1795704249": [
+   755,
+   89496,
+   0,
+   0
+  ],
+  "1795704250": [
+   212,
+   34316,
+   0,
+   0
+  ],
+  "1795704251": [
+   682,
+   82400,
+   0,
+   0
+  ],
+  "1795704252": [
+   230,
+   46896,
+   0,
+   0
+  ],
+  "1795704253": [
+   818,
+   96932,
+   0,
+   0
+  ],
+  "1795704254": [
+   150,
+   21128,
+   0,
+   0
+  ],
+  "1795704255": [
+   516,
+   63811,
+   0,
+   0
+  ],
+  "1795704256": [
+   442,
+   70613,
+   0,
+   0
+  ],
+  "1795704257": [
+   172,
+   27486,
+   0,
+   0
+  ],
+  "1795704258": [
+   908,
+   122642,
+   0,
+   0
+  ],
+  "1795704259": [
+   168,
+   29996,
+   0,
+   0
+  ],
+  "1795704260": [
+   1130,
+   199990,
+   0,
+   0
+  ],
+  "1795704261": [
+   192,
+   36765,
+   0,
+   0
+  ],
+  "1795704262": [
+   731,
+   86512,
+   0,
+   0
+  ],
+  "1795704263": [
+   132,
+   22781,
+   0,
+   0
+  ],
+  "1795704264": [
+   704,
+   85632,
+   0,
+   0
+  ],
+  "1795704265": [
+   170,
+   27988,
+   0,
+   0
+  ],
+  "1795704266": [
+   718,
+   90731,
+   0,
+   0
+  ],
+  "1795704267": [
+   134,
+   19764,
+   0,
+   0
+  ],
+  "1795704268": [
+   664,
+   77112,
+   0,
+   0
+  ],
+  "1795704269": [
+   196,
+   28492,
+   0,
+   0
+  ],
+  "1795704270": [
+   150,
+   20256,
+   0,
+   0
+  ],
+  "1795704271": [
+   719,
+   101385,
+   0,
+   0
+  ],
+  "1795704272": [
+   232,
+   42213,
+   0,
+   0
+  ],
+  "1795704273": [
+   778,
+   109821,
+   0,
+   0
+  ],
+  "1795704274": [
+   192,
+   27149,
+   0,
+   0
+  ],
+  "1795704275": [
+   678,
+   82592,
+   0,
+   0
+  ],
+  "1795704276": [
+   187,
+   32385,
+   0,
+   0
+  ],
+  "1795704277": [
+   798,
+   96232,
+   0,
+   0
+  ],
+  "1795704278": [
+   164,
+   23804,
+   0,
+   0
+  ],
+  "1795704279": [
+   764,
+   88620,
+   0,
+   0
+  ],
+  "1795704280": [
+   232,
+   33600,
+   0,
+   0
+  ],
+  "1795704281": [
+   764,
+   91344,
+   0,
+   0
+  ],
+  "1795704282": [
+   270,
+   55986,
+   0,
+   0
+  ],
+  "1795704283": [
+   160,
+   24767,
+   0,
+   0
+  ],
+  "1795704284": [
+   786,
+   91140,
+   0,
+   0
+  ],
+  "1795704285": [
+   140,
+   23712,
+   0,
+   0
+  ],
+  "1795704286": [
+   744,
+   89403,
+   0,
+   0
+  ],
+  "1795704287": [
+   239,
+   54664,
+   0,
+   0
+  ],
+  "1795704288": [
+   646,
+   74376,
+   0,
+   0
+  ],
+  "1795704289": [
+   166,
+   24464,
+   0,
+   0
+  ],
+  "1795704290": [
+   696,
+   82432,
+   0,
+   0
+  ],
+  "1795704291": [
+   152,
+   23739,
+   0,
+   0
+  ],
+  "1795704292": [
+   908,
+   120989,
+   0,
+   0
+  ],
+  "1795704293": [
+   155,
+   31454,
+   0,
+   0
+  ],
+  "1795704294": [
+   884,
+   120285,
+   0,
+   0
+  ],
+  "1795704295": [
+   168,
+   25164,
+   0,
+   0
+  ],
+  "1795704296": [
+   294,
+   37208,
+   0,
+   0
+  ],
+  "1795704297": [
+   552,
+   69063,
+   0,
+   0
+  ],
+  "1795704298": [
+   24,
+   5308,
+   0,
+   0
+  ]
+ },
+ "detalle_10ms": [],
+ "intervalos_10ms_sobre_umbral_detalle": 0
+}

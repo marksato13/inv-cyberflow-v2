@@ -1,0 +1,10 @@
+{"paso":"conciliar","rc":0,"inicio_epoch":1795708030.021248062,"fin_epoch":1795708030.145335367,"obligatorio":true,"fallo_deliberado":false}
+{"paso":"cobertura","rc":0,"inicio_epoch":1795708030.150179453,"fin_epoch":1795708040.067575190,"obligatorio":true,"fallo_deliberado":false}
+{"paso":"fronteras","rc":0,"inicio_epoch":1795708040.070946584,"fin_epoch":1795708040.240821264,"obligatorio":true,"fallo_deliberado":false}
+{"paso":"extraer","rc":0,"inicio_epoch":1795708040.245164894,"fin_epoch":1795708092.545918458,"obligatorio":true,"fallo_deliberado":false}
+{"paso":"verificar","rc":0,"inicio_epoch":1795708092.549340589,"fin_epoch":1795708725.963789753,"obligatorio":true,"fallo_deliberado":false}
+{"paso":"calidad_copias","rc":0,"inicio_epoch":1795708725.967883026,"fin_epoch":1795708751.028298569,"obligatorio":false,"fallo_deliberado":false}
+{"paso":"calidad_dns","rc":0,"inicio_epoch":1795708751.032554537,"fin_epoch":1795708755.802886507,"obligatorio":false,"fallo_deliberado":false}
+{"paso":"calidad_extremo","rc":0,"inicio_epoch":1795708755.806397573,"fin_epoch":1795708769.521767482,"obligatorio":false,"fallo_deliberado":false}
+{"paso":"metadatos","rc":0,"inicio_epoch":1795708769.525583482,"fin_epoch":1795708769.786792129,"obligatorio":true,"fallo_deliberado":false}
+{"paso":"calidad_sonda","rc":0,"inicio_epoch":1795708769.790653222,"fin_epoch":1795708769.879164513,"obligatorio":false,"fallo_deliberado":false}

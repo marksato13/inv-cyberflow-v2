@@ -1,0 +1,46 @@
+{
+ "ejecucion": "V2-VD4-20261126T141333Z",
+ "programa": "prueba-niveles-transiciones.json",
+ "programa_sha256": "3089fc531745d9271818ee20c0d9915bd045801669dd2042a766e269cd7ee160",
+ "codigo_version": "45344c5",
+ "planificado": {
+  "archivador_desde_epoch": 1795702413,
+  "generador_inicio_epoch": 1795702723,
+  "generador_fin_epoch": 1795704163,
+  "captura_hasta_epoch": 1795704283,
+  "tope_epoch": 1795707883
+ },
+ "real": {
+  "archivador_confirmado_epoch": 1795702481,
+  "primer_paquete_epoch": 1795702447.494895,
+  "ultimo_paquete_epoch": 1795704298.241164,
+  "generador_inicio_epoch": 1795702727.18033,
+  "generador_fin_epoch": 1795704167.87434
+ },
+ "guardas_planificadas": {
+  "margen_sonda_s": 240,
+  "generador_no_antes_de_epoch": 1795702723,
+  "captura_previa_s": 150,
+  "margen_fin_s": 120
+ },
+ "referencias": {
+  "extremo_srvdmz_pcap": "/home/adminsrvdmz/cyberflow-v2/extremo/V2-VD4-20261126T141333Z.pcap",
+  "dns_dc1": "cf-v2-dns-v2-vd4-20261126t141333z"
+ },
+ "vigilancia_referencias": {
+  "registro": "referencias.jsonl",
+  "cada_s": 20,
+  "minimo_gb": 1.0,
+  "sin_progreso_s": 180,
+  "sin_lectura_s": 90
+ },
+ "coordinacion_transferencias": {
+  "candado": "~/cyberflow-v2/CAPTURA_EN_CURSO",
+  "registro": "~/cyberflow-v2/transferencias.jsonl",
+  "holgura_s": 60,
+  "margen_anillo_s": 40
+ },
+ "duracion_s": 1440,
+ "retraso_prueba_s": 0,
+ "dns_unidad": "cf-v2-dns-v2-vd4-20261126t141333z"
+}

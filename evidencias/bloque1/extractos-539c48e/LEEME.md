@@ -1,3 +1,5 @@
+> **Sustituido por `../entradas-r4/` (4.ª revisión, 26-nov).** Las carpetas `entradas-*` de aquí nunca se publicaron: `.gitignore` las excluía. Además, su saneado sustituía las redes 10.10.X.0 del laboratorio. El extracto de P2 (`p2-V2-VD2-…`) sigue vigente y ya está publicado completo, con sus PCAP y su EVE.
+
 # Extractos saneados y entradas mínimas (3.ª revisión, 26-nov-2026)
 
 Generados en Sensor1 con el código 539c48e: `operacion/extracto_saneado.py` y

@@ -1,0 +1,61 @@
+{
+ "ejecucion": "V2-VD2-20261126T090705Z",
+ "ventanas": 664,
+ "ids_unicos": true,
+ "uno_a_uno": true,
+ "entradas_columnas_ok": true,
+ "n_entradas": 28,
+ "metadatos_fuera_de_las_28": true,
+ "solape": [],
+ "obligatorios_vacios": {
+  "ventana_id": 0,
+  "ejecucion": 0,
+  "entidad_ip": 0,
+  "perfil": 0,
+  "ventana_cierre_utc": 0,
+  "bloque_id": 0,
+  "particion": 0,
+  "nivel": 0,
+  "eve_fichero": 0,
+  "cobertura_estado": 0,
+  "conciliacion_estado": 0,
+  "excluir_entrenamiento": 0
+ },
+ "obligatorios_ok": true,
+ "por_particion": {
+  "fuera": 25,
+  "prueba": 639
+ },
+ "por_bloque": {
+  "A-B1": 132,
+  "A-B2": 209,
+  "B-B1": 190,
+  "B-B2": 108,
+  "fuera": 25
+ },
+ "por_perfil": {
+  "P1": 169,
+  "P2": 108,
+  "P3": 55,
+  "P4": 134,
+  "P5": 70,
+  "P6": 128
+ },
+ "por_cobertura": {
+  "incompleta": 23,
+  "ok": 150,
+  "sin_transacciones": 491
+ },
+ "por_conciliacion": {
+  "ok": 173,
+  "sin_transacciones": 491
+ },
+ "excluidas": 386,
+ "exclusion_por_regla": {
+  "E1": 365,
+  "E5": 26,
+  "E3": 23
+ },
+ "dispersion_t0_s": 0.042,
+ "trazabilidad_ok": true
+}

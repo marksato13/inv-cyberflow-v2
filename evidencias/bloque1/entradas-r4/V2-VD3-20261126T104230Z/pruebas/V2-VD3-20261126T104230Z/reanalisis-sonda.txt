@@ -1,0 +1,1 @@
+{"estado": "sin_contaminacion", "tocadas_utiles": 0, "tocadas_en_guarda_planificada": 23}

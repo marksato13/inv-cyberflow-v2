@@ -103,12 +103,13 @@ class Revisar(unittest.TestCase):
 
 
 class Integracion(unittest.TestCase):
-    def evaluar(self, duracion, ok7=True):
+    def evaluar(self, duracion, ok7=True, tipo=None):
         t = tempfile.TemporaryDirectory()
         self.addCleanup(t.cleanup)
         p = Path(t.name) / "pruebas" / "V2-X"
         (p / "registros").mkdir(parents=True)
-        (p / "registros" / "lanzamiento.json").write_text(json.dumps({"duracion_s": duracion}))
+        lz = {"duracion_s": duracion} if tipo is None else {"duracion_s": duracion, "tipo_ejecucion": tipo}
+        (p / "registros" / "lanzamiento.json").write_text(json.dumps(lz))
         crit = {k: {"ok": True} for k in [f"C{i}" for i in range(1, 14)] + ["C11b"]}
         for k in ("C7", "C9", "C10", "C11", "C12", "C13"):
             crit[k] = {"ok": None, "revisar": True}
@@ -129,6 +130,40 @@ class Integracion(unittest.TestCase):
     def test_larga_lo_prolongado_sigue_pendiente(self):
         r = self.evaluar(176400)
         self.assertIn("falta:prolongada:C7", r["motivos"])
+
+    def test_tipo_inferido_en_lanzamientos_anteriores(self):
+        r = self.evaluar(1440)
+        self.assertEqual((r["tipo_ejecucion"], r["tipo_inferido_por_duracion"]), ("verificacion_dirigida", True))
+
+    def test_verificacion_dirigida_declarada(self):
+        r = self.evaluar(1440, tipo="verificacion_dirigida")
+        self.assertFalse([m for m in r["motivos"] if "prolongada" in m or "otra:" in m])
+        self.assertFalse(r["tipo_inferido_por_duracion"])
+
+    def test_piloto_final_exige_las_otras_comprobaciones(self):
+        r = self.evaluar(1800, tipo="piloto_final")
+        self.assertIn("falta:otra:C7", r["motivos"])
+        self.assertFalse([m for m in r["motivos"] if "prolongada" in m])
+        self.assertNotEqual(r["global"], "aprobada")
+        self.assertIn("piloto_final", r["alcance"])
+
+    def test_captura_definitiva_exige_prolongadas_aunque_sea_corta(self):
+        r = self.evaluar(1440, tipo="captura_definitiva")
+        self.assertIn("falta:prolongada:C9", r["motivos"])
+        self.assertIn("falta:otra:C7", r["motivos"])
+
+    def test_tipo_desconocido_no_aprueba(self):
+        r = self.evaluar(1440, tipo="prueba_rara")
+        self.assertIn("falta:tipo_ejecucion", r["motivos"])
+        self.assertIn("falta:prolongada:C7", r["motivos"])
+        self.assertNotEqual(r["global"], "aprobada")
+
+    def test_lanzador_exige_el_tipo_antes_de_nada(self):
+        s = (Path(__file__).resolve().parents[1] / "operacion" / "lanzar_v2.sh").read_text(encoding="utf-8")
+        self.assertLess(s.index("CF_TIPO_EJECUCION debe ser"), s.index("candado crear"))
+        self.assertIn('"tipo_ejecucion": tipo', s)
+        v = (Path(__file__).resolve().parents[1] / "operacion" / "verificacion_dirigida.sh").read_text(encoding="utf-8")
+        self.assertIn("CF_TIPO_EJECUCION=verificacion_dirigida", v)
 
     def test_criterio_revisado_que_falla_no_aprueba(self):
         r = self.evaluar(1440, ok7=False)

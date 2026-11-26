@@ -1,0 +1,6 @@
+{
+ "monotonic": 331088.660156699,
+ "seguimiento_ntp": "Server: 198.51.100.24 (ntp.ubuntu.com)\nPoll interval: 34min 8s (min: 32s; max 34min 8s)\n         Leap: normal\n      Version: 4\n      Stratum: 2\n    Reference: 1D586304\n    Precision: 1us (-25)\nRoot distance: 3.829ms (max: 5s)\n       Offset: -24us\n        Delay: 152.954ms\n       Jitter: 162us\n Packet count: 165\n    Frequency: +5,351ppm",
+ "timedatectl_show": "Timezone=Etc/UTC\nLocalRTC=no\nCanNTP=yes\nNTP=yes\nNTPSynchronized=yes\nTimeUSec=Thu 2026-11-26 11:11:46 UTC\nRTCTimeUSec=Thu 2026-11-26 11:11:46 UTC",
+ "utc": "2026-11-26T11:11:46.752320Z"
+}

@@ -1,0 +1,29 @@
+2026-11-26T09:38:30.679951915Z
+Timezone=Etc/UTC
+LocalRTC=no
+CanNTP=yes
+NTP=yes
+NTPSynchronized=yes
+TimeUSec=Thu 2026-11-26 09:38:30 UTC
+RTCTimeUSec=Thu 2026-11-26 09:38:30 UTC
+       Server: 198.51.100.94 (ntp.ubuntu.com)
+Poll interval: 34min 8s (min: 32s; max 34min 8s)
+         Leap: normal
+      Version: 4
+      Stratum: 2
+    Reference: DA45F1D0
+    Precision: 1us (-25)
+Root distance: 717us (max: 5s)
+       Offset: +195us
+        Delay: 152.716ms
+       Jitter: 249us
+ Packet count: 162
+    Frequency: +7,478ppm
+== carga
+0.35 0.09 0.03 1/201 342587
+1
+== espacio
+Mounted on       Avail
+/          10214993920
+/          10214993920
+/          10214993920

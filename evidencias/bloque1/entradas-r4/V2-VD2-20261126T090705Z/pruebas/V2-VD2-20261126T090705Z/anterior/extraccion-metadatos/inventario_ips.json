@@ -1,0 +1,2706 @@
+[
+  {
+    "ip": "198.51.100.1",
+    "regla": "otra_excluida",
+    "paquetes": 2470,
+    "bytes_ip": 148744,
+    "vlan": [
+      20
+    ],
+    "primero_utc": "2026-11-26T09:07:06.582037+00:00",
+    "ultimo_utc": "2026-11-26T09:37:54.655482+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.2",
+        2468
+      ],
+      [
+        "198.51.100.3",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "10.10.10.1",
+    "regla": "otra_excluida",
+    "paquetes": 293,
+    "bytes_ip": 16369,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:12.580229+00:00",
+    "ultimo_utc": "2026-11-26T09:36:28.158468+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        280
+      ],
+      [
+        "10.10.10.20",
+        13
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.4",
+    "regla": "otra_excluida",
+    "paquetes": 9104,
+    "bytes_ip": 535760,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:05.660366+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.980773+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.5",
+        4936
+      ],
+      [
+        "198.51.100.2",
+        3666
+      ],
+      [
+        "10.10.10.20",
+        251
+      ],
+      [
+        "10.10.10.30",
+        251
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.5",
+    "regla": "otra_excluida",
+    "paquetes": 4936,
+    "bytes_ip": 286288,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:07.465725+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.738784+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.4",
+        4936
+      ]
+    ]
+  },
+  {
+    "ip": "10.10.10.20",
+    "regla": "respuesta_servicio_a_poblacion",
+    "paquetes": 3005,
+    "bytes_ip": 533021,
+    "vlan": [
+      10,
+      20,
+      40,
+      50,
+      60
+    ],
+    "primero_utc": "2026-11-26T09:07:13.748669+00:00",
+    "ultimo_utc": "2026-11-26T09:37:53.983998+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.6",
+        288
+      ],
+      [
+        "198.51.100.7",
+        288
+      ],
+      [
+        "198.51.100.8",
+        274
+      ],
+      [
+        "198.51.100.9",
+        272
+      ],
+      [
+        "198.51.100.10",
+        252
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.11",
+    "regla": "otra_excluida",
+    "paquetes": 24,
+    "bytes_ip": 1632,
+    "vlan": [
+      40,
+      50,
+      60
+    ],
+    "primero_utc": "2026-11-26T09:08:22.078284+00:00",
+    "ultimo_utc": "2026-11-26T09:37:36.589619+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.12",
+        8
+      ],
+      [
+        "198.51.100.9",
+        8
+      ],
+      [
+        "198.51.100.13",
+        2
+      ],
+      [
+        "198.51.100.8",
+        2
+      ],
+      [
+        "198.51.100.6",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "10.10.10.30",
+    "regla": "gestion_excluida",
+    "paquetes": 661798,
+    "bytes_ip": 58092572,
+    "vlan": [
+      10,
+      20,
+      30,
+      60,
+      99
+    ],
+    "primero_utc": "2026-11-26T09:07:05.433943+00:00",
+    "ultimo_utc": "2026-11-26T09:37:56.015330+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.14",
+        489128
+      ],
+      [
+        "10.10.60.11",
+        135848
+      ],
+      [
+        "198.51.100.15",
+        24302
+      ],
+      [
+        "10.10.30.10",
+        4730
+      ],
+      [
+        "198.51.100.16",
+        2414
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.17",
+    "regla": "otra_excluida",
+    "paquetes": 8607,
+    "bytes_ip": 492592,
+    "vlan": [
+      20
+    ],
+    "primero_utc": "2026-11-26T09:07:05.660228+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.980825+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.18",
+        4940
+      ],
+      [
+        "198.51.100.2",
+        3666
+      ],
+      [
+        "198.51.100.19",
+        1
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.18",
+    "regla": "otra_excluida",
+    "paquetes": 4947,
+    "bytes_ip": 287752,
+    "vlan": [
+      20
+    ],
+    "primero_utc": "2026-11-26T09:07:07.965638+00:00",
+    "ultimo_utc": "2026-11-26T09:37:53.738527+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.17",
+        4940
+      ],
+      [
+        "198.51.100.20",
+        2
+      ],
+      [
+        "198.51.100.21",
+        2
+      ],
+      [
+        "198.51.100.22",
+        2
+      ],
+      [
+        "198.51.100.19",
+        1
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.23",
+    "regla": "otra_excluida",
+    "paquetes": 176,
+    "bytes_ip": 13376,
+    "vlan": [
+      20
+    ],
+    "primero_utc": "2026-11-26T09:07:24.994141+00:00",
+    "ultimo_utc": "2026-11-26T09:35:15.086485+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.24",
+        64
+      ],
+      [
+        "198.51.100.25",
+        56
+      ],
+      [
+        "198.51.100.26",
+        56
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.15",
+    "regla": "gestion_excluida",
+    "paquetes": 24304,
+    "bytes_ip": 5738896,
+    "vlan": [
+      10,
+      20
+    ],
+    "primero_utc": "2026-11-26T09:07:13.500289+00:00",
+    "ultimo_utc": "2026-11-26T09:37:15.680159+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        24302
+      ],
+      [
+        "198.51.100.27",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "10.10.20.21",
+    "regla": "poblacion",
+    "paquetes": 2646,
+    "bytes_ip": 1250492,
+    "vlan": [
+      10,
+      20,
+      30
+    ],
+    "primero_utc": "2026-11-26T09:07:38.108903+00:00",
+    "ultimo_utc": "2026-11-26T09:35:35.434315+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.30.10",
+        2442
+      ],
+      [
+        "10.10.10.20",
+        204
+      ]
+    ]
+  },
+  {
+    "ip": "10.10.20.22",
+    "regla": "poblacion",
+    "paquetes": 5300,
+    "bytes_ip": 3572546,
+    "vlan": [
+      10,
+      20,
+      30
+    ],
+    "primero_utc": "2026-11-26T09:14:14.219530+00:00",
+    "ultimo_utc": "2026-11-26T09:32:05.159141+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.30.10",
+        5164
+      ],
+      [
+        "10.10.10.20",
+        136
+      ]
+    ]
+  },
+  {
+    "ip": "10.10.20.23",
+    "regla": "poblacion",
+    "paquetes": 17986,
+    "bytes_ip": 20193798,
+    "vlan": [
+      10,
+      20,
+      30
+    ],
+    "primero_utc": "2026-11-26T09:16:16.171065+00:00",
+    "ultimo_utc": "2026-11-26T09:25:12.351228+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.30.10",
+        17970
+      ],
+      [
+        "10.10.10.20",
+        16
+      ]
+    ]
+  },
+  {
+    "ip": "10.10.20.24",
+    "regla": "poblacion",
+    "paquetes": 3080,
+    "bytes_ip": 634354,
+    "vlan": [
+      10,
+      20,
+      30
+    ],
+    "primero_utc": "2026-11-26T09:12:03.323153+00:00",
+    "ultimo_utc": "2026-11-26T09:34:14.441053+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.30.10",
+        2912
+      ],
+      [
+        "10.10.10.20",
+        168
+      ]
+    ]
+  },
+  {
+    "ip": "10.10.20.25",
+    "regla": "poblacion",
+    "paquetes": 292,
+    "bytes_ip": 124122,
+    "vlan": [
+      10,
+      20,
+      30
+    ],
+    "primero_utc": "2026-11-26T09:18:59.110913+00:00",
+    "ultimo_utc": "2026-11-26T09:26:14.917185+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.30.10",
+        264
+      ],
+      [
+        "10.10.10.20",
+        28
+      ]
+    ]
+  },
+  {
+    "ip": "10.10.20.26",
+    "regla": "poblacion",
+    "paquetes": 2418,
+    "bytes_ip": 1190916,
+    "vlan": [
+      10,
+      20,
+      30
+    ],
+    "primero_utc": "2026-11-26T09:12:21.939958+00:00",
+    "ultimo_utc": "2026-11-26T09:33:31.183039+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.30.10",
+        2238
+      ],
+      [
+        "10.10.10.20",
+        180
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.28",
+    "regla": "gestion_excluida",
+    "paquetes": 2,
+    "bytes_ip": 152,
+    "vlan": [
+      20
+    ],
+    "primero_utc": "2026-11-26T09:30:33.331748+00:00",
+    "ultimo_utc": "2026-11-26T09:30:33.363660+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.29",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.19",
+    "regla": "otra_excluida",
+    "paquetes": 64,
+    "bytes_ip": 8344,
+    "vlan": [
+      20
+    ],
+    "primero_utc": "2026-11-26T09:07:29.969818+00:00",
+    "ultimo_utc": "2026-11-26T09:37:07.735827+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.3",
+        62
+      ],
+      [
+        "198.51.100.17",
+        1
+      ],
+      [
+        "198.51.100.18",
+        1
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.30",
+    "regla": "otra_excluida",
+    "paquetes": 3666,
+    "bytes_ip": 205296,
+    "vlan": [
+      30
+    ],
+    "primero_utc": "2026-11-26T09:07:05.660192+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.980810+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.2",
+        3666
+      ]
+    ]
+  },
+  {
+    "ip": "10.10.30.10",
+    "regla": "respuesta_servicio_a_poblacion",
+    "paquetes": 35722,
+    "bytes_ip": 27525376,
+    "vlan": [
+      10,
+      20,
+      30
+    ],
+    "primero_utc": "2026-11-26T09:07:11.555210+00:00",
+    "ultimo_utc": "2026-11-26T09:37:56.015330+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.20.23",
+        17970
+      ],
+      [
+        "10.10.20.22",
+        5164
+      ],
+      [
+        "10.10.10.30",
+        4730
+      ],
+      [
+        "10.10.20.24",
+        2912
+      ],
+      [
+        "10.10.20.21",
+        2442
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.31",
+    "regla": "otra_excluida",
+    "paquetes": 3917,
+    "bytes_ip": 227384,
+    "vlan": [
+      40
+    ],
+    "primero_utc": "2026-11-26T09:07:05.660268+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.980882+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.2",
+        3666
+      ],
+      [
+        "198.51.100.13",
+        251
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.13",
+    "regla": "otra_excluida",
+    "paquetes": 656,
+    "bytes_ip": 50180,
+    "vlan": [
+      10,
+      40
+    ],
+    "primero_utc": "2026-11-26T09:07:10.064730+00:00",
+    "ultimo_utc": "2026-11-26T09:37:50.298292+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.31",
+        251
+      ],
+      [
+        "198.51.100.32",
+        222
+      ],
+      [
+        "198.51.100.33",
+        145
+      ],
+      [
+        "10.10.10.20",
+        14
+      ],
+      [
+        "198.51.100.34",
+        8
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.35",
+    "regla": "otra_excluida",
+    "paquetes": 3917,
+    "bytes_ip": 227384,
+    "vlan": [
+      50
+    ],
+    "primero_utc": "2026-11-26T09:07:05.660268+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.980882+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.2",
+        3666
+      ],
+      [
+        "198.51.100.10",
+        251
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.10",
+    "regla": "otra_excluida",
+    "paquetes": 842,
+    "bytes_ip": 108812,
+    "vlan": [
+      10,
+      50
+    ],
+    "primero_utc": "2026-11-26T09:07:14.336490+00:00",
+    "ultimo_utc": "2026-11-26T09:37:54.584930+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.20",
+        252
+      ],
+      [
+        "198.51.100.35",
+        251
+      ],
+      [
+        "198.51.100.32",
+        222
+      ],
+      [
+        "198.51.100.33",
+        116
+      ],
+      [
+        "198.51.100.11",
+        1
+      ]
+    ]
+  },
+  {
+    "ip": "10.10.60.1",
+    "regla": "otra_excluida",
+    "paquetes": 2,
+    "bytes_ip": 152,
+    "vlan": [
+      60
+    ],
+    "primero_utc": "2026-11-26T09:12:48.986758+00:00",
+    "ultimo_utc": "2026-11-26T09:12:48.987069+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.60.11",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.36",
+    "regla": "otra_excluida",
+    "paquetes": 3670,
+    "bytes_ip": 205680,
+    "vlan": [
+      60
+    ],
+    "primero_utc": "2026-11-26T09:07:05.660227+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.980825+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.2",
+        3666
+      ],
+      [
+        "198.51.100.12",
+        1
+      ],
+      [
+        "198.51.100.8",
+        1
+      ],
+      [
+        "198.51.100.9",
+        1
+      ],
+      [
+        "198.51.100.6",
+        1
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.32",
+    "regla": "otra_excluida",
+    "paquetes": 938,
+    "bytes_ip": 64515,
+    "vlan": [
+      10,
+      40,
+      50,
+      90,
+      99
+    ],
+    "primero_utc": "2026-11-26T09:07:06.959365+00:00",
+    "ultimo_utc": "2026-11-26T09:37:54.895873+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.13",
+        222
+      ],
+      [
+        "10.10.10.20",
+        222
+      ],
+      [
+        "198.51.100.10",
+        222
+      ],
+      [
+        "10.10.10.30",
+        222
+      ],
+      [
+        "198.51.100.14",
+        44
+      ]
+    ]
+  },
+  {
+    "ip": "10.10.60.11",
+    "regla": "otra_excluida",
+    "paquetes": 135850,
+    "bytes_ip": 17694656,
+    "vlan": [
+      10,
+      60
+    ],
+    "primero_utc": "2026-11-26T09:07:05.433943+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.962011+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        135848
+      ],
+      [
+        "10.10.60.1",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.12",
+    "regla": "otra_excluida",
+    "paquetes": 249,
+    "bytes_ip": 66006,
+    "vlan": [
+      10,
+      60
+    ],
+    "primero_utc": "2026-11-26T09:12:04.577351+00:00",
+    "ultimo_utc": "2026-11-26T09:35:31.001974+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.20",
+        240
+      ],
+      [
+        "198.51.100.11",
+        8
+      ],
+      [
+        "198.51.100.36",
+        1
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.7",
+    "regla": "otra_excluida",
+    "paquetes": 289,
+    "bytes_ip": 70570,
+    "vlan": [
+      10,
+      60
+    ],
+    "primero_utc": "2026-11-26T09:14:07.450209+00:00",
+    "ultimo_utc": "2026-11-26T09:35:21.122329+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.20",
+        288
+      ],
+      [
+        "198.51.100.11",
+        1
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.6",
+    "regla": "otra_excluida",
+    "paquetes": 291,
+    "bytes_ip": 68566,
+    "vlan": [
+      10,
+      60
+    ],
+    "primero_utc": "2026-11-26T09:11:04.471479+00:00",
+    "ultimo_utc": "2026-11-26T09:37:36.589619+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.20",
+        288
+      ],
+      [
+        "198.51.100.11",
+        2
+      ],
+      [
+        "198.51.100.36",
+        1
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.8",
+    "regla": "otra_excluida",
+    "paquetes": 277,
+    "bytes_ip": 67144,
+    "vlan": [
+      10,
+      60
+    ],
+    "primero_utc": "2026-11-26T09:10:52.711293+00:00",
+    "ultimo_utc": "2026-11-26T09:37:10.490726+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.20",
+        274
+      ],
+      [
+        "198.51.100.11",
+        2
+      ],
+      [
+        "198.51.100.36",
+        1
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.33",
+    "regla": "otra_excluida",
+    "paquetes": 522,
+    "bytes_ip": 31320,
+    "vlan": [
+      10,
+      40,
+      50
+    ],
+    "primero_utc": "2026-11-26T09:07:58.164754+00:00",
+    "ultimo_utc": "2026-11-26T09:37:27.024186+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.13",
+        145
+      ],
+      [
+        "10.10.10.20",
+        145
+      ],
+      [
+        "10.10.10.30",
+        116
+      ],
+      [
+        "198.51.100.10",
+        116
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.9",
+    "regla": "otra_excluida",
+    "paquetes": 281,
+    "bytes_ip": 69570,
+    "vlan": [
+      10,
+      60
+    ],
+    "primero_utc": "2026-11-26T09:11:32.318629+00:00",
+    "ultimo_utc": "2026-11-26T09:36:01.043412+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.20",
+        272
+      ],
+      [
+        "198.51.100.11",
+        8
+      ],
+      [
+        "198.51.100.36",
+        1
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.37",
+    "regla": "otra_excluida",
+    "paquetes": 8602,
+    "bytes_ip": 491584,
+    "vlan": [
+      70
+    ],
+    "primero_utc": "2026-11-26T09:07:05.660195+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.980764+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.38",
+        4936
+      ],
+      [
+        "198.51.100.2",
+        3666
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.38",
+    "regla": "otra_excluida",
+    "paquetes": 4936,
+    "bytes_ip": 286288,
+    "vlan": [
+      70
+    ],
+    "primero_utc": "2026-11-26T09:07:07.465620+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.738841+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.37",
+        4936
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.39",
+    "regla": "otra_excluida",
+    "paquetes": 3666,
+    "bytes_ip": 205296,
+    "vlan": [
+      80
+    ],
+    "primero_utc": "2026-11-26T09:07:05.660268+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.980882+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.2",
+        3666
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.40",
+    "regla": "otra_excluida",
+    "paquetes": 3666,
+    "bytes_ip": 205296,
+    "vlan": [
+      85
+    ],
+    "primero_utc": "2026-11-26T09:07:05.660147+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.980810+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.2",
+        3666
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.41",
+    "regla": "otra_excluida",
+    "paquetes": 3666,
+    "bytes_ip": 205296,
+    "vlan": [
+      88
+    ],
+    "primero_utc": "2026-11-26T09:07:05.660366+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.980749+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.2",
+        3666
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.42",
+    "regla": "otra_excluida",
+    "paquetes": 3672,
+    "bytes_ip": 206254,
+    "vlan": [
+      90
+    ],
+    "primero_utc": "2026-11-26T09:07:05.660366+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.980773+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.2",
+        3666
+      ],
+      [
+        "198.51.100.43",
+        6
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.43",
+    "regla": "otra_excluida",
+    "paquetes": 12,
+    "bytes_ip": 1748,
+    "vlan": [
+      90
+    ],
+    "primero_utc": "2026-11-26T09:17:27.206837+00:00",
+    "ultimo_utc": "2026-11-26T09:17:27.209829+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.32",
+        6
+      ],
+      [
+        "198.51.100.42",
+        6
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.44",
+    "regla": "otra_excluida",
+    "paquetes": 8602,
+    "bytes_ip": 491584,
+    "vlan": [
+      95
+    ],
+    "primero_utc": "2026-11-26T09:07:05.660195+00:00",
+    "ultimo_utc": "2026-11-26T09:37:56.238591+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.45",
+        4936
+      ],
+      [
+        "198.51.100.2",
+        3666
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.45",
+    "regla": "otra_excluida",
+    "paquetes": 4936,
+    "bytes_ip": 286288,
+    "vlan": [
+      95
+    ],
+    "primero_utc": "2026-11-26T09:07:07.466077+00:00",
+    "ultimo_utc": "2026-11-26T09:37:56.238591+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.44",
+        4936
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.14",
+    "regla": "otra_excluida",
+    "paquetes": 492676,
+    "bytes_ip": 33180355,
+    "vlan": [
+      10,
+      99
+    ],
+    "primero_utc": "2026-11-26T09:07:05.689231+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.654966+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        489128
+      ],
+      [
+        "198.51.100.46",
+        1774
+      ],
+      [
+        "198.51.100.47",
+        1730
+      ],
+      [
+        "198.51.100.32",
+        44
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.47",
+    "regla": "otra_excluida",
+    "paquetes": 1730,
+    "bytes_ip": 145320,
+    "vlan": [
+      99
+    ],
+    "primero_utc": "2026-11-26T09:07:06.629109+00:00",
+    "ultimo_utc": "2026-11-26T09:37:54.607688+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.14",
+        1730
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.46",
+    "regla": "otra_excluida",
+    "paquetes": 5440,
+    "bytes_ip": 358638,
+    "vlan": [
+      99
+    ],
+    "primero_utc": "2026-11-26T09:07:05.660268+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.980882+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.2",
+        3666
+      ],
+      [
+        "198.51.100.14",
+        1774
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.48",
+    "regla": "otra_excluida",
+    "paquetes": 52742,
+    "bytes_ip": 17197000,
+    "vlan": [
+      100
+    ],
+    "primero_utc": "2026-11-26T09:07:05.400074+00:00",
+    "ultimo_utc": "2026-11-26T09:37:56.204793+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.49",
+        52742
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.49",
+    "regla": "otra_excluida",
+    "paquetes": 52742,
+    "bytes_ip": 17197000,
+    "vlan": [
+      100
+    ],
+    "primero_utc": "2026-11-26T09:07:05.400074+00:00",
+    "ultimo_utc": "2026-11-26T09:37:56.204793+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.48",
+        52742
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.50",
+    "regla": "otra_excluida",
+    "paquetes": 331,
+    "bytes_ip": 50312,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:08.251956+00:00",
+    "ultimo_utc": "2026-11-26T09:32:46.627578+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        331
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.51",
+    "regla": "otra_excluida",
+    "paquetes": 20,
+    "bytes_ip": 1996,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:14:42.749954+00:00",
+    "ultimo_utc": "2026-11-26T09:14:43.523117+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        20
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.52",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627600+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.255869+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.53",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526295+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.154961+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.54",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526482+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.158044+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.55",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627134+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.257114+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.56",
+    "regla": "otra_excluida",
+    "paquetes": 30,
+    "bytes_ip": 2636,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627210+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.262079+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        30
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.57",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526482+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.144874+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.58",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526295+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.277229+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.59",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627600+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.373350+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.60",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.727136+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.480343+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.61",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.727059+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.487116+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.62",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526078+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.284351+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.63",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627153+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.385684+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.64",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627600+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.343070+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.26",
+    "regla": "otra_excluida",
+    "paquetes": 66,
+    "bytes_ip": 5016,
+    "vlan": [
+      10,
+      20,
+      40
+    ],
+    "primero_utc": "2026-11-26T09:07:58.991745+00:00",
+    "ultimo_utc": "2026-11-26T09:32:10.764818+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.23",
+        56
+      ],
+      [
+        "10.10.10.20",
+        4
+      ],
+      [
+        "198.51.100.13",
+        4
+      ],
+      [
+        "10.10.10.30",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.65",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526482+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.154238+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.25",
+    "regla": "otra_excluida",
+    "paquetes": 56,
+    "bytes_ip": 4256,
+    "vlan": [
+      20
+    ],
+    "primero_utc": "2026-11-26T09:07:24.994141+00:00",
+    "ultimo_utc": "2026-11-26T09:29:41.025198+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.23",
+        56
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.66",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627003+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.174813+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.67",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.525974+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.074975+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.68",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.626805+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.248650+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.20",
+    "regla": "otra_excluida",
+    "paquetes": 2,
+    "bytes_ip": 152,
+    "vlan": [
+      20
+    ],
+    "primero_utc": "2026-11-26T09:12:55.150976+00:00",
+    "ultimo_utc": "2026-11-26T09:12:55.150976+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.18",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.69",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.726835+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.441920+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.70",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.525922+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.242743+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.71",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.626933+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.344129+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.72",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.626970+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.369275+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.73",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.726860+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.470481+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.74",
+    "regla": "otra_excluida",
+    "paquetes": 14,
+    "bytes_ip": 896,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526125+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.268867+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        14
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.75",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627186+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.280827+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.76",
+    "regla": "otra_excluida",
+    "paquetes": 112,
+    "bytes_ip": 7168,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:12.580416+00:00",
+    "ultimo_utc": "2026-11-26T09:32:44.062562+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        112
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.77",
+    "regla": "otra_excluida",
+    "paquetes": 30,
+    "bytes_ip": 2642,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627600+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.329084+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        30
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.78",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.727059+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.431890+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.79",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526345+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.227991+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.80",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.727138+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.375635+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.81",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526129+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.173870+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.82",
+    "regla": "otra_excluida",
+    "paquetes": 30,
+    "bytes_ip": 2642,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526482+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.880277+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        30
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.83",
+    "regla": "otra_excluida",
+    "paquetes": 30,
+    "bytes_ip": 2642,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627187+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.880954+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        30
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.84",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627186+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.232222+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.85",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526143+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.130431+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.86",
+    "regla": "otra_excluida",
+    "paquetes": 30,
+    "bytes_ip": 2636,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627153+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.236751+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        30
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.87",
+    "regla": "otra_excluida",
+    "paquetes": 30,
+    "bytes_ip": 2642,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526265+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.135345+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        30
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.88",
+    "regla": "otra_excluida",
+    "paquetes": 107,
+    "bytes_ip": 6852,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:12.580266+00:00",
+    "ultimo_utc": "2026-11-26T09:32:44.081895+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        107
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.24",
+    "regla": "otra_excluida",
+    "paquetes": 64,
+    "bytes_ip": 4864,
+    "vlan": [
+      20
+    ],
+    "primero_utc": "2026-11-26T09:08:10.990716+00:00",
+    "ultimo_utc": "2026-11-26T09:35:15.086485+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.23",
+        64
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.89",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526459+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.229435+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.90",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.726270+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.429425+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.91",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627236+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.329574+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.92",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627600+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.242965+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.93",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526184+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.143464+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.27",
+    "regla": "otra_excluida",
+    "paquetes": 2,
+    "bytes_ip": 152,
+    "vlan": [
+      20
+    ],
+    "primero_utc": "2026-11-26T09:28:46.589755+00:00",
+    "ultimo_utc": "2026-11-26T09:28:46.742649+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.15",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.94",
+    "regla": "otra_excluida",
+    "paquetes": 2,
+    "bytes_ip": 152,
+    "vlan": [
+      30
+    ],
+    "primero_utc": "2026-11-26T09:29:05.953352+00:00",
+    "ultimo_utc": "2026-11-26T09:29:06.105829+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.30.10",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.95",
+    "regla": "otra_excluida",
+    "paquetes": 14,
+    "bytes_ip": 1064,
+    "vlan": [
+      10,
+      40
+    ],
+    "primero_utc": "2026-11-26T09:10:58.411667+00:00",
+    "ultimo_utc": "2026-11-26T09:37:02.082066+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        8
+      ],
+      [
+        "10.10.10.20",
+        4
+      ],
+      [
+        "198.51.100.13",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.96",
+    "regla": "otra_excluida",
+    "paquetes": 331,
+    "bytes_ip": 50312,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:08.251956+00:00",
+    "ultimo_utc": "2026-11-26T09:32:46.627578+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        331
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.97",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526021+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.110552+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.98",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627153+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.210505+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.99",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627600+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.186962+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.100",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526100+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.086499+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.101",
+    "regla": "otra_excluida",
+    "paquetes": 100,
+    "bytes_ip": 10040,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.727489+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.683991+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        100
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.16",
+    "regla": "otra_excluida",
+    "paquetes": 2414,
+    "bytes_ip": 455491,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:08.251851+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.863946+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        2414
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.102",
+    "regla": "otra_excluida",
+    "paquetes": 100,
+    "bytes_ip": 10040,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.728791+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.682536+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        100
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.103",
+    "regla": "otra_excluida",
+    "paquetes": 30,
+    "bytes_ip": 2648,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627153+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.181254+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        30
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.104",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627251+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.197114+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.105",
+    "regla": "otra_excluida",
+    "paquetes": 331,
+    "bytes_ip": 50312,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:08.251898+00:00",
+    "ultimo_utc": "2026-11-26T09:32:46.627693+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        331
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.34",
+    "regla": "otra_excluida",
+    "paquetes": 16,
+    "bytes_ip": 5288,
+    "vlan": [
+      10,
+      40
+    ],
+    "primero_utc": "2026-11-26T09:07:34.658357+00:00",
+    "ultimo_utc": "2026-11-26T09:15:10.846812+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.13",
+        8
+      ],
+      [
+        "10.10.10.30",
+        8
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.106",
+    "regla": "otra_excluida",
+    "paquetes": 331,
+    "bytes_ip": 50312,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:08.251898+00:00",
+    "ultimo_utc": "2026-11-26T09:32:46.627814+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        331
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.107",
+    "regla": "otra_excluida",
+    "paquetes": 331,
+    "bytes_ip": 50312,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:08.251920+00:00",
+    "ultimo_utc": "2026-11-26T09:32:46.627600+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        331
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.108",
+    "regla": "otra_excluida",
+    "paquetes": 331,
+    "bytes_ip": 50312,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:08.251968+00:00",
+    "ultimo_utc": "2026-11-26T09:32:46.627674+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        331
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.109",
+    "regla": "otra_excluida",
+    "paquetes": 216,
+    "bytes_ip": 39790,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:22.902692+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.452609+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        216
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.110",
+    "regla": "otra_excluida",
+    "paquetes": 30,
+    "bytes_ip": 2648,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526248+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.061062+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        30
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.111",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526184+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.081929+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.112",
+    "regla": "otra_excluida",
+    "paquetes": 884,
+    "bytes_ip": 170459,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:10.256389+00:00",
+    "ultimo_utc": "2026-11-26T09:37:54.327644+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        884
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.29",
+    "regla": "otra_excluida",
+    "paquetes": 2,
+    "bytes_ip": 152,
+    "vlan": [
+      20
+    ],
+    "primero_utc": "2026-11-26T09:30:33.331748+00:00",
+    "ultimo_utc": "2026-11-26T09:30:33.363660+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.28",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.113",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 760,
+    "vlan": [
+      10,
+      40
+    ],
+    "primero_utc": "2026-11-26T09:13:25.015790+00:00",
+    "ultimo_utc": "2026-11-26T09:31:32.884103+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        4
+      ],
+      [
+        "198.51.100.13",
+        4
+      ],
+      [
+        "10.10.10.20",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.21",
+    "regla": "otra_excluida",
+    "paquetes": 2,
+    "bytes_ip": 152,
+    "vlan": [
+      20
+    ],
+    "primero_utc": "2026-11-26T09:30:20.189624+00:00",
+    "ultimo_utc": "2026-11-26T09:30:20.189624+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.18",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.114",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 760,
+    "vlan": [
+      10,
+      40
+    ],
+    "primero_utc": "2026-11-26T09:14:15.419765+00:00",
+    "ultimo_utc": "2026-11-26T09:36:34.557307+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.13",
+        4
+      ],
+      [
+        "10.10.10.20",
+        4
+      ],
+      [
+        "10.10.10.30",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.115",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.726775+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.455581+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.116",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526079+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.257444+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.117",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526482+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.097064+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.118",
+    "regla": "otra_excluida",
+    "paquetes": 30,
+    "bytes_ip": 2648,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.526030+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.085611+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        30
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.119",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.626923+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.175932+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.120",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.525976+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.075743+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.121",
+    "regla": "otra_excluida",
+    "paquetes": 10,
+    "bytes_ip": 640,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:09:40.627186+00:00",
+    "ultimo_utc": "2026-11-26T09:30:10.182092+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        10
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.22",
+    "regla": "otra_excluida",
+    "paquetes": 2,
+    "bytes_ip": 152,
+    "vlan": [
+      20
+    ],
+    "primero_utc": "2026-11-26T09:35:36.137848+00:00",
+    "ultimo_utc": "2026-11-26T09:35:36.137848+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.18",
+        2
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.2",
+    "regla": "otra_excluida",
+    "paquetes": 50126,
+    "bytes_ip": 2816928,
+    "vlan": [
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      85,
+      88,
+      90,
+      95,
+      99
+    ],
+    "primero_utc": "2026-11-26T09:07:05.660147+00:00",
+    "ultimo_utc": "2026-11-26T09:37:55.980882+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.40",
+        3666
+      ],
+      [
+        "198.51.100.30",
+        3666
+      ],
+      [
+        "198.51.100.44",
+        3666
+      ],
+      [
+        "198.51.100.37",
+        3666
+      ],
+      [
+        "198.51.100.36",
+        3666
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.122",
+    "regla": "otra_excluida",
+    "paquetes": 224,
+    "bytes_ip": 32144,
+    "vlan": [
+      10
+    ],
+    "primero_utc": "2026-11-26T09:07:12.580383+00:00",
+    "ultimo_utc": "2026-11-26T09:32:43.984399+00:00",
+    "interlocutores_principales": [
+      [
+        "10.10.10.30",
+        224
+      ]
+    ]
+  },
+  {
+    "ip": "198.51.100.3",
+    "regla": "otra_excluida",
+    "paquetes": 64,
+    "bytes_ip": 8352,
+    "vlan": [
+      20
+    ],
+    "primero_utc": "2026-11-26T09:07:29.969818+00:00",
+    "ultimo_utc": "2026-11-26T09:37:07.735827+00:00",
+    "interlocutores_principales": [
+      [
+        "198.51.100.19",
+        62
+      ],
+      [
+        "198.51.100.1",
+        2
+      ]
+    ]
+  }
+]

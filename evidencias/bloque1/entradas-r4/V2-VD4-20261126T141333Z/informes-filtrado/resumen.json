@@ -1,0 +1,30 @@
+{
+ "ejecucion": "V2-VD4-20261126T141333Z",
+ "criterio": "IPv4 con un extremo de la poblacion y el otro de la poblacion o un servidor (10.10.30.10, 10.10.10.20)",
+ "anillo_sensor1": {
+  "ficheros": 369,
+  "tramas_originales": 889146,
+  "tramas_conservadas": 32838,
+  "descartadas_por_motivo": {
+   "fuera_del_experimento": 809551,
+   "no_ipv4": 46757
+  }
+ },
+ "extremo_srvdmz": {
+  "tramas_originales": 8269,
+  "tramas_conservadas": 8269,
+  "enlace": 1,
+  "descartadas_por_motivo": {}
+ },
+ "dns_dc1": {
+  "tramas_originales": 366,
+  "tramas_conservadas": 366,
+  "enlace": 1,
+  "descartadas_por_motivo": {}
+ },
+ "eve": {
+  "eventos_originales": 8570,
+  "eventos_conservados": 3023,
+  "campo_quitado": "ether"
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "ejecucion": "V2-VD4-20261126T141333Z",
+ "dictamen_original": null,
+ "casos": [
+  {
+   "caso": "correcta",
+   "global": "aprobada",
+   "codigo_salida": 0,
+   "calidad": {
+    "calidad_copias": "completo",
+    "calidad_dns": "completo",
+    "calidad_extremo": "completo",
+    "calidad_sonda": "completo"
+   },
+   "motivos": []
+  },
+  {
+   "caso": "perdida_extremo",
+   "global": "no_aprobada",
+   "codigo_salida": 1,
+   "calidad": {
+    "calidad_copias": "completo",
+    "calidad_dns": "completo",
+    "calidad_extremo": "perdida",
+    "calidad_sonda": "completo"
+   },
+   "motivos": [
+    "calidad_extremo:perdida"
+   ]
+  },
+  {
+   "caso": "perdida_copias",
+   "global": "no_aprobada",
+   "codigo_salida": 1,
+   "calidad": {
+    "calidad_copias": "perdida",
+    "calidad_dns": "completo",
+    "calidad_extremo": "completo",
+    "calidad_sonda": "completo"
+   },
+   "motivos": [
+    "calidad_copias:perdida"
+   ]
+  },
+  {
+   "caso": "contaminacion_sonda",
+   "global": "no_aprobada",
+   "codigo_salida": 1,
+   "calidad": {
+    "calidad_copias": "completo",
+    "calidad_dns": "completo",
+    "calidad_extremo": "completo",
+    "calidad_sonda": "contaminacion"
+   },
+   "motivos": [
+    "calidad_sonda:contaminacion"
+   ]
+  },
+  {
+   "caso": "extremo_ausente",
+   "global": "indeterminada",
+   "codigo_salida": 2,
+   "calidad": {
+    "calidad_copias": "completo",
+    "calidad_dns": "completo",
+    "calidad_extremo": "sin_datos",
+    "calidad_sonda": "completo"
+   },
+   "motivos": [
+    "falta:calidad_extremo"
+   ]
+  },
+  {
+   "caso": "sonda_ausente",
+   "global": "indeterminada",
+   "codigo_salida": 2,
+   "calidad": {
+    "calidad_copias": "completo",
+    "calidad_dns": "completo",
+    "calidad_extremo": "completo",
+    "calidad_sonda": "sin_datos"
+   },
+   "motivos": [
+    "falta:calidad_sonda"
+   ]
+  },
+  {
+   "caso": "dns_ausente",
+   "global": "indeterminada",
+   "codigo_salida": 2,
+   "calidad": {
+    "calidad_copias": "completo",
+    "calidad_dns": "sin_datos",
+    "calidad_extremo": "completo",
+    "calidad_sonda": "completo"
+   },
+   "motivos": [
+    "falta:calidad_dns"
+   ]
+  },
+  {
+   "caso": "extremo_con_descartes",
+   "global": "indeterminada",
+   "codigo_salida": 2,
+   "calidad": {
+    "calidad_copias": "completo",
+    "calidad_dns": "completo",
+    "calidad_extremo": "indeterminado",
+    "calidad_sonda": "completo"
+   },
+   "motivos": [
+    "falta:calidad_extremo"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+{
+ "monotonic": 226942.948418602,
+ "seguimiento_ntp": "Server: 10.10.60.1 (10.10.60.1)\nPoll interval: 34min 8s (min: 32s; max 34min 8s)\n         Leap: normal\n      Version: 4\n      Stratum: 2\n    Reference: C8A007C4\n    Precision: 1us (-22)\nRoot distance: 67.336ms (max: 5s)\n       Offset: -162us\n        Delay: 254us\n       Jitter: 368us\n Packet count: 115\n    Frequency: +12,625ppm",
+ "timedatectl_show": "Timezone=Etc/UTC\nLocalRTC=no\nCanNTP=yes\nNTP=yes\nNTPSynchronized=yes\nTimeUSec=Thu 2026-11-26 14:14:40 UTC\nRTCTimeUSec=Thu 2026-11-26 14:14:40 UTC",
+ "utc": "2026-11-26T14:14:40.838863Z"
+}

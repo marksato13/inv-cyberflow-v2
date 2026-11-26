@@ -1,0 +1,15 @@
+{"utc":"2026-11-26T14:13:33.192Z","paso":"identificador","detalle":"V2-VD4-20261126T141333Z programa=prueba-niveles-transiciones.json sha256=3089fc531745d9271818ee20c0d9915bd045801669dd2042a766e269cd7ee160 duracion=1440 tope_inicial=1795711323 retraso_prueba=0 "}
+{"utc":"2026-11-26T14:13:33.263Z","paso":"candado","detalle":"creado (/home/gadmin/cyberflow-v2/CAPTURA_EN_CURSO) "}
+{"utc":"2026-11-26T14:13:33.661Z","paso":"exclusion_v1","detalle":"{cubierto: true, regla: *@2026-11-26T14:03:33+00:00/2026-11-26T16:52:03+00:00, cambio: true, respaldo: /home/m4rk/cyberflow/configs/cyberflow.local.toml.antes-v2-20261126T141333Z} "}
+{"utc":"2026-11-26T14:13:42.210Z","paso":"preflight","detalle":"ok "}
+{"utc":"2026-11-26T14:13:51.332Z","paso":"relojes","detalle":"srvdmz y dc1 "}
+{"utc":"2026-11-26T14:13:56.782Z","paso":"contadores","detalle":"inicio "}
+{"utc":"2026-11-26T14:13:57.014Z","paso":"registro_dns","detalle":"cf-v2-dns-v2-vd4-20261126t141333z "}
+{"utc":"2026-11-26T14:13:59.702Z","paso":"extremo","detalle":"srvdmz /home/adminsrvdmz/cyberflow-v2/extremo/V2-VD4-20261126T141333Z.pcap filtro=poblacion<->10.10.30.10:80/443 "}
+{"utc":"2026-11-26T14:14:01.731Z","paso":"sondeo_span","detalle":"pid 1454590 "}
+{"utc":"2026-11-26T14:14:42.746Z","paso":"sondas","detalle":"{ejecucion: V2-VD4-20261126T141333Z, ok: true, sondas: 5, ultima_sonda_fin_epoch: 1795702482.34918, margen_sonda_s: 240.0, generador_no_antes_de_epoch: 1795702722.34918, fallos: []} "}
+{"utc":"2026-11-26T14:14:43.490Z","paso":"exclusion_v1_confirmada","detalle":"{cubierto: true, regla: *@2026-11-26T14:03:33+00:00/2026-11-26T16:52:03+00:00, cambio: false} "}
+{"utc":"2026-11-26T14:14:43.498Z","paso":"archivador","detalle":"ok confirmado=1795702481 inicio=1795702723 tope=1795707883 "}
+{"utc":"2026-11-26T14:14:45.522Z","paso":"referencias","detalle":"vigilancia pid 1454902 "}
+{"utc":"2026-11-26T14:18:47.099Z","paso":"generador","detalle":"{ejecucion: V2-VD4-20261126T141333Z, directorio: /home/adminclientes/cyberflow-v2/ejecuciones/V2-VD4-20261126T141333Z, supervisor_pid: 157503, programa_sha256: 3089fc531745d9271818ee20c0d9915bd045801669dd2042a766e269cd7ee160, inicio_utc: 2026-11-26T14:18:47.051795Z} "}
+{"utc":"2026-11-26T14:18:47.108Z","paso":"vigia","detalle":"pid 1456071 "}

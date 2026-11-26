@@ -1,0 +1,45 @@
+=== utc 2026-11-26T14:45:31.392006952Z
+=== switch GigabitEthernet2/0/19
+GigabitEthernet2/0/19 is up, line protocol is down (monitoring)
+  MTU 9198 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+  Input queue: 0/2000/0/0 (size/max/drops/flushes); Total output drops: 224356
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 479000 bits/sec, 458 packets/sec
+     48 packets input, 3324 bytes, 0 no buffer
+     67103612 packets output, 14048030829 bytes, 0 underruns
+     0 output errors, 0 collisions, 5 interface resets
+=== switch GigabitEthernet1/0/23
+GigabitEthernet1/0/23 is up, line protocol is up (connected) 
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+  Input queue: 0/2000/0/0 (size/max/drops/flushes); Total output drops: 0
+  5 minute input rate 14000 bits/sec, 10 packets/sec
+  5 minute output rate 47000 bits/sec, 37 packets/sec
+     3667984 packets input, 686078073 bytes, 0 no buffer
+     11982220 packets output, 2006095057 bytes, 0 underruns
+     0 output errors, 0 collisions, 2 interface resets
+=== switch GigabitEthernet2/0/23
+GigabitEthernet2/0/23 is up, line protocol is up (connected) 
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+  Input queue: 0/2000/0/0 (size/max/drops/flushes); Total output drops: 24
+  5 minute input rate 964000 bits/sec, 274 packets/sec
+  5 minute output rate 944000 bits/sec, 270 packets/sec
+     27412976 packets input, 7103475767 bytes, 0 no buffer
+     25856914 packets output, 6333730384 bytes, 0 underruns
+     0 output errors, 0 collisions, 2 interface resets
+=== sensor1
+ens37_rx_packets 41635458
+ens37_rx_bytes 9609738368
+ens37_rx_dropped 3201258
+ens37_rx_missed_errors 0
+ens37_rx_errors 0
+softnet_dropped 0
+nov 26 14:44:30 cyberflow-sensor tcpdump[1391]: tcpdump: 46215931 packets captured, 46216085 packets received by filter, 0 packets dropped by kernel
+nov 26 14:45:00 cyberflow-sensor tcpdump[1391]: tcpdump: 46229585 packets captured, 46229599 packets received by filter, 0 packets dropped by kernel
+nov 26 14:45:30 cyberflow-sensor tcpdump[1391]: tcpdump: 46240854 packets captured, 46241148 packets received by filter, 0 packets dropped by kernel
+capture.kernel_packets                        | Total                     | 28607190
+capture.kernel_packets                        | Total                     | 28635087
+=== aislamiento_v1
+srvdmz_limitados 0
+srvdmz_bloqueados 0
+agente_aplicar 0
+dc1_nft_lineas 0

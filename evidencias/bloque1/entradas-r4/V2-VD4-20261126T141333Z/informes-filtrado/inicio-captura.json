@@ -1,0 +1,7 @@
+{
+ "captura_original": "V2-VD4-20261126T141333Z",
+ "primer_ipv4_epoch": 1795702447.494895,
+ "primer_eve_epoch": 1795702482.331575,
+ "inicio_epoch": 1795702447.494895,
+ "nota": "instante con el que extraer_v2.py fija el arranque (primer paquete IPv4 o primer evento EVE de la captura ORIGINAL, calculado en el laboratorio con las mismas funciones); el extracto filtrado no lo contiene porque suele ser tráfico no experimental"
+}

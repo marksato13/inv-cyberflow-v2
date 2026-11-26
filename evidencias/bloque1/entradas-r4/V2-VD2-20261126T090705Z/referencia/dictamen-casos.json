@@ -1,0 +1,125 @@
+{
+ "ejecucion": "V2-VD2-20261126T090705Z",
+ "dictamen_original": null,
+ "casos": [
+  {
+   "caso": "correcta",
+   "global": "indeterminada",
+   "codigo_salida": 2,
+   "calidad": {
+    "calidad_copias": "completo",
+    "calidad_dns": "completo",
+    "calidad_extremo": "completo",
+    "calidad_sonda": "completo"
+   },
+   "motivos": [
+    "falta:espejo"
+   ]
+  },
+  {
+   "caso": "perdida_extremo",
+   "global": "no_aprobada",
+   "codigo_salida": 1,
+   "calidad": {
+    "calidad_copias": "completo",
+    "calidad_dns": "completo",
+    "calidad_extremo": "perdida",
+    "calidad_sonda": "completo"
+   },
+   "motivos": [
+    "calidad_extremo:perdida",
+    "falta:espejo"
+   ]
+  },
+  {
+   "caso": "perdida_copias",
+   "global": "no_aprobada",
+   "codigo_salida": 1,
+   "calidad": {
+    "calidad_copias": "perdida",
+    "calidad_dns": "completo",
+    "calidad_extremo": "completo",
+    "calidad_sonda": "completo"
+   },
+   "motivos": [
+    "calidad_copias:perdida",
+    "falta:espejo"
+   ]
+  },
+  {
+   "caso": "contaminacion_sonda",
+   "global": "no_aprobada",
+   "codigo_salida": 1,
+   "calidad": {
+    "calidad_copias": "completo",
+    "calidad_dns": "completo",
+    "calidad_extremo": "completo",
+    "calidad_sonda": "contaminacion"
+   },
+   "motivos": [
+    "calidad_sonda:contaminacion",
+    "falta:espejo"
+   ]
+  },
+  {
+   "caso": "extremo_ausente",
+   "global": "indeterminada",
+   "codigo_salida": 2,
+   "calidad": {
+    "calidad_copias": "completo",
+    "calidad_dns": "completo",
+    "calidad_extremo": "sin_datos",
+    "calidad_sonda": "completo"
+   },
+   "motivos": [
+    "falta:espejo",
+    "falta:calidad_extremo"
+   ]
+  },
+  {
+   "caso": "sonda_ausente",
+   "global": "indeterminada",
+   "codigo_salida": 2,
+   "calidad": {
+    "calidad_copias": "completo",
+    "calidad_dns": "completo",
+    "calidad_extremo": "completo",
+    "calidad_sonda": "sin_datos"
+   },
+   "motivos": [
+    "falta:espejo",
+    "falta:calidad_sonda"
+   ]
+  },
+  {
+   "caso": "dns_ausente",
+   "global": "indeterminada",
+   "codigo_salida": 2,
+   "calidad": {
+    "calidad_copias": "completo",
+    "calidad_dns": "sin_datos",
+    "calidad_extremo": "completo",
+    "calidad_sonda": "completo"
+   },
+   "motivos": [
+    "falta:espejo",
+    "falta:calidad_dns"
+   ]
+  },
+  {
+   "caso": "extremo_con_descartes",
+   "global": "indeterminada",
+   "codigo_salida": 2,
+   "calidad": {
+    "calidad_copias": "completo",
+    "calidad_dns": "completo",
+    "calidad_extremo": "indeterminado",
+    "calidad_sonda": "completo"
+   },
+   "motivos": [
+    "falta:espejo",
+    "falta:calidad_extremo"
+   ]
+  }
+ ]
+}

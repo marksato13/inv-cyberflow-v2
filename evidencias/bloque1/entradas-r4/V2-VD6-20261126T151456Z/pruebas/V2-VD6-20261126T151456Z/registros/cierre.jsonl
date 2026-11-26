@@ -1,0 +1,14 @@
+{"utc":"2026-11-26T15:46:46.331Z","paso":"manifiestos","detalle":"ok "}
+{"utc":"2026-11-26T15:46:50.465Z","paso":"referencias","detalle":"completo [] "}
+{"utc":"2026-11-26T15:46:52.130Z","paso":"sondeo_span","detalle":"analizar_sondeo rc=0 (0 sin descartes, 1 con descartes, 2 indeterminado, 3 sin registro) "}
+{"utc":"2026-11-26T15:46:52.605Z","paso":"exclusion_v1","detalle":"{  cubierto: true,  regla: *@2026-11-26T14:03:33+00:00/2026-11-26T16:52:03+00:00,  cambio: false,  cubria_antes: true } "}
+{"utc":"2026-11-26T15:46:58.089Z","paso":"contadores_fin","detalle":"antes de las copias del cierre "}
+{"utc":"2026-11-26T15:46:58.380Z","paso":"registro_dns","detalle":"399 lineas "}
+{"utc":"2026-11-26T15:46:58.570Z","paso":"registro_dns_pcap","detalle":"50098 bytes "}
+{"utc":"2026-11-26T15:47:02.054Z","paso":"extremo","detalle":"{fichero_origen:/home/adminsrvdmz/cyberflow-v2/extremo/V2-VD6-20261126T151456Z.pcap,capturados:8019,recibidos_por_filtro:8019,descartados_nucleo:0,sha256_origen:d97f6fb5a26f9bab564341e175e4699a0b78b2da088cdba5da3999a44b8cf2ed,bytes:13296054,sigue_vivo:false,estado:ok} "}
+{"utc":"2026-11-26T15:47:03.367Z","paso":"extremo_copia","detalle":"sha256 coincide d97f6fb5a26f9bab564341e175e4699a0b78b2da088cdba5da3999a44b8cf2ed "}
+{"utc":"2026-11-26T15:47:03.551Z","paso":"transferencias","detalle":"sin_copias 0 rechazadas 0 "}
+{"utc":"2026-11-26T15:47:03.624Z","paso":"candado","detalle":"quitado "}
+{"utc":"2026-11-26T15:47:08.584Z","paso":"servidor","detalle":"420 lineas en ventana "}
+{"utc":"2026-11-26T15:47:09.677Z","paso":"reunido","detalle":"/home/m4rk/cyberflow-v2/pruebas/V2-VD6-20261126T151456Z "}
+{"utc":"2026-11-26T15:59:29.883Z","paso":"analisis","detalle":"conciliar rc=0 cobertura rc=0 fronteras rc=0 extraer rc=0 verificar rc=0 metadatos rc=0  "}

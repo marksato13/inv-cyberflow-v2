@@ -1,0 +1,43 @@
+{
+ "codigos": {
+  "P1": 0,
+  "P2": 0,
+  "P3": 0,
+  "P4": 0,
+  "P5": 0,
+  "P6": 0
+ },
+ "ejecucion": "V2-VD2-20261126T090705Z",
+ "entorno_fin": {
+  "codigo": {
+   "clientes_lab_v2.py": "4e54513d195f4289854b2d2cdba591a9db6a1ae596d2d7f8e31154638ae4448d",
+   "distribuciones.py": "3e8429a5b68f5b8cdd7c18834b07d689808cdfe3807f1f9fe3dd079665196649",
+   "programa.py": "4c86bdda6203d181d83b052a755f37b781e14ac7ffdb53b98e84b65cea013b2e",
+   "transacciones.py": "7eef88868e5e407bd1e65e4ceba319324253888eeb90013edae90708ba8e36a1",
+   "v2ctl.py": "5394d6d0df87c1fe12aa1430db524e605faa337c44faa08322d398f1d44f45d7"
+  },
+  "host": "clientesadmin",
+  "monotonic": 325323.59957895,
+  "ntp_sincronizado": "yes",
+  "python": "3.12.3",
+  "timesync": "Server: 198.51.100.27 (ntp.ubuntu.com)\nPoll interval: 34min 8s (min: 32s; max 34min 8s)\n         Leap: normal\n      Version: 4\n      Stratum: 2\n    Reference: 1D586304\n    Precision: 1us (-25)\nRoot distance: 3.936ms (max: 5s)\n       Offset: +10us\n        Delay: 153.152ms\n       Jitter: 152us\n Packet count: 162\n    Frequency: +5,263ppm",
+  "utc": "2026-11-26T09:35:41.691742Z"
+ },
+ "estado": "completa",
+ "ficheros": {
+  "eventos-P1.jsonl": "0321d2df486791948dcded6080dc1dbd41d2db29111b6e278a7f9d9715386593",
+  "eventos-P2.jsonl": "3026a5c92bdbb32f10ac1abc9c096e47d7e67bd548643fa0894825e649ffd2af",
+  "eventos-P3.jsonl": "d9e209ae7f90097044dd70cc1e5755bd78ac7e867151674329c3cc9f05ae9efb",
+  "eventos-P4.jsonl": "170f3a65a7eeaeaaf5984407445039c27279c7311d796c287ecee33130164439",
+  "eventos-P5.jsonl": "e6a638ffc5f1a20ced7fcc0a6bf32d68d30f8926e232737c627dd10272e3cb3d",
+  "eventos-P6.jsonl": "d535f362966097f5cea93b17c1d8c38a79f2cbbc5da0bf98edaefdb8d7c02dc1",
+  "preflight.jsonl": "863fc9735a30d385ce5bd74251e1faded5b98941575be2626c8e9a70db55f056",
+  "transacciones-P1.jsonl": "83731a0ce910c595e000791617a0255cf63c67421ca43021e7ccea4f8b82b1b6",
+  "transacciones-P2.jsonl": "e5cc73bd8877dab748139987c67fe585579d7541cc781040525b5776dfff2b48",
+  "transacciones-P3.jsonl": "c8901465ec149f8ac4ea11ad1176ba95ffe5c2fdfc05ea560f601260fe0b40d6",
+  "transacciones-P4.jsonl": "dec44f072db966e112d92c3e75f2a0a5a52cb3153b8922bc596bb82852dc8d05",
+  "transacciones-P5.jsonl": "6e3dadc5f640c03e981dfd6c3c11e065d8146e3a5d34b9acf9aa95b19d08fa43",
+  "transacciones-P6.jsonl": "9a5d661a96c52c89b4a32d844b00e88101d29b104485edc3d2ea8947c97b5cf3"
+ },
+ "motivo": null
+}

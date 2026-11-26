@@ -1,0 +1,40 @@
+{"duracion_s": 1440, "ejecucion_id": "V2-VD2-20261126T090705Z", "host": "clientesadmin", "origen_ip": "10.10.20.26", "perfil": "P6", "pid": 126860, "programa_id": "V2-T2", "programa_sha256": "3089fc531745d9271818ee20c0d9915bd045801669dd2042a766e269cd7ee160", "python": "3.12.3", "t_s": 0, "tipo": "inicio", "utc": "2026-11-26T09:11:41.267913Z", "version": "3.0.0"}
+{"bloque_id": "A-B1", "ejecucion_id": "V2-VD2-20261126T090705Z", "particion": "prueba", "perfil": "P6", "pid": 126860, "semillas": {"contenido": 107832996828434, "espera": 87742301397674, "red": 8563477634208}, "t_s": 0.000709, "tipo": "bloque", "utc": "2026-11-26T09:11:41.268072Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "jornada_id": "A", "patron": "reducido_base_aumentado", "perfil": "P6", "pid": 126860, "t_s": 0.000709, "tipo": "jornada", "utc": "2026-11-26T09:11:41.268131Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "factor": 0.3333333333333333, "nivel": "reducido", "perfil": "P6", "pid": 126860, "t_s": 0.000709, "tipo": "nivel", "utc": "2026-11-26T09:11:41.268170Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 0.000709, "tipo": "on", "utc": "2026-11-26T09:11:41.268243Z"}
+{"borde_s": 60, "desde_s": 56.56906750402413, "ejecucion_id": "V2-VD2-20261126T090705Z", "espera_s": 61.44292001090435, "perfil": "P6", "pid": 126860, "t_s": 60, "tipo": "pausa_cortada", "utc": "2026-11-26T09:12:41.267521Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 60.000461, "tipo": "off", "utc": "2026-11-26T09:12:41.267804Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 180.000374, "tipo": "on", "utc": "2026-11-26T09:14:41.267745Z"}
+{"borde_s": 240, "desde_s": 234.55650692398194, "ejecucion_id": "V2-VD2-20261126T090705Z", "espera_s": 17.155413088973653, "perfil": "P6", "pid": 126860, "t_s": 240, "tipo": "pausa_cortada", "utc": "2026-11-26T09:15:41.267499Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "factor": 1, "nivel": "base", "perfil": "P6", "pid": 126860, "t_s": 240.000321, "tipo": "nivel", "utc": "2026-11-26T09:15:41.267647Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 240.000321, "tipo": "off", "utc": "2026-11-26T09:15:41.267694Z"}
+{"bloque_id": "A-B2", "ejecucion_id": "V2-VD2-20261126T090705Z", "particion": "prueba", "perfil": "P6", "pid": 126860, "semillas": {"contenido": 235951425718614, "espera": 137206552963741, "red": 171715871525002}, "t_s": 360.000269, "tipo": "bloque", "utc": "2026-11-26T09:17:41.267920Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 360.000269, "tipo": "on", "utc": "2026-11-26T09:17:41.268131Z"}
+{"borde_s": 420, "desde_s": 419.3392959230114, "ejecucion_id": "V2-VD2-20261126T090705Z", "espera_s": 11.789511397068807, "perfil": "P6", "pid": 126860, "t_s": 420, "tipo": "pausa_cortada", "utc": "2026-11-26T09:18:41.267503Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 420.000347, "tipo": "off", "utc": "2026-11-26T09:18:41.267678Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "factor": 2, "nivel": "aumentado", "perfil": "P6", "pid": 126860, "t_s": 480.000254, "tipo": "nivel", "utc": "2026-11-26T09:19:41.267595Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 540.000483, "tipo": "on", "utc": "2026-11-26T09:20:41.267856Z"}
+{"borde_s": 600, "desde_s": 599.1181398350163, "ejecucion_id": "V2-VD2-20261126T090705Z", "espera_s": 10.238824403264687, "perfil": "P6", "pid": 126860, "t_s": 600, "tipo": "pausa_cortada", "utc": "2026-11-26T09:21:41.267527Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 600.000349, "tipo": "off", "utc": "2026-11-26T09:21:41.267678Z"}
+{"bloque_id": "B-B1", "ejecucion_id": "V2-VD2-20261126T090705Z", "particion": "prueba", "perfil": "P6", "pid": 126860, "semillas": {"contenido": 268378484319537, "espera": 167692124114587, "red": 179354340398639}, "t_s": 720.000207, "tipo": "bloque", "utc": "2026-11-26T09:23:41.267648Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "jornada_id": "B", "patron": "reducido_con_rafagas", "perfil": "P6", "pid": 126860, "t_s": 720.000207, "tipo": "jornada", "utc": "2026-11-26T09:23:41.267803Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "factor": 0.3333333333333333, "nivel": "reducido", "perfil": "P6", "pid": 126860, "t_s": 720.000207, "tipo": "nivel", "utc": "2026-11-26T09:23:41.267857Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 720.000207, "tipo": "on", "utc": "2026-11-26T09:23:41.267891Z"}
+{"borde_s": 780, "desde_s": 736.7691113330075, "ejecucion_id": "V2-VD2-20261126T090705Z", "espera_s": 63.36979507003113, "perfil": "P6", "pid": 126860, "t_s": 780, "tipo": "pausa_cortada", "utc": "2026-11-26T09:24:41.267643Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 780.000629, "tipo": "off", "utc": "2026-11-26T09:24:41.267960Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "factor": 1, "nivel": "base", "perfil": "P6", "pid": 126860, "t_s": 840.000289, "tipo": "nivel", "utc": "2026-11-26T09:25:41.267661Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "factor": 0.3333333333333333, "nivel": "reducido", "perfil": "P6", "pid": 126860, "t_s": 900.000628, "tipo": "nivel", "utc": "2026-11-26T09:26:41.268087Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 900.000628, "tipo": "on", "utc": "2026-11-26T09:26:41.268281Z"}
+{"borde_s": 960, "desde_s": 954.4618307949859, "ejecucion_id": "V2-VD2-20261126T090705Z", "espera_s": 22.04463114149048, "perfil": "P6", "pid": 126860, "t_s": 960, "tipo": "pausa_cortada", "utc": "2026-11-26T09:27:41.267520Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 960.000371, "tipo": "off", "utc": "2026-11-26T09:27:41.267703Z"}
+{"bloque_id": "B-B2", "ejecucion_id": "V2-VD2-20261126T090705Z", "particion": "prueba", "perfil": "P6", "pid": 126860, "semillas": {"contenido": 123623775711829, "espera": 219623287383801, "red": 18017275668313}, "t_s": 1080.000206, "tipo": "bloque", "utc": "2026-11-26T09:29:41.267669Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 1080.000206, "tipo": "on", "utc": "2026-11-26T09:29:41.267823Z"}
+{"borde_s": 1140, "desde_s": 1137.3054139459855, "ejecucion_id": "V2-VD2-20261126T090705Z", "espera_s": 21.983583698991655, "perfil": "P6", "pid": 126860, "t_s": 1140, "tipo": "pausa_cortada", "utc": "2026-11-26T09:30:41.267571Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 1140.000512, "tipo": "off", "utc": "2026-11-26T09:30:41.267859Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "factor": 1, "nivel": "base", "perfil": "P6", "pid": 126860, "t_s": 1260.000361, "tipo": "nivel", "utc": "2026-11-26T09:32:41.267833Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 1260.000361, "tipo": "on", "utc": "2026-11-26T09:32:41.268058Z"}
+{"borde_s": 1320, "desde_s": 1309.914396637003, "ejecucion_id": "V2-VD2-20261126T090705Z", "espera_s": 10.79994565799993, "perfil": "P6", "pid": 126860, "t_s": 1320, "tipo": "pausa_cortada", "utc": "2026-11-26T09:33:41.267483Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "factor": 0.3333333333333333, "nivel": "reducido", "perfil": "P6", "pid": 126860, "t_s": 1320.000257, "tipo": "nivel", "utc": "2026-11-26T09:33:41.267585Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "perfil": "P6", "pid": 126860, "t_s": 1320.000257, "tipo": "off", "utc": "2026-11-26T09:33:41.267625Z"}
+{"ejecucion_id": "V2-VD2-20261126T090705Z", "estado": "completa", "motivo": null, "perfil": "P6", "pid": 126860, "t_s": 1440.000383, "tipo": "fin", "transacciones": 90, "utc": "2026-11-26T09:35:41.267772Z"}

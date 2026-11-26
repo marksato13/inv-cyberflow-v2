@@ -1,0 +1,50 @@
+{
+ "acciones": [
+  "consulta",
+  "dns",
+  "envio",
+  "obtener"
+ ],
+ "clases": {
+  "correcto": 598
+ },
+ "errores_lectura": [],
+ "motivos_no_ok": {},
+ "por_accion": {
+  "consulta": {
+   "correcto": 83
+  },
+  "dns": {
+   "correcto": 182
+  },
+  "envio": {
+   "correcto": 42
+  },
+  "obtener": {
+   "correcto": 291
+  }
+ },
+ "por_perfil": {
+  "P1": {
+   "correcto": 100
+  },
+  "P2": {
+   "correcto": 219
+  },
+  "P3": {
+   "correcto": 8
+  },
+  "P4": {
+   "correcto": 167
+  },
+  "P5": {
+   "correcto": 14
+  },
+  "P6": {
+   "correcto": 90
+  }
+ },
+ "registro_dns_eventos": 399,
+ "registro_http_eventos": 420,
+ "total": 598
+}

@@ -1,0 +1,1 @@
+{"total": {"n": 598, "conexion": 416, "peticion": 598, "respuesta": 598, "completas": 416, "bytes_esperados": 12428520, "bytes_vistos": 12428904, "fraccion": 1.0000308966795726, "no_comparables": 182, "no_verificables": 0, "copias_espejo": 11240, "retransmisiones": 0, "huecos": 0, "reutilizadas": 151}, "errores": []}

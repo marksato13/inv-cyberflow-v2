@@ -1,0 +1,29 @@
+2026-11-26T14:13:50.952738740Z
+Timezone=Etc/UTC
+LocalRTC=no
+CanNTP=yes
+NTP=yes
+NTPSynchronized=yes
+TimeUSec=Thu 2026-11-26 14:13:50 UTC
+RTCTimeUSec=Thu 2026-11-26 14:13:50 UTC
+       Server: 10.10.60.1 (10.10.60.1)
+Poll interval: 34min 8s (min: 32s; max 34min 8s)
+         Leap: normal
+      Version: 4
+      Stratum: 2
+    Reference: C8A007C4
+    Precision: 1us (-22)
+Root distance: 67.336ms (max: 5s)
+       Offset: -162us
+        Delay: 254us
+       Jitter: 368us
+ Packet count: 115
+    Frequency: +12,625ppm
+== carga
+0.41 0.45 0.36 1/264 905314
+4
+== espacio
+Mounted on       Avail
+/          21431521280
+/          21431521280
+/          21431521280

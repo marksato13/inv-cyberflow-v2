@@ -1,0 +1,29 @@
+2026-11-26T14:13:42.732237671Z
+Timezone=America/Lima
+LocalRTC=no
+CanNTP=yes
+NTP=yes
+NTPSynchronized=yes
+TimeUSec=Thu 2026-11-26 09:13:42 -05
+RTCTimeUSec=Thu 2026-11-26 09:13:42 -05
+Reference ID    : C8A00008 (a.ntp.br)
+Stratum         : 3
+Ref time (UTC)  : Thu Nov 26 13:59:45 2026
+System time     : 0.000746650 seconds fast of NTP time
+Last offset     : +0.000905105 seconds
+RMS offset      : 0.000337044 seconds
+Frequency       : 7.310 ppm slow
+Residual freq   : +0.044 ppm
+Skew            : 0.098 ppm
+Root delay      : 0.080761433 seconds
+Root dispersion : 0.001388002 seconds
+Update interval : 1027.8 seconds
+Leap status     : Normal
+== carga
+0.27 0.06 0.02 1/305 83505
+2
+== espacio
+Mounted on       Avail
+/          35256164352
+/          35256164352
+/          35256164352

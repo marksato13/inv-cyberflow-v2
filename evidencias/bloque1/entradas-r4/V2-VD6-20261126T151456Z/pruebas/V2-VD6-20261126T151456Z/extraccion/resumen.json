@@ -1,0 +1,40 @@
+{
+  "copias_espejo_quitadas": 418145,
+  "paquetes_descartados_poblacion": 410946,
+  "paquetes_incluidos": 16254,
+  "eventos_descartados_poblacion": 389,
+  "eventos_incluidos": 1417,
+  "filas": 674,
+  "orden_eve": {
+    "reordenados": 2,
+    "tardios_descartados": 0,
+    "desorden_max_s": 0.0010590553283691406,
+    "ventana_s": 60.0
+  },
+  "orden_pcap": {
+    "reordenadas": 8818,
+    "tardias_descartadas": 0,
+    "desorden_max_s": 0.0023660659790039062,
+    "ventana_s": 1.0
+  },
+  "ejecucion": "V2-VD6-20261126T151456Z",
+  "poblacion": [
+    "10.10.20.21",
+    "10.10.20.22",
+    "10.10.20.23",
+    "10.10.20.24",
+    "10.10.20.25",
+    "10.10.20.26"
+  ],
+  "fronteras_utc": [
+    "2026-11-26T15:26:14.699785+00:00",
+    "2026-11-26T15:32:14.699785+00:00",
+    "2026-11-26T15:38:14.699785+00:00"
+  ],
+  "pcap_ficheros": 369,
+  "paso_s": 10,
+  "historia_maxima_s": 60,
+  "horizonte_estado_flujos_s": 230.0,
+  "guarda_estado_s": 230.0,
+  "estado": "continuo"
+}
