@@ -1,0 +1,5205 @@
+{
+ "nota": "campos de trazabilidad; no son atributos del IF",
+ "ids": {
+  "ejecucion": "V2-E3-20261125T230032Z",
+  "programa": "prueba-niveles-transiciones.json",
+  "programa_sha256": "3089fc531745d9271818ee20c0d9915bd045801669dd2042a766e269cd7ee160",
+  "dns_unidad": "cf-v2-dns-v2-e3-20261125t230032z"
+ },
+ "codigo": {
+  "version": "60fc6df",
+  "fuente": "inferida: VERSION del bastión al lanzar E3",
+  "generador_sha256": {
+   "clientes_lab_v2.py": "4e54513d195f4289854b2d2cdba591a9db6a1ae596d2d7f8e31154638ae4448d",
+   "distribuciones.py": "3e8429a5b68f5b8cdd7c18834b07d689808cdfe3807f1f9fe3dd079665196649",
+   "programa.py": "4c86bdda6203d181d83b052a755f37b781e14ac7ffdb53b98e84b65cea013b2e",
+   "transacciones.py": "7eef88868e5e407bd1e65e4ceba319324253888eeb90013edae90708ba8e36a1",
+   "v2ctl.py": "b0f4b1be6a65c1f93058058b63a071c06e57e8c94f7e7f0d868c9fe1726dd764"
+  }
+ },
+ "tiempos": {
+  "planificado": {
+   "archivador_desde_epoch": {
+    "epoch": 1795647632,
+    "utc": "2026-11-25T23:00:32Z"
+   },
+   "generador_inicio_epoch": {
+    "epoch": 1795647810,
+    "utc": "2026-11-25T23:03:30Z"
+   },
+   "generador_fin_epoch": {
+    "epoch": 1795649250,
+    "utc": "2026-11-25T23:27:30Z"
+   },
+   "captura_hasta_epoch": {
+    "epoch": 1795649370,
+    "utc": "2026-11-25T23:29:30Z"
+   },
+   "tope_epoch": {
+    "epoch": 1795652970,
+    "utc": "2026-11-26T00:29:30Z"
+   }
+  },
+  "real": {
+   "archivador_confirmado_epoch": {
+    "epoch": 1795647660,
+    "utc": "2026-11-25T23:01:00Z"
+   },
+   "primer_paquete_epoch": {
+    "epoch": 1795647625.453466,
+    "utc": "2026-11-25T23:00:25.453466Z"
+   },
+   "ultimo_paquete_epoch": {
+    "epoch": 1795649389.080454,
+    "utc": "2026-11-25T23:29:49.080454Z"
+   },
+   "generador_inicio_epoch": {
+    "epoch": 1795647813.177694,
+    "utc": "2026-11-25T23:03:33.177694Z"
+   },
+   "generador_fin_epoch": {
+    "epoch": 1795649253.873267,
+    "utc": "2026-11-25T23:27:33.873267Z"
+   }
+  },
+  "desvio_inicio_generador_s": 3.178,
+  "desvio_fin_generador_s": 3.873,
+  "margen_captura_antes_s": 187.724,
+  "margen_captura_despues_s": 135.207,
+  "intervalo_captura": {
+   "desde_epoch": 1795647625.453466,
+   "hasta_epoch": 1795649389.080454,
+   "desde_utc": "2026-11-25T23:00:25.453466Z",
+   "hasta_utc": "2026-11-25T23:29:49.080454Z"
+  },
+  "intervalo_servidor": {
+   "desde_epoch": 1795647625.0,
+   "hasta_epoch": 1795649390.0,
+   "desde_utc": "2026-11-25T23:00:25Z",
+   "hasta_utc": "2026-11-25T23:29:50Z"
+  },
+  "intervalo_exclusion_v1": {
+   "desde_epoch": 1795647025.0,
+   "hasta_epoch": 1795649990.0,
+   "desde_utc": "2026-11-25T22:50:25Z",
+   "hasta_utc": "2026-11-25T23:39:50Z"
+  }
+ },
+ "fases": [
+  {
+   "id": "A-B1",
+   "jornada": "A",
+   "particion": "prueba",
+   "inicio_s": 0,
+   "fin_s": 360,
+   "inicio_utc": "2026-11-25T23:03:33.177694Z",
+   "fin_utc": "2026-11-25T23:09:33.177694Z"
+  },
+  {
+   "id": "A-B2",
+   "jornada": "A",
+   "particion": "prueba",
+   "inicio_s": 360,
+   "fin_s": 720,
+   "inicio_utc": "2026-11-25T23:09:33.177694Z",
+   "fin_utc": "2026-11-25T23:15:33.177694Z"
+  },
+  {
+   "id": "B-B1",
+   "jornada": "B",
+   "particion": "prueba",
+   "inicio_s": 720,
+   "fin_s": 1080,
+   "inicio_utc": "2026-11-25T23:15:33.177694Z",
+   "fin_utc": "2026-11-25T23:21:33.177694Z"
+  },
+  {
+   "id": "B-B2",
+   "jornada": "B",
+   "particion": "prueba",
+   "inicio_s": 1080,
+   "fin_s": 1440,
+   "inicio_utc": "2026-11-25T23:21:33.177694Z",
+   "fin_utc": "2026-11-25T23:27:33.177694Z"
+  }
+ ],
+ "referencia_temporal": {
+  "regla": "UTC; NTP en cada equipo; el reloj del switch NO es autoritativo",
+  "relojes": [
+   {
+    "fichero": "relojes-fin-10.10.10.20.txt",
+    "marca_utc": "2026-11-25T23:30:18.823142286Z",
+    "ntp_sincronizado": "yes",
+    "referencia": "C8A00008 (a.ntp.br)",
+    "desfase_sistema": "0.001202233 seconds slow of NTP time",
+    "estrato": "3"
+   },
+   {
+    "fichero": "relojes-fin-srvdmz.txt",
+    "marca_utc": "2026-11-25T23:30:18.561604693Z",
+    "ntp_sincronizado": "yes",
+    "estrato": "2",
+    "servidor": "185.125.190.58 (ntp.ubuntu.com)",
+    "desfase": "+1.346ms"
+   },
+   {
+    "fichero": "relojes-inicio-10.10.10.20.txt",
+    "marca_utc": "2026-11-25T23:00:41.130969634Z",
+    "ntp_sincronizado": "yes",
+    "referencia": "C8A00008 (a.ntp.br)",
+    "desfase_sistema": "0.000302053 seconds fast of NTP time",
+    "estrato": "3"
+   },
+   {
+    "fichero": "relojes-inicio-srvdmz.txt",
+    "marca_utc": "2026-11-25T23:00:40.944851416Z",
+    "ntp_sincronizado": "yes",
+    "estrato": "2",
+    "servidor": "185.125.190.58 (ntp.ubuntu.com)",
+    "desfase": "+1.314ms"
+   }
+  ],
+  "generador_fin": {
+   "ntp_sincronizado": "yes",
+   "utc": "2026-11-25T23:27:33.873267Z",
+   "timesync": "Server: 185.125.190.56 (ntp.ubuntu.com)\nPoll interval: 34min 8s (min: 32s; max 34min 8s)\n         Leap: normal\n      Version: 4\n      Stratum: 2\n    Reference: 1D586304\n    Precision: 1us (-25)\nRoot distance: 3.425ms (max: 5s)\n       Offset: +834us\n        Delay: 153.513ms\n       Jitter: 1.216ms\n Packet count: 144\n    Frequency: +4,631ppm"
+  },
+  "desfases_supervision_s": [
+   {
+    "utc": "2026-11-25T23:03:36.373757+00:00",
+    "desfase_clientes_s": 0.18159127235412598,
+    "desfase_sensor1_s": 0.1675090789794922
+   },
+   {
+    "utc": "2026-11-25T23:08:42.460915+00:00",
+    "desfase_clientes_s": 0.17066121101379395,
+    "desfase_sensor1_s": 0.1652538776397705
+   },
+   {
+    "utc": "2026-11-25T23:13:47.589726+00:00",
+    "desfase_clientes_s": 0.17933869361877441,
+    "desfase_sensor1_s": 0.1711885929107666
+   },
+   {
+    "utc": "2026-11-25T23:18:52.189818+00:00",
+    "desfase_clientes_s": 0.18462634086608887,
+    "desfase_sensor1_s": 0.1705477237701416
+   },
+   {
+    "utc": "2026-11-25T23:23:57.826152+00:00",
+    "desfase_clientes_s": 0.1784343719482422,
+    "desfase_sensor1_s": 0.16703462600708008
+   },
+   {
+    "utc": "2026-11-25T23:29:08.426497+00:00",
+    "desfase_clientes_s": 0.5749349594116211,
+    "desfase_sensor1_s": 0.17379331588745117
+   }
+  ]
+ },
+ "inventario": {
+  "pcap": {
+   "pcap_ficheros": 351,
+   "pcap_bytes": 137663903,
+   "pcap_completo": true,
+   "pcap_huecos": 0,
+   "inventario_sha256": "5933ccb1b0a0e479eb09359c50dafdd40eeb809d39966b3c1f547f3cceabd672",
+   "ubicacion": "/home/m4rk/cyberflow-v2/capturas/V2-E3-20261125T230032Z"
+  },
+  "eve": {
+   "eve_bytes": 5775357,
+   "eve_completo": true,
+   "eve_huecos": 0,
+   "eve_corruptas": 0,
+   "eve_sha256": "56ef1156c354ec24331e363544778dc00540af297f451442a87282235ea791d2"
+  },
+  "nic": {
+   "delta_nic_rx_packets": 828084,
+   "delta_nic_rx_dropped": 24312
+  },
+  "archivador": {
+   "estado": "completa",
+   "motivo": "fin_programado",
+   "inicio": "2026-11-25T23:01:00.546839Z",
+   "fin": "2026-11-25T23:29:53.034688Z"
+  },
+  "generador": {
+   "estado": "completa",
+   "motivo": null,
+   "codigos": {
+    "P1": 0,
+    "P2": 0,
+    "P3": 0,
+    "P4": 0,
+    "P5": 0,
+    "P6": 0
+   },
+   "ficheros_sha256": {
+    "eventos-P1.jsonl": "d68ef6071921728974cf71a282ba85c12bca3d37410d0720da181ab3f0941da7",
+    "eventos-P2.jsonl": "013554c1811c49180e390f29e9ed502ab8b69169640ab3fa638ff78e65fe9bea",
+    "eventos-P3.jsonl": "d5929e41f5662550e01f3e38a7b7e4edd6c70777468a5eba51c783fad000b26f",
+    "eventos-P4.jsonl": "322552f36040d9a49756fec8a68705037f2e0b1db004258e2574f808b7e7a71a",
+    "eventos-P5.jsonl": "1cbe613ed9477ee85c3515bea4f13fe71b6f88f4e3d8be1a850bce2964f73e52",
+    "eventos-P6.jsonl": "01295ab6476968b237c82b3afcd64a7d3f35ed6f3728d76a7fd07efe3066f702",
+    "transacciones-P1.jsonl": "81661fc8a7b0c5446f957441716a6e9a1b6ae9fbcc2012142587921000ae426f",
+    "transacciones-P2.jsonl": "0c5d7caf0710d3220f152ec8f7cdd12cb01b62a6312c9c9c3bab5e606474aad1",
+    "transacciones-P3.jsonl": "f5c49baae931ff462d577d448e8da2852157163cb056bc0abcc6389d93ce9180",
+    "transacciones-P4.jsonl": "469e15920dd80955d0dd1191c7d78b4dc96145839dd585df329d70e1214c3f76",
+    "transacciones-P5.jsonl": "aae52c3f50a1a40a52b04746b1ade089cac3af3bab6590964e49d556be00ee5a",
+    "transacciones-P6.jsonl": "f5e39fdc5be0d64c55ea4437b4517ec3968e83fcb3ff618afd71b66c463e3425"
+   }
+  },
+  "ficheros_ejecucion_sha256": {
+   "analisis-salida.txt": "91266a90f2182bcf2d5ca19c58e47e1e226a8c1062774c9e85b7cf87d34139e2",
+   "calidad-espejo-sondeo.json": "95af2e30daba1c8d4f2cd3ea3d2fc770044c777bd49dfd5d8976e0e3d9645455",
+   "cierre.jsonl": "2f56ef3181d030c10fb44647f241d5a98ede4a392cb68f8ce569742de6cbaa91",
+   "contadores-lab-fin.txt": "d64f598b8d2a04368d1fa8767f7b47fe222042e5d27752ec2e752312b96e8dad",
+   "contadores-lab-inicio.txt": "55e1c0d34f2d2871b2abdcc1558462b2eab94921d8d807bdcff095e3a5a2d51a",
+   "criterios-salida.txt": "8f17731ca723251c6d52f7b47a8589d05a9caeaeaf1be4c2643687f20a90695f",
+   "dns-V2-E3-20261125T230032Z.jsonl": "c5bbf18f556c12ed4d4acda9a5f348eb437300b30364dcc80f3fe0a8efab9cf4",
+   "dns-V2-E3-20261125T230032Z.pcap": "c95b92efa8566a8b710e2c2e96396b5fbf0b674137e7b5a143d2772c93ae4fe5",
+   "exclusion-v1.json": "f4fdd418203e606a6580d44c1be5692ef8d38ec35b2f54b3695bb3bb24c8d1ba",
+   "intervalo-captura.txt": "97c4c0b6ff898aedde3e6d2c733b6fe8ce3800db9e70b639323eb26cb6450ded",
+   "intervalo-exclusion.txt": "061ded2ca953ec714b2233a912468aa307dee719b0d2c5be61b3133ffdbae386",
+   "intervalo-servidor.txt": "4d64897a0e586bd3381a3d8737ee0fd5a85b64c37b8ca85f4b8e566f47b98dc1",
+   "lanzamiento.json": "cbcd1b4d7e4d73b4e1f1398ff50a2944e7f241ce501ed88048e7a3d6ce8c10ec",
+   "lanzamiento.jsonl": "577f13f0170c08ac39b073554cc58b6bb7edd32b884f512637e0b2787c4572d9",
+   "manifiesto-archivador.json": "3183902a6ffd65540c0d29737a9219208bf48d0db8f8e94230ffb716c49c6c97",
+   "manifiesto-generador.json": "b2093d1e58a5eec255cd39e051f866bbd469f7f13a8d6cf6cbbaf81fcce92d63",
+   "pasos-analisis.jsonl": "d7cfbfd32bb2bb2e7a814d18260cb0cfc5d6a80b6aeb05a35d6f6c8809b329aa",
+   "preflight-lab.jsonl": "66d78c08b235da08508745c0ffc814a5bf97adbc64885ba0745749791111b2b6",
+   "relojes-fin-10.10.10.20.txt": "415f2d42928c406c9840a98213f8501c2dde0533234fc7451c12f7808076da48",
+   "relojes-fin-srvdmz.txt": "f60a13d1e50e0486d53a50d97630ef46ee36270e9c70e37d7b9a5dfb19ca0589",
+   "relojes-inicio-10.10.10.20.txt": "ce9cf30b2d38a92ce371d029c1a063657a545e5e839a1a63ca602de9291ffb36",
+   "relojes-inicio-srvdmz.txt": "854136e80176944a92a05e5cbc12f2a8fff5d02b5590c295cdd8c1b1eb226c91",
+   "resultado-global.json": "ab421412079de166f48d7d2fc3e7dad3dbf77e3f6594773bdaa5e6813e995b95",
+   "servidor-http-80.jsonl": "6f7c71c6b916b09d3fc3f30b56d424cc912078c8e5ef1ddca7eac89201f47d35",
+   "servidor-https-443.jsonl": "2b5b4561b19e21949f57f928b2e57ecc5c28a0268da394a633c6755acc2114a1",
+   "sondeo-span-salida.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "sondeo-span.jsonl": "262deb4a7029c7fadb8ccb25ebb5f5e5ab956ecd36ed6b699ff4a87fa4bacdba",
+   "supervision.jsonl": "ca7582a1e516bb866b2f49c325e914a53c595771e8324e6eb4b214d227c3e06b",
+   "supervisor-generador.jsonl": "6e384a9652ef12f5383d5dffb9836dcd56570761ed413b27e1bf5d4bd9afc6b3",
+   "vigia-salida.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "vigia.jsonl": "477befbb9e22bd756b66063617cb9442f353e1c23f57b872f1f495f9d31598bc"
+  }
+ },
+ "huecos": {
+  "pcap": 0,
+  "eve": 0
+ },
+ "sondeo_espejo": {
+  "desde": 1795647625.453466,
+  "hasta": 1795649389.080454,
+  "intervalos": [
+   {
+    "desde": 1795647625.453466,
+    "hasta": 1795647659.4764829,
+    "delta_drops": null,
+    "clase": "indeterminado",
+    "causa": "antes_primera_muestra"
+   },
+   {
+    "desde": 1795647659.4764829,
+    "hasta": 1795647661.7909882,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647661.6496515,
+    "hasta": 1795647663.9556265,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647663.7918215,
+    "hasta": 1795647666.118067,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647665.956784,
+    "hasta": 1795647668.2792854,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647668.119011,
+    "hasta": 1795647670.4193842,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647670.2801106,
+    "hasta": 1795647672.6022744,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647672.4203997,
+    "hasta": 1795647674.7761033,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647674.6031706,
+    "hasta": 1795647676.9378629,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647676.7770245,
+    "hasta": 1795647679.075905,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647678.9386518,
+    "hasta": 1795647681.2451508,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647681.077167,
+    "hasta": 1795647683.3917024,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647683.2460518,
+    "hasta": 1795647685.532914,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647685.3928168,
+    "hasta": 1795647687.6912353,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647687.5336912,
+    "hasta": 1795647689.8491333,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647689.6921396,
+    "hasta": 1795647691.9825902,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647691.8499768,
+    "hasta": 1795647694.139274,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647693.9834301,
+    "hasta": 1795647696.2950647,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647696.1400976,
+    "hasta": 1795647698.4429417,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647698.2959783,
+    "hasta": 1795647700.6012764,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647700.4439416,
+    "hasta": 1795647702.7654092,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647702.6020238,
+    "hasta": 1795647704.912713,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647704.7663002,
+    "hasta": 1795647707.053612,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647706.9136007,
+    "hasta": 1795647709.1942472,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647709.054709,
+    "hasta": 1795647711.37219,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647711.1953776,
+    "hasta": 1795647713.5416005,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647713.3730288,
+    "hasta": 1795647715.7234058,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647715.5423605,
+    "hasta": 1795647717.875779,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647717.7245886,
+    "hasta": 1795647720.0255551,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647719.8766644,
+    "hasta": 1795647722.1865647,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647722.0263379,
+    "hasta": 1795647724.3371894,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647724.187383,
+    "hasta": 1795647726.4895895,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647726.3382242,
+    "hasta": 1795647728.6754777,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647728.4908166,
+    "hasta": 1795647730.8314385,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647730.676419,
+    "hasta": 1795647732.9626033,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647732.8323336,
+    "hasta": 1795647735.1289027,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647734.9641128,
+    "hasta": 1795647737.2738492,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647737.1296556,
+    "hasta": 1795647739.4324257,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647739.2748666,
+    "hasta": 1795647741.59766,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647741.4331577,
+    "hasta": 1795647743.7538624,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647743.5984414,
+    "hasta": 1795647745.929579,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647745.754786,
+    "hasta": 1795647748.0920882,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647747.9302952,
+    "hasta": 1795647750.2577026,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647750.0933127,
+    "hasta": 1795647752.4202518,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647752.2585537,
+    "hasta": 1795647754.558789,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647754.4210966,
+    "hasta": 1795647756.7286234,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647756.5600204,
+    "hasta": 1795647758.8924403,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647758.729452,
+    "hasta": 1795647761.0415075,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647760.8933856,
+    "hasta": 1795647763.2059133,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647763.0424304,
+    "hasta": 1795647765.3431816,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647765.2067142,
+    "hasta": 1795647767.5016942,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647767.3443077,
+    "hasta": 1795647769.7044623,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647769.5026717,
+    "hasta": 1795647771.8566992,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647771.7056243,
+    "hasta": 1795647773.9898503,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647773.857847,
+    "hasta": 1795647776.2050161,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647775.9916947,
+    "hasta": 1795647778.3839166,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647778.2059503,
+    "hasta": 1795647780.5221553,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647780.3849971,
+    "hasta": 1795647782.6598208,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647782.5231106,
+    "hasta": 1795647784.8205438,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647784.6609423,
+    "hasta": 1795647786.946681,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647786.821769,
+    "hasta": 1795647789.1285083,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647788.9475849,
+    "hasta": 1795647791.2955043,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647791.1293862,
+    "hasta": 1795647793.4336047,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647793.2961667,
+    "hasta": 1795647795.5937567,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647795.4343572,
+    "hasta": 1795647797.7497897,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647797.5949202,
+    "hasta": 1795647799.8903327,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647799.750968,
+    "hasta": 1795647802.0643828,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647801.891063,
+    "hasta": 1795647804.2102473,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647804.0651393,
+    "hasta": 1795647806.3674934,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647806.211366,
+    "hasta": 1795647808.511645,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647808.3684516,
+    "hasta": 1795647810.673373,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647810.5126219,
+    "hasta": 1795647812.828241,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647812.6741571,
+    "hasta": 1795647814.9857478,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647814.8291261,
+    "hasta": 1795647817.1923907,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647816.9867332,
+    "hasta": 1795647819.3557706,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647819.1936204,
+    "hasta": 1795647821.5109513,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647821.3569322,
+    "hasta": 1795647823.67088,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647823.5119345,
+    "hasta": 1795647825.8331053,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647825.671821,
+    "hasta": 1795647827.9791076,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647827.8341565,
+    "hasta": 1795647830.1157153,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647829.979965,
+    "hasta": 1795647832.3009527,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647832.1168053,
+    "hasta": 1795647834.4623308,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647834.3018312,
+    "hasta": 1795647836.6035233,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647836.4634438,
+    "hasta": 1795647838.774105,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647838.6043212,
+    "hasta": 1795647840.9392169,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647840.7751665,
+    "hasta": 1795647843.106602,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647842.9398646,
+    "hasta": 1795647845.2688425,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647845.107307,
+    "hasta": 1795647847.409411,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647847.2697694,
+    "hasta": 1795647849.572065,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647849.4102845,
+    "hasta": 1795647851.7422879,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647851.5731628,
+    "hasta": 1795647853.9250665,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647853.7432094,
+    "hasta": 1795647856.1008112,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647855.9262848,
+    "hasta": 1795647858.2395513,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647858.101893,
+    "hasta": 1795647860.416978,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647860.240461,
+    "hasta": 1795647862.5588439,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647862.4178526,
+    "hasta": 1795647864.722432,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647864.5609286,
+    "hasta": 1795647866.8868349,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647866.723286,
+    "hasta": 1795647869.0616837,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647868.887789,
+    "hasta": 1795647871.2129025,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647871.062507,
+    "hasta": 1795647873.3704453,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647873.2137313,
+    "hasta": 1795647875.5253594,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647875.3713605,
+    "hasta": 1795647877.6622453,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647877.5263772,
+    "hasta": 1795647879.8020859,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647879.6631477,
+    "hasta": 1795647881.9612575,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647881.8027315,
+    "hasta": 1795647884.1242783,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647883.962107,
+    "hasta": 1795647886.293336,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647886.1255631,
+    "hasta": 1795647888.4368103,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647888.2942948,
+    "hasta": 1795647890.582361,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647890.4384606,
+    "hasta": 1795647892.7508895,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647892.5833166,
+    "hasta": 1795647894.9020946,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647894.7522452,
+    "hasta": 1795647897.0836012,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647896.9030015,
+    "hasta": 1795647899.2765796,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647899.084624,
+    "hasta": 1795647901.4381638,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647901.2776875,
+    "hasta": 1795647903.599854,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647903.4391463,
+    "hasta": 1795647905.767242,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647905.6008327,
+    "hasta": 1795647907.9066818,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647907.768118,
+    "hasta": 1795647910.0626233,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647909.907831,
+    "hasta": 1795647912.2376492,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647912.0634422,
+    "hasta": 1795647914.401249,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647914.238562,
+    "hasta": 1795647916.5426106,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647916.4021044,
+    "hasta": 1795647918.7029521,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647918.5435967,
+    "hasta": 1795647920.8611362,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647920.7037673,
+    "hasta": 1795647923.0108204,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647922.8620615,
+    "hasta": 1795647925.192277,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647925.011666,
+    "hasta": 1795647927.3529108,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647927.1931372,
+    "hasta": 1795647929.5020156,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647929.3538408,
+    "hasta": 1795647931.6463947,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647931.5027897,
+    "hasta": 1795647933.834212,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647933.6472435,
+    "hasta": 1795647935.9646945,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647935.835068,
+    "hasta": 1795647938.1301293,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647937.9655983,
+    "hasta": 1795647940.2955828,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647940.1312876,
+    "hasta": 1795647942.4449608,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647942.296566,
+    "hasta": 1795647944.616004,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647944.4458206,
+    "hasta": 1795647946.7576492,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647946.6167302,
+    "hasta": 1795647948.9198768,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647948.7584417,
+    "hasta": 1795647951.0787573,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647950.9209082,
+    "hasta": 1795647953.2351425,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647953.0797849,
+    "hasta": 1795647955.3981442,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647955.2362247,
+    "hasta": 1795647957.5739625,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647957.3989365,
+    "hasta": 1795647959.7573898,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647959.5755262,
+    "hasta": 1795647961.9182625,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647961.758261,
+    "hasta": 1795647964.096956,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647963.9188964,
+    "hasta": 1795647966.2789454,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647966.097773,
+    "hasta": 1795647968.4618287,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647968.2799568,
+    "hasta": 1795647970.6204326,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647970.4627082,
+    "hasta": 1795647972.7931743,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647972.6211195,
+    "hasta": 1795647974.9601908,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647974.7940414,
+    "hasta": 1795647977.1414526,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647976.9612684,
+    "hasta": 1795647979.3268156,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647979.1425605,
+    "hasta": 1795647981.5111833,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647981.327536,
+    "hasta": 1795647983.668598,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647983.5120442,
+    "hasta": 1795647985.8376305,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647985.6695507,
+    "hasta": 1795647988.0309203,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647987.8385582,
+    "hasta": 1795647990.2065392,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647990.0318782,
+    "hasta": 1795647992.3694446,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647992.2077386,
+    "hasta": 1795647994.5006356,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647994.370534,
+    "hasta": 1795647996.6718776,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647996.5015912,
+    "hasta": 1795647998.8548148,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795647998.672932,
+    "hasta": 1795648001.0607557,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648000.8556376,
+    "hasta": 1795648003.2278283,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648003.0614822,
+    "hasta": 1795648005.3834746,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648005.2288387,
+    "hasta": 1795648007.5412524,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648007.3848443,
+    "hasta": 1795648009.684027,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648009.5437453,
+    "hasta": 1795648011.8449512,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648011.685136,
+    "hasta": 1795648014.0134184,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648013.845835,
+    "hasta": 1795648016.167103,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648016.014411,
+    "hasta": 1795648018.3085067,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648018.1685348,
+    "hasta": 1795648020.4433722,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648020.3093858,
+    "hasta": 1795648022.604954,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648022.4441657,
+    "hasta": 1795648024.767855,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648024.6058955,
+    "hasta": 1795648026.95925,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648026.7685573,
+    "hasta": 1795648029.127456,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648028.960035,
+    "hasta": 1795648031.300384,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648031.1282985,
+    "hasta": 1795648033.4422317,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648033.3010976,
+    "hasta": 1795648035.6112807,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648035.44344,
+    "hasta": 1795648037.7721858,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648037.612511,
+    "hasta": 1795648039.9178045,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648039.773005,
+    "hasta": 1795648042.0780604,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648041.9185905,
+    "hasta": 1795648044.2177792,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648044.0787628,
+    "hasta": 1795648046.3822954,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648046.2186804,
+    "hasta": 1795648048.5182235,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648048.383584,
+    "hasta": 1795648050.689464,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648050.5192811,
+    "hasta": 1795648052.855783,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648052.6902711,
+    "hasta": 1795648055.0191166,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648054.8566947,
+    "hasta": 1795648057.1830788,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648057.0199249,
+    "hasta": 1795648059.3281903,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648059.184346,
+    "hasta": 1795648061.483831,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648061.3294654,
+    "hasta": 1795648063.6589916,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648063.484661,
+    "hasta": 1795648065.8418908,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648065.6617856,
+    "hasta": 1795648068.0039477,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648067.8431914,
+    "hasta": 1795648070.1634305,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648070.004931,
+    "hasta": 1795648072.3055472,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648072.1642547,
+    "hasta": 1795648074.4568357,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648074.306752,
+    "hasta": 1795648076.5946057,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648076.4576054,
+    "hasta": 1795648078.7979002,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648078.595866,
+    "hasta": 1795648080.9614995,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648080.7992742,
+    "hasta": 1795648083.1211495,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648082.962496,
+    "hasta": 1795648085.2838347,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648085.121997,
+    "hasta": 1795648087.4267368,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648087.284726,
+    "hasta": 1795648089.5874362,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648089.4276075,
+    "hasta": 1795648091.7299974,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648091.5882583,
+    "hasta": 1795648093.894769,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648093.7312138,
+    "hasta": 1795648096.0680866,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648095.8955166,
+    "hasta": 1795648098.206913,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648098.0687234,
+    "hasta": 1795648100.36931,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648100.2081025,
+    "hasta": 1795648102.5430036,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648102.3701057,
+    "hasta": 1795648104.7094011,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648104.5441546,
+    "hasta": 1795648106.8739347,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648106.7102447,
+    "hasta": 1795648109.03354,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648108.8752177,
+    "hasta": 1795648111.1737072,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648111.034292,
+    "hasta": 1795648113.3299797,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648113.1747775,
+    "hasta": 1795648115.481984,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648115.3308802,
+    "hasta": 1795648117.6610024,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648117.4827507,
+    "hasta": 1795648119.803343,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648119.6624136,
+    "hasta": 1795648121.9518156,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648121.8041782,
+    "hasta": 1795648124.0871894,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648123.9525461,
+    "hasta": 1795648126.2259028,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648126.0884233,
+    "hasta": 1795648128.3992627,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648128.2291837,
+    "hasta": 1795648130.570643,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648130.40072,
+    "hasta": 1795648132.7625477,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648132.571552,
+    "hasta": 1795648134.9261868,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648134.7632082,
+    "hasta": 1795648137.0967326,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648136.926941,
+    "hasta": 1795648139.25919,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648139.0975685,
+    "hasta": 1795648141.4387152,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648141.2603555,
+    "hasta": 1795648143.5944169,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648143.4396067,
+    "hasta": 1795648145.7718806,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648145.5957134,
+    "hasta": 1795648147.9219663,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648147.7729754,
+    "hasta": 1795648150.0707247,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648149.9231963,
+    "hasta": 1795648152.2478793,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648152.072011,
+    "hasta": 1795648154.4029632,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648154.2486153,
+    "hasta": 1795648156.5693827,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648156.4040804,
+    "hasta": 1795648158.7338922,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648158.5704312,
+    "hasta": 1795648160.8881874,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648160.735008,
+    "hasta": 1795648163.0311882,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648162.8890302,
+    "hasta": 1795648165.2015069,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648165.0320818,
+    "hasta": 1795648167.3440268,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648167.2023077,
+    "hasta": 1795648169.5111008,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648169.3453581,
+    "hasta": 1795648171.671798,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648171.5122454,
+    "hasta": 1795648173.8365266,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648173.6726034,
+    "hasta": 1795648175.9647672,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648175.8376508,
+    "hasta": 1795648178.0972672,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648177.9655044,
+    "hasta": 1795648180.2525685,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648180.0980358,
+    "hasta": 1795648182.4104536,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648182.253402,
+    "hasta": 1795648184.5412354,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648184.4113333,
+    "hasta": 1795648186.6867416,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648186.5419965,
+    "hasta": 1795648188.8385854,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648188.6877592,
+    "hasta": 1795648191.0101588,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648190.8394508,
+    "hasta": 1795648193.18198,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648193.0111408,
+    "hasta": 1795648195.354733,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648195.182674,
+    "hasta": 1795648197.4850535,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648197.3559325,
+    "hasta": 1795648199.6577346,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648199.4858804,
+    "hasta": 1795648201.8020213,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648201.6616716,
+    "hasta": 1795648203.9551911,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648203.802862,
+    "hasta": 1795648206.09904,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648205.9561217,
+    "hasta": 1795648208.2578368,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648208.0998118,
+    "hasta": 1795648210.4511654,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648210.2589853,
+    "hasta": 1795648212.6128519,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648212.4519494,
+    "hasta": 1795648214.7739139,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648214.6135523,
+    "hasta": 1795648216.9150755,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648216.775086,
+    "hasta": 1795648219.0974178,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648218.9162745,
+    "hasta": 1795648221.27088,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648221.098714,
+    "hasta": 1795648223.4349406,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648223.2716813,
+    "hasta": 1795648225.6001515,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648225.436106,
+    "hasta": 1795648227.7579482,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648227.601245,
+    "hasta": 1795648229.933857,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648229.7592218,
+    "hasta": 1795648232.085942,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648231.9347115,
+    "hasta": 1795648234.2432632,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648234.0866969,
+    "hasta": 1795648236.410128,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648236.244184,
+    "hasta": 1795648238.5708795,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648238.4111414,
+    "hasta": 1795648240.705114,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648240.5719209,
+    "hasta": 1795648242.8509457,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648242.70589,
+    "hasta": 1795648244.9960215,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648244.8525696,
+    "hasta": 1795648247.158128,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648246.9973223,
+    "hasta": 1795648249.2994096,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648249.1591954,
+    "hasta": 1795648251.4357667,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648251.3001213,
+    "hasta": 1795648253.6051908,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648253.436721,
+    "hasta": 1795648255.768031,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648255.6063645,
+    "hasta": 1795648257.9302564,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648257.7688937,
+    "hasta": 1795648260.0867088,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648259.9311178,
+    "hasta": 1795648262.2374358,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648262.0874302,
+    "hasta": 1795648264.3984487,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648264.2382143,
+    "hasta": 1795648266.5402904,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648266.39939,
+    "hasta": 1795648268.7057755,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648268.5412052,
+    "hasta": 1795648270.8819823,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648270.7067015,
+    "hasta": 1795648273.0364137,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648272.882805,
+    "hasta": 1795648275.1991737,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648275.0374503,
+    "hasta": 1795648277.3619428,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648277.2003033,
+    "hasta": 1795648279.5225692,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648279.3631504,
+    "hasta": 1795648281.6994417,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648281.5255356,
+    "hasta": 1795648283.841831,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648283.700231,
+    "hasta": 1795648285.9901721,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648285.8430793,
+    "hasta": 1795648288.1502106,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648287.991351,
+    "hasta": 1795648290.3188303,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648290.1510854,
+    "hasta": 1795648292.482135,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648292.319838,
+    "hasta": 1795648294.6394575,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648294.4834623,
+    "hasta": 1795648296.8040235,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648296.645949,
+    "hasta": 1795648298.9524488,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648298.8051224,
+    "hasta": 1795648301.1297486,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648300.9536097,
+    "hasta": 1795648303.279031,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648303.130579,
+    "hasta": 1795648305.4516766,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648305.2801354,
+    "hasta": 1795648307.61484,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648307.4524903,
+    "hasta": 1795648309.780153,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648309.6157477,
+    "hasta": 1795648311.9241588,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648311.78102,
+    "hasta": 1795648314.085391,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648313.9250672,
+    "hasta": 1795648316.245111,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648316.0861986,
+    "hasta": 1795648318.4775143,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648318.2464924,
+    "hasta": 1795648320.6333163,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648320.4784427,
+    "hasta": 1795648322.7972212,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648322.6341686,
+    "hasta": 1795648324.9656265,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648324.7981832,
+    "hasta": 1795648327.1309881,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648326.9664905,
+    "hasta": 1795648329.300817,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648329.1319363,
+    "hasta": 1795648331.4558516,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648331.3015537,
+    "hasta": 1795648333.5935578,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648333.456962,
+    "hasta": 1795648335.7566571,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648335.5944958,
+    "hasta": 1795648337.9266117,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648337.7575688,
+    "hasta": 1795648340.1069517,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648339.9276323,
+    "hasta": 1795648342.279876,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648342.1077666,
+    "hasta": 1795648344.4437058,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648344.2809944,
+    "hasta": 1795648346.612323,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648346.444688,
+    "hasta": 1795648348.7893596,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648348.613122,
+    "hasta": 1795648350.9510584,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648350.7902298,
+    "hasta": 1795648353.0917184,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648352.9519649,
+    "hasta": 1795648355.2551777,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648355.0924683,
+    "hasta": 1795648357.392096,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648357.2566664,
+    "hasta": 1795648359.536343,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648359.3938875,
+    "hasta": 1795648361.719065,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648361.5372121,
+    "hasta": 1795648363.8897774,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648363.7204192,
+    "hasta": 1795648366.032221,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648365.8908765,
+    "hasta": 1795648368.1975822,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648368.0336049,
+    "hasta": 1795648370.3638794,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648370.1984725,
+    "hasta": 1795648372.491054,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648372.3647516,
+    "hasta": 1795648374.6603105,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648374.4919887,
+    "hasta": 1795648376.8359072,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648376.6611845,
+    "hasta": 1795648379.0190184,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648378.8371832,
+    "hasta": 1795648381.1634111,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648381.0200458,
+    "hasta": 1795648383.3213758,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648383.1645525,
+    "hasta": 1795648385.482291,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648385.3226106,
+    "hasta": 1795648387.6418557,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648387.483395,
+    "hasta": 1795648389.8169377,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648389.6430297,
+    "hasta": 1795648391.964486,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648391.817967,
+    "hasta": 1795648394.1333923,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648393.9658666,
+    "hasta": 1795648396.2835498,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648396.1343853,
+    "hasta": 1795648398.4405806,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648398.2845924,
+    "hasta": 1795648400.6058648,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648400.4414926,
+    "hasta": 1795648402.7678435,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648402.6066296,
+    "hasta": 1795648404.9145753,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648404.7687626,
+    "hasta": 1795648407.0685575,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648406.9153798,
+    "hasta": 1795648409.2342403,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648409.0694788,
+    "hasta": 1795648411.3954687,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648411.2355425,
+    "hasta": 1795648413.537067,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648413.3962407,
+    "hasta": 1795648415.69974,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648415.5379646,
+    "hasta": 1795648417.8391757,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648417.7005138,
+    "hasta": 1795648420.0395477,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648419.8400364,
+    "hasta": 1795648422.1748757,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648422.040394,
+    "hasta": 1795648424.3241522,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648424.1761048,
+    "hasta": 1795648426.4986753,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648426.3259609,
+    "hasta": 1795648428.655913,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648428.4995997,
+    "hasta": 1795648430.795081,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648430.6567817,
+    "hasta": 1795648432.994172,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648432.7959354,
+    "hasta": 1795648435.1601396,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648434.9954755,
+    "hasta": 1795648437.3160276,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648437.1612341,
+    "hasta": 1795648439.4596887,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648439.3169088,
+    "hasta": 1795648441.5956683,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648441.4608245,
+    "hasta": 1795648443.7678998,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648443.596581,
+    "hasta": 1795648445.9314044,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648445.7687018,
+    "hasta": 1795648448.0932834,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648447.932634,
+    "hasta": 1795648450.2502058,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648450.0946121,
+    "hasta": 1795648452.4041054,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648452.25115,
+    "hasta": 1795648454.5675702,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648454.4049494,
+    "hasta": 1795648456.737752,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648456.5687737,
+    "hasta": 1795648458.8942537,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648458.7390485,
+    "hasta": 1795648461.0512,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648460.8953376,
+    "hasta": 1795648463.2122374,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648463.0518863,
+    "hasta": 1795648465.3701375,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648465.213578,
+    "hasta": 1795648467.5318584,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648467.3709667,
+    "hasta": 1795648469.715691,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648469.5327518,
+    "hasta": 1795648471.8517578,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648471.7169185,
+    "hasta": 1795648473.9930193,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648473.8531213,
+    "hasta": 1795648476.157311,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648475.9941416,
+    "hasta": 1795648478.3184586,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648478.1585367,
+    "hasta": 1795648480.4729419,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648480.3194807,
+    "hasta": 1795648482.6326842,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648482.473687,
+    "hasta": 1795648484.7769578,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648484.6334085,
+    "hasta": 1795648486.9595532,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648486.7782328,
+    "hasta": 1795648489.1187232,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648488.9605012,
+    "hasta": 1795648491.264675,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648491.1200602,
+    "hasta": 1795648493.4504817,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648493.2655563,
+    "hasta": 1795648495.6225488,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648495.4519289,
+    "hasta": 1795648497.79058,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648497.6233356,
+    "hasta": 1795648499.9563758,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648499.79196,
+    "hasta": 1795648502.1195683,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648501.9573143,
+    "hasta": 1795648504.2880118,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648504.1208766,
+    "hasta": 1795648506.4570007,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648506.28899,
+    "hasta": 1795648508.6530898,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648508.4579346,
+    "hasta": 1795648510.8176253,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648510.654235,
+    "hasta": 1795648512.9560962,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648512.8185208,
+    "hasta": 1795648515.0874047,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648514.9569294,
+    "hasta": 1795648517.2515607,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648517.0881326,
+    "hasta": 1795648519.4386773,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648519.2525063,
+    "hasta": 1795648521.6089587,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648521.4395747,
+    "hasta": 1795648523.776243,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648523.6100338,
+    "hasta": 1795648525.9376163,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648525.7773354,
+    "hasta": 1795648528.0770555,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648527.938557,
+    "hasta": 1795648530.2350233,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648530.0781646,
+    "hasta": 1795648532.3968112,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648532.2358317,
+    "hasta": 1795648534.5799181,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648534.397581,
+    "hasta": 1795648536.742942,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648536.5808241,
+    "hasta": 1795648538.9168649,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648538.7441638,
+    "hasta": 1795648541.0814054,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648540.9177248,
+    "hasta": 1795648543.228434,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648543.0821133,
+    "hasta": 1795648545.4143145,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648545.2298295,
+    "hasta": 1795648547.5768063,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648547.4154325,
+    "hasta": 1795648549.756533,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648549.5781853,
+    "hasta": 1795648551.9223368,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648551.7573261,
+    "hasta": 1795648554.1660717,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648553.9237835,
+    "hasta": 1795648556.3472762,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648556.1670015,
+    "hasta": 1795648558.4894388,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648558.3481436,
+    "hasta": 1795648560.6600432,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648560.490315,
+    "hasta": 1795648562.8320112,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648562.6610174,
+    "hasta": 1795648565.0075562,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648564.8331244,
+    "hasta": 1795648567.1607609,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648567.0083165,
+    "hasta": 1795648569.320294,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648569.1619387,
+    "hasta": 1795648571.489319,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648571.3212028,
+    "hasta": 1795648573.650108,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648573.4902554,
+    "hasta": 1795648575.8122888,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648575.6509058,
+    "hasta": 1795648577.973744,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648577.8131917,
+    "hasta": 1795648580.126809,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648579.9745865,
+    "hasta": 1795648582.2705188,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648582.1280665,
+    "hasta": 1795648584.4459412,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648584.2721071,
+    "hasta": 1795648586.6139286,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648586.446733,
+    "hasta": 1795648588.8074965,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648588.6148617,
+    "hasta": 1795648590.9650295,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648590.8086746,
+    "hasta": 1795648593.1277866,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648592.9661322,
+    "hasta": 1795648595.286295,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648595.1286042,
+    "hasta": 1795648597.461373,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648597.2871592,
+    "hasta": 1795648599.604647,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648599.4625301,
+    "hasta": 1795648601.7420743,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648601.605921,
+    "hasta": 1795648603.8781497,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648603.743442,
+    "hasta": 1795648606.0432446,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648605.878973,
+    "hasta": 1795648608.185035,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648608.0439703,
+    "hasta": 1795648610.3516273,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648610.186238,
+    "hasta": 1795648612.5066903,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648612.3527374,
+    "hasta": 1795648614.677872,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648614.5076053,
+    "hasta": 1795648616.8412762,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648616.678781,
+    "hasta": 1795648618.9973602,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648618.842185,
+    "hasta": 1795648621.1515627,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648620.9984305,
+    "hasta": 1795648623.2884526,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648623.1527817,
+    "hasta": 1795648625.4485881,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648625.2893791,
+    "hasta": 1795648627.6244793,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648627.4493983,
+    "hasta": 1795648629.7873893,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648629.6253219,
+    "hasta": 1795648631.953929,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648631.7882333,
+    "hasta": 1795648634.1460595,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648633.9547334,
+    "hasta": 1795648636.308529,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648636.146949,
+    "hasta": 1795648638.444453,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648638.3093095,
+    "hasta": 1795648640.5983953,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648640.445254,
+    "hasta": 1795648642.7522101,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648642.5992568,
+    "hasta": 1795648644.9177241,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648644.7529998,
+    "hasta": 1795648647.0780447,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648646.9195807,
+    "hasta": 1795648649.2323427,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648649.0787816,
+    "hasta": 1795648651.367209,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648651.2332692,
+    "hasta": 1795648653.5340533,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648653.3681107,
+    "hasta": 1795648655.6929116,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648655.5349295,
+    "hasta": 1795648657.8507774,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648657.6941092,
+    "hasta": 1795648660.0016296,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648659.8519113,
+    "hasta": 1795648662.1606066,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648662.0024228,
+    "hasta": 1795648664.3111181,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648664.1635456,
+    "hasta": 1795648666.4689682,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648666.3121498,
+    "hasta": 1795648668.607099,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648668.4695528,
+    "hasta": 1795648670.76651,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648670.6082559,
+    "hasta": 1795648672.9504645,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648672.7674944,
+    "hasta": 1795648675.1184652,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648674.9511101,
+    "hasta": 1795648677.2776487,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648677.119376,
+    "hasta": 1795648679.436121,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648679.278723,
+    "hasta": 1795648681.5875657,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648681.4369993,
+    "hasta": 1795648683.7488084,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648683.5887551,
+    "hasta": 1795648685.8910034,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648685.7498949,
+    "hasta": 1795648688.0532928,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648687.8920724,
+    "hasta": 1795648690.219203,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648690.0541372,
+    "hasta": 1795648692.4022362,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648692.220022,
+    "hasta": 1795648694.5627692,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648694.4030664,
+    "hasta": 1795648696.7220387,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648696.563712,
+    "hasta": 1795648698.8817585,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648698.7230203,
+    "hasta": 1795648701.0586438,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648700.8825452,
+    "hasta": 1795648703.2020466,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648703.059301,
+    "hasta": 1795648705.4015396,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648705.2028894,
+    "hasta": 1795648707.5705357,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648707.4026535,
+    "hasta": 1795648709.7125678,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648709.5714505,
+    "hasta": 1795648711.8779545,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648711.7135847,
+    "hasta": 1795648714.0308619,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648713.878816,
+    "hasta": 1795648716.1914856,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648716.031898,
+    "hasta": 1795648718.3513062,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648718.193555,
+    "hasta": 1795648720.5006895,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648720.3522153,
+    "hasta": 1795648722.6562476,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648722.501709,
+    "hasta": 1795648724.7999375,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648724.6570952,
+    "hasta": 1795648726.9460888,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648726.8007557,
+    "hasta": 1795648729.1131358,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648728.94738,
+    "hasta": 1795648731.2832448,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648731.1178448,
+    "hasta": 1795648733.4461772,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648733.2843812,
+    "hasta": 1795648735.6012256,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648735.4472332,
+    "hasta": 1795648737.7652647,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648737.6046352,
+    "hasta": 1795648739.9266381,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648739.7660666,
+    "hasta": 1795648742.076464,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648741.927758,
+    "hasta": 1795648744.2562323,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648744.0770605,
+    "hasta": 1795648746.4100842,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648746.2571466,
+    "hasta": 1795648748.5837595,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648748.411415,
+    "hasta": 1795648750.741743,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648750.5849514,
+    "hasta": 1795648752.8953466,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648752.7426612,
+    "hasta": 1795648755.0441859,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648754.8961585,
+    "hasta": 1795648757.225868,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648757.0450368,
+    "hasta": 1795648759.3975942,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648759.226698,
+    "hasta": 1795648761.5362475,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648761.4018538,
+    "hasta": 1795648763.7054994,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648763.5370965,
+    "hasta": 1795648765.870265,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648765.7064576,
+    "hasta": 1795648768.0106423,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648767.8711495,
+    "hasta": 1795648770.1543143,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648770.011791,
+    "hasta": 1795648772.297858,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648772.1552134,
+    "hasta": 1795648774.4337783,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648774.2989826,
+    "hasta": 1795648776.5712216,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648776.437548,
+    "hasta": 1795648778.7450428,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648778.5721378,
+    "hasta": 1795648780.9036672,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648780.7458434,
+    "hasta": 1795648783.0641606,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648782.904631,
+    "hasta": 1795648785.2501225,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648785.0653274,
+    "hasta": 1795648787.4274867,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648787.251114,
+    "hasta": 1795648789.5678875,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648789.4283605,
+    "hasta": 1795648791.7139797,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648791.5686827,
+    "hasta": 1795648793.8743937,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648793.7151325,
+    "hasta": 1795648796.035284,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648795.875287,
+    "hasta": 1795648798.1755705,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648798.0361753,
+    "hasta": 1795648800.3344054,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648800.17655,
+    "hasta": 1795648802.4960868,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648802.335228,
+    "hasta": 1795648804.6718814,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648804.497256,
+    "hasta": 1795648806.8211217,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648806.6726766,
+    "hasta": 1795648808.9673953,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648808.8221736,
+    "hasta": 1795648811.1264367,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648810.9685018,
+    "hasta": 1795648813.3046834,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648813.1275315,
+    "hasta": 1795648815.4592874,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648815.305505,
+    "hasta": 1795648817.5963259,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648817.4599931,
+    "hasta": 1795648819.7571833,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648819.5972471,
+    "hasta": 1795648821.9107647,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648821.7579737,
+    "hasta": 1795648824.0766785,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648823.911412,
+    "hasta": 1795648826.2329996,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648826.0773454,
+    "hasta": 1795648828.3968077,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648828.2341383,
+    "hasta": 1795648830.55406,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648830.3977304,
+    "hasta": 1795648832.732765,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648832.555259,
+    "hasta": 1795648834.8738315,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648834.733667,
+    "hasta": 1795648837.0432696,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648836.8746254,
+    "hasta": 1795648839.2004576,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648839.0439043,
+    "hasta": 1795648841.3760047,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648841.2013469,
+    "hasta": 1795648843.5356002,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648843.3769825,
+    "hasta": 1795648845.7157757,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648845.5366201,
+    "hasta": 1795648847.8548748,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648847.7170126,
+    "hasta": 1795648850.0420299,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648849.8559897,
+    "hasta": 1795648852.2134404,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648852.0429676,
+    "hasta": 1795648854.3540926,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648854.2148266,
+    "hasta": 1795648856.4827309,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648856.3549397,
+    "hasta": 1795648858.6354303,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648858.4834857,
+    "hasta": 1795648860.7765276,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648860.636238,
+    "hasta": 1795648862.9442563,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648862.7775111,
+    "hasta": 1795648865.1162298,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648864.9452624,
+    "hasta": 1795648867.277564,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648867.1171112,
+    "hasta": 1795648869.4443958,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648869.278528,
+    "hasta": 1795648871.5822752,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648871.4456966,
+    "hasta": 1795648873.7195685,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648873.5834272,
+    "hasta": 1795648875.8689098,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648875.720364,
+    "hasta": 1795648878.0476081,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648877.870653,
+    "hasta": 1795648880.223143,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648880.0485132,
+    "hasta": 1795648882.4000525,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648882.2240198,
+    "hasta": 1795648884.5442722,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648884.4011726,
+    "hasta": 1795648886.72329,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648886.5451107,
+    "hasta": 1795648888.8628702,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648888.7241225,
+    "hasta": 1795648891.0250995,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648890.8649106,
+    "hasta": 1795648893.1856136,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648893.0256763,
+    "hasta": 1795648895.3414202,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648895.18695,
+    "hasta": 1795648897.5178487,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648897.3422658,
+    "hasta": 1795648899.657418,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648899.5186656,
+    "hasta": 1795648901.8192823,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648901.6583092,
+    "hasta": 1795648903.9892824,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648903.820247,
+    "hasta": 1795648906.1502345,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648905.9901574,
+    "hasta": 1795648908.3125153,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648908.1511042,
+    "hasta": 1795648910.4621065,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648910.313494,
+    "hasta": 1795648912.6214986,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648912.4629881,
+    "hasta": 1795648914.7939615,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648914.6223803,
+    "hasta": 1795648916.9645798,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648916.7947888,
+    "hasta": 1795648919.1432583,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648918.965695,
+    "hasta": 1795648921.3063347,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648921.1442556,
+    "hasta": 1795648923.4649432,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648923.3072495,
+    "hasta": 1795648925.656119,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648925.466097,
+    "hasta": 1795648927.8240469,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648927.6569676,
+    "hasta": 1795648929.9727263,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648929.8247945,
+    "hasta": 1795648932.137722,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648931.973669,
+    "hasta": 1795648934.2972732,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648934.1386812,
+    "hasta": 1795648936.4692984,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648936.297999,
+    "hasta": 1795648938.6129813,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648938.4701662,
+    "hasta": 1795648940.7913303,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648940.613805,
+    "hasta": 1795648942.9562693,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648942.792293,
+    "hasta": 1795648945.118644,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648944.9578457,
+    "hasta": 1795648947.2781465,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648947.1194243,
+    "hasta": 1795648949.4354916,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648949.2790332,
+    "hasta": 1795648951.6100154,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648951.4365685,
+    "hasta": 1795648953.753436,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648953.6112168,
+    "hasta": 1795648955.9325778,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648955.754427,
+    "hasta": 1795648958.0889359,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648957.9333746,
+    "hasta": 1795648960.261657,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648960.0895956,
+    "hasta": 1795648962.4412432,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648962.262521,
+    "hasta": 1795648964.595197,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648964.442052,
+    "hasta": 1795648966.7631462,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648966.5961778,
+    "hasta": 1795648968.9435081,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648968.764027,
+    "hasta": 1795648971.106142,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648970.9442403,
+    "hasta": 1795648973.2649226,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648973.1070583,
+    "hasta": 1795648975.4221873,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648975.2661552,
+    "hasta": 1795648977.5934942,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648977.4231875,
+    "hasta": 1795648979.763437,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648979.594722,
+    "hasta": 1795648981.9068062,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648981.7645328,
+    "hasta": 1795648984.078806,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648983.9077034,
+    "hasta": 1795648986.2307615,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648986.0797215,
+    "hasta": 1795648988.3919415,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648988.2316883,
+    "hasta": 1795648990.5563638,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648990.3927324,
+    "hasta": 1795648992.7003353,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648992.55709,
+    "hasta": 1795648994.8622968,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648994.7014391,
+    "hasta": 1795648997.0186367,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648996.8631587,
+    "hasta": 1795648999.1608717,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795648999.0194776,
+    "hasta": 1795649001.323369,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649001.1620798,
+    "hasta": 1795649003.4985476,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649003.3245645,
+    "hasta": 1795649005.6476943,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649005.4997642,
+    "hasta": 1795649007.8069682,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649007.6485136,
+    "hasta": 1795649009.9722114,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649009.8082297,
+    "hasta": 1795649012.1357694,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649011.9737067,
+    "hasta": 1795649014.2924654,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649014.1366475,
+    "hasta": 1795649016.4314363,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649016.293565,
+    "hasta": 1795649018.5947678,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649018.432753,
+    "hasta": 1795649020.7700531,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649020.5975618,
+    "hasta": 1795649022.9299967,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649022.770916,
+    "hasta": 1795649025.0879946,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649024.9308486,
+    "hasta": 1795649027.2637477,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649027.0887167,
+    "hasta": 1795649029.4186304,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649029.2646263,
+    "hasta": 1795649031.5825064,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649031.4197302,
+    "hasta": 1795649033.7231817,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649033.5835774,
+    "hasta": 1795649035.8827202,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649035.7240317,
+    "hasta": 1795649038.0604868,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649037.8835435,
+    "hasta": 1795649040.228411,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649040.061389,
+    "hasta": 1795649042.3968847,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649042.2290807,
+    "hasta": 1795649044.5577357,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649044.398106,
+    "hasta": 1795649046.732195,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649046.558639,
+    "hasta": 1795649048.9032075,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649048.7330759,
+    "hasta": 1795649051.0696146,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649050.9040692,
+    "hasta": 1795649053.2146904,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649053.0703676,
+    "hasta": 1795649055.3840654,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649055.2155266,
+    "hasta": 1795649057.545436,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649057.3851645,
+    "hasta": 1795649059.68277,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649059.546311,
+    "hasta": 1795649061.850034,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649061.6840732,
+    "hasta": 1795649064.0055664,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649063.850879,
+    "hasta": 1795649066.1669352,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649066.0062754,
+    "hasta": 1795649068.3386865,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649068.1677287,
+    "hasta": 1795649070.5039942,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649070.340715,
+    "hasta": 1795649072.6675,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649072.5048263,
+    "hasta": 1795649074.8056035,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649074.6686745,
+    "hasta": 1795649077.0024703,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649076.8064198,
+    "hasta": 1795649079.1609244,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649079.0033188,
+    "hasta": 1795649081.3207386,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649081.161804,
+    "hasta": 1795649083.471439,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649083.3217223,
+    "hasta": 1795649085.6439874,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649085.4722645,
+    "hasta": 1795649087.8110392,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649087.6456347,
+    "hasta": 1795649089.9740026,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649089.8121011,
+    "hasta": 1795649092.1510298,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649091.9750757,
+    "hasta": 1795649094.3312101,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649094.1518698,
+    "hasta": 1795649096.4708357,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649096.3320522,
+    "hasta": 1795649098.6044767,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649098.4720714,
+    "hasta": 1795649100.746017,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649100.6052942,
+    "hasta": 1795649102.8936388,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649102.7468152,
+    "hasta": 1795649105.0759804,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649104.8946,
+    "hasta": 1795649107.2237437,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649107.0770469,
+    "hasta": 1795649109.3798563,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649109.2246206,
+    "hasta": 1795649111.5376658,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649111.3808355,
+    "hasta": 1795649113.700694,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649113.538824,
+    "hasta": 1795649115.8586586,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649115.7016747,
+    "hasta": 1795649117.9987328,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649117.8598871,
+    "hasta": 1795649120.175788,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649119.999912,
+    "hasta": 1795649122.368779,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649122.1766682,
+    "hasta": 1795649124.5230596,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649124.369971,
+    "hasta": 1795649126.6663675,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649126.5242493,
+    "hasta": 1795649128.821677,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649128.6672664,
+    "hasta": 1795649130.9817,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649130.8227842,
+    "hasta": 1795649133.1512668,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649132.9826124,
+    "hasta": 1795649135.3155413,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649135.1520488,
+    "hasta": 1795649137.4688363,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649137.316333,
+    "hasta": 1795649139.6344962,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649139.469848,
+    "hasta": 1795649141.7828321,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649141.6354265,
+    "hasta": 1795649143.9385955,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649143.7840464,
+    "hasta": 1795649146.0795078,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649145.939585,
+    "hasta": 1795649148.2563467,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649148.080847,
+    "hasta": 1795649150.425045,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649150.2572477,
+    "hasta": 1795649152.6080291,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649152.4258618,
+    "hasta": 1795649154.7694855,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649154.6089587,
+    "hasta": 1795649156.9130023,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649156.770601,
+    "hasta": 1795649159.0664647,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649158.9137523,
+    "hasta": 1795649161.2243586,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649161.0676646,
+    "hasta": 1795649163.4237616,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649163.2251265,
+    "hasta": 1795649165.6020918,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649165.4247355,
+    "hasta": 1795649167.7613008,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649167.6031451,
+    "hasta": 1795649169.920108,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649169.7624536,
+    "hasta": 1795649172.0841322,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649171.9211822,
+    "hasta": 1795649174.2553818,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649174.0848598,
+    "hasta": 1795649176.4216225,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649176.2564423,
+    "hasta": 1795649178.5812287,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649178.4228206,
+    "hasta": 1795649180.7457726,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649180.5820172,
+    "hasta": 1795649182.9146926,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649182.7467442,
+    "hasta": 1795649185.0681567,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649184.9155748,
+    "hasta": 1795649187.229596,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649187.0690835,
+    "hasta": 1795649189.4046211,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649189.2306516,
+    "hasta": 1795649191.5604358,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649191.4056017,
+    "hasta": 1795649193.7290945,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649193.561642,
+    "hasta": 1795649195.882551,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649195.7302487,
+    "hasta": 1795649198.044055,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649197.8838015,
+    "hasta": 1795649200.1849709,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649200.0453446,
+    "hasta": 1795649202.3234482,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649202.18586,
+    "hasta": 1795649204.484342,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649204.3244128,
+    "hasta": 1795649206.6401923,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649206.485283,
+    "hasta": 1795649208.7838285,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649208.6420786,
+    "hasta": 1795649210.9698286,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649210.784889,
+    "hasta": 1795649213.155527,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649212.9709084,
+    "hasta": 1795649215.2890422,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649215.1563587,
+    "hasta": 1795649217.4687078,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649217.2899423,
+    "hasta": 1795649219.623406,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649219.4696531,
+    "hasta": 1795649221.7876577,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649221.624198,
+    "hasta": 1795649223.9691586,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649223.7883573,
+    "hasta": 1795649226.1445692,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649225.9703043,
+    "hasta": 1795649228.3045797,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649228.1454163,
+    "hasta": 1795649230.4661322,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649230.3056085,
+    "hasta": 1795649232.6280973,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649232.4669623,
+    "hasta": 1795649234.7922947,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649234.6290612,
+    "hasta": 1795649236.9569669,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649236.7930894,
+    "hasta": 1795649239.122818,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649238.957772,
+    "hasta": 1795649241.2933612,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649241.1236753,
+    "hasta": 1795649243.4507058,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649243.29467,
+    "hasta": 1795649245.614401,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649245.4514327,
+    "hasta": 1795649247.7513254,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649247.6156666,
+    "hasta": 1795649249.9172199,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649249.7523882,
+    "hasta": 1795649252.083338,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649251.9181135,
+    "hasta": 1795649254.2411854,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649254.0843844,
+    "hasta": 1795649256.3891897,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649256.242208,
+    "hasta": 1795649258.5263202,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649258.3901908,
+    "hasta": 1795649260.6831331,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649260.527282,
+    "hasta": 1795649262.858459,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649262.6840184,
+    "hasta": 1795649265.0007918,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649264.8595936,
+    "hasta": 1795649267.1760597,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649267.0017567,
+    "hasta": 1795649269.3472524,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649269.177414,
+    "hasta": 1795649271.5176728,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649271.3512485,
+    "hasta": 1795649273.679289,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649273.5184557,
+    "hasta": 1795649275.8405313,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649275.6803975,
+    "hasta": 1795649278.0045192,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649277.8418453,
+    "hasta": 1795649280.1430545,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649280.0058832,
+    "hasta": 1795649282.2997463,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649282.1443384,
+    "hasta": 1795649284.4660685,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649284.3006766,
+    "hasta": 1795649286.6289785,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649286.4670517,
+    "hasta": 1795649288.7972107,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649288.6298378,
+    "hasta": 1795649290.9572647,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649290.7981102,
+    "hasta": 1795649293.117967,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649292.9585195,
+    "hasta": 1795649295.2736325,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649295.1191084,
+    "hasta": 1795649297.4325666,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649297.2743578,
+    "hasta": 1795649299.6013882,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649299.4335082,
+    "hasta": 1795649301.760256,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649301.602211,
+    "hasta": 1795649303.9022198,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649303.7619107,
+    "hasta": 1795649306.042812,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649305.9031405,
+    "hasta": 1795649308.2095554,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649308.0438848,
+    "hasta": 1795649310.36091,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649310.2103586,
+    "hasta": 1795649312.5096,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649312.3622465,
+    "hasta": 1795649314.6774178,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649314.5106833,
+    "hasta": 1795649316.8321826,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649316.678335,
+    "hasta": 1795649319.0035667,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649318.8334618,
+    "hasta": 1795649321.1643498,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649321.0044253,
+    "hasta": 1795649323.343499,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649323.1654139,
+    "hasta": 1795649325.492224,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649325.3444352,
+    "hasta": 1795649327.6572855,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649327.493684,
+    "hasta": 1795649329.8186562,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649329.6584208,
+    "hasta": 1795649331.9813719,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649331.8197272,
+    "hasta": 1795649334.15304,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649333.9824393,
+    "hasta": 1795649336.3100104,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649336.1541712,
+    "hasta": 1795649338.4776647,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649338.3108008,
+    "hasta": 1795649340.6211395,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649340.478653,
+    "hasta": 1795649342.7778637,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649342.6219115,
+    "hasta": 1795649344.9202607,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649344.7787514,
+    "hasta": 1795649347.0828147,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649346.9219215,
+    "hasta": 1795649349.2607455,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649349.0834937,
+    "hasta": 1795649351.4227755,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649351.2619286,
+    "hasta": 1795649353.6046572,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649353.4236696,
+    "hasta": 1795649355.7602468,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649355.6054695,
+    "hasta": 1795649357.9531407,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649357.7610357,
+    "hasta": 1795649360.1351523,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649359.9539378,
+    "hasta": 1795649362.2769191,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649362.1359062,
+    "hasta": 1795649364.443517,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649364.2776866,
+    "hasta": 1795649366.5855753,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649366.444475,
+    "hasta": 1795649368.7459354,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649368.5867348,
+    "hasta": 1795649370.9116194,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649370.747114,
+    "hasta": 1795649373.052053,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649372.9128377,
+    "hasta": 1795649375.2166812,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649375.0529158,
+    "hasta": 1795649377.3708842,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649377.2179222,
+    "hasta": 1795649379.5289874,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649379.3721197,
+    "hasta": 1795649381.6742883,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649381.5298495,
+    "hasta": 1795649383.833078,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649383.675177,
+    "hasta": 1795649385.9940205,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649385.8339076,
+    "hasta": 1795649388.1341603,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   },
+   {
+    "desde": 1795649387.9947755,
+    "hasta": 1795649389.080454,
+    "delta_drops": 0,
+    "clase": "sin_descartes"
+   }
+  ],
+  "segundos_por_clase": {
+   "sin_descartes": 1729.6039712429047,
+   "con_descartes": 0.0,
+   "indeterminado": 34.023016929626465
+  },
+  "numero_muestras": 801,
+  "latencias_s": {
+   "p50": 0.16022682189941406,
+   "p95": 0.1818828582763672,
+   "max": 0.24228811264038086
+  },
+  "intervalos_reales_s": {
+   "p50": 2.161198616027832,
+   "p95": 2.183076500892639,
+   "max": 2.243217945098877
+  }
+ },
+ "pasos_analisis": [
+  {
+   "paso": "conciliar",
+   "rc": 0,
+   "inicio_epoch": 1795649424.167323,
+   "fin_epoch": 1795649424.2915642,
+   "obligatorio": true,
+   "fallo_deliberado": false
+  },
+  {
+   "paso": "cobertura",
+   "rc": 0,
+   "inicio_epoch": 1795649424.2952514,
+   "fin_epoch": 1795649433.7002428,
+   "obligatorio": true,
+   "fallo_deliberado": false
+  },
+  {
+   "paso": "fronteras",
+   "rc": 0,
+   "inicio_epoch": 1795649433.7040632,
+   "fin_epoch": 1795649433.867627,
+   "obligatorio": true,
+   "fallo_deliberado": false
+  },
+  {
+   "paso": "extraer",
+   "rc": 0,
+   "inicio_epoch": 1795649433.8713741,
+   "fin_epoch": 1795649483.4676528,
+   "obligatorio": true,
+   "fallo_deliberado": false
+  },
+  {
+   "paso": "verificar",
+   "rc": 0,
+   "inicio_epoch": 1795649483.4711432,
+   "fin_epoch": 1795650054.2972438,
+   "obligatorio": true,
+   "fallo_deliberado": false
+  },
+  {
+   "paso": "calidad_copias",
+   "rc": 0,
+   "inicio_epoch": 1795650054.3020992,
+   "fin_epoch": 1795650077.3829007,
+   "obligatorio": false,
+   "fallo_deliberado": false
+  },
+  {
+   "paso": "calidad_dns",
+   "rc": 1,
+   "inicio_epoch": 1795650077.3868966,
+   "fin_epoch": 1795650081.7564979,
+   "obligatorio": false,
+   "fallo_deliberado": false
+  },
+  {
+   "paso": "metadatos",
+   "rc": 0,
+   "inicio_epoch": 1795650081.760485,
+   "fin_epoch": 1795650082.0123522,
+   "obligatorio": true,
+   "fallo_deliberado": false
+  }
+ ],
+ "dictamen": {
+  "global": "indeterminada",
+  "dictamen": "indeterminado",
+  "codigo_salida": 2,
+  "motivos": [
+   "falta:criterio:C7",
+   "falta:criterio:C9",
+   "falta:criterio:C10",
+   "falta:criterio:C11",
+   "falta:criterio:C12",
+   "falta:criterio:C13"
+  ],
+  "fuente_pasos": "pasos-analisis.jsonl"
+ }
+}

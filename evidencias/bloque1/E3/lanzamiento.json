@@ -1,0 +1,22 @@
+{
+ "ejecucion": "V2-E3-20261125T230032Z",
+ "programa": "prueba-niveles-transiciones.json",
+ "programa_sha256": "3089fc531745d9271818ee20c0d9915bd045801669dd2042a766e269cd7ee160",
+ "planificado": {
+  "archivador_desde_epoch": 1795647632,
+  "generador_inicio_epoch": 1795647810,
+  "generador_fin_epoch": 1795649250,
+  "captura_hasta_epoch": 1795649370,
+  "tope_epoch": 1795652970
+ },
+ "real": {
+  "archivador_confirmado_epoch": 1795647660,
+  "primer_paquete_epoch": 1795647625.453466,
+  "ultimo_paquete_epoch": 1795649389.080454,
+  "generador_inicio_epoch": 1795647813.177694,
+  "generador_fin_epoch": 1795649253.873267
+ },
+ "duracion_s": 1440,
+ "retraso_prueba_s": 0,
+ "dns_unidad": "cf-v2-dns-v2-e3-20261125t230032z"
+}

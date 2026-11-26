@@ -1,0 +1,14 @@
+{"utc":"2026-11-25T23:48:43.733Z","paso":"manifiestos","detalle":"ok "}
+{"utc":"2026-11-25T23:48:44.880Z","paso":"sondeo_span","detalle":"analizar_sondeo rc=3 (0 sin descartes, 1 con descartes, 2 indeterminado, 3 sin registro) "}
+{"utc":"2026-11-25T23:48:45.327Z","paso":"exclusion_v1","detalle":"{  cubierto: true,  regla: *@2026-11-24T18:15:00+00:00/2026-11-26T00:00:00+00:00,  cambio: false,  cubria_antes: true } "}
+{"utc":"2026-11-25T23:48:45.830Z","paso":"registro_dns","detalle":"68 lineas "}
+{"utc":"2026-11-25T23:48:46.032Z","paso":"registro_dns_pcap","detalle":"0 bytes "}
+{"utc":"2026-11-25T23:48:51.384Z","paso":"servidor","detalle":"56 lineas en ventana "}
+{"utc":"2026-11-25T23:48:52.386Z","paso":"reunido","detalle":"/home/m4rk/cyberflow-v2/pruebas/V2-E1-20261125T185323Z "}
+{"utc":"2026-11-26T00:04:51.095Z","paso":"analisis","detalle":"conciliar rc=0 cobertura rc=0 fronteras rc=0 extraer rc=97 verificar rc=0 metadatos rc=0  "}
+{"utc":"2026-11-26T00:04:53.078Z","paso":"estado_global","detalle":"{ejecucion: V2-E1-20261125T185323Z, generador: completa, archivador: completa, vigia: sin_paradas, supervision: sin_invalidaciones, analisis: incompleto, exclusion_v1: cubre, global: no_aprobada, dictamen: fallido, codigo_salida: 1, motivos: [analisis:fallo, analisis:fallo:extraer, falta:analisis, falta:criterio:C7, falta:criterio:C9, falta:criterio:C10, falta:criterio:C11, falta:criterio:C12, fal"}
+508
+52M	capturas/V2-E1-20261125T185323Z
+1,3M	pruebas/V2-E1-20261125T185323Z
+{"utc":"2026-11-26T00:04:53.693Z","paso":"hashes","detalle":"pruebas/V2-E1-20261125T185323Z/SHA256SUMS "}
+{"utc":"2026-11-26T00:04:53.702Z","paso":"fin","detalle":"codigo_salida=1 "}

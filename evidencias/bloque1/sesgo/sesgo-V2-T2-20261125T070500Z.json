@@ -1,0 +1,73 @@
+{
+ "ventanas_consideradas": 265,
+ "intervalos": 4,
+ "afectadas": 265,
+ "cortes_cuartiles_paquetes": [
+  0,
+  0,
+  0
+ ],
+ "por": {
+  "perfil": {
+   "P1": {
+    "todas": 71,
+    "afectadas": 71,
+    "fraccion": 1.0
+   },
+   "P2": {
+    "todas": 32,
+    "afectadas": 32,
+    "fraccion": 1.0
+   },
+   "P3": {
+    "todas": 21,
+    "afectadas": 21,
+    "fraccion": 1.0
+   },
+   "P4": {
+    "todas": 70,
+    "afectadas": 70,
+    "fraccion": 1.0
+   },
+   "P5": {
+    "todas": 13,
+    "afectadas": 13,
+    "fraccion": 1.0
+   },
+   "P6": {
+    "todas": 58,
+    "afectadas": 58,
+    "fraccion": 1.0
+   }
+  },
+  "nivel": {
+   "aumentado": {
+    "todas": 72,
+    "afectadas": 72,
+    "fraccion": 1.0
+   },
+   "base": {
+    "todas": 52,
+    "afectadas": 52,
+    "fraccion": 1.0
+   },
+   "reducido": {
+    "todas": 141,
+    "afectadas": 141,
+    "fraccion": 1.0
+   }
+  },
+  "cuartil_paquetes": {
+   "Q1": {
+    "todas": 204,
+    "afectadas": 204,
+    "fraccion": 1.0
+   },
+   "Q4": {
+    "todas": 61,
+    "afectadas": 61,
+    "fraccion": 1.0
+   }
+  }
+ }
+}

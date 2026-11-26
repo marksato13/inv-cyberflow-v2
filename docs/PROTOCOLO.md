@@ -55,7 +55,7 @@ Ver `programas/README.md`. Los multiplicadores del plan (×1,25, pulsos ×1,5, �
 - que no haya otro generador en marcha;
 - la sincronización NTP y el espacio libre;
 - una sonda de cada servicio: HTTP 200, HTTPS 200, 401, 404, 500, DNS existente con la IP correcta, NXDOMAIN, puerto cerrado e ICMP;
-- que la jornada no cruce las 00:00 UTC (rotación del EVE).
+- que la jornada no cruce las 00:00 UTC (rotación del EVE). *(Superado: en el `v2ctl.py` actual esta comprobación es informativa y cruzar las 00:00 UTC está permitido; ver `BLOQUE1-CIERRE.md` §12.)*
 
 **DNS.** Zona controlada `cf-v2.lab` en DC1, creada el 24-nov. Seis nombres (`portal`, `intranet`, `correo`, `wiki`, `erp`, `archivos`) con registro A a 10.10.30.10.
 
@@ -186,6 +186,12 @@ las haya, irán en `ventanas_meta.csv` con las reglas de `docs/ETIQUETADO-ATAQUE
 - `capture.kernel_*` de Suricata.
 
 **Discrepancia de `rx_dropped`.** tcpdump y Suricata pierden 0 paquetes y `rx_dropped` sube entre un 4 y un 6 % durante las pruebas. No basta para explicar las tramas grandes ausentes, que no llegan a la NIC. Sigue abierta y unida al bloqueante del MTU.
+
+**Actualización del 26-nov (cierre del Bloque 1):** cerrada. Δ`rx_dropped` es exactamente el número de tramas 802.3/SNAP etiquetadas (PVST+/CDP), que el kernel entrega a los sockets de paquetes y luego descarta por falta de manejador (`BLOQUE1-CIERRE.md` §5.1). Los indicadores de pérdida son tcpdump `dropped by kernel`, vmxnet3, el sondeo del destino del SPAN y, sobre todo, el comprobador de copias de cada cierre, porque el espejo puede perder copias sin que el contador del switch suba (§5.2).
+
+**Sondeo del destino del SPAN.** `lanzar_v2.sh` arranca `sondeo_span.py` (cada 2 s, con reconexión) antes del archivador. `cerrar_v2.sh` lo detiene y lo clasifica (`calidad-espejo-sondeo.json`), y `estado_global` añade el estado `espejo`: sin sondeo o con huecos es `falta`, y con descartes es fallo.
+
+**Norma de operación.** Durante una captura no se transfiere nada grande a través del cortafuegos (copias, `scp`, lecturas de registros de más de unos KB). 160 Mb/s no es un límite seguro.
 
 **Interrupciones.** El supervisor clasifica cada perfil:
 

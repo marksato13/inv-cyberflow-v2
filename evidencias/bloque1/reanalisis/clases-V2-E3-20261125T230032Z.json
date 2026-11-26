@@ -1,0 +1,29 @@
+{
+ "version": "1.0",
+ "captura": "/home/m4rk/cyberflow-v2/capturas/V2-E3-20261125T230032Z",
+ "ficheros": 351,
+ "incidencias": [],
+ "primer_paquete": 1795647625.453466,
+ "ultimo_paquete": 1795649389.080454,
+ "tramas": 834690,
+ "por_clase": {
+  "vlan/ipv4": 790598,
+  "vlan/802.3_llc_snap": 24737,
+  "vlan/arp": 18949,
+  "sin_vlan/loopback": 354,
+  "vlan/ipv6": 52
+ },
+ "manifiesto": {
+  "delta_nic_rx_packets": 828084,
+  "delta_nic_rx_dropped": 24312,
+  "inicio": "2026-11-25T23:01:00.546839Z",
+  "fin": "2026-11-25T23:29:53.034688Z",
+  "pcap_huecos": 0,
+  "kernel_drops": null,
+  "estado": "completa"
+ },
+ "comparacion": {
+  "tramas_pcap_menos_rx_packets": 6606,
+  "snap_etiquetadas_menos_rx_dropped": 425
+ }
+}

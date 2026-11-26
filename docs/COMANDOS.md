@@ -152,3 +152,23 @@ Archivar fuera de Sensor1 (el destino está pendiente). Conservar el `manifiesto
 2. [Clientes] `v2ctl.py parar --ejecucion ID` si quedan perfiles vivos; [Sensor1] `touch .../ID/PARAR`.
 3. Clasificar la causa (PROTOCOLO §8). Si es técnica, repetir la jornada completa con un `ID` nuevo y las mismas semillas del programa. Como máximo, una repetición.
 4. Conservar la ejecución fallida y anotar su motivo en el registro de ejecuciones.
+
+## 6. Cierre del Bloque 1 (26-nov): sondeo, norma, cierre y reanálisis
+
+- **Norma:** durante una captura no se transfiere nada grande a través del cortafuegos. El cierre
+  copia después. 160 Mb/s no es un límite seguro.
+- **Sondeo del SPAN:** lo arranca `lanzar_v2.sh` (paso 4b) y lo cierra `cerrar_v2.sh`. A mano
+  (bastión):
+
+      python3 ~/cyberflow-v2/codigo/operacion/sondeo_span.py --salida s.jsonl --hasta-epoch <epoch> --cada-s 2 --pid s.pid
+      python3 ~/cyberflow-v2/codigo/operacion/analizar_sondeo.py s.jsonl   # 0 sin descartes, 1 con, 2 indeterminado, 3 sin registro
+
+- **Cierre con fallo deliberado** (prueba; bastión):
+
+      CF_FALLO_PASO=extraer bash ~/cyberflow-v2/codigo/operacion/cerrar_v2.sh <ID>
+
+- **Despliegue** (bastión; rechaza si hay una ejecución en curso):
+
+      bash ~/cyberflow-v2/codigo/operacion/desplegar_codigo.sh /tmp/codigo-<c>.tgz <c>
+
+- **Reanálisis, ficha de trazabilidad y paquete:** ver `BLOQUE1-CIERRE.md` §14.

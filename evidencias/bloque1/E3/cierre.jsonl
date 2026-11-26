@@ -1,0 +1,11 @@
+{"utc":"2026-11-25T23:30:06.759Z","paso":"manifiestos","detalle":"ok "}
+{"utc":"2026-11-25T23:30:11.419Z","paso":"sondeo_span","detalle":"analizar_sondeo rc=2 (0 sin descartes, 1 con descartes, 2 indeterminado, 3 sin registro) "}
+{"utc":"2026-11-25T23:30:11.879Z","paso":"exclusion_v1","detalle":"{  cubierto: true,  regla: *@2026-11-24T18:15:00+00:00/2026-11-26T00:00:00+00:00,  cambio: false,  cubria_antes: true } "}
+{"utc":"2026-11-25T23:30:12.531Z","paso":"registro_dns","detalle":"397 lineas "}
+{"utc":"2026-11-25T23:30:12.740Z","paso":"registro_dns_pcap","detalle":"50098 bytes "}
+{"utc":"2026-11-25T23:30:22.481Z","paso":"servidor","detalle":"420 lineas en ventana "}
+{"utc":"2026-11-25T23:30:23.821Z","paso":"reunido","detalle":"/home/m4rk/cyberflow-v2/pruebas/V2-E3-20261125T230032Z "}
+{"utc":"2026-11-25T23:41:22.021Z","paso":"analisis","detalle":"conciliar rc=0 cobertura rc=0 fronteras rc=0 extraer rc=0 verificar rc=0 metadatos rc=0  "}
+{"utc":"2026-11-25T23:41:24.065Z","paso":"estado_global","detalle":"{ejecucion: V2-E3-20261125T230032Z, generador: completa, archivador: completa, vigia: sin_paradas, supervision: sin_invalidaciones, analisis: completo, exclusion_v1: cubre, global: indeterminada, dictamen: indeterminado, codigo_salida: 2, motivos: [falta:criterio:C7, falta:criterio:C9, falta:criterio:C10, falta:criterio:C11, falta:criterio:C12, falta:criterio:C13], pasos: {conciliar: 0, cobertura:"}
+{"utc":"2026-11-25T23:41:24.692Z","paso":"hashes","detalle":"pruebas/V2-E3-20261125T230032Z/SHA256SUMS "}
+{"utc":"2026-11-25T23:41:24.701Z","paso":"fin","detalle":"codigo_salida=2 "}

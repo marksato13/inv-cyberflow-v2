@@ -8,3 +8,4 @@
 # capturas/V2-E2-20261125T194609Z (manifiesto)
 9387c6526d94ec73158d35d5d220793e22db3721c9f36e57b94a9795882f50a7  capturas/V2-E2-20261125T194609Z/manifiesto.json
 6965160ce75341c2d5cb110dd46f5ce770d51a1247622b6c3cb9b91ba2fd78df  pruebas/V2-E2-20261125T194609Z/SHA256SUMS
+00a47e371ddeb459f915bbb8c4ff4b8a9c6758f25243ce216756e7ecdb496802  bloque1/reanalisis/copias-V2-B1-20261125T182207Z-gestion.json (privado: contiene IP de equipos ajenos; versión pública = paquete/V2-B1-20261125T182207Z/copias-gestion-desde-extracto.json)

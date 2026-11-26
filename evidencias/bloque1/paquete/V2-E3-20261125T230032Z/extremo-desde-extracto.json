@@ -1,0 +1,1506 @@
+{
+  "conexiones_solo_extremo": {
+    "total": 0,
+    "detalles": []
+  },
+  "conexiones_solo_sensor": {
+    "total": 0,
+    "detalles": []
+  },
+  "por_clase": {
+    "syn": {
+      "extremo": 264,
+      "sensor": 264,
+      "sin_sensor": {
+        "total": 0,
+        "detalles": []
+      },
+      "sin_extremo": {
+        "total": 0,
+        "detalles": []
+      }
+    },
+    "syn_ack": {
+      "extremo": 264,
+      "sensor": 264,
+      "sin_sensor": {
+        "total": 0,
+        "detalles": []
+      },
+      "sin_extremo": {
+        "total": 0,
+        "detalles": []
+      }
+    },
+    "fin": {
+      "extremo": 528,
+      "sensor": 528,
+      "sin_sensor": {
+        "total": 0,
+        "detalles": []
+      },
+      "sin_extremo": {
+        "total": 0,
+        "detalles": []
+      }
+    },
+    "rst": {
+      "extremo": 32,
+      "sensor": 32,
+      "sin_sensor": {
+        "total": 0,
+        "detalles": []
+      },
+      "sin_extremo": {
+        "total": 0,
+        "detalles": []
+      }
+    },
+    "ack_puro": {
+      "extremo": 4445,
+      "sensor": 4445,
+      "sin_sensor": {
+        "total": 0,
+        "detalles": []
+      },
+      "sin_extremo": {
+        "total": 0,
+        "detalles": []
+      }
+    },
+    "datos": {
+      "extremo": 10130,
+      "sensor": 10130,
+      "sin_sensor": {
+        "total": 0,
+        "detalles": []
+      },
+      "sin_extremo": {
+        "total": 0,
+        "detalles": []
+      }
+    }
+  },
+  "rangos": {
+    "total": 528,
+    "detalles": [
+      {
+        "conexion": [
+          "10.10.20.21",
+          33197,
+          80,
+          2507849169
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 84,
+        "bytes_sensor": 84,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          33197,
+          80,
+          2507849169
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 117722,
+        "bytes_sensor": 117722,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          34329,
+          80,
+          3331183302
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 81,
+        "bytes_sensor": 81,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          34329,
+          80,
+          3331183302
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 724,
+        "bytes_sensor": 724,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          35091,
+          80,
+          1629824936
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 83,
+        "bytes_sensor": 83,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          35091,
+          80,
+          1629824936
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 16214,
+        "bytes_sensor": 16214,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          35195,
+          80,
+          4000287787
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 82,
+        "bytes_sensor": 82,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          35195,
+          80,
+          4000287787
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 4864,
+        "bytes_sensor": 4864,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          35749,
+          80,
+          3389574625
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 82,
+        "bytes_sensor": 82,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          35749,
+          80,
+          3389574625
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 7196,
+        "bytes_sensor": 7196,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          36767,
+          80,
+          1043344826
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 82,
+        "bytes_sensor": 82,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          36767,
+          80,
+          1043344826
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 8011,
+        "bytes_sensor": 8011,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          37813,
+          80,
+          3069078843
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 82,
+        "bytes_sensor": 82,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          37813,
+          80,
+          3069078843
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 2117,
+        "bytes_sensor": 2117,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          37887,
+          80,
+          4204581079
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 81,
+        "bytes_sensor": 81,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          37887,
+          80,
+          4204581079
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 1071,
+        "bytes_sensor": 1071,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          39025,
+          80,
+          3219342641
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 82,
+        "bytes_sensor": 82,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          39025,
+          80,
+          3219342641
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 1901,
+        "bytes_sensor": 1901,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          39093,
+          80,
+          526517113
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 83,
+        "bytes_sensor": 83,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          39093,
+          80,
+          526517113
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 28191,
+        "bytes_sensor": 28191,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      }
+    ]
+  },
+  "transmisiones_verificadas_en_rangos": 0,
+  "tamaños": {
+    "pares": 15663,
+    "diferencias": 0
+  },
+  "desfases": {
+    "pares": 15663,
+    "estimado_s": -3.800359880727103e-05,
+    "medio_s": -3.800359880727103e-05,
+    "p50_s": 4.100799560546875e-05,
+    "p99_s": 0.0006033229827880852,
+    "max_abs_s": 0.005524158477783203,
+    "residual_p99_s": 0.0011960210025687254,
+    "deriva_s": -0.0009500980377197266,
+    "orden_conservado": false
+  },
+  "retransmisiones": {
+    "extremo": 0,
+    "sensor": 0,
+    "coinciden": true,
+    "por_conexion": {
+      "total": 528,
+      "detalles": [
+        {
+          "conexion": [
+            "10.10.20.21",
+            33197,
+            80,
+            2507849169
+          ],
+          "sentido": "c2s",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            33197,
+            80,
+            2507849169
+          ],
+          "sentido": "s2c",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            34329,
+            80,
+            3331183302
+          ],
+          "sentido": "c2s",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            34329,
+            80,
+            3331183302
+          ],
+          "sentido": "s2c",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            35091,
+            80,
+            1629824936
+          ],
+          "sentido": "c2s",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            35091,
+            80,
+            1629824936
+          ],
+          "sentido": "s2c",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            35195,
+            80,
+            4000287787
+          ],
+          "sentido": "c2s",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            35195,
+            80,
+            4000287787
+          ],
+          "sentido": "s2c",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            35749,
+            80,
+            3389574625
+          ],
+          "sentido": "c2s",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            35749,
+            80,
+            3389574625
+          ],
+          "sentido": "s2c",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            36767,
+            80,
+            1043344826
+          ],
+          "sentido": "c2s",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            36767,
+            80,
+            1043344826
+          ],
+          "sentido": "s2c",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            37813,
+            80,
+            3069078843
+          ],
+          "sentido": "c2s",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            37813,
+            80,
+            3069078843
+          ],
+          "sentido": "s2c",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            37887,
+            80,
+            4204581079
+          ],
+          "sentido": "c2s",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            37887,
+            80,
+            4204581079
+          ],
+          "sentido": "s2c",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            39025,
+            80,
+            3219342641
+          ],
+          "sentido": "c2s",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            39025,
+            80,
+            3219342641
+          ],
+          "sentido": "s2c",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            39093,
+            80,
+            526517113
+          ],
+          "sentido": "c2s",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        },
+        {
+          "conexion": [
+            "10.10.20.21",
+            39093,
+            80,
+            526517113
+          ],
+          "sentido": "s2c",
+          "extremo": 0,
+          "sensor": 0,
+          "coinciden": true
+        }
+      ]
+    }
+  },
+  "discrepancias": 0,
+  "version": 2,
+  "parametros": {
+    "servidor": "10.10.30.10",
+    "margen_s": 2.0,
+    "ventana_copia_s": 0.02,
+    "margen_par_s": 0.05
+  },
+  "captura_extremo": {
+    "fichero": "/tmp/tmp.Fc6NP6jY8g/V2-E3-20261125T230032Z/ext.pcap",
+    "paquetes": 15722,
+    "primer_instante": 1795647813.022861,
+    "ultimo_instante": 1795649247.623504,
+    "offload_detectado": false,
+    "tamaño_maximo_ip": 1500
+  },
+  "sensor": {
+    "ficheros": [
+      "/home/m4rk/cyberflow-v2/bloque1/paquete/V2-E3-20261125T230032Z/pcap/live-00000000000000.pcap.gz"
+    ],
+    "paquetes": 163032,
+    "eventos": 15722,
+    "copias": 31444
+  },
+  "periodo_comun": {
+    "inicio": 1795647815.022861,
+    "fin": 1795649245.623504
+  },
+  "modo": "paquetes",
+  "sin_periodo_comun": false,
+  "denominadores": {
+    "conexiones_extremo": 264,
+    "conexiones_sensor": 264,
+    "eventos_extremo": 15663,
+    "eventos_sensor": 15663
+  },
+  "parciales_extremo": {
+    "total": 0,
+    "detalles": []
+  },
+  "parciales_sensor": {
+    "total": 0,
+    "detalles": []
+  },
+  "fuera_de_periodo_comun": {
+    "extremo": {
+      "total": 59,
+      "detalles": [
+        {
+          "ts": 1795647813.022861,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 44517,
+          "puerto_destino": 80,
+          "ipid": 60309,
+          "longitud_ip": 60,
+          "seq": 1307045455,
+          "ack": 0,
+          "flags": 2,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.022911,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 44517,
+          "ipid": 0,
+          "longitud_ip": 60,
+          "seq": 2401792658,
+          "ack": 1307045456,
+          "flags": 18,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.023337,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 44517,
+          "puerto_destino": 80,
+          "ipid": 60310,
+          "longitud_ip": 52,
+          "seq": 1307045456,
+          "ack": 2401792659,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.023404,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 44517,
+          "puerto_destino": 80,
+          "ipid": 60311,
+          "longitud_ip": 133,
+          "seq": 1307045456,
+          "ack": 2401792659,
+          "flags": 24,
+          "carga": 81,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.02342,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 44517,
+          "ipid": 10431,
+          "longitud_ip": 52,
+          "seq": 2401792659,
+          "ack": 1307045537,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.024963,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 44517,
+          "ipid": 10432,
+          "longitud_ip": 206,
+          "seq": 2401792659,
+          "ack": 1307045537,
+          "flags": 24,
+          "carga": 154,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.025319,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 44517,
+          "ipid": 10433,
+          "longitud_ip": 152,
+          "seq": 2401792813,
+          "ack": 1307045537,
+          "flags": 25,
+          "carga": 100,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.025588,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 44517,
+          "puerto_destino": 80,
+          "ipid": 60312,
+          "longitud_ip": 52,
+          "seq": 1307045537,
+          "ack": 2401792813,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.025838,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 44517,
+          "puerto_destino": 80,
+          "ipid": 60313,
+          "longitud_ip": 52,
+          "seq": 1307045537,
+          "ack": 2401792914,
+          "flags": 17,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.02586,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 44517,
+          "ipid": 10434,
+          "longitud_ip": 52,
+          "seq": 2401792914,
+          "ack": 1307045538,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.025928,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56835,
+          "puerto_destino": 443,
+          "ipid": 27228,
+          "longitud_ip": 60,
+          "seq": 958394402,
+          "ack": 0,
+          "flags": 2,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.025953,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 443,
+          "puerto_destino": 56835,
+          "ipid": 0,
+          "longitud_ip": 60,
+          "seq": 2482502554,
+          "ack": 958394403,
+          "flags": 18,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.026269,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56835,
+          "puerto_destino": 443,
+          "ipid": 27229,
+          "longitud_ip": 52,
+          "seq": 958394403,
+          "ack": 2482502555,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.030658,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56835,
+          "puerto_destino": 443,
+          "ipid": 27230,
+          "longitud_ip": 569,
+          "seq": 958394403,
+          "ack": 2482502555,
+          "flags": 24,
+          "carga": 517,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.030687,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 443,
+          "puerto_destino": 56835,
+          "ipid": 44805,
+          "longitud_ip": 52,
+          "seq": 2482502555,
+          "ack": 958394920,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.032869,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 443,
+          "puerto_destino": 56835,
+          "ipid": 44806,
+          "longitud_ip": 1481,
+          "seq": 2482502555,
+          "ack": 958394920,
+          "flags": 24,
+          "carga": 1429,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.033377,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56835,
+          "puerto_destino": 443,
+          "ipid": 27231,
+          "longitud_ip": 52,
+          "seq": 958394920,
+          "ack": 2482503984,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.034971,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56835,
+          "puerto_destino": 443,
+          "ipid": 27232,
+          "longitud_ip": 132,
+          "seq": 958394920,
+          "ack": 2482503984,
+          "flags": 24,
+          "carga": 80,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.035306,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 443,
+          "puerto_destino": 56835,
+          "ipid": 44807,
+          "longitud_ip": 307,
+          "seq": 2482503984,
+          "ack": 958395000,
+          "flags": 24,
+          "carga": 255,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795647813.035731,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56835,
+          "puerto_destino": 443,
+          "ipid": 27233,
+          "longitud_ip": 155,
+          "seq": 958395000,
+          "ack": 2482504239,
+          "flags": 24,
+          "carga": 103,
+          "copias": 1,
+          "vlan": []
+        }
+      ]
+    },
+    "sensor": {
+      "total": 59,
+      "detalles": [
+        {
+          "ts": 1795647813.022697,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 44517,
+          "puerto_destino": 80,
+          "ipid": 60309,
+          "longitud_ip": 60,
+          "seq": 1307045455,
+          "ack": 0,
+          "flags": 2,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.023053,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 44517,
+          "ipid": 0,
+          "longitud_ip": 60,
+          "seq": 2401792658,
+          "ack": 1307045456,
+          "flags": 18,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.023309,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 44517,
+          "puerto_destino": 80,
+          "ipid": 60310,
+          "longitud_ip": 52,
+          "seq": 1307045456,
+          "ack": 2401792659,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.023357,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 44517,
+          "puerto_destino": 80,
+          "ipid": 60311,
+          "longitud_ip": 133,
+          "seq": 1307045456,
+          "ack": 2401792659,
+          "flags": 24,
+          "carga": 81,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.023539,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 44517,
+          "ipid": 10431,
+          "longitud_ip": 52,
+          "seq": 2401792659,
+          "ack": 1307045537,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.025128,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 44517,
+          "ipid": 10432,
+          "longitud_ip": 206,
+          "seq": 2401792659,
+          "ack": 1307045537,
+          "flags": 24,
+          "carga": 154,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.025392,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 44517,
+          "puerto_destino": 80,
+          "ipid": 60312,
+          "longitud_ip": 52,
+          "seq": 1307045537,
+          "ack": 2401792813,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.025763,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 44517,
+          "puerto_destino": 80,
+          "ipid": 60313,
+          "longitud_ip": 52,
+          "seq": 1307045537,
+          "ack": 2401792914,
+          "flags": 17,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.026277,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 44517,
+          "ipid": 10433,
+          "longitud_ip": 152,
+          "seq": 2401792813,
+          "ack": 1307045537,
+          "flags": 25,
+          "carga": 100,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.026277,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 44517,
+          "ipid": 10434,
+          "longitud_ip": 52,
+          "seq": 2401792914,
+          "ack": 1307045538,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.026277,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56835,
+          "puerto_destino": 443,
+          "ipid": 27228,
+          "longitud_ip": 60,
+          "seq": 958394402,
+          "ack": 0,
+          "flags": 2,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.026059,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 443,
+          "puerto_destino": 56835,
+          "ipid": 0,
+          "longitud_ip": 60,
+          "seq": 2482502554,
+          "ack": 958394403,
+          "flags": 18,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.026277,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56835,
+          "puerto_destino": 443,
+          "ipid": 27229,
+          "longitud_ip": 52,
+          "seq": 958394403,
+          "ack": 2482502555,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.030502,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56835,
+          "puerto_destino": 443,
+          "ipid": 27230,
+          "longitud_ip": 569,
+          "seq": 958394403,
+          "ack": 2482502555,
+          "flags": 24,
+          "carga": 517,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.03082,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 443,
+          "puerto_destino": 56835,
+          "ipid": 44805,
+          "longitud_ip": 52,
+          "seq": 2482502555,
+          "ack": 958394920,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.033046,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 443,
+          "puerto_destino": 56835,
+          "ipid": 44806,
+          "longitud_ip": 1481,
+          "seq": 2482502555,
+          "ack": 958394920,
+          "flags": 24,
+          "carga": 1429,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.033368,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56835,
+          "puerto_destino": 443,
+          "ipid": 27231,
+          "longitud_ip": 52,
+          "seq": 958394920,
+          "ack": 2482503984,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.034912,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56835,
+          "puerto_destino": 443,
+          "ipid": 27232,
+          "longitud_ip": 132,
+          "seq": 958394920,
+          "ack": 2482503984,
+          "flags": 24,
+          "carga": 80,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.035431,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 443,
+          "puerto_destino": 56835,
+          "ipid": 44807,
+          "longitud_ip": 307,
+          "seq": 2482503984,
+          "ack": 958395000,
+          "flags": 24,
+          "carga": 255,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795647813.035701,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56835,
+          "puerto_destino": 443,
+          "ipid": 27233,
+          "longitud_ip": 155,
+          "seq": 958395000,
+          "ack": 2482504239,
+          "flags": 24,
+          "carga": 103,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        }
+      ]
+    }
+  },
+  "comprobado": [
+    "conexiones por tupla e ISN",
+    "eventos de control uno a uno",
+    "cobertura de bytes por conexión y sentido",
+    "paquetes de datos uno a uno",
+    "tamaños IP por paquete",
+    "desfases y orden relativos",
+    "retransmisiones por transmisión"
+  ],
+  "no_comprobado": [
+    {
+      "aspecto": "tráfico fuera del periodo común y conexiones parciales",
+      "motivo": "observación incompleta en ambas capturas"
+    }
+  ]
+}

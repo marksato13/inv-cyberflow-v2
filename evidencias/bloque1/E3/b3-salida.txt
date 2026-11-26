@@ -1,0 +1,22 @@
+tcp-segmentation-offload: off
+generic-segmentation-offload: off
+generic-receive-offload: off
+large-receive-offload: off
+ejecucion V2-E3-20261125T230032Z
+tcpdump: listening on ens35, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+15722 packets captured
+15722 packets received by filter
+0 packets dropped by kernel
+Actual changes:
+tx-generic-segmentation: on
+rx-gro: on
+rx-lro: on
+tx-tcp-segmentation: on
+tx-tcp-ecn-segmentation: off [requested on]
+tx-tcp-mangleid-segmentation: on
+tx-tcp6-segmentation: on
+offload restaurado igual que antes
+cerrar rc=2
+{"modo": "paquetes", "discrepancias": 21}
+extremo rc=1
+fin V2-E3-20261125T230032Z

@@ -1,0 +1,282 @@
+{
+ "nota": "campos de trazabilidad; no son atributos del IF",
+ "ids": {
+  "ejecucion": "V2-E1-20261125T185323Z",
+  "programa": "prueba-perfiles-aislados.json",
+  "programa_sha256": "d93f81a808491838eb685460a9f3e9ef2f1353b160339961695f1e4c0a893603",
+  "dns_unidad": "cf-v2-dns-v2-e1-20261125t185323z"
+ },
+ "codigo": {
+  "version": "cc70836",
+  "fuente": "inferida: despliegue del vigía corregido antes de E1",
+  "generador_sha256": {
+   "clientes_lab_v2.py": "4e54513d195f4289854b2d2cdba591a9db6a1ae596d2d7f8e31154638ae4448d",
+   "distribuciones.py": "3e8429a5b68f5b8cdd7c18834b07d689808cdfe3807f1f9fe3dd079665196649",
+   "programa.py": "4c86bdda6203d181d83b052a755f37b781e14ac7ffdb53b98e84b65cea013b2e",
+   "transacciones.py": "7eef88868e5e407bd1e65e4ceba319324253888eeb90013edae90708ba8e36a1",
+   "v2ctl.py": "b0f4b1be6a65c1f93058058b63a071c06e57e8c94f7e7f0d868c9fe1726dd764"
+  }
+ },
+ "tiempos": {
+  "planificado": {
+   "archivador_desde_epoch": {
+    "epoch": 1795632803,
+    "utc": "2026-11-25T18:53:23Z"
+   },
+   "generador_inicio_epoch": {
+    "epoch": 1795632974,
+    "utc": "2026-11-25T18:56:14Z"
+   },
+   "generador_fin_epoch": {
+    "epoch": 1795634774,
+    "utc": "2026-11-25T19:26:14Z"
+   },
+   "captura_hasta_epoch": {
+    "epoch": 1795634894,
+    "utc": "2026-11-25T19:28:14Z"
+   },
+   "tope_epoch": {
+    "epoch": 1795638494,
+    "utc": "2026-11-25T20:28:14Z"
+   }
+  },
+  "real": {
+   "archivador_confirmado_epoch": {
+    "epoch": 1795632824,
+    "utc": "2026-11-25T18:53:44Z"
+   },
+   "primer_paquete_epoch": {
+    "epoch": 1795632793.470186,
+    "utc": "2026-11-25T18:53:13.470186Z"
+   },
+   "ultimo_paquete_epoch": {
+    "epoch": 1795634907.885766,
+    "utc": "2026-11-25T19:28:27.885766Z"
+   },
+   "generador_inicio_epoch": {
+    "epoch": 1795632976.786045,
+    "utc": "2026-11-25T18:56:16.786045Z"
+   },
+   "generador_fin_epoch": {
+    "epoch": 1795634777.636926,
+    "utc": "2026-11-25T19:26:17.636926Z"
+   }
+  },
+  "desvio_inicio_generador_s": 2.786,
+  "desvio_fin_generador_s": 3.637,
+  "margen_captura_antes_s": 183.316,
+  "margen_captura_despues_s": 130.249,
+  "intervalo_captura": null,
+  "intervalo_servidor": {
+   "desde_epoch": 1795632793.0,
+   "hasta_epoch": 1795634908.0,
+   "desde_utc": "2026-11-25T18:53:13Z",
+   "hasta_utc": "2026-11-25T19:28:28Z"
+  },
+  "intervalo_exclusion_v1": {
+   "desde_epoch": 1795632193.0,
+   "hasta_epoch": 1795635508.0,
+   "desde_utc": "2026-11-25T18:43:13Z",
+   "hasta_utc": "2026-11-25T19:38:28Z"
+  }
+ },
+ "fases": [
+  {
+   "id": "A-B1",
+   "jornada": "A",
+   "particion": "prueba",
+   "inicio_s": 0,
+   "fin_s": 900,
+   "inicio_utc": "2026-11-25T18:56:16.786045Z",
+   "fin_utc": "2026-11-25T19:11:16.786045Z"
+  },
+  {
+   "id": "A-B2",
+   "jornada": "A",
+   "particion": "prueba",
+   "inicio_s": 900,
+   "fin_s": 1800,
+   "inicio_utc": "2026-11-25T19:11:16.786045Z",
+   "fin_utc": "2026-11-25T19:26:16.786045Z"
+  }
+ ],
+ "referencia_temporal": {
+  "regla": "UTC; NTP en cada equipo; el reloj del switch NO es autoritativo",
+  "relojes": [
+   {
+    "fichero": "relojes-fin-10.10.10.20.txt",
+    "marca_utc": "2026-11-25T19:29:06.232380199Z",
+    "ntp_sincronizado": "yes",
+    "referencia": "C8A00008 (a.ntp.br)",
+    "desfase_sistema": "0.000945274 seconds fast of NTP time",
+    "estrato": "3"
+   },
+   {
+    "fichero": "relojes-fin-srvdmz.txt",
+    "marca_utc": "2026-11-25T19:29:05.989547338Z",
+    "ntp_sincronizado": "yes",
+    "estrato": "2",
+    "servidor": "185.125.190.58 (ntp.ubuntu.com)",
+    "desfase": "-344us"
+   },
+   {
+    "fichero": "relojes-inicio-10.10.10.20.txt",
+    "marca_utc": "2026-11-25T18:53:33.334677468Z",
+    "ntp_sincronizado": "yes",
+    "referencia": "C8A00008 (a.ntp.br)",
+    "desfase_sistema": "0.001086053 seconds fast of NTP time",
+    "estrato": "3"
+   },
+   {
+    "fichero": "relojes-inicio-srvdmz.txt",
+    "marca_utc": "2026-11-25T18:53:33.154949094Z",
+    "ntp_sincronizado": "yes",
+    "estrato": "2",
+    "servidor": "185.125.190.58 (ntp.ubuntu.com)",
+    "desfase": "-416us"
+   }
+  ],
+  "generador_fin": {
+   "ntp_sincronizado": "yes",
+   "utc": "2026-11-25T19:26:17.636926Z",
+   "timesync": "Server: 185.125.190.56 (ntp.ubuntu.com)\nPoll interval: 34min 8s (min: 32s; max 34min 8s)\n         Leap: normal\n      Version: 4\n      Stratum: 2\n    Reference: 1D586304\n    Precision: 1us (-25)\nRoot distance: 3.646ms (max: 5s)\n       Offset: -1.282ms\n        Delay: 153.110ms\n       Jitter: 2.206ms\n Packet count: 137\n    Frequency: +4,445ppm"
+  },
+  "desfases_supervision_s": [
+   {
+    "utc": "2026-11-25T18:56:20.468934+00:00",
+    "desfase_clientes_s": 0.1783444881439209,
+    "desfase_sensor1_s": 0.16479039192199707
+   },
+   {
+    "utc": "2026-11-25T19:01:25.030526+00:00",
+    "desfase_clientes_s": 0.17270946502685547,
+    "desfase_sensor1_s": 0.1667325496673584
+   },
+   {
+    "utc": "2026-11-25T19:06:30.062329+00:00",
+    "desfase_clientes_s": 0.17977571487426758,
+    "desfase_sensor1_s": 0.16481852531433105
+   },
+   {
+    "utc": "2026-11-25T19:11:35.093160+00:00",
+    "desfase_clientes_s": 0.1881568431854248,
+    "desfase_sensor1_s": 0.4324166774749756
+   },
+   {
+    "utc": "2026-11-25T19:16:40.750148+00:00",
+    "desfase_clientes_s": 0.18202757835388184,
+    "desfase_sensor1_s": 0.416581392288208
+   },
+   {
+    "utc": "2026-11-25T19:21:45.956625+00:00",
+    "desfase_clientes_s": 0.17542243003845215,
+    "desfase_sensor1_s": 0.4220588207244873
+   },
+   {
+    "utc": "2026-11-25T19:26:50.105634+00:00",
+    "desfase_clientes_s": 0.5611686706542969,
+    "desfase_sensor1_s": 0.1691420078277588
+   }
+  ]
+ },
+ "inventario": {
+  "pcap": {
+   "pcap_ficheros": 421,
+   "pcap_bytes": 155496059,
+   "pcap_completo": true,
+   "pcap_huecos": 0,
+   "inventario_sha256": "16561b91772aafd6c3298f62f631f2c230821ce62ca4388c444df0563fcbac7b",
+   "ubicacion": "/home/m4rk/cyberflow-v2/capturas/V2-E1-20261125T185323Z"
+  },
+  "eve": {
+   "eve_bytes": 7060289,
+   "eve_completo": true,
+   "eve_huecos": 0,
+   "eve_corruptas": 0,
+   "eve_sha256": "21951162961ba4a8f32e06e46118a0925fc3e8fb19285c578e725cea8fc20272"
+  },
+  "nic": {
+   "delta_nic_rx_packets": 1132354,
+   "delta_nic_rx_dropped": 29309
+  },
+  "archivador": {
+   "estado": "completa",
+   "motivo": "fin_programado",
+   "inicio": "2026-11-25T18:53:44.209293Z",
+   "fin": "2026-11-25T19:28:32.703659Z"
+  },
+  "generador": {
+   "estado": "completa",
+   "motivo": null,
+   "codigos": {
+    "P1": 0,
+    "P2": 0,
+    "P3": 0,
+    "P4": 0,
+    "P5": 0,
+    "P6": 0
+   },
+   "ficheros_sha256": {
+    "eventos-P1.jsonl": "ae86eec197df44a9687e196f22c6ea3bec197c3dd03cd3e8274c836186e33279",
+    "eventos-P2.jsonl": "b186e577e8afaac8c43a21dd5569c5d3fce9fcf540ad6af0a134c8ea515fa6b6",
+    "eventos-P3.jsonl": "f2ed46b24fcdaa8cbebba16c78d6dc855262e214643feb4f4e5d50e963ce70d0",
+    "eventos-P4.jsonl": "106c322b0b79d5c7a345e7f391e50cc6275644184081dc082c8dddecc8db0c83",
+    "eventos-P5.jsonl": "923b8857be81e15feaf6bfc8f01286fdf052bced9e0ac15c63fc8f3638fad525",
+    "eventos-P6.jsonl": "40c82ee4601586a50bade95e21d2608cd0d689dec4ce1d86473e584a086c8528",
+    "transacciones-P1.jsonl": "802d91100434d48452899bc00364717c08d68d058f91622f3b7d8381cc2f1941",
+    "transacciones-P2.jsonl": "103a9e6865c31960ee992e0d2e400a0f78f8dfffa8f368c3afbe9c514b9aadfe",
+    "transacciones-P3.jsonl": "364e91f49c3d91340c7ac64094b92007400cc5c80bfb6e2f13d60c250ffd3430",
+    "transacciones-P4.jsonl": "71db5754e2d30130ce231a3b621897296a73581805ebc4ddf66c13b843e464f1",
+    "transacciones-P5.jsonl": "bc93756c0d9fe2365b7fb3218d6e97c9674141d3db91e64d334aa3d8aaa42c2a",
+    "transacciones-P6.jsonl": "17f841fc6062afd5fb5e06b486bcd97839ec57c1638f50449a93029b3115b0bb"
+   }
+  },
+  "ficheros_ejecucion_sha256": {
+   "analisis-salida.txt": "27ec538124a8cb211bef2d2e17bf2aaaea2e20713c81885a4b70c87966f772b5",
+   "cierre.jsonl": "191fcd485970331f530bff7d2af48cdbd8f5586d48e2f6f55ce92363532ef59b",
+   "contadores-lab-fin.txt": "e080389b947a22fd06f4d4f0235195cdf5af6d57693d7fd5bc2e8247c7094ee8",
+   "contadores-lab-inicio.txt": "3b649ded6870b5c1f957f34b7234295e98e28b1fc874c47c1239c9ec40b02e80",
+   "criterios-salida.txt": "8f17731ca723251c6d52f7b47a8589d05a9caeaeaf1be4c2643687f20a90695f",
+   "dns-V2-E1-20261125T185323Z.jsonl": "1935e29bd528e78f255bf3d42ab4da0c43e98b4ce272fc96ebcde15290f19bd9",
+   "exclusion-v1.json": "f4fdd418203e606a6580d44c1be5692ef8d38ec35b2f54b3695bb3bb24c8d1ba",
+   "intervalo-exclusion.txt": "7d72571c1635bcefd4a16656ef055654515d3226709bf3c22121811e4d441805",
+   "intervalo-servidor.txt": "45f3c4efe250c4b52496b4c84899c897e2ea7f4761baface8ce550cd04518c14",
+   "lanzamiento.json": "43325ef3d104e62d5250112b883d1765c1b40393ef76dab5dfb309cd6de91a07",
+   "lanzamiento.jsonl": "b8d84b0ebe835aeb4c7863db983571da729c8c9e72ffdd4f6cd6f512cd26412a",
+   "manifiesto-archivador.json": "52600f555d3041e4ead8de5a15299d92fc0f56ca529f930d8c35d4fb0ef9e282",
+   "manifiesto-generador.json": "83254e27f27819be8762adbf15ebd990887d2eac62906fb6db70344adbbae03a",
+   "preflight-lab.jsonl": "d718db48708c2b93b9b3fb36163d3e6a9604a99ac6521cf6ad82c41149486f40",
+   "relojes-fin-10.10.10.20.txt": "cd96ae002dcaa2524b25310c66d92187b781980d94ade0ef5f71e80ca22f7300",
+   "relojes-fin-srvdmz.txt": "61b6beaa3138447b08917e5587d34a6f5aea5b1cc7c4810fe7b29da6f5e3cb8f",
+   "relojes-inicio-10.10.10.20.txt": "9c5b2b976f418e7b2555ca63b2ea66fcca495ac469dbe169aeab89adcf42ebc2",
+   "relojes-inicio-srvdmz.txt": "973d182e198bfab793b434de0f63679e4f52ec611e7d4a441c30b263359e3bca",
+   "resultado-global.json": "db9e5da11e7552bb4d06dfa8a0553a862a77b1bcbb54df9530d4d729cc277052",
+   "servidor-http-80.jsonl": "b5c7c3be3092ea939de3a023e51f3069611e88c26c907c34c836e7bcdaff8646",
+   "servidor-https-443.jsonl": "03102209b1bc40739a44a78b37f6ef0c4c3be58b93f766d8b77a907195af377e",
+   "supervision.jsonl": "de83fa15ee1c2b9a8e0bb160803e6f90e7162a8926611c2dbfe9730e99acdc52",
+   "supervisor-generador.jsonl": "a1b093922102e9c49118d54d32776830888e915655bdcdacf046d20d7f5ecca2",
+   "vigia-salida.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "vigia.jsonl": "8b0b2e7b510e764b65837fa9e571ee4dfd5d7c2ad3941579f1e4eb3516c704cf"
+  }
+ },
+ "huecos": {
+  "pcap": 0,
+  "eve": 0
+ },
+ "sondeo_espejo": null,
+ "pasos_analisis": [],
+ "dictamen": {
+  "global": "indeterminada",
+  "dictamen": null,
+  "codigo_salida": null,
+  "motivos": [
+   "falta:criterio:C7",
+   "falta:criterio:C9",
+   "falta:criterio:C10",
+   "falta:criterio:C11",
+   "falta:criterio:C12",
+   "falta:criterio:C13"
+  ],
+  "fuente_pasos": null
+ }
+}

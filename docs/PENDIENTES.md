@@ -1,4 +1,4 @@
-# Estado de cada elemento (24-nov-2026)
+# Estado de cada elemento (24-nov-2026; actualizado el 26-nov con el cierre del Bloque 1)
 
 **Leyenda:**
 
@@ -27,7 +27,7 @@ Preparar una prueba no es pasarla, y pasarla no cierra una observación de los r
 | 12b | Cambio de distribución de bytes en V1 en sombra al llegar la carga útil completa | Pendiente (decisión de Mark) | Desde el 24-nov ~18:40 UTC; valorar excluir del aprendizaje V1 o pausar sus timers |
 | 12c | Carga útil en descargas a velocidad de línea | Comprobado (limitación) | T8: 85,96 % del servidor. La saturación del destino del SPAN con dos copias está en `web_grande`; aceptar, limitar o espejar un sentido es decisión de Mark |
 | 13 | Configuración del SPAN (orígenes, destino, VLAN, camino en ESXi) | Comprobado | T6/T7: SPAN 1 de CORE-STACK, Gi1/0/23 y Gi2/0/23 (both) → Gi2/0/19 → vmnic2 → vSwitch2 → PG-CYBERFLOW-SPAN (VLAN 4095); estándar, sin vDS; VLAN 20 y 30 observadas |
-| 14 | Discrepancia de `rx_dropped` | Comprobado | T9: son tramas sin protocolo manejado (2,74 % frente a 2,90 % en el PCAP) y se entregan antes a tcpdump; no es pérdida |
+| 14 | Discrepancia de `rx_dropped` | Comprobado (26-nov) | ~~T9: 2,74 % frente a 2,90 %~~ (parecido de porcentajes, sustituido). Prueba de 120 s: Δ`rx_dropped` 1 708 = exactamente las tramas SNAP etiquetadas (PVST+/CDP) del PCAP; no es pérdida. `BLOQUE1-CIERRE.md` §5.1 |
 | 15 | Truncado del EVE por copytruncate a las 00:00 UTC | Implementado sin verificar | El archivador lo registra; programar las jornadas sin cruzar las 00:00 UTC |
 | 16 | Volumen GB/h con carga sostenida y destino del almacenamiento privado | Pendiente (**bloqueante para las 42 h**) | T8: 0,78 GB/h con la prueba corta, que da ~33 GB para 42 h, y Sensor1 tiene 23 GB libres. Hay que medirlo con el programa del piloto y decidir el disco destino (Mark) |
 | 17 | Condición de parada por espacio | Implementado sin verificar | `--libre-minimo-gb 4` |
@@ -43,10 +43,14 @@ Preparar una prueba no es pasarla, y pasarla no cierra una observación de los r
 | 27 | Scripts de procesamiento, entrenamiento y evaluación | Pendiente | Se incorporarán después, con su procedencia |
 | 28 | Código público de V1 con nombres de otro dominio en `clientes_lab.py` | Pendiente | Anotado; no se ha tocado V1 |
 | 29 | Bloque 1 (25-nov): causa de los descartes de Gi2/0/19 en T1/T2 | Comprobado | Transferencias de gestión que cruzan el cortafuegos (vigía `tail -n 2000`), duplicadas por el espejo; B1 reproduce y anula; vigía corregido `cc70836`; E1/E2 con 0 descartes durante la captura. `BLOQUE1-CALIDAD-CAPTURA.md` |
-| 30 | Copias faltantes de gestión sin descarte contado (B1: 1 843 frente a 145) | Pendiente | Causa sin resolver (¿vSwitch ESXi?, ¿replicación SPAN no contada?). Mientras tanto, la ausencia de incrementos no prueba ausencia de pérdida; para lo experimental valen copias + extremo + cobertura |
-| 31 | `rx_dropped` de `ens37` creciente | Pendiente | Probablemente tramas sin manejador; no demostrado |
+| 30 | Copias faltantes de gestión sin descarte contado | Comprobado el hecho; lugar sin localizar | Con la v2: 42 418 (no 1 843, que venía de la v1): R3 38 328 con +137 descartes, R4 111 con 0. La pérdida es anterior a la VM. Falta `esxcli network nic stats get -n vmnic2` antes y después de una transferencia (ESXi, Mark). `BLOQUE1-CIERRE.md` §5.2 |
+| 31 | `rx_dropped` de `ens37` creciente | Comprobado (26-nov) | Igual que la fila 14 (§5.1); retrospectiva en las 6 ejecuciones coherente (SNAP − Δ`rx_dropped` = +344…+425) |
 | 32 | Decisión de Mark: política de calidad del espejo (clases, localización, propagación, parada) | Pendiente | Propuesta en `BLOQUE1-CALIDAD-CAPTURA.md` §5; criterio C9 vigente sin cambios |
 | 33 | Decisión de Mark: filtro de VLAN en la sesión SPAN o `qos queue-softmax-multiplier` | Pendiente | No aplicado; la sesión la comparte otro consumidor del espejo |
-| 34 | Sondeo fino del contador (≈6 s) durante las 49 h | Implementado sin verificar en horas | `sondear_span.sh` probado en B1/E1/E2 (≤ 35 min); falta reconexión automática y su integración en `lanzar_v2.sh` |
-| 35 | Norma: sin transferencias de gestión grandes por el cortafuegos durante una captura (o ≤ 160 Mb/s) | Implementado sin verificar en horas | B1-R4; añadir a PROTOCOLO y COMANDOS |
-| 36 | `cerrar_v2.sh`: stderr de `time -v` entremezclado con `rc=` | Comprobado (corregido) | E2 salió `analisis: incompleto` por eso; `exec 2>&1`; pendiente de ejercitar en el lab |
+| 34 | Sondeo fino del contador durante las 49 h | Integrado y comprobado en E3 (30 min); horas sin verificar | `sondeo_span.py` cada 2 s, con reconexión, en `lanzar_v2.sh` (paso 4b) y analizado en `cerrar_v2.sh`; `estado_global` no lee nunca «sin sondeo» como «sin pérdidas». `BLOQUE1-CIERRE.md` §6 |
+| 35 | Norma: sin transferencias grandes por el cortafuegos durante una captura | En PROTOCOLO y COMANDOS (26-nov) | 160 Mb/s **no** es un límite seguro: R4 perdió 111 copias de gestión sin descartes contados |
+| 36 | `cerrar_v2.sh`: pasos y código de salida | Comprobado (26-nov) | Pasos estructurados en `pasos-analisis.jsonl`; caso correcto (salida 2) y fallo deliberado `CF_FALLO_PASO=extraer` (salida 1) en E1. `BLOQUE1-CIERRE.md` §9 |
+| 37 | Deduplicación del extractor: RST idénticos fundidos y copias a más de 5 ms | Pendiente (bloque 3) | E3: 16 pares de RST y 4 tramas; el comprobador ya lo resuelve (VLAN+TTL, 20 ms). `BLOQUE1-CIERRE.md` §1 |
+| 38 | Reloj de DC1 unos 6,5–7 ms por detrás de Clientes y Sensor1 | Pendiente | Contraste DNS de E3 (marcas del kernel). Contradice a `chronyc` en DC1 (+0,6 ms). Medir el desfase entre equipos directamente |
+| 39 | Decisión de Mark: política de calidad (vigente frente a propuesta) | Pendiente | `BLOQUE1-CIERRE.md` §7, con el sesgo cuantificado (T1 59/65, T2 265/265) |
+| 40 | 6 consultas DNS por ejecución sin transacción del generador | Pendiente (sin pérdida) | Vistas igual en DC1 y Sensor1; hipótesis: sonda del preflight o arranque |
