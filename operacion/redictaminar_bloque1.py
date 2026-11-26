@@ -26,6 +26,9 @@ def main(argv=None) -> int:
     ap.add_argument("--pruebas", required=True, type=Path)
     ap.add_argument("--copias-dir", required=True, type=Path)
     ap.add_argument("--dns-dir", required=True, type=Path)
+    ap.add_argument("--sonda-dir", type=Path, help="ventanas-sonda-<ID>.json (ventanas_sonda.py v2)")
+    ap.add_argument("--extremo-dir", type=Path, help="extremo-<ID>.json (comparar_extremo.py)")
+    ap.add_argument("--extremo-captura-dir", type=Path, help="extremo-captura-<ID>.json (tcpdump de srv-dmz)")
     ap.add_argument("--carpeta", action="append", default=[],
                     help="ID=carpeta cuando la carpeta de pruebas no se llama como el ID")
     ap.add_argument("--salida", required=True, type=Path)
@@ -37,6 +40,14 @@ def main(argv=None) -> int:
         p = a.pruebas / carpetas.get(ide, ide)
         sustitutos = {p / "calidad-copias-espejo.json": a.copias_dir / ("copias-%s.json" % ide),
                       p / "calidad-contraste-dns.json": a.dns_dir / ("dns-%s.json" % ide)}
+        # Sin sustituto, la evidencia se busca donde la deja cerrar_v2.sh desde el 26-nov: en las
+        # ejecuciones antiguas no existe y el dictamen la da por ausente (indeterminado).
+        for opcion, nombre, destino in ((a.sonda_dir, "ventanas-sonda-%s.json", p / "calidad-sonda.json"),
+                                        (a.extremo_dir, "extremo-%s.json", p / "calidad-extremo.json"),
+                                        (a.extremo_captura_dir, "extremo-captura-%s.json",
+                                         p / "registros" / "extremo-captura.json")):
+            if opcion and (opcion / (nombre % ide)).exists():
+                sustitutos[destino] = opcion / (nombre % ide)
         eg.leer = lambda ruta, s=sustitutos: original(s.get(ruta, ruta))
         try:
             r = eg.evaluar(ide, p)
@@ -46,7 +57,8 @@ def main(argv=None) -> int:
         filas.append({"ejecucion": ide, "anterior": {k: anterior.get(k) for k in ("global", "motivos")},
                       "nuevo": r, "fuentes_sustituidas": {k.name: str(v) for k, v in sustitutos.items()}})
         print(ide, "anterior=%s" % anterior.get("global"), "nuevo=%s" % r["global"],
-              "copias=%s dns=%s" % (r["calidad_copias"], r["calidad_dns"]),
+              "copias=%s dns=%s extremo=%s sonda=%s" % (r["calidad_copias"], r["calidad_dns"],
+                                                        r["calidad_extremo"], r["calidad_sonda"]),
               "motivos=%s" % ",".join(m for m in r["motivos"] if not m.startswith("falta:criterio")))
     a.salida.write_text(json.dumps(filas, ensure_ascii=False, indent=1), encoding="utf-8")
     return 0

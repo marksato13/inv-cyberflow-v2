@@ -32,6 +32,9 @@ EJECUCIONES = {
     "V2-E3-20261125T230032Z": "V2-E3-20261125T230032Z",
 }
 PCAP_DC1 = {"V2-E3-20261125T230032Z": ENTRADAS / "dns-e3-pcap/dns-dc1-V2-E3-20261125T230032Z.saneado.pcap"}
+# Registros de sondas reconstruidos (segunda revisión del 26-nov) y la clasificación que dio el
+# laboratorio con ellos: la reproducción debe dar la misma relación evento -> sonda.
+SONDAS = RAIZ / "evidencias/bloque1/sonda-preflight-v2"
 
 
 def sin_parametros(d):
@@ -52,6 +55,9 @@ def contrastar(paquete: Path, salida: Path, ide: str, carpeta: str, pcap: Path |
            "--capturas", str(paquete / ide), "--salida", str(destino)]
     if pcap:
         cmd += ["--pcap", str(pcap)]
+    registro = SONDAS / ("sondas-reconstruidas-%s.jsonl" % ide)
+    if registro.exists():
+        cmd += ["--sondas", str(registro)]
     rc = subprocess.run(cmd, stdout=subprocess.DEVNULL, stdin=subprocess.DEVNULL).returncode
     return rc, json.loads(destino.read_text(encoding="utf-8"))
 
@@ -72,12 +78,23 @@ def main(argv=None):
             rc, r = contrastar(paquete, salida, ide, carpeta, pcap)
             lab = json.loads(referencia.read_text(encoding="utf-8"))
             igual = sin_parametros(r) == sin_parametros(lab)
+            # Clasificación de los eventos sin transacción frente a la del laboratorio con el mismo
+            # registro reconstruido (sonda-preflight-v2/dns-<ID>-{sin,con}-pcap.json).
+            ref_clas = SONDAS / ("dns-%s-%s.json" % (ide, "con-pcap" if pcap else "sin-pcap"))
+            clas_igual = None
+            if ref_clas.exists():
+                k = lambda c: {x: c.get(x) for x in ("explicados", "no_explicados", "inciertos", "por_motivo",
+                                                      "por_fuente_registro", "claves_explicadas")}
+                clas_igual = k(r["sin_transaccion_clasificacion"]) == k(
+                    json.loads(ref_clas.read_text(encoding="utf-8"))["sin_transaccion_clasificacion"])
+                igual &= clas_igual
             todo_igual &= igual
             filas.append({"ejecucion": ide, "pcap_dc1": r["parametros"]["pcap_dc1"], "rc": rc,
                           "total": r["total"], "sin_transaccion": r["sin_transaccion"]["total"],
                           "tramas_ilegibles": r["tramas_ilegibles"]["total"],
                           "sin_transaccion_clasificacion": r["sin_transaccion_clasificacion"],
                           "tramas_recortadas_no_dns": r.get("tramas_recortadas_no_dns", 0),
+                          "clasificacion_igual_al_laboratorio": clas_igual,
                           "igual_al_laboratorio": igual, "referencia": referencia.relative_to(RAIZ).as_posix()})
     (salida / "reproduccion-dns.json").write_text(
         json.dumps({"filas": filas, "todo_igual": todo_igual}, ensure_ascii=False, indent=1), encoding="utf-8")

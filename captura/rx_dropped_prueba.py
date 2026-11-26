@@ -133,7 +133,10 @@ def main() -> int:
     serie = []
     for i in range(len(muestras) - 1):
         seg = int(muestras[i]["t"] - t0)
-        serie.append({"s": seg, "rx_dropped": muestras[i + 1]["rx_dropped"] - muestras[i]["rx_dropped"],
+        # «s» se repite cuando dos muestras caen en el mismo segundo entero: «desde»/«hasta» son los
+        # instantes reales del intervalo de la muestra.
+        serie.append({"s": seg, "desde": muestras[i]["t"], "hasta": muestras[i + 1]["t"],
+                      "rx_dropped": muestras[i + 1]["rx_dropped"] - muestras[i]["rx_dropped"],
                       "rx_packets": muestras[i + 1]["rx_packets"] - muestras[i]["rx_packets"],
                       "clases": dict(por_seg.get(seg, {}))})
     try:
