@@ -1,0 +1,266 @@
+[
+ {
+  "ejecucion": "V2-T1-20261125T062528Z",
+  "anterior": {
+   "global": "no_aprobada",
+   "motivos": [
+    "supervision:con_invalidaciones",
+    "falta:criterio:C7",
+    "falta:criterio:C9",
+    "falta:criterio:C10",
+    "falta:criterio:C11",
+    "falta:criterio:C12",
+    "falta:criterio:C13"
+   ]
+  },
+  "nuevo": {
+   "ejecucion": "V2-T1-20261125T062528Z",
+   "generador": "completa",
+   "archivador": "completa",
+   "vigia": "sin_paradas",
+   "supervision": "con_invalidaciones",
+   "espejo": "sin_datos",
+   "calidad_copias": "completo",
+   "calidad_dns": "completo",
+   "analisis": "completo",
+   "exclusion_v1": "cubre",
+   "global": "no_aprobada",
+   "dictamen": "fallido",
+   "codigo_salida": 1,
+   "motivos": [
+    "supervision:con_invalidaciones",
+    "falta:espejo",
+    "falta:criterio:C7",
+    "falta:criterio:C9",
+    "falta:criterio:C10",
+    "falta:criterio:C11",
+    "falta:criterio:C12",
+    "falta:criterio:C13"
+   ],
+   "pasos": {
+    "conciliar": "0",
+    "cobertura": "0",
+    "fronteras": "0",
+    "extraer": "0",
+    "verificar": "0",
+    "metadatos": "0"
+   },
+   "fuente_pasos": "analisis-salida.txt"
+  },
+  "fuentes_sustituidas": {
+   "calidad-copias-espejo.json": "/home/m4rk/cyberflow-v2/bloque1/reanalisis/copias-V2-T1-20261125T062528Z.json",
+   "calidad-contraste-dns.json": "/home/m4rk/cyberflow-v2/bloque1/sonda-preflight/dns-V2-T1-20261125T062528Z.json"
+  }
+ },
+ {
+  "ejecucion": "V2-T2-20261125T070500Z",
+  "anterior": {
+   "global": "no_aprobada",
+   "motivos": [
+    "supervision:con_invalidaciones",
+    "falta:criterio:C7",
+    "falta:criterio:C9",
+    "falta:criterio:C10",
+    "falta:criterio:C11",
+    "falta:criterio:C12",
+    "falta:criterio:C13"
+   ]
+  },
+  "nuevo": {
+   "ejecucion": "V2-T2-20261125T070500Z",
+   "generador": "completa",
+   "archivador": "completa",
+   "vigia": "sin_paradas",
+   "supervision": "con_invalidaciones",
+   "espejo": "sin_datos",
+   "calidad_copias": "completo",
+   "calidad_dns": "completo",
+   "analisis": "completo",
+   "exclusion_v1": "cubre",
+   "global": "no_aprobada",
+   "dictamen": "fallido",
+   "codigo_salida": 1,
+   "motivos": [
+    "supervision:con_invalidaciones",
+    "falta:espejo",
+    "falta:criterio:C7",
+    "falta:criterio:C9",
+    "falta:criterio:C10",
+    "falta:criterio:C11",
+    "falta:criterio:C12",
+    "falta:criterio:C13"
+   ],
+   "pasos": {
+    "conciliar": "0",
+    "cobertura": "0",
+    "fronteras": "0",
+    "extraer": "0",
+    "verificar": "0",
+    "metadatos": "0"
+   },
+   "fuente_pasos": "analisis-salida.txt"
+  },
+  "fuentes_sustituidas": {
+   "calidad-copias-espejo.json": "/home/m4rk/cyberflow-v2/bloque1/reanalisis/copias-V2-T2-20261125T070500Z.json",
+   "calidad-contraste-dns.json": "/home/m4rk/cyberflow-v2/bloque1/sonda-preflight/dns-V2-T2-20261125T070500Z.json"
+  }
+ },
+ {
+  "ejecucion": "V2-E1-20261125T185323Z",
+  "anterior": {
+   "global": "indeterminada",
+   "motivos": [
+    "falta:criterio:C7",
+    "falta:criterio:C9",
+    "falta:criterio:C10",
+    "falta:criterio:C11",
+    "falta:criterio:C12",
+    "falta:criterio:C13"
+   ]
+  },
+  "nuevo": {
+   "ejecucion": "V2-E1-20261125T185323Z",
+   "generador": "completa",
+   "archivador": "completa",
+   "vigia": "sin_paradas",
+   "supervision": "sin_invalidaciones",
+   "espejo": "sin_datos",
+   "calidad_copias": "completo",
+   "calidad_dns": "completo",
+   "analisis": "completo",
+   "exclusion_v1": "cubre",
+   "global": "indeterminada",
+   "dictamen": "indeterminado",
+   "codigo_salida": 2,
+   "motivos": [
+    "falta:espejo",
+    "falta:criterio:C7",
+    "falta:criterio:C9",
+    "falta:criterio:C10",
+    "falta:criterio:C11",
+    "falta:criterio:C12",
+    "falta:criterio:C13"
+   ],
+   "pasos": {
+    "conciliar": "0",
+    "cobertura": "0",
+    "fronteras": "0",
+    "extraer": "0",
+    "verificar": "0",
+    "metadatos": "0"
+   },
+   "fuente_pasos": "analisis-salida.txt"
+  },
+  "fuentes_sustituidas": {
+   "calidad-copias-espejo.json": "/home/m4rk/cyberflow-v2/bloque1/reanalisis/copias-V2-E1-20261125T185323Z.json",
+   "calidad-contraste-dns.json": "/home/m4rk/cyberflow-v2/bloque1/sonda-preflight/dns-V2-E1-20261125T185323Z.json"
+  }
+ },
+ {
+  "ejecucion": "V2-E2-20261125T194609Z",
+  "anterior": {
+   "global": "indeterminada",
+   "motivos": [
+    "falta:analisis",
+    "falta:criterio:C7",
+    "falta:criterio:C9",
+    "falta:criterio:C10",
+    "falta:criterio:C11",
+    "falta:criterio:C12",
+    "falta:criterio:C13"
+   ]
+  },
+  "nuevo": {
+   "ejecucion": "V2-E2-20261125T194609Z",
+   "generador": "completa",
+   "archivador": "completa",
+   "vigia": "sin_paradas",
+   "supervision": "sin_invalidaciones",
+   "espejo": "sin_datos",
+   "calidad_copias": "completo",
+   "calidad_dns": "completo",
+   "analisis": "incompleto",
+   "exclusion_v1": "cubre",
+   "global": "indeterminada",
+   "dictamen": "indeterminado",
+   "codigo_salida": 2,
+   "motivos": [
+    "falta:paso:verificar",
+    "falta:espejo",
+    "falta:analisis",
+    "falta:criterio:C7",
+    "falta:criterio:C9",
+    "falta:criterio:C10",
+    "falta:criterio:C11",
+    "falta:criterio:C12",
+    "falta:criterio:C13"
+   ],
+   "pasos": {
+    "conciliar": "0",
+    "cobertura": "0",
+    "fronteras": "0",
+    "extraer": "0",
+    "iverificar": "0",
+    "metadatos": "0"
+   },
+   "fuente_pasos": "analisis-salida.txt"
+  },
+  "fuentes_sustituidas": {
+   "calidad-copias-espejo.json": "/home/m4rk/cyberflow-v2/bloque1/reanalisis/copias-V2-E2-20261125T194609Z.json",
+   "calidad-contraste-dns.json": "/home/m4rk/cyberflow-v2/bloque1/sonda-preflight/dns-V2-E2-20261125T194609Z.json"
+  }
+ },
+ {
+  "ejecucion": "V2-E3-20261125T230032Z",
+  "anterior": {
+   "global": "indeterminada",
+   "motivos": [
+    "falta:criterio:C7",
+    "falta:criterio:C9",
+    "falta:criterio:C10",
+    "falta:criterio:C11",
+    "falta:criterio:C12",
+    "falta:criterio:C13"
+   ]
+  },
+  "nuevo": {
+   "ejecucion": "V2-E3-20261125T230032Z",
+   "generador": "completa",
+   "archivador": "completa",
+   "vigia": "sin_paradas",
+   "supervision": "sin_invalidaciones",
+   "espejo": "indeterminado",
+   "calidad_copias": "completo",
+   "calidad_dns": "completo",
+   "analisis": "completo",
+   "exclusion_v1": "cubre",
+   "global": "indeterminada",
+   "dictamen": "indeterminado",
+   "codigo_salida": 2,
+   "motivos": [
+    "falta:espejo",
+    "falta:criterio:C7",
+    "falta:criterio:C9",
+    "falta:criterio:C10",
+    "falta:criterio:C11",
+    "falta:criterio:C12",
+    "falta:criterio:C13"
+   ],
+   "pasos": {
+    "conciliar": "0",
+    "cobertura": "0",
+    "fronteras": "0",
+    "extraer": "0",
+    "verificar": "0",
+    "calidad_copias": "0",
+    "calidad_dns": "1",
+    "metadatos": "0"
+   },
+   "fuente_pasos": "pasos-analisis.jsonl"
+  },
+  "fuentes_sustituidas": {
+   "calidad-copias-espejo.json": "/home/m4rk/cyberflow-v2/bloque1/reanalisis/copias-V2-E3-20261125T230032Z.json",
+   "calidad-contraste-dns.json": "/home/m4rk/cyberflow-v2/bloque1/sonda-preflight/dns-V2-E3-20261125T230032Z.json"
+  }
+ }
+]

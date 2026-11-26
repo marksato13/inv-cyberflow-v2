@@ -1,0 +1,149 @@
+{
+ "filas": [
+  {
+   "ejecucion": "V2-T1-20261125T062528Z",
+   "pcap_dc1": false,
+   "rc": 1,
+   "total": {
+    "transacciones": 32,
+    "comprobadas": 32,
+    "sin_discrepancias": 32,
+    "discrepancias": 0,
+    "no_determinables": 0,
+    "indeterminado_dc1": 0,
+    "ambiguas": 0,
+    "consultas_dc1": 32,
+    "respuestas_dc1": 32,
+    "timeouts": 0,
+    "timeouts_con_consulta_dc1": 0,
+    "timeouts_con_consulta_sensor1": 0
+   },
+   "sin_transaccion": 10,
+   "tramas_ilegibles": 0,
+   "tramas_recortadas_no_dns": 132025,
+   "igual_al_laboratorio": true,
+   "referencia": "evidencias/bloque1/reanalisis/dns-V2-T1-20261125T062528Z.json"
+  },
+  {
+   "ejecucion": "V2-T2-20261125T070500Z",
+   "pcap_dc1": false,
+   "rc": 1,
+   "total": {
+    "transacciones": 182,
+    "comprobadas": 182,
+    "sin_discrepancias": 182,
+    "discrepancias": 0,
+    "no_determinables": 0,
+    "indeterminado_dc1": 0,
+    "ambiguas": 0,
+    "consultas_dc1": 182,
+    "respuestas_dc1": 182,
+    "timeouts": 0,
+    "timeouts_con_consulta_dc1": 0,
+    "timeouts_con_consulta_sensor1": 0
+   },
+   "sin_transaccion": 6,
+   "tramas_ilegibles": 0,
+   "tramas_recortadas_no_dns": 106741,
+   "igual_al_laboratorio": true,
+   "referencia": "evidencias/bloque1/reanalisis/dns-V2-T2-20261125T070500Z.json"
+  },
+  {
+   "ejecucion": "V2-E1-20261125T185323Z",
+   "pcap_dc1": false,
+   "rc": 1,
+   "total": {
+    "transacciones": 32,
+    "comprobadas": 32,
+    "sin_discrepancias": 32,
+    "discrepancias": 0,
+    "no_determinables": 0,
+    "indeterminado_dc1": 0,
+    "ambiguas": 0,
+    "consultas_dc1": 32,
+    "respuestas_dc1": 32,
+    "timeouts": 0,
+    "timeouts_con_consulta_dc1": 0,
+    "timeouts_con_consulta_sensor1": 0
+   },
+   "sin_transaccion": 6,
+   "tramas_ilegibles": 0,
+   "tramas_recortadas_no_dns": 118580,
+   "igual_al_laboratorio": true,
+   "referencia": "evidencias/bloque1/reanalisis/dns-V2-E1-20261125T185323Z.json"
+  },
+  {
+   "ejecucion": "V2-E2-20261125T194609Z",
+   "pcap_dc1": false,
+   "rc": 1,
+   "total": {
+    "transacciones": 182,
+    "comprobadas": 182,
+    "sin_discrepancias": 182,
+    "discrepancias": 0,
+    "no_determinables": 0,
+    "indeterminado_dc1": 0,
+    "ambiguas": 0,
+    "consultas_dc1": 182,
+    "respuestas_dc1": 182,
+    "timeouts": 0,
+    "timeouts_con_consulta_dc1": 0,
+    "timeouts_con_consulta_sensor1": 0
+   },
+   "sin_transaccion": 6,
+   "tramas_ilegibles": 0,
+   "tramas_recortadas_no_dns": 98564,
+   "igual_al_laboratorio": true,
+   "referencia": "evidencias/bloque1/reanalisis/dns-V2-E2-20261125T194609Z.json"
+  },
+  {
+   "ejecucion": "V2-E3-20261125T230032Z",
+   "pcap_dc1": false,
+   "rc": 1,
+   "total": {
+    "transacciones": 182,
+    "comprobadas": 182,
+    "sin_discrepancias": 182,
+    "discrepancias": 0,
+    "no_determinables": 0,
+    "indeterminado_dc1": 0,
+    "ambiguas": 0,
+    "consultas_dc1": 182,
+    "respuestas_dc1": 182,
+    "timeouts": 0,
+    "timeouts_con_consulta_dc1": 0,
+    "timeouts_con_consulta_sensor1": 0
+   },
+   "sin_transaccion": 6,
+   "tramas_ilegibles": 0,
+   "tramas_recortadas_no_dns": 98712,
+   "igual_al_laboratorio": true,
+   "referencia": "evidencias/bloque1/reanalisis/dns-V2-E3-20261125T230032Z.json"
+  },
+  {
+   "ejecucion": "V2-E3-20261125T230032Z",
+   "pcap_dc1": true,
+   "rc": 1,
+   "total": {
+    "transacciones": 182,
+    "comprobadas": 182,
+    "sin_discrepancias": 182,
+    "discrepancias": 0,
+    "no_determinables": 0,
+    "indeterminado_dc1": 0,
+    "ambiguas": 0,
+    "consultas_dc1": 182,
+    "respuestas_dc1": 182,
+    "timeouts": 0,
+    "timeouts_con_consulta_dc1": 0,
+    "timeouts_con_consulta_sensor1": 0
+   },
+   "sin_transaccion": 8,
+   "tramas_ilegibles": 0,
+   "tramas_recortadas_no_dns": 98712,
+   "igual_al_laboratorio": true,
+   "referencia": "evidencias/bloque1/dns-entradas/dns-e3-pcap/dns-V2-E3-20261125T230032Z-pcap-saneado.json"
+  }
+ ],
+ "todo_igual": true
+}

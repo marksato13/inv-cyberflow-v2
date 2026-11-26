@@ -1,5 +1,16 @@
 # Cierre del Bloque 1: calidad y trazabilidad de la captura (25/26-nov-2026)
 
+> **Revisión del 26-nov (`BLOQUE1-REVISION-2026-11-26.md`). Este documento NO cierra el Bloque 1.**
+>
+> - **DNS (§4):** el E3 publicado se contrastó sin el PCAP de DC1. Está corregido y es reproducible
+>   desde lo publicado (REVISION §1).
+> - **Eventos sin transacción (§4):** son la sonda del preflight de `v2ctl.py`; están explicados
+>   (REVISION §2).
+> - **Política (§7):** ahora entra en el dictamen (`BLOQUE1-POLITICA-CALIDAD.md`).
+> - **Alcance:** B1 **no tiene eventos experimentales**. Las cifras experimentales son de las cinco
+>   ejecuciones con generador.
+> - **Estado:** el de REVISION, «Estado del Bloque 1». La matriz del §13 está actualizada.
+
 Continúa `BLOQUE1-CALIDAD-CAPTURA.md`, que se conserva como estaba. Lo que este documento corrige
 de aquel está en el §12.
 
@@ -123,7 +134,7 @@ de DC1 con otros equipos. Por eso los denominadores de «antes» y «después» 
 
 | Ejecución | Copias, antes (cd06fcf / v1) | Copias, después (v2) | Extremo, antes | Extremo, después | DNS (generador ↔ DC1 ↔ Sensor1) |
 |---|---|---|---|---|---|
-| B1 (experimental) | 0 faltantes | sin eventos de clientes en la ventana (B1 no tenía generador) | — | — | — |
+| B1 (experimental) | sin eventos: no aplica (el «0 faltantes» anterior era vacío) | sin eventos de clientes en la ventana (B1 no tenía generador) | — | — | — |
 | B1 (gestión bastión↔Sensor1) | **1 843** faltantes, 7 428 «de más» | **42 418** faltantes (§5) | — | — | — |
 | T1 | 0 faltantes, 1 «de más» | **3 888 completos** | — | — | 32/32 coinciden |
 | T2 | 0 faltantes, 16 «de más» | **16 791 completos** | — | — | 182/182 coinciden |
@@ -499,20 +510,25 @@ Tras ese cambio, la búsqueda no encuentra ninguna dirección ajena en lo public
 
 | Requisito | Comprobación | Resultado | Evidencia | Limitación | Estado |
 |---|---|---|---|---|---|
-| 1. Comprobador de copias | 12 + 6 pruebas; 6 ejecuciones reales; extracto reproducible | Experimental: 0 faltantes en las 6. Gestión de B1: 42 418 | `reanalisis/copias-*.json`, `tests/test_copias_espejo.py` | Una pérdida de las dos copias no es visible sin referencia | **Cerrado** |
+| 1. Comprobador de copias | 12 + 6 pruebas; 6 ejecuciones reales; extracto reproducible | Experimental: 0 faltantes en las **5 con generador** (B1 sin eventos experimentales: no aplica). Gestión de B1: 42 418 | `reanalisis/copias-*.json`, `tests/test_copias_espejo.py` | Una pérdida de las dos copias no es visible sin referencia | **Cerrado** (reproducido) |
 | 1b. Deduplicación del extractor | 6 pruebas, conteos documentados | Funde los RST idénticos y no empareja copias a más de 5 ms | `extraccion/README.md` | Se corrige en el bloque de características | **Pendiente (bloque 3)** |
 | 2. Contraste con el extremo | 13 pruebas; E1–E3 | 0 discrepancias; E3 paquete a paquete 15 663/15 663 | `reanalisis/extremo-*.json` | Con offload, el número de paquetes de datos no es comprobable | **Cerrado** |
-| 3. DNS | 11 pruebas; 5 ejecuciones | Todas las transacciones coinciden; 6 `sin_transaccion` sin explicar | `reanalisis/dns-*.json` | Reloj de DC1 a −6,5/−7 ms, sin causa | **Cerrado con observación** |
+| 3. DNS | 11 + 8 pruebas; 5 ejecuciones; E3 con PCAP de DC1 | Todas las transacciones coinciden. Los `sin_transaccion` son la sonda del preflight (explicada). E3 con las tres fuentes: 182/182 | `dns-entradas/`, `sonda-preflight/`, reproducción 6/6 idéntica | Reloj de DC1 a −6,5/−7 ms, sin causa (bloque 4). Sonda: 23 ventanas de .21 por ejecución sin excluir aún (bloque 3) | **Hecho (reproducido)**; tratamiento definitivo de la sonda pendiente |
 | 4. Reanálisis antes/después | 6 ejecuciones, originales intactos | Tabla del §3 | `evidencias/bloque1/reanalisis/` | Denominadores distintos por la población | **Cerrado** |
-| 5. Contadores | Prueba dirigida + retrospectiva | `rx_dropped` = SNAP (exacto). Pérdida de gestión sin contador | §5 | Lugar de la pérdida de gestión (switch o ESXi) sin localizar | **Cerrado en lo medible; queda una hipótesis abierta** |
+| 5. Contadores | Prueba dirigida + retrospectiva | `rx_dropped` = SNAP (conteo exacto). Pérdida de gestión sin contador | §5; `rx-dropped-r1.json` publicado | PCAP de la prueba de 120 s rotado: la igualdad trama a trama (1 704 PVST+ y 4 CDP) no es revisable. Lugar de la pérdida de gestión (switch o ESXi) sin localizar | **Abierto**: la localización necesita los accesos de REVISION §8 |
 | 6. Sondeo en el lanzador | 11 pruebas + E3 real | 809 muestras, 0 descartes; hueco inicial declarado | `E3/calidad-espejo-sondeo.json` | No ejercitado durante horas | **Cerrado (horas: bloque 4)** |
-| 7. Política | Vigente intacta; propuesta + sesgo | §7 | `evidencias/bloque1/sesgo/` | **Decisión de Mark** | **Pendiente de decisión** |
+| 7. Política | Integrada en `estado_global.py`; 16 pruebas; las 5 ejecuciones redictaminadas | Pérdida o entrada dañada = fallo; evidencia ausente o que no decide = indeterminado. Sin umbrales elegidos | `BLOQUE1-POLITICA-CALIDAD.md`, `redictamen/` | Faltan decisiones de Mark: fracción máxima de exclusión, extremo en srv-dmz durante las 49 h, tratamiento definitivo de la sonda | **Integrada; pendiente de 3 decisiones** |
 | 8. Trazabilidad | Ficha por ejecución | 5 fichas | `trazabilidad/` | Versión inferida antes de c7c0b49 | **Cerrado** |
 | 9. `cerrar_v2.sh` | Caso correcto + fallo deliberado | Salidas 2 y 1, coherentes | `cierre-pruebas/` | — | **Cerrado** |
 | 10. Publicación | Repositorio + release; reproducibilidad | Extracto = captura | §10 | Lo que no es de la población no es recalculable | **Cerrado** |
 
-**Conclusión.** El Bloque 1 queda **cerrado en lo técnico**: las herramientas están verificadas
-con pruebas y con datos reales, y los resultados se reproducen desde lo publicado. Queda:
+**Conclusión.** Sustituida por el estado de `BLOQUE1-REVISION-2026-11-26.md`: el Bloque 1 **no
+está cerrado**. Las herramientas y la política están hechas y probadas, y el DNS es reproducible.
+Quedan las decisiones de política y la localización de la pérdida de gestión. El texto que sigue
+se conserva como estaba el 26-nov por la mañana:
+
+~~El Bloque 1 queda cerrado en lo técnico: las herramientas están verificadas con pruebas y con
+datos reales, y los resultados se reproducen desde lo publicado.~~ Queda:
 
 - **decisión de Mark:** la política (§7.2), el filtro de VLAN en la sesión SPAN o
   `queue-softmax`, y `write memory`;

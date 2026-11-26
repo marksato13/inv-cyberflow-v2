@@ -1,0 +1,3320 @@
+{
+ "entrada": {
+  "ruta": "/home/m4rk/cyberflow-v2/pruebas/V2-E3-20261125T230032Z/registros/dns-V2-E3-20261125T230032Z.pcap",
+  "sha256": "c95b92efa8566a8b710e2c2e96396b5fbf0b674137e7b5a143d2772c93ae4fe5",
+  "tramas": 366
+ },
+ "salida": {
+  "ruta": "dns-dc1-V2-E3-20261125T230032Z.saneado.pcap",
+  "sha256": "c95b92efa8566a8b710e2c2e96396b5fbf0b674137e7b5a143d2772c93ae4fe5",
+  "tramas": 366
+ },
+ "enlace": 1,
+ "precision": "ns",
+ "criterio": "IPv4/UDP puerto 53 entre 10.10.10.20 y 10.10.20.21,10.10.20.22,10.10.20.23,10.10.20.24,10.10.20.25,10.10.20.26",
+ "descartadas_por_motivo": {},
+ "tramas_conservadas_por_cliente": {
+  "10.10.20.21": 102,
+  "10.10.20.24": 84,
+  "10.10.20.26": 90,
+  "10.10.20.22": 68,
+  "10.10.20.23": 8,
+  "10.10.20.25": 14
+ },
+ "transacciones": [
+  {
+   "t": 1795647813.014755,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 53580,
+   "id": 17611,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647813.0153878,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 53580,
+   "id": 17611,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647835.5312185,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 45884,
+   "id": 8480,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647835.5319612,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 45884,
+   "id": 8480,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647854.1165798,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 53061,
+   "id": 57320,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647854.1171632,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 53061,
+   "id": 57320,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647870.0047886,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 35204,
+   "id": 55546,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647870.0054085,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 35204,
+   "id": 55546,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647933.7252014,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 36003,
+   "id": 48883,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647933.726018,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 36003,
+   "id": 48883,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647966.43456,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 56313,
+   "id": 38808,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647966.4351387,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 56313,
+   "id": 38808,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647988.2372544,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 53753,
+   "id": 15183,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647988.2379692,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 53753,
+   "id": 15183,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647996.3440437,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 57413,
+   "id": 8224,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795647996.3446553,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 57413,
+   "id": 8224,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648038.0997581,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 53655,
+   "id": 23979,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648038.1003988,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 53655,
+   "id": 23979,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648042.7647135,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 52431,
+   "id": 31184,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648042.765525,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 52431,
+   "id": 31184,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648047.9969974,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 45270,
+   "id": 61115,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648047.997984,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 45270,
+   "id": 61115,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648055.0603929,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 50247,
+   "id": 28434,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648055.0611267,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 50247,
+   "id": 28434,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648056.3403225,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 37359,
+   "id": 32353,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648056.3409574,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 37359,
+   "id": 32353,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648059.6058478,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 53852,
+   "id": 3574,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648059.6064458,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 53852,
+   "id": 3574,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648066.6229358,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 58313,
+   "id": 62940,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648066.6236486,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 58313,
+   "id": 62940,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648072.3076234,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 43647,
+   "id": 24152,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648072.3081598,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 43647,
+   "id": 24152,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648088.3450654,
+   "sentido": "consulta",
+   "cliente": "10.10.20.23",
+   "puerto": 60013,
+   "id": 16648,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648088.3461545,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.23",
+   "puerto": 60013,
+   "id": 16648,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648092.0889275,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 59424,
+   "id": 15893,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648092.0895383,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 59424,
+   "id": 15893,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648103.4915593,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 57506,
+   "id": 49286,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648103.4922323,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 57506,
+   "id": 49286,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648108.433072,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 43493,
+   "id": 8874,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648108.433656,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 43493,
+   "id": 8874,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648109.7109113,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 33676,
+   "id": 60071,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648109.7115953,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 33676,
+   "id": 60071,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648120.820035,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 33098,
+   "id": 62561,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648120.8207648,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 33098,
+   "id": 62561,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648122.6235056,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 34517,
+   "id": 15514,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648122.624088,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 34517,
+   "id": 15514,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648122.7927892,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 41036,
+   "id": 28516,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648122.793468,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 41036,
+   "id": 28516,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648123.922427,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 56848,
+   "id": 13508,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648123.92318,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 56848,
+   "id": 13508,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648131.4851983,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 39242,
+   "id": 33154,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648131.4859107,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 39242,
+   "id": 33154,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648138.2747858,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 59701,
+   "id": 57495,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648138.2753768,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 59701,
+   "id": 57495,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648151.9832618,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 48947,
+   "id": 37922,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648151.9839246,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 48947,
+   "id": 37922,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648156.5343938,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 34977,
+   "id": 61769,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648156.5349236,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 34977,
+   "id": 61769,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648166.5471067,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 57615,
+   "id": 45083,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648166.547887,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 57615,
+   "id": 45083,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648169.5880184,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 48635,
+   "id": 42072,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648169.5888119,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 48635,
+   "id": 42072,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648172.9543579,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 43212,
+   "id": 64538,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648172.954977,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 43212,
+   "id": 64538,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648186.045769,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 41371,
+   "id": 36385,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648186.0465102,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 41371,
+   "id": 36385,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648193.7137508,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 47481,
+   "id": 35366,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648193.7144601,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 47481,
+   "id": 35366,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648195.006675,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 40084,
+   "id": 47124,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648195.007212,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 40084,
+   "id": 47124,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648195.1043768,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 49087,
+   "id": 53599,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648195.1049442,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 49087,
+   "id": 53599,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648195.1390347,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 42731,
+   "id": 42449,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648195.1396544,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 42731,
+   "id": 42449,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648198.1705039,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 51967,
+   "id": 3891,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648198.1710792,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 51967,
+   "id": 3891,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648203.2249272,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 59423,
+   "id": 52346,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648203.2255187,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 59423,
+   "id": 52346,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648207.9589348,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 53889,
+   "id": 18568,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648207.9595149,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 53889,
+   "id": 18568,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648211.3912082,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 56204,
+   "id": 2066,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648211.3938646,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 56204,
+   "id": 2066,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648211.542374,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 48602,
+   "id": 45265,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648211.543092,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 48602,
+   "id": 45265,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648213.060153,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 38949,
+   "id": 50989,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648213.0607696,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 38949,
+   "id": 50989,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648222.3625064,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 55578,
+   "id": 55388,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648222.3632078,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 55578,
+   "id": 55388,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648229.9534447,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 42556,
+   "id": 15231,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648229.9542003,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 42556,
+   "id": 15231,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648232.7783782,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 43156,
+   "id": 53181,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648232.77918,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 43156,
+   "id": 53181,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648251.292729,
+   "sentido": "consulta",
+   "cliente": "10.10.20.25",
+   "puerto": 52784,
+   "id": 57651,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648251.2934687,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.25",
+   "puerto": 52784,
+   "id": 57651,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648255.4300234,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 44755,
+   "id": 3062,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648255.4307752,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 44755,
+   "id": 3062,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648289.3213964,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 44069,
+   "id": 64193,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648289.3220046,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 44069,
+   "id": 64193,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648291.8357034,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 34177,
+   "id": 17437,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648291.836248,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 34177,
+   "id": 17437,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648311.6206427,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 43063,
+   "id": 22252,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648311.621223,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 43063,
+   "id": 22252,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648313.0425003,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 45013,
+   "id": 5475,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648313.0431821,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 45013,
+   "id": 5475,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648315.450593,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 44542,
+   "id": 31888,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648315.4512956,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 44542,
+   "id": 31888,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648316.547762,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 45900,
+   "id": 31147,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648316.548324,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 45900,
+   "id": 31147,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648317.1289666,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 40215,
+   "id": 53771,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648317.1295235,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 40215,
+   "id": 53771,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648323.3484914,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 37156,
+   "id": 51160,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648323.349087,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 37156,
+   "id": 51160,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648327.055696,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 48408,
+   "id": 35997,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648327.056231,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 48408,
+   "id": 35997,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648329.1244354,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 50262,
+   "id": 4456,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648329.125077,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 50262,
+   "id": 4456,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648329.9739532,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 53950,
+   "id": 59654,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648329.9749386,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 53950,
+   "id": 59654,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648340.8247976,
+   "sentido": "consulta",
+   "cliente": "10.10.20.25",
+   "puerto": 55405,
+   "id": 41707,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648340.8253548,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.25",
+   "puerto": 55405,
+   "id": 41707,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648347.369728,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 36895,
+   "id": 13177,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648347.3706071,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 36895,
+   "id": 13177,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648351.8775907,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 45065,
+   "id": 43024,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648351.8781826,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 45065,
+   "id": 43024,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648353.1446102,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 44748,
+   "id": 45684,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648353.1456203,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 44748,
+   "id": 45684,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648354.084426,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 37014,
+   "id": 60100,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648354.0854728,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 37014,
+   "id": 60100,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648355.1428504,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 42380,
+   "id": 25735,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648355.1433938,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 42380,
+   "id": 25735,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648356.5989718,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 55215,
+   "id": 9158,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648356.5995321,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 55215,
+   "id": 9158,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648357.6238952,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 38195,
+   "id": 62711,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648357.6249886,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 38195,
+   "id": 62711,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648358.5156658,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 44324,
+   "id": 61476,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648358.5166988,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 44324,
+   "id": 61476,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648358.5830975,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 45697,
+   "id": 21073,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648358.5836864,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 45697,
+   "id": 21073,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648360.3640943,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 59309,
+   "id": 54617,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648360.3647885,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 59309,
+   "id": 54617,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648361.1571457,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 57738,
+   "id": 12106,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648361.1577952,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 57738,
+   "id": 12106,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648361.4805706,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 58844,
+   "id": 12486,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648361.48117,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 58844,
+   "id": 12486,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648363.7433136,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 48432,
+   "id": 47615,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648363.7438974,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 48432,
+   "id": 47615,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648364.0216057,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 38178,
+   "id": 15343,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648364.0235133,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 38178,
+   "id": 15343,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648365.43541,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 51191,
+   "id": 12792,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648365.4359791,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 51191,
+   "id": 12792,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648367.5192533,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 39625,
+   "id": 48149,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648367.5198076,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 39625,
+   "id": 48149,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648371.2139258,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 44638,
+   "id": 23521,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648371.2149367,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 44638,
+   "id": 23521,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648371.377717,
+   "sentido": "consulta",
+   "cliente": "10.10.20.25",
+   "puerto": 52585,
+   "id": 41051,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648371.3783476,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.25",
+   "puerto": 52585,
+   "id": 41051,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648371.9857492,
+   "sentido": "consulta",
+   "cliente": "10.10.20.25",
+   "puerto": 45602,
+   "id": 32974,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648371.9862878,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.25",
+   "puerto": 45602,
+   "id": 32974,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648372.8709447,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 34390,
+   "id": 7916,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648372.8715053,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 34390,
+   "id": 7916,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648374.9861286,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 33795,
+   "id": 59751,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648374.9867384,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 33795,
+   "id": 59751,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648375.581069,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 40854,
+   "id": 29088,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648375.58173,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 40854,
+   "id": 29088,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648379.67519,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 35961,
+   "id": 45240,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648379.6757197,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 35961,
+   "id": 45240,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648382.4530528,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 41243,
+   "id": 48155,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648382.4540243,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 41243,
+   "id": 48155,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648390.2432406,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 49898,
+   "id": 25006,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648390.2439153,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 49898,
+   "id": 25006,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648395.5175672,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 42505,
+   "id": 45077,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648395.5182364,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 42505,
+   "id": 45077,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648403.4905787,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 47621,
+   "id": 27039,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648403.491175,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 47621,
+   "id": 27039,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648404.0406094,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 34203,
+   "id": 52616,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648404.0411649,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 34203,
+   "id": 52616,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648404.2594054,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 49936,
+   "id": 7838,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648404.2600884,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 49936,
+   "id": 7838,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648406.3744369,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 48003,
+   "id": 50025,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648406.3751795,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 48003,
+   "id": 50025,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648407.2143965,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 58592,
+   "id": 47866,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648407.2154047,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 58592,
+   "id": 47866,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648407.5298185,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 59865,
+   "id": 1736,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648407.5304785,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 59865,
+   "id": 1736,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648408.4766204,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 41874,
+   "id": 49485,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648408.4771767,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 41874,
+   "id": 49485,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648412.55669,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 60212,
+   "id": 12601,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648412.5576637,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 60212,
+   "id": 12601,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648414.6695848,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 35879,
+   "id": 17123,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648414.6701505,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 35879,
+   "id": 17123,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648415.4045403,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 42707,
+   "id": 35831,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648415.4051955,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 42707,
+   "id": 35831,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648419.4482405,
+   "sentido": "consulta",
+   "cliente": "10.10.20.25",
+   "puerto": 44447,
+   "id": 18099,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648419.4493058,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.25",
+   "puerto": 44447,
+   "id": 18099,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648422.661886,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 32974,
+   "id": 43491,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648422.662443,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 32974,
+   "id": 43491,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648429.7565398,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 32944,
+   "id": 65237,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648429.7571008,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 32944,
+   "id": 65237,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648432.0225105,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 50745,
+   "id": 16996,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648432.023064,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 50745,
+   "id": 16996,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648432.2463567,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 49142,
+   "id": 47757,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648432.2469215,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 49142,
+   "id": 47757,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648433.9997141,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 44630,
+   "id": 57164,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648434.000316,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 44630,
+   "id": 57164,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648436.1705732,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 37305,
+   "id": 23422,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648436.1711488,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 37305,
+   "id": 23422,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648438.6539876,
+   "sentido": "consulta",
+   "cliente": "10.10.20.23",
+   "puerto": 58681,
+   "id": 1584,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648438.6545439,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.23",
+   "puerto": 58681,
+   "id": 1584,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648444.1175134,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 60707,
+   "id": 33501,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648444.1211228,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 60707,
+   "id": 33501,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648444.4659889,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 35334,
+   "id": 35469,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648444.4665165,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 35334,
+   "id": 35469,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648445.1990285,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 52682,
+   "id": 19539,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648445.1999626,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 52682,
+   "id": 19539,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648457.5587096,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 43833,
+   "id": 27388,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648457.5593746,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 43833,
+   "id": 27388,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648466.103092,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 52874,
+   "id": 24403,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648466.1036906,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 52874,
+   "id": 24403,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648469.9874682,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 38253,
+   "id": 13804,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648469.988213,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 38253,
+   "id": 13804,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648471.5513172,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 35676,
+   "id": 44959,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648471.5518866,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 35676,
+   "id": 44959,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648475.9243033,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 46838,
+   "id": 15371,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648475.9249115,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 46838,
+   "id": 15371,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648476.9013069,
+   "sentido": "consulta",
+   "cliente": "10.10.20.25",
+   "puerto": 43955,
+   "id": 65506,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648476.9019818,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.25",
+   "puerto": 43955,
+   "id": 65506,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648477.9811351,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 38695,
+   "id": 1618,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648477.9817045,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 38695,
+   "id": 1618,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648479.4649692,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 42124,
+   "id": 29178,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648479.4660213,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 42124,
+   "id": 29178,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648486.5238547,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 59172,
+   "id": 62525,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648486.5244708,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 59172,
+   "id": 62525,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648487.798146,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 43524,
+   "id": 18079,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648487.798824,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 43524,
+   "id": 18079,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648493.536141,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 57971,
+   "id": 20020,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648493.5372157,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 57971,
+   "id": 20020,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648494.4596975,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 53547,
+   "id": 40569,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648494.460255,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 53547,
+   "id": 40569,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648495.3848388,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 40883,
+   "id": 15253,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648495.385431,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 40883,
+   "id": 15253,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648496.538422,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 39445,
+   "id": 63036,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648496.5389752,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 39445,
+   "id": 63036,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648504.8587945,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 45682,
+   "id": 3552,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648504.8594482,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 45682,
+   "id": 3552,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648507.5145073,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 48438,
+   "id": 49286,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648507.5153165,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 48438,
+   "id": 49286,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648510.9808815,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 55014,
+   "id": 46376,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648510.9814336,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 55014,
+   "id": 46376,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648522.9336467,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 55179,
+   "id": 34733,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648522.9342659,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 55179,
+   "id": 34733,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648548.5351453,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 33321,
+   "id": 38405,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648548.5361333,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 33321,
+   "id": 38405,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648550.2080865,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 41585,
+   "id": 48374,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648550.208622,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 41585,
+   "id": 48374,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648580.9321418,
+   "sentido": "consulta",
+   "cliente": "10.10.20.23",
+   "puerto": 44500,
+   "id": 3424,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648580.9327931,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.23",
+   "puerto": 44500,
+   "id": 3424,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648624.140485,
+   "sentido": "consulta",
+   "cliente": "10.10.20.23",
+   "puerto": 51501,
+   "id": 46867,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648624.1411667,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.23",
+   "puerto": 51501,
+   "id": 46867,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648633.9808164,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 33514,
+   "id": 30610,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648633.9813867,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 33514,
+   "id": 30610,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648639.730128,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 58811,
+   "id": 11859,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648639.7306907,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 58811,
+   "id": 11859,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648655.1805727,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 33852,
+   "id": 37247,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648655.181316,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 33852,
+   "id": 37247,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648660.2624803,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 38513,
+   "id": 27770,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648660.2630222,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 38513,
+   "id": 27770,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648675.3036864,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 37243,
+   "id": 23748,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648675.3044064,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 37243,
+   "id": 23748,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648683.1153395,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 58072,
+   "id": 38985,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648683.1159241,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 58072,
+   "id": 38985,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648683.8130007,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 41205,
+   "id": 15983,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648683.8139975,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 41205,
+   "id": 15983,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648687.091294,
+   "sentido": "consulta",
+   "cliente": "10.10.20.25",
+   "puerto": 59752,
+   "id": 1275,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648687.0918338,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.25",
+   "puerto": 59752,
+   "id": 1275,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648692.0948162,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 34113,
+   "id": 17935,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648692.0954323,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 34113,
+   "id": 17935,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648701.2929544,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 44619,
+   "id": 50410,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648701.2936246,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 44619,
+   "id": 50410,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648708.0833063,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 35974,
+   "id": 34958,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648708.0840242,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 35974,
+   "id": 34958,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648711.319608,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 57156,
+   "id": 3846,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648711.3201368,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 57156,
+   "id": 3846,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648726.6635578,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 38177,
+   "id": 31417,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648726.6641583,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 38177,
+   "id": 31417,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648767.9004998,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 34654,
+   "id": 544,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648767.9011502,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 34654,
+   "id": 544,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648782.9689503,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 42081,
+   "id": 54951,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648782.9695218,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 42081,
+   "id": 54951,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648795.6355486,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 51736,
+   "id": 45957,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648795.6361883,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 51736,
+   "id": 45957,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648858.7146933,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 49819,
+   "id": 29810,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648858.7153141,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 49819,
+   "id": 29810,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648867.2755716,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 55200,
+   "id": 60380,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648867.2761319,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 55200,
+   "id": 60380,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648890.0047433,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 33920,
+   "id": 27300,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648890.0054333,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 33920,
+   "id": 27300,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648895.379533,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 37287,
+   "id": 24737,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648895.3802056,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 37287,
+   "id": 24737,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648895.7061653,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 47506,
+   "id": 30490,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648895.706833,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 47506,
+   "id": 30490,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648897.0001152,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 51104,
+   "id": 18824,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648897.0007017,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 51104,
+   "id": 18824,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648905.7334106,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 33734,
+   "id": 5178,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648905.734138,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 33734,
+   "id": 5178,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648923.9348717,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 55725,
+   "id": 30824,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648923.9354544,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 55725,
+   "id": 30824,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648930.6221101,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 57755,
+   "id": 34318,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648930.6226847,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 57755,
+   "id": 34318,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648931.7830431,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 37480,
+   "id": 29311,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648931.7835977,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 37480,
+   "id": 29311,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648934.5166857,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 50720,
+   "id": 4064,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648934.5172703,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 50720,
+   "id": 4064,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648941.6960738,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 39070,
+   "id": 50399,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648941.6966913,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 39070,
+   "id": 50399,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648942.3962977,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 44259,
+   "id": 60801,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648942.3969662,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 44259,
+   "id": 60801,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648945.5597763,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 55606,
+   "id": 25167,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648945.5603743,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 55606,
+   "id": 25167,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648947.0579293,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 39056,
+   "id": 59355,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648947.0587003,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 39056,
+   "id": 59355,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648948.110009,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 36750,
+   "id": 13238,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648948.11107,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 36750,
+   "id": 13238,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648949.349025,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 42788,
+   "id": 27673,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648949.3498716,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 42788,
+   "id": 27673,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648949.5049834,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 49596,
+   "id": 35415,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648949.5055966,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 49596,
+   "id": 35415,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648950.7414346,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 60024,
+   "id": 16319,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648950.742098,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 60024,
+   "id": 16319,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648951.4158287,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 36127,
+   "id": 62558,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648951.4165518,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 36127,
+   "id": 62558,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648987.0143943,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 55150,
+   "id": 35987,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795648987.0149856,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 55150,
+   "id": 35987,
+   "nombre": "wiki.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649037.062914,
+   "sentido": "consulta",
+   "cliente": "10.10.20.22",
+   "puerto": 46024,
+   "id": 42355,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649037.0637386,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.22",
+   "puerto": 46024,
+   "id": 42355,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649046.2883246,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 43437,
+   "id": 33714,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649046.2894728,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 43437,
+   "id": 33714,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649080.9398994,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 49092,
+   "id": 49559,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649080.9406974,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 49092,
+   "id": 49559,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649082.6048455,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 59957,
+   "id": 57934,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649082.6056771,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 59957,
+   "id": 57934,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649088.9156864,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 56351,
+   "id": 64313,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649088.9167452,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 56351,
+   "id": 64313,
+   "nombre": "portal.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649089.5414307,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 53480,
+   "id": 53074,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649089.5420551,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 53480,
+   "id": 53074,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649097.0170918,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 56410,
+   "id": 39116,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649097.0176346,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 56410,
+   "id": 39116,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649100.406663,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 44167,
+   "id": 18052,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649100.4076931,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 44167,
+   "id": 18052,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649107.3819609,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 60254,
+   "id": 34481,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649107.3829398,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 60254,
+   "id": 34481,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649110.2427282,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 44269,
+   "id": 26695,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649110.2437632,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 44269,
+   "id": 26695,
+   "nombre": "archivos.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649111.8012376,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 32878,
+   "id": 36217,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649111.8022351,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 32878,
+   "id": 36217,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649112.6450865,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 53435,
+   "id": 16058,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649112.645665,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 53435,
+   "id": 16058,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649118.8189754,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 56814,
+   "id": 58240,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649118.8195233,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 56814,
+   "id": 58240,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649123.347661,
+   "sentido": "consulta",
+   "cliente": "10.10.20.26",
+   "puerto": 47295,
+   "id": 29110,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649123.3487172,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.26",
+   "puerto": 47295,
+   "id": 29110,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649131.6182716,
+   "sentido": "consulta",
+   "cliente": "10.10.20.24",
+   "puerto": 50780,
+   "id": 12491,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649131.619281,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.24",
+   "puerto": 50780,
+   "id": 12491,
+   "nombre": "correo.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649213.1133215,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 56969,
+   "id": 37813,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649213.1139276,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 56969,
+   "id": 37813,
+   "nombre": "erp.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649247.6107662,
+   "sentido": "consulta",
+   "cliente": "10.10.20.21",
+   "puerto": 56358,
+   "id": 33488,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  },
+  {
+   "t": 1795649247.6114163,
+   "sentido": "respuesta",
+   "cliente": "10.10.20.21",
+   "puerto": 56358,
+   "id": 33488,
+   "nombre": "intranet.cf-v2.lab",
+   "rcode": 0
+  }
+ ]
+}

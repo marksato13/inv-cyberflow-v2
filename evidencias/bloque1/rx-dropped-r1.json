@@ -1,0 +1,1284 @@
+{
+ "version": "1.0",
+ "interfaz": "ens37",
+ "desde_epoch": 1795645645.0402403,
+ "hasta_epoch": 1795645766.0006034,
+ "incremento": {
+  "rx_packets": 19037,
+  "rx_dropped": 1708,
+  "rx_nohandler": 0
+ },
+ "tramas_en_pcap": 19037,
+ "por_clase": {
+  "sin_vlan/loopback": 24,
+  "vlan/802.3_llc_snap": 1708,
+  "vlan/arp": 1231,
+  "vlan/ipv4": 16068,
+  "vlan/ipv6": 6
+ },
+ "clases_sin_manejador_ipv4_arp_ipv6": [
+  "sin_vlan/loopback",
+  "vlan/802.3_llc_snap"
+ ],
+ "tramas_sin_manejador": 1732,
+ "ficheros": [
+  "live-20261125222713.pcap",
+  "live-20261125222718.pcap",
+  "live-20261125222723.pcap",
+  "live-20261125222728.pcap",
+  "live-20261125222733.pcap",
+  "live-20261125222738.pcap",
+  "live-20261125222743.pcap",
+  "live-20261125222748.pcap",
+  "live-20261125222753.pcap",
+  "live-20261125222758.pcap",
+  "live-20261125222804.pcap",
+  "live-20261125222809.pcap",
+  "live-20261125222814.pcap",
+  "live-20261125222819.pcap",
+  "live-20261125222824.pcap",
+  "live-20261125222829.pcap",
+  "live-20261125222834.pcap",
+  "live-20261125222839.pcap",
+  "live-20261125222844.pcap",
+  "live-20261125222849.pcap",
+  "live-20261125222854.pcap",
+  "live-20261125222859.pcap",
+  "live-20261125222904.pcap",
+  "live-20261125222909.pcap",
+  "live-20261125222914.pcap",
+  "live-20261125222919.pcap",
+  "live-20261125222924.pcap",
+  "live-20261125222929.pcap",
+  "live-20261125222934.pcap"
+ ],
+ "incidencias": [],
+ "proc_net_ptype": "Type Device      Function\nALL  ens37    packet_rcv_fanout\nALL  ens37    tpacket_rcv\nALL  ens37    tpacket_rcv\n0800          ip_rcv\n0806          arp_rcv\n00fa          mctp_pkttype_receive\n86dd          ipv6_rcv\n",
+ "serie": [
+  {
+   "s": 0,
+   "rx_dropped": 24,
+   "rx_packets": 156,
+   "clases": {
+    "vlan/ipv4": 120,
+    "vlan/arp": 16,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 0,
+   "rx_dropped": 4,
+   "rx_packets": 142,
+   "clases": {
+    "vlan/ipv4": 120,
+    "vlan/arp": 16,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 1,
+   "rx_dropped": 24,
+   "rx_packets": 180,
+   "clases": {
+    "vlan/ipv4": 122,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 2,
+   "rx_dropped": 4,
+   "rx_packets": 139,
+   "clases": {
+    "vlan/arp": 12,
+    "vlan/ipv4": 142,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 3,
+   "rx_dropped": 24,
+   "rx_packets": 168,
+   "clases": {
+    "vlan/arp": 14,
+    "vlan/ipv4": 123,
+    "sin_vlan/loopback": 2,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 4,
+   "rx_dropped": 4,
+   "rx_packets": 172,
+   "clases": {
+    "vlan/ipv4": 132,
+    "vlan/arp": 18,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 5,
+   "rx_dropped": 24,
+   "rx_packets": 170,
+   "clases": {
+    "vlan/ipv4": 154,
+    "vlan/arp": 10,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 6,
+   "rx_dropped": 4,
+   "rx_packets": 147,
+   "clases": {
+    "vlan/ipv4": 133,
+    "vlan/arp": 12,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 7,
+   "rx_dropped": 24,
+   "rx_packets": 187,
+   "clases": {
+    "vlan/ipv4": 134,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 8,
+   "rx_dropped": 4,
+   "rx_packets": 145,
+   "clases": {
+    "vlan/arp": 8,
+    "vlan/ipv4": 152,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 9,
+   "rx_dropped": 24,
+   "rx_packets": 169,
+   "clases": {
+    "vlan/arp": 14,
+    "vlan/ipv4": 126,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 10,
+   "rx_dropped": 4,
+   "rx_packets": 188,
+   "clases": {
+    "vlan/ipv4": 132,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 11,
+   "rx_dropped": 24,
+   "rx_packets": 191,
+   "clases": {
+    "vlan/ipv4": 174,
+    "vlan/arp": 10,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 12,
+   "rx_dropped": 4,
+   "rx_packets": 137,
+   "clases": {
+    "vlan/ipv4": 155,
+    "vlan/arp": 12,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 13,
+   "rx_dropped": 24,
+   "rx_packets": 183,
+   "clases": {
+    "vlan/arp": 10,
+    "vlan/ipv4": 120,
+    "sin_vlan/loopback": 2,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 14,
+   "rx_dropped": 4,
+   "rx_packets": 81,
+   "clases": {
+    "vlan/ipv4": 144,
+    "vlan/arp": 18,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 15,
+   "rx_dropped": 24,
+   "rx_packets": 207,
+   "clases": {
+    "vlan/ipv4": 102,
+    "vlan/arp": 12,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 16,
+   "rx_dropped": 4,
+   "rx_packets": 161,
+   "clases": {
+    "vlan/ipv4": 134,
+    "vlan/arp": 10,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 17,
+   "rx_dropped": 24,
+   "rx_packets": 161,
+   "clases": {
+    "vlan/ipv4": 150,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 18,
+   "rx_dropped": 4,
+   "rx_packets": 145,
+   "clases": {
+    "vlan/ipv4": 126,
+    "vlan/arp": 10,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 19,
+   "rx_dropped": 24,
+   "rx_packets": 183,
+   "clases": {
+    "vlan/ipv4": 126,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 20,
+   "rx_dropped": 4,
+   "rx_packets": 137,
+   "clases": {
+    "vlan/ipv4": 154,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 21,
+   "rx_dropped": 24,
+   "rx_packets": 153,
+   "clases": {
+    "vlan/ipv4": 126,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 22,
+   "rx_dropped": 4,
+   "rx_packets": 157,
+   "clases": {
+    "vlan/ipv4": 124,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 23,
+   "rx_dropped": 24,
+   "rx_packets": 170,
+   "clases": {
+    "vlan/ipv4": 140,
+    "vlan/arp": 12,
+    "sin_vlan/loopback": 2,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 24,
+   "rx_dropped": 4,
+   "rx_packets": 138,
+   "clases": {
+    "vlan/ipv4": 130,
+    "vlan/arp": 16,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 25,
+   "rx_dropped": 25,
+   "rx_packets": 191,
+   "clases": {
+    "vlan/ipv4": 124,
+    "vlan/arp": 10,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 26,
+   "rx_dropped": 4,
+   "rx_packets": 132,
+   "clases": {
+    "vlan/ipv4": 158,
+    "vlan/arp": 4,
+    "vlan/802.3_llc_snap": 25,
+    "vlan/ipv6": 2
+   }
+  },
+  {
+   "s": 27,
+   "rx_dropped": 24,
+   "rx_packets": 152,
+   "clases": {
+    "vlan/ipv4": 124,
+    "vlan/arp": 4,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 28,
+   "rx_dropped": 4,
+   "rx_packets": 174,
+   "clases": {
+    "vlan/ipv4": 122,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 29,
+   "rx_dropped": 24,
+   "rx_packets": 166,
+   "clases": {
+    "vlan/ipv4": 156,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 30,
+   "rx_dropped": 5,
+   "rx_packets": 104,
+   "clases": {
+    "vlan/ipv4": 134,
+    "vlan/arp": 10,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 31,
+   "rx_dropped": 24,
+   "rx_packets": 162,
+   "clases": {
+    "vlan/802.3_llc_snap": 5,
+    "vlan/ipv4": 122,
+    "vlan/arp": 8
+   }
+  },
+  {
+   "s": 32,
+   "rx_dropped": 4,
+   "rx_packets": 138,
+   "clases": {
+    "vlan/ipv4": 99,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 33,
+   "rx_dropped": 24,
+   "rx_packets": 153,
+   "clases": {
+    "vlan/ipv4": 124,
+    "vlan/arp": 8,
+    "sin_vlan/loopback": 2,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 34,
+   "rx_dropped": 4,
+   "rx_packets": 168,
+   "clases": {
+    "vlan/ipv4": 123,
+    "vlan/arp": 10,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 35,
+   "rx_dropped": 24,
+   "rx_packets": 209,
+   "clases": {
+    "vlan/ipv4": 154,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 36,
+   "rx_dropped": 4,
+   "rx_packets": 148,
+   "clases": {
+    "vlan/ipv4": 180,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 37,
+   "rx_dropped": 24,
+   "rx_packets": 186,
+   "clases": {
+    "vlan/arp": 10,
+    "vlan/ipv4": 131,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 38,
+   "rx_dropped": 4,
+   "rx_packets": 144,
+   "clases": {
+    "vlan/arp": 10,
+    "vlan/ipv4": 154,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 39,
+   "rx_dropped": 24,
+   "rx_packets": 164,
+   "clases": {
+    "vlan/arp": 14,
+    "vlan/ipv4": 122,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 40,
+   "rx_dropped": 4,
+   "rx_packets": 158,
+   "clases": {
+    "vlan/arp": 10,
+    "vlan/ipv4": 130,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 41,
+   "rx_dropped": 24,
+   "rx_packets": 138,
+   "clases": {
+    "vlan/ipv4": 146,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 42,
+   "rx_dropped": 4,
+   "rx_packets": 148,
+   "clases": {
+    "vlan/arp": 12,
+    "vlan/ipv4": 130,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 43,
+   "rx_dropped": 24,
+   "rx_packets": 192,
+   "clases": {
+    "vlan/ipv4": 130,
+    "vlan/arp": 12,
+    "sin_vlan/loopback": 2,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 44,
+   "rx_dropped": 4,
+   "rx_packets": 154,
+   "clases": {
+    "vlan/ipv4": 152,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 45,
+   "rx_dropped": 24,
+   "rx_packets": 152,
+   "clases": {
+    "vlan/arp": 14,
+    "vlan/ipv4": 136,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 46,
+   "rx_dropped": 4,
+   "rx_packets": 150,
+   "clases": {
+    "vlan/arp": 6,
+    "vlan/ipv4": 96,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 47,
+   "rx_dropped": 24,
+   "rx_packets": 98,
+   "clases": {
+    "vlan/ipv4": 142,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 48,
+   "rx_dropped": 4,
+   "rx_packets": 142,
+   "clases": {
+    "vlan/ipv4": 116,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 49,
+   "rx_dropped": 24,
+   "rx_packets": 186,
+   "clases": {
+    "vlan/ipv4": 72,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 50,
+   "rx_dropped": 4,
+   "rx_packets": 128,
+   "clases": {
+    "vlan/ipv4": 154,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 51,
+   "rx_dropped": 24,
+   "rx_packets": 152,
+   "clases": {
+    "vlan/ipv4": 120,
+    "vlan/arp": 4,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 52,
+   "rx_dropped": 4,
+   "rx_packets": 164,
+   "clases": {
+    "vlan/ipv4": 124,
+    "vlan/arp": 4,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 53,
+   "rx_dropped": 24,
+   "rx_packets": 168,
+   "clases": {
+    "vlan/ipv4": 148,
+    "vlan/arp": 10,
+    "sin_vlan/loopback": 2,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 54,
+   "rx_dropped": 4,
+   "rx_packets": 188,
+   "clases": {
+    "vlan/ipv4": 131,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 55,
+   "rx_dropped": 24,
+   "rx_packets": 184,
+   "clases": {
+    "vlan/ipv4": 173,
+    "vlan/arp": 12,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 56,
+   "rx_dropped": 4,
+   "rx_packets": 145,
+   "clases": {
+    "vlan/ipv4": 150,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 57,
+   "rx_dropped": 24,
+   "rx_packets": 164,
+   "clases": {
+    "vlan/ipv4": 135,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 58,
+   "rx_dropped": 4,
+   "rx_packets": 180,
+   "clases": {
+    "vlan/ipv4": 132,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 59,
+   "rx_dropped": 24,
+   "rx_packets": 158,
+   "clases": {
+    "vlan/ipv4": 162,
+    "vlan/ipv6": 2,
+    "vlan/arp": 12,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 60,
+   "rx_dropped": 4,
+   "rx_packets": 139,
+   "clases": {
+    "vlan/ipv4": 126,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 61,
+   "rx_dropped": 24,
+   "rx_packets": 181,
+   "clases": {
+    "vlan/ipv4": 129,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 62,
+   "rx_dropped": 4,
+   "rx_packets": 139,
+   "clases": {
+    "vlan/ipv4": 149,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 63,
+   "rx_dropped": 24,
+   "rx_packets": 139,
+   "clases": {
+    "vlan/arp": 16,
+    "vlan/ipv4": 121,
+    "sin_vlan/loopback": 2,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 64,
+   "rx_dropped": 4,
+   "rx_packets": 143,
+   "clases": {
+    "vlan/ipv4": 135,
+    "vlan/arp": 18,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 65,
+   "rx_dropped": 24,
+   "rx_packets": 158,
+   "clases": {
+    "vlan/arp": 12,
+    "vlan/ipv4": 85,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 66,
+   "rx_dropped": 4,
+   "rx_packets": 143,
+   "clases": {
+    "vlan/ipv4": 124,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 67,
+   "rx_dropped": 24,
+   "rx_packets": 185,
+   "clases": {
+    "vlan/ipv4": 131,
+    "vlan/arp": 10,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 68,
+   "rx_dropped": 4,
+   "rx_packets": 147,
+   "clases": {
+    "vlan/ipv4": 146,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 69,
+   "rx_dropped": 24,
+   "rx_packets": 176,
+   "clases": {
+    "vlan/ipv4": 125,
+    "vlan/arp": 18,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 70,
+   "rx_dropped": 4,
+   "rx_packets": 175,
+   "clases": {
+    "vlan/ipv4": 137,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 71,
+   "rx_dropped": 24,
+   "rx_packets": 157,
+   "clases": {
+    "vlan/arp": 8,
+    "vlan/ipv4": 159,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 72,
+   "rx_dropped": 4,
+   "rx_packets": 137,
+   "clases": {
+    "vlan/ipv4": 125,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 73,
+   "rx_dropped": 24,
+   "rx_packets": 183,
+   "clases": {
+    "vlan/arp": 8,
+    "vlan/ipv4": 123,
+    "sin_vlan/loopback": 2,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 74,
+   "rx_dropped": 4,
+   "rx_packets": 201,
+   "clases": {
+    "vlan/ipv4": 145,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 75,
+   "rx_dropped": 24,
+   "rx_packets": 157,
+   "clases": {
+    "vlan/arp": 12,
+    "vlan/ipv4": 185,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 76,
+   "rx_dropped": 4,
+   "rx_packets": 160,
+   "clases": {
+    "vlan/ipv4": 125,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 77,
+   "rx_dropped": 25,
+   "rx_packets": 161,
+   "clases": {
+    "vlan/ipv4": 144,
+    "vlan/arp": 12,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 78,
+   "rx_dropped": 4,
+   "rx_packets": 153,
+   "clases": {
+    "vlan/ipv4": 122,
+    "vlan/802.3_llc_snap": 25,
+    "vlan/arp": 14
+   }
+  },
+  {
+   "s": 79,
+   "rx_dropped": 25,
+   "rx_packets": 189,
+   "clases": {
+    "vlan/ipv4": 129,
+    "vlan/arp": 22,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 80,
+   "rx_dropped": 4,
+   "rx_packets": 72,
+   "clases": {
+    "vlan/ipv4": 154,
+    "vlan/802.3_llc_snap": 25,
+    "vlan/arp": 10
+   }
+  },
+  {
+   "s": 81,
+   "rx_dropped": 24,
+   "rx_packets": 156,
+   "clases": {
+    "vlan/ipv4": 100,
+    "vlan/arp": 10,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 82,
+   "rx_dropped": 4,
+   "rx_packets": 162,
+   "clases": {
+    "vlan/ipv4": 82,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 83,
+   "rx_dropped": 24,
+   "rx_packets": 156,
+   "clases": {
+    "vlan/ipv4": 148,
+    "vlan/arp": 8,
+    "sin_vlan/loopback": 2,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 84,
+   "rx_dropped": 4,
+   "rx_packets": 130,
+   "clases": {
+    "vlan/ipv4": 118,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 85,
+   "rx_dropped": 24,
+   "rx_packets": 188,
+   "clases": {
+    "vlan/ipv4": 122,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 86,
+   "rx_dropped": 4,
+   "rx_packets": 136,
+   "clases": {
+    "vlan/ipv4": 156,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 87,
+   "rx_dropped": 24,
+   "rx_packets": 152,
+   "clases": {
+    "vlan/ipv4": 122,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 88,
+   "rx_dropped": 4,
+   "rx_packets": 170,
+   "clases": {
+    "vlan/ipv4": 120,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 89,
+   "rx_dropped": 24,
+   "rx_packets": 154,
+   "clases": {
+    "vlan/ipv4": 154,
+    "vlan/arp": 12,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 90,
+   "rx_dropped": 4,
+   "rx_packets": 130,
+   "clases": {
+    "vlan/ipv4": 124,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 91,
+   "rx_dropped": 24,
+   "rx_packets": 190,
+   "clases": {
+    "vlan/arp": 6,
+    "vlan/ipv4": 120,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 92,
+   "rx_dropped": 4,
+   "rx_packets": 134,
+   "clases": {
+    "vlan/arp": 10,
+    "vlan/ipv4": 156,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 93,
+   "rx_dropped": 24,
+   "rx_packets": 162,
+   "clases": {
+    "vlan/arp": 12,
+    "vlan/ipv4": 116,
+    "sin_vlan/loopback": 2,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 94,
+   "rx_dropped": 4,
+   "rx_packets": 201,
+   "clases": {
+    "vlan/ipv4": 124,
+    "vlan/arp": 16,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 95,
+   "rx_dropped": 24,
+   "rx_packets": 156,
+   "clases": {
+    "vlan/ipv4": 184,
+    "vlan/arp": 11,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 96,
+   "rx_dropped": 4,
+   "rx_packets": 94,
+   "clases": {
+    "vlan/ipv4": 130,
+    "vlan/arp": 4,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 97,
+   "rx_dropped": 24,
+   "rx_packets": 157,
+   "clases": {
+    "vlan/ipv4": 124,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 98,
+   "rx_dropped": 4,
+   "rx_packets": 139,
+   "clases": {
+    "vlan/ipv4": 83,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 99,
+   "rx_dropped": 24,
+   "rx_packets": 160,
+   "clases": {
+    "vlan/ipv4": 121,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 100,
+   "rx_dropped": 4,
+   "rx_packets": 152,
+   "clases": {
+    "vlan/ipv4": 128,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 101,
+   "rx_dropped": 24,
+   "rx_packets": 148,
+   "clases": {
+    "vlan/ipv4": 142,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 102,
+   "rx_dropped": 4,
+   "rx_packets": 136,
+   "clases": {
+    "vlan/ipv4": 120,
+    "vlan/arp": 4,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 103,
+   "rx_dropped": 24,
+   "rx_packets": 182,
+   "clases": {
+    "vlan/ipv4": 124,
+    "vlan/arp": 6,
+    "sin_vlan/loopback": 2,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 104,
+   "rx_dropped": 4,
+   "rx_packets": 136,
+   "clases": {
+    "vlan/ipv4": 144,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 105,
+   "rx_dropped": 24,
+   "rx_packets": 158,
+   "clases": {
+    "vlan/ipv4": 120,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 106,
+   "rx_dropped": 4,
+   "rx_packets": 164,
+   "clases": {
+    "vlan/arp": 12,
+    "vlan/ipv4": 122,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 107,
+   "rx_dropped": 24,
+   "rx_packets": 164,
+   "clases": {
+    "vlan/ipv4": 148,
+    "vlan/arp": 8,
+    "vlan/ipv6": 2,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 108,
+   "rx_dropped": 4,
+   "rx_packets": 152,
+   "clases": {
+    "vlan/arp": 14,
+    "vlan/ipv4": 126,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 109,
+   "rx_dropped": 24,
+   "rx_packets": 190,
+   "clases": {
+    "vlan/ipv4": 132,
+    "vlan/arp": 16,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 110,
+   "rx_dropped": 4,
+   "rx_packets": 132,
+   "clases": {
+    "vlan/ipv4": 152,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 111,
+   "rx_dropped": 24,
+   "rx_packets": 160,
+   "clases": {
+    "vlan/ipv4": 122,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 112,
+   "rx_dropped": 4,
+   "rx_packets": 162,
+   "clases": {
+    "vlan/ipv4": 128,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 113,
+   "rx_dropped": 24,
+   "rx_packets": 162,
+   "clases": {
+    "vlan/ipv4": 148,
+    "vlan/arp": 8,
+    "sin_vlan/loopback": 2,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 114,
+   "rx_dropped": 4,
+   "rx_packets": 90,
+   "clases": {
+    "vlan/ipv4": 126,
+    "vlan/arp": 14,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 115,
+   "rx_dropped": 24,
+   "rx_packets": 200,
+   "clases": {
+    "vlan/ipv4": 120,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 116,
+   "rx_dropped": 4,
+   "rx_packets": 134,
+   "clases": {
+    "vlan/ipv4": 130,
+    "vlan/arp": 4,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 117,
+   "rx_dropped": 24,
+   "rx_packets": 154,
+   "clases": {
+    "vlan/ipv4": 124,
+    "vlan/arp": 6,
+    "vlan/802.3_llc_snap": 4
+   }
+  },
+  {
+   "s": 118,
+   "rx_dropped": 4,
+   "rx_packets": 176,
+   "clases": {
+    "vlan/ipv4": 126,
+    "vlan/arp": 8,
+    "vlan/802.3_llc_snap": 24
+   }
+  },
+  {
+   "s": 119,
+   "rx_dropped": 24,
+   "rx_packets": 156,
+   "clases": {
+    "vlan/ipv4": 156,
+    "vlan/arp": 12,
+    "vlan/802.3_llc_snap": 4
+   }
+  }
+ ]
+}

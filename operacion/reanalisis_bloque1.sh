@@ -19,8 +19,11 @@ for ID in $IDS; do
   nice python3 $C/captura/extracto_pcap.py $CAP/pcap --salida $S1/bloque1/paquete/$ID/pcap/live-00000000000000.pcap.gz     --completas $CLI --cabeceras $GES > extracto-$ID.json; echo "$ID extracto rc=$?"
   nice python3 $C/captura/clases_tramas.py $CAP --salida clases-$ID.json > /dev/null; echo "$ID clases rc=$?"
   if [ -f "$P/registros/dns-$ID.jsonl" ]; then
+    # El PCAP de DC1 (registrador 2.x) es la tercera fuente: si existe se usa siempre. Hasta la
+    # revisión del 26-nov no se pasaba y el E3 publicado quedó con pcap_dc1: false.
+    DNSP=""; [ -s "$P/registros/dns-$ID.pcap" ] && DNSP="--pcap $P/registros/dns-$ID.pcap"
     nice python3 $C/captura/contraste_dns.py --transacciones $P/generador/$ID/transacciones-*.jsonl \
-      --dc1 $P/registros/dns-$ID.jsonl --capturas $CAP --salida dns-$ID.json --csv dns-$ID.csv > /dev/null; echo "$ID dns rc=$?"
+      --dc1 $P/registros/dns-$ID.jsonl --capturas $CAP $DNSP --salida dns-$ID.json --csv dns-$ID.csv > /dev/null; echo "$ID dns rc=$?"
   fi
   if [ -f "$S1/bloque1/extremo/$ID.pcap" ]; then
     nice python3 $C/captura/comparar_extremo.py --extremo $S1/bloque1/extremo/$ID.pcap --sensor $CAP/pcap \

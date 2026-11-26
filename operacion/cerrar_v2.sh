@@ -146,8 +146,9 @@ paso cobertura \$T python3 \$C/captura/cobertura_v2.py --capturas $S1/capturas/$
 paso fronteras python3 \$C/extraccion/metadatos_v2.py fronteras --generador generador/$ID --salida fronteras.json
 paso extraer \$T python3 \$C/extraccion/extraer_v2.py $S1/capturas/$ID --salida extraccion --fronteras fronteras.json
 paso verificar \$T python3 \$C/extraccion/verificar_v2.py $S1/capturas/$ID --salida extraccion --fronteras fronteras.json --max-filas 40 --historia-s 230
-# Calidad de captura (bloque 1): se registran como pasos, pero NO entran en el dictamen vigente
-# (estado_global.PASOS_OBLIGATORIOS); su efecto es la propuesta de política de docs/BLOQUE1-CIERRE.md.
+# Calidad de captura (bloque 1): no son pasos obligatorios (su rc no decide), pero desde la revisión
+# del 26-nov estado_global.py LEE su resultado y lo integra en el dictamen
+# (docs/BLOQUE1-POLITICA-CALIDAD.md): pérdida o entrada dañada = fallo; ausencia = indeterminado.
 paso calidad_copias nice python3 \$C/captura/copias_espejo.py $S1/capturas/$ID/pcap --salida calidad-copias-espejo.json --detalle-umbral 0.4
 DNSP=""; [ -s registros/dns-$ID.pcap ] && DNSP="--pcap registros/dns-$ID.pcap"
 paso calidad_dns nice python3 \$C/captura/contraste_dns.py --transacciones generador/$ID/transacciones-*.jsonl --dc1 registros/dns-$ID.jsonl \

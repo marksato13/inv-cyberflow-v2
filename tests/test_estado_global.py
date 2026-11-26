@@ -46,6 +46,29 @@ class TestEstadoGlobal(unittest.TestCase):
         self.escribir(self.p / "criterios.json", {
             **{f"C{i}": {"ok": True} for i in range(1, 14)}, "C11b": {"ok": True}})
         self.sondeo(("sin_descartes", 0, 100))
+        self.copias()
+        self.dns()
+
+    def copias(self, clases=None, entrada_completa=True):
+        clases = {"completo": 100} if clases is None else clases
+        self.escribir(self.p / "calidad-copias-espejo.json", {
+            "resultado_global": "examinado_completo" if entrada_completa else "incompleto",
+            "entrada_completa": entrada_completa,
+            "denominadores": {"eventos": sum(clases.values()), "eventos_por_clase": clases}})
+
+    def dns(self, pcap_dc1=True, declara_pcap=True, sueltos=0, explicados=0, **total):
+        base = {"transacciones": 10, "comprobadas": 10, "sin_discrepancias": 10, "discrepancias": 0,
+                "no_determinables": 0, "indeterminado_dc1": 0, "ambiguas": 0}
+        base.update(total)
+        self.escribir(self.p / "calidad-contraste-dns.json", {
+            "total": base, "sin_transaccion": {"total": sueltos, "items": [], "truncados": 0},
+            "sin_transaccion_clasificacion": {"explicados": explicados, "no_explicados": sueltos - explicados},
+            "tramas_ilegibles": {"total": 0, "items": [], "truncados": 0},
+            "parametros": {"pcap_dc1": pcap_dc1}})
+        arranque = {"evento": "arranque", "version": "2.0.0"}
+        if declara_pcap:
+            arranque["pcap"] = "/var/log/cyberflow-v2/dns.pcap"
+        (self.e / ("dns-%s.jsonl" % self.id)).write_text(json.dumps(arranque) + "\n")
 
     def sondeo(self, *tramos):
         self.escribir(self.e / "calidad-espejo-sondeo.json", {"intervalos": [

@@ -71,6 +71,9 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
         estados["espejo"] = ("con_descartes" if seg["con_descartes"] > 0 else
                              "indeterminado" if seg["indeterminado"] > 0 or set(seg) - {"sin_descartes", "con_descartes", "indeterminado"}
                              else "sin_descartes")
+    estados["calidad_copias"] = calidad_copias(leer(pruebas / "calidad-copias-espejo.json"))
+    estados["calidad_dns"] = calidad_dns(leer(pruebas / "calidad-contraste-dns.json"),
+                                         lineas(e / ("dns-%s.jsonl" % identificador)))
     evidencias = [
         pruebas / "extraccion" / "resumen.json",
         pruebas / "extraccion" / "verificacion.json",
@@ -115,6 +118,10 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
         "supervision": ("con_invalidaciones",),
         "exclusion_v1": ("no_cubre",),
         "espejo": ("con_descartes",),
+        # Política de calidad (docs/BLOQUE1-POLITICA-CALIDAD.md): la evidencia existe y muestra un
+        # defecto ⇒ fallo. La evidencia falta o no decide ⇒ indeterminación (ver «faltantes»).
+        "calidad_copias": ("perdida", "entrada_danada"),
+        "calidad_dns": ("discrepancia", "entrada_danada"),
     }
     for nombre, valores in fallos.items():
         if estados[nombre] in valores:
@@ -137,7 +144,8 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
     if prueba:
         motivos.append("prueba_parada:%s" % prueba[-1].get("provocado", "desconocido"))
     faltantes = [k for k, v in estados.items() if v in
-                 ("ausente", "sin_datos", "desconocido", "indeterminado")]
+                 ("ausente", "sin_datos", "desconocido", "indeterminado",
+                  "sin_eventos", "falta_pcap_dc1", "sin_transacciones")]
     if estados["analisis"] == "incompleto":
         faltantes.append("analisis")
     if not criterios:
@@ -157,6 +165,52 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
 
 
 PASOS_OBLIGATORIOS = ("conciliar", "cobertura", "fronteras", "extraer", "verificar", "metadatos")
+
+# Clases de copias_espejo.py para la población (docs/BLOQUE1-POLITICA-CALIDAD.md §2).
+COPIAS_PERDIDA = ("falta_copia", "vlan_incorrecta")
+COPIAS_INDETERMINADO = ("ambiguo", "copias_de_mas", "inesperado", "no_determinable")
+
+
+def calidad_copias(r) -> str:
+    """completo | perdida | entrada_danada | indeterminado | sin_eventos | sin_datos."""
+    if not isinstance(r, dict) or "denominadores" not in r:
+        return "sin_datos"
+    if r.get("entrada_completa") is not True or r.get("resultado_global") != "examinado_completo":
+        return "entrada_danada"
+    clases = r["denominadores"].get("eventos_por_clase") or {}
+    if any(clases.get(c, 0) for c in COPIAS_PERDIDA):
+        return "perdida"
+    if any(clases.get(c, 0) for c in COPIAS_INDETERMINADO) or set(clases) - set(
+            COPIAS_PERDIDA + COPIAS_INDETERMINADO + ("completo",)):
+        return "indeterminado"
+    return "completo" if r["denominadores"].get("eventos", 0) > 0 else "sin_eventos"
+
+
+def calidad_dns(r, registro_dc1) -> str:
+    """completo | discrepancia | entrada_danada | indeterminado | falta_pcap_dc1 |
+    sin_transacciones | sin_datos.
+
+    El PCAP de DC1 es obligatorio cuando el registrador declara que lo escribe (registro 2.x,
+    campo `pcap` en el arranque): sin él, la tercera fuente queda sin contrastar."""
+    if not isinstance(r, dict) or "total" not in r:
+        return "sin_datos"
+    if "error" in r:
+        return "entrada_danada"
+    t = r["total"]
+    if t.get("discrepancias"):
+        return "discrepancia"
+    if not t.get("transacciones"):
+        return "sin_transacciones"
+    clasif = r.get("sin_transaccion_clasificacion")
+    no_explicados = (clasif or {}).get("no_explicados") if clasif else r.get("sin_transaccion", {}).get("total", 0)
+    if (t.get("no_determinables") or t.get("indeterminado_dc1") or t.get("ambiguas")
+            or t.get("comprobadas", 0) != t.get("transacciones") or no_explicados
+            or (r.get("tramas_ilegibles") or {}).get("total")):
+        return "indeterminado"
+    declara_pcap = any(x.get("evento") == "arranque" and x.get("pcap") for x in (registro_dc1 or []))
+    if declara_pcap and not (r.get("parametros") or {}).get("pcap_dc1"):
+        return "falta_pcap_dc1"
+    return "completo"
 DICTAMEN = {"aprobada": "aprobado", "no_aprobada": "fallido", "indeterminada": "indeterminado"}
 CODIGO = {"aprobada": 0, "no_aprobada": 1, "indeterminada": 2}
 

@@ -75,7 +75,7 @@ def pcap(ruta):
                 trama = entrada.read(incluido)
                 if len(trama) != incluido:
                     raise EntradaDanada(f"{ruta}: trama PCAP truncada")
-                yield seg + sub / escala, trama
+                yield seg + sub / escala, trama, original
     except (OSError, EOFError) as exc:
         raise EntradaDanada(f"{ruta}: {exc}") from exc
 
@@ -138,7 +138,13 @@ def dns(datos):
                 a=direcciones, ttl=ttls)
 
 
-def trama_dns(ts, trama):
+class RecortadaNoDns(Exception):
+    """Trama recortada por el snaplen (p. ej. el extracto publicado deja la gestión en 96 B) cuya
+    cabecera dice que no es UDP/53: no puede ser DNS, así que no es «ilegible» para este análisis."""
+
+
+def trama_dns(ts, trama, original=None):
+    recortada = original is not None and original > len(trama)
     if len(trama) < 14:
         raise EntradaDanada("trama Ethernet truncada")
     etipo, pos, vlan = struct.unpack_from("!H", trama, 12)[0], 14, None
@@ -154,7 +160,16 @@ def trama_dns(ts, trama):
         raise EntradaDanada("IPv4 truncado")
     ihl = (trama[pos] & 15) * 4
     largo = struct.unpack_from("!H", trama, pos + 2)[0]
-    if trama[pos] >> 4 != 4 or ihl < 20 or largo < ihl or pos + largo > len(trama):
+    if trama[pos] >> 4 != 4 or ihl < 20 or largo < ihl:
+        raise EntradaDanada("IPv4 inválido o truncado")
+    if pos + largo > len(trama):
+        # Recortada por el snaplen: solo es ilegible si pudiera ser DNS (UDP con puerto 53 o
+        # puertos no legibles). Una trama dañada (sin recorte declarado) sigue siendo ilegible.
+        if recortada and pos + ihl <= len(trama):
+            if trama[pos + 9] != 17:
+                raise RecortadaNoDns()
+            if pos + ihl + 4 <= len(trama) and 53 not in struct.unpack_from("!HH", trama, pos + ihl):
+                raise RecortadaNoDns()
         raise EntradaDanada("IPv4 inválido o truncado")
     if trama[pos + 9] != 17 or struct.unpack_from("!H", trama, pos + 6)[0] & 0x1FFF:
         return None
@@ -177,6 +192,7 @@ def trama_dns(ts, trama):
 
 
 ILEGIBLES = []   # tramas IPv4 que no se pudieron analizar (se informan; no abortan la lectura)
+RECORTADAS_NO_DNS = [0]   # recortadas por el snaplen y con cabecera que excluye DNS
 
 
 def leer_pcap(rutas, poblacion):
@@ -184,9 +200,12 @@ def leer_pcap(rutas, poblacion):
     en ILEGIBLES con su instante y motivo, porque puede ser tráfico ajeno sin relación con el DNS."""
     salida = []
     for ruta in rutas:
-        for ts, datos in pcap(ruta):
+        for ts, datos, original in pcap(ruta):
             try:
-                paquete = trama_dns(ts, datos)
+                paquete = trama_dns(ts, datos, original)
+            except RecortadaNoDns:
+                RECORTADAS_NO_DNS[0] += 1
+                continue
             except EntradaDanada as exc:
                 ILEGIBLES.append({"fichero": Path(ruta).name, "t": ts, "motivo": str(exc)})
                 continue
@@ -263,6 +282,34 @@ def limitar(items, limite):
     return {"total": len(items), "items": items[:limite], "truncados": max(0, len(items) - limite)}
 
 
+# Sonda DNS del preflight (operacion/v2ctl.py, `preflight`): el cliente se crea con
+# random.Random(1) como generador de identificadores, así que la primera consulta lleva siempre
+# este id; sale del origen del primer perfil hacia «portal.<zona>». La ejecuta el lanzador
+# (`v2ctl.py preflight`) y otra vez el supervisor al arrancar el generador; no escribe
+# transacción. Si v2ctl cambia la semilla o el nombre, esta regla deja de casar y el evento
+# vuelve a contar como no explicado (nunca al revés).
+ID_SONDA_PREFLIGHT = 17611          # random.Random(1).randint(0, 65535)
+NOMBRE_SONDA_PREFLIGHT = "portal."
+
+
+def clasificar_sueltos(sueltos, nombres):
+    """Separa los eventos sin transacción explicados (sonda del preflight) de los demás.
+
+    Un evento solo es explicado si casan id, nombre y que todas las tramas con esa clave
+    (cliente, puerto, id) tengan el mismo nombre. Lo no explicado mantiene el código de salida 1."""
+    explicados, otros = [], []
+    for s, nombre in zip(sueltos, nombres):
+        es_sonda = (s["clave"][2] == ID_SONDA_PREFLIGHT and nombre is not None
+                    and str(nombre).startswith(NOMBRE_SONDA_PREFLIGHT))
+        (explicados if es_sonda else otros).append(s)
+    claves = sorted({tuple(s["clave"]) for s in explicados})
+    return {"explicados": len(explicados), "no_explicados": len(otros),
+            "por_motivo": {"sonda_preflight": len(explicados)} if explicados else {},
+            "claves_explicadas": [list(k) for k in claves],
+            "regla": "id %d y nombre %s* (sonda de v2ctl.py preflight)" % (
+                ID_SONDA_PREFLIGHT, NOMBRE_SONDA_PREFLIGHT)}
+
+
 def contrastar(transacciones, dc, sensor, dc_pcap, ventanas, descartes, v1, margen=.5, limite=100):
     filas, indice = [], defaultdict(list)
     poblacion = {t["origen_ip"] for t in transacciones}
@@ -288,7 +335,7 @@ def contrastar(transacciones, dc, sensor, dc_pcap, ventanas, descartes, v1, marg
         indice[clave].append(e)
     for grupo in indice.values():
         grupo.sort(key=lambda e: e["inicio"])
-    sueltos, ambiguos = [], []
+    sueltos, ambiguos, nombres_sueltos = [], [], []
     for fuente, paquetes in (("dc1", dc), ("sensor1", sensor), ("pcap_dc1", dc_pcap or [])):
         for p in paquetes:
             e, ambiguo = elegir(p, indice, margen,
@@ -301,6 +348,7 @@ def contrastar(transacciones, dc, sensor, dc_pcap, ventanas, descartes, v1, marg
             else:
                 sueltos.append({"fuente": fuente, "clave": list(p["clave"]),
                                 "sentido": p["sentido"], "t": p["t"], "vlan": p.get("vlan")})
+                nombres_sueltos.append(p.get("nombre"))
     diferencias = {"dc1_menos_sensor1": [], "generador_inicio_menos_dc1_consulta": [],
                    "generador_fin_menos_dc1_respuesta": []}
     for e in filas:
@@ -447,6 +495,7 @@ def contrastar(transacciones, dc, sensor, dc_pcap, ventanas, descartes, v1, marg
     return {"total": agregado(resultados), "por_clase": {k: agregado(v) for k, v in sorted(clases.items())},
             "desfases": {k: resumen_numeros(v) for k, v in diferencias.items()},
             "por_transaccion": resultados, "sin_transaccion": limitar(sueltos, limite),
+            "sin_transaccion_clasificacion": clasificar_sueltos(sueltos, nombres_sueltos),
             "ambiguos": limitar(ambiguos, limite),
             "parametros": {"margen_s": margen, "ventanas_dc1": ventanas, "intervalos_socket_descartadas": descartes,
                            "registro_v1": v1, "pcap_dc1": dc_pcap is not None,
@@ -480,6 +529,10 @@ def main(argv=None):
         informe = contrastar(txs, dc, sensor, dc_pcap, ventanas, descartes, v1,
                              args.margen_s, args.limite_lista)
         informe["tramas_ilegibles"] = limitar(ILEGIBLES, args.limite_lista)
+        if RECORTADAS_NO_DNS[0]:
+            # Solo aparece con capturas recortadas (el extracto publicado); en el laboratorio es 0 y
+            # el informe queda idéntico al de antes de este cambio.
+            informe["tramas_recortadas_no_dns"] = RECORTADAS_NO_DNS[0]
         Path(args.salida).write_text(json.dumps(informe, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         if args.csv:
             with open(args.csv, "w", newline="", encoding="utf-8") as salida:
@@ -493,7 +546,9 @@ def main(argv=None):
                     escritor.writerow({k: json.dumps(r[k], ensure_ascii=False) if isinstance(r[k], (dict, list)) else r[k]
                                      for k in columnas})
         print(json.dumps({"total": informe["total"], "sin_transaccion": informe["sin_transaccion"]["total"]}, ensure_ascii=False))
-        return 1 if (informe["total"]["discrepancias"] or informe["sin_transaccion"]["total"]
+        # Los eventos sin transacción explicados (sonda del preflight) no son fallo; los demás sí.
+        return 1 if (informe["total"]["discrepancias"]
+                     or informe["sin_transaccion_clasificacion"]["no_explicados"]
                      or informe["ambiguos"]["total"] or ILEGIBLES) else 0
     except (EntradaDanada, OSError, UnicodeError, KeyError, TypeError, ValueError) as exc:
         print(f"entrada dañada: {exc}", file=sys.stderr)
