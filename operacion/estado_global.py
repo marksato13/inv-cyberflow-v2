@@ -221,8 +221,9 @@ def calidad_extremo(r, captura, copia_danada=False) -> str:
 
 
 def calidad_sonda(r) -> str:
-    """completo | contaminacion | indeterminado | sin_datos (ventanas_sonda.py v2)."""
-    if not isinstance(r, dict) or r.get("version") != 2:
+    """completo | contaminacion | indeterminado | sin_datos (ventanas_sonda.py v2 o v3; la v3 solo
+    cambia el recuento a ventanas distintas, el estado se decide igual)."""
+    if not isinstance(r, dict) or r.get("version") not in (2, 3):
         return "sin_datos"
     if r.get("estado") == "contaminacion_en_periodo_util":
         return "contaminacion"

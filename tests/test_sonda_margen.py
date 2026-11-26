@@ -122,6 +122,25 @@ def test_cli_estados(tmp_path):
     assert json.loads(sal.read_text())["estado"] == "sin_registro"
 
 
+def test_salida_real_de_ventanas_sonda_la_entiende_el_dictamen(tmp_path):
+    """La versión que escribe ventanas_sonda.py es la que acepta estado_global (VD2, 26-nov)."""
+    sys.path.insert(0, str(RAIZ / "operacion"))
+    import estado_global as eg
+    captura, t0 = 1_000_000.0, 1_000_250.0
+    meta = tmp_path / "meta.csv"
+    escribir_meta(meta, ventanas(captura, t0, 600))
+    pre, sal = tmp_path / "pre.jsonl", tmp_path / "s.json"
+    pre.write_text(json.dumps(sonda(t0 - 245, t0 - 241)) + "\n")
+    vs.main(["--ventanas", str(meta), "--preflight", str(pre), "--salida", str(sal)])
+    assert eg.calidad_sonda(json.loads(sal.read_text())) == "completo"
+    pre.write_text(json.dumps(sonda(t0 - 245, t0 - 241, fuente="reconstruido")) + "\n")
+    vs.main(["--ventanas", str(meta), "--preflight", str(pre), "--salida", str(sal)])
+    assert eg.calidad_sonda(json.loads(sal.read_text())) == "indeterminado"
+    pre.write_text(json.dumps(sonda(t0 + 30, t0 + 31)) + "\n")
+    vs.main(["--ventanas", str(meta), "--preflight", str(pre), "--salida", str(sal)])
+    assert eg.calidad_sonda(json.loads(sal.read_text())) == "contaminacion"
+
+
 # -- iniciar --sondas-previas --------------------------------------------------------------------
 def registro(tmp_path, ejecucion="V2-X-20261126T000000Z", fin=1000.0, clase="ok", ok=True):
     lineas = [{"tipo": "comprobacion", "ejecucion_id": ejecucion, "comprobacion": "reloj", "ok": ok},
