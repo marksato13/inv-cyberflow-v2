@@ -23,7 +23,8 @@ V2 vuelve a capturar los datos y vuelve a entrenar el escalador y el IF, a calib
 
 - El piloto final y las 49 h definitivas, los ataques y las campañas A/B **no se han iniciado**.
 - Estado del Bloque 1:
-  - `docs/BLOQUE1-REVISION-6-2026-11-26.md`: suficiencia temporal de Suricata (el periodo debe quedar acotado), C9 sin depender de C7, `dictamen_casos` sin copia recursiva, qué valores publicados deciden el dictamen, y dependencias (lo vigente);
+  - `docs/BLOQUE1-REVISION-7-2026-11-26.md`: Suricata por intervalos (pérdida atribuible frente a no localizada, el fallo manda sobre la falta de evidencia), continuidad con `uptime` y paso de cierre comprobado (lo vigente);
+  - `docs/BLOQUE1-REVISION-6-2026-11-26.md`: suficiencia temporal de Suricata (el periodo debe quedar acotado), C9 sin depender de C7, `dictamen_casos` sin copia recursiva, qué valores publicados deciden el dictamen, y dependencias;
   - `docs/BLOQUE1-REVISION-5-2026-11-26.md`: reproducción limpia, Suricata `kernel_drops` (sí se mide),
     conciliación de pendientes y **matriz final del Bloque 1**;
   - `docs/BLOQUE1-REVISION-4-2026-11-26.md`: publicación, reproducción y requisitos por tipo de ejecución;
@@ -57,18 +58,18 @@ python -X utf8 operacion/reproducir_dictamen.py
 python -X utf8 operacion/recalcular_desde_capturas.py evidencias/bloque1/entradas-r4 --p2 evidencias/bloque1/extractos-539c48e/p2-V2-VD2-20261126T090705Z
 ```
 
-Resultado esperado: cada guion termina en `GLOBAL SATISFACTORIO` (rc 0). `reproducir_dictamen.py` aplica por omisión los complementos `suricata-r5` y `suricata-r6` (REVISION-6 §6).
+Resultado esperado: cada guion termina en `GLOBAL SATISFACTORIO` (rc 0). `reproducir_dictamen.py` aplica por omisión los complementos `suricata-r5`, `suricata-r6` y `suricata-r7` (REVISION-7 §5).
 
 ### Pruebas
 
-Además de lo anterior hace falta **pytest** (probado con Python 3.14.3 y pytest 9.0.3). `unittest discover` solo recoge 261 de las 310 pruebas.
+Además de lo anterior hace falta **pytest** (probado con Python 3.14.3 y pytest 9.0.3). `unittest discover` no recoge las pruebas escritas para pytest.
 
 ```
 python -m pip install pytest
 python -m pytest -q -p no:cacheprovider tests
 ```
 
-Resultado esperado con 2a3478b: `310 passed, 38 subtests passed`.
+Resultado esperado con el código de la 7.ª revisión: `335 passed, 38 subtests passed`. Las pruebas del fragmento de `cerrar_v2.sh` necesitan bash (en Windows, Git Bash); sin él se omiten. `test_sondeo_span` puede fallar alguna vez si la máquina va muy cargada (REVISION-7 §4).
 
 - `verificar_paquetes.py` comprueba los sha256 frente al manifiesto versionado y extrae los paquetes.
 - `reproducir_dictamen.py` rehace el dictamen desde los resultados intermedios: dictamen, motivos,

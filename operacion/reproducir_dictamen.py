@@ -19,7 +19,7 @@ estado_global.py y dictamen_casos.py, y compara con la referencia:
 Una ejecución esperada ausente, un fichero de entrada o de referencia ausente, un programa que falla
 o cualquier diferencia => NO SATISFACTORIO y rc 1. No escribe en el repositorio.
 
-Complementos (--complemento, repetible; por omisión evidencias/bloque1/suricata-r5 y suricata-r6). r5: Añade, por
+Complementos (--complemento, repetible; por omisión evidencias/bloque1/suricata-r5, -r6 y -r7). r5: Añade, por
 ejecución, los eventos stats originales de Suricata (capturas/<ID>/eve/suricata-stats-<ID>.jsonl, que
 el EVE filtrado de r4 no lleva) y la referencia del laboratorio recalculada con el código que mide
 kernel_drops; esa referencia sustituye a la de r4. Se compara además el componente de Suricata de C9
@@ -27,7 +27,9 @@ kernel_drops; esa referencia sustituye a la de r4. Se compara además el compone
 de supervision.jsonl sea igual al último evento stats anterior de la EVE.
 r6: muestras stats de la EVE dedicada completa que acotan el periodo de captura
 (pruebas/<ID>/registros/suricata-stats-ventana-<ID>.jsonl) y la referencia recalculada con el código
-que exige esa cobertura; la referencia es la del último complemento que la tenga.
+que exige esa cobertura. r7: referencia recalculada con el código que evalúa Suricata por intervalos
+(pérdida atribuible / no localizada, continuidad con uptime). La referencia es la del último
+complemento que la tenga.
 --sin-complemento reproduce la referencia de r4, válida solo para el código hasta 57b2293.
 """
 from __future__ import annotations
@@ -79,7 +81,8 @@ def comparar(nombre, ref, nuevo, difs):
                                                                  json.dumps(nuevo, ensure_ascii=False)[:300]))
 
 
-CAMPOS_SURICATA = ("estado", "motivo", "eventos", "eventos_usados", "muestra_antes_s", "muestra_despues_s",
+CAMPOS_SURICATA = ("estado", "motivo", "falta_evidencia", "delta_kernel_drops_atribuible", "delta_kernel_drops_ampliado",
+                   "eventos", "eventos_usados", "muestra_antes_s", "muestra_despues_s",
                    "hueco_maximo_s", "delta_kernel_drops", "delta_kernel_packets", "kernel_drops",
                    "kernel_packets", "uptime", "primero", "ultimo")
 
@@ -185,11 +188,11 @@ def main(argv=None):
     ap.add_argument("dir", nargs="?", type=Path, default=REPO / "evidencias" / "bloque1" / "entradas-r4")
     ap.add_argument("--salida", type=Path)
     ap.add_argument("--complemento", type=Path, action="append",
-                    help="carpeta de complemento (se puede repetir, en orden); por omisión suricata-r5 y suricata-r6")
+                    help="carpeta de complemento (se puede repetir, en orden); por omisión suricata-r5, -r6 y -r7")
     ap.add_argument("--sin-complemento", action="store_true")
     a = ap.parse_args(argv)
     if a.complemento is None:
-        a.complemento = [REPO / "evidencias" / "bloque1" / "suricata-r5", REPO / "evidencias" / "bloque1" / "suricata-r6"]
+        a.complemento = [REPO / "evidencias" / "bloque1" / x for x in ("suricata-r5", "suricata-r6", "suricata-r7")]
     informe = {"version": 4, "complementos": [] if a.sin_complemento else [str(c) for c in a.complemento],
                "comprobacion": "dictamen desde resultados intermedios", "ejecuciones": []}
     for ID in ESPERADAS:

@@ -1,0 +1,536 @@
+{
+ "version": 1,
+ "ejecucion": "V2-VD2-20261126T090705Z",
+ "generado_utc": "2026-11-26T21:21:36.825438+00:00",
+ "nota": "evaluar_piloto.py deja estos criterios en revisión manual (ok None); aquí se revisan con evidencia. «requiere_duracion_prolongada» no cuenta en una verificación corta y se conserva aparte; «falta_evidencia» deja ok = None.",
+ "criterios": {
+  "C7": {
+   "ok": true,
+   "revision": "automatica (revisar_criterios.py)",
+   "comprobaciones": [
+    {
+     "que": "transacciones del generador presentes en la cobertura",
+     "ok": true,
+     "valor": [
+      598,
+      598
+     ],
+     "fuente": null
+    },
+    {
+     "que": "conexión vista (TCP con clase ok)",
+     "ok": true,
+     "valor": {
+      "aplica": 416,
+      "sin": []
+     },
+     "fuente": null
+    },
+    {
+     "que": "petición vista (clase ok)",
+     "ok": true,
+     "valor": {
+      "aplica": 598,
+      "sin": []
+     },
+     "fuente": null
+    },
+    {
+     "que": "respuesta vista (clase ok)",
+     "ok": true,
+     "valor": {
+      "aplica": 598,
+      "sin": []
+     },
+     "fuente": null
+    },
+    {
+     "que": "0 no verificables",
+     "ok": true,
+     "valor": 0,
+     "fuente": null
+    },
+    {
+     "que": "cobertura versión 2 (reparto por conexión persistente)",
+     "ok": true,
+     "valor": 2,
+     "fuente": null
+    },
+    {
+     "que": "bytes vistos / esperados >= 0.95 en total total",
+     "ok": true,
+     "valor": 1.000031,
+     "fuente": null
+    },
+    {
+     "que": "bytes vistos / esperados >= 0.95 en acción consulta",
+     "ok": true,
+     "valor": 1.0,
+     "fuente": null
+    },
+    {
+     "que": "bytes vistos / esperados >= 0.95 en acción envio",
+     "ok": true,
+     "valor": 1.0,
+     "fuente": null
+    },
+    {
+     "que": "bytes vistos / esperados >= 0.95 en acción obtener",
+     "ok": true,
+     "valor": 1.000031,
+     "fuente": null
+    },
+    {
+     "que": "bytes vistos / esperados >= 0.95 en perfil P1",
+     "ok": true,
+     "valor": 1.0,
+     "fuente": null
+    },
+    {
+     "que": "bytes vistos / esperados >= 0.95 en perfil P2",
+     "ok": true,
+     "valor": 1.000238,
+     "fuente": null
+    },
+    {
+     "que": "bytes vistos / esperados >= 0.95 en perfil P3",
+     "ok": true,
+     "valor": 1.0,
+     "fuente": null
+    },
+    {
+     "que": "bytes vistos / esperados >= 0.95 en perfil P4",
+     "ok": true,
+     "valor": 1.0,
+     "fuente": null
+    },
+    {
+     "que": "bytes vistos / esperados >= 0.95 en perfil P5",
+     "ok": true,
+     "valor": 1.0,
+     "fuente": null
+    },
+    {
+     "que": "bytes vistos / esperados >= 0.95 en perfil P6",
+     "ok": true,
+     "valor": 1.0,
+     "fuente": null
+    }
+   ],
+   "falta_evidencia": [],
+   "requiere_duracion_prolongada": [
+    "cobertura a través de la rotación del EVE a las 00:00 UTC (bloque 4)"
+   ],
+   "pendiente_otra_comprobacion": [],
+   "informativo": {
+    "transferencias_incompletas": 0,
+    "ejemplos": []
+   }
+  },
+  "C9": {
+   "ok": null,
+   "revision": "automatica (revisar_criterios.py)",
+   "comprobaciones": [
+    {
+     "que": "Δ output drops GigabitEthernet2/0/19",
+     "ok": true,
+     "valor": [
+      218993,
+      218993,
+      0
+     ],
+     "fuente": "contadores-lab-*"
+    },
+    {
+     "que": "Δ output drops GigabitEthernet1/0/23",
+     "ok": true,
+     "valor": [
+      0,
+      0,
+      0
+     ],
+     "fuente": "contadores-lab-*"
+    },
+    {
+     "que": "Δ output drops GigabitEthernet2/0/23",
+     "ok": true,
+     "valor": [
+      24,
+      24,
+      0
+     ],
+     "fuente": "contadores-lab-*"
+    },
+    {
+     "que": "Δ ens37_rx_missed_errors",
+     "ok": true,
+     "valor": [
+      0,
+      0,
+      0
+     ],
+     "fuente": "contadores-lab-*"
+    },
+    {
+     "que": "Δ ens37_rx_errors",
+     "ok": true,
+     "valor": [
+      0,
+      0,
+      0
+     ],
+     "fuente": "contadores-lab-*"
+    },
+    {
+     "que": "Δ softnet_dropped",
+     "ok": true,
+     "valor": [
+      0,
+      0,
+      0
+     ],
+     "fuente": "contadores-lab-*"
+    },
+    {
+     "que": "tcpdump del anillo: descartados por el núcleo",
+     "ok": true,
+     "valor": [
+      0,
+      0,
+      0
+     ],
+     "fuente": "journal de tcpdump en contadores-lab-*"
+    },
+    {
+     "que": "sondeo del destino del SPAN durante toda la captura",
+     "ok": null,
+     "valor": {
+      "sin_descartes": 1820.2857520580292,
+      "con_descartes": 0.0,
+      "indeterminado": 30.552764892578125
+     },
+     "fuente": "calidad-espejo-sondeo.json"
+    },
+    {
+     "que": "tcpdump de srv-dmz: descartados por el núcleo",
+     "ok": true,
+     "valor": [
+      0,
+      0,
+      0
+     ],
+     "fuente": "extremo-captura.json"
+    },
+    {
+     "que": "Suricata capture.kernel_drops (eventos stats de la EVE dedicada)",
+     "ok": true,
+     "valor": {
+      "eventos": 235,
+      "intervalo_stats_s": 8,
+      "hueco_maximo_admitido_s": 16,
+      "periodo": [
+       1795684057.02517,
+       1795685879.681486
+      ],
+      "muestra_antes_s": 6.272,
+      "muestra_despues_s": 3.384,
+      "eventos_usados": 230,
+      "primero": "2026-11-26T09:07:30.752701+0000",
+      "ultimo": "2026-11-26T09:38:03.065526+0000",
+      "hueco_maximo_s": 8.003,
+      "delta_kernel_drops_atribuible": 0,
+      "delta_kernel_drops_ampliado": 0,
+      "intervalos_con_perdida": [],
+      "kernel_drops": [
+       0,
+       0
+      ],
+      "kernel_packets": [
+       23398193,
+       24265003
+      ],
+      "uptime": [
+       118132,
+       119965
+      ],
+      "errors": [
+       0,
+       0
+      ],
+      "delta_kernel_packets": 866810,
+      "falta_evidencia": [],
+      "estado": "presente",
+      "delta_kernel_drops": 0
+     },
+     "fuente": "capturas/<ID>/eve (stats), registros/suricata-stats-ventana, manifiesto.json"
+    }
+   ],
+   "falta_evidencia": [],
+   "requiere_duracion_prolongada": [
+    "contadores a lo largo de 49 h (supervisión prolongada, bloque 4)"
+   ],
+   "pendiente_otra_comprobacion": []
+  },
+  "C10": {
+   "ok": null,
+   "revision": "automatica (revisar_criterios.py)",
+   "comprobaciones": [
+    {
+     "que": "NTP sincronizado al inicio en sensor1",
+     "ok": true,
+     "valor": "ok",
+     "fuente": "preflight-lab.jsonl"
+    },
+    {
+     "que": "NTP sincronizado al inicio en clientes",
+     "ok": true,
+     "valor": "ok",
+     "fuente": "preflight-lab.jsonl"
+    },
+    {
+     "que": "NTP sincronizado al inicio en srvdmz",
+     "ok": true,
+     "valor": "ok",
+     "fuente": "preflight-lab.jsonl"
+    },
+    {
+     "que": "NTP sincronizado al inicio en dc1",
+     "ok": true,
+     "valor": "ok",
+     "fuente": "preflight-lab.jsonl"
+    },
+    {
+     "que": "NTP sincronizado al final en srvdmz",
+     "ok": true,
+     "valor": true,
+     "fuente": "relojes-fin / manifiesto-fin"
+    },
+    {
+     "que": "NTP sincronizado al final en dc1",
+     "ok": true,
+     "valor": true,
+     "fuente": "relojes-fin / manifiesto-fin"
+    },
+    {
+     "que": "NTP sincronizado al final en clientes",
+     "ok": true,
+     "valor": true,
+     "fuente": "relojes-fin / manifiesto-fin"
+    },
+    {
+     "que": "|desfase aparente| mediano <= 5 ms",
+     "ok": true,
+     "valor": 0.000669,
+     "fuente": "cobertura.json"
+    }
+   ],
+   "falta_evidencia": [
+    "NTP al final en sensor1 (no registrado)"
+   ],
+   "requiere_duracion_prolongada": [
+    "deriva de los relojes a lo largo de 49 h (bloque 4)"
+   ],
+   "pendiente_otra_comprobacion": [
+    "DC1 unos 6,5–7 ms por detrás (bloque 4)"
+   ]
+  },
+  "C11": {
+   "ok": true,
+   "revision": "automatica (revisar_criterios.py)",
+   "comprobaciones": [
+    {
+     "que": "extraer rc 0",
+     "ok": true,
+     "valor": 0,
+     "fuente": "pasos-analisis.jsonl"
+    },
+    {
+     "que": "verificar rc 0",
+     "ok": true,
+     "valor": 0,
+     "fuente": "pasos-analisis.jsonl"
+    },
+    {
+     "que": "verificación 40/40 filas",
+     "ok": true,
+     "valor": 40,
+     "fuente": null
+    },
+    {
+     "que": "verificación sin diferencias",
+     "ok": true,
+     "valor": 0,
+     "fuente": null
+    },
+    {
+     "que": "historia del motor 230 s, sin futuro",
+     "ok": true,
+     "valor": "solo [t_fin - 230 s, t_fin], como el motor en operación",
+     "fuente": null
+    },
+    {
+     "que": "paridad con el motor",
+     "ok": true,
+     "valor": true,
+     "fuente": null
+    },
+    {
+     "que": "constantes justificadas",
+     "ok": true,
+     "valor": [
+      "icmp_ratio_10s",
+      "http_error_ratio_60s",
+      "dns_nxdomain_ratio_60s",
+      "fragment_ratio_10s",
+      "tcp_retransmission_ratio_10s",
+      "http_auth_failure_ratio_60s",
+      "tls_handshake_failure_ratio_60s",
+      "http_status_5xx_ratio_60s"
+     ],
+     "fuente": null
+    },
+    {
+     "que": "tardías EVE descartadas = 0",
+     "ok": true,
+     "valor": 0,
+     "fuente": null
+    },
+    {
+     "que": "tardías PCAP descartadas = 0",
+     "ok": true,
+     "valor": 0,
+     "fuente": null
+    },
+    {
+     "que": "inventario: todas las IP con regla",
+     "ok": true,
+     "valor": {
+      "ip": 134,
+      "sin_regla": 0
+     },
+     "fuente": null
+    }
+   ],
+   "falta_evidencia": [],
+   "requiere_duracion_prolongada": [
+    "orden del EVE a través de su rotación a las 00:00 UTC (bloque 4)"
+   ],
+   "pendiente_otra_comprobacion": [
+    "deduplicación del extractor: RST idénticos y copias a >5 ms (bloque 3)"
+   ]
+  },
+  "C12": {
+   "ok": true,
+   "revision": "automatica (revisar_criterios.py)",
+   "comprobaciones": [
+    {
+     "que": "volumen por minuto durante toda la captura",
+     "ok": true,
+     "valor": {
+      "minutos": 31,
+      "captura_s": 1850.8
+     },
+     "fuente": "volumen.jsonl"
+    },
+    {
+     "que": "volumen medido por fase",
+     "ok": true,
+     "valor": {
+      "previa": {
+       "minutos": 5,
+       "pcap_mb": 15.886,
+       "eve_mb": 0.535
+      },
+      "generacion": {
+       "minutos": 25,
+       "pcap_mb": 121.253,
+       "eve_mb": 5.246
+      },
+      "margen_final": {
+       "minutos": 3,
+       "pcap_mb": 10.011,
+       "eve_mb": 0.438
+      }
+     },
+     "fuente": null
+    },
+    {
+     "que": "GB/h de PCAP comprimido + EVE de esta ejecución",
+     "ok": true,
+     "valor": 0.2839,
+     "fuente": "manifiesto.json"
+    }
+   ],
+   "falta_evidencia": [],
+   "requiere_duracion_prolongada": [
+    "volumen real de 49 h frente a la proyección (otro programa y carga nocturna)"
+   ],
+   "pendiente_otra_comprobacion": []
+  },
+  "C13": {
+   "ok": true,
+   "revision": "automatica (revisar_criterios.py)",
+   "comprobaciones": [
+    {
+     "que": "al inicio: exclusion_v1",
+     "ok": true,
+     "valor": "*@2026-11-26T08:49:11+00:00/2026-11-26T11:37:41+00:00 ",
+     "fuente": "preflight-lab.jsonl"
+    },
+    {
+     "que": "al inicio: srvdmz_sets_vacios",
+     "ok": true,
+     "valor": "limitados y bloqueados vacios ",
+     "fuente": "preflight-lab.jsonl"
+    },
+    {
+     "que": "al inicio: agente_v1_sombra",
+     "ok": true,
+     "valor": "sin --aplicar ",
+     "fuente": "preflight-lab.jsonl"
+    },
+    {
+     "que": "al inicio: dc1_sin_restricciones",
+     "ok": true,
+     "valor": "nft vacio ",
+     "fuente": "preflight-lab.jsonl"
+    },
+    {
+     "que": "al final: srvdmz_limitados = 0",
+     "ok": true,
+     "valor": 0,
+     "fuente": null
+    },
+    {
+     "que": "al final: srvdmz_bloqueados = 0",
+     "ok": true,
+     "valor": 0,
+     "fuente": null
+    },
+    {
+     "que": "al final: agente_aplicar = 0",
+     "ok": true,
+     "valor": 0,
+     "fuente": null
+    },
+    {
+     "que": "al final: dc1_nft_lineas = 0",
+     "ok": true,
+     "valor": 0,
+     "fuente": null
+    },
+    {
+     "que": "la regla *@ cubre la ejecución real",
+     "ok": true,
+     "valor": "*@2026-11-26T08:49:11+00:00/2026-11-26T11:37:41+00:00",
+     "fuente": "exclusion-v1.json"
+    }
+   ],
+   "falta_evidencia": [],
+   "requiere_duracion_prolongada": [
+    "aislamiento mantenido durante 49 h (supervisión prolongada)"
+   ],
+   "pendiente_otra_comprobacion": []
+  }
+ }
+}

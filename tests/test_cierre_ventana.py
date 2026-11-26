@@ -204,6 +204,12 @@ class FragmentoCerrar(Base):
         self.assertRegex(log, r"suricata_stats_ventana rc=5 ")
         self.assertIn("CONTINUA", log)
 
+    def test_sintaxis_de_todos_los_guiones(self):
+        # la 7.ª revisión dejó un `log` pegado a un comentario: bash -n lo habría detectado
+        for g in sorted((RAIZ / "operacion").glob("*.sh")):
+            r = subprocess.run([bash(), "-n", ruta(g)], capture_output=True, stdin=subprocess.DEVNULL, text=True)
+            self.assertEqual(r.returncode, 0, "%s: %s" % (g.name, r.stderr))
+
     def test_el_paso_va_antes_de_revisar_criterios(self):
         t = (RAIZ / "operacion" / "cerrar_v2.sh").read_text(encoding="utf-8")
         self.assertLess(t.index("suricata_stats.py ventana"), t.index("revisar_criterios.py --pruebas"))
