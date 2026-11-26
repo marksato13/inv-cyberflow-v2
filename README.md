@@ -23,16 +23,22 @@ V2 vuelve a capturar los datos y vuelve a entrenar el escalador y el IF, a calib
 
 - El piloto final y las 49 h definitivas, los ataques y las campañas A/B **no se han iniciado**.
 - Estado del Bloque 1:
-  - `docs/BLOQUE1-REVISION-4-2026-11-26.md`: publicación, reproducción y requisitos por tipo de
-    ejecución (lo vigente);
+  - `docs/BLOQUE1-REVISION-5-2026-11-26.md`: reproducción limpia, Suricata `kernel_drops` (sí se mide),
+    conciliación de pendientes y **matriz final del Bloque 1** (lo vigente);
+  - `docs/BLOQUE1-REVISION-4-2026-11-26.md`: publicación, reproducción y requisitos por tipo de ejecución;
   - `docs/BLOQUE1-REVISION-3-2026-11-26.md`: VD4/VD6 y C7/C9–C13;
   - `docs/BLOQUE1-REVISION-2-2026-11-26.md`;
   - `docs/BLOQUE1-POLITICA-CALIDAD.md`, `docs/PENDIENTES.md` y `docs/MATRIZ-OBSERVACIONES.md`.
 - **VD6** (V2-VD6-20261126T151456Z, código 9196712) es una **verificación dirigida** `aprobada`. Lo
   está solo en los requisitos de ese tipo de ejecución: las comprobaciones de duración prolongada y
   las de otros bloques siguen pendientes aparte. VD3 se conserva como `no_aprobada`.
-- **Siguen abiertos:** deduplicación del extractor, reloj de DC1, rotación del EVE y supervisión
-  prolongada, y la causa interna de la pérdida de gestión en el switch.
+- **Siguen abiertos:**
+  - del propio bloque: la causa interna de la pérdida en el switch;
+  - del bloque 3: la deduplicación del extractor;
+  - del bloque 4: el reloj de DC1, la rotación del EVE y la supervisión prolongada.
+
+  Suricata `kernel_drops` se mide y vale 0: la afirmación anterior de «no medible» era falsa
+  (REVISION-5 §2).
 
 ### Reproducir el Bloque 1 (desde un clon nuevo)
 
@@ -54,12 +60,20 @@ Resultado esperado: cada guion termina en `GLOBAL SATISFACTORIO` (rc 0).
 
 - `verificar_paquetes.py` comprueba los sha256 frente al manifiesto versionado y extrae los paquetes.
 - `reproducir_dictamen.py` rehace el dictamen desde los resultados intermedios: dictamen, motivos,
-  criterios y los ocho casos de VD2, VD3, VD4 y VD6 frente a la referencia del laboratorio.
+  criterios y los ocho casos de VD2, VD3, VD4 y VD6 frente a la referencia del laboratorio. Usa por
+  omisión el complemento `evidencias/bloque1/suricata-r5/`: los eventos `stats` originales de Suricata y
+  la referencia recalculada (revisión 5). Comprueba además el componente de Suricata de C9 y que cada
+  lectura de la supervisión coincida con la EVE.
   Resultados esperados: VD2 `indeterminada`, VD3 `no_aprobada`, VD4 y VD6 `aprobada`.
 - `recalcular_desde_capturas.py` rehace cobertura, extremo, DNS, copias y extracción desde los
   PCAP/EVE, y las 45 transacciones de P2.
 
-Qué no puede rehacerse, y por qué, está en `evidencias/bloque1/entradas-r4/LEEME.md`. La comprobación desde una carpeta vacía con estos mismos comandos **está pendiente de repetirse**. El primer intento falló por la longitud de las rutas en Windows y su registro se conserva.
+Qué no puede rehacerse, y por qué, está en `evidencias/bloque1/entradas-r4/LEEME.md`. Comprobado desde una carpeta vacía con estos mismos comandos:
+
+- `C:\r4` con r4: `evidencias/bloque1/entradas-r4/REPRODUCCION-CLON-LIMPIO-intento2.txt`;
+- `C:\r5` con r5: `evidencias/bloque1/suricata-r5/REPRODUCCION-CLON-LIMPIO-intento3.txt`.
+
+El primer intento falló por la longitud de las rutas, y su registro se conserva.
 
 | Carpeta | Contenido |
 |---|---|

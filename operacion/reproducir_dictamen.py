@@ -23,7 +23,8 @@ Complemento (--complemento, por omisión evidencias/bloque1/suricata-r5): revisi
 ejecución, los eventos stats originales de Suricata (capturas/<ID>/eve/suricata-stats-<ID>.jsonl, que
 el EVE filtrado de r4 no lleva) y la referencia del laboratorio recalculada con el código que mide
 kernel_drops; esa referencia sustituye a la de r4. Se compara además el componente de Suricata de C9
-(estado, eventos, Δ kernel_drops, kernel_packets, uptime, primero y último).
+(estado, eventos, Δ kernel_drops, kernel_packets, uptime, primero y último) y que cada lectura
+de supervision.jsonl sea igual al último evento stats anterior de la EVE.
 --sin-complemento reproduce la referencia de r4, válida solo para el código hasta 57b2293.
 """
 from __future__ import annotations
@@ -87,6 +88,26 @@ def suricata_c9(c):
     return None
 
 
+def supervision_frente_a_stats(P: Path, K: Path, ID: str, difs: list) -> dict:
+    """Cada lectura kernel_drops de supervision.jsonl debe ser igual al último evento stats de la EVE
+    anterior a esa lectura (procedencia del valor). Lectura sin evento previo o distinta = diferencia."""
+    sys.path.insert(0, str(REPO / "operacion"))
+    import suricata_stats as ss
+    ev = [(ss.epoch(e["timestamp"]), ss.lectura(e)["kernel_drops"])
+          for e in ss.eventos_stats(sorted((K / "eve").glob("suricata-stats-*.jsonl")))]
+    sup = [json.loads(x) for x in (P / "registros" / "supervision.jsonl").read_text(encoding="utf-8").splitlines() if x.strip()]
+    n = 0
+    for s in sup:
+        previos = [v for t, v in ev if t <= s.get("hasta_epoch", 0)]
+        if not previos:
+            difs.append("supervisión %s: sin evento stats anterior" % s.get("utc"))
+        elif s.get("kernel_drops") is None or previos[-1] != s.get("kernel_drops"):
+            difs.append("supervisión %s: kernel_drops %s, EVE %s" % (s.get("utc"), s.get("kernel_drops"), previos[-1]))
+        else:
+            n += 1
+    return {"lecturas": len(sup), "iguales_a_la_eve": n}
+
+
 def una(E: Path, ID: str, C: Path | None = None):
     res = {"ejecucion": ID, "diferencias": [], "ausentes": []}
     R = C / "referencia" if C is not None else E / "referencia"
@@ -132,6 +153,7 @@ def una(E: Path, ID: str, C: Path | None = None):
                     res["diferencias"].append("la referencia r5 no tiene el componente de Suricata en C9")
                 comparar("C9.suricata", ref_s, nuevo_s, res["diferencias"])
                 res["suricata"] = nuevo_s
+                res["supervision_frente_a_stats"] = supervision_frente_a_stats(P, K, ID, res["diferencias"])
             ref_c, nuevo_c = resumen_casos(dec(R / "dictamen-casos.json")), resumen_casos(dec(t / "casos" / "dictamen-casos.json"))
             if len(ref_c) != N_CASOS:
                 res["diferencias"].append("la referencia tiene %d casos, se esperaban %d" % (len(ref_c), N_CASOS))
@@ -159,7 +181,7 @@ def main(argv=None):
         r = una(E, ID, C) if E.is_dir() else {"ejecucion": ID, "satisfactorio": False, "ausentes": [str(E)], "diferencias": []}
         informe["ejecuciones"].append(r)
         print(ID, "SATISFACTORIO" if r["satisfactorio"] else "NO SATISFACTORIO", r.get("dictamen"), r.get("motivos"),
-              r.get("criterios"), r.get("casos"), r.get("suricata"))
+              r.get("criterios"), r.get("casos"), r.get("suricata"), r.get("supervision_frente_a_stats"))
         for x in r["ausentes"] + r["diferencias"]:
             print("   ", x)
     informe["satisfactorio"] = all(r["satisfactorio"] for r in informe["ejecuciones"])

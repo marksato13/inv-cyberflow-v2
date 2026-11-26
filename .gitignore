@@ -32,3 +32,9 @@ tests/_temporales_pytest/
 !evidencias/bloque1/extractos-539c48e/p2-V2-VD2-20261126T090705Z/capturas/
 !evidencias/bloque1/extractos-539c48e/p2-V2-VD2-20261126T090705Z/capturas/*/pcap/extracto-*.pcap
 !evidencias/bloque1/extractos-539c48e/p2-V2-VD2-20261126T090705Z/capturas/*/eve/eve-extracto.json
+# Bloque 1, revisión 5 (docs/BLOQUE1-REVISION-5-2026-11-26.md): solo los eventos stats de Suricata
+# (contadores, sin IP ni MAC; barridos) y la referencia recalculada. Nada de PCAP ni del EVE completo.
+!evidencias/bloque1/suricata-r5/*/capturas/
+!evidencias/bloque1/suricata-r5/*/capturas/*/eve/suricata-stats-*.jsonl
+# carpeta de descarga de la release al reproducir desde un clon
+descargas/

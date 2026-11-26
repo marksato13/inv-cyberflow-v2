@@ -1,5 +1,7 @@
 # Informe del piloto de 30 min (24-nov-2026)
 
+> **Corrección (5.ª revisión, 26-nov):** lo que aquí se dice de que Suricata `kernel_drops` «no es medible» es falso. `stats.log` omite los contadores que valen 0, y la EVE dedicada `v2/eve.json` lo da: 0 en VD2–VD6. Ver `BLOQUE1-REVISION-5-2026-11-26.md` §2.
+
 **Ejecución:** `V2-PILOTO-20261124T224340Z`. Programa `programas/piloto-30min.json`
 (sha256 `16661aec…1c45136`), lanzado con `bash lanzar_v2.sh piloto-30min.json PILOTO 2` y
 cerrado con `bash cerrar_v2.sh V2-PILOTO-20261124T224340Z`.

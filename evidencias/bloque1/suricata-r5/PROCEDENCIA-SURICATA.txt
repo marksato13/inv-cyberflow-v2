@@ -1,0 +1,74 @@
+# Procedencia de capture.kernel_drops (Sensor1), 2026-11-26T19:48:46Z, codigo 88c380d
+## version
+This is Suricata version 7.0.3 RELEASE
+## proceso
+pid=339658 inicio=mié nov 25 00:18:37 2026 usuario=root
+/usr/bin/suricata -D --af-packet -c /etc/suricata/suricata.yaml --pidfile /run/suricata.pid 
+## systemd
+NRestarts=0
+ExecMainStartTimestamp=Wed 2026-11-25 00:18:38 UTC
+ActiveState=active
+## configuracion: /etc/suricata/suricata.yaml sha256 931845bf0b8a0acdcf096a808fee58ea86eba089b93ce5546a3ef92d13d22456
+### default-log-dir y stats globales
+61:default-log-dir: /var/log/suricata/
+stats:
+  enabled: yes
+  # The interval field (in seconds) controls the interval at
+  # which stats are updated in the log.
+  interval: 8
+### salida EVE dedicada (eve-log con filename v2/eve.json) y su bloque stats
+  - eve-log:
+      enabled: yes
+      filetype: regular #regular|syslog|unix_dgram|unix_stream|redis
+      filename: v2/eve.json  # CyberFlow V2: copia completa, fuera del glob de logrotate
+      # Enable for multi-threaded eve.json output; output files are amended with
+        - stats:
+            totals: yes       # stats for all threads merged together
+            threads: no       # per thread stats
+            deltas: no        # include delta values
+### stats.log (null-values por omision: no => omite contadores a 0)
+  - stats:
+      enabled: yes
+      filename: stats.log
+      append: yes       # append to file (yes) or overwrite it (no)
+      totals: yes       # stats for all threads merged together
+      threads: no       # per thread stats
+      #null-values: yes  # print counters that have value 0. Default: no
+### captura
+af-packet:
+  - interface: ens37
+    ring-size: 16384   # cierre 4A 4-nov-2026: único cambio del ensayo
+    checksum-checks: no
+    cluster-id: 99
+## fichero que lee el vigia y que copia el archivador
+-rw-r--r-- 1 root root 372826139 2026-11-26 19:48:43.661821381 +0000 /var/log/suricata/v2/eve.json
+/home/m4rk/cyberflow-v2/codigo/operacion/vigia_v2.py:149:                ["ssh", "sensor1", "tail -n 2000 /var/log/suricata/v2/eve.json"
+## stats.log frente a la EVE: mismo instante y mismo uptime
+### V2-VD2-20261126T090705Z: EVE primer stats ts=2026-11-26T09:07:38.753879+0000 uptime=118140 kernel_packets=23401101 kernel_drops=0
+Date: 11/26/2026 -- 09:07:38 (uptime: 1d, 08h 49m 00s)
+capture.kernel_packets                        | Total                     | 23401101
+capture.afpacket.busy_loop_avg                | Total                     | 1
+capture.afpacket.polls                        | Total                     | 15878545
+capture.afpacket.poll_timeout                 | Total                     | 3349439
+capture.afpacket.poll_data                    | Total                     | 12529106
+### V2-VD3-20261126T104230Z: EVE primer stats ts=2026-11-26T10:43:47.723031+0000 uptime=123909 kernel_packets=24979554 kernel_drops=0
+Date: 11/26/2026 -- 10:43:47 (uptime: 1d, 10h 25m 09s)
+capture.kernel_packets                        | Total                     | 24979554
+capture.afpacket.busy_loop_avg                | Total                     | 1
+capture.afpacket.polls                        | Total                     | 16950591
+capture.afpacket.poll_timeout                 | Total                     | 3509850
+capture.afpacket.poll_data                    | Total                     | 13440741
+### V2-VD4-20261126T141333Z: EVE primer stats ts=2026-11-26T14:14:45.899643+0000 uptime=136567 kernel_packets=27724962 kernel_drops=0
+Date: 11/26/2026 -- 14:14:45 (uptime: 1d, 13h 56m 07s)
+capture.kernel_packets                        | Total                     | 27724962
+capture.afpacket.busy_loop_avg                | Total                     | 1
+capture.afpacket.polls                        | Total                     | 18839514
+capture.afpacket.poll_timeout                 | Total                     | 3861033
+capture.afpacket.poll_data                    | Total                     | 14978481
+### V2-VD6-20261126T151456Z: EVE primer stats ts=2026-11-26T15:16:14.532941+0000 uptime=140256 kernel_packets=29013398 kernel_drops=0
+Date: 11/26/2026 -- 15:16:14 (uptime: 1d, 14h 57m 36s)
+capture.kernel_packets                        | Total                     | 29013398
+capture.afpacket.busy_loop_avg                | Total                     | 1
+capture.afpacket.polls                        | Total                     | 19708715
+capture.afpacket.poll_timeout                 | Total                     | 3959548
+capture.afpacket.poll_data                    | Total                     | 15749167

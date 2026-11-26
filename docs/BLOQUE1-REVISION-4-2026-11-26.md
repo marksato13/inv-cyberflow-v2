@@ -1,5 +1,7 @@
 # Bloque 1, revisión 4: publicación y reproducción (26-nov-2026)
 
+> **Corrección (5.ª revisión, 26-nov):** lo que aquí se dice de que Suricata `kernel_drops` «no es medible» es falso. `stats.log` omite los contadores que valen 0, y la EVE dedicada `v2/eve.json` lo da: 0 en VD2–VD6. Ver `BLOQUE1-REVISION-5-2026-11-26.md` §2.
+
 Esta revisión es **preparación**. No se repitió ninguna captura. El piloto final y las 49 h **no se
 han iniciado**. VD3 se conserva como fallida, y VD6 y los resultados anteriores no se tocan. El
 laboratorio queda detenido.

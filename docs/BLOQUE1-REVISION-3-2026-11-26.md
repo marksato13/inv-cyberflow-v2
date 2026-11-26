@@ -1,5 +1,7 @@
 # Bloque 1 — 3.ª revisión (26-nov-2026)
 
+> **Corrección (5.ª revisión, 26-nov):** lo que aquí se dice de que Suricata `kernel_drops` «no es medible» es falso. `stats.log` omite los contadores que valen 0, y la EVE dedicada `v2/eve.json` lo da: 0 en VD2–VD6. Ver `BLOQUE1-REVISION-5-2026-11-26.md` §2.
+
 Esto **no es el piloto final ni las 49 h**: ninguna de las dos se ha iniciado. No se ha tocado el
 SPAN ni los búferes compartidos. En el switch y en el ESXi solo se leyó.
 
