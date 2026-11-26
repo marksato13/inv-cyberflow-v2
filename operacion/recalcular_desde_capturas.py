@@ -7,7 +7,9 @@ con el resultado del laboratorio (Bloque 1, revisión 4).
 DIR_PAQUETES contiene una carpeta `<ID>/` por ejecución, tal como sale de los paquetes de la
 release: `pruebas/<ID>/` (entradas de texto saneadas y resultados del laboratorio) y
 `capturas/<ID>/{pcap,eve}` (anillo de Sensor1 filtrado al tráfico experimental), con
-`pruebas/<ID>/registros/{extremo,dns}-<ID>.pcap` (srv-dmz y DC1).
+`pruebas/<ID>/registros/{extremo,dns}-<ID>.pcap` (srv-dmz y DC1), e `informes-filtrado/` con el
+resumen del filtrado y `inicio-captura.json` (el único dato añadido: el instante del primer paquete
+IPv4 o evento EVE de la captura original, con el que el extractor fija el arranque).
 
 Para cada ejecución vuelve a ejecutar, en una carpeta temporal y con el código de este repositorio:
 cobertura_v2 (C7), comparar_extremo (calidad_extremo), contraste_dns (calidad_dns), copias_espejo
@@ -43,6 +45,13 @@ DEPENDEN_DEL_TRAFICO_AJENO = {
         "por_segundo": "tramas y bytes de todo el anillo por segundo",
         "pico_1s": "pico de todo el anillo",
         "pico_10ms": "pico de todo el anillo",
+        "detalle_10ms": "intervalos de 10 ms del anillo completo cerca de la tasa de línea",
+        "intervalos_10ms_sobre_umbral_detalle": "ídem, su recuento",
+        "intervalos_10ms_a_linea": "ídem, a tasa de línea",
+        "intervalos_10ms_a_linea_primeros": "ídem, los primeros",
+    },
+    "extremo": {
+        "sensor/paquetes": "total de tramas leídas del anillo, también las no experimentales",
     },
     "extraccion": {
         "resumen/copias_espejo_quitadas": "copias de espejo de todo el anillo (población y no población)",
@@ -130,7 +139,7 @@ def una(base: Path, ID: str):
     necesarias = [K0 / "pcap", K0 / "eve" / ("eve-%s.json" % ID), P0 / "registros" / ("extremo-%s.pcap" % ID),
                   P0 / "registros" / ("dns-%s.pcap" % ID), P0 / "registros" / ("dns-%s.jsonl" % ID),
                   P0 / "fronteras.json", P0 / "generador" / ID / "preflight.jsonl", K0 / "inventario.jsonl",
-                  P0 / "conciliacion" / "conciliacion.jsonl"]
+                  P0 / "conciliacion" / "conciliacion.jsonl", base / "informes-filtrado" / "inicio-captura.json"]
     res["entradas_ausentes"] = [str(p.relative_to(base)) for p in necesarias if not p.exists()]
     tx = sorted((P0 / "generador" / ID).glob("transacciones-*.jsonl"))
     if not tx:
@@ -185,10 +194,10 @@ def una(base: Path, ID: str):
         rc, s = ejecutar([cap / "copias_espejo.py", K0 / "pcap", "--salida", T / "copias.json", "--detalle-umbral", "0.4"], T)
         registrar("copias", rc, s, [P0 / "calidad-copias-espejo.json"], [T / "copias.json"])
         E = T / "extraccion"
-        # El primer paquete del anillo (inicio de la captura) suele ser tráfico no experimental, que el
-        # extracto no lleva; el inventario publicado registra su instante.
-        inicio = min(json.loads(l)["primer_paquete_epoch"]
-                     for l in (K0 / "inventario.jsonl").read_text(encoding="utf-8").splitlines() if l.strip())
+        # El arranque lo fija el primer paquete IPv4 o evento EVE de la captura ORIGINAL, que suele ser
+        # tráfico no experimental y no está en el extracto: el paquete lo publica, calculado en el
+        # laboratorio con las mismas funciones del extractor (informes-filtrado/inicio-captura.json).
+        inicio = dec(base / "informes-filtrado" / "inicio-captura.json")["inicio_epoch"]
         rc, s = ejecutar([ext / "extraer_v2.py", K0, "--salida", E, "--fronteras", P0 / "fronteras.json",
                           "--inicio-captura-epoch", repr(inicio)], T)
         if rc == 0:

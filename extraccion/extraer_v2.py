@@ -285,10 +285,10 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
     if p_next is None and e_next is None:
         raise ValueError("archivo sin observaciones IPv4 ni EVE")
     inicio = min(x for x in (p_next.packet.timestamp if p_next else None, e_next[0] if e_next else None) if x is not None)
-    # Reproducción desde un extracto filtrado (Bloque 1, r4): el primer paquete del anillo suele ser
-    # tráfico no experimental, que el extracto no lleva. El inventario de la ejecución registra ese
-    # instante (primer_paquete_epoch) y se pasa aquí para que el arranque y las marcas coincidan. Sin el
-    # parámetro (laboratorio) el comportamiento no cambia.
+    # Reproducción desde un extracto filtrado (Bloque 1, r4): el primer paquete IPv4 o evento EVE de la
+    # captura original suele ser tráfico no experimental, que el extracto no lleva. El paquete publica
+    # ese instante (informes-filtrado/inicio-captura.json) y se pasa aquí para que el arranque y las
+    # marcas coincidan. Sin el parámetro (laboratorio) el comportamiento no cambia.
     if inicio_captura is not None:
         inicio = min(inicio, inicio_captura)
     anchor = (math.floor(inicio / 10) + 1) * 10
