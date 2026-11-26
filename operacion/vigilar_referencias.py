@@ -122,7 +122,9 @@ class Vigilante:
             previo = self.ultimo.get(equipo)
             if previo is None or tam > previo[1]:
                 self.ultimo[equipo] = (t, tam)
-            elif en_generacion and t - previo[0] > self.a.sin_progreso_s:
+            # VD4: el reloj se cuenta desde el inicio de la generación como pronto. Antes (sondas,
+            # margen previo) no hay tráfico hacia las referencias y su quietud no es un incidente.
+            elif en_generacion and t - max(previo[0], self.a.generador_desde) > self.a.sin_progreso_s:
                 self.incidente(equipo, "sin_progreso", bytes=tam, sin_crecer_desde_epoch=previo[0])
 
     def correr(self):
@@ -140,7 +142,24 @@ class Vigilante:
         self.escribir(tipo="fin", motivo="parado_por_cierre" if self.parar_pedido else "tope")
 
 
-def analizar(lineas, parada_cierre=None):
+def progreso_desde_muestras(ini, muestras):
+    """Recalcula `sin_progreso` con las muestras registradas y la regla corregida (reloj desde el
+    inicio de la generación). Para reanalizar registros escritos con la regla anterior."""
+    salida, ultimo = [], {}
+    for x in muestras:
+        eq, t = x["equipo"], x["utc_epoch"]
+        tam = sum(b for b in x["bytes"] if b > 0)
+        previo = ultimo.get(eq)
+        if previo is None or tam > previo[1]:
+            ultimo[eq] = (t, tam)
+        elif (x.get("en_generacion") and t - max(previo[0], ini["generador_desde"]) > ini["sin_progreso_s"]
+              and not any(i["equipo"] == eq for i in salida)):
+            salida.append({"tipo": "incidente", "equipo": eq, "incidente": "sin_progreso", "bytes": tam,
+                           "sin_crecer_desde_epoch": previo[0], "utc_epoch": t, "recalculado": True})
+    return salida
+
+
+def analizar(lineas, parada_cierre=None, recalcular_progreso=False):
     """completo | incompleta (con incidentes) | sin_datos. Sin registro NUNCA es completo."""
     if not lineas:
         return {"version": 1, "estado": "sin_datos", "motivo": "sin registro de vigilancia"}
@@ -148,6 +167,10 @@ def analizar(lineas, parada_cierre=None):
     fin = next((x for x in lineas if x.get("tipo") == "fin"), None)
     muestras = [x for x in lineas if x.get("tipo") == "muestra"]
     inc = [x for x in lineas if x.get("tipo") == "incidente"]
+    registrados = None
+    if recalcular_progreso and ini is not None:
+        registrados = [x for x in inc if x.get("incidente") == "sin_progreso"]
+        inc = [x for x in inc if x.get("incidente") != "sin_progreso"] + progreso_desde_muestras(ini, muestras)
     por_equipo = {}
     for eq in ("srvdmz", "dc1"):
         m = [x for x in muestras if x["equipo"] == eq]
@@ -164,8 +187,12 @@ def analizar(lineas, parada_cierre=None):
     for eq, d in por_equipo.items():
         if not d["en_generacion"]:
             motivos.append("%s:sin_muestras_en_generacion" % eq)
-    return {"version": 1, "estado": "completo" if not motivos else "incompleta", "motivos": motivos,
-            "por_equipo": por_equipo, "incidentes": inc,
+    r = {"version": 1, "estado": "completo" if not motivos else "incompleta", "motivos": motivos,
+         "por_equipo": por_equipo, "incidentes": inc}
+    if registrados is not None:
+        r["recalculado_progreso"] = {"regla": "reloj de sin_progreso desde max(último crecimiento, inicio de la generación)",
+                                     "incidentes_registrados_sustituidos": registrados}
+    return {**r,
             "fin": fin.get("motivo") if fin else None, "parada_cierre_epoch": parada_cierre}
 
 
@@ -187,6 +214,8 @@ def main(argv=None):
     z = sub.add_parser("analizar")
     z.add_argument("registro")
     z.add_argument("--parada-cierre-epoch", type=float)
+    z.add_argument("--recalcular-progreso", action="store_true",
+                   help="reanálisis: recalcula sin_progreso con las muestras y la regla corregida")
     a = ap.parse_args(argv)
     if a.orden == "vigilar":
         a.inicio = time.time()
@@ -196,7 +225,7 @@ def main(argv=None):
         return 0
     p = Path(a.registro)
     lineas = [json.loads(x) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()] if p.exists() else []
-    r = analizar(lineas, a.parada_cierre_epoch)
+    r = analizar(lineas, a.parada_cierre_epoch, a.recalcular_progreso)
     print(json.dumps(r, indent=1, ensure_ascii=False))
     return 0 if r["estado"] == "completo" else 1
 

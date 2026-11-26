@@ -201,6 +201,30 @@ class Vigilancia(unittest.TestCase):
         v.escribir(tipo="fin", motivo="parado_por_cierre")
         self.assertEqual(vr.analizar(self.registro())["estado"], "completo")
 
+    def test_quietud_antes_de_la_generacion_no_cuenta_vd4(self):
+        # VD4: sin tráfico durante las sondas (antes de generador_desde) y crecimiento a los 40 s
+        # de empezar la generación. El reloj no debe arrastrar la quietud previa.
+        v = self.vig(generador_desde=600, generador_hasta=1100)
+        v.escribir(tipo="inicio", generador_desde=600, sin_progreso_s=180)
+        self.correr(v, 640, crece=False)
+        self.correr(v, 1100)
+        v.escribir(tipo="fin", motivo="parado_por_cierre")
+        self.assertEqual(vr.analizar(self.registro())["estado"], "completo")
+
+    def test_recalcular_sustituye_el_falso_sin_progreso_y_conserva_uno_real(self):
+        ini = {"tipo": "inicio", "generador_desde": 600, "sin_progreso_s": 180}
+        m = lambda t, b, g=True: {"tipo": "muestra", "equipo": "srvdmz", "utc_epoch": t, "bytes": [b], "en_generacion": g,
+                                  "proceso": True, "libre_b": 9e9}
+        dc = [dict(m(t, t, t >= 600), equipo="dc1") for t in range(0, 1200, 20)]
+        falso = [ini] + [m(t, 10, t >= 600) for t in range(0, 600, 20)] + [m(t, t) for t in range(620, 1200, 20)] + dc + [
+            {"tipo": "incidente", "equipo": "srvdmz", "incidente": "sin_progreso"}, {"tipo": "fin", "motivo": "parado_por_cierre"}]
+        self.assertEqual(vr.analizar(falso)["estado"], "incompleta")
+        r = vr.analizar(falso, recalcular_progreso=True)
+        self.assertEqual(r["estado"], "completo", r["motivos"])
+        self.assertEqual(len(r["recalculado_progreso"]["incidentes_registrados_sustituidos"]), 1)
+        real = [ini] + [m(t, 10) for t in range(600, 1200, 20)] + dc + [{"tipo": "fin", "motivo": "x"}]
+        self.assertIn("srvdmz:sin_progreso", vr.analizar(real, recalcular_progreso=True)["motivos"])
+
     def test_espacio_bajo_parada_coordinada_y_declarada(self):
         v = self.vig()
         v.escribir(tipo="inicio")
