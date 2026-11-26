@@ -74,6 +74,12 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
     estados["calidad_copias"] = calidad_copias(leer(pruebas / "calidad-copias-espejo.json"))
     estados["calidad_dns"] = calidad_dns(leer(pruebas / "calidad-contraste-dns.json"),
                                          lineas(e / ("dns-%s.jsonl" % identificador)))
+    # Referencia independiente del extremo (srv-dmz) y sondas del preflight: obligatorias desde la
+    # revisión del 26-nov. Sin ellas la ejecución no puede aprobarse (indeterminada).
+    estados["calidad_extremo"] = calidad_extremo(
+        leer(pruebas / "calidad-extremo.json"), leer(e / "extremo-captura.json"),
+        (e / ("extremo-%s.pcap.danado" % identificador)).exists())
+    estados["calidad_sonda"] = calidad_sonda(leer(pruebas / "calidad-sonda.json"))
     evidencias = [
         pruebas / "extraccion" / "resumen.json",
         pruebas / "extraccion" / "verificacion.json",
@@ -122,6 +128,10 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
         # defecto ⇒ fallo. La evidencia falta o no decide ⇒ indeterminación (ver «faltantes»).
         "calidad_copias": ("perdida", "entrada_danada"),
         "calidad_dns": ("discrepancia", "entrada_danada"),
+        "calidad_extremo": ("perdida", "entrada_danada"),
+        # La sonda dentro del periodo útil es un incidente comprobado: con el margen planificado
+        # (v2ctl.MARGEN_SONDA_S) no debe ocurrir; si ocurre, la ejecución no se aprueba.
+        "calidad_sonda": ("contaminacion",),
     }
     for nombre, valores in fallos.items():
         if estados[nombre] in valores:
@@ -161,7 +171,67 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
         "indeterminada" if any(m.startswith("falta:") for m in motivos) else "aprobada")
     return {"ejecucion": identificador, **estados, "global": global_estado,
             "dictamen": DICTAMEN[global_estado], "codigo_salida": CODIGO[global_estado],
-            "motivos": motivos, "pasos": rcs, "fuente_pasos": fuente_pasos}
+            "motivos": motivos, "pasos": rcs, "fuente_pasos": fuente_pasos,
+            "exclusiones": exclusiones(pruebas, invalidaciones)}
+
+
+# Reglas de exclusión de metadatos_v2.py. Las guardas planificadas se fijan antes de capturar y no
+# dependen de lo que pase; las exclusiones por incidente responden a algo observado. Se informan por
+# separado y NINGUNA convierte una pérdida experimental o una evidencia ausente en aprobada.
+GUARDAS_PLANIFICADAS = ("E1", "E5")
+EXCLUSIONES_INCIDENTE = ("E2", "E3", "E4")
+
+
+def exclusiones(pruebas: Path, invalidaciones) -> dict:
+    traz = leer(pruebas / "extraccion" / "trazabilidad.json") or {}
+    por_regla = traz.get("exclusion_por_regla") or {}
+    plan = {k: v for k, v in por_regla.items() if k.split(":")[0] in GUARDAS_PLANIFICADAS}
+    inc = {k: v for k, v in por_regla.items() if k.split(":")[0] in EXCLUSIONES_INCIDENTE}
+    otras = {k: v for k, v in por_regla.items() if k not in plan and k not in inc}
+    return {"ventanas": traz.get("ventanas"), "excluidas": traz.get("excluidas"),
+            "guardas_planificadas": plan, "por_incidente": inc, "otras_reglas": otras,
+            "invalidaciones_supervision": len(invalidaciones or [])}
+
+
+def calidad_extremo(r, captura, copia_danada=False) -> str:
+    """completo | perdida | entrada_danada | indeterminado | sin_datos.
+
+    `captura` es extremo-captura.json (cerrar_v2: estadísticas de tcpdump en srv-dmz y sha256).
+    Pérdida = algo que el extremo vio y Sensor1 no (conexiones o eventos sin_sensor). Lo que la
+    referencia no vio, descartes del núcleo en el extremo o falta de periodo común no deciden."""
+    if copia_danada:
+        return "entrada_danada"
+    if not isinstance(captura, dict) or captura.get("estado") == "sin_captura":
+        return "sin_datos"
+    if not isinstance(r, dict) or "por_clase" not in r:
+        return "sin_datos"
+    if captura.get("estado") != "ok" or captura.get("descartados_nucleo") != 0:
+        return "indeterminado"
+    if r.get("sin_periodo_comun"):
+        return "indeterminado"
+    total = lambda x: (x or {}).get("total", 0) if isinstance(x, dict) else len(x or [])
+    sin_sensor = sum(total(c.get("sin_sensor")) for c in r["por_clase"].values())
+    if total(r.get("conexiones_solo_extremo")) or sin_sensor:
+        return "perdida"
+    sin_extremo = sum(total(c.get("sin_extremo")) for c in r["por_clase"].values())
+    if (total(r.get("conexiones_solo_sensor")) or sin_extremo or r.get("discrepancias")
+            or (r.get("retransmisiones") or {}).get("coinciden") is False):
+        return "indeterminado"
+    return "completo"
+
+
+def calidad_sonda(r) -> str:
+    """completo | contaminacion | indeterminado | sin_datos (ventanas_sonda.py v2)."""
+    if not isinstance(r, dict) or r.get("version") != 2:
+        return "sin_datos"
+    if r.get("estado") == "contaminacion_en_periodo_util":
+        return "contaminacion"
+    if r.get("estado") == "sin_registro":
+        return "sin_datos"
+    if r.get("estado") != "sin_contaminacion":
+        return "indeterminado"
+    # Un registro reconstruido (ejecuciones antiguas) no acredita el instante exacto de la sonda.
+    return "completo" if r.get("fuentes_registro") == ["v2ctl"] else "indeterminado"
 
 
 PASOS_OBLIGATORIOS = ("conciliar", "cobertura", "fronteras", "extraer", "verificar", "metadatos")
@@ -202,9 +272,16 @@ def calidad_dns(r, registro_dc1) -> str:
     if not t.get("transacciones"):
         return "sin_transacciones"
     clasif = r.get("sin_transaccion_clasificacion")
-    no_explicados = (clasif or {}).get("no_explicados") if clasif else r.get("sin_transaccion", {}).get("total", 0)
+    # Solo vale la clasificación por registro de sondas (con «relaciones»). La de la primera revisión
+    # (id + prefijo) ya no explica nada: todos sus eventos sueltos cuentan como no explicados.
+    if clasif and "relaciones" in clasif:
+        no_explicados = clasif.get("no_explicados")
+        reconstruidas = (clasif.get("por_fuente_registro") or {}).get("reconstruido", 0)
+    else:
+        no_explicados = r.get("sin_transaccion", {}).get("total", 0)
+        reconstruidas = 0
     if (t.get("no_determinables") or t.get("indeterminado_dc1") or t.get("ambiguas")
-            or t.get("comprobadas", 0) != t.get("transacciones") or no_explicados
+            or t.get("comprobadas", 0) != t.get("transacciones") or no_explicados or reconstruidas
             or (r.get("tramas_ilegibles") or {}).get("total")):
         return "indeterminado"
     declara_pcap = any(x.get("evento") == "arranque" and x.get("pcap") for x in (registro_dc1 or []))

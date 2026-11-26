@@ -282,35 +282,108 @@ def limitar(items, limite):
     return {"total": len(items), "items": items[:limite], "truncados": max(0, len(items) - limite)}
 
 
-# Sonda DNS del preflight (operacion/v2ctl.py, `preflight`): el cliente se crea con
-# random.Random(1) como generador de identificadores, así que la primera consulta lleva siempre
-# este id; sale del origen del primer perfil hacia «portal.<zona>». La ejecuta el lanzador
-# (`v2ctl.py preflight`) y otra vez el supervisor al arrancar el generador; no escribe
-# transacción. Si v2ctl cambia la semilla o el nombre, esta regla deja de casar y el evento
-# vuelve a contar como no explicado (nunca al revés).
+# Sonda DNS del preflight (operacion/v2ctl.py): el cliente se crea con random.Random(1) como
+# generador de identificadores, así que su consulta lleva siempre este id y pregunta por
+# «portal.<zona>». La FIRMA (id + prefijo) ya no basta para explicar un evento (revisión del
+# 26-nov): solo sirve para señalar como «incierto» un evento con aspecto de sonda que no casa con
+# ninguna sonda registrada. Para explicar hace falta el registro de v2ctl (preflight.jsonl).
 ID_SONDA_PREFLIGHT = 17611          # random.Random(1).randint(0, 65535)
 NOMBRE_SONDA_PREFLIGHT = "portal."
 
 
-def clasificar_sueltos(sueltos, nombres):
-    """Separa los eventos sin transacción explicados (sonda del preflight) de los demás.
+def _nombre(n):
+    return None if n is None else str(n).rstrip(".").lower()
 
-    Un evento solo es explicado si casan id, nombre y que todas las tramas con esa clave
-    (cliente, puerto, id) tengan el mismo nombre. Lo no explicado mantiene el código de salida 1."""
-    explicados, otros = [], []
+
+def leer_sondas(rutas):
+    """Sondas DNS registradas (tipo «sonda», acción «dns») de uno o más preflight.jsonl."""
+    sondas = []
+    for ruta in rutas or ():
+        for x in jsonl(ruta):
+            if x.get("tipo") == "sonda" and x.get("accion") == "dns":
+                for campo in ("ejecucion_id", "origen_ip", "dns_id", "dns_nombre", "inicio_utc", "fin_utc"):
+                    if x.get(campo) is None:
+                        raise EntradaDanada(f"{ruta}: sonda DNS sin {campo}")
+                sondas.append(dict(x, _ini=instante(x["inicio_utc"]), _fin=instante(x["fin_utc"])))
+    return sondas
+
+
+def clasificar_sueltos(sueltos, nombres, sondas=None, ejecuciones=None, margen=.5):
+    """Relaciona cada evento sin transacción con una sonda registrada.
+
+    Explicado = existe una sonda DNS registrada de la MISMA ejecución con el mismo origen, puerto,
+    id y nombre completo, y el evento cae en [inicio − margen, fin + margen] de esa sonda. Un registro
+    reconstruido (fuente «reconstruido», sin puerto) solo casa si su intervalo contiene el evento y
+    la clave es la única de la firma en ese intervalo; se cuenta aparte. Todo lo demás es no
+    explicado, con su motivo; una firma de sonda sin sonda que case es «incierto»."""
+    sondas = sondas or []
+    ejecuciones = set(ejecuciones or ())
+    explicados, otros, relaciones = [], [], []
+    por_motivo, por_fuente = Counter(), Counter()
+    firma_en = defaultdict(list)          # (cliente, puerto) con firma de sonda -> instantes
     for s, nombre in zip(sueltos, nombres):
-        es_sonda = (s["clave"][2] == ID_SONDA_PREFLIGHT and nombre is not None
-                    and str(nombre).startswith(NOMBRE_SONDA_PREFLIGHT))
-        (explicados if es_sonda else otros).append(s)
+        if s["clave"][2] == ID_SONDA_PREFLIGHT and str(nombre or "").startswith(NOMBRE_SONDA_PREFLIGHT):
+            firma_en[tuple(s["clave"][:2])].append(s["t"])
+    for s, nombre in zip(sueltos, nombres):
+        cliente, puerto, ident = s["clave"]
+        firma = ident == ID_SONDA_PREFLIGHT and str(nombre or "").startswith(NOMBRE_SONDA_PREFLIGHT)
+        casa, motivo = None, None
+        if not sondas:
+            motivo = "sin_registro_de_sondas"
+        for x in sondas:
+            if ejecuciones and x["ejecucion_id"] not in ejecuciones:
+                motivo = motivo or "registro_de_otra_ejecucion"
+                continue
+            if x["origen_ip"] != cliente or int(x["dns_id"]) != ident:
+                motivo = motivo or "sin_sonda_con_esa_clave"
+                continue
+            reconstruido = x.get("fuente") == "reconstruido" and x.get("origen_puerto") is None
+            if not reconstruido and int(x.get("origen_puerto") or -1) != puerto:
+                motivo = motivo or "sin_sonda_con_esa_clave"
+                continue
+            if _nombre(x["dns_nombre"]) != _nombre(nombre):
+                motivo = "nombre_distinto"
+                continue
+            if not (x["_ini"] - margen <= s["t"] <= x["_fin"] + margen):
+                motivo = "fuera_del_intervalo_de_la_sonda"
+                continue
+            if reconstruido:
+                otras = {k for k, ts in firma_en.items() if k[0] == cliente
+                         and any(x["_ini"] - margen <= t <= x["_fin"] + margen for t in ts)}
+                if len(otras) != 1:
+                    motivo = "reconstruccion_ambigua"
+                    continue
+            casa = x
+            break
+        if casa:
+            fuente = casa.get("fuente", "v2ctl")
+            explicados.append(s)
+            por_fuente[fuente] += 1
+            por_motivo["sonda_preflight_" + fuente] += 1
+            relaciones.append({"clave": s["clave"], "fuente_evento": s["fuente"], "t": s["t"],
+                               "ejecucion_id": casa["ejecucion_id"], "contexto": casa.get("contexto"),
+                               "sonda_inicio_utc": casa["inicio_utc"], "sonda_fin_utc": casa["fin_utc"],
+                               "nombre": nombre, "fuente_registro": fuente})
+        else:
+            motivo = motivo or "sin_sonda_con_esa_clave"
+            if firma:
+                motivo = "incierto:firma_de_sonda_sin_ejecucion_acreditada(%s)" % motivo
+            otros.append(dict(s, motivo=motivo, nombre=nombre))
+            por_motivo[motivo] += 1
     claves = sorted({tuple(s["clave"]) for s in explicados})
     return {"explicados": len(explicados), "no_explicados": len(otros),
-            "por_motivo": {"sonda_preflight": len(explicados)} if explicados else {},
-            "claves_explicadas": [list(k) for k in claves],
-            "regla": "id %d y nombre %s* (sonda de v2ctl.py preflight)" % (
-                ID_SONDA_PREFLIGHT, NOMBRE_SONDA_PREFLIGHT)}
+            "inciertos": sum(o["motivo"].startswith("incierto") for o in otros),
+            "por_motivo": dict(sorted(por_motivo.items())), "por_fuente_registro": dict(sorted(por_fuente.items())),
+            "claves_explicadas": [list(k) for k in claves], "relaciones": relaciones,
+            "no_explicados_detalle": otros[:100],
+            "sondas_registradas": len(sondas),
+            "regla": ("sonda DNS registrada en preflight.jsonl de la misma ejecución con igual origen, "
+                      "puerto, id y nombre completo, y el evento dentro de [inicio − %g s, fin + %g s]"
+                      % (margen, margen))}
 
 
-def contrastar(transacciones, dc, sensor, dc_pcap, ventanas, descartes, v1, margen=.5, limite=100):
+def contrastar(transacciones, dc, sensor, dc_pcap, ventanas, descartes, v1, margen=.5, limite=100,
+               sondas=None):
     filas, indice = [], defaultdict(list)
     poblacion = {t["origen_ip"] for t in transacciones}
     for t in transacciones:
@@ -495,7 +568,9 @@ def contrastar(transacciones, dc, sensor, dc_pcap, ventanas, descartes, v1, marg
     return {"total": agregado(resultados), "por_clase": {k: agregado(v) for k, v in sorted(clases.items())},
             "desfases": {k: resumen_numeros(v) for k, v in diferencias.items()},
             "por_transaccion": resultados, "sin_transaccion": limitar(sueltos, limite),
-            "sin_transaccion_clasificacion": clasificar_sueltos(sueltos, nombres_sueltos),
+            "sin_transaccion_clasificacion": clasificar_sueltos(
+                sueltos, nombres_sueltos, sondas,
+                {t.get("ejecucion_id") for t in transacciones if t.get("ejecucion_id")}, margen),
             "ambiguos": limitar(ambiguos, limite),
             "parametros": {"margen_s": margen, "ventanas_dc1": ventanas, "intervalos_socket_descartadas": descartes,
                            "registro_v1": v1, "pcap_dc1": dc_pcap is not None,
@@ -509,6 +584,8 @@ def main(argv=None):
     ap.add_argument("--dc1", required=True, help="registro JSONL de DC1")
     ap.add_argument("--capturas", required=True, help="directorio capturas/ID")
     ap.add_argument("--pcap", help="PCAP opcional de DC1")
+    ap.add_argument("--sondas", nargs="*", default=[],
+                    help="preflight.jsonl de v2ctl (o registro reconstruido): explica las sondas")
     ap.add_argument("--salida", required=True)
     ap.add_argument("--csv")
     ap.add_argument("--margen-s", type=float, default=.5)
@@ -526,8 +603,10 @@ def main(argv=None):
             raise EntradaDanada(f"{carpeta}: no hay live-*.pcap[.gz]")
         sensor = leer_pcap(rutas, poblacion)
         dc_pcap = leer_pcap([Path(args.pcap)], poblacion) if args.pcap else None
+        sondas = leer_sondas(args.sondas)
         informe = contrastar(txs, dc, sensor, dc_pcap, ventanas, descartes, v1,
-                             args.margen_s, args.limite_lista)
+                             args.margen_s, args.limite_lista, sondas)
+        informe["parametros"]["sondas"] = [str(r) for r in args.sondas]
         informe["tramas_ilegibles"] = limitar(ILEGIBLES, args.limite_lista)
         if RECORTADAS_NO_DNS[0]:
             # Solo aparece con capturas recortadas (el extracto publicado); en el laboratorio es 0 y

@@ -115,6 +115,76 @@ class TestCalidadEnDictamen(Base):
         r = self.dictamen()
         self.assertEqual((r["calidad_dns"], r["global"]), ("completo", "aprobada"))
 
+    def test_sondas_explicadas_por_firma_ya_no_aprueban(self):
+        # clasificación de la primera revisión (id + prefijo, sin «relaciones»)
+        self.dns(sueltos=6, explicados=6, formato_antiguo=True)
+        self.assertEqual(self.dictamen()["calidad_dns"], "indeterminado")
+
+    def test_sondas_explicadas_por_registro_reconstruido_no_aprueban(self):
+        self.dns(sueltos=6, explicados=6, reconstruidos=6)
+        r = self.dictamen()
+        self.assertEqual((r["calidad_dns"], r["global"]), ("indeterminado", "indeterminada"))
+
+    # -- referencia independiente del extremo (srv-dmz) ------------------------------------------
+    def test_perdida_vista_por_el_extremo_es_fallo(self):
+        for k in ({"sin_sensor": 1}, {"solo_extremo": 1}):
+            with self.subTest(**k):
+                self.extremo(**k)
+                r = self.dictamen()
+                self.assertEqual((r["calidad_extremo"], r["global"]), ("perdida", "no_aprobada"))
+                self.assertIn("calidad_extremo:perdida", r["motivos"])
+
+    def test_extremo_ausente_es_indeterminado(self):
+        (self.p / "calidad-extremo.json").unlink()
+        r = self.dictamen()
+        self.assertEqual((r["calidad_extremo"], r["global"]), ("sin_datos", "indeterminada"))
+        self.assertIn("falta:calidad_extremo", r["motivos"])
+        (self.e / "extremo-captura.json").unlink()
+        self.assertEqual(self.dictamen()["calidad_extremo"], "sin_datos")
+
+    def test_referencia_incompleta_no_decide(self):
+        for k in ({"descartes": 3}, {"estado_captura": "sin_estadisticas"}, {"periodo": False},
+                  {"sin_extremo": 2}):
+            with self.subTest(**k):
+                self.extremo(**k)
+                r = self.dictamen()
+                self.assertEqual((r["calidad_extremo"], r["global"]), ("indeterminado", "indeterminada"))
+
+    def test_copia_danada_del_extremo_es_fallo(self):
+        (self.e / ("extremo-%s.pcap.danado" % self.id)).write_bytes(b"x")
+        self.assertEqual(self.dictamen()["calidad_extremo"], "entrada_danada")
+
+    # -- sondas del preflight frente al periodo útil ----------------------------------------------
+    def test_sonda_en_periodo_util_es_fallo(self):
+        self.sonda(estado="contaminacion_en_periodo_util")
+        r = self.dictamen()
+        self.assertEqual((r["calidad_sonda"], r["global"]), ("contaminacion", "no_aprobada"))
+
+    def test_sin_registro_de_sondas_es_indeterminado(self):
+        for k in ({"presente": False}, {"estado": "sin_registro"}, {"version": 1}):
+            with self.subTest(**k):
+                self.sonda(**k)
+                self.assertEqual(self.dictamen()["global"], "indeterminada")
+
+    def test_sonda_con_registro_reconstruido_no_aprueba(self):
+        self.sonda(fuentes=("reconstruido",))
+        self.assertEqual(self.dictamen()["calidad_sonda"], "indeterminado")
+
+    # -- guardas planificadas frente a exclusiones por incidente -------------------------------
+    def test_guardas_e_incidentes_se_informan_por_separado(self):
+        self.escribir(self.p / "extraccion" / "trazabilidad.json", {
+            "trazabilidad_ok": True, "ventanas": 100, "excluidas": 30,
+            "exclusion_por_regla": {"E1:arranque": 23, "E5:fuera_del_programa": 2, "E2:hueco_captura": 5}})
+        r = self.dictamen()
+        self.assertEqual(r["exclusiones"]["guardas_planificadas"], {"E1:arranque": 23, "E5:fuera_del_programa": 2})
+        self.assertEqual(r["exclusiones"]["por_incidente"], {"E2:hueco_captura": 5})
+
+    def test_exclusiones_no_convierten_perdida_en_aprobada(self):
+        self.escribir(self.p / "extraccion" / "trazabilidad.json", {
+            "trazabilidad_ok": True, "exclusion_por_regla": {"E2:hueco_captura": 50}})
+        self.copias({"completo": 99, "falta_copia": 1})
+        self.assertEqual(self.dictamen()["global"], "no_aprobada")
+
     def leer_json(self, p):
         import json
         return json.loads(p.read_text())

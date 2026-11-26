@@ -5,7 +5,9 @@
 #   bash lanzar_v2.sh piloto-30min.json PILOTO 2
 #   bash lanzar_v2.sh captura-42h.json C42 12
 # Orden: identificador -> exclusión V1 -> preflight -> relojes -> registro DNS + PCAP (DC1) ->
-#        sondeo del espejo (bastión) -> archivador (Sensor1) -> espera >= 2 min de captura previa -> generador (Clientes) -> vigía.
+#        referencia del extremo (tcpdump en srv-dmz) -> sondeo del espejo (bastión) -> archivador (Sensor1) ->
+#        sondas del preflight (Clientes, registradas) -> espera: captura previa >= 2 min Y margen de sonda
+#        (HORIZONTE 230 s + PASO 10 s, v2ctl.MARGEN_SONDA_S) -> generador (Clientes) -> vigía.
 # Si algo falla antes del generador, no se lanza nada más y se deshace lo arrancado.
 set -euo pipefail
 PROG=${1:?programa}; TAG=${2:?etiqueta}; GB=${3:?gb_necesarios}
@@ -14,7 +16,10 @@ CL=/home/adminclientes/cyberflow-v2              # Clientes
 S1=/home/m4rk/cyberflow-v2                       # Sensor1
 DC=/home/dcadmin/cyberflow-v2                    # DC1
 POBL=10.10.20.21,10.10.20.22,10.10.20.23,10.10.20.24,10.10.20.25,10.10.20.26
-PREVIO_S=150; MARGEN_FIN_S=120; HOLGURA_S=3600
+PREVIO_S=150; MARGEN_FIN_S=120; HOLGURA_S=3600; MARGEN_SONDA_S=240
+EXT=/home/adminsrvdmz/cyberflow-v2/extremo        # srv-dmz: referencia independiente HTTP/HTTPS
+# Solo la población con srv-dmz (privacidad y volumen): nada de terceros entra en el fichero.
+FILTRO_EXT="host 10.10.30.10 and tcp and (port 80 or port 443) and (host 10.10.20.21 or host 10.10.20.22 or host 10.10.20.23 or host 10.10.20.24 or host 10.10.20.25 or host 10.10.20.26)"
 RETRASO_PRUEBA_S=${RETRASO_PRUEBA_S:-0}
 [[ $RETRASO_PRUEBA_S =~ ^[0-9]+$ ]] || { echo "RETRASO_PRUEBA_S debe ser entero no negativo" >&2; exit 2; }
 SSH="ssh -n -o BatchMode=yes -o ConnectTimeout=8"
@@ -30,6 +35,7 @@ log identificador "$ID programa=$PROG sha256=$SHA duracion=$DUR tope_inicial=$TO
 deshacer() { log deshacer "$1"
   [ -f "$E/sondeo-span.pid" ] && kill -TERM "$(cat "$E/sondeo-span.pid")" 2>/dev/null || true
   $SSH dcadmin@10.10.10.20 "sudo -n systemctl stop cf-v2-dns-${ID,,}" 2>/dev/null || true
+  $SSH srvdmz "sudo -n pkill -INT -f '[t]cpdump .* -w $EXT/$ID.pcap'" 2>/dev/null || true
   $SSH sensor1 "pkill -TERM -f '[a]rchivar_v2.py --ejecucion $ID'" 2>/dev/null || true
   exit 1; }
 
@@ -44,7 +50,8 @@ log preflight ok
 
 # 3. Relojes de los servidores (Clientes y Sensor1 los registran sus propios programas)
 for h in srvdmz dcadmin@10.10.10.20; do
-  $SSH "$h" 'date -u +%FT%T.%NZ; timedatectl show; (chronyc tracking 2>/dev/null || timedatectl timesync-status)' > "$E/relojes-inicio-${h#*@}.txt" 2>&1 || true
+  # relojes + carga y espacio de las referencias (srv-dmz y DC1), al principio y al final
+  $SSH "$h" 'date -u +%FT%T.%NZ; timedatectl show; (chronyc tracking 2>/dev/null || timedatectl timesync-status); echo "== carga"; cat /proc/loadavg; nproc; echo "== espacio"; df -B1 --output=target,avail / /var/log $HOME 2>/dev/null' > "$E/relojes-inicio-${h#*@}.txt" 2>&1 || true
 done
 log relojes "srvdmz y dc1"
 bash "$B/operacion/contadores_lab.sh" "$E/contadores-lab-inicio.txt" >/dev/null; log contadores inicio
@@ -53,6 +60,15 @@ bash "$B/operacion/contadores_lab.sh" "$E/contadores-lab-inicio.txt" >/dev/null;
 $SSH dcadmin@10.10.10.20 "sudo -n mkdir -p /var/log/cyberflow-v2 && sudo -n systemd-run --unit=cf-v2-dns-${ID,,} --property=RuntimeMaxSec=$((DUR + 3600)) /usr/bin/python3 $DC/servidor/registro_dns_v2.py --interfaz ens224 --salida /var/log/cyberflow-v2/dns-$ID.jsonl --pcap /var/log/cyberflow-v2/dns-$ID.pcap --poblacion $POBL" \
   || deshacer "no arrancó el registro DNS"
 log registro_dns "cf-v2-dns-${ID,,}"
+
+# 4a. Referencia independiente en el extremo: tcpdump en srv-dmz (ens35), solo población <-> srv-dmz
+# HTTP/HTTPS, sin recorte (-s 0), escritura sin búfer (-U). Se para en cerrar_v2.sh (SIGINT: escribe
+# sus estadísticas de descartes del núcleo en el .log); cerrar_v2 calcula el sha256 y lo contrasta.
+$SSH srvdmz "mkdir -p $EXT && sudo -n setsid nohup tcpdump -i ens35 -n -s 0 -U -w $EXT/$ID.pcap '$FILTRO_EXT' > $EXT/$ID.log 2>&1 < /dev/null &" \
+  || deshacer "no arrancó la captura del extremo"
+sleep 2
+$SSH srvdmz "pgrep -f '[t]cpdump .* -w $EXT/$ID.pcap' >/dev/null" || deshacer "la captura del extremo no sigue viva: $($SSH srvdmz "cat $EXT/$ID.log" 2>&1)"
+log extremo "srvdmz $EXT/$ID.pcap filtro=poblacion<->10.10.30.10:80/443"
 
 # 4b. Supervisión continua del destino SPAN (Gi2/0/19), antes del archivador: así cubre la captura
 # previa, la generación y el margen final. Se para en cerrar_v2.sh; el tope es una red de seguridad.
@@ -72,7 +88,20 @@ for i in $(seq 1 30); do
   echo "$st" | grep -q '"estado": *"ok"' && break; sleep 2
 done
 echo "$st" | grep -q '"estado": *"ok"' || deshacer "archivador sin estado ok: $st"
-T_CONF=$(date +%s); INI=$((T_CONF + PREVIO_S)); FIN_GEN=$((INI + DUR)); FIN=$((FIN_GEN + MARGEN_FIN_S)); TOPE=$((FIN + HOLGURA_S))
+T_CONF=$(date +%s)
+
+# 5b. Sondas del preflight ANTES del periodo útil, con la captura ya en marcha (quedan grabadas) y
+# registradas con ejecución, origen, puerto, id, nombre e instantes. El generador no arranca hasta
+# fin_última_sonda + MARGEN_SONDA_S: así ninguna ventana útil las tiene en su historia de 230 s.
+SONDAS=$CL/sondas/$ID-preflight.jsonl
+r=$($SSH clientes "python3 $CL/codigo/operacion/v2ctl.py sondear --programa $CL/codigo/programas/$PROG --ejecucion $ID --registro $SONDAS") \
+  || deshacer "sondas del preflight con fallos: $r"
+$SSH clientes "cat $SONDAS" > "$E/preflight-clientes.jsonl" || deshacer "no se pudo copiar el registro de sondas"
+NO_ANTES=$(python3 -c "import json,math,sys;print(math.ceil(json.loads(sys.argv[1])['ultima_sonda_fin_epoch']+$MARGEN_SONDA_S))" "$r") \
+  || deshacer "registro de sondas sin fin: $r"
+log sondas "$r"
+INI=$((T_CONF + PREVIO_S)); if [ "$NO_ANTES" -gt "$INI" ]; then INI=$NO_ANTES; fi
+FIN_GEN=$((INI + DUR)); FIN=$((FIN_GEN + MARGEN_FIN_S)); TOPE=$((FIN + HOLGURA_S))
 $SSH sensor1 "printf '%s\n' $TOPE > $S1/capturas/$ID/HASTA_MAX_EPOCH.tmp; mv $S1/capturas/$ID/HASTA_MAX_EPOCH.tmp $S1/capturas/$ID/HASTA_MAX_EPOCH" \
   || deshacer "no se pudo fijar el tope real del archivador"
 r=$($SSH sensor1 "python3 $S1/codigo/operacion/exclusion_v1.py --desde $((T_ARCH - 600)) --hasta $((TOPE + 600))") \
@@ -83,7 +112,7 @@ log archivador "ok confirmado=$T_CONF inicio=$INI tope=$TOPE"
 # 6. Captura previa sin tráfico V2 (>= 2 min) y generador
 while [ "$(date +%s)" -lt "$INI" ]; do sleep 5; done
 [ "$RETRASO_PRUEBA_S" -eq 0 ] || sleep "$RETRASO_PRUEBA_S"
-r=$($SSH clientes "python3 $CL/codigo/operacion/v2ctl.py iniciar --programa $CL/codigo/programas/$PROG --ejecucion $ID --requiere-permiso") \
+r=$($SSH clientes "python3 $CL/codigo/operacion/v2ctl.py iniciar --programa $CL/codigo/programas/$PROG --ejecucion $ID --requiere-permiso --sondas-previas $SONDAS --margen-sonda-s $MARGEN_SONDA_S") \
   || deshacer "v2ctl iniciar: $r"
 log generador "$r"
 
@@ -97,14 +126,19 @@ setsid nohup python3 "$B/operacion/vigia_v2.py" --ejecucion "$ID" \
   --registro "$E/vigia.jsonl" > "$E/vigia-salida.txt" 2>&1 < /dev/null &
 log vigia "pid $!"
 VER_CODIGO=$(cat "$B/VERSION" 2>/dev/null || echo no_registrada)
-python3 - "$E" "$ID" "$PROG" "$SHA" "$T_ARCH" "$T_CONF" "$INI" "$FIN_GEN" "$FIN" "$TOPE" "$DUR" "$RETRASO_PRUEBA_S" "$VER_CODIGO" <<'PY'
+python3 - "$E" "$ID" "$PROG" "$SHA" "$T_ARCH" "$T_CONF" "$INI" "$FIN_GEN" "$FIN" "$TOPE" "$DUR" "$RETRASO_PRUEBA_S" "$VER_CODIGO" "$MARGEN_SONDA_S" "$NO_ANTES" "$EXT/$ID.pcap" <<'PY'
 import json, sys
-e, i, p, sha, ta, conf, ini, fin_gen, fin, tope, dur, retraso, ver = sys.argv[1:]
+e, i, p, sha, ta, conf, ini, fin_gen, fin, tope, dur, retraso, ver, margen, no_antes, ext = sys.argv[1:]
 json.dump({"ejecucion": i, "programa": p, "programa_sha256": sha, "codigo_version": ver,
            "planificado": {"archivador_desde_epoch": int(ta), "generador_inicio_epoch": int(ini),
                            "generador_fin_epoch": int(fin_gen), "captura_hasta_epoch": int(fin),
                            "tope_epoch": int(tope)},
            "real": {"archivador_confirmado_epoch": int(conf)},
+           # Guardas y márgenes PLANIFICADOS (no son exclusiones por incidente): la sonda termina antes
+           # de no_antes − margen; la guarda E1 y E5 las aplica metadatos_v2.
+           "guardas_planificadas": {"margen_sonda_s": int(margen), "generador_no_antes_de_epoch": int(no_antes),
+                                    "captura_previa_s": 150, "margen_fin_s": 120},
+           "referencias": {"extremo_srvdmz_pcap": ext, "dns_dc1": "cf-v2-dns-" + i.lower()},
            "duracion_s": int(dur), "retraso_prueba_s": int(retraso),
            "dns_unidad": "cf-v2-dns-" + i.lower()}, open(e + "/lanzamiento.json", "w"), indent=1)
 PY

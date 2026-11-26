@@ -48,6 +48,29 @@ class TestEstadoGlobal(unittest.TestCase):
         self.sondeo(("sin_descartes", 0, 100))
         self.copias()
         self.dns()
+        self.extremo()
+        self.sonda()
+
+    def extremo(self, sin_sensor=0, solo_extremo=0, sin_extremo=0, descartes=0, estado_captura="ok",
+                periodo=True, presente=True):
+        if presente:
+            self.escribir(self.p / "calidad-extremo.json", {
+                "por_clase": {"datos": {"extremo": 10, "sensor": 10,
+                                        "sin_sensor": {"total": sin_sensor, "detalles": []},
+                                        "sin_extremo": {"total": sin_extremo, "detalles": []}}},
+                "conexiones_solo_extremo": {"total": solo_extremo, "detalles": []},
+                "conexiones_solo_sensor": {"total": 0, "detalles": []},
+                "retransmisiones": {"coinciden": True}, "discrepancias": 0,
+                "sin_periodo_comun": not periodo})
+        self.escribir(self.e / "extremo-captura.json", {
+            "estado": estado_captura, "descartados_nucleo": descartes, "sha256_origen": "0" * 64})
+
+    def sonda(self, estado="sin_contaminacion", fuentes=("v2ctl",), version=2, presente=True):
+        ruta = self.p / "calidad-sonda.json"
+        if not presente:
+            ruta.unlink(missing_ok=True)
+            return
+        self.escribir(ruta, {"version": version, "estado": estado, "fuentes_registro": list(fuentes)})
 
     def copias(self, clases=None, entrada_completa=True):
         clases = {"completo": 100} if clases is None else clases
@@ -56,13 +79,19 @@ class TestEstadoGlobal(unittest.TestCase):
             "entrada_completa": entrada_completa,
             "denominadores": {"eventos": sum(clases.values()), "eventos_por_clase": clases}})
 
-    def dns(self, pcap_dc1=True, declara_pcap=True, sueltos=0, explicados=0, **total):
+    def dns(self, pcap_dc1=True, declara_pcap=True, sueltos=0, explicados=0, reconstruidos=0,
+            formato_antiguo=False, **total):
         base = {"transacciones": 10, "comprobadas": 10, "sin_discrepancias": 10, "discrepancias": 0,
                 "no_determinables": 0, "indeterminado_dc1": 0, "ambiguas": 0}
         base.update(total)
+        clasif = {"explicados": explicados, "no_explicados": sueltos - explicados}
+        if not formato_antiguo:
+            fuentes = {k: v for k, v in (("v2ctl", explicados - reconstruidos),
+                                         ("reconstruido", reconstruidos)) if v}
+            clasif.update(relaciones=[], por_fuente_registro=fuentes)
         self.escribir(self.p / "calidad-contraste-dns.json", {
             "total": base, "sin_transaccion": {"total": sueltos, "items": [], "truncados": 0},
-            "sin_transaccion_clasificacion": {"explicados": explicados, "no_explicados": sueltos - explicados},
+            "sin_transaccion_clasificacion": clasif,
             "tramas_ilegibles": {"total": 0, "items": [], "truncados": 0},
             "parametros": {"pcap_dc1": pcap_dc1}})
         arranque = {"evento": "arranque", "version": "2.0.0"}

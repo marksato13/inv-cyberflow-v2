@@ -93,10 +93,40 @@ log registro_dns "$(wc -l < "$E/dns-$ID.jsonl") lineas"
 $SSH dcadmin@10.10.10.20 "sudo -n cat /var/log/cyberflow-v2/dns-$ID.pcap 2>/dev/null" > "$E/dns-$ID.pcap" || true
 log registro_dns_pcap "$(wc -c < "$E/dns-$ID.pcap") bytes"
 
+# 2b. Referencia del extremo (srv-dmz): se para tcpdump (SIGINT: imprime capturados/recibidos/
+# descartados por el núcleo), se calcula sha256 y tamaño en origen y se copia a Sensor1 verificando
+# el hash. Si no hubo captura del extremo (ejecuciones antiguas), queda constancia y el dictamen lo
+# trata como evidencia ausente.
+EXT=/home/adminsrvdmz/cyberflow-v2/extremo
+$SSH srvdmz "sudo -n pkill -INT -f '[t]cpdump .* -w $EXT/$ID.pcap'; sleep 3; pgrep -f '[t]cpdump .* -w $EXT/$ID.pcap' >/dev/null && echo SIGUE_VIVO; cat $EXT/$ID.log 2>/dev/null; echo '== sha256'; sha256sum $EXT/$ID.pcap 2>/dev/null; stat -c '%s' $EXT/$ID.pcap 2>/dev/null" > "$E/extremo-captura.txt" 2>&1 || true
+python3 - "$E/extremo-captura.txt" "$E/extremo-captura.json" "$EXT/$ID.pcap" <<'PY'
+import json, re, sys
+t = open(sys.argv[1], encoding="utf-8", errors="replace").read()
+num = lambda pat: (int(m.group(1)) if (m := re.search(pat, t)) else None)
+sha = re.search(r"^([0-9a-f]{64})\s", t, re.M)
+tam = re.findall(r"^(\d+)\s*$", t, re.M)
+r = {"fichero_origen": sys.argv[3], "capturados": num(r"(\d+) packets captured"),
+     "recibidos_por_filtro": num(r"(\d+) packets received by filter"),
+     "descartados_nucleo": num(r"(\d+) packets dropped by kernel"),
+     "sha256_origen": sha.group(1) if sha else None, "bytes": int(tam[-1]) if tam else None,
+     "sigue_vivo": "SIGUE_VIVO" in t}
+r["estado"] = ("sin_captura" if r["sha256_origen"] is None else
+               "sin_estadisticas" if r["descartados_nucleo"] is None or r["sigue_vivo"] else "ok")
+json.dump(r, open(sys.argv[2], "w"), indent=1)
+PY
+log extremo "$(cat "$E/extremo-captura.json" | tr -d '\n ')"
+if grep -q '"sha256_origen": "[0-9a-f]' "$E/extremo-captura.json"; then
+  $SSH sensor1 "mkdir -p $P/registros"
+  ssh -n -o BatchMode=yes srvdmz "cat $EXT/$ID.pcap" | ssh -o BatchMode=yes sensor1 "cat > $P/registros/extremo-$ID.pcap"
+  SHA_DEST=$($SSH sensor1 "sha256sum $P/registros/extremo-$ID.pcap | cut -c1-64")
+  grep -q "\"sha256_origen\": \"$SHA_DEST\"" "$E/extremo-captura.json" && log extremo_copia "sha256 coincide $SHA_DEST" \
+    || { log extremo_copia "sha256 NO coincide ($SHA_DEST)"; $SSH sensor1 "mv $P/registros/extremo-$ID.pcap $P/registros/extremo-$ID.pcap.danado"; }
+fi
+
 # 3. Contadores (switch, sensor, aislamiento V1) y relojes de fin
 [ -f "$E/contadores-lab-fin.txt" ] || bash "$(dirname "$0")/contadores_lab.sh" "$E/contadores-lab-fin.txt" >/dev/null
 for h in srvdmz dcadmin@10.10.10.20; do
-  $SSH "$h" 'date -u +%FT%T.%NZ; timedatectl show; (chronyc tracking 2>/dev/null || timedatectl timesync-status)' > "$E/relojes-fin-${h#*@}.txt" 2>&1 || true
+  $SSH "$h" 'date -u +%FT%T.%NZ; timedatectl show; (chronyc tracking 2>/dev/null || timedatectl timesync-status); echo "== carga"; cat /proc/loadavg; nproc; echo "== espacio"; df -B1 --output=target,avail / /var/log $HOME 2>/dev/null' > "$E/relojes-fin-${h#*@}.txt" 2>&1 || true
 done
 
 # 4. Servidor: solo las líneas de la ventana [DESDE-300, HASTA+300] (el registro es acumulativo)
@@ -151,10 +181,19 @@ paso verificar \$T python3 \$C/extraccion/verificar_v2.py $S1/capturas/$ID --sal
 # (docs/BLOQUE1-POLITICA-CALIDAD.md): pérdida o entrada dañada = fallo; ausencia = indeterminado.
 paso calidad_copias nice python3 \$C/captura/copias_espejo.py $S1/capturas/$ID/pcap --salida calidad-copias-espejo.json --detalle-umbral 0.4
 DNSP=""; [ -s registros/dns-$ID.pcap ] && DNSP="--pcap registros/dns-$ID.pcap"
+# Registro de sondas: el de v2ctl (generador/ID/preflight.jsonl); sin él, ninguna sonda se explica.
+SONDASP=""; [ -s generador/$ID/preflight.jsonl ] && SONDASP="--sondas generador/$ID/preflight.jsonl"
 paso calidad_dns nice python3 \$C/captura/contraste_dns.py --transacciones generador/$ID/transacciones-*.jsonl --dc1 registros/dns-$ID.jsonl \
-  --capturas $S1/capturas/$ID \$DNSP --salida calidad-contraste-dns.json --csv calidad-contraste-dns.csv
+  --capturas $S1/capturas/$ID \$DNSP \$SONDASP --salida calidad-contraste-dns.json --csv calidad-contraste-dns.csv
+if [ -s registros/extremo-$ID.pcap ]; then
+  paso calidad_extremo nice python3 \$C/captura/comparar_extremo.py --extremo registros/extremo-$ID.pcap --sensor $S1/capturas/$ID/pcap \
+    --salida calidad-extremo.json
+fi
 paso metadatos python3 \$C/extraccion/metadatos_v2.py metadatos --capturas $S1/capturas/$ID --extraccion extraccion --generador generador/$ID \
   --cobertura cobertura/cobertura.csv --conciliacion conciliacion/conciliacion.jsonl
+PREF=""; [ -s generador/$ID/preflight.jsonl ] && PREF="--preflight generador/$ID/preflight.jsonl"
+paso calidad_sonda python3 \$C/operacion/ventanas_sonda.py --ventanas extraccion/ventanas_meta.csv \$PREF \
+  --dns calidad-contraste-dns.json --salida calidad-sonda.json
 EOF
 log analisis "$(grep -o '^[a-z]* rc=[0-9]*' "$E/analisis-salida.txt" | tr '\n' ' ')"
 $SSH sensor1 "cat $P/registros/pasos-analisis.jsonl" > "$E/pasos-analisis.jsonl" || true
