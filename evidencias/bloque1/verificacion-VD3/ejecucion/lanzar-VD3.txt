@@ -1,0 +1,15 @@
+{"utc":"2026-11-26T10:42:31.007Z","paso":"identificador","detalle":"V2-VD3-20261126T104230Z programa=prueba-niveles-transiciones.json sha256=3089fc531745d9271818ee20c0d9915bd045801669dd2042a766e269cd7ee160 duracion=1440 tope_inicial=1795698661 retraso_prueba=0 "}
+{"utc":"2026-11-26T10:42:31.415Z","paso":"exclusion_v1","detalle":"{cubierto: true, regla: *@2026-11-26T10:32:31+00:00/2026-11-26T13:21:01+00:00, cambio: true, respaldo: /home/m4rk/cyberflow/configs/cyberflow.local.toml.antes-v2-20261126T104231Z} "}
+{"utc":"2026-11-26T10:42:40.555Z","paso":"preflight","detalle":"ok "}
+{"utc":"2026-11-26T10:42:52.245Z","paso":"relojes","detalle":"srvdmz y dc1 "}
+{"utc":"2026-11-26T10:42:57.701Z","paso":"contadores","detalle":"inicio "}
+Running as unit: cf-v2-dns-v2-vd3-20261126t104230z.service; invocation ID: fa0cd6f9784d4a039401b420de3e44be
+{"utc":"2026-11-26T10:42:57.928Z","paso":"registro_dns","detalle":"cf-v2-dns-v2-vd3-20261126t104230z "}
+{"utc":"2026-11-26T10:43:00.633Z","paso":"extremo","detalle":"srvdmz /home/adminsrvdmz/cyberflow-v2/extremo/V2-VD3-20261126T104230Z.pcap filtro=poblacion<->10.10.30.10:80/443 "}
+{"utc":"2026-11-26T10:43:02.659Z","paso":"sondeo_span","detalle":"pid 1399270 "}
+{"utc":"2026-11-26T10:43:43.719Z","paso":"sondas","detalle":"{ejecucion: V2-VD3-20261126T104230Z, ok: true, sondas: 5, ultima_sonda_fin_epoch: 1795689823.324216, margen_sonda_s: 240.0, generador_no_antes_de_epoch: 1795690063.324216, fallos: []} "}
+{"utc":"2026-11-26T10:43:44.484Z","paso":"exclusion_v1_confirmada","detalle":"{cubierto: true, regla: *@2026-11-26T10:32:31+00:00/2026-11-26T13:21:01+00:00, cambio: false} "}
+{"utc":"2026-11-26T10:43:44.490Z","paso":"archivador","detalle":"ok confirmado=1795689821 inicio=1795690064 tope=1795695224 "}
+{"utc":"2026-11-26T10:47:46.053Z","paso":"generador","detalle":"{ejecucion: V2-VD3-20261126T104230Z, directorio: /home/adminclientes/cyberflow-v2/ejecuciones/V2-VD3-20261126T104230Z, supervisor_pid: 141893, programa_sha256: 3089fc531745d9271818ee20c0d9915bd045801669dd2042a766e269cd7ee160, inicio_utc: 2026-11-26T10:47:46.011713Z} "}
+{"utc":"2026-11-26T10:47:46.062Z","paso":"vigia","detalle":"pid 1400924 "}
+V2-VD3-20261126T104230Z

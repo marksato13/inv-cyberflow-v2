@@ -1,0 +1,1645 @@
+{
+  "conexiones_solo_extremo": {
+    "total": 0,
+    "detalles": []
+  },
+  "conexiones_solo_sensor": {
+    "total": 0,
+    "detalles": []
+  },
+  "por_clase": {
+    "syn": {
+      "extremo": 264,
+      "sensor": 264,
+      "sin_sensor": {
+        "total": 0,
+        "detalles": []
+      },
+      "sin_extremo": {
+        "total": 0,
+        "detalles": []
+      }
+    },
+    "syn_ack": {
+      "extremo": 264,
+      "sensor": 264,
+      "sin_sensor": {
+        "total": 0,
+        "detalles": []
+      },
+      "sin_extremo": {
+        "total": 0,
+        "detalles": []
+      }
+    },
+    "fin": {
+      "extremo": 528,
+      "sensor": 528,
+      "sin_sensor": {
+        "total": 0,
+        "detalles": []
+      },
+      "sin_extremo": {
+        "total": 0,
+        "detalles": []
+      }
+    },
+    "rst": {
+      "extremo": 32,
+      "sensor": 32,
+      "sin_sensor": {
+        "total": 0,
+        "detalles": []
+      },
+      "sin_extremo": {
+        "total": 0,
+        "detalles": []
+      }
+    },
+    "ack_puro": {
+      "extremo": 4122,
+      "sensor": 4122,
+      "sin_sensor": {
+        "total": 0,
+        "detalles": []
+      },
+      "sin_extremo": {
+        "total": 0,
+        "detalles": []
+      }
+    },
+    "datos": {
+      "extremo": 2236,
+      "sensor": 10128,
+      "sin_sensor": {
+        "total": 0,
+        "detalles": []
+      },
+      "sin_extremo": {
+        "total": 0,
+        "detalles": []
+      }
+    }
+  },
+  "rangos": {
+    "total": 528,
+    "detalles": [
+      {
+        "conexion": [
+          "10.10.20.21",
+          33653,
+          80,
+          1964062388
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 84,
+        "bytes_sensor": 84,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          33653,
+          80,
+          1964062388
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 117722,
+        "bytes_sensor": 117722,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          33781,
+          80,
+          1460811985
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 82,
+        "bytes_sensor": 82,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          33781,
+          80,
+          1460811985
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 4294,
+        "bytes_sensor": 4294,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          33871,
+          80,
+          2267090204
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 82,
+        "bytes_sensor": 82,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          33871,
+          80,
+          2267090204
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 3892,
+        "bytes_sensor": 3892,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          34379,
+          80,
+          2354113949
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 82,
+        "bytes_sensor": 82,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          34379,
+          80,
+          2354113949
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 1751,
+        "bytes_sensor": 1751,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          34677,
+          80,
+          621608210
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 82,
+        "bytes_sensor": 82,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          34677,
+          80,
+          621608210
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 5516,
+        "bytes_sensor": 5516,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          34759,
+          80,
+          1296475873
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 82,
+        "bytes_sensor": 82,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          34759,
+          80,
+          1296475873
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 1792,
+        "bytes_sensor": 1792,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          34785,
+          80,
+          2224109588
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 82,
+        "bytes_sensor": 82,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          34785,
+          80,
+          2224109588
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 1581,
+        "bytes_sensor": 1581,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          35887,
+          80,
+          1333214808
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 83,
+        "bytes_sensor": 83,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          35887,
+          80,
+          1333214808
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 11801,
+        "bytes_sensor": 11801,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          36021,
+          80,
+          3505733343
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 82,
+        "bytes_sensor": 82,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          36021,
+          80,
+          3505733343
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 5586,
+        "bytes_sensor": 5586,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          40493,
+          80,
+          4033567496
+        ],
+        "sentido": "c2s",
+        "bytes_extremo": 83,
+        "bytes_sensor": 83,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      },
+      {
+        "conexion": [
+          "10.10.20.21",
+          40493,
+          80,
+          4033567496
+        ],
+        "sentido": "s2c",
+        "bytes_extremo": 16214,
+        "bytes_sensor": 16214,
+        "bytes_sin_sensor": 0,
+        "bytes_sin_extremo": 0,
+        "rangos_sin_sensor": {
+          "total": 0,
+          "detalles": []
+        },
+        "rangos_sin_extremo": {
+          "total": 0,
+          "detalles": []
+        }
+      }
+    ]
+  },
+  "transmisiones_verificadas_en_rangos": 1481,
+  "tamaños": {
+    "pares": 5210,
+    "diferencias": 0
+  },
+  "desfases": {
+    "pares": 5210,
+    "estimado_s": 0.0008697429228612583,
+    "medio_s": 0.0008582286322185495,
+    "p50_s": 0.0008834600448608398,
+    "p99_s": 0.0017418861389160156,
+    "max_abs_s": 0.004732847213745117,
+    "residual_p99_s": 0.0009275928068944613,
+    "deriva_s": -0.000682830810546875,
+    "orden_conservado": false
+  },
+  "retransmisiones": {
+    "extremo": 0,
+    "sensor": 0,
+    "coinciden": true,
+    "por_conexion": {
+      "total": 0,
+      "detalles": []
+    }
+  },
+  "discrepancias": 0,
+  "version": 2,
+  "parametros": {
+    "servidor": "10.10.30.10",
+    "margen_s": 2.0,
+    "ventana_copia_s": 0.02,
+    "margen_par_s": 0.05
+  },
+  "captura_extremo": {
+    "fichero": "registros/extremo-V2-VD3-20261126T104230Z.pcap",
+    "paquetes": 7509,
+    "primer_instante": 1795689823.303236,
+    "ultimo_instante": 1795691500.589841,
+    "offload_detectado": true,
+    "tamaño_maximo_ip": 16458
+  },
+  "sensor": {
+    "ficheros": [
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104307.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104312.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104317.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104322.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104327.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104332.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104337.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104342.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104347.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104352.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104357.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104402.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104407.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104412.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104417.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104422.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104427.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104432.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104437.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104442.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104447.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104452.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104457.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104502.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104507.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104512.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104517.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104522.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104527.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104532.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104537.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104542.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104547.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104552.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104557.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104602.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104607.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104612.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104617.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104622.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104627.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104632.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104637.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104642.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104647.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104652.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104657.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104702.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104707.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104712.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104717.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104722.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104727.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104732.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104737.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104742.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104747.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104752.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104758.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104803.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104808.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104813.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104818.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104823.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104828.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104833.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104838.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104843.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104848.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104853.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104858.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104903.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104908.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104913.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104918.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104923.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104928.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104934.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104939.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104944.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104949.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104954.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126104959.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105004.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105009.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105014.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105019.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105024.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105029.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105034.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105039.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105044.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105049.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105054.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105100.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105105.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105110.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105115.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105120.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105125.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105130.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105135.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105140.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105145.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105150.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105155.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105200.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105205.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105210.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105215.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105220.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105225.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105230.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105235.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105240.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105245.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105250.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105255.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105300.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105305.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105310.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105315.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105320.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105325.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105330.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105335.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105340.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105345.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105350.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105355.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105400.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105405.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105410.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105415.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105420.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105425.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105430.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105435.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105440.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105445.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105450.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105455.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105500.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105505.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105510.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105515.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105520.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105525.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105530.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105535.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105540.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105545.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105550.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105556.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105601.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105606.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105611.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105616.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105621.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105626.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105631.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105636.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105641.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105646.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105651.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105656.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105701.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105706.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105711.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105716.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105721.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105726.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105732.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105737.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105742.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105747.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105752.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105757.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105802.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105807.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105812.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105817.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105822.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105827.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105832.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105837.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105842.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105847.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105852.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105857.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105902.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105907.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105913.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105918.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105923.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105928.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105933.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105938.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105943.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105948.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105953.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126105958.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110003.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110009.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110014.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110019.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110024.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110029.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110034.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110039.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110044.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110049.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110054.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110059.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110104.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110109.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110114.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110119.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110124.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110129.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110134.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110140.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110145.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110150.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110155.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110200.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110205.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110210.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110215.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110220.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110225.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110230.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110235.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110240.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110245.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110250.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110255.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110300.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110305.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110310.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110315.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110320.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110325.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110330.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110335.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110340.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110345.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110350.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110355.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110400.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110405.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110410.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110415.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110420.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110425.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110430.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110435.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110440.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110445.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110450.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110455.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110500.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110505.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110510.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110515.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110520.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110525.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110530.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110535.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110540.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110545.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110550.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110555.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110600.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110605.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110610.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110615.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110620.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110625.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110630.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110636.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110641.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110646.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110651.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110656.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110701.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110706.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110711.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110716.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110721.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110726.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110731.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110736.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110741.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110746.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110751.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110756.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110801.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110806.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110811.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110816.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110821.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110826.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110831.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110836.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110841.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110846.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110851.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110857.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110902.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110907.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110912.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110917.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110922.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110927.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110932.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110937.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110942.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110947.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110952.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126110957.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111002.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111007.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111012.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111017.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111022.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111027.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111032.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111037.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111042.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111047.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111052.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111057.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111102.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111107.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111112.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111117.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111122.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111127.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111132.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111137.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111142.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111148.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111153.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111158.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111203.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111208.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111213.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111218.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111223.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111228.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111233.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111238.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111243.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111248.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111253.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111258.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111303.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111308.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111313.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111318.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111323.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111328.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111333.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111338.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111343.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111348.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111353.pcap.gz",
+      "/home/m4rk/cyberflow-v2/capturas/V2-VD3-20261126T104230Z/pcap/live-20261126111358.pcap.gz"
+    ],
+    "paquetes": 891512,
+    "eventos": 15401,
+    "copias": 30802
+  },
+  "periodo_comun": {
+    "inicio": 1795689825.303236,
+    "fin": 1795691498.589841
+  },
+  "modo": "rangos",
+  "sin_periodo_comun": false,
+  "denominadores": {
+    "conexiones_extremo": 264,
+    "conexiones_sensor": 264,
+    "eventos_extremo": 7446,
+    "eventos_sensor": 15338
+  },
+  "parciales_extremo": {
+    "total": 0,
+    "detalles": []
+  },
+  "parciales_sensor": {
+    "total": 0,
+    "detalles": []
+  },
+  "fuera_de_periodo_comun": {
+    "extremo": {
+      "total": 63,
+      "detalles": [
+        {
+          "ts": 1795689823.303236,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 49043,
+          "puerto_destino": 80,
+          "ipid": 21945,
+          "longitud_ip": 60,
+          "seq": 3142439008,
+          "ack": 0,
+          "flags": 2,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.303611,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 49043,
+          "ipid": 0,
+          "longitud_ip": 60,
+          "seq": 2744635073,
+          "ack": 3142439009,
+          "flags": 18,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.304138,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 49043,
+          "puerto_destino": 80,
+          "ipid": 21946,
+          "longitud_ip": 52,
+          "seq": 3142439009,
+          "ack": 2744635074,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.304313,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 49043,
+          "puerto_destino": 80,
+          "ipid": 21947,
+          "longitud_ip": 133,
+          "seq": 3142439009,
+          "ack": 2744635074,
+          "flags": 24,
+          "carga": 81,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.304379,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 49043,
+          "ipid": 32380,
+          "longitud_ip": 52,
+          "seq": 2744635074,
+          "ack": 3142439090,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.308174,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 49043,
+          "ipid": 32381,
+          "longitud_ip": 206,
+          "seq": 2744635074,
+          "ack": 3142439090,
+          "flags": 24,
+          "carga": 154,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.308659,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 49043,
+          "puerto_destino": 80,
+          "ipid": 21948,
+          "longitud_ip": 52,
+          "seq": 3142439090,
+          "ack": 2744635228,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.308697,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 49043,
+          "ipid": 32382,
+          "longitud_ip": 152,
+          "seq": 2744635228,
+          "ack": 3142439090,
+          "flags": 24,
+          "carga": 100,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.308908,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 49043,
+          "ipid": 32383,
+          "longitud_ip": 52,
+          "seq": 2744635328,
+          "ack": 3142439090,
+          "flags": 17,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.308967,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 49043,
+          "puerto_destino": 80,
+          "ipid": 21949,
+          "longitud_ip": 52,
+          "seq": 3142439090,
+          "ack": 2744635328,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.309008,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 49043,
+          "puerto_destino": 80,
+          "ipid": 21950,
+          "longitud_ip": 52,
+          "seq": 3142439090,
+          "ack": 2744635328,
+          "flags": 17,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.309018,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 49043,
+          "ipid": 32384,
+          "longitud_ip": 52,
+          "seq": 2744635329,
+          "ack": 3142439091,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.309165,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 49043,
+          "puerto_destino": 80,
+          "ipid": 21951,
+          "longitud_ip": 52,
+          "seq": 3142439091,
+          "ack": 2744635329,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.309288,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56831,
+          "puerto_destino": 443,
+          "ipid": 54178,
+          "longitud_ip": 60,
+          "seq": 2429041385,
+          "ack": 0,
+          "flags": 2,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.309318,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 443,
+          "puerto_destino": 56831,
+          "ipid": 0,
+          "longitud_ip": 60,
+          "seq": 1190836650,
+          "ack": 2429041386,
+          "flags": 18,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.30968,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56831,
+          "puerto_destino": 443,
+          "ipid": 54179,
+          "longitud_ip": 52,
+          "seq": 2429041386,
+          "ack": 1190836651,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.31403,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56831,
+          "puerto_destino": 443,
+          "ipid": 54180,
+          "longitud_ip": 569,
+          "seq": 2429041386,
+          "ack": 1190836651,
+          "flags": 24,
+          "carga": 517,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.314043,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 443,
+          "puerto_destino": 56831,
+          "ipid": 63785,
+          "longitud_ip": 52,
+          "seq": 1190836651,
+          "ack": 2429041903,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.316047,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 443,
+          "puerto_destino": 56831,
+          "ipid": 63786,
+          "longitud_ip": 1481,
+          "seq": 1190836651,
+          "ack": 2429041903,
+          "flags": 24,
+          "carga": 1429,
+          "copias": 1,
+          "vlan": []
+        },
+        {
+          "ts": 1795689823.316766,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56831,
+          "puerto_destino": 443,
+          "ipid": 54181,
+          "longitud_ip": 52,
+          "seq": 2429041903,
+          "ack": 1190838080,
+          "flags": 16,
+          "carga": 0,
+          "copias": 1,
+          "vlan": []
+        }
+      ]
+    },
+    "sensor": {
+      "total": 63,
+      "detalles": [
+        {
+          "ts": 1795689823.304145,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 49043,
+          "puerto_destino": 80,
+          "ipid": 21945,
+          "longitud_ip": 60,
+          "seq": 3142439008,
+          "ack": 0,
+          "flags": 2,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.304918,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 49043,
+          "ipid": 0,
+          "longitud_ip": 60,
+          "seq": 2744635073,
+          "ack": 3142439009,
+          "flags": 18,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.305163,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 49043,
+          "puerto_destino": 80,
+          "ipid": 21946,
+          "longitud_ip": 52,
+          "seq": 3142439009,
+          "ack": 2744635074,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.305306,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 49043,
+          "puerto_destino": 80,
+          "ipid": 21947,
+          "longitud_ip": 133,
+          "seq": 3142439009,
+          "ack": 2744635074,
+          "flags": 24,
+          "carga": 81,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.305563,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 49043,
+          "ipid": 32380,
+          "longitud_ip": 52,
+          "seq": 2744635074,
+          "ack": 3142439090,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.309487,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 49043,
+          "ipid": 32381,
+          "longitud_ip": 206,
+          "seq": 2744635074,
+          "ack": 3142439090,
+          "flags": 24,
+          "carga": 154,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.30975,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 49043,
+          "puerto_destino": 80,
+          "ipid": 21948,
+          "longitud_ip": 52,
+          "seq": 3142439090,
+          "ack": 2744635228,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.309918,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 49043,
+          "ipid": 32382,
+          "longitud_ip": 152,
+          "seq": 2744635228,
+          "ack": 3142439090,
+          "flags": 24,
+          "carga": 100,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.310077,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 49043,
+          "puerto_destino": 80,
+          "ipid": 21949,
+          "longitud_ip": 52,
+          "seq": 3142439090,
+          "ack": 2744635328,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.310118,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 49043,
+          "puerto_destino": 80,
+          "ipid": 21950,
+          "longitud_ip": 52,
+          "seq": 3142439090,
+          "ack": 2744635328,
+          "flags": 17,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.310119,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 49043,
+          "ipid": 32383,
+          "longitud_ip": 52,
+          "seq": 2744635328,
+          "ack": 3142439090,
+          "flags": 17,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.310244,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 80,
+          "puerto_destino": 49043,
+          "ipid": 32384,
+          "longitud_ip": 52,
+          "seq": 2744635329,
+          "ack": 3142439091,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.31027,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 49043,
+          "puerto_destino": 80,
+          "ipid": 21951,
+          "longitud_ip": 52,
+          "seq": 3142439091,
+          "ack": 2744635329,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.310303,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56831,
+          "puerto_destino": 443,
+          "ipid": 54178,
+          "longitud_ip": 60,
+          "seq": 2429041385,
+          "ack": 0,
+          "flags": 2,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.310557,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 443,
+          "puerto_destino": 56831,
+          "ipid": 0,
+          "longitud_ip": 60,
+          "seq": 1190836650,
+          "ack": 2429041386,
+          "flags": 18,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.310746,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56831,
+          "puerto_destino": 443,
+          "ipid": 54179,
+          "longitud_ip": 52,
+          "seq": 2429041386,
+          "ack": 1190836651,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.315087,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56831,
+          "puerto_destino": 443,
+          "ipid": 54180,
+          "longitud_ip": 569,
+          "seq": 2429041386,
+          "ack": 1190836651,
+          "flags": 24,
+          "carga": 517,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.315281,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 443,
+          "puerto_destino": 56831,
+          "ipid": 63785,
+          "longitud_ip": 52,
+          "seq": 1190836651,
+          "ack": 2429041903,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.317294,
+          "origen": "10.10.30.10",
+          "destino": "10.10.20.21",
+          "puerto_origen": 443,
+          "puerto_destino": 56831,
+          "ipid": 63786,
+          "longitud_ip": 1481,
+          "seq": 1190836651,
+          "ack": 2429041903,
+          "flags": 24,
+          "carga": 1429,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        },
+        {
+          "ts": 1795689823.317712,
+          "origen": "10.10.20.21",
+          "destino": "10.10.30.10",
+          "puerto_origen": 56831,
+          "puerto_destino": 443,
+          "ipid": 54181,
+          "longitud_ip": 52,
+          "seq": 2429041903,
+          "ack": 1190838080,
+          "flags": 16,
+          "carga": 0,
+          "copias": 2,
+          "vlan": [
+            20,
+            30
+          ]
+        }
+      ]
+    }
+  },
+  "comprobado": [
+    "conexiones por tupla e ISN",
+    "eventos de control uno a uno",
+    "cobertura de bytes por conexión y sentido"
+  ],
+  "no_comprobado": [
+    {
+      "aspecto": "número de paquetes de datos",
+      "motivo": "TSO/GSO/GRO altera la segmentación observada en el extremo"
+    },
+    {
+      "aspecto": "tamaños de datos por paquete",
+      "motivo": "TSO/GSO/GRO altera la segmentación observada en el extremo"
+    },
+    {
+      "aspecto": "transmisiones originales perdidas y luego retransmitidas",
+      "motivo": "TSO/GSO/GRO altera la segmentación observada en el extremo"
+    },
+    {
+      "aspecto": "tiempos por paquete de datos",
+      "motivo": "TSO/GSO/GRO altera la segmentación observada en el extremo"
+    },
+    {
+      "aspecto": "tráfico fuera del periodo común y conexiones parciales",
+      "motivo": "observación incompleta en ambas capturas"
+    }
+  ]
+}

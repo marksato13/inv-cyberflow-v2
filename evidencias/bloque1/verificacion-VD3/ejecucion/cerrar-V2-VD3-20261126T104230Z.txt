@@ -1,0 +1,16 @@
+{"utc":"2026-11-26T11:14:18.162Z","paso":"manifiestos","detalle":"ok "}
+{"utc":"2026-11-26T11:14:22.823Z","paso":"sondeo_span","detalle":"analizar_sondeo rc=1 (0 sin descartes, 1 con descartes, 2 indeterminado, 3 sin registro) "}
+{"utc":"2026-11-26T11:14:23.295Z","paso":"exclusion_v1","detalle":"{  cubierto: true,  regla: *@2026-11-26T08:49:11+00:00/2026-11-26T11:37:41+00:00,  cambio: false,  cubria_antes: true } "}
+{"utc":"2026-11-26T11:14:23.935Z","paso":"registro_dns","detalle":"399 lineas "}
+{"utc":"2026-11-26T11:14:24.142Z","paso":"registro_dns_pcap","detalle":"50098 bytes "}
+{"utc":"2026-11-26T11:14:28.219Z","paso":"extremo","detalle":"{fichero_origen:/home/adminsrvdmz/cyberflow-v2/extremo/V2-VD3-20261126T104230Z.pcap,capturados:7509,recibidos_por_filtro:7509,descartados_nucleo:0,sha256_origen:b03731fe999ed70c14974d8885fd865c4ebdcbf3210a3c1eee34cee8afaa4b05,bytes:13254234,sigue_vivo:false,estado:ok} "}
+{"utc":"2026-11-26T11:14:29.652Z","paso":"extremo_copia","detalle":"sha256 coincide b03731fe999ed70c14974d8885fd865c4ebdcbf3210a3c1eee34cee8afaa4b05 "}
+{"utc":"2026-11-26T11:14:48.069Z","paso":"servidor","detalle":"420 lineas en ventana "}
+{"utc":"2026-11-26T11:14:49.409Z","paso":"reunido","detalle":"/home/m4rk/cyberflow-v2/pruebas/V2-VD3-20261126T104230Z "}
+{"utc":"2026-11-26T11:27:03.475Z","paso":"analisis","detalle":"conciliar rc=0 cobertura rc=0 fronteras rc=0 extraer rc=0 verificar rc=0 metadatos rc=0  "}
+{"utc":"2026-11-26T11:27:05.576Z","paso":"estado_global","detalle":"{ejecucion: V2-VD3-20261126T104230Z, generador: completa, archivador: completa, vigia: sin_paradas, supervision: sin_invalidaciones, espejo: con_descartes, calidad_copias: completo, calidad_dns: completo, calidad_extremo: completo, calidad_sonda: completo, analisis: completo, exclusion_v1: cubre, global: no_aprobada, dictamen: fallido, codigo_salida: 1, motivos: [espejo:con_descartes, falta:criter"}
+462
+57M	capturas/V2-VD3-20261126T104230Z
+19M	pruebas/V2-VD3-20261126T104230Z
+{"utc":"2026-11-26T11:27:06.278Z","paso":"hashes","detalle":"pruebas/V2-VD3-20261126T104230Z/SHA256SUMS "}
+{"utc":"2026-11-26T11:27:06.284Z","paso":"fin","detalle":"codigo_salida=1 "}

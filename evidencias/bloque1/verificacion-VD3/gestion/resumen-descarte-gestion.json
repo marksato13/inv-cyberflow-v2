@@ -1,0 +1,40 @@
+{
+  "ejecucion": "V2-VD3-20261126T104230Z",
+  "herramienta": "captura/copias_espejo.py --ips 10.10.10.30,10.10.60.11 (bastion, Sensor1 gestion)",
+  "desde_epoch": 1795689995,
+  "hasta_epoch": 1795690025,
+  "denominadores": {
+    "tramas_en_ventana": 18873,
+    "eventos_por_clase": {
+      "falta_copia": 606,
+      "completo": 7597,
+      "inesperado": 5,
+      "no_determinable": 155
+    },
+    "eventos": 8363
+  },
+  "falta_copia_por_par": {
+    "Sensor1->bastion": 446,
+    "bastion->Sensor1": 152,
+    "bastion->10.10.60.10": 4,
+    "bastion->10.10.60.45": 4
+  },
+  "falta_copia_por_segundo_utc": {
+    "10:46:35": 1,
+    "10:46:41": 1,
+    "10:46:42": 1,
+    "10:46:43": 1,
+    "10:46:44": 1,
+    "10:46:45": 1,
+    "10:46:47": 269,
+    "10:46:48": 154,
+    "10:46:49": 175,
+    "10:46:55": 2
+  },
+  "scp_operador_utc": "10:46:46.0-10:46:49.7 (scp de la evidencia de VD2, Sensor1->bastion, unos 2,6 MB)",
+  "descarte_sondeo": "Gi2/0/19 +1 output drop entre 10:46:51.07 y 10:46:53.41",
+  "generador_inicio_utc": "10:47:46",
+  "poblacion": "15 767/15 767 eventos completos",
+  "detalle_privado_sha256": "accae85e8e3879e5bcfbfe42f50c507cdc5ee2e60093bb5a4f0c1e4fffb8c7fb",
+  "detalle_privado": "contiene una IP ajena; en Sensor1 ~/cyberflow-v2/bloque1/vd3-descarte-gestion/"
+}

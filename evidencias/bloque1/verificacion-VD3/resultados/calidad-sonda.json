@@ -1,0 +1,79 @@
+{
+ "version": 3,
+ "estado": "sin_contaminacion",
+ "recuento": "ventanas distintas (version 2 sumaba por sonda)",
+ "fuentes_registro": [
+  "v2ctl"
+ ],
+ "historia_s": 230,
+ "cola_s": 1.0,
+ "guardas_planificadas": [
+  "E1:",
+  "E5:"
+ ],
+ "ventanas_poblacion": 645,
+ "tocadas_utiles": 0,
+ "tocadas_en_guarda_planificada": 23,
+ "sondas": [
+  {
+   "origen_ip": "10.10.20.21",
+   "sonda": "sondear/dns",
+   "desde_epoch": 1795689823.2947938,
+   "hasta_epoch": 1795689824.302952,
+   "t0_perfil_epoch": 1795690066.407,
+   "margen_hasta_t0_s": 242.10404801368713,
+   "ventanas_entidad": 169,
+   "tocadas_en_guarda_planificada": 23,
+   "tocadas_utiles": 0,
+   "ids_utiles": []
+  },
+  {
+   "origen_ip": "10.10.20.21",
+   "sonda": "sondear/obtener HTTP",
+   "desde_epoch": 1795689823.2947938,
+   "hasta_epoch": 1795689824.309119,
+   "t0_perfil_epoch": 1795690066.407,
+   "margen_hasta_t0_s": 242.0978810787201,
+   "ventanas_entidad": 169,
+   "tocadas_en_guarda_planificada": 23,
+   "tocadas_utiles": 0,
+   "ids_utiles": []
+  },
+  {
+   "origen_ip": "10.10.20.21",
+   "sonda": "sondear/obtener HTTPS",
+   "desde_epoch": 1795689823.2947938,
+   "hasta_epoch": 1795689824.320798,
+   "t0_perfil_epoch": 1795690066.407,
+   "margen_hasta_t0_s": 242.0862021446228,
+   "ventanas_entidad": 169,
+   "tocadas_en_guarda_planificada": 23,
+   "tocadas_utiles": 0,
+   "ids_utiles": []
+  },
+  {
+   "origen_ip": "10.10.20.21",
+   "sonda": "sondear/consulta",
+   "desde_epoch": 1795689823.2947938,
+   "hasta_epoch": 1795689824.3225,
+   "t0_perfil_epoch": 1795690066.407,
+   "margen_hasta_t0_s": 242.0845000743866,
+   "ventanas_entidad": 169,
+   "tocadas_en_guarda_planificada": 23,
+   "tocadas_utiles": 0,
+   "ids_utiles": []
+  },
+  {
+   "origen_ip": "10.10.20.21",
+   "sonda": "sondear/envio",
+   "desde_epoch": 1795689823.2947938,
+   "hasta_epoch": 1795689824.324216,
+   "t0_perfil_epoch": 1795690066.407,
+   "margen_hasta_t0_s": 242.0827841758728,
+   "ventanas_entidad": 169,
+   "tocadas_en_guarda_planificada": 23,
+   "tocadas_utiles": 0,
+   "ids_utiles": []
+  }
+ ]
+}

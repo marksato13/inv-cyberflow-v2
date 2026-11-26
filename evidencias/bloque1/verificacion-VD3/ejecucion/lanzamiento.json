@@ -1,0 +1,33 @@
+{
+ "ejecucion": "V2-VD3-20261126T104230Z",
+ "programa": "prueba-niveles-transiciones.json",
+ "programa_sha256": "3089fc531745d9271818ee20c0d9915bd045801669dd2042a766e269cd7ee160",
+ "codigo_version": "80627be",
+ "planificado": {
+  "archivador_desde_epoch": 1795689751,
+  "generador_inicio_epoch": 1795690064,
+  "generador_fin_epoch": 1795691504,
+  "captura_hasta_epoch": 1795691624,
+  "tope_epoch": 1795695224
+ },
+ "real": {
+  "archivador_confirmado_epoch": 1795689821,
+  "primer_paquete_epoch": 1795689786.234638,
+  "ultimo_paquete_epoch": 1795691642.160417,
+  "generador_inicio_epoch": 1795690066.13994,
+  "generador_fin_epoch": 1795691506.835214
+ },
+ "guardas_planificadas": {
+  "margen_sonda_s": 240,
+  "generador_no_antes_de_epoch": 1795690064,
+  "captura_previa_s": 150,
+  "margen_fin_s": 120
+ },
+ "referencias": {
+  "extremo_srvdmz_pcap": "/home/adminsrvdmz/cyberflow-v2/extremo/V2-VD3-20261126T104230Z.pcap",
+  "dns_dc1": "cf-v2-dns-v2-vd3-20261126t104230z"
+ },
+ "duracion_s": 1440,
+ "retraso_prueba_s": 0,
+ "dns_unidad": "cf-v2-dns-v2-vd3-20261126t104230z"
+}

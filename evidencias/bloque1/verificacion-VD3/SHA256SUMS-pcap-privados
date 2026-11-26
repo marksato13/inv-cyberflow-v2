@@ -1,0 +1,5 @@
+# PCAP de VD3 que no se publican (tráfico del laboratorio), copias en Sensor1
+b03731fe999ed70c14974d8885fd865c4ebdcbf3210a3c1eee34cee8afaa4b05  pruebas/V2-VD3-20261126T104230Z/registros/extremo-V2-VD3-20261126T104230Z.pcap  (origen srv-dmz, mismo sha256)
+1034d558e8552f5f07bcb6dbabf4e3b30c2ff5aa49b2a6f669a7dabc1e0f9db7  pruebas/V2-VD3-20261126T104230Z/registros/dns-V2-VD3-20261126T104230Z.pcap  (registrador DC1)
+a9618746cc77446ce837576751c5a9d31a9f5e907d0ca3460766b8ba05b66574  capturas/V2-VD3-20261126T104230Z/inventario  (369 PCAP del espejo)
+9a08fd6b4681dbd2ec0efbbdfcb284e7e90f429d46222c313981bdd02ed99546  capturas/V2-VD3-20261126T104230Z/eve

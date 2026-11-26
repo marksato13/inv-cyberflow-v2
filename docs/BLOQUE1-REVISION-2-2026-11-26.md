@@ -24,7 +24,7 @@ Paquete: https://github.com/marksato13/inv-cyberflow-v2/releases/tag/bloque1-cie
 | 5. Criterio conservador | **En el dictamen**: guardas planificadas separadas de exclusiones por incidente; sin porcentaje (§5) |
 | 6. Referencia independiente en srv-dmz y DC1 | **Integrada** en lanzador, cierre y dictamen; comprobada en VD2 (§6) |
 | 7. rx_dropped de 120 s con PCAP | **Repetida y archivada**; extracto publicado (§7) |
-| 8. Despliegue y pruebas del cierre | **Desplegado y verificado por hash**; dictamen probado con evidencia correcta, pérdida y ausente (§8) |
+| 8. Despliegue y pruebas del cierre | **Desplegado y verificado por hash**. El dictamen se probó con evidencia correcta, con pérdida y con evidencia ausente. VD2 sale `indeterminada` (espejo, ya corregido); VD3 confirma la corrección, pero sale `no_aprobada` por un descarte que provocó el operador (§8) |
 | 9. Pérdida de gestión | **Localizada en el switch**, antes de la cola de salida del destino del SPAN; ESXi descartado (§9) |
 
 **El Bloque 1 sigue sin cerrarse por completo**: las ejecuciones antiguas (T1–E3) quedan
@@ -303,7 +303,47 @@ evalúa con el `estado_global.py` desplegado (`verificacion-VD2/dictamen/dictame
 Una pérdida comprobada da `no_aprobada`, y una evidencia ausente o incompleta da `indeterminada`.
 Ninguna de las dos se aprueba.
 
-⟨VD3⟩
+**Criterios sin valor en cualquier prueba corta.** En VD2 y VD3, C7 y C9–C13 no tienen valor con
+24 min de programa (`falta:criterio:*`). Por eso ninguna verificación dirigida puede salir
+`aprobada`: como mucho, `indeterminada`. Así debe ser con el criterio conservador, porque no son
+ejecuciones definitivas. La comparación de los casos con la ejecución real deja fuera esos
+`falta:criterio`, que son iguales en todos los casos.
+
+**VD3: comprobación de 80627be en el laboratorio** (V2-VD3-20261126T104230Z, mismo programa,
+evidencia en `evidencias/bloque1/verificacion-VD3/`):
+
+| | Resultado |
+|---|---|
+| Sondeo del SPAN | 859 muestras de 10:43:06 a 11:14:02, que cubren **toda la captura**: **0 s indeterminados** (VD2: 30,5 s). La corrección funciona |
+| Sonda | `sin_contaminacion`: 0 ventanas útiles y 23 en guarda planificada |
+| Extremo | 7 509 capturados, 0 descartes del núcleo, sha256 `b03731fe…` igual en la copia; 264/264 conexiones, 0 solo en un lado, 1 481 transmisiones verificadas, 0 discrepancias |
+| DNS | `completo`, `pcap_dc1: true` |
+| Copias de la población | 15 767/15 767 completas |
+| Exclusiones | 645 ventanas, 373 excluidas. Guardas planificadas: E1 353 y E5 26. Incidente: E3 21 (P2, PENDIENTES 52) |
+| **Dictamen** | **`no_aprobada`** por `espejo:con_descartes` |
+
+**Causa del descarte: el operador.** El sondeo vio **1** descarte de salida en Gi2/0/19 entre las
+10:46:51,07 y las 10:46:53,41 UTC, durante la captura previa y 55 s antes del generador (10:47:46).
+Las copias de gestión del intervalo 10:46:35–10:47:05, contadas con `copias_espejo.py` en el
+propio PCAP de VD3, dan 606 faltantes:
+
+- **598** entre las 10:46:47 y las 10:46:49 UTC;
+- **446** de Sensor1 al bastión y **152** del bastión a Sensor1.
+
+Es justo cuando hice el `scp` de la evidencia de VD2 de Sensor1 al bastión: unos 2,6 MB, de
+10:46:46,0 a 10:46:49,7, según los instantes de los ficheros. Ese `scp` incumplió la norma 35 de
+PENDIENTES (nada de transferencias por el cortafuegos durante una captura), y es el mismo mecanismo
+que en R3 (§9). La población no perdió nada, pero el dictamen se queda en `no_aprobada`: el
+criterio no se relaja después de ver el resultado.
+
+**Medida:**
+
+- ninguna copia de evidencia mientras haya una ejecución en marcha;
+- el resumen está en `verificacion-VD3/gestion/resumen-descarte-gestion.json`.
+
+**Pendiente:** que el lanzador o el vigía detecten transferencias de gestión durante la captura
+(PENDIENTES 54). Para ver un espejo `sin_descartes` en el laboratorio hace falta otra verificación
+corta sin intervención. Aun así, saldría `indeterminada` por los criterios sin valor.
 
 ## 9. Pérdida de gestión: dónde se pierde
 
