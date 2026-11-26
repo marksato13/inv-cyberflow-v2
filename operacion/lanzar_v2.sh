@@ -77,11 +77,17 @@ setsid nohup python3 "$B/operacion/sondeo_span.py" --salida "$E/sondeo-span.json
   > "$E/sondeo-span-salida.txt" 2>&1 < /dev/null &
 for i in $(seq 1 15); do grep -q '"tipo": "muestra"' "$E/sondeo-span.jsonl" 2>/dev/null && break; sleep 2; done
 grep -q '"tipo": "muestra"' "$E/sondeo-span.jsonl" 2>/dev/null || deshacer "el sondeo del espejo no dio ninguna muestra"
+T_SONDEO=$(date +%s)
 log sondeo_span "pid $(cat "$E/sondeo-span.pid" 2>/dev/null)"
+# El archivador recoge también los PCAP del anillo de los MARGEN_PREVIO_ARCH_S anteriores a su
+# arranque (+ ROTACION_S = 5 s de archivar_v2): el sondeo tiene que llevar ese tiempo dando muestras
+# o el principio de la captura queda sin sondeo (`espejo: indeterminado`, como en E3 y VD2).
+MARGEN_PREVIO_ARCH_S=30
+while [ "$(date +%s)" -lt $((T_SONDEO + MARGEN_PREVIO_ARCH_S + 5 + 3)) ]; do sleep 1; done
 
 # 5. Archivador en Sensor1 (EVE + PCAP comprimido, parada por espacio)
 # (el & solo debe afectar al archivador: con «a && b && c &» ssh espera a la subcapa y no regresa)
-$SSH sensor1 "mkdir -p $S1/capturas; cd $S1/codigo/captura; setsid nohup python3 archivar_v2.py --ejecucion $ID --hasta-epoch 0 --hasta-max-epoch $TOPE_INICIAL --margen-final-s 15 --eve /var/log/suricata/v2/eve.json --libre-minimo-gb 4 > $S1/capturas/archivador-$ID.txt 2>&1 < /dev/null &" \
+$SSH sensor1 "mkdir -p $S1/capturas; cd $S1/codigo/captura; setsid nohup python3 archivar_v2.py --ejecucion $ID --hasta-epoch 0 --hasta-max-epoch $TOPE_INICIAL --margen-final-s 15 --margen-previo $MARGEN_PREVIO_ARCH_S --eve /var/log/suricata/v2/eve.json --libre-minimo-gb 4 > $S1/capturas/archivador-$ID.txt 2>&1 < /dev/null &" \
   || deshacer "no arrancó el archivador"
 for i in $(seq 1 30); do
   st=$($SSH sensor1 "cat $S1/capturas/$ID/estado.json 2>/dev/null" || true)
