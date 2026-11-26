@@ -24,6 +24,8 @@ class Extracto(unittest.TestCase):
                 [{"ip": "10.10.60.45", "regla": "ajena"}, {"ip": "10.10.20.21", "regla": "poblacion"},
                  {"ip": "10.10.60.45", "mac": "AA:BB:CC:DD:EE:FF", "version": "3.12.3"}]))
             (c / "x.pcap").write_bytes(b"\xd4\xc3\xb2\xa1")
+            (c / "eve").mkdir()
+            (c / "eve" / "eve-V2-X.json").write_text('{"dns": {"rrname": "algo.de.terceros"}}\n')
             r = es.extraer(p, c, t / "salida", ["10.10.10.20"])
             texto = (t / "salida" / "pruebas" / "V2-X" / "inventario.json").read_text()
             self.assertNotIn("10.10.60.45", texto)
@@ -32,7 +34,8 @@ class Extracto(unittest.TestCase):
             self.assertIn("3.12.3", texto)
             self.assertEqual(texto.count("198.51.100.1"), 2)          # consistente
             self.assertEqual(r["ip_ajenas_sustituidas"], 1)
-            self.assertEqual(r["fuera"][0]["fichero"], "capturas/V2-X/x.pcap")
+            self.assertEqual({x["fichero"] for x in r["fuera"]}, {"capturas/V2-X/x.pcap", "capturas/V2-X/eve/eve-V2-X.json"})
+            self.assertFalse((t / "salida" / "capturas" / "V2-X" / "eve").exists())
             self.assertTrue((t / "salida" / "SHA256SUMS").exists())
             with self.assertRaises(SystemExit):
                 es.extraer(p, c, t / "salida")

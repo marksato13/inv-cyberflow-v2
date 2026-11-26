@@ -78,6 +78,12 @@ def extraer(pruebas: Path, capturas: Path, salida: Path, permitidas=()):
     for raiz, nombre in ((pruebas, "pruebas"), (capturas, "capturas")):
         for f in sorted(p for p in raiz.rglob("*") if p.is_file()):
             rel = "%s/%s/%s" % (nombre, raiz.name, f.relative_to(raiz).as_posix())
+            if nombre == "capturas" and f.relative_to(raiz).parts[0] == "eve":
+                # El EVE completo lleva metadatos de aplicación de terceros (DNS, SNI, URL): no se
+                # publica aunque las IP estén sustituidas. El dictamen no lo necesita.
+                fuera.append({"fichero": rel, "bytes": f.stat().st_size,
+                              "motivo": "EVE completo: metadatos de aplicación de terceros (DNS, SNI, URL)"})
+                continue
             if f.suffix not in SUFIJOS or f.name == "SHA256SUMS" or f.stat().st_size > MAX_BYTES:
                 fuera.append({"fichero": rel, "bytes": f.stat().st_size,
                               "motivo": "binario o captura (PCAP/comprimido)" if f.suffix not in SUFIJOS
