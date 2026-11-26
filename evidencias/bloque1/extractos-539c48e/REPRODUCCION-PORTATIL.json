@@ -1,0 +1,171 @@
+{
+ "version": 1,
+ "codigo": "539c48e+",
+ "nota": "Reproducción fuera del laboratorio (Windows), solo con las entradas publicadas sin EVE ni PCAP",
+ "ejecuciones": {
+  "V2-VD2-20261126T090705Z": {
+   "dictamen_portatil": "indeterminada",
+   "motivos_portatil": [
+    "falta:espejo",
+    "falta:criterio:C9",
+    "falta:criterio:C10"
+   ],
+   "dictamen_laboratorio": "indeterminada",
+   "motivos_laboratorio": [
+    "falta:espejo",
+    "falta:criterio:C9",
+    "falta:criterio:C10"
+   ],
+   "igual": true,
+   "criterios_iguales": true,
+   "criterios": {
+    "C7": true,
+    "C9": null,
+    "C10": null,
+    "C11": true,
+    "C12": true,
+    "C13": true
+   },
+   "casos": [
+    [
+     "correcta",
+     "indeterminada"
+    ],
+    [
+     "perdida_extremo",
+     "no_aprobada"
+    ],
+    [
+     "perdida_copias",
+     "no_aprobada"
+    ],
+    [
+     "contaminacion_sonda",
+     "no_aprobada"
+    ],
+    [
+     "extremo_ausente",
+     "indeterminada"
+    ],
+    [
+     "sonda_ausente",
+     "indeterminada"
+    ],
+    [
+     "dns_ausente",
+     "indeterminada"
+    ],
+    [
+     "extremo_con_descartes",
+     "indeterminada"
+    ]
+   ]
+  },
+  "V2-VD3-20261126T104230Z": {
+   "dictamen_portatil": "no_aprobada",
+   "motivos_portatil": [
+    "espejo:con_descartes",
+    "falta:criterio:C10"
+   ],
+   "dictamen_laboratorio": "no_aprobada",
+   "motivos_laboratorio": [
+    "espejo:con_descartes",
+    "falta:criterio:C10"
+   ],
+   "igual": true,
+   "criterios_iguales": true,
+   "criterios": {
+    "C7": true,
+    "C9": true,
+    "C10": null,
+    "C11": true,
+    "C12": true,
+    "C13": true
+   },
+   "casos": [
+    [
+     "correcta",
+     "no_aprobada"
+    ],
+    [
+     "perdida_extremo",
+     "no_aprobada"
+    ],
+    [
+     "perdida_copias",
+     "no_aprobada"
+    ],
+    [
+     "contaminacion_sonda",
+     "no_aprobada"
+    ],
+    [
+     "extremo_ausente",
+     "no_aprobada"
+    ],
+    [
+     "sonda_ausente",
+     "no_aprobada"
+    ],
+    [
+     "dns_ausente",
+     "no_aprobada"
+    ],
+    [
+     "extremo_con_descartes",
+     "no_aprobada"
+    ]
+   ]
+  },
+  "V2-VD4-20261126T141333Z": {
+   "dictamen_portatil": "aprobada",
+   "motivos_portatil": [],
+   "dictamen_laboratorio": "aprobada",
+   "motivos_laboratorio": [],
+   "igual": true,
+   "criterios_iguales": true,
+   "criterios": {
+    "C7": true,
+    "C9": true,
+    "C10": true,
+    "C11": true,
+    "C12": true,
+    "C13": true
+   },
+   "casos": [
+    [
+     "correcta",
+     "aprobada"
+    ],
+    [
+     "perdida_extremo",
+     "no_aprobada"
+    ],
+    [
+     "perdida_copias",
+     "no_aprobada"
+    ],
+    [
+     "contaminacion_sonda",
+     "no_aprobada"
+    ],
+    [
+     "extremo_ausente",
+     "indeterminada"
+    ],
+    [
+     "sonda_ausente",
+     "indeterminada"
+    ],
+    [
+     "dns_ausente",
+     "indeterminada"
+    ],
+    [
+     "extremo_con_descartes",
+     "indeterminada"
+    ]
+   ]
+  }
+ }
+}

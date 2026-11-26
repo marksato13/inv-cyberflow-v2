@@ -1,0 +1,37 @@
+{
+ "version": 1,
+ "estado": "completo",
+ "motivos": [],
+ "por_equipo": {
+  "srvdmz": {
+   "muestras": 88,
+   "en_generacion": 68,
+   "libre_min_gb": 10.201,
+   "bytes_fin": 13316560,
+   "proceso_vivo_en_todas": true
+  },
+  "dc1": {
+   "muestras": 88,
+   "en_generacion": 68,
+   "libre_min_gb": 35.254,
+   "bytes_fin": 195293,
+   "proceso_vivo_en_todas": true
+  }
+ },
+ "incidentes": [],
+ "recalculado_progreso": {
+  "regla": "reloj de sin_progreso desde max(último crecimiento, inicio de la generación)",
+  "incidentes_registrados_sustituidos": [
+   {
+    "tipo": "incidente",
+    "equipo": "srvdmz",
+    "incidente": "sin_progreso",
+    "bytes": 8545,
+    "sin_crecer_desde_epoch": 1795702483.5602944,
+    "utc_epoch": 1795702736.8640656
+   }
+  ]
+ },
+ "fin": "parado_por_cierre",
+ "parada_cierre_epoch": null
+}

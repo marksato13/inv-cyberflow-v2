@@ -1,0 +1,16 @@
+{
+ "transacciones": 45,
+ "campos": [
+  "conexion",
+  "peticion",
+  "respuesta",
+  "transferencia",
+  "bytes_esperados",
+  "bytes_vistos",
+  "huecos",
+  "retransmisiones",
+  "conexion_reutilizada",
+  "rango_respuesta"
+ ],
+ "diferencias": []
+}

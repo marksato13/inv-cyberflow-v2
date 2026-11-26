@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Reproduce, fuera del laboratorio, el dictamen de VD2/VD3/VD4 con las entradas publicadas.
+"""Reproduce, fuera del laboratorio, el dictamen de VD2/VD3/VD4/VD6 con las entradas publicadas.
 
     python3 -X utf8 operacion/reproducir_dictamen.py [evidencias/bloque1/extractos-539c48e]
 
 Para cada `entradas-<ID>/` (texto saneado, sin PCAP ni EVE) copia la ejecución a una carpeta
 temporal, ejecuta revisar_criterios.py, estado_global.py y dictamen_casos.py, y compara el dictamen,
 los motivos y C7/C9–C13 con los resultados del laboratorio publicados en
-`evidencias/bloque1/reanalisis/<código>/<ID>/`. No escribe en el repositorio. rc 0 si todo coincide.
+`evidencias/bloque1/reanalisis/<código>/<ID>/` (VD6: `verificacion-VD6/resultados/`). No escribe en el repositorio. rc 0 si todo coincide.
 """
 from __future__ import annotations
 
@@ -18,8 +18,10 @@ import tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-REF = {"V2-VD2-20261126T090705Z": "5d4d51f", "V2-VD3-20261126T104230Z": "5d4d51f",
-       "V2-VD4-20261126T141333Z": "3e0c73e"}
+REF = {"V2-VD2-20261126T090705Z": "reanalisis/5d4d51f/V2-VD2-20261126T090705Z",
+       "V2-VD3-20261126T104230Z": "reanalisis/5d4d51f/V2-VD3-20261126T104230Z",
+       "V2-VD4-20261126T141333Z": "reanalisis/3e0c73e/V2-VD4-20261126T141333Z",
+       "V2-VD6-20261126T151456Z": "verificacion-VD6/resultados"}
 
 
 def dec(p):
@@ -33,7 +35,7 @@ def main(argv=None):
     todo = True
     for ID, cod in REF.items():
         E = X / ("entradas-" + ID)
-        ref = REPO / "evidencias" / "bloque1" / "reanalisis" / cod / ID
+        ref = REPO / "evidencias" / "bloque1" / cod
         with tempfile.TemporaryDirectory() as t:
             t = Path(t)
             P, K = t / ID, E / "capturas" / ID

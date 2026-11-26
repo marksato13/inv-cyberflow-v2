@@ -1,0 +1,24 @@
+{
+ "version": 1,
+ "estado": "completo",
+ "motivos": [],
+ "por_equipo": {
+  "srvdmz": {
+   "muestras": 88,
+   "en_generacion": 68,
+   "libre_min_gb": 10.218,
+   "bytes_fin": 13296054,
+   "proceso_vivo_en_todas": true
+  },
+  "dc1": {
+   "muestras": 88,
+   "en_generacion": 68,
+   "libre_min_gb": 35.252,
+   "bytes_fin": 195297,
+   "proceso_vivo_en_todas": true
+  }
+ },
+ "incidentes": [],
+ "fin": "parado_por_cierre",
+ "parada_cierre_epoch": 1795708010.0
+}

@@ -25,7 +25,7 @@ Paquete: https://github.com/marksato13/inv-cyberflow-v2/releases/tag/bloque1-cie
 | 6. Referencia independiente en srv-dmz y DC1 | **Integrada** en lanzador, cierre y dictamen; comprobada en VD2 (§6) |
 | 7. rx_dropped de 120 s con PCAP | **Repetida y archivada**; extracto publicado (§7) |
 | 8. Despliegue y pruebas del cierre | **Desplegado y verificado por hash**. El dictamen se probó con evidencia correcta, con pérdida y con evidencia ausente. VD2 sale `indeterminada` (espejo, ya corregido); VD3 confirma la corrección, pero sale `no_aprobada` por un descarte que provocó el operador (§8) |
-| 9. Pérdida de gestión | **Localizada en el switch**, antes de la cola de salida del destino del SPAN; ESXi descartado (§9) |
+| 9. Pérdida de gestión | **Localizada en el switch**, antes de la cola de salida del destino del SPAN. El ESXi no explica la pérdida, pero no se descarta una pérdida menor que la resolución, de unos cientos de paquetes por tramo. La causa interna sigue pendiente (§9, acotado en la revisión 3) |
 
 **El Bloque 1 sigue sin cerrarse por completo**: las ejecuciones antiguas (T1–E3) quedan
 `no_aprobada` con el criterio nuevo (§4), y siguen abiertos los puntos de los bloques 3 y 4 (§10).
@@ -303,11 +303,15 @@ evalúa con el `estado_global.py` desplegado (`verificacion-VD2/dictamen/dictame
 Una pérdida comprobada da `no_aprobada`, y una evidencia ausente o incompleta da `indeterminada`.
 Ninguna de las dos se aprueba.
 
-**Criterios sin valor en cualquier prueba corta.** En VD2 y VD3, C7 y C9–C13 no tienen valor con
-24 min de programa (`falta:criterio:*`). Por eso ninguna verificación dirigida puede salir
-`aprobada`: como mucho, `indeterminada`. Así debe ser con el criterio conservador, porque no son
-ejecuciones definitivas. La comparación de los casos con la ejecución real deja fuera esos
-`falta:criterio`, que son iguales en todos los casos.
+**C7 y C9–C13 (CORREGIDO en la revisión 3).** Aquí se decía que «no tienen valor con 24 min de
+programa» y que ninguna verificación dirigida podía salir `aprobada`. **Era falso.**
+`evaluar_piloto.py` los deja con `ok: None, revisar: True`, es decir, **pendientes de revisión
+manual**, no «no evaluables por ser corta». Desde 5d4d51f/45344c5 los revisa
+`operacion/revisar_criterios.py` con la evidencia de la propia ejecución. Lo que solo una captura
+larga puede comprobar (rotación del EVE, deriva de relojes, volumen de 49 h, supervisión
+prolongada) queda aparte, en `requiere_duracion_prolongada`. Resultado del reanálisis de VD2 y VD3:
+`docs/BLOQUE1-REVISION-3-2026-11-26.md` §1. La comparación de los casos con la ejecución real deja
+fuera esos `falta:criterio`, que son iguales en todos los casos.
 
 **VD3: comprobación de 80627be en el laboratorio** (V2-VD3-20261126T104230Z, mismo programa,
 evidencia en `evidencias/bloque1/verificacion-VD3/`):
@@ -343,7 +347,7 @@ criterio no se relaja después de ver el resultado.
 
 **Pendiente:** que el lanzador o el vigía detecten transferencias de gestión durante la captura
 (PENDIENTES 54). Para ver un espejo `sin_descartes` en el laboratorio hace falta otra verificación
-corta sin intervención. Aun así, saldría `indeterminada` por los criterios sin valor.
+corta sin intervención (VD4, revisión 3).
 
 ## 9. Pérdida de gestión: dónde se pierde
 
@@ -379,12 +383,24 @@ queue stats interface Gi2/0/19` antes y después, `resumen-qos-r3.json`): la col
 **25,3 MB**; las dos copias de la subida son unos 40 MB; la cola descartó 58 KB (+40 paquetes =
 +40 `Total output drops`); faltan **11 917 copias** (unos 17 MB). 25,3 + 17,3 ≈ 42,6 MB.
 
-**Conclusión respaldada por los contadores de ambos lados.**
+**Conclusión, acotada por la precisión de las lecturas (revisión 3).**
 
-1. Todo lo que el switch transmite por Gi2/0/19 lo reciben `vmnic2`, el vSwitch, la vNIC y el
-   invitado: **el ESXi no pierde** (hipótesis 2 descartada).
-2. Las copias que faltan **no llegan a encolarse** en la salida de Gi2/0/19: se pierden en la
-   replicación del SPAN dentro del switch y no las cuenta ningún contador de la interfaz.
+Las lecturas no son simultáneas. Por eso la diferencia entre lo que sale del switch y lo que recibe
+`vmnic2` va de −302 a +465 paquetes por tramo, también en los fondos sin pérdida. En toda la
+prueba (F0 a F1) la diferencia es de 157 523 frente a 157 349 paquetes, es decir, 174 (0,11 %).
+
+1. **ESXi.** Una pérdida en el ESXi no puede explicar las 17 593 copias que faltan en R3 + R4.
+   Esa cifra es unas 38 veces la mayor diferencia de un tramo, y `vmnic2`, el vSwitch y `vmxnet3`
+   no cuentan ningún descarte. Lo que estas lecturas **no** permiten descartar es una pérdida
+   menor que su resolución: unos cientos de paquetes por tramo. Antes ponía «el ESXi no pierde»;
+   la afirmación correcta es esta, acotada.
+2. **Switch.** Las copias que faltan no aparecen como paquetes de salida de Gi2/0/19, ni en
+   `Total output drops` (+38 y +1), ni en lo que encoló la cola. El balance QoS de R3 da
+   25,3 MB encolados + unos 17,3 MB faltantes ≈ 42,6 MB, frente a unos 40 MB de copias esperadas
+   (estimación, ±6 % aproximadamente). Lo que se puede afirmar: **se pierden en el switch antes
+   de la cola de salida del destino**.
+   **Sigue pendiente la causa interna**, no demostrada: replicación del SPAN, sobresuscripción en
+   microrráfagas u otra. Hace falta un contador del ASIC.
 3. En R3 el tráfico entra por Gi2/0/23, el mismo miembro del stack que el destino: no hace falta
    cruzar el anillo del stack (estado del stack: 4 puertos OK, 1 cambio de enlace).
 
@@ -409,7 +425,7 @@ grande por el cortafuegos durante una captura); 160 Mb/s de media no es seguro.
 | Contadores del switch y del ESXi | Publicado (texto) | `gestion-esxi-r1/contadores-*.txt`, `qos-*.txt` |
 | VD2: preflight, sondas, calidad (sonda, extremo, DNS, copias, espejo), cobertura y dictámenes | **Publicado (resultados)** | `evidencias/bloque1/verificacion-VD2/`; rehacerlos exige los PCAP de Sensor1, srv-dmz y DC1 (privados: tráfico del laboratorio, sha256 en `SHA256SUMS-pcap-privados`) |
 | Casos del dictamen (correcta, pérdida, ausente) | Resultado publicado; **repetirlo requiere la carpeta de la ejecución** en Sensor1 (CSV del extractor) | `dictamen_casos.py` (§8) |
-| Reparto de bytes en conexiones persistentes (E3 de P2 en VD2) | **Pendiente (bloque 3)** | PENDIENTES 52 |
+| Reparto de bytes en conexiones persistentes (E3 de P2 en VD2) | **Corregido en la cobertura** (revisión 3, cobertura_v2 v2). Era un defecto de la atribución, no una pérdida | PENDIENTES 52; el resto del bloque 3 (deduplicación) sigue abierto |
 | Contador interno que confirme la sobresuscripción del SPAN | **Pendiente** | Solo lectura en el ASIC, si se identifica el contador |
 | Deduplicación del extractor | **Pendiente (bloque 3)** | |
 | Relojes (DC1 ~6,5–7 ms por detrás) | **Pendiente (bloque 4)** | |

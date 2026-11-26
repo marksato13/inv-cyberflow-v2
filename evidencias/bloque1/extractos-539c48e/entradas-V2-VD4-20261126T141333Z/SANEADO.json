@@ -1,0 +1,1912 @@
+{
+ "version": 1,
+ "ejecucion": "V2-VD4-20261126T141333Z",
+ "incluidos": 99,
+ "fuera": [
+  {
+   "fichero": "pruebas/V2-VD4-20261126T141333Z/SHA256SUMS",
+   "bytes": 62409,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "pruebas/V2-VD4-20261126T141333Z/extraccion/verificacion.md",
+   "bytes": 5196,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "pruebas/V2-VD4-20261126T141333Z/generador/V2-VD4-20261126T141333Z/PERMISO_CAPTURA",
+   "bytes": 0,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "pruebas/V2-VD4-20261126T141333Z/registros/dns-V2-VD4-20261126T141333Z.pcap",
+   "bytes": 50098,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "pruebas/V2-VD4-20261126T141333Z/registros/extremo-V2-VD4-20261126T141333Z.pcap",
+   "bytes": 13316560,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "pruebas/V2-VD4-20261126T141333Z/registros/referencias.pid",
+   "bytes": 7,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/HASTA_EPOCH",
+   "bytes": 17,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/HASTA_MAX_EPOCH",
+   "bytes": 11,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141408.pcap.gz",
+   "bytes": 89504,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141413.pcap.gz",
+   "bytes": 71924,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141418.pcap.gz",
+   "bytes": 86652,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141423.pcap.gz",
+   "bytes": 93155,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141428.pcap.gz",
+   "bytes": 63152,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141433.pcap.gz",
+   "bytes": 76801,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141438.pcap.gz",
+   "bytes": 115491,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141443.pcap.gz",
+   "bytes": 124443,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141448.pcap.gz",
+   "bytes": 70848,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141453.pcap.gz",
+   "bytes": 92382,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141458.pcap.gz",
+   "bytes": 71496,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141503.pcap.gz",
+   "bytes": 84614,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141508.pcap.gz",
+   "bytes": 97843,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141513.pcap.gz",
+   "bytes": 68304,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141518.pcap.gz",
+   "bytes": 70945,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141523.pcap.gz",
+   "bytes": 81966,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141528.pcap.gz",
+   "bytes": 88498,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141533.pcap.gz",
+   "bytes": 77007,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141538.pcap.gz",
+   "bytes": 83898,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141543.pcap.gz",
+   "bytes": 101510,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141548.pcap.gz",
+   "bytes": 83137,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141553.pcap.gz",
+   "bytes": 68125,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141558.pcap.gz",
+   "bytes": 74997,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141603.pcap.gz",
+   "bytes": 86215,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141608.pcap.gz",
+   "bytes": 101822,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141613.pcap.gz",
+   "bytes": 89451,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141618.pcap.gz",
+   "bytes": 71738,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141623.pcap.gz",
+   "bytes": 71317,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141628.pcap.gz",
+   "bytes": 98313,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141633.pcap.gz",
+   "bytes": 74300,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141638.pcap.gz",
+   "bytes": 62724,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141643.pcap.gz",
+   "bytes": 76430,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141648.pcap.gz",
+   "bytes": 98736,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141653.pcap.gz",
+   "bytes": 71318,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141658.pcap.gz",
+   "bytes": 71842,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141703.pcap.gz",
+   "bytes": 87351,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141708.pcap.gz",
+   "bytes": 76455,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141713.pcap.gz",
+   "bytes": 92839,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141718.pcap.gz",
+   "bytes": 71399,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141724.pcap.gz",
+   "bytes": 70327,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141729.pcap.gz",
+   "bytes": 101363,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141734.pcap.gz",
+   "bytes": 70386,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141739.pcap.gz",
+   "bytes": 71976,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141744.pcap.gz",
+   "bytes": 92700,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141749.pcap.gz",
+   "bytes": 76382,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141754.pcap.gz",
+   "bytes": 82289,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141759.pcap.gz",
+   "bytes": 84523,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141804.pcap.gz",
+   "bytes": 61872,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141809.pcap.gz",
+   "bytes": 70638,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141814.pcap.gz",
+   "bytes": 90975,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141819.pcap.gz",
+   "bytes": 82995,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141824.pcap.gz",
+   "bytes": 70317,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141829.pcap.gz",
+   "bytes": 89273,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141834.pcap.gz",
+   "bytes": 81482,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141839.pcap.gz",
+   "bytes": 70962,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141844.pcap.gz",
+   "bytes": 93083,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141849.pcap.gz",
+   "bytes": 162515,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141854.pcap.gz",
+   "bytes": 84661,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141859.pcap.gz",
+   "bytes": 99269,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141904.pcap.gz",
+   "bytes": 85926,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141909.pcap.gz",
+   "bytes": 103471,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141914.pcap.gz",
+   "bytes": 92696,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141919.pcap.gz",
+   "bytes": 97686,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141924.pcap.gz",
+   "bytes": 93267,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141929.pcap.gz",
+   "bytes": 79410,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141934.pcap.gz",
+   "bytes": 102315,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141939.pcap.gz",
+   "bytes": 97027,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141944.pcap.gz",
+   "bytes": 133069,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141949.pcap.gz",
+   "bytes": 85665,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141954.pcap.gz",
+   "bytes": 127889,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126141959.pcap.gz",
+   "bytes": 81559,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142004.pcap.gz",
+   "bytes": 97357,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142009.pcap.gz",
+   "bytes": 92780,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142014.pcap.gz",
+   "bytes": 65502,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142019.pcap.gz",
+   "bytes": 128887,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142024.pcap.gz",
+   "bytes": 83081,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142029.pcap.gz",
+   "bytes": 101715,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142034.pcap.gz",
+   "bytes": 74684,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142039.pcap.gz",
+   "bytes": 126539,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142044.pcap.gz",
+   "bytes": 71189,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142049.pcap.gz",
+   "bytes": 99573,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142054.pcap.gz",
+   "bytes": 99435,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142100.pcap.gz",
+   "bytes": 84357,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142105.pcap.gz",
+   "bytes": 100587,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142110.pcap.gz",
+   "bytes": 99084,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142115.pcap.gz",
+   "bytes": 99423,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142120.pcap.gz",
+   "bytes": 127689,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142125.pcap.gz",
+   "bytes": 99647,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142130.pcap.gz",
+   "bytes": 75077,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142135.pcap.gz",
+   "bytes": 121359,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142140.pcap.gz",
+   "bytes": 92682,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142145.pcap.gz",
+   "bytes": 80050,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142150.pcap.gz",
+   "bytes": 108185,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142155.pcap.gz",
+   "bytes": 92054,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142200.pcap.gz",
+   "bytes": 98794,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142205.pcap.gz",
+   "bytes": 83178,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142210.pcap.gz",
+   "bytes": 117540,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142215.pcap.gz",
+   "bytes": 73289,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142220.pcap.gz",
+   "bytes": 99475,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142225.pcap.gz",
+   "bytes": 85270,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142230.pcap.gz",
+   "bytes": 92795,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142235.pcap.gz",
+   "bytes": 107559,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142240.pcap.gz",
+   "bytes": 84050,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142245.pcap.gz",
+   "bytes": 116494,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142250.pcap.gz",
+   "bytes": 99725,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142255.pcap.gz",
+   "bytes": 117915,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142300.pcap.gz",
+   "bytes": 80430,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142305.pcap.gz",
+   "bytes": 110025,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142310.pcap.gz",
+   "bytes": 80645,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142315.pcap.gz",
+   "bytes": 108389,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142320.pcap.gz",
+   "bytes": 5174172,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142325.pcap.gz",
+   "bytes": 92820,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142330.pcap.gz",
+   "bytes": 126019,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142335.pcap.gz",
+   "bytes": 87009,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142340.pcap.gz",
+   "bytes": 130623,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142345.pcap.gz",
+   "bytes": 47819,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142350.pcap.gz",
+   "bytes": 129202,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142355.pcap.gz",
+   "bytes": 144107,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142400.pcap.gz",
+   "bytes": 95355,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142405.pcap.gz",
+   "bytes": 104249,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142410.pcap.gz",
+   "bytes": 82729,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142415.pcap.gz",
+   "bytes": 126873,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142420.pcap.gz",
+   "bytes": 82170,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142425.pcap.gz",
+   "bytes": 101575,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142430.pcap.gz",
+   "bytes": 330316,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142435.pcap.gz",
+   "bytes": 72559,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142440.pcap.gz",
+   "bytes": 133072,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142445.pcap.gz",
+   "bytes": 90009,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142450.pcap.gz",
+   "bytes": 120386,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142455.pcap.gz",
+   "bytes": 65929,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142500.pcap.gz",
+   "bytes": 114674,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142505.pcap.gz",
+   "bytes": 120961,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142510.pcap.gz",
+   "bytes": 101984,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142515.pcap.gz",
+   "bytes": 117212,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142520.pcap.gz",
+   "bytes": 92650,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142525.pcap.gz",
+   "bytes": 121071,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142530.pcap.gz",
+   "bytes": 75346,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142535.pcap.gz",
+   "bytes": 126125,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142540.pcap.gz",
+   "bytes": 88139,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142545.pcap.gz",
+   "bytes": 106289,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142550.pcap.gz",
+   "bytes": 84877,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142555.pcap.gz",
+   "bytes": 122656,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142600.pcap.gz",
+   "bytes": 84464,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142605.pcap.gz",
+   "bytes": 95170,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142610.pcap.gz",
+   "bytes": 98911,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142615.pcap.gz",
+   "bytes": 84641,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142620.pcap.gz",
+   "bytes": 98526,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142625.pcap.gz",
+   "bytes": 98895,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142630.pcap.gz",
+   "bytes": 98778,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142635.pcap.gz",
+   "bytes": 76658,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142640.pcap.gz",
+   "bytes": 134991,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142645.pcap.gz",
+   "bytes": 83443,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142650.pcap.gz",
+   "bytes": 82953,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142655.pcap.gz",
+   "bytes": 120091,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142700.pcap.gz",
+   "bytes": 73613,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142705.pcap.gz",
+   "bytes": 210830,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142710.pcap.gz",
+   "bytes": 106033,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142716.pcap.gz",
+   "bytes": 131327,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142721.pcap.gz",
+   "bytes": 126603,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142726.pcap.gz",
+   "bytes": 103107,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142731.pcap.gz",
+   "bytes": 75410,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142736.pcap.gz",
+   "bytes": 120388,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142741.pcap.gz",
+   "bytes": 606089,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142746.pcap.gz",
+   "bytes": 113880,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142751.pcap.gz",
+   "bytes": 342859,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142756.pcap.gz",
+   "bytes": 177531,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142801.pcap.gz",
+   "bytes": 131937,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142806.pcap.gz",
+   "bytes": 143024,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142811.pcap.gz",
+   "bytes": 107239,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142816.pcap.gz",
+   "bytes": 87484,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142821.pcap.gz",
+   "bytes": 131475,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142826.pcap.gz",
+   "bytes": 84897,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142831.pcap.gz",
+   "bytes": 68010,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142836.pcap.gz",
+   "bytes": 141323,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142841.pcap.gz",
+   "bytes": 123025,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142846.pcap.gz",
+   "bytes": 138589,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142851.pcap.gz",
+   "bytes": 95484,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142856.pcap.gz",
+   "bytes": 136444,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142901.pcap.gz",
+   "bytes": 122728,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142906.pcap.gz",
+   "bytes": 354552,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142911.pcap.gz",
+   "bytes": 1891085,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142916.pcap.gz",
+   "bytes": 176470,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142921.pcap.gz",
+   "bytes": 102669,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142926.pcap.gz",
+   "bytes": 106897,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142931.pcap.gz",
+   "bytes": 102523,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142936.pcap.gz",
+   "bytes": 76754,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142941.pcap.gz",
+   "bytes": 121938,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142946.pcap.gz",
+   "bytes": 117856,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142951.pcap.gz",
+   "bytes": 185488,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126142956.pcap.gz",
+   "bytes": 99737,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143001.pcap.gz",
+   "bytes": 110105,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143006.pcap.gz",
+   "bytes": 180807,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143011.pcap.gz",
+   "bytes": 91236,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143016.pcap.gz",
+   "bytes": 124332,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143021.pcap.gz",
+   "bytes": 181780,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143026.pcap.gz",
+   "bytes": 99099,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143031.pcap.gz",
+   "bytes": 134252,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143036.pcap.gz",
+   "bytes": 93531,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143041.pcap.gz",
+   "bytes": 100123,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143046.pcap.gz",
+   "bytes": 101823,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143051.pcap.gz",
+   "bytes": 107085,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143056.pcap.gz",
+   "bytes": 69853,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143101.pcap.gz",
+   "bytes": 109673,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143106.pcap.gz",
+   "bytes": 99013,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143111.pcap.gz",
+   "bytes": 121186,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143116.pcap.gz",
+   "bytes": 89408,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143121.pcap.gz",
+   "bytes": 93215,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143126.pcap.gz",
+   "bytes": 96174,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143131.pcap.gz",
+   "bytes": 1401594,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143136.pcap.gz",
+   "bytes": 129796,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143141.pcap.gz",
+   "bytes": 65883,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143146.pcap.gz",
+   "bytes": 102476,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143151.pcap.gz",
+   "bytes": 89937,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143156.pcap.gz",
+   "bytes": 109355,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143201.pcap.gz",
+   "bytes": 99641,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143206.pcap.gz",
+   "bytes": 43663,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143211.pcap.gz",
+   "bytes": 115882,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143216.pcap.gz",
+   "bytes": 2098195,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143221.pcap.gz",
+   "bytes": 119882,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143226.pcap.gz",
+   "bytes": 76376,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143231.pcap.gz",
+   "bytes": 121447,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143236.pcap.gz",
+   "bytes": 82887,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143241.pcap.gz",
+   "bytes": 104823,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143246.pcap.gz",
+   "bytes": 81880,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143251.pcap.gz",
+   "bytes": 112726,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143256.pcap.gz",
+   "bytes": 115900,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143301.pcap.gz",
+   "bytes": 79337,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143306.pcap.gz",
+   "bytes": 119024,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143311.pcap.gz",
+   "bytes": 60818,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143316.pcap.gz",
+   "bytes": 115765,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143321.pcap.gz",
+   "bytes": 81444,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143326.pcap.gz",
+   "bytes": 113351,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143331.pcap.gz",
+   "bytes": 96216,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143336.pcap.gz",
+   "bytes": 76021,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143341.pcap.gz",
+   "bytes": 125549,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143346.pcap.gz",
+   "bytes": 71207,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143351.pcap.gz",
+   "bytes": 106123,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143356.pcap.gz",
+   "bytes": 61202,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143401.pcap.gz",
+   "bytes": 151068,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143406.pcap.gz",
+   "bytes": 115220,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143411.pcap.gz",
+   "bytes": 78325,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143416.pcap.gz",
+   "bytes": 111427,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143421.pcap.gz",
+   "bytes": 81208,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143426.pcap.gz",
+   "bytes": 115884,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143431.pcap.gz",
+   "bytes": 83422,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143436.pcap.gz",
+   "bytes": 85469,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143441.pcap.gz",
+   "bytes": 104183,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143446.pcap.gz",
+   "bytes": 103470,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143451.pcap.gz",
+   "bytes": 97091,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143456.pcap.gz",
+   "bytes": 85706,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143501.pcap.gz",
+   "bytes": 147382,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143506.pcap.gz",
+   "bytes": 90850,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143511.pcap.gz",
+   "bytes": 101156,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143516.pcap.gz",
+   "bytes": 91183,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143521.pcap.gz",
+   "bytes": 112489,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143526.pcap.gz",
+   "bytes": 77913,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143532.pcap.gz",
+   "bytes": 112599,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143537.pcap.gz",
+   "bytes": 87029,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143542.pcap.gz",
+   "bytes": 98459,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143547.pcap.gz",
+   "bytes": 97182,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143552.pcap.gz",
+   "bytes": 73403,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143557.pcap.gz",
+   "bytes": 115754,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143602.pcap.gz",
+   "bytes": 68945,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143607.pcap.gz",
+   "bytes": 118778,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143612.pcap.gz",
+   "bytes": 101745,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143617.pcap.gz",
+   "bytes": 244993,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143622.pcap.gz",
+   "bytes": 99581,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143627.pcap.gz",
+   "bytes": 103644,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143632.pcap.gz",
+   "bytes": 99043,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143637.pcap.gz",
+   "bytes": 86226,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143642.pcap.gz",
+   "bytes": 119406,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143647.pcap.gz",
+   "bytes": 89255,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143652.pcap.gz",
+   "bytes": 131412,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143657.pcap.gz",
+   "bytes": 70758,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143702.pcap.gz",
+   "bytes": 114597,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143707.pcap.gz",
+   "bytes": 99790,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143712.pcap.gz",
+   "bytes": 90132,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143717.pcap.gz",
+   "bytes": 111010,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143722.pcap.gz",
+   "bytes": 79103,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143727.pcap.gz",
+   "bytes": 97438,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143732.pcap.gz",
+   "bytes": 81531,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143737.pcap.gz",
+   "bytes": 153027,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143742.pcap.gz",
+   "bytes": 94435,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143747.pcap.gz",
+   "bytes": 97304,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143752.pcap.gz",
+   "bytes": 99082,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143757.pcap.gz",
+   "bytes": 89032,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143802.pcap.gz",
+   "bytes": 97700,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143807.pcap.gz",
+   "bytes": 80381,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143812.pcap.gz",
+   "bytes": 107287,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143817.pcap.gz",
+   "bytes": 76825,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143822.pcap.gz",
+   "bytes": 116226,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143827.pcap.gz",
+   "bytes": 69161,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143832.pcap.gz",
+   "bytes": 108246,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143837.pcap.gz",
+   "bytes": 105220,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143842.pcap.gz",
+   "bytes": 103323,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143847.pcap.gz",
+   "bytes": 75975,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143852.pcap.gz",
+   "bytes": 103358,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143857.pcap.gz",
+   "bytes": 84136,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143902.pcap.gz",
+   "bytes": 73341,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143907.pcap.gz",
+   "bytes": 185233,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143912.pcap.gz",
+   "bytes": 125152,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143917.pcap.gz",
+   "bytes": 82235,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143922.pcap.gz",
+   "bytes": 118342,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143927.pcap.gz",
+   "bytes": 72507,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143932.pcap.gz",
+   "bytes": 99192,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143937.pcap.gz",
+   "bytes": 112041,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143942.pcap.gz",
+   "bytes": 90988,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143947.pcap.gz",
+   "bytes": 75470,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143952.pcap.gz",
+   "bytes": 92559,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126143957.pcap.gz",
+   "bytes": 115217,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144002.pcap.gz",
+   "bytes": 78789,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144007.pcap.gz",
+   "bytes": 110900,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144012.pcap.gz",
+   "bytes": 115288,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144017.pcap.gz",
+   "bytes": 112737,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144022.pcap.gz",
+   "bytes": 123361,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144028.pcap.gz",
+   "bytes": 100322,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144033.pcap.gz",
+   "bytes": 75508,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144038.pcap.gz",
+   "bytes": 155265,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144043.pcap.gz",
+   "bytes": 78934,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144048.pcap.gz",
+   "bytes": 95524,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144053.pcap.gz",
+   "bytes": 93194,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144058.pcap.gz",
+   "bytes": 81122,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144103.pcap.gz",
+   "bytes": 114437,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144108.pcap.gz",
+   "bytes": 49758,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144113.pcap.gz",
+   "bytes": 128650,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144118.pcap.gz",
+   "bytes": 76415,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144123.pcap.gz",
+   "bytes": 128443,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144128.pcap.gz",
+   "bytes": 73142,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144133.pcap.gz",
+   "bytes": 97280,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144138.pcap.gz",
+   "bytes": 89733,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144143.pcap.gz",
+   "bytes": 95634,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144148.pcap.gz",
+   "bytes": 86236,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144153.pcap.gz",
+   "bytes": 75545,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144158.pcap.gz",
+   "bytes": 117438,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144203.pcap.gz",
+   "bytes": 97611,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144208.pcap.gz",
+   "bytes": 98608,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144213.pcap.gz",
+   "bytes": 101818,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144218.pcap.gz",
+   "bytes": 98426,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144223.pcap.gz",
+   "bytes": 78037,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144228.pcap.gz",
+   "bytes": 103570,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144233.pcap.gz",
+   "bytes": 76252,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144238.pcap.gz",
+   "bytes": 75360,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144243.pcap.gz",
+   "bytes": 108070,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144248.pcap.gz",
+   "bytes": 97732,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144253.pcap.gz",
+   "bytes": 101152,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144258.pcap.gz",
+   "bytes": 92511,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144303.pcap.gz",
+   "bytes": 78617,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144308.pcap.gz",
+   "bytes": 82754,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144313.pcap.gz",
+   "bytes": 84032,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144318.pcap.gz",
+   "bytes": 90817,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144323.pcap.gz",
+   "bytes": 80473,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144328.pcap.gz",
+   "bytes": 76343,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144333.pcap.gz",
+   "bytes": 99106,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144338.pcap.gz",
+   "bytes": 77520,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144343.pcap.gz",
+   "bytes": 89379,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144348.pcap.gz",
+   "bytes": 100928,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144353.pcap.gz",
+   "bytes": 73547,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144358.pcap.gz",
+   "bytes": 72957,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144403.pcap.gz",
+   "bytes": 72406,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144408.pcap.gz",
+   "bytes": 100037,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144413.pcap.gz",
+   "bytes": 90952,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144418.pcap.gz",
+   "bytes": 148023,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144423.pcap.gz",
+   "bytes": 66705,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144428.pcap.gz",
+   "bytes": 81563,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144433.pcap.gz",
+   "bytes": 99801,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144438.pcap.gz",
+   "bytes": 83921,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144444.pcap.gz",
+   "bytes": 82090,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144449.pcap.gz",
+   "bytes": 93849,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/pcap/live-20261126144454.pcap.gz",
+   "bytes": 81651,
+   "motivo": "binario o captura (PCAP/comprimido)"
+  },
+  {
+   "fichero": "capturas/V2-VD4-20261126T141333Z/eve/eve-V2-VD4-20261126T141333Z.json",
+   "bytes": 6223771,
+   "motivo": "EVE completo: metadatos de aplicación de terceros (DNS, SNI, URL)"
+  }
+ ],
+ "ip_experimento_conservadas": [
+  "10.10.10.20",
+  "10.10.10.30",
+  "10.10.20.21",
+  "10.10.20.22",
+  "10.10.20.23",
+  "10.10.20.24",
+  "10.10.20.25",
+  "10.10.20.26",
+  "10.10.30.10",
+  "10.10.60.11"
+ ],
+ "ip_ajenas_sustituidas": 136,
+ "mac_sustituidas": 1,
+ "regla": "- las IP del experimento se conservan: las de las transacciones del generador más las --permitida;\n  - cualquier otra IPv4 (terceros, NTP público…) se sustituye de forma consistente por una dirección\n    de documentación (198.51.100.0/24, luego 203.0.113.0/24), así que los recuentos y las reglas por\n    IP siguen dando lo mismo;\n  - las MAC se sustituyen por 02:00:00:00:xx:yy, de forma consistente."
+}
