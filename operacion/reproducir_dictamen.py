@@ -19,12 +19,15 @@ estado_global.py y dictamen_casos.py, y compara con la referencia:
 Una ejecución esperada ausente, un fichero de entrada o de referencia ausente, un programa que falla
 o cualquier diferencia => NO SATISFACTORIO y rc 1. No escribe en el repositorio.
 
-Complemento (--complemento, por omisión evidencias/bloque1/suricata-r5): revisión 5. Añade, por
+Complementos (--complemento, repetible; por omisión evidencias/bloque1/suricata-r5 y suricata-r6). r5: Añade, por
 ejecución, los eventos stats originales de Suricata (capturas/<ID>/eve/suricata-stats-<ID>.jsonl, que
 el EVE filtrado de r4 no lleva) y la referencia del laboratorio recalculada con el código que mide
 kernel_drops; esa referencia sustituye a la de r4. Se compara además el componente de Suricata de C9
 (estado, eventos, Δ kernel_drops, kernel_packets, uptime, primero y último) y que cada lectura
 de supervision.jsonl sea igual al último evento stats anterior de la EVE.
+r6: muestras stats de la EVE dedicada completa que acotan el periodo de captura
+(pruebas/<ID>/registros/suricata-stats-ventana-<ID>.jsonl) y la referencia recalculada con el código
+que exige esa cobertura; la referencia es la del último complemento que la tenga.
 --sin-complemento reproduce la referencia de r4, válida solo para el código hasta 57b2293.
 """
 from __future__ import annotations
@@ -76,7 +79,8 @@ def comparar(nombre, ref, nuevo, difs):
                                                                  json.dumps(nuevo, ensure_ascii=False)[:300]))
 
 
-CAMPOS_SURICATA = ("estado", "eventos", "delta_kernel_drops", "delta_kernel_packets", "kernel_drops",
+CAMPOS_SURICATA = ("estado", "motivo", "eventos", "eventos_usados", "muestra_antes_s", "muestra_despues_s",
+                   "hueco_maximo_s", "delta_kernel_drops", "delta_kernel_packets", "kernel_drops",
                    "kernel_packets", "uptime", "primero", "ultimo")
 
 
@@ -93,8 +97,8 @@ def supervision_frente_a_stats(P: Path, K: Path, ID: str, difs: list) -> dict:
     anterior a esa lectura (procedencia del valor). Lectura sin evento previo o distinta = diferencia."""
     sys.path.insert(0, str(REPO / "operacion"))
     import suricata_stats as ss
-    ev = [(ss.epoch(e["timestamp"]), ss.lectura(e)["kernel_drops"])
-          for e in ss.eventos_stats(sorted((K / "eve").glob("suricata-stats-*.jsonl")))]
+    fuentes = sorted((K / "eve").glob("suricata-stats-*.jsonl")) + sorted((P / "registros").glob("suricata-stats-ventana*.jsonl"))
+    ev = sorted({(ss.epoch(e["timestamp"]), ss.lectura(e)["kernel_drops"]) for e in ss.eventos_stats(fuentes)})
     sup = [json.loads(x) for x in (P / "registros" / "supervision.jsonl").read_text(encoding="utf-8").splitlines() if x.strip()]
     n = 0
     for s in sup:
@@ -108,10 +112,15 @@ def supervision_frente_a_stats(P: Path, K: Path, ID: str, difs: list) -> dict:
     return {"lecturas": len(sup), "iguales_a_la_eve": n}
 
 
-def una(E: Path, ID: str, C: Path | None = None):
+def una(E: Path, ID: str, Cs=()):
+    """Cs: carpetas de complemento de esta ejecución, en orden; cada una superpone sus capturas/<ID>
+    y pruebas/<ID> a la copia temporal, y la referencia es la del último complemento que la tenga."""
     res = {"ejecucion": ID, "diferencias": [], "ausentes": []}
-    R = C / "referencia" if C is not None else E / "referencia"
-    extra = [C / "capturas" / ID / "eve" / ("suricata-stats-%s.jsonl" % ID)] if C is not None else []
+    Cs = [Path(c) for c in Cs]
+    con_ref = [c for c in Cs if (c / "referencia").is_dir()]
+    R = con_ref[-1] / "referencia" if con_ref else E / "referencia"
+    res["referencia"] = str(R)
+    extra = list(Cs) + [c / "capturas" / ID / "eve" / ("suricata-stats-%s.jsonl" % ID) for c in Cs if (c / "capturas").is_dir()]
     for f in [E / "pruebas" / ID, E / "capturas" / ID, R / "resultado-global.json",
               R / "criterios-revisados.json", R / "dictamen-casos.json"] + extra:
         if not f.exists():
@@ -124,10 +133,14 @@ def una(E: Path, ID: str, C: Path | None = None):
         t = Path(t)
         P, K = t / ID, E / "capturas" / ID
         shutil.copytree(E / "pruebas" / ID, P)
-        if C is not None:
+        if Cs:
             K = t / "capturas" / ID
             shutil.copytree(E / "capturas" / ID, K)
-            shutil.copytree(C / "capturas" / ID, K, dirs_exist_ok=True)
+            for C in Cs:
+                if (C / "capturas" / ID).is_dir():
+                    shutil.copytree(C / "capturas" / ID, K, dirs_exist_ok=True)
+                if (C / "pruebas" / ID).is_dir():
+                    shutil.copytree(C / "pruebas" / ID, P, dirs_exist_ok=True)
         pasos = [
             ("revisar_criterios", [str(op / "revisar_criterios.py"), "--pruebas", str(P), "--capturas", str(K)]),
             ("estado_global", [str(op / "estado_global.py"), ID, "--pruebas", str(P), "--ejecucion-dir",
@@ -147,7 +160,7 @@ def una(E: Path, ID: str, C: Path | None = None):
             comparar("dictamen", resumen_dictamen(dec(R / "resultado-global.json")), resumen_dictamen(g), res["diferencias"])
             comparar("criterios", resumen_criterios(dec(R / "criterios-revisados.json")),
                      resumen_criterios(dec(P / "criterios-revisados.json")), res["diferencias"])
-            if C is not None:
+            if Cs:
                 ref_s, nuevo_s = suricata_c9(dec(R / "criterios-revisados.json")), suricata_c9(dec(P / "criterios-revisados.json"))
                 if ref_s is None:
                     res["diferencias"].append("la referencia r5 no tiene el componente de Suricata en C9")
@@ -171,14 +184,18 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("dir", nargs="?", type=Path, default=REPO / "evidencias" / "bloque1" / "entradas-r4")
     ap.add_argument("--salida", type=Path)
-    ap.add_argument("--complemento", type=Path, default=REPO / "evidencias" / "bloque1" / "suricata-r5")
+    ap.add_argument("--complemento", type=Path, action="append",
+                    help="carpeta de complemento (se puede repetir, en orden); por omisión suricata-r5 y suricata-r6")
     ap.add_argument("--sin-complemento", action="store_true")
     a = ap.parse_args(argv)
-    informe = {"version": 3, "complemento": None if a.sin_complemento else str(a.complemento), "comprobacion": "dictamen desde resultados intermedios", "ejecuciones": []}
+    if a.complemento is None:
+        a.complemento = [REPO / "evidencias" / "bloque1" / "suricata-r5", REPO / "evidencias" / "bloque1" / "suricata-r6"]
+    informe = {"version": 4, "complementos": [] if a.sin_complemento else [str(c) for c in a.complemento],
+               "comprobacion": "dictamen desde resultados intermedios", "ejecuciones": []}
     for ID in ESPERADAS:
         E = a.dir / ID
-        C = None if a.sin_complemento else a.complemento / ID
-        r = una(E, ID, C) if E.is_dir() else {"ejecucion": ID, "satisfactorio": False, "ausentes": [str(E)], "diferencias": []}
+        Cs = [] if a.sin_complemento else [c / ID for c in a.complemento]
+        r = una(E, ID, Cs) if E.is_dir() else {"ejecucion": ID, "satisfactorio": False, "ausentes": [str(E)], "diferencias": []}
         informe["ejecuciones"].append(r)
         print(ID, "SATISFACTORIO" if r["satisfactorio"] else "NO SATISFACTORIO", r.get("dictamen"), r.get("motivos"),
               r.get("criterios"), r.get("casos"), r.get("suricata"), r.get("supervision_frente_a_stats"))

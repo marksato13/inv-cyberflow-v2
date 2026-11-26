@@ -28,7 +28,21 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import estado_global as eg  # noqa: E402
 
 
+def comprobar_salida(origen: Path, salida: Path) -> None:
+    """Rechaza, con rutas resueltas y ANTES de copiar nada, una salida igual al origen o dentro de él:
+    copiar `origen` en una carpeta suya hace que rglob recorra lo que se va copiando y la copia se
+    anida sin fin (reanálisis r5, 26-nov: --salida dentro de --pruebas). También una salida que ya
+    existe, para no mezclar casos con una ejecución anterior."""
+    o, s = origen.resolve(), salida.resolve()
+    if s == o or o in s.parents:
+        raise SystemExit("la salida %s está dentro de las pruebas %s (o es la misma carpeta): se "
+                         "copiaría a sí misma" % (s, o))
+    if s.exists():
+        raise SystemExit("la carpeta de salida ya existe: %s" % s)
+
+
 def copiar(origen: Path, destino: Path):
+    comprobar_salida(origen, destino)
     for f in origen.rglob("*"):
         # .csv: el dictamen exige entradas_if.csv y ventanas_meta.csv como evidencia del análisis
         if f.is_file() and f.suffix in (".json", ".jsonl", ".csv") and f.stat().st_size < 200_000_000:
@@ -84,8 +98,7 @@ def main(argv=None) -> int:
     ap.add_argument("--capturas", required=True, type=Path)
     ap.add_argument("--salida", required=True, type=Path)
     a = ap.parse_args(argv)
-    if a.salida.exists():
-        raise SystemExit("la carpeta de salida ya existe: %s" % a.salida)
+    comprobar_salida(a.pruebas, a.salida)
     filas = []
     original = (eg.leer(a.pruebas / "resultado-global.json") or {}).get("global")
     for caso in CASOS:

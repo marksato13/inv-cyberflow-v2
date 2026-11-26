@@ -247,7 +247,7 @@ se corrige y se registra el intento fallido. Ningún criterio mira resultados de
 | C6 | Conciliación con el registro independiente | 0 `fallo_imprevisto` y 0 `incompleta_no_verificable` entre cliente y srv-dmz/DC1 | `conciliacion/` |
 | C7 | Cobertura de la captura | Fases: conexión, petición y respuesta vistas en el 100 % de lo que aplica; bytes de respuesta vistos / bytes TCP recibidos ≥ 95 % **en el total, en cada acción comparable y en cada perfil**; 0 `no verificable` | `cobertura/` |
 | C8 | Archivado | Manifiesto del archivador `completa`: 0 huecos PCAP, 0 huecos EVE, 0 líneas corruptas | `capturas/<ID>/manifiesto.json` |
-| C9 | Pérdidas en toda la cadena | Δ output drops de Gi2/0/19 y de los orígenes, Δ`rx_missed_errors`/softnet y descartes de tcpdump/Suricata registrados antes y después. Se acepta Δdrops = 0; si no, se cuantifica y C7 decide | `contadores-lab-*.txt` |
+| C9 | Pérdidas en toda la cadena | Δ output drops de Gi2/0/19 y de los orígenes, Δ`rx_missed_errors`/softnet y descartes de tcpdump registrados antes y después: se acepta Δ = 0; si no, se cuantifica y C7 decide, porque C7 mide en el PCAP del anillo si esas pérdidas tocaron al tráfico experimental. **Suricata** (`capture.kernel_drops`, eventos `stats` de la EVE dedicada): el periodo del archivador debe quedar **acotado** por una muestra en o antes del inicio y otra en o después del fin, con huecos ≤ 16 s y `uptime` continuo; si no, falta evidencia (nunca 0). Un Δ > 0 o un reinicio es **fallo**: C7 no lo decide, porque no mide lo que Suricata procesó (revisión 6) | `contadores-lab-*.txt`, `capturas/<ID>/eve`, `registros/suricata-stats-ventana-<ID>.jsonl` |
 | C10 | Relojes | NTP sincronizado en los cuatro equipos al principio y al final; \|desfase aparente\| mediano ≤ 5 ms | `relojes-*`, `cobertura/` |
 | C11 | Extracción | `extraer_v2` y `verificar_v2` con rc 0; verificación 40/40 sin diferencias (historia del motor 230 s); inventario con todas las IP y su regla; constantes justificadas; tardías descartadas = 0 | `extraccion/` |
 | C11b | Trazabilidad de ventanas (añadido a las 23:05 UTC, durante el piloto y antes de cerrarlo, a petición de Mark) | `trazabilidad_ok`: cada ventana con ejecución, entidad, perfil, cierre, bloque, partición, fase, PCAP/EVE, cobertura, conciliación y exclusión; 1:1 con `entradas_if.csv`, que tiene exactamente las 28 columnas | `extraccion/trazabilidad.json` |
@@ -290,7 +290,7 @@ contadores; una subida invalida el intervalo entre muestras. Cada registro de
 | PARADA | Gi2/0/19 con protocolo caído o distinto de 1000Mb/s Full | Parar generador |
 | PARADA | Libre en Sensor1 menor que 4 GB | Parar generador |
 | INVALIDACIÓN | Aumentan `output drops` de Gi2/0/19 | `perdida_antes_sensor`; continuar |
-| INVALIDACIÓN | Aumentan `capture.kernel_drops` en la EVE dedicada o los huecos EVE/PCAP del archivador | `perdida_en_sensor`; continuar |
+| INVALIDACIÓN | Aumentan `capture.kernel_drops` en la EVE dedicada, Suricata se reinicia (`reinicio_suricata`), o aumentan los huecos EVE/PCAP del archivador. Una lectura de stats ausente, fallida u obsoleta (más de 20 s) no es «0»: deja la supervisión `sin_datos` | `perdida_en_sensor`; continuar. Toda invalidación da `supervision: con_invalidaciones` y el dictamen `no_aprobada`. Lo que ocurra tras la última supervisión periódica lo detecta C9, que cubre hasta la muestra posterior al fin |
 | INVALIDACIÓN | Desfase de Sensor1 o Clientes frente al bastión mayor que 1 s | `desfase_reloj`; continuar |
 
 `resultado-global.json` separa generador, archivador, vigía, supervisión,

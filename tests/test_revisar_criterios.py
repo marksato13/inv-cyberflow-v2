@@ -61,10 +61,13 @@ class Revisar(unittest.TestCase):
         (E / "exclusion-v1.json").write_text(json.dumps({"cubierto": True}))
         eve = Path(t.name) / "capturas" / "V2-X" / "eve"
         eve.mkdir(parents=True)
+        # muestras cada 8 s que ACOTAN el periodo del archivador (09:00:02–09:00:14)
         (eve / "eve-V2-X.json").write_text("".join(json.dumps(
-            {"timestamp": "2026-11-26T09:00:0%d.0+0000" % i, "event_type": "stats",
-             "stats": {"uptime": 100 + i, "capture": {"kernel_packets": 10 + i, "kernel_drops": 0}}}) + "\n"
-            for i in range(2)))
+            {"timestamp": "2026-11-26T09:00:%02d.0+0000" % (8 * i), "event_type": "stats",
+             "stats": {"uptime": 100 + 8 * i, "capture": {"kernel_packets": 10 + i, "kernel_drops": 0}}}) + "\n"
+            for i in range(3)))
+        (eve.parent / "manifiesto.json").write_text(json.dumps(
+            {"inicio": "2026-11-26T09:00:02Z", "fin": "2026-11-26T09:00:14Z"}))
         return P
 
     def test_c9_delta_de_drops(self):

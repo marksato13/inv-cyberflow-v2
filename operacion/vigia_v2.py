@@ -8,8 +8,12 @@ import json
 import re
 import shlex
 import subprocess
+import sys
 import time
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import suricata_stats  # noqa: E402
 
 CONDICIONES = {
     "PARADA": ("archivador_no_ok", "latido_viejo", "estado_inaccesible", "enlace_invalido", "espacio"),
@@ -36,7 +40,8 @@ def epoch(utc: str) -> float:
 def leer_stats(raw: str) -> dict:
     """Último evento stats de la EVE dedicada. Distingue (nunca convierte un dato ausente en 0):
     presente (kernel_drops leído, puede ser 0), ausente (evento stats sin capture.kernel_drops) y
-    sin_stats (ningún evento stats en lo leído). La lectura fallida la registra quien llama."""
+    sin_stats (ningún evento stats en lo leído). La lectura fallida y la obsoleta (muestra más vieja
+    que suricata_stats.ANTIGUEDAD_MAXIMA_S) las registra supervision()."""
     for linea in reversed(raw.splitlines()):
         try:
             reg = json.loads(linea)
@@ -152,6 +157,18 @@ class Vigia:
             reg["eve_error"] = str(e)
             reg["kernel_drops_estado"] = "lectura_fallida"
             reg["kernel_drops"] = None
+        # Antigüedad: la última muestra debe tener como mucho ANTIGUEDAD_MAXIMA_S (2 intervalos de
+        # stats + latencia). Más vieja = la salida de stats se detuvo: el valor no describe el
+        # presente y no se usa (queda en kernel_drops_leido), nunca se toma como «sin descartes».
+        if reg.get("kernel_drops_estado") == "presente" and reg.get("stats_timestamp"):
+            try:
+                edad = ahora - suricata_stats.epoch(reg["stats_timestamp"])
+            except ValueError:
+                edad = None
+            reg["stats_antiguedad_s"] = None if edad is None else round(edad, 3)
+            if edad is None or edad > suricata_stats.ANTIGUEDAD_MAXIMA_S:
+                reg["kernel_drops_leido"] = reg["kernel_drops"]
+                reg["kernel_drops_estado"], reg["kernel_drops"] = "obsoleta", None
         # Reinicio de Suricata: uptime o kernel_packets retroceden y los contadores vuelven a 0. Se
         # invalida el tramo (pérdida no cuantificable) y la base de comparación pasa a la lectura
         # nueva: sin esto, descartes posteriores por debajo del valor previo quedarían ocultos.

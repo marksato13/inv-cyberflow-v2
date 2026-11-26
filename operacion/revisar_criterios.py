@@ -139,34 +139,56 @@ def perdida(que, a, b, c7_ok, fuente):
     return x
 
 
-def suricata(CAP, c7_ok):
-    """capture.kernel_drops de los eventos stats de la EVE dedicada (capturas/<ID>/eve/). La copia
-    publicada del EVE va filtrada y no los lleva; se publican aparte en suricata-stats-<ID>.jsonl,
-    que se lee igual. Un evento repetido en los dos se cuenta una vez."""
+def periodo_captura(CAP):
+    """[inicio, fin] del archivador (capturas/<ID>/manifiesto.json): el intervalo que C9 certifica."""
+    m = cargar(Path(CAP) / "manifiesto.json") or {}
+    try:
+        return suricata_stats.epoch(m["inicio"]), suricata_stats.epoch(m["fin"])
+    except (KeyError, TypeError, ValueError):
+        return None, None
+
+
+def suricata(CAP, c7_ok=None, P=None):
+    """capture.kernel_drops de Suricata en el periodo de captura, desde los eventos stats de:
+      - capturas/<ID>/eve/*.json: el recorte del archivador (muestras interiores);
+      - capturas/<ID>/eve/suricata-stats-*.jsonl: los mismos stats publicados aparte (el EVE
+        publicado va filtrado y no los lleva);
+      - pruebas/<ID>/registros/suricata-stats-ventana*.jsonl: la EVE dedicada COMPLETA en
+        [inicio − 30 s, fin + 30 s], que aporta las muestras que ACOTAN el periodo (cerrar_v2.sh).
+    Un evento repetido se cuenta una vez.
+
+    Conciliación (revisión 6, PROTOCOLO §10): un Δ > 0 es pérdida en el procesamiento de Suricata y
+    es FALLO; C7 NO lo decide. C7 (cobertura) se mide en el PCAP del anillo (tcpdump), con bytes ≥ 95 %,
+    y no dice nada de los paquetes que Suricata dejó de procesar, que son los que forman el EVE que usa
+    el extractor (C11). Es lo mismo que hace el vigía: un aumento invalida la supervisión
+    (perdida_en_sensor) y el dictamen sale no_aprobada. c7_ok se conserva solo como información."""
     rutas = sorted(glob.glob(str(Path(CAP) / "eve" / "*.json"))) + \
         sorted(glob.glob(str(Path(CAP) / "eve" / "suricata-stats-*.jsonl")))
+    if P is not None:
+        rutas += sorted(glob.glob(str(Path(P) / "registros" / "suricata-stats-ventana*.jsonl")))
     vistos, ev = set(), []
     for e in suricata_stats.eventos_stats(rutas):
         k = (e.get("timestamp"), (e.get("stats") or {}).get("uptime"))
         if k not in vistos:
             vistos.add(k)
             ev.append(e)
-    r = suricata_stats.evaluar(ev)
+    desde, hasta = periodo_captura(CAP)
+    r = suricata_stats.evaluar(ev, desde, hasta)
     que = "Suricata capture.kernel_drops (eventos stats de la EVE dedicada)"
-    fuente = "capturas/<ID>/eve/ (stats)"
+    fuente = "capturas/<ID>/eve (stats), registros/suricata-stats-ventana, manifiesto.json"
     if r["estado"] == "presente":
-        x = c(que, True if r["delta_kernel_drops"] == 0 else c7_ok, r, fuente)
+        x = c(que, r["delta_kernel_drops"] == 0, r, fuente)
         if r["delta_kernel_drops"]:
-            x["nota"] = "Δ %d cuantificado; decide C7 (%s)" % (r["delta_kernel_drops"], c7_ok)
+            x["nota"] = ("Δ %d descartes de Suricata en el periodo: fallo (no lo decide C7, que mide el PCAP; "
+                         "C7 = %s)" % (r["delta_kernel_drops"], c7_ok))
         return x
     if r["estado"] == "reinicio":
         x = c(que, False, r, fuente)
         x["nota"] = "Suricata se reinició durante la captura: pérdida no cuantificable"
         return x
-    x = c(que, None, r, fuente)       # ausente o sin eventos: falta evidencia, nunca 0
-    x["nota"] = "contador %s: falta evidencia" % r["estado"]
+    x = c(que, None, r, fuente)       # ausente, sin eventos o insuficiente: falta evidencia, nunca 0
+    x["nota"] = "contador %s%s: falta evidencia" % (r["estado"], (" (%s)" % r["motivo"]) if r.get("motivo") else "")
     return x
-
 
 def c9(P, E, c7_ok=None, CAP=None):
     ini, fin = texto(E / "contadores-lab-inicio.txt"), texto(E / "contadores-lab-fin.txt")
@@ -198,7 +220,7 @@ def c9(P, E, c7_ok=None, CAP=None):
     ext = cargar(E / "extremo-captura.json") or {}
     comp.append(perdida("tcpdump de srv-dmz: descartados por el núcleo", 0, ext.get("descartados_nucleo"),
                         c7_ok, "extremo-captura.json"))
-    comp.append(suricata(CAP if CAP is not None else Path(P).parent.parent / "capturas" / Path(P).name, c7_ok))
+    comp.append(suricata(CAP if CAP is not None else Path(P).parent.parent / "capturas" / Path(P).name, c7_ok, P))
     return criterio(comp, prolongada=["contadores a lo largo de 49 h (supervisión prolongada, bloque 4)"])
 
 

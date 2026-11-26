@@ -226,6 +226,14 @@ scp -q -o BatchMode=yes "$E/analisis-salida.txt" "$E/cierre.jsonl" sensor1:"$P/r
 
 # Dictamen de criterios y resultado global, también para ejecuciones incompletas.
 ssh -n -o BatchMode=yes sensor1 "python3 $S1/codigo/operacion/evaluar_piloto.py --pruebas $P --capturas $S1/capturas/$ID" > "$E/criterios-salida.txt" 2>&1 || true
+# Suricata (C9): muestras stats de la EVE dedicada COMPLETA que ACOTAN el periodo del archivador; el
+# recorte de capturas/<ID>/eve solo tiene muestras interiores. Se escribe cada 8 s: si aún no hay una
+# posterior al fin, se reintenta (rc 3 = insuficiente). Lectura local en Sensor1: no cruza la red.
+for intento in 1 2 3; do
+  ssh -n -o BatchMode=yes sensor1 "python3 $S1/codigo/operacion/suricata_stats.py ventana /var/log/suricata/v2/eve.json --manifiesto $S1/capturas/$ID/manifiesto.json --salida $P/registros/suricata-stats-ventana-$ID.jsonl" > "$E/suricata-stats-ventana.json" 2>&1 && break
+  sleep 10
+done
+log suricata_stats_ventana "$(head -c 400 "$E/suricata-stats-ventana.json" | tr '\n' ' ')"
 # C7 y C9–C13 (que evaluar_piloto deja en revisión manual), revisados con evidencia; lo que requiere
 # duración prolongada queda aparte (criterios-revisados.json).
 ssh -n -o BatchMode=yes sensor1 "python3 $S1/codigo/operacion/revisar_criterios.py --pruebas $P --capturas $S1/capturas/$ID" >> "$E/criterios-salida.txt" 2>&1 || true
