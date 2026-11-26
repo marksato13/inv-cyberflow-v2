@@ -80,6 +80,20 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
         leer(pruebas / "calidad-extremo.json"), leer(e / "extremo-captura.json"),
         (e / ("extremo-%s.pcap.danado" % identificador)).exists())
     estados["calidad_sonda"] = calidad_sonda(leer(pruebas / "calidad-sonda.json"))
+    # Desde la 3.ª revisión (27-nov) el lanzador declara la vigilancia de las referencias y la
+    # coordinación de copias; si las declara, su evidencia es obligatoria. Las ejecuciones
+    # anteriores no las tienen y se evalúan como antes (no se les inventa un requisito).
+    lz = leer(e / "lanzamiento.json") or {}
+    if "vigilancia_referencias" in lz:
+        ref = leer(e / "calidad-referencias.json")
+        estados["referencias"] = ("sin_datos" if not isinstance(ref, dict) else
+                                  "completo" if ref.get("estado") == "completo" else
+                                  "referencia_incompleta" if ref.get("estado") == "incompleta" else "sin_datos")
+    if "coordinacion_transferencias" in lz:
+        tr = leer(e / "transferencias.json")
+        estados["transferencias"] = ("sin_datos" if not isinstance(tr, dict) or not tr.get("registro_existe") else
+                                     tr.get("estado") if tr.get("estado") in ("sin_copias", "copias_durante_captura")
+                                     else "sin_datos")
     evidencias = [
         pruebas / "extraccion" / "resumen.json",
         pruebas / "extraccion" / "verificacion.json",
@@ -116,6 +130,21 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
         "no_cubre" if excl and excl.get("cubierto") is False else "desconocido")
     criterios = leer(pruebas / "criterios.json")
     claves = [f"C{i}" for i in range(1, 14)] + ["C11b"]
+    # C7 y C9–C13 los deja evaluar_piloto en revisión manual (ok None); revisar_criterios.py los
+    # revisa con evidencia. Lo que requiere duración prolongada se conserva APARTE: en una
+    # verificación corta no cuenta; en una ejecución de >= 24 h sigue pendiente (falta).
+    revisados = (leer(pruebas / "criterios-revisados.json") or {}).get("criterios") or {}
+    prolongada, otra = {}, {}
+    if criterios:
+        criterios = dict(criterios)
+        for k, v in revisados.items():
+            if isinstance(criterios.get(k), dict) and criterios[k].get("ok") is None and isinstance(v, dict):
+                criterios[k] = dict(criterios[k], ok=v.get("ok"), revisado=True)
+            if v.get("requiere_duracion_prolongada"):
+                prolongada[k] = v["requiere_duracion_prolongada"]
+            if v.get("pendiente_otra_comprobacion"):
+                otra[k] = v["pendiente_otra_comprobacion"]
+    larga = (lz.get("duracion_s") or 0) >= 86400
     motivos = []
     fallos = {
         "generador": ("incompleta",),
@@ -132,9 +161,11 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
         # La sonda dentro del periodo útil es un incidente comprobado: con el margen planificado
         # (v2ctl.MARGEN_SONDA_S) no debe ocurrir; si ocurre, la ejecución no se aprueba.
         "calidad_sonda": ("contaminacion",),
+        # Una copia de gestión dentro del intervalo de captura incumple la coordinación (VD3).
+        "transferencias": ("copias_durante_captura",),
     }
     for nombre, valores in fallos.items():
-        if estados[nombre] in valores:
+        if estados.get(nombre) in valores:
             motivos.append("%s:%s" % (nombre, estados[nombre]))
     fallidos = [p for p in pasos if rcs.get(p) not in (None, "0")]
     if fallidos:
@@ -155,7 +186,7 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
         motivos.append("prueba_parada:%s" % prueba[-1].get("provocado", "desconocido"))
     faltantes = [k for k, v in estados.items() if v in
                  ("ausente", "sin_datos", "desconocido", "indeterminado",
-                  "sin_eventos", "falta_pcap_dc1", "sin_transacciones")]
+                  "sin_eventos", "falta_pcap_dc1", "sin_transacciones", "referencia_incompleta")]
     if estados["analisis"] == "incompleto":
         faltantes.append("analisis")
     if not criterios:
@@ -166,12 +197,20 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
                       or criterios[k].get("ok") is not True and criterios[k].get("ok") is not False]
     if not (e / "lanzamiento.json").exists():
         faltantes.append("lanzamiento")
+    if larga:
+        faltantes += ["prolongada:%s" % k for k in sorted(prolongada)]
     motivos.extend("falta:%s" % k for k in faltantes)
     global_estado = "no_aprobada" if any(not m.startswith("falta:") for m in motivos) else (
         "indeterminada" if any(m.startswith("falta:") for m in motivos) else "aprobada")
     return {"ejecucion": identificador, **estados, "global": global_estado,
             "dictamen": DICTAMEN[global_estado], "codigo_salida": CODIGO[global_estado],
+            "alcance": ("ejecucion_prolongada" if larga else
+                        "verificacion_corta: aprobada se refiere SOLO a los requisitos aplicables; "
+                        "las comprobaciones de duración prolongada siguen pendientes aparte"),
             "motivos": motivos, "pasos": rcs, "fuente_pasos": fuente_pasos,
+            "criterios_revisados": bool(revisados),
+            "pendientes_duracion_prolongada": prolongada,
+            "pendientes_otra_comprobacion": otra,
             "exclusiones": exclusiones(pruebas, invalidaciones)}
 
 

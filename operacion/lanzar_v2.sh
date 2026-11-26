@@ -32,11 +32,21 @@ SHA=$(sha256sum "$B/programas/$PROG" | cut -c1-64)
 T_ARCH=$(date +%s); TOPE_INICIAL=$((T_ARCH + 3600 + PREVIO_S + DUR + MARGEN_FIN_S + HOLGURA_S))
 log identificador "$ID programa=$PROG sha256=$SHA duracion=$DUR tope_inicial=$TOPE_INICIAL retraso_prueba=$RETRASO_PRUEBA_S"
 
+# 0. Coordinación de copias (VD3): candado de captura en el bastión. Ninguna copia de evidencia
+# (transferir.py) puede empezar mientras exista; y la captura no empieza hasta HOLGURA_S tras el
+# fin de la última copia registrada (el archivador recoge el anillo de los 30-35 s anteriores).
+# Lo quita cerrar_v2.sh cuando el archivador y las dos referencias están parados.
+python3 "$B/operacion/transferir.py" candado crear "$ID" \
+  || { log candado "no creado: captura en curso o copia sin terminar"; exit 1; }
+log candado "creado ($HOME/cyberflow-v2/CAPTURA_EN_CURSO)"
+
 deshacer() { log deshacer "$1"
   [ -f "$E/sondeo-span.pid" ] && kill -TERM "$(cat "$E/sondeo-span.pid")" 2>/dev/null || true
+  [ -f "$E/referencias.pid" ] && kill -TERM "$(cat "$E/referencias.pid")" 2>/dev/null || true
   $SSH dcadmin@10.10.10.20 "sudo -n systemctl stop cf-v2-dns-${ID,,}" 2>/dev/null || true
   $SSH srvdmz "sudo -n pkill -INT -f '[t]cpdump .* -w $EXT/$ID.pcap'" 2>/dev/null || true
   $SSH sensor1 "pkill -TERM -f '[a]rchivar_v2.py --ejecucion $ID'" 2>/dev/null || true
+  python3 "$B/operacion/transferir.py" candado quitar "$ID" >/dev/null 2>&1 || true
   exit 1; }
 
 # 1. V1 no aprende de esta ventana (respaldo del toml si hay que añadir la regla)
@@ -49,8 +59,8 @@ if ! bash "$B/operacion/preflight_lab.sh" "$T_ARCH" "$TOPE_INICIAL" "$GB" > "$E/
 log preflight ok
 
 # 3. Relojes de los servidores (Clientes y Sensor1 los registran sus propios programas)
-for h in srvdmz dcadmin@10.10.10.20; do
-  # relojes + carga y espacio de las referencias (srv-dmz y DC1), al principio y al final
+for h in srvdmz dcadmin@10.10.10.20 sensor1 clientes; do
+  # relojes + carga y espacio de las referencias (srv-dmz y DC1) y de Sensor1/Clientes (C10), al principio y al final
   $SSH "$h" 'date -u +%FT%T.%NZ; timedatectl show; (chronyc tracking 2>/dev/null || timedatectl timesync-status); echo "== carga"; cat /proc/loadavg; nproc; echo "== espacio"; df -B1 --output=target,avail / /var/log $HOME 2>/dev/null' > "$E/relojes-inicio-${h#*@}.txt" 2>&1 || true
 done
 log relojes "srvdmz y dc1"
@@ -115,6 +125,20 @@ r=$($SSH sensor1 "python3 $S1/codigo/operacion/exclusion_v1.py --desde $((T_ARCH
 log exclusion_v1_confirmada "$r"
 log archivador "ok confirmado=$T_CONF inicio=$INI tope=$TOPE"
 
+# 5c. Vigilancia de las referencias (srv-dmz y DC1): proceso vivo, progreso del fichero durante la
+# generación y espacio libre, cada 20 s. Con poco espacio para la captura de esa referencia
+# (SIGINT) y la declara incompleta; cerrar_v2.sh la para antes de parar las referencias.
+setsid nohup python3 "$B/operacion/vigilar_referencias.py" vigilar --ejecucion "$ID" \
+  --salida "$E/referencias.jsonl" --pid "$E/referencias.pid" \
+  --generador-desde "$INI" --generador-hasta "$FIN_GEN" --hasta-epoch $((TOPE + 900)) \
+  > "$E/referencias-salida.txt" 2>&1 < /dev/null &
+for i in $(seq 1 20); do
+  grep -q '"equipo": "srvdmz"' "$E/referencias.jsonl" 2>/dev/null && grep -q '"equipo": "dc1"' "$E/referencias.jsonl" 2>/dev/null && break; sleep 2
+done
+grep -q '"equipo": "dc1"' "$E/referencias.jsonl" 2>/dev/null && grep -q '"equipo": "srvdmz"' "$E/referencias.jsonl" 2>/dev/null \
+  || deshacer "la vigilancia de las referencias no dio muestras de srv-dmz y DC1"
+log referencias "vigilancia pid $(cat "$E/referencias.pid" 2>/dev/null)"
+
 # 6. Captura previa sin tráfico V2 (>= 2 min) y generador
 while [ "$(date +%s)" -lt "$INI" ]; do sleep 5; done
 [ "$RETRASO_PRUEBA_S" -eq 0 ] || sleep "$RETRASO_PRUEBA_S"
@@ -145,6 +169,12 @@ json.dump({"ejecucion": i, "programa": p, "programa_sha256": sha, "codigo_versio
            "guardas_planificadas": {"margen_sonda_s": int(margen), "generador_no_antes_de_epoch": int(no_antes),
                                     "captura_previa_s": 150, "margen_fin_s": 120},
            "referencias": {"extremo_srvdmz_pcap": ext, "dns_dc1": "cf-v2-dns-" + i.lower()},
+           # Declarados = obligatorios en el dictamen (estado_global): sin su evidencia, indeterminada.
+           "vigilancia_referencias": {"registro": "referencias.jsonl", "cada_s": 20, "minimo_gb": 1.0,
+                                      "sin_progreso_s": 180, "sin_lectura_s": 90},
+           "coordinacion_transferencias": {"candado": "~/cyberflow-v2/CAPTURA_EN_CURSO",
+                                           "registro": "~/cyberflow-v2/transferencias.jsonl",
+                                           "holgura_s": 60, "margen_anillo_s": 40},
            "duracion_s": int(dur), "retraso_prueba_s": int(retraso),
            "dns_unidad": "cf-v2-dns-" + i.lower()}, open(e + "/lanzamiento.json", "w"), indent=1)
 PY

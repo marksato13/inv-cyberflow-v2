@@ -143,41 +143,64 @@ def decodificar(ts, d):
     return None
 
 
+def fila(t):
+    return dict(transaccion_id=t.get("transaccion_id"), ejecucion_id=t.get("ejecucion_id"),
+                jornada_id=t.get("jornada_id"), perfil=t.get("perfil"),
+                accion=t.get("accion"), protocolo=t.get("protocolo"),
+                origen_ip=t.get("origen_ip"), origen_puerto=t.get("origen_puerto"),
+                destino_ip=t.get("destino_ip"), destino_puerto=t.get("destino_puerto"),
+                inicio_utc=t["inicio_utc"], fin_utc=t["fin_utc"], conexion=False,
+                syn=False, syn_ack=False, rst=False, peticion=False, respuesta=False,
+                transferencia="no comparable", bytes_esperados=t.get("bytes_tcp_recibidos"),
+                bytes_tcp_enviados=t.get("bytes_tcp_enviados"),
+                bytes_aplicacion_recibidos=t.get("bytes_recibidos"),
+                bytes_vistos=0, fraccion=None, copias_espejo=0, retransmisiones=0, huecos=0,
+                desfase_aparente_s=None, estado="verificable", eve_tipos=[],
+                eve_flow_id=None, eve_http_codigo=None, eve_http_coincide=None,
+                eve_dns_rcode=None, eve_dns_coincide=None,
+                eve_tls_version=None, eve_tls_coincide=None,
+                conexion_n=t.get("conexion_n"), peticion_en_conexion=t.get("peticion_en_conexion"),
+                conexion_reutilizada=False, transacciones_en_conexion=1,
+                rango_respuesta=None, rango_peticion=None)
+
+
 def preparar(txs):
-    indice = defaultdict(list)
+    """Una CONEXIÓN agrupa las transacciones que comparten socket (HTTP persistente: misma
+    5-tupla y mismo `conexion_n`, con `persistente`); el resto, una transacción por conexión.
+    Los paquetes se asignan a la conexión por 5-tupla y tiempo, y los bytes de cada sentido se
+    reparten después entre sus transacciones por posición en el flujo TCP (§atribuir)."""
+    grupos = {}
     estados = []
     for t in txs:
-        r = dict(transaccion_id=t.get("transaccion_id"), ejecucion_id=t.get("ejecucion_id"),
-                 jornada_id=t.get("jornada_id"), perfil=t.get("perfil"),
-                 accion=t.get("accion"), protocolo=t.get("protocolo"),
-                 origen_ip=t.get("origen_ip"), origen_puerto=t.get("origen_puerto"),
-                 destino_ip=t.get("destino_ip"), destino_puerto=t.get("destino_puerto"),
-                 inicio_utc=t["inicio_utc"], fin_utc=t["fin_utc"], conexion=False,
-                 syn=False, syn_ack=False, rst=False, peticion=False, respuesta=False,
-                 transferencia="no comparable", bytes_esperados=t.get("bytes_tcp_recibidos"),
-                 bytes_tcp_enviados=t.get("bytes_tcp_enviados"),
-                 bytes_aplicacion_recibidos=t.get("bytes_recibidos"),
-                 bytes_vistos=0, fraccion=None, copias_espejo=0, retransmisiones=0, huecos=0,
-                 desfase_aparente_s=None, estado="verificable", eve_tipos=[],
-                 eve_flow_id=None, eve_http_codigo=None, eve_http_coincide=None,
-                 eve_dns_rcode=None, eve_dns_coincide=None,
-                 eve_tls_version=None, eve_tls_coincide=None)
-        e = dict(t=t, r=r, inicio=epoch(t["inicio_utc"]), fin=epoch(t["fin_utc"]),
-                 rangos=[[], []], por_vlan=[defaultdict(list), defaultdict(list)],
-                 control=[defaultdict(set), defaultdict(set)], segmentos=[set(), set()],
-                 isn=[None, None], primer=None, dns_id=None, icmp_id=None)
+        e = dict(t=t, r=fila(t), inicio=epoch(t["inicio_utc"]), fin=epoch(t["fin_utc"]))
         estados.append(e)
-        indice[clave(t)].append(e)
+        tcp = clave(t)[0] == "tcp"
+        if tcp and t.get("persistente") and t.get("conexion_n") is not None:
+            llave = (clave(t), t.get("perfil"), t.get("conexion_n"))
+        else:
+            llave = ("sola", id(e))
+        grupos.setdefault(llave, []).append(e)
+    indice = defaultdict(list)
+    conexiones = []
+    for grupo in grupos.values():
+        grupo.sort(key=lambda e: (e["t"].get("peticion_en_conexion") or 0, e["inicio"]))
+        c = dict(txs=grupo, inicio=min(e["inicio"] for e in grupo), fin=max(e["fin"] for e in grupo),
+                 rangos=[[], []], control=[set(), set()], segmentos=[set(), set()],
+                 isn=[None, None], datos=[[], []], ctrl_ts=[], primer=None, dns_id=None, icmp_id=None)
+        for e in grupo:
+            e["c"] = c
+        conexiones.append(c)
+        indice[clave(grupo[0]["t"])].append(c)
     for k, grupo in indice.items():
-        grupo.sort(key=lambda e: e["inicio"])
-        indice[k] = ([e["inicio"] for e in grupo],
-                     max(e["fin"] - e["inicio"] for e in grupo), grupo)
-    return estados, indice
+        grupo.sort(key=lambda c: c["inicio"])
+        indice[k] = ([c["inicio"] for c in grupo], max(c["fin"] - c["inicio"] for c in grupo), grupo)
+    return estados, conexiones, indice
 
 
 def asignar(p, indice):
     k = p["proto"], p["origen"], p["po"], p["destino"], p["pd"]
     inv = p["proto"], p["destino"], p["pd"], p["origen"], p["po"]
+
     def vecinos(llave):
         if llave not in indice:
             return ()
@@ -185,70 +208,149 @@ def asignar(p, indice):
         desde = bisect.bisect_left(inicios, p["ts"] - duracion - MARGEN)
         hasta = bisect.bisect_right(inicios, p["ts"] + MARGEN)
         return grupo[desde:hasta]
-    candidatos = [(e, 0) for e in vecinos(k)] + [(e, 1) for e in vecinos(inv)]
-    candidatos = [(e, s) for e, s in candidatos if e["inicio"] - MARGEN <= p["ts"] <= e["fin"] + MARGEN]
+    candidatos = [(c, 0) for c in vecinos(k)] + [(c, 1) for c in vecinos(inv)]
+    candidatos = [(c, s) for c, s in candidatos if c["inicio"] - MARGEN <= p["ts"] <= c["fin"] + MARGEN]
     return min(candidatos, key=lambda x: (abs(p["ts"] - x[0]["inicio"]), x[0]["inicio"])) if candidatos else None
 
 
-def observar(e, sentido, p):
-    r = e["r"]
+def observar(c, sentido, p):
     if sentido == 0:
-        e["primer"] = p["ts"] if e["primer"] is None else min(e["primer"], p["ts"])
+        c["primer"] = p["ts"] if c["primer"] is None else min(c["primer"], p["ts"])
     if p["proto"] == "tcp":
-        flags, seq, carga, vlan = p["flags"], p["seq"], p["carga"], p["vlan"]
+        flags, seq, carga = p["flags"], p["seq"], p["carga"]
         if flags & 2:
-            r["syn" if sentido == 0 else "syn_ack"] = True
-            e["isn"][sentido] = seq
-        if flags & 4:
-            r["rst"] = True
+            c["isn"][sentido] = seq
         if carga:
-            r["peticion" if sentido == 0 else "respuesta"] = True
-            base = e["isn"][sentido]
+            base = c["isn"][sentido]
             a = (seq - base - 1) & 0xffffffff if base is not None else seq
             b = a + len(carga)
             # Copia del espejo = el MISMO paquete IP (IP ID y bytes iguales), venga por la misma VLAN o
             # por otra (el SPAN copia de dos puertos y el router lo reenvía por otra VLAN).
             # Retransmisión = bytes ya vistos en un paquete IP distinto (IP ID nuevo).
             firma = (p.get("ipid"), a, b)
-            vistos = e["segmentos"][sentido]
-            nuevos = unir(e["rangos"][sentido], a, b)
-            if firma in vistos:
-                r["copias_espejo"] += 1
-            elif nuevos < len(carga):
-                r["retransmisiones"] += 1
+            vistos = c["segmentos"][sentido]
+            nuevos = unir(c["rangos"][sentido], a, b)
+            clase = "copia" if firma in vistos else "retransmision" if nuevos < len(carga) else "nuevo"
             vistos.add(firma)
-            unir(e["por_vlan"][sentido][vlan], a, b)
-            if sentido == 1:
-                r["bytes_vistos"] = sum(y - x for x, y in e["rangos"][1])
-        else:
+            c["datos"][sentido].append((a, p["ts"], clase, base is not None))
+        elif flags & 0x07:
             # Solo cuentan SYN/FIN/RST (los ACK puros se repiten legítimamente con el mismo seq).
-            if flags & 0x07:
-                firma = seq, flags & 0x17
-                propias = e["control"][sentido]["todas"]
-                if (firma, p.get("ipid")) in propias:
-                    r["copias_espejo"] += 1
-                elif any(f == firma for f, _ in propias):
-                    r["retransmisiones"] += 1
-                propias.add((firma, p.get("ipid")))
-        r["conexion"] = r["syn"] or r["syn_ack"] or r["rst"]
+            firma = seq, flags & 0x17
+            propias = c["control"][sentido]
+            clase = ("copia" if (firma, p.get("ipid")) in propias else
+                     "retransmision" if any(f == firma for f, _ in propias) else "nuevo")
+            propias.add((firma, p.get("ipid")))
+            c["ctrl_ts"].append((p["ts"], sentido, flags, clase))
     elif p["proto"] == "udp" and len(p["carga"]) >= 12:
+        r = c["txs"][0]["r"]
         ident, flags = struct.unpack_from("!HH", p["carga"])
         if sentido == 0 and not flags & 0x8000:
-            e["dns_id"] = ident
+            c["dns_id"] = ident
             r["peticion"] = True
-        elif sentido == 1 and flags & 0x8000 and ident == e["dns_id"]:
+        elif sentido == 1 and flags & 0x8000 and ident == c["dns_id"]:
             r["respuesta"] = True
             r["dns_rcode_pcap"] = flags & 15
     elif p["proto"] == "icmp":
+        r = c["txs"][0]["r"]
         if sentido == 0 and p["tipo"] == 8:
-            e["icmp_id"] = p["ident"], p["sec"]
+            c["icmp_id"] = p["ident"], p["sec"]
             r["peticion"] = True
-        elif sentido == 1 and p["tipo"] == 0 and e["icmp_id"] == (p["ident"], p["sec"]):
+        elif sentido == 1 and p["tipo"] == 0 and c["icmp_id"] == (p["ident"], p["sec"]):
             r["respuesta"] = True
+
+
+def cubiertos(rangos, a, b):
+    """Bytes de [a,b) cubiertos por los rangos unidos (b=None: sin límite)."""
+    return sum(max(0, (y if b is None else min(b, y)) - max(a, x)) for x, y in rangos
+               if (b is None or x < b) and y > a)
+
+
+def tramos(c, sentido, campo):
+    """Reparte el flujo de un sentido entre las transacciones de la conexión en el orden en que
+    las hizo el cliente: la transacción j ocupa [suma de las anteriores, + sus bytes TCP), que el
+    generador mide sobre el mismo socket (bytes crudos: en HTTPS, registros TLS). La última se
+    queda también lo que llegue después (cierre TLS, FIN con datos), como en una conexión de una
+    sola transacción. Sin los bytes de alguna, no se puede repartir: None."""
+    n = len(c["txs"])
+    medidas = [e["t"].get(campo) for e in c["txs"]]
+    if n > 1 and not all(isinstance(m, int) and m >= 0 for m in medidas):
+        return None
+    salida, desde = [], 0
+    for i, m in enumerate(medidas):
+        ultimo = i == n - 1
+        hasta = None if ultimo else desde + m
+        salida.append((desde, hasta))
+        if not ultimo:
+            desde = hasta
+    return salida
+
+
+def atribuir(c):
+    n = len(c["txs"])
+    resp, pet = tramos(c, 1, "bytes_tcp_recibidos"), tramos(c, 0, "bytes_tcp_enviados")
+    syn = any(f & 2 and s == 0 for _, s, f, _ in c["ctrl_ts"])
+    syn_ack = any(f & 2 and s == 1 for _, s, f, _ in c["ctrl_ts"])
+    for i, e in enumerate(c["txs"]):
+        r = e["r"]
+        r["transacciones_en_conexion"] = n
+        r["conexion_reutilizada"] = i > 0
+        if i == 0:
+            r["syn"], r["syn_ack"] = syn, syn_ack
+        if e["t"].get("protocolo") not in ("http", "https", "tcp"):
+            if c["primer"] is not None:
+                r["desfase_aparente_s"] = c["primer"] - e["inicio"]
+            continue
+        r["conexion"] = syn or syn_ack or any(f & 4 for _, _, f, _ in c["ctrl_ts"])
+        if resp is None or pet is None:
+            r["nota_atribucion"] = "conexión con varias transacciones sin bytes TCP de todas"
+            r["estado_atribucion"] = "sin_reparto"
+            continue
+        (ra, rb), (pa, pb) = resp[i], pet[i]
+        r["rango_respuesta"], r["rango_peticion"] = [ra, rb], [pa, pb]
+        dentro = lambda a, x, y: a >= x and (y is None or a < y)
+        conocida = [c["isn"][0] is not None, c["isn"][1] is not None]
+        # Sin SYN en un sentido los desplazamientos son absolutos y no se pueden repartir.
+        r["peticion"] = any(dentro(a, pa, pb) for a, _, _, _ in c["datos"][0]) if conocida[0] or n == 1 else False
+        r["respuesta"] = any(dentro(a, ra, rb) for a, _, _, _ in c["datos"][1]) if conocida[1] or n == 1 else False
+        for s, (x, y) in ((0, (pa, pb)), (1, (ra, rb))):
+            for a, _, clase, _ in c["datos"][s]:
+                if (conocida[s] or n == 1) and dentro(a, x, y):
+                    if clase == "copia":
+                        r["copias_espejo"] += 1
+                    elif clase == "retransmision":
+                        r["retransmisiones"] += 1
+        # Control (SYN/FIN/RST): a la transacción en curso por tiempo.
+        for ts, s, f, clase in c["ctrl_ts"]:
+            j = max([k for k, x in enumerate(c["txs"]) if x["inicio"] - MARGEN <= ts] or [0])
+            if j == i:
+                if f & 4:
+                    r["rst"] = True
+                if clase == "copia":
+                    r["copias_espejo"] += 1
+                elif clase == "retransmision":
+                    r["retransmisiones"] += 1
+        primeros = [ts for a, ts, _, _ in c["datos"][0] if dentro(a, pa, pb)]
+        if i == 0 and c["primer"] is not None:
+            primeros.append(c["primer"])
+        if primeros:
+            r["desfase_aparente_s"] = min(primeros) - e["inicio"]
+        if not conocida[1] and n > 1:
+            r["bytes_vistos"], r["huecos"] = 0, None
+            continue
+        rangos = c["rangos"][1]
+        r["bytes_vistos"] = cubiertos(rangos, ra, rb)
+        if rb is None:
+            # Última (o única): huecos entre su inicio y el último byte visto, como antes.
+            fin = max([y for _, y in rangos] or [ra])
+            r["huecos"] = (max(0, fin - ra) - cubiertos(rangos, ra, fin)) if conocida[1] else None
+        else:
+            r["huecos"] = (rb - ra) - r["bytes_vistos"]
 
 
 def leer_eve(carpeta, indice, errores):
     # Dos pasadas evitan guardar eventos ajenos: primero se identifican flow_id.
+    # Un flow de Suricata es una conexión; en HTTP persistente, tx_id (0, 1, …) es la petición
+    # n.º tx_id+1 de la conexión. flow y tls son de la conexión entera.
     flows = {}
     for pasada in (0, 1):
         for f in sorted((carpeta / "eve").glob("eve-*.json")):
@@ -276,21 +378,31 @@ def leer_eve(carpeta, indice, errores):
                                 m = None
                             if m and fid is not None:
                                 flows[fid] = m[0]
-                        elif fid in flows:
-                            e = flows[fid]
+                            continue
+                        if fid not in flows:
+                            continue
+                        c = flows[fid]
+                        tipo = ev.get("event_type")
+                        txid = ev.get("tx_id")
+                        if tipo in ("http", "fileinfo") and len(c["txs"]) > 1 and isinstance(txid, int):
+                            destinos = [c["txs"][txid]] if txid < len(c["txs"]) else []
+                        elif tipo in ("http", "fileinfo", "dns"):
+                            destinos = c["txs"][:1]
+                        else:
+                            destinos = c["txs"]
+                        for e in destinos:
                             r = e["r"]
-                            tipo = ev.get("event_type")
                             if tipo not in r["eve_tipos"]:
                                 r["eve_tipos"].append(tipo)
                             r["eve_flow_id"] = fid
                             if tipo == "http":
-                                if "eve_http_tx_id" in r and ev.get("tx_id") != r["eve_http_tx_id"]:
+                                if "eve_http_tx_id" in r and txid != r["eve_http_tx_id"]:
                                     continue
                                 codigo = (ev.get("http") or {}).get("status")
                                 if codigo is not None:
                                     r["eve_http_codigo"] = codigo
                                     r["eve_http_coincide"] = str(codigo) == str(e["t"].get("http_codigo"))
-                                r["eve_http_tx_id"] = ev.get("tx_id")
+                                r["eve_http_tx_id"] = txid
                             elif tipo == "dns":
                                 codigo = (ev.get("dns") or {}).get("rcode")
                                 if codigo is not None:
@@ -303,7 +415,7 @@ def leer_eve(carpeta, indice, errores):
                                 version = (ev.get("tls") or {}).get("version")
                                 if version is not None:
                                     r["eve_tls_version"] = version
-                                    esperado = e["t"].get("tls_version")
+                                    esperado = e["t"].get("tls_version") or c["txs"][0]["t"].get("tls_version")
                                     r["eve_tls_coincide"] = (version == esperado or
                                         (esperado is not None and re.sub(r"[^0-9.]", "", str(version)) ==
                                          re.sub(r"[^0-9.]", "", str(esperado))))
@@ -329,11 +441,12 @@ def agregado(estados):
                 no_verificables=len(filas) - len(validas),
                 copias_espejo=sum(r["copias_espejo"] for r in validas),
                 retransmisiones=sum(r["retransmisiones"] for r in validas),
-                huecos=sum(r["huecos"] or 0 for r in validas))
+                huecos=sum(r["huecos"] or 0 for r in validas),
+                reutilizadas=sum(bool(r.get("conexion_reutilizada")) for r in filas))
 
 
 def medir(capturas, transacciones):
-    estados, indice = preparar(transacciones)
+    estados, conexiones, indice = preparar(transacciones)
     errores = []
     carpeta = Path(capturas)
     ficheros = sorted(list((carpeta / "pcap").glob("*.pcap")) + list((carpeta / "pcap").glob("*.pcap.gz")),
@@ -382,14 +495,13 @@ def medir(capturas, transacciones):
         except (OSError, ValueError) as exc:
             errores.append(dict(fichero=str(f), motivo=str(exc)))
     leer_eve(carpeta, indice, errores)
+    for c in conexiones:
+        atribuir(c)
     for e in estados:
         r = e["r"]
-        if e["primer"] is not None:
-            r["desfase_aparente_s"] = e["primer"] - e["inicio"]
         if e["t"].get("protocolo") in ("http", "https", "tcp"):
-            r["huecos"] = huecos(e["rangos"][1], 0 if e["isn"][1] is not None else None)
             esperado = r["bytes_esperados"]
-            if isinstance(esperado, int):
+            if isinstance(esperado, int) and r.get("estado_atribucion") != "sin_reparto":
                 r["fraccion"] = r["bytes_vistos"] / esperado if esperado else None
                 r["transferencia"] = ("completa" if r["respuesta"] and r["huecos"] == 0
                                         and r["bytes_vistos"] >= esperado else "incompleta")
@@ -399,7 +511,8 @@ def medir(capturas, transacciones):
     for e in estados:
         acciones[e["r"]["accion"]].append(e)
         perfiles[e["r"]["perfil"]].append(e)
-    return dict(por_transaccion=[e["r"] for e in estados],
+    return dict(version=2,
+                por_transaccion=[e["r"] for e in estados],
                 por_accion={k: agregado(v) for k, v in sorted(acciones.items())},
                 por_perfil={k: agregado(v) for k, v in sorted(perfiles.items())},
                 total=agregado(estados), errores=errores,
@@ -407,7 +520,13 @@ def medir(capturas, transacciones):
                                 pcap_ficheros=len(ficheros),
                                 desfase_aparente="desfase aparente = reloj + latencia",
                                 error="cualquier error de lectura invalida conservadoramente toda la ejecución",
-                                bytes="carga TCP única del servidor / bytes_tcp_recibidos"))
+                                bytes="carga TCP única del servidor / bytes_tcp_recibidos",
+                                atribucion=("conexión persistente (misma 5-tupla y conexion_n): cada transacción "
+                                            "ocupa su tramo del flujo según los bytes TCP que midió el generador, "
+                                            "en orden de petición; sin SYN no se reparte (incompleta)"),
+                                limites_https=("en HTTPS el contraste es de bytes TCP (registros TLS); el tramo de "
+                                               "cada petición depende de los contadores crudos del cliente; el código "
+                                               "HTTP y el cuerpo no se ven en la captura ni en el EVE")))
 
 
 def main(argv=None):

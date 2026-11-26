@@ -34,6 +34,15 @@ log manifiestos ok
 # Sondeo del espejo: se para ahora (la captura ya terminó) y se analiza sobre el periodo real de
 # captura. La falta de sondeo NO equivale a «sin descartes»: analizar_sondeo da 3 sin registro.
 if [ -f "$E/sondeo-span.pid" ]; then kill -TERM "$(cat "$E/sondeo-span.pid")" 2>/dev/null || true; sleep 3; fi
+# Vigilancia de las referencias: se para ANTES de parar las referencias (esa parada es la
+# prevista, no un incidente) y se analiza. Sin registro no se da por completa.
+if [ -f "$E/referencias.pid" ]; then
+  kill -TERM "$(cat "$E/referencias.pid")" 2>/dev/null || true
+  for i in $(seq 1 20); do grep -q '"tipo": "fin"' "$E/referencias.jsonl" 2>/dev/null && break; sleep 1; done
+fi
+python3 "$(dirname "$0")/vigilar_referencias.py" analizar "$E/referencias.jsonl" \
+  --parada-cierre-epoch "$(date +%s)" > "$E/calidad-referencias.json" || true
+log referencias "$(python3 -c 'import json,sys;d=json.load(open(sys.argv[1]));print(d.get("estado"),d.get("motivos"))' "$E/calidad-referencias.json" 2>&1)"
 $SSH sensor1 "cat $S1/capturas/$ID/manifiesto.json" > "$E/manifiesto-archivador.json"
 $SSH clientes "cat $CL/ejecuciones/$ID/manifiesto-fin.json" > "$E/manifiesto-generador.json"
 $SSH clientes "cat $CL/ejecuciones/$ID/supervisor.jsonl" > "$E/supervisor-generador.jsonl"
@@ -123,9 +132,19 @@ if grep -q '"sha256_origen": "[0-9a-f]' "$E/extremo-captura.json"; then
     || { log extremo_copia "sha256 NO coincide ($SHA_DEST)"; $SSH sensor1 "mv $P/registros/extremo-$ID.pcap $P/registros/extremo-$ID.pcap.danado"; }
 fi
 
+# 2c. Coordinación de copias: con el archivador y las dos referencias ya parados termina el
+# intervalo de captura. Se comprueba en el registro de transferir.py que ninguna copia lo tocó
+# (desde el arranque del archivador menos el anillo previo) y se quita el candado.
+if python3 -c 'import json,sys;sys.exit(0 if "coordinacion_transferencias" in json.load(open(sys.argv[1])) else 1)' "$E/lanzamiento.json"; then
+  T_DESDE=$(python3 -c 'import json,sys;l=json.load(open(sys.argv[1]));print(int(l["planificado"]["archivador_desde_epoch"]) - int(l["coordinacion_transferencias"].get("margen_anillo_s", 40)))' "$E/lanzamiento.json")
+  python3 "$(dirname "$0")/transferir.py" solapes --desde "$T_DESDE" --hasta "$(date +%s)" --salida "$E/transferencias.json" > /dev/null || true
+  log transferencias "$(python3 -c 'import json,sys;d=json.load(open(sys.argv[1]));print(d["estado"],len(d["copias_en_captura"]),"rechazadas",d["rechazadas_en_captura"])' "$E/transferencias.json" 2>&1)"
+  python3 "$(dirname "$0")/transferir.py" candado quitar "$ID" && log candado "quitado"
+fi
+
 # 3. Contadores (switch, sensor, aislamiento V1) y relojes de fin
 [ -f "$E/contadores-lab-fin.txt" ] || bash "$(dirname "$0")/contadores_lab.sh" "$E/contadores-lab-fin.txt" >/dev/null
-for h in srvdmz dcadmin@10.10.10.20; do
+for h in srvdmz dcadmin@10.10.10.20 sensor1 clientes; do
   $SSH "$h" 'date -u +%FT%T.%NZ; timedatectl show; (chronyc tracking 2>/dev/null || timedatectl timesync-status); echo "== carga"; cat /proc/loadavg; nproc; echo "== espacio"; df -B1 --output=target,avail / /var/log $HOME 2>/dev/null' > "$E/relojes-fin-${h#*@}.txt" 2>&1 || true
 done
 
@@ -201,6 +220,9 @@ scp -q -o BatchMode=yes "$E/analisis-salida.txt" "$E/cierre.jsonl" sensor1:"$P/r
 
 # Dictamen de criterios y resultado global, también para ejecuciones incompletas.
 ssh -n -o BatchMode=yes sensor1 "python3 $S1/codigo/operacion/evaluar_piloto.py --pruebas $P --capturas $S1/capturas/$ID" > "$E/criterios-salida.txt" 2>&1 || true
+# C7 y C9–C13 (que evaluar_piloto deja en revisión manual), revisados con evidencia; lo que requiere
+# duración prolongada queda aparte (criterios-revisados.json).
+ssh -n -o BatchMode=yes sensor1 "python3 $S1/codigo/operacion/revisar_criterios.py --pruebas $P --capturas $S1/capturas/$ID" >> "$E/criterios-salida.txt" 2>&1 || true
 RC_GLOBAL=0
 ssh -n -o BatchMode=yes sensor1 "python3 $S1/codigo/operacion/estado_global.py $ID --pruebas $P --ejecucion-dir $P/registros --captura-dir $S1/capturas/$ID --codigo-salida" > "$E/resultado-global.json" || RC_GLOBAL=$?
 log estado_global "$(cat "$E/resultado-global.json")"

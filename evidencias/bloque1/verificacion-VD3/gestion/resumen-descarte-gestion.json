@@ -16,8 +16,8 @@
   "falta_copia_por_par": {
     "Sensor1->bastion": 446,
     "bastion->Sensor1": 152,
-    "bastion->10.10.60.10": 4,
-    "bastion->10.10.60.45": 4
+    "bastion->equipo_ajeno_A (VLAN 60, fuera del experimento)": 4,
+    "bastion->equipo_ajeno_B (VLAN 60, fuera del experimento)": 4
   },
   "falta_copia_por_segundo_utc": {
     "10:46:35": 1,
