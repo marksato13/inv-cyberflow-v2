@@ -1,0 +1,150 @@
+Reproduccion desde carpeta vacia - Bloque 1 - intento 4 (revision 6: complementos suricata-r5 + suricata-r6, codigo con suficiencia temporal)
+carpeta: C:\r6 (creada vacia para esta prueba; entradas iniciales: 1)
+sistema: Microsoft Windows NT 10.0.26300.0 | PowerShell 7.7.0
+python: Python 3.14.3 (%USERPROFILE%\AppData\Local\Python\bin\python.exe)
+pytest: pytest 9.0.3
+git: git version 2.56.0.windows.3 | gh: gh version 2.103.2 (2026-10-23)
+core.longpaths global: '' (se fuerza con -c en el clon)
+
+[2026-11-26T20:30:22.122Z] PASO clonar  (cwd: C:\r6)
+$ git clone -c core.longpaths=true https://github.com/marksato13/inv-cyberflow-v2.git
+Cloning into 'inv-cyberflow-v2'...
+Updating files:  21% (223/1034)
+Updating files:  22% (228/1034)
+Updating files:  23% (238/1034)
+Updating files:  24% (249/1034)
+Updating files:  25% (259/1034)
+Updating files:  26% (269/1034)
+Updating files:  27% (280/1034)
+Updating files:  28% (290/1034)
+Updating files:  29% (300/1034)
+Updating files:  30% (311/1034)
+Updating files:  31% (321/1034)
+Updating files:  32% (331/1034)
+Updating files:  33% (342/1034)
+Updating files:  34% (352/1034)
+Updating files:  35% (362/1034)
+Updating files:  36% (373/1034)
+Updating files:  37% (383/1034)
+Updating files:  38% (393/1034)
+Updating files:  39% (404/1034)
+Updating files:  40% (414/1034)
+Updating files:  41% (424/1034)
+Updating files:  42% (435/1034)
+Updating files:  43% (445/1034)
+Updating files:  44% (455/1034)
+Updating files:  45% (466/1034)
+Updating files:  46% (476/1034)
+Updating files:  47% (486/1034)
+Updating files:  48% (497/1034)
+Updating files:  48% (501/1034)
+Updating files:  49% (507/1034)
+Updating files:  50% (517/1034)
+Updating files:  51% (528/1034)
+Updating files:  52% (538/1034)
+Updating files:  53% (549/1034)
+Updating files:  54% (559/1034)
+Updating files:  55% (569/1034)
+Updating files:  56% (580/1034)
+Updating files:  57% (590/1034)
+Updating files:  58% (600/1034)
+Updating files:  59% (611/1034)
+Updating files:  60% (621/1034)
+Updating files:  61% (631/1034)
+Updating files:  62% (642/1034)
+Updating files:  63% (652/1034)
+Updating files:  64% (662/1034)
+Updating files:  65% (673/1034)
+Updating files:  66% (683/1034)
+Updating files:  67% (693/1034)
+Updating files:  68% (704/1034)
+Updating files:  69% (714/1034)
+Updating files:  69% (718/1034)
+Updating files:  70% (724/1034)
+Updating files:  71% (735/1034)
+Updating files:  72% (745/1034)
+Updating files:  73% (755/1034)
+Updating files:  74% (766/1034)
+Updating files:  75% (776/1034)
+Updating files:  76% (786/1034)
+Updating files:  77% (797/1034)
+Updating files:  78% (807/1034)
+Updating files:  79% (817/1034)
+Updating files:  80% (828/1034)
+Updating files:  81% (838/1034)
+Updating files:  81% (842/1034)
+Updating files:  82% (848/1034)
+Updating files:  83% (859/1034)
+Updating files:  84% (869/1034)
+Updating files:  85% (879/1034)
+Updating files:  86% (890/1034)
+Updating files:  87% (900/1034)
+Updating files:  88% (910/1034)
+Updating files:  89% (921/1034)
+Updating files:  90% (931/1034)
+Updating files:  91% (941/1034)
+Updating files:  92% (952/1034)
+Updating files:  93% (962/1034)
+Updating files:  94% (972/1034)
+Updating files:  95% (983/1034)
+Updating files:  96% (993/1034)
+Updating files:  97% (1003/1034)
+Updating files:  98% (1014/1034)
+Updating files:  99% (1024/1034)
+Updating files: 100% (1034/1034)
+Updating files: 100% (1034/1034), done.
+rc=0  duracion_s=11.4
+
+[2026-11-26T20:30:34.897Z] PASO estado  (cwd: C:\r6\inv-cyberflow-v2)
+$ git -c core.longpaths=true status --porcelain; git rev-parse HEAD; git log -1 --format=%cI
+de3a09721a17c8d82a959dc99cf16bb3d8cb0f0f
+2026-11-26T15:30:02-05:00
+rc=0  duracion_s=0.6
+
+[2026-11-26T20:30:36.661Z] PASO descargar  (cwd: C:\r6\inv-cyberflow-v2)
+$ gh release download bloque1-r4-2026-11-26 --repo marksato13/inv-cyberflow-v2 -D descargas
+rc=0  duracion_s=13
+
+[2026-11-26T20:30:50.544Z] PASO verificar  (cwd: C:\r6\inv-cyberflow-v2)
+$ python -X utf8 operacion/verificar_paquetes.py descargas
+f992cd45fe346b06c10837ad5c04ccce26692f60c7c335d28b8ef32b31baf379  bloque1-r4-V2-VD2-20261126T090705Z.tgz  OK
+9b2c85fdc23f16501188765f0a10a41336ff9e56355cc6d483b8f3bf55b1a298  bloque1-r4-V2-VD3-20261126T104230Z.tgz  OK
+bbb8d1fea42f2e704e55a717fec15d4158a0876127120a696fe612a6860b8604  bloque1-r4-V2-VD4-20261126T141333Z.tgz  OK
+ffe91cbd936a5a478d8ce2413776439f379c9afbf64af94f374369470c394fd0  bloque1-r4-V2-VD6-20261126T151456Z.tgz  OK
+V2-VD2-20261126T090705Z: 490 ficheros del manifiesto, 0 distintos o ausentes
+V2-VD3-20261126T104230Z: 491 ficheros del manifiesto, 0 distintos o ausentes
+V2-VD4-20261126T141333Z: 483 ficheros del manifiesto, 0 distintos o ausentes
+V2-VD6-20261126T151456Z: 479 ficheros del manifiesto, 0 distintos o ausentes
+GLOBAL SATISFACTORIO
+rc=0  duracion_s=13
+
+[2026-11-26T20:31:04.989Z] PASO dictamen  (cwd: C:\r6\inv-cyberflow-v2)
+$ python -X utf8 operacion/reproducir_dictamen.py --salida ..\dictamen-intento4.json
+V2-VD2-20261126T090705Z SATISFACTORIO indeterminada ['falta:espejo', 'falta:criterio:C9', 'falta:criterio:C10'] {'C7': True, 'C9': None, 'C10': None, 'C11': True, 'C12': True, 'C13': True} [('correcta', 'indeterminada'), ('perdida_extremo', 'no_aprobada'), ('perdida_copias', 'no_aprobada'), ('contaminacion_sonda', 'no_aprobada'), ('extremo_ausente', 'indeterminada'), ('sonda_ausente', 'indeterminada'), ('dns_ausente', 'indeterminada'), ('extremo_con_descartes', 'indeterminada')] {'ok': True, 'estado': 'presente', 'motivo': None, 'eventos': 235, 'eventos_usados': 230, 'muestra_antes_s': 6.272, 'muestra_despues_s': 3.384, 'hueco_maximo_s': 8.003, 'delta_kernel_drops': 0, 'delta_kernel_packets': 866810, 'kernel_drops': [0, 0], 'kernel_packets': [23398193, 24265003], 'uptime': [118132, 119965], 'primero': '2026-11-26T09:07:30.752701+0000', 'ultimo': '2026-11-26T09:38:03.065526+0000'} {'lecturas': 6, 'iguales_a_la_eve': 6}
+V2-VD3-20261126T104230Z SATISFACTORIO no_aprobada ['espejo:con_descartes', 'falta:criterio:C10'] {'C7': True, 'C9': True, 'C10': None, 'C11': True, 'C12': True, 'C13': True} [('correcta', 'no_aprobada'), ('perdida_extremo', 'no_aprobada'), ('perdida_copias', 'no_aprobada'), ('contaminacion_sonda', 'no_aprobada'), ('extremo_ausente', 'no_aprobada'), ('sonda_ausente', 'no_aprobada'), ('dns_ausente', 'no_aprobada'), ('extremo_con_descartes', 'no_aprobada')] {'ok': True, 'estado': 'presente', 'motivo': None, 'eventos': 235, 'eventos_usados': 230, 'muestra_antes_s': 2.012, 'muestra_despues_s': 7.075, 'hueco_maximo_s': 8.005, 'delta_kernel_drops': 0, 'delta_kernel_packets': 881606, 'kernel_drops': [0, 0], 'kernel_packets': [24975099, 25856705], 'uptime': [123901, 125734], 'primero': '2026-11-26T10:43:39.721831+0000', 'ultimo': '2026-11-26T11:14:12.039526+0000'} {'lecturas': 6, 'iguales_a_la_eve': 6}
+V2-VD4-20261126T141333Z SATISFACTORIO aprobada [] {'C7': True, 'C9': True, 'C10': True, 'C11': True, 'C12': True, 'C13': True} [('correcta', 'aprobada'), ('perdida_extremo', 'no_aprobada'), ('perdida_copias', 'no_aprobada'), ('contaminacion_sonda', 'no_aprobada'), ('extremo_ausente', 'indeterminada'), ('sonda_ausente', 'indeterminada'), ('dns_ausente', 'indeterminada'), ('extremo_con_descartes', 'indeterminada')] {'ok': True, 'estado': 'presente', 'motivo': None, 'eventos': 235, 'eventos_usados': 230, 'muestra_antes_s': 2.894, 'muestra_despues_s': 6.464, 'hueco_maximo_s': 8.004, 'delta_kernel_drops': 0, 'delta_kernel_packets': 880487, 'kernel_drops': [0, 0], 'kernel_packets': [27720306, 28600793], 'uptime': [136559, 138392], 'primero': '2026-11-26T14:14:37.898426+0000', 'ultimo': '2026-11-26T14:45:10.215507+0000'} {'lecturas': 6, 'iguales_a_la_eve': 6}
+V2-VD6-20261126T151456Z SATISFACTORIO aprobada [] {'C7': True, 'C9': True, 'C10': True, 'C11': True, 'C12': True, 'C13': True} [('correcta', 'aprobada'), ('perdida_extremo', 'no_aprobada'), ('perdida_copias', 'no_aprobada'), ('contaminacion_sonda', 'no_aprobada'), ('extremo_ausente', 'indeterminada'), ('sonda_ausente', 'indeterminada'), ('dns_ausente', 'indeterminada'), ('extremo_con_descartes', 'indeterminada')] {'ok': True, 'estado': 'presente', 'motivo': None, 'eventos': 235, 'eventos_usados': 230, 'muestra_antes_s': 1.366, 'muestra_despues_s': 7.938, 'hueco_maximo_s': 8.003, 'delta_kernel_drops': 0, 'delta_kernel_packets': 881205, 'kernel_drops': [0, 0], 'kernel_packets': [29009643, 29890848], 'uptime': [140248, 142080], 'primero': '2026-11-26T15:16:06.531781+0000', 'ultimo': '2026-11-26T15:46:38.840359+0000'} {'lecturas': 6, 'iguales_a_la_eve': 6}
+GLOBAL SATISFACTORIO
+rc=0  duracion_s=30
+
+[2026-11-26T20:31:36.292Z] PASO recalcular  (cwd: C:\r6\inv-cyberflow-v2)
+$ python -X utf8 operacion/recalcular_desde_capturas.py evidencias/bloque1/entradas-r4 --p2 evidencias/bloque1/extractos-539c48e/p2-V2-VD2-20261126T090705Z --salida ..\recalculo-intento4.json
+V2-VD2-20261126T090705Z SATISFACTORIO {'cobertura': 'reproducido (7 esperadas, 0 inesperadas)', 'extremo': 'reproducido (370 esperadas, 0 inesperadas)', 'dns': 'reproducido (1 esperadas, 0 inesperadas)', 'copias': 'reproducido (2126 esperadas, 0 inesperadas)', 'extraccion': 'reproducido (9 esperadas, 0 inesperadas)'} 
+V2-VD3-20261126T104230Z SATISFACTORIO {'cobertura': 'reproducido (7 esperadas, 0 inesperadas)', 'extremo': 'reproducido (371 esperadas, 0 inesperadas)', 'dns': 'reproducido (1 esperadas, 0 inesperadas)', 'copias': 'reproducido (2134 esperadas, 0 inesperadas)', 'extraccion': 'reproducido (9 esperadas, 0 inesperadas)'} 
+V2-VD4-20261126T141333Z SATISFACTORIO {'cobertura': 'reproducido (7 esperadas, 0 inesperadas)', 'extremo': 'reproducido (371 esperadas, 0 inesperadas)', 'dns': 'reproducido (1 esperadas, 0 inesperadas)', 'copias': 'reproducido (2123 esperadas, 0 inesperadas)', 'extraccion': 'reproducido (9 esperadas, 0 inesperadas)'} 
+V2-VD6-20261126T151456Z SATISFACTORIO {'cobertura': 'reproducido (7 esperadas, 0 inesperadas)', 'extremo': 'reproducido (371 esperadas, 0 inesperadas)', 'dns': 'reproducido (1 esperadas, 0 inesperadas)', 'copias': 'reproducido (2117 esperadas, 0 inesperadas)', 'extraccion': 'reproducido (9 esperadas, 0 inesperadas)'} 
+P2 p2-V2-VD2-20261126T090705Z SATISFACTORIO 45 transacciones, 0 diferencias 
+GLOBAL SATISFACTORIO
+rc=0  duracion_s=406.6
+
+[2026-11-26T20:38:24.160Z] PASO pruebas  (cwd: C:\r6\inv-cyberflow-v2)
+$ python -m pytest -q -p no:cacheprovider tests
+...................................................................... [ 22%]
+........................................................................ [ 45%]
+........................................................................................................................................................................             [100%]
+310 passed, 38 subtests passed in 54.24s
+rc=0  duracion_s=56.7
+
+[2026-11-26T20:39:22.147Z] PASO final  (cwd: C:\r6\inv-cyberflow-v2)
+$ git -c core.longpaths=true status --porcelain
+rc=0  duracion_s=0.5

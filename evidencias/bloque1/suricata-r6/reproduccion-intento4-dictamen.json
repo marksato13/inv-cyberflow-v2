@@ -1,0 +1,342 @@
+{
+ "version": 4,
+ "complementos": [
+  "C:\\r6\\inv-cyberflow-v2\\evidencias\\bloque1\\suricata-r5",
+  "C:\\r6\\inv-cyberflow-v2\\evidencias\\bloque1\\suricata-r6"
+ ],
+ "comprobacion": "dictamen desde resultados intermedios",
+ "ejecuciones": [
+  {
+   "ejecucion": "V2-VD2-20261126T090705Z",
+   "diferencias": [],
+   "ausentes": [],
+   "referencia": "C:\\r6\\inv-cyberflow-v2\\evidencias\\bloque1\\suricata-r6\\V2-VD2-20261126T090705Z\\referencia",
+   "suricata": {
+    "ok": true,
+    "estado": "presente",
+    "motivo": null,
+    "eventos": 235,
+    "eventos_usados": 230,
+    "muestra_antes_s": 6.272,
+    "muestra_despues_s": 3.384,
+    "hueco_maximo_s": 8.003,
+    "delta_kernel_drops": 0,
+    "delta_kernel_packets": 866810,
+    "kernel_drops": [
+     0,
+     0
+    ],
+    "kernel_packets": [
+     23398193,
+     24265003
+    ],
+    "uptime": [
+     118132,
+     119965
+    ],
+    "primero": "2026-11-26T09:07:30.752701+0000",
+    "ultimo": "2026-11-26T09:38:03.065526+0000"
+   },
+   "supervision_frente_a_stats": {
+    "lecturas": 6,
+    "iguales_a_la_eve": 6
+   },
+   "dictamen": "indeterminada",
+   "motivos": [
+    "falta:espejo",
+    "falta:criterio:C9",
+    "falta:criterio:C10"
+   ],
+   "criterios": {
+    "C7": true,
+    "C9": null,
+    "C10": null,
+    "C11": true,
+    "C12": true,
+    "C13": true
+   },
+   "casos": [
+    [
+     "correcta",
+     "indeterminada"
+    ],
+    [
+     "perdida_extremo",
+     "no_aprobada"
+    ],
+    [
+     "perdida_copias",
+     "no_aprobada"
+    ],
+    [
+     "contaminacion_sonda",
+     "no_aprobada"
+    ],
+    [
+     "extremo_ausente",
+     "indeterminada"
+    ],
+    [
+     "sonda_ausente",
+     "indeterminada"
+    ],
+    [
+     "dns_ausente",
+     "indeterminada"
+    ],
+    [
+     "extremo_con_descartes",
+     "indeterminada"
+    ]
+   ],
+   "satisfactorio": true
+  },
+  {
+   "ejecucion": "V2-VD3-20261126T104230Z",
+   "diferencias": [],
+   "ausentes": [],
+   "referencia": "C:\\r6\\inv-cyberflow-v2\\evidencias\\bloque1\\suricata-r6\\V2-VD3-20261126T104230Z\\referencia",
+   "suricata": {
+    "ok": true,
+    "estado": "presente",
+    "motivo": null,
+    "eventos": 235,
+    "eventos_usados": 230,
+    "muestra_antes_s": 2.012,
+    "muestra_despues_s": 7.075,
+    "hueco_maximo_s": 8.005,
+    "delta_kernel_drops": 0,
+    "delta_kernel_packets": 881606,
+    "kernel_drops": [
+     0,
+     0
+    ],
+    "kernel_packets": [
+     24975099,
+     25856705
+    ],
+    "uptime": [
+     123901,
+     125734
+    ],
+    "primero": "2026-11-26T10:43:39.721831+0000",
+    "ultimo": "2026-11-26T11:14:12.039526+0000"
+   },
+   "supervision_frente_a_stats": {
+    "lecturas": 6,
+    "iguales_a_la_eve": 6
+   },
+   "dictamen": "no_aprobada",
+   "motivos": [
+    "espejo:con_descartes",
+    "falta:criterio:C10"
+   ],
+   "criterios": {
+    "C7": true,
+    "C9": true,
+    "C10": null,
+    "C11": true,
+    "C12": true,
+    "C13": true
+   },
+   "casos": [
+    [
+     "correcta",
+     "no_aprobada"
+    ],
+    [
+     "perdida_extremo",
+     "no_aprobada"
+    ],
+    [
+     "perdida_copias",
+     "no_aprobada"
+    ],
+    [
+     "contaminacion_sonda",
+     "no_aprobada"
+    ],
+    [
+     "extremo_ausente",
+     "no_aprobada"
+    ],
+    [
+     "sonda_ausente",
+     "no_aprobada"
+    ],
+    [
+     "dns_ausente",
+     "no_aprobada"
+    ],
+    [
+     "extremo_con_descartes",
+     "no_aprobada"
+    ]
+   ],
+   "satisfactorio": true
+  },
+  {
+   "ejecucion": "V2-VD4-20261126T141333Z",
+   "diferencias": [],
+   "ausentes": [],
+   "referencia": "C:\\r6\\inv-cyberflow-v2\\evidencias\\bloque1\\suricata-r6\\V2-VD4-20261126T141333Z\\referencia",
+   "suricata": {
+    "ok": true,
+    "estado": "presente",
+    "motivo": null,
+    "eventos": 235,
+    "eventos_usados": 230,
+    "muestra_antes_s": 2.894,
+    "muestra_despues_s": 6.464,
+    "hueco_maximo_s": 8.004,
+    "delta_kernel_drops": 0,
+    "delta_kernel_packets": 880487,
+    "kernel_drops": [
+     0,
+     0
+    ],
+    "kernel_packets": [
+     27720306,
+     28600793
+    ],
+    "uptime": [
+     136559,
+     138392
+    ],
+    "primero": "2026-11-26T14:14:37.898426+0000",
+    "ultimo": "2026-11-26T14:45:10.215507+0000"
+   },
+   "supervision_frente_a_stats": {
+    "lecturas": 6,
+    "iguales_a_la_eve": 6
+   },
+   "dictamen": "aprobada",
+   "motivos": [],
+   "criterios": {
+    "C7": true,
+    "C9": true,
+    "C10": true,
+    "C11": true,
+    "C12": true,
+    "C13": true
+   },
+   "casos": [
+    [
+     "correcta",
+     "aprobada"
+    ],
+    [
+     "perdida_extremo",
+     "no_aprobada"
+    ],
+    [
+     "perdida_copias",
+     "no_aprobada"
+    ],
+    [
+     "contaminacion_sonda",
+     "no_aprobada"
+    ],
+    [
+     "extremo_ausente",
+     "indeterminada"
+    ],
+    [
+     "sonda_ausente",
+     "indeterminada"
+    ],
+    [
+     "dns_ausente",
+     "indeterminada"
+    ],
+    [
+     "extremo_con_descartes",
+     "indeterminada"
+    ]
+   ],
+   "satisfactorio": true
+  },
+  {
+   "ejecucion": "V2-VD6-20261126T151456Z",
+   "diferencias": [],
+   "ausentes": [],
+   "referencia": "C:\\r6\\inv-cyberflow-v2\\evidencias\\bloque1\\suricata-r6\\V2-VD6-20261126T151456Z\\referencia",
+   "suricata": {
+    "ok": true,
+    "estado": "presente",
+    "motivo": null,
+    "eventos": 235,
+    "eventos_usados": 230,
+    "muestra_antes_s": 1.366,
+    "muestra_despues_s": 7.938,
+    "hueco_maximo_s": 8.003,
+    "delta_kernel_drops": 0,
+    "delta_kernel_packets": 881205,
+    "kernel_drops": [
+     0,
+     0
+    ],
+    "kernel_packets": [
+     29009643,
+     29890848
+    ],
+    "uptime": [
+     140248,
+     142080
+    ],
+    "primero": "2026-11-26T15:16:06.531781+0000",
+    "ultimo": "2026-11-26T15:46:38.840359+0000"
+   },
+   "supervision_frente_a_stats": {
+    "lecturas": 6,
+    "iguales_a_la_eve": 6
+   },
+   "dictamen": "aprobada",
+   "motivos": [],
+   "criterios": {
+    "C7": true,
+    "C9": true,
+    "C10": true,
+    "C11": true,
+    "C12": true,
+    "C13": true
+   },
+   "casos": [
+    [
+     "correcta",
+     "aprobada"
+    ],
+    [
+     "perdida_extremo",
+     "no_aprobada"
+    ],
+    [
+     "perdida_copias",
+     "no_aprobada"
+    ],
+    [
+     "contaminacion_sonda",
+     "no_aprobada"
+    ],
+    [
+     "extremo_ausente",
+     "indeterminada"
+    ],
+    [
+     "sonda_ausente",
+     "indeterminada"
+    ],
+    [
+     "dns_ausente",
+     "indeterminada"
+    ],
+    [
+     "extremo_con_descartes",
+     "indeterminada"
+    ]
+   ],
+   "satisfactorio": true
+  }
+ ],
+ "satisfactorio": true
+}
