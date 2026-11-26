@@ -115,6 +115,15 @@ class Transferir(unittest.TestCase):
         self.assertEqual(tr.ultima_copia_fin(tr.leer_registro()) is not None, True)
         tr.externa_fin(ident, float(inicio), 0)
         self.assertEqual([x["tipo"] for x in tr.leer_registro()], ["inicio", "fin"])
+        # VD5: tras el fin (inicio leído de la CLI) la copia NO puede quedar abierta
+        self.assertLess(tr.ultima_copia_fin(tr.leer_registro()), tr.ahora() + 1)
+        self.assertIsNotNone(tr.solapes(0, 1e12)["copias_en_captura"][0]["fin_epoch"])
+
+    def test_inicio_sin_redondear_y_fin_redondeado_emparejan(self):
+        reg = [dict(tipo="inicio", inicio_epoch=1795705766.2133064, pid="externa-1"),
+               dict(tipo="fin", inicio_epoch=1795705766.213306, fin_epoch=1795705780.2, pid="externa-1")]
+        self.assertEqual(tr.ultima_copia_fin(reg), 1795705780.2)
+        self.assertEqual(tr.solapes(1795705790, 1795705800, reg)["estado"], "sin_copias")
 
 
 def args(**k):

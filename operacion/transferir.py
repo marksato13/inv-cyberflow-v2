@@ -101,7 +101,7 @@ def externa_inicio(descripcion, ejecutar=subprocess.run):
         registrar(tipo="rechazada", utc_epoch=ahora(), motivo=motivo, args=["externa", descripcion])
         print("NO SE COPIA: " + motivo, file=sys.stderr)
         return OCUPADO, None
-    inicio = ahora()
+    inicio = round(ahora(), 6)          # VD5: el fin llega por la CLI con 6 decimales
     ident = "externa-%d" % int(inicio * 1000)
     registrar(tipo="inicio", inicio_epoch=inicio, args=["externa", descripcion], pid=ident)
     return LIBRE, "%s %.6f" % (ident, inicio)
@@ -112,14 +112,21 @@ def externa_fin(ident, inicio, rc):
     return LIBRE
 
 
+def clave(x):
+    """Empareja inicio y fin de una copia: pid + inicio a 6 decimales (VD5: un inicio sin redondear
+    y su fin redondeado dejaban la copia «abierta» y el candado esperaba sin fin)."""
+    i = x.get("inicio_epoch")
+    return (x.get("pid"), round(i, 6) if isinstance(i, (int, float)) else i)
+
+
 def ultima_copia_fin(reg):
     """Fin de la última copia; una copia iniciada sin fin registrado cuenta como en curso (ahora)."""
     fines = {}
     for x in reg:
         if x.get("tipo") == "inicio":
-            fines.setdefault((x.get("pid"), x.get("inicio_epoch")), None)
+            fines.setdefault(clave(x), None)
         elif x.get("tipo") == "fin":
-            fines[(x.get("pid"), x.get("inicio_epoch"))] = x.get("fin_epoch")
+            fines[clave(x)] = x.get("fin_epoch")
     if not fines:
         return None
     return max((f if f is not None else ahora()) for f in fines.values())
@@ -168,7 +175,7 @@ def solapes(desde, hasta, reg=None):
     abiertas = {}
     copias = []
     for x in reg:
-        k = (x.get("pid"), x.get("inicio_epoch"))
+        k = clave(x)
         if x.get("tipo") == "inicio":
             abiertas[k] = x
         elif x.get("tipo") == "fin":
