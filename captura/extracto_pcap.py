@@ -6,8 +6,8 @@
 
 - Tramas con un extremo en --completas (tráfico experimental: contenido sintético del generador y
   del servidor de laboratorio, DNS de la zona del laboratorio): se copian enteras.
-- Tramas con un extremo en --cabeceras (gestión del laboratorio, p. ej. SSH bastión↔Sensor1, que
-  hace falta para revisar B1): se copian recortadas a --cabeceras-bytes (Ethernet + VLAN + IP +
+- Tramas con LOS DOS extremos en --cabeceras (gestión del laboratorio, p. ej. SSH bastión↔Sensor1,
+  que hace falta para revisar B1): se copian recortadas a --cabeceras-bytes (Ethernet + VLAN + IP +
   TCP), conservando en la cabecera del registro la longitud original. La carga (cifrada) no se publica.
 - Todo lo demás (tráfico de otros equipos y de otros proyectos, VLAN ajenas, control del switch) se
   descarta. Se cuentan las tramas descartadas por motivo.
@@ -66,7 +66,7 @@ def main() -> int:
                         continue
                     if comp & set(par):
                         dato, clase = d, "completa"
-                    elif cab & set(par):
+                    elif set(par) <= cab:          # los dos extremos: nunca equipos ajenos
                         dato, clase = d[:a.cabeceras_bytes], "cabeceras"
                     else:
                         cuenta["descartada_fuera_de_poblacion"] += 1

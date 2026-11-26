@@ -23,7 +23,8 @@ class ExtractoTest(unittest.TestCase):
         t = [trama(100, vlan=20), trama(100.0002, vlan=30, ttl=63),                       # experimental
              trama(101, "10.10.10.30", "10.10.60.11", ipid=7, vlan=10, payload=b"x" * 1000),  # gestión
              trama(101.0002, "10.10.10.30", "10.10.60.11", ipid=7, vlan=60, ttl=63, payload=b"x" * 1000),
-             trama(102, "10.10.50.52", "10.10.10.20", ipid=9, vlan=50)]                     # ajeno
+             trama(102, "10.10.50.52", "10.10.10.20", ipid=9, vlan=50),                     # ajeno
+             trama(103, "10.10.10.30", "10.10.60.10", ipid=11, vlan=10)]                    # bastión → equipo ajeno
         pcap(self.raiz / "a" / "pcap" / "live-20250101000000.pcap", t)
         salida = self.raiz / "b" / "pcap" / "live-20250101000000.pcap.gz"
         r = subprocess.run([sys.executable, str(RAIZ / "captura" / "extracto_pcap.py"), str(self.raiz / "a" / "pcap"),
@@ -32,7 +33,7 @@ class ExtractoTest(unittest.TestCase):
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertIn('"completa": 2', r.stdout)
         self.assertIn('"cabeceras": 2', r.stdout)
-        self.assertIn('"descartada_fuera_de_poblacion": 1', r.stdout)
+        self.assertIn('"descartada_fuera_de_poblacion": 2', r.stdout)
         exp = ce.analizar(self.raiz / "b" / "pcap", ips={"10.10.20.21"})
         ges = ce.analizar(self.raiz / "b" / "pcap", ips={"10.10.10.30", "10.10.60.11"})
         self.assertEqual(exp["denominadores"]["eventos_por_clase"], {"completo": 1})
