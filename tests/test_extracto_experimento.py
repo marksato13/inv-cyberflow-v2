@@ -61,6 +61,15 @@ class Extracto(unittest.TestCase):
             ex.filtrar_pcap(ent, Path(t) / "s2.pcap", POB, SRV, clave)
             self.assertEqual(Path(t, "s2.pcap").read_bytes(), sal.read_bytes())
 
+    def test_salida_gz_conserva_nombre_y_contenido(self):
+        with tempfile.TemporaryDirectory() as t:
+            ent = Path(t) / "live-20261126151534.pcap.gz"
+            escribir(ent, [trama("10.10.20.22", "10.10.30.10")], comprimir=True)
+            ex.filtrar_pcap(ent, Path(t) / "plano.pcap", POB, SRV, b"k")
+            r = ex.filtrar_pcap(ent, Path(t) / "x.pcap.gz", POB, SRV, b"k")
+            self.assertEqual(gzip.open(Path(t) / "x.pcap.gz").read(), (Path(t) / "plano.pcap").read_bytes())
+            self.assertEqual(r["salida"]["tramas"], 1)
+
     def test_eve(self):
         with tempfile.TemporaryDirectory() as t:
             e = Path(t) / "eve.json"

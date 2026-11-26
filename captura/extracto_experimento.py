@@ -15,7 +15,10 @@ capturada y original, etiquetas 802.1Q/QinQ, cabeceras IP/TCP/UDP (TTL, IP ID, n
 secuencia, sumas de comprobación) y la carga (servidor sintético HTTP, TLS cifrado, DNS de la zona
 del laboratorio).
 
-ÚNICA modificación: las MAC (Ethernet: destino y origen; Linux SLL/SLL2: la dirección de enlace) se
+Si SALIDA termina en .gz se escribe comprimida (gzip, mtime 0): el extracto del anillo conserva así
+el nombre `live-*.pcap.gz` que registran el inventario y el manifiesto de la ejecución.
+
+ÚNICA modificación del contenido: las MAC (Ethernet: destino y origen; Linux SLL/SLL2: la dirección de enlace) se
 sustituyen por 02:xx:xx:xx:xx:xx = HMAC-SHA256(clave, MAC)[:5]. Así la seudonimización es
 determinista y consistente entre ficheros y ejecuciones (la misma MAC da el mismo seudónimo en
 Sensor1, srv-dmz y DC1) y no reversible sin la clave, que es privada y no se publica.
@@ -73,7 +76,10 @@ def filtrar_pcap(entrada, salida, poblacion, servidores, clave: bytes):
     permitido = pobl | serv
     seud = Seudonimo(clave)
     motivos, conservadas, leidas = Counter(), 0, 0
-    with abrir(entrada) as f, open(salida, "wb") as o:
+    # SALIDA .pcap.gz -> gzip, para conservar el nombre del fichero del anillo: el inventario y el
+    # manifiesto de la ejecución lo nombran así, y cobertura/copias/extracción lo buscan por nombre.
+    escribir = (lambda p: gzip.GzipFile(p, "wb", compresslevel=6, mtime=0)) if str(salida).endswith(".gz") else (lambda p: open(p, "wb"))
+    with abrir(entrada) as f, escribir(salida) as o:
         glob = f.read(24)
         if len(glob) < 24:
             raise ValueError("cabecera global truncada")

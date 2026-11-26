@@ -13,6 +13,9 @@ Saneado:
   - cualquier otra IPv4 (terceros, NTP público…) se sustituye de forma consistente por una dirección
     de documentación (198.51.100.0/24, luego 203.0.113.0/24), así que los recuentos y las reglas por
     IP siguen dando lo mismo;
+  - las direcciones de red de las subredes del laboratorio (10.10.X.0, p. ej. en «10.10.20.0/24») se
+    conservan: nombran una subred, no un equipo. Sin esta regla (antes de 2026-11-26 r4) también se
+    sustituían, y la configuración del espejo y las rutas de calidad_copias dejaban de ser comparables;
   - las MAC se sustituyen por 02:00:00:00:xx:yy, de forma consistente.
 La correspondencia NO se escribe; SANEADO.json dice qué se incluyó, qué se dejó fuera y cuántas
 direcciones se sustituyeron.
@@ -43,6 +46,8 @@ class Saneador:
     def ip(self, m):
         s = m.group(0)
         if any(int(o) > 255 for o in m.groups()) or s in self.permitidas:
+            return s
+        if s.startswith("10.10.") and s.endswith(".0"):
             return s
         if s not in self.ips:
             if not self.libres:

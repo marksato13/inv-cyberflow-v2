@@ -22,7 +22,8 @@ class Extracto(unittest.TestCase):
                 json.dumps({"origen_ip": "10.10.20.21", "destino_ip": "10.10.30.10"}) + "\n")
             (p / "inventario.json").write_text(json.dumps(
                 [{"ip": "10.10.60.45", "regla": "ajena"}, {"ip": "10.10.20.21", "regla": "poblacion"},
-                 {"ip": "10.10.60.45", "mac": "AA:BB:CC:DD:EE:FF", "version": "3.12.3"}]))
+                 {"ip": "10.10.60.45", "mac": "AA:BB:CC:DD:EE:FF", "version": "3.12.3"},
+                 {"ruta": "10.10.20.0/24>10.10.30.0/24"}]))
             (c / "x.pcap").write_bytes(b"\xd4\xc3\xb2\xa1")
             (c / "eve").mkdir()
             (c / "eve" / "eve-V2-X.json").write_text('{"dns": {"rrname": "algo.de.terceros"}}\n')
@@ -32,6 +33,7 @@ class Extracto(unittest.TestCase):
             self.assertNotIn("AA:BB", texto.upper().replace("02:00", ""))
             self.assertIn("10.10.20.21", texto)
             self.assertIn("3.12.3", texto)
+            self.assertIn("10.10.20.0/24>10.10.30.0/24", texto)        # redes del laboratorio: no son equipos
             self.assertEqual(texto.count("198.51.100.1"), 2)          # consistente
             self.assertEqual(r["ip_ajenas_sustituidas"], 1)
             self.assertEqual({x["fichero"] for x in r["fuera"]}, {"capturas/V2-X/x.pcap", "capturas/V2-X/eve/eve-V2-X.json"})

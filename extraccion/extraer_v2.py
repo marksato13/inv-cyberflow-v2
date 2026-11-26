@@ -269,7 +269,7 @@ def atribuir_con_estado(paquetes, estado, piso, anchor, bloque, horizonte_s=HORI
 
 def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[float],
              horizonte_s: float = HORIZONTE_MOTOR_S, estado_modo: str = "continuo",
-             guarda_s: float = GUARDA_ESTADO_S) -> dict:
+             guarda_s: float = GUARDA_ESTADO_S, inicio_captura: float | None = None) -> dict:
     if estado_modo not in ("continuo", "por-bloque"):
         raise ValueError("--estado debe ser continuo o por-bloque")
     if guarda_s < horizonte_s:
@@ -285,6 +285,12 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
     if p_next is None and e_next is None:
         raise ValueError("archivo sin observaciones IPv4 ni EVE")
     inicio = min(x for x in (p_next.packet.timestamp if p_next else None, e_next[0] if e_next else None) if x is not None)
+    # Reproducción desde un extracto filtrado (Bloque 1, r4): el primer paquete del anillo suele ser
+    # tráfico no experimental, que el extracto no lleva. El inventario de la ejecución registra ese
+    # instante (primer_paquete_epoch) y se pasa aquí para que el arranque y las marcas coincidan. Sin el
+    # parámetro (laboratorio) el comportamiento no cambia.
+    if inicio_captura is not None:
+        inicio = min(inicio, inicio_captura)
     anchor = (math.floor(inicio / 10) + 1) * 10
     contextos = deque()
     pendientes = []
@@ -430,9 +436,12 @@ def main() -> int:
                     help="--history-seconds del motor en operación (230 en Sensor1)")
     ap.add_argument("--estado", choices=("continuo", "por-bloque"), default="continuo")
     ap.add_argument("--guarda-s", type=float, default=GUARDA_ESTADO_S)
+    ap.add_argument("--inicio-captura-epoch", type=float,
+                    help="solo al reproducir desde un extracto: primer paquete del anillo según el inventario")
     args = ap.parse_args()
     print(json.dumps(procesar(args.archivo, args.salida, poblacion_desde(args.poblacion),
-                              fronteras_desde(args.fronteras), args.horizonte_motor_s, args.estado, args.guarda_s), ensure_ascii=False))
+                              fronteras_desde(args.fronteras), args.horizonte_motor_s, args.estado, args.guarda_s,
+                              args.inicio_captura_epoch), ensure_ascii=False))
     return 0
 
 
