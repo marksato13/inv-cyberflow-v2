@@ -18,6 +18,13 @@ estado_global.py y dictamen_casos.py, y compara con la referencia:
   - los ocho casos de dictamen_casos.py: caso, global, codigo_salida, calidad y motivos.
 Una ejecución esperada ausente, un fichero de entrada o de referencia ausente, un programa que falla
 o cualquier diferencia => NO SATISFACTORIO y rc 1. No escribe en el repositorio.
+
+Complemento (--complemento, por omisión evidencias/bloque1/suricata-r5): revisión 5. Añade, por
+ejecución, los eventos stats originales de Suricata (capturas/<ID>/eve/suricata-stats-<ID>.jsonl, que
+el EVE filtrado de r4 no lleva) y la referencia del laboratorio recalculada con el código que mide
+kernel_drops; esa referencia sustituye a la de r4. Se compara además el componente de Suricata de C9
+(estado, eventos, Δ kernel_drops, kernel_packets, uptime, primero y último).
+--sin-complemento reproduce la referencia de r4, válida solo para el código hasta 57b2293.
 """
 from __future__ import annotations
 
@@ -68,13 +75,26 @@ def comparar(nombre, ref, nuevo, difs):
                                                                  json.dumps(nuevo, ensure_ascii=False)[:300]))
 
 
-def una(E: Path, ID: str):
+CAMPOS_SURICATA = ("estado", "eventos", "delta_kernel_drops", "delta_kernel_packets", "kernel_drops",
+                   "kernel_packets", "uptime", "primero", "ultimo")
+
+
+def suricata_c9(c):
+    for x in c["criterios"]["C9"].get("comprobaciones", []):
+        if x.get("que", "").startswith("Suricata capture.kernel_drops"):
+            v = x.get("valor") or {}
+            return {"ok": x.get("ok"), **{k: v.get(k) for k in CAMPOS_SURICATA}}
+    return None
+
+
+def una(E: Path, ID: str, C: Path | None = None):
     res = {"ejecucion": ID, "diferencias": [], "ausentes": []}
-    R = E / "referencia"
-    for f in (E / "pruebas" / ID, E / "capturas" / ID, R / "resultado-global.json",
-              R / "criterios-revisados.json", R / "dictamen-casos.json"):
+    R = C / "referencia" if C is not None else E / "referencia"
+    extra = [C / "capturas" / ID / "eve" / ("suricata-stats-%s.jsonl" % ID)] if C is not None else []
+    for f in [E / "pruebas" / ID, E / "capturas" / ID, R / "resultado-global.json",
+              R / "criterios-revisados.json", R / "dictamen-casos.json"] + extra:
         if not f.exists():
-            res["ausentes"].append(str(f.relative_to(E.parent)))
+            res["ausentes"].append(str(f))
     if res["ausentes"]:
         res["satisfactorio"] = False
         return res
@@ -83,6 +103,10 @@ def una(E: Path, ID: str):
         t = Path(t)
         P, K = t / ID, E / "capturas" / ID
         shutil.copytree(E / "pruebas" / ID, P)
+        if C is not None:
+            K = t / "capturas" / ID
+            shutil.copytree(E / "capturas" / ID, K)
+            shutil.copytree(C / "capturas" / ID, K, dirs_exist_ok=True)
         pasos = [
             ("revisar_criterios", [str(op / "revisar_criterios.py"), "--pruebas", str(P), "--capturas", str(K)]),
             ("estado_global", [str(op / "estado_global.py"), ID, "--pruebas", str(P), "--ejecucion-dir",
@@ -102,6 +126,12 @@ def una(E: Path, ID: str):
             comparar("dictamen", resumen_dictamen(dec(R / "resultado-global.json")), resumen_dictamen(g), res["diferencias"])
             comparar("criterios", resumen_criterios(dec(R / "criterios-revisados.json")),
                      resumen_criterios(dec(P / "criterios-revisados.json")), res["diferencias"])
+            if C is not None:
+                ref_s, nuevo_s = suricata_c9(dec(R / "criterios-revisados.json")), suricata_c9(dec(P / "criterios-revisados.json"))
+                if ref_s is None:
+                    res["diferencias"].append("la referencia r5 no tiene el componente de Suricata en C9")
+                comparar("C9.suricata", ref_s, nuevo_s, res["diferencias"])
+                res["suricata"] = nuevo_s
             ref_c, nuevo_c = resumen_casos(dec(R / "dictamen-casos.json")), resumen_casos(dec(t / "casos" / "dictamen-casos.json"))
             if len(ref_c) != N_CASOS:
                 res["diferencias"].append("la referencia tiene %d casos, se esperaban %d" % (len(ref_c), N_CASOS))
@@ -119,14 +149,17 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("dir", nargs="?", type=Path, default=REPO / "evidencias" / "bloque1" / "entradas-r4")
     ap.add_argument("--salida", type=Path)
+    ap.add_argument("--complemento", type=Path, default=REPO / "evidencias" / "bloque1" / "suricata-r5")
+    ap.add_argument("--sin-complemento", action="store_true")
     a = ap.parse_args(argv)
-    informe = {"version": 2, "comprobacion": "dictamen desde resultados intermedios", "ejecuciones": []}
+    informe = {"version": 3, "complemento": None if a.sin_complemento else str(a.complemento), "comprobacion": "dictamen desde resultados intermedios", "ejecuciones": []}
     for ID in ESPERADAS:
         E = a.dir / ID
-        r = una(E, ID) if E.is_dir() else {"ejecucion": ID, "satisfactorio": False, "ausentes": [str(E)], "diferencias": []}
+        C = None if a.sin_complemento else a.complemento / ID
+        r = una(E, ID, C) if E.is_dir() else {"ejecucion": ID, "satisfactorio": False, "ausentes": [str(E)], "diferencias": []}
         informe["ejecuciones"].append(r)
         print(ID, "SATISFACTORIO" if r["satisfactorio"] else "NO SATISFACTORIO", r.get("dictamen"), r.get("motivos"),
-              r.get("criterios"), r.get("casos"))
+              r.get("criterios"), r.get("casos"), r.get("suricata"))
         for x in r["ausentes"] + r["diferencias"]:
             print("   ", x)
     informe["satisfactorio"] = all(r["satisfactorio"] for r in informe["ejecuciones"])

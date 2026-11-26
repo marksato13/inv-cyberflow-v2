@@ -44,7 +44,7 @@ class Revisar(unittest.TestCase):
     def carpeta(self, d19_fin=100, aplicar=0, ntp_fin_sensor1=True):
         t = tempfile.TemporaryDirectory()
         self.addCleanup(t.cleanup)
-        P = Path(t.name) / "V2-X"
+        P = Path(t.name) / "pruebas" / "V2-X"          # como en el laboratorio: pruebas/<ID>, capturas/<ID>
         E = P / "registros"
         E.mkdir(parents=True)
         (E / "contadores-lab-inicio.txt").write_text(CONT.format(d19=100, aplicar=0))
@@ -59,6 +59,12 @@ class Revisar(unittest.TestCase):
         for h in ("srvdmz", "10.10.10.20") + (("sensor1",) if ntp_fin_sensor1 else ()):
             (E / ("relojes-fin-%s.txt" % h)).write_text("NTPSynchronized=yes\n")
         (E / "exclusion-v1.json").write_text(json.dumps({"cubierto": True}))
+        eve = Path(t.name) / "capturas" / "V2-X" / "eve"
+        eve.mkdir(parents=True)
+        (eve / "eve-V2-X.json").write_text("".join(json.dumps(
+            {"timestamp": "2026-11-26T09:00:0%d.0+0000" % i, "event_type": "stats",
+             "stats": {"uptime": 100 + i, "capture": {"kernel_packets": 10 + i, "kernel_drops": 0}}}) + "\n"
+            for i in range(2)))
         return P
 
     def test_c9_delta_de_drops(self):
@@ -74,7 +80,9 @@ class Revisar(unittest.TestCase):
         self.assertIn("decide C7", r["comprobaciones"][0]["nota"])
         self.assertIsNone(rc.c9(P, P / "registros", None)["ok"])
         self.assertTrue(r["requiere_duracion_prolongada"])
-        self.assertTrue(r["pendiente_otra_comprobacion"])   # Suricata kernel_drops no medible
+        # kernel_drops de Suricata se mide (EVE dedicada): ya no queda pendiente de otra comprobación
+        self.assertEqual(r["pendiente_otra_comprobacion"], [])
+        self.assertEqual(r["comprobaciones"][-1]["valor"]["estado"], "presente")
 
     def test_c9_delta_fuera_de_la_captura_con_sondeo_limpio_vd4(self):
         P = self.carpeta(d19_fin=172)

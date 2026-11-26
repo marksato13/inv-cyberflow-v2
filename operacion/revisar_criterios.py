@@ -23,7 +23,11 @@ import glob
 import json
 import re
 import statistics
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import suricata_stats  # noqa: E402
 
 UMBRAL_BYTES = 0.95
 DESFASE_MAX_S = 0.005
@@ -135,7 +139,36 @@ def perdida(que, a, b, c7_ok, fuente):
     return x
 
 
-def c9(P, E, c7_ok=None):
+def suricata(CAP, c7_ok):
+    """capture.kernel_drops de los eventos stats de la EVE dedicada (capturas/<ID>/eve/). La copia
+    publicada del EVE va filtrada y no los lleva; se publican aparte en suricata-stats-<ID>.jsonl,
+    que se lee igual. Un evento repetido en los dos se cuenta una vez."""
+    rutas = sorted(glob.glob(str(Path(CAP) / "eve" / "*.json"))) + \
+        sorted(glob.glob(str(Path(CAP) / "eve" / "suricata-stats-*.jsonl")))
+    vistos, ev = set(), []
+    for e in suricata_stats.eventos_stats(rutas):
+        k = (e.get("timestamp"), (e.get("stats") or {}).get("uptime"))
+        if k not in vistos:
+            vistos.add(k)
+            ev.append(e)
+    r = suricata_stats.evaluar(ev)
+    que = "Suricata capture.kernel_drops (eventos stats de la EVE dedicada)"
+    fuente = "capturas/<ID>/eve/ (stats)"
+    if r["estado"] == "presente":
+        x = c(que, True if r["delta_kernel_drops"] == 0 else c7_ok, r, fuente)
+        if r["delta_kernel_drops"]:
+            x["nota"] = "Δ %d cuantificado; decide C7 (%s)" % (r["delta_kernel_drops"], c7_ok)
+        return x
+    if r["estado"] == "reinicio":
+        x = c(que, False, r, fuente)
+        x["nota"] = "Suricata se reinició durante la captura: pérdida no cuantificable"
+        return x
+    x = c(que, None, r, fuente)       # ausente o sin eventos: falta evidencia, nunca 0
+    x["nota"] = "contador %s: falta evidencia" % r["estado"]
+    return x
+
+
+def c9(P, E, c7_ok=None, CAP=None):
     ini, fin = texto(E / "contadores-lab-inicio.txt"), texto(E / "contadores-lab-fin.txt")
     if ini is None or fin is None:
         return criterio([], falta=["registros/contadores-lab-inicio.txt / -fin.txt"])
@@ -165,8 +198,8 @@ def c9(P, E, c7_ok=None):
     ext = cargar(E / "extremo-captura.json") or {}
     comp.append(perdida("tcpdump de srv-dmz: descartados por el núcleo", 0, ext.get("descartados_nucleo"),
                         c7_ok, "extremo-captura.json"))
-    return criterio(comp, prolongada=["contadores a lo largo de 49 h (supervisión prolongada, bloque 4)"],
-                    otra=["Suricata no publica kernel_drops en stats.log: no medible (INFORME-PILOTO §4)"])
+    comp.append(suricata(CAP if CAP is not None else Path(P).parent.parent / "capturas" / Path(P).name, c7_ok))
+    return criterio(comp, prolongada=["contadores a lo largo de 49 h (supervisión prolongada, bloque 4)"])
 
 
 # ---------------------------------------------------------------- C10 relojes
@@ -293,7 +326,7 @@ def revisar(P, CAP):
     E, G = P / "registros", P / "generador" / ID
     txs = [t for f in sorted(glob.glob(str(G / "transacciones-*.jsonl"))) for t in (jsonl(f) or [])]
     r7 = c7(P, txs)
-    R = {"C7": r7, "C9": c9(P, E, r7["ok"]),"C10": c10(P, E, G), "C11": c11(P, E), "C12": c12(P, E, CAP), "C13": c13(P, E)}
+    R = {"C7": r7, "C9": c9(P, E, r7["ok"], CAP),"C10": c10(P, E, G), "C11": c11(P, E), "C12": c12(P, E, CAP), "C13": c13(P, E)}
     return {"version": 1, "ejecucion": ID,
             "generado_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
             "nota": ("evaluar_piloto.py deja estos criterios en revisión manual (ok None); aquí se revisan "

@@ -14,7 +14,8 @@ from pathlib import Path
 CONDICIONES = {
     "PARADA": ("archivador_no_ok", "latido_viejo", "estado_inaccesible", "enlace_invalido", "espacio"),
     "INVALIDACION": {"output_drops": "perdida_antes_sensor",
-                     "kernel_drops": "perdida_en_sensor", "hueco_eve": "perdida_en_sensor",
+                     "kernel_drops": "perdida_en_sensor", "reinicio_suricata": "perdida_en_sensor",
+                     "hueco_eve": "perdida_en_sensor",
                      "hueco_pcap": "perdida_en_sensor", "desfase_reloj": "desfase_reloj"},
 }
 
@@ -32,15 +33,29 @@ def epoch(utc: str) -> float:
     return dt.datetime.fromisoformat(utc.replace("Z", "+00:00")).timestamp()
 
 
-def ultimo_kernel_drops(raw: str) -> int | None:
+def leer_stats(raw: str) -> dict:
+    """Último evento stats de la EVE dedicada. Distingue (nunca convierte un dato ausente en 0):
+    presente (kernel_drops leído, puede ser 0), ausente (evento stats sin capture.kernel_drops) y
+    sin_stats (ningún evento stats en lo leído). La lectura fallida la registra quien llama."""
     for linea in reversed(raw.splitlines()):
         try:
             reg = json.loads(linea)
-            if reg.get("event_type") == "stats":
-                return int(reg["stats"]["capture"]["kernel_drops"])
-        except (ValueError, KeyError, TypeError):
-            pass
-    return None
+        except ValueError:
+            continue
+        if reg.get("event_type") != "stats":
+            continue
+        s = reg.get("stats") if isinstance(reg.get("stats"), dict) else {}
+        cap = s.get("capture") if isinstance(s.get("capture"), dict) else {}
+        kd, kp = cap.get("kernel_drops"), cap.get("kernel_packets")
+        return {"kernel_drops_estado": "presente" if isinstance(kd, int) else "ausente",
+                "kernel_drops": kd if isinstance(kd, int) else None,
+                "kernel_packets": kp if isinstance(kp, int) else None,
+                "suricata_uptime_s": s.get("uptime"), "stats_timestamp": reg.get("timestamp")}
+    return {"kernel_drops_estado": "sin_stats", "kernel_drops": None}
+
+
+def ultimo_kernel_drops(raw: str) -> int | None:
+    return leer_stats(raw)["kernel_drops"]
 
 
 def enlace(raw: str) -> tuple[bool | None, int | None]:
@@ -130,11 +145,26 @@ class Vigia:
             # Se filtra EN Sensor1 y solo viaja la última línea stats: traer 2000 líneas (~1 MB)
             # al bastión cruza el cortafuegos, el espejo la ve dos veces y desbordaba Gi2/0/19
             # (prueba B1 del 25-nov: R1 sin filtrar 4/5 con descartes; R2 filtrada 0/5).
-            reg["kernel_drops"] = ultimo_kernel_drops(self.ejecutor(
+            reg.update(leer_stats(self.ejecutor(
                 ["ssh", "sensor1", "tail -n 2000 /var/log/suricata/v2/eve.json"
-                 " | grep -F '\"event_type\":\"stats\"' | tail -n 1"]))
+                 " | grep -F '\"event_type\":\"stats\"' | tail -n 1"])))
         except Exception as e:
             reg["eve_error"] = str(e)
+            reg["kernel_drops_estado"] = "lectura_fallida"
+            reg["kernel_drops"] = None
+        # Reinicio de Suricata: uptime o kernel_packets retroceden y los contadores vuelven a 0. Se
+        # invalida el tramo (pérdida no cuantificable) y la base de comparación pasa a la lectura
+        # nueva: sin esto, descartes posteriores por debajo del valor previo quedarían ocultos.
+        up, kp = reg.get("suricata_uptime_s"), reg.get("kernel_packets")
+        up0, kp0 = self.previos.get("suricata_uptime_s"), self.previos.get("kernel_packets")
+        if (up is not None and up0 is not None and up < up0) or (kp is not None and kp0 is not None and kp < kp0):
+            reg["suricata_reinicio"] = True
+            self.invalidar("reinicio_suricata", desde, ahora, uptime_anterior=up0, uptime_nuevo=up,
+                           kernel_packets_anterior=kp0, kernel_packets_nuevo=kp)
+            self.previos.pop("kernel_drops", None)
+        for k in ("suricata_uptime_s", "kernel_packets"):
+            if reg.get(k) is not None:
+                self.previos[k] = reg[k]
         reg["libre_gb"] = estado.get("libre_gb")
         for host in ("sensor1", "clientes"):
             try:
