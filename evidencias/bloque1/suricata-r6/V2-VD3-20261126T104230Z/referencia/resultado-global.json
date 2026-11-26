@@ -1,0 +1,81 @@
+{
+  "ejecucion": "V2-VD3-20261126T104230Z",
+  "generador": "completa",
+  "archivador": "completa",
+  "vigia": "sin_paradas",
+  "supervision": "sin_invalidaciones",
+  "espejo": "con_descartes",
+  "calidad_copias": "completo",
+  "calidad_dns": "completo",
+  "calidad_extremo": "completo",
+  "calidad_sonda": "completo",
+  "analisis": "completo",
+  "exclusion_v1": "cubre",
+  "global": "no_aprobada",
+  "dictamen": "fallido",
+  "codigo_salida": 1,
+  "alcance": "verificacion_corta: aprobada se refiere SOLO a los requisitos aplicables; las comprobaciones de duración prolongada siguen pendientes aparte",
+  "tipo_ejecucion": "verificacion_dirigida",
+  "tipo_inferido_por_duracion": true,
+  "requisitos": {
+    "prolongadas": false,
+    "otra_comprobacion": false
+  },
+  "motivos": [
+    "espejo:con_descartes",
+    "falta:criterio:C10"
+  ],
+  "pasos": {
+    "conciliar": "0",
+    "cobertura": "0",
+    "fronteras": "0",
+    "extraer": "0",
+    "verificar": "0",
+    "calidad_copias": "0",
+    "calidad_dns": "0",
+    "calidad_extremo": "0",
+    "metadatos": "0",
+    "calidad_sonda": "0"
+  },
+  "fuente_pasos": "pasos-analisis.jsonl",
+  "criterios_revisados": true,
+  "pendientes_duracion_prolongada": {
+    "C7": [
+      "cobertura a través de la rotación del EVE a las 00:00 UTC (bloque 4)"
+    ],
+    "C9": [
+      "contadores a lo largo de 49 h (supervisión prolongada, bloque 4)"
+    ],
+    "C10": [
+      "deriva de los relojes a lo largo de 49 h (bloque 4)"
+    ],
+    "C11": [
+      "orden del EVE a través de su rotación a las 00:00 UTC (bloque 4)"
+    ],
+    "C12": [
+      "volumen real de 49 h frente a la proyección (otro programa y carga nocturna)"
+    ],
+    "C13": [
+      "aislamiento mantenido durante 49 h (supervisión prolongada)"
+    ]
+  },
+  "pendientes_otra_comprobacion": {
+    "C10": [
+      "DC1 unos 6,5–7 ms por detrás (bloque 4)"
+    ],
+    "C11": [
+      "deduplicación del extractor: RST idénticos y copias a >5 ms (bloque 3)"
+    ]
+  },
+  "exclusiones": {
+    "ventanas": 645,
+    "excluidas": 360,
+    "guardas_planificadas": {
+      "E1": 353,
+      "E5": 26
+    },
+    "por_incidente": {},
+    "otras_reglas": {},
+    "invalidaciones_supervision": 0
+  }
+}

@@ -36,5 +36,8 @@ tests/_temporales_pytest/
 # (contadores, sin IP ni MAC; barridos) y la referencia recalculada. Nada de PCAP ni del EVE completo.
 !evidencias/bloque1/suricata-r5/*/capturas/
 !evidencias/bloque1/suricata-r5/*/capturas/*/eve/suricata-stats-*.jsonl
+# Bloque 1, revisión 6: muestras stats de la EVE dedicada completa que acotan cada periodo de captura
+!evidencias/bloque1/suricata-r6/*/pruebas/
+!evidencias/bloque1/suricata-r6/*/pruebas/*/registros/suricata-stats-ventana-*.jsonl
 # carpeta de descarga de la release al reproducir desde un clon
 descargas/

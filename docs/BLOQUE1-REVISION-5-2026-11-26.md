@@ -1,3 +1,5 @@
+> **Nota (6.ª revisión, docs/BLOQUE1-REVISION-6-2026-11-26.md):** tres correcciones a esta revisión. (1) El Δ de Suricata se medía solo entre muestras interiores al periodo; ahora el periodo debe quedar acotado (§1 de la 6.ª). (2) Con Δ > 0, C9 de Suricata dependía de C7; ahora es fallo (§2). (3) «Ninguno decide el dictamen» (§5) era inexacto (§4). Los dictámenes de VD2–VD6 no cambian.
+
 # Bloque 1, revisión 5: reproducción limpia, Suricata `kernel_drops` y matriz final (26-nov-2026)
 
 Esta revisión es **preparación**. No se repitió ninguna captura: el reanálisis se hizo sobre copias.
@@ -216,7 +218,7 @@ Los resultados se dan en el orden VD2 / VD3 / VD4 / VD6.
 - el análisis de la pérdida de gestión;
 - T1–E3, que no tienen extractos.
 
-**Ninguno decide el dictamen.**
+~~**Ninguno decide el dictamen.**~~ **Corregido en la 6.ª revisión (§4):** es inexacto. No deciden el dictamen los campos que cuentan el anillo completo, pero sí lo deciden valores publicados cuya traza original es privada o irrepetible: lecturas del switch, contadores de Sensor1, tcpdump y srv-dmz, relojes, volumen del PCAP/EVE completos, recuentos de `nft` y la completitud de los eventos `stats` de Suricata. La comprobación A recalcula el dictamen desde esos valores; no los verifica de forma independiente.
 
 **Pendientes del Bloque 1:**
 

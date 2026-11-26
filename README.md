@@ -23,8 +23,9 @@ V2 vuelve a capturar los datos y vuelve a entrenar el escalador y el IF, a calib
 
 - El piloto final y las 49 h definitivas, los ataques y las campañas A/B **no se han iniciado**.
 - Estado del Bloque 1:
+  - `docs/BLOQUE1-REVISION-6-2026-11-26.md`: suficiencia temporal de Suricata (el periodo debe quedar acotado), C9 sin depender de C7, `dictamen_casos` sin copia recursiva, qué valores publicados deciden el dictamen, y dependencias (lo vigente);
   - `docs/BLOQUE1-REVISION-5-2026-11-26.md`: reproducción limpia, Suricata `kernel_drops` (sí se mide),
-    conciliación de pendientes y **matriz final del Bloque 1** (lo vigente);
+    conciliación de pendientes y **matriz final del Bloque 1**;
   - `docs/BLOQUE1-REVISION-4-2026-11-26.md`: publicación, reproducción y requisitos por tipo de ejecución;
   - `docs/BLOQUE1-REVISION-3-2026-11-26.md`: VD4/VD6 y C7/C9–C13;
   - `docs/BLOQUE1-REVISION-2-2026-11-26.md`;
@@ -42,7 +43,7 @@ V2 vuelve a capturar los datos y vuelve a entrenar el escalador y el IF, a calib
 
 ### Reproducir el Bloque 1 (desde un clon nuevo)
 
-Hace falta Python 3.12 o posterior, solo con la biblioteca estándar. Para descargar, `gh` o el
+Los programas necesitan Python 3.12 o posterior, solo con la biblioteca estándar. Las pruebas necesitan además pytest (ver «Pruebas» abajo). Para descargar, `gh` o el
 navegador. **En Windows**, clona en una carpeta de ruta corta (por ejemplo `C:\r4`) y con
 `core.longpaths=true`: algunas rutas de `evidencias/` superan los 260 caracteres. Sin eso, el checkout
 queda incompleto (primer intento, `evidencias/bloque1/entradas-r4/REPRODUCCION-CLON-LIMPIO-intento1-fallido.txt`).
@@ -56,7 +57,18 @@ python -X utf8 operacion/reproducir_dictamen.py
 python -X utf8 operacion/recalcular_desde_capturas.py evidencias/bloque1/entradas-r4 --p2 evidencias/bloque1/extractos-539c48e/p2-V2-VD2-20261126T090705Z
 ```
 
-Resultado esperado: cada guion termina en `GLOBAL SATISFACTORIO` (rc 0).
+Resultado esperado: cada guion termina en `GLOBAL SATISFACTORIO` (rc 0). `reproducir_dictamen.py` aplica por omisión los complementos `suricata-r5` y `suricata-r6` (REVISION-6 §6).
+
+### Pruebas
+
+Además de lo anterior hace falta **pytest** (probado con Python 3.14.3 y pytest 9.0.3). `unittest discover` solo recoge 261 de las 310 pruebas.
+
+```
+python -m pip install pytest
+python -m pytest -q -p no:cacheprovider tests
+```
+
+Resultado esperado con 2a3478b: `310 passed, 38 subtests passed`.
 
 - `verificar_paquetes.py` comprueba los sha256 frente al manifiesto versionado y extrae los paquetes.
 - `reproducir_dictamen.py` rehace el dictamen desde los resultados intermedios: dictamen, motivos,
@@ -82,7 +94,7 @@ El primer intento falló por la longitud de las rutas, y su registro se conserva
 | `operacion/` | `v2ctl.py`: preflight, iniciar, estado y parar, con un supervisor sin reinicio automático |
 | `captura/` | Archivador de PCAP y EVE fuera del anillo de V1 y cruce del registro con la captura |
 | `extraccion/` | Extracción V2 (`extraer_v2`, `verificar_v2`, `metadatos_v2`) a partir de los originales |
-| `tests/` | Pruebas sin red (`python -m unittest discover -s tests`) |
+| `tests/` | Pruebas sin red (`python -m pytest -q -p no:cacheprovider tests`; necesita pytest) |
 | `docs/` | Protocolo, aclaraciones, procedencia, comandos, informe de pruebas, pendientes y matriz de observaciones |
 | `manifiestos/` | Versiones y sha256 del código, los programas y la evidencia privada |
 
@@ -94,4 +106,4 @@ Se publican, en la release, extractos filtrados al tráfico experimental. Solo c
 pasan a un seudónimo. Para P2 se publica un extracto de 6 conexiones. El criterio está en
 `evidencias/bloque1/entradas-r4/LEEME.md`.
 
-Solo se usa la biblioteca estándar de Python 3.12 o posterior, porque las VM del laboratorio no tienen dependencias instaladas.
+Los programas solo usan la biblioteca estándar de Python 3.12 o posterior, porque las VM del laboratorio no tienen dependencias instaladas. Las pruebas, además, pytest.
