@@ -1,4 +1,4 @@
-# Estado de cada elemento (24-nov-2026; actualizado el 26-nov con el cierre del Bloque 1)
+# Estado de cada elemento (24-nov-2026; actualizado el 26-nov con el cierre del Bloque 1 y sus dos revisiones)
 
 **Leyenda:**
 
@@ -54,8 +54,17 @@ Preparar una prueba no es pasarla, y pasarla no cierra una observación de los r
 | 38 | Reloj de DC1 unos 6,5–7 ms por detrás de Clientes y Sensor1 | Pendiente | Contraste DNS de E3 (marcas del kernel). Contradice a `chronyc` en DC1 (+0,6 ms). Medir el desfase entre equipos directamente |
 | 39 | Decisión de Mark: política de calidad (vigente frente a propuesta) | Sustituida por la fila 32 (26-nov) | Pérdida comprobada = `no_aprobada` mientras no haya fracción de exclusión fijada. `BLOQUE1-REVISION-2026-11-26.md` §3–4 |
 | 40 | DNS de E3 con el PCAP de DC1 | Comprobado y reproducible (26-nov) | 182/182, `pcap_dc1: true`. Antes `reanalisis_bloque1.sh` no pasaba `--pcap` (corregido). Entradas en `evidencias/bloque1/dns-entradas/`; `reproducir_dns.py` da 6/6 idénticos |
-| 41 | Eventos DNS sin transacción = sonda del preflight de `v2ctl.py` (id 17611) | Explicados (26-nov); tratamiento temporal | 23 ventanas de .21 por ejecución calculadas (`ventanas_sonda.py`), sin aplicar en `cerrar_v2.sh`. Definitivo (registrar la sonda y retirarla en el extractor): bloque 3. Origen de la sonda de T1 a las 06:25:16 sin documentar |
-| 42 | PCAP de la prueba de `rx_dropped` (120 s) | Perdido (rotado) | Solo `rx-dropped-r1.json` publicado. La igualdad trama a trama (1 704 PVST+ / 4 CDP) no es revisable; repetir archivando si se pide |
-| 43 | Localización de la pérdida silenciosa de gestión (switch frente a ESXi) | Pendiente: faltan accesos | Lectura en ESXi (`esxcli … nic stats`, `esxtop %DRPRX`, `vsish`) y en el switch: `BLOQUE1-REVISION-2026-11-26.md` §8; prueba nueva con la orden de Mark |
+| 41 | Eventos DNS sin transacción = sonda del preflight de `v2ctl.py` | Corregido (26-nov, 2.ª revisión) | Ya no basta id 17611 + `portal.`: explicado solo con sonda registrada de la misma ejecución, misma clave (origen, puerto, id, nombre completo) y dentro de su intervalo; 11 pruebas. T1–E3: explicados con registro reconstruido (dictamen `indeterminado`); la consulta de T1 de las 06:25:16 queda **incierta**. `BLOQUE1-REVISION-2-2026-11-26.md` §2 |
+| 42 | PCAP de la prueba de `rx_dropped` (120 s) | Comprobado (26-nov, repetida) | r2: Δ`rx_dropped` 1 688 = 1 684 PVST+ + 4 CDP; 29 PCAP archivados (privados) y extracto saneado publicado (`evidencias/bloque1/rx-dropped-r2/`). r1 = evidencia histórica incompleta. REVISION-2 §7 |
+| 43 | Localización de la pérdida silenciosa de gestión (switch frente a ESXi) | Localizada (26-nov) | Contadores de ambos lados: lo que sale de Gi2/0/19 llega entero al invitado (ESXi 0 descartes); las copias que faltan no llegan a encolarse en Gi2/0/19. Mecanismo exacto dentro del switch (sobresuscripción en microrráfagas, hipótesis) sin contador que lo confirme. REVISION-2 §9 |
 | 44 | Rotación del EVE y supervisión prolongada | Pendiente (bloque 4) | Ver filas 15 y 34; no se declaran cerradas |
-| 40 | 6 consultas DNS por ejecución sin transacción del generador | Pendiente (sin pérdida) | Vistas igual en DC1 y Sensor1; hipótesis: sonda del preflight o arranque |
+| 40b | 6 consultas DNS por ejecución sin transacción del generador | Sustituida por la fila 41 | Era la sonda del preflight |
+| 45 | Preflight completo registrado (comprobaciones locales + sondas DNS/HTTP/HTTPS) | Comprobado en VD2 (26-nov) | `registros/preflight-clientes.jsonl` y `generador/<ID>/preflight.jsonl`. REVISION-2 §3 |
+| 46 | Sonda antes del periodo útil, margen 240 s derivado del extractor | Comprobado en VD2 (26-nov) | `iniciar --sondas-previas`; `calidad_sonda` con el extractor real. T1–E3 contaminadas → `no_aprobada`. REVISION-2 §4 |
+| 47 | Referencia independiente obligatoria: srv-dmz (tcpdump) y DC1 (PCAP) en cada ejecución | Comprobado en VD2 (26-nov) | Integridad (sha256, `.danado`), descartes, filtro, espacio y carga; `calidad_extremo` en el dictamen. REVISION-2 §6 |
+| 48 | Criterio conservador: guardas planificadas frente a exclusiones por incidente, sin porcentaje | Implementado y probado | `estado_global.exclusiones()`; POLITICA §1 y §6 |
+| 49 | Lanzador: la captura de srv-dmz retenía la sesión ssh (VD1) | Corregido (c548ecd) | `tests/test_lanzar_fondo.py`; REVISION-2 §11 |
+| 50 | Contador interno del switch que confirme la sobresuscripción del destino del SPAN | Pendiente | Solo lectura; no se cambia SPAN ni búferes |
+| 51 | Espacio de srv-dmz durante la captura del extremo | Pendiente | Se registra al principio y al final; no hay vigilancia ni parada si se agota. VD2: 13 MB en 24 min de generación, 10,2 GB libres |
+| 52 | `cobertura_v2.py` con conexiones persistentes (P2) | Pendiente (bloque 3) | VD2: 152 transacciones de P2 «incompletas» en conexiones reutilizadas (hasta 24 por conexión) → E3 en 23 ventanas de .22, clasificadas como exclusión por incidente. No hay pérdida: el extremo ve 0 segmentos sin Sensor1 y P2 suma 1 626 730 B vistos frente a 1 615 901 esperados. Corregir el reparto de bytes por transacción |
+| 53 | El sondeo del SPAN no cubría el margen previo del archivador (30–35 s) | Corregido (80627be) | E3 y VD2 `espejo: indeterminado` por eso. El lanzador espera a que el sondeo cubra ese margen; comprobado en VD3 |

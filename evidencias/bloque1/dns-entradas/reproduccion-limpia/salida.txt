@@ -1,0 +1,20 @@
+commit ccb41a4fb09c27f330046edc5a0775e650737c2c
+paquete sha256 cc21f054bb5e1e1830e46555d9ccff8490d6bcebd681b39d75e3ee188cce270b
+carpeta paquete <carpeta-vacia>\paquete\paquete
+pcap DC1: True c95b92efa8566a8b710e2c2e96396b5fbf0b674137e7b5a143d2772c93ae4fe5
+V2-T1-20261125T062528Z pcap_dc1=False rc=1 32/32 sin_tx=10 igual=True
+V2-T2-20261125T070500Z pcap_dc1=False rc=0 182/182 sin_tx=6 igual=True
+V2-E1-20261125T185323Z pcap_dc1=False rc=0 32/32 sin_tx=6 igual=True
+V2-E2-20261125T194609Z pcap_dc1=False rc=0 182/182 sin_tx=6 igual=True
+V2-E3-20261125T230032Z pcap_dc1=False rc=0 182/182 sin_tx=6 igual=True
+V2-E3-20261125T230032Z pcap_dc1=True rc=0 182/182 sin_tx=8 igual=True
+rc 0  duracion 7 s
+V2-T1-20261125T062528Z False 1 32 / 32 sin_tx 10 {'explicados': 6, 'inciertos': 4, 'no_explicados': 4} clasif_igual True igual True
+V2-T2-20261125T070500Z False 0 182 / 182 sin_tx 6 {'explicados': 6, 'inciertos': 0, 'no_explicados': 0} clasif_igual True igual True
+V2-E1-20261125T185323Z False 0 32 / 32 sin_tx 6 {'explicados': 6, 'inciertos': 0, 'no_explicados': 0} clasif_igual True igual True
+V2-E2-20261125T194609Z False 0 182 / 182 sin_tx 6 {'explicados': 6, 'inciertos': 0, 'no_explicados': 0} clasif_igual True igual True
+V2-E3-20261125T230032Z False 0 182 / 182 sin_tx 6 {'explicados': 6, 'inciertos': 0, 'no_explicados': 0} clasif_igual True igual True
+V2-E3-20261125T230032Z True 0 182 / 182 sin_tx 8 {'explicados': 8, 'inciertos': 0, 'no_explicados': 0} clasif_igual True igual True
+todo_igual True
+
+[exited with code 0]

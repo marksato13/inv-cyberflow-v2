@@ -1,0 +1,917 @@
+{
+ "filas": [
+  {
+   "ejecucion": "V2-T1-20261125T062528Z",
+   "pcap_dc1": false,
+   "rc": 1,
+   "total": {
+    "transacciones": 32,
+    "comprobadas": 32,
+    "sin_discrepancias": 32,
+    "discrepancias": 0,
+    "no_determinables": 0,
+    "indeterminado_dc1": 0,
+    "ambiguas": 0,
+    "consultas_dc1": 32,
+    "respuestas_dc1": 32,
+    "timeouts": 0,
+    "timeouts_con_consulta_dc1": 0,
+    "timeouts_con_consulta_sensor1": 0
+   },
+   "sin_transaccion": 10,
+   "tramas_ilegibles": 0,
+   "sin_transaccion_clasificacion": {
+    "explicados": 6,
+    "no_explicados": 4,
+    "inciertos": 4,
+    "por_motivo": {
+     "incierto:firma_de_sonda_sin_ejecucion_acreditada(fuera_del_intervalo_de_la_sonda)": 4,
+     "sonda_preflight_reconstruido": 6
+    },
+    "por_fuente_registro": {
+     "reconstruido": 6
+    },
+    "claves_explicadas": [
+     [
+      "10.10.20.21",
+      59565,
+      17611
+     ]
+    ],
+    "relaciones": [
+     {
+      "clave": [
+       "10.10.20.21",
+       59565,
+       17611
+      ],
+      "fuente_evento": "dc1",
+      "t": 1795588191.077402,
+      "ejecucion_id": "V2-T1-20261125T062528Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T06:29:48.000000Z",
+      "sonda_fin_utc": "2026-11-25T06:29:51.226030Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       59565,
+       17611
+      ],
+      "fuente_evento": "dc1",
+      "t": 1795588191.07859,
+      "ejecucion_id": "V2-T1-20261125T062528Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T06:29:48.000000Z",
+      "sonda_fin_utc": "2026-11-25T06:29:51.226030Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       59565,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795588191.082266,
+      "ejecucion_id": "V2-T1-20261125T062528Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T06:29:48.000000Z",
+      "sonda_fin_utc": "2026-11-25T06:29:51.226030Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       59565,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795588191.082439,
+      "ejecucion_id": "V2-T1-20261125T062528Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T06:29:48.000000Z",
+      "sonda_fin_utc": "2026-11-25T06:29:51.226030Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       59565,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795588191.083922,
+      "ejecucion_id": "V2-T1-20261125T062528Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T06:29:48.000000Z",
+      "sonda_fin_utc": "2026-11-25T06:29:51.226030Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       59565,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795588191.084179,
+      "ejecucion_id": "V2-T1-20261125T062528Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T06:29:48.000000Z",
+      "sonda_fin_utc": "2026-11-25T06:29:51.226030Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     }
+    ],
+    "no_explicados_detalle": [
+     {
+      "fuente": "sensor1",
+      "clave": [
+       "10.10.20.21",
+       38742,
+       17611
+      ],
+      "sentido": "consulta",
+      "t": 1795587916.819316,
+      "vlan": 20,
+      "motivo": "incierto:firma_de_sonda_sin_ejecucion_acreditada(fuera_del_intervalo_de_la_sonda)",
+      "nombre": "portal.cf-v2.lab"
+     },
+     {
+      "fuente": "sensor1",
+      "clave": [
+       "10.10.20.21",
+       38742,
+       17611
+      ],
+      "sentido": "consulta",
+      "t": 1795587916.819364,
+      "vlan": 10,
+      "motivo": "incierto:firma_de_sonda_sin_ejecucion_acreditada(fuera_del_intervalo_de_la_sonda)",
+      "nombre": "portal.cf-v2.lab"
+     },
+     {
+      "fuente": "sensor1",
+      "clave": [
+       "10.10.20.21",
+       38742,
+       17611
+      ],
+      "sentido": "respuesta",
+      "t": 1795587916.820361,
+      "vlan": 10,
+      "motivo": "incierto:firma_de_sonda_sin_ejecucion_acreditada(fuera_del_intervalo_de_la_sonda)",
+      "nombre": "portal.cf-v2.lab"
+     },
+     {
+      "fuente": "sensor1",
+      "clave": [
+       "10.10.20.21",
+       38742,
+       17611
+      ],
+      "sentido": "respuesta",
+      "t": 1795587916.820643,
+      "vlan": 20,
+      "motivo": "incierto:firma_de_sonda_sin_ejecucion_acreditada(fuera_del_intervalo_de_la_sonda)",
+      "nombre": "portal.cf-v2.lab"
+     }
+    ],
+    "sondas_registradas": 1,
+    "regla": "sonda DNS registrada en preflight.jsonl de la misma ejecución con igual origen, puerto, id y nombre completo, y el evento dentro de [inicio − 0.5 s, fin + 0.5 s]"
+   },
+   "tramas_recortadas_no_dns": 132025,
+   "clasificacion_igual_al_laboratorio": true,
+   "igual_al_laboratorio": true,
+   "referencia": "evidencias/bloque1/reanalisis/dns-V2-T1-20261125T062528Z.json"
+  },
+  {
+   "ejecucion": "V2-T2-20261125T070500Z",
+   "pcap_dc1": false,
+   "rc": 0,
+   "total": {
+    "transacciones": 182,
+    "comprobadas": 182,
+    "sin_discrepancias": 182,
+    "discrepancias": 0,
+    "no_determinables": 0,
+    "indeterminado_dc1": 0,
+    "ambiguas": 0,
+    "consultas_dc1": 182,
+    "respuestas_dc1": 182,
+    "timeouts": 0,
+    "timeouts_con_consulta_dc1": 0,
+    "timeouts_con_consulta_sensor1": 0
+   },
+   "sin_transaccion": 6,
+   "tramas_ilegibles": 0,
+   "sin_transaccion_clasificacion": {
+    "explicados": 6,
+    "no_explicados": 0,
+    "inciertos": 0,
+    "por_motivo": {
+     "sonda_preflight_reconstruido": 6
+    },
+    "por_fuente_registro": {
+     "reconstruido": 6
+    },
+    "claves_explicadas": [
+     [
+      "10.10.20.21",
+      44578,
+      17611
+     ]
+    ],
+    "relaciones": [
+     {
+      "clave": [
+       "10.10.20.21",
+       44578,
+       17611
+      ],
+      "fuente_evento": "dc1",
+      "t": 1795590469.591375,
+      "ejecucion_id": "V2-T2-20261125T070500Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T07:07:47.000000Z",
+      "sonda_fin_utc": "2026-11-25T07:07:49.749030Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       44578,
+       17611
+      ],
+      "fuente_evento": "dc1",
+      "t": 1795590469.592056,
+      "ejecucion_id": "V2-T2-20261125T070500Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T07:07:47.000000Z",
+      "sonda_fin_utc": "2026-11-25T07:07:49.749030Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       44578,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795590469.596517,
+      "ejecucion_id": "V2-T2-20261125T070500Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T07:07:47.000000Z",
+      "sonda_fin_utc": "2026-11-25T07:07:49.749030Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       44578,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795590469.596729,
+      "ejecucion_id": "V2-T2-20261125T070500Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T07:07:47.000000Z",
+      "sonda_fin_utc": "2026-11-25T07:07:49.749030Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       44578,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795590469.597739,
+      "ejecucion_id": "V2-T2-20261125T070500Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T07:07:47.000000Z",
+      "sonda_fin_utc": "2026-11-25T07:07:49.749030Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       44578,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795590469.598155,
+      "ejecucion_id": "V2-T2-20261125T070500Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T07:07:47.000000Z",
+      "sonda_fin_utc": "2026-11-25T07:07:49.749030Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     }
+    ],
+    "no_explicados_detalle": [],
+    "sondas_registradas": 1,
+    "regla": "sonda DNS registrada en preflight.jsonl de la misma ejecución con igual origen, puerto, id y nombre completo, y el evento dentro de [inicio − 0.5 s, fin + 0.5 s]"
+   },
+   "tramas_recortadas_no_dns": 106741,
+   "clasificacion_igual_al_laboratorio": true,
+   "igual_al_laboratorio": true,
+   "referencia": "evidencias/bloque1/reanalisis/dns-V2-T2-20261125T070500Z.json"
+  },
+  {
+   "ejecucion": "V2-E1-20261125T185323Z",
+   "pcap_dc1": false,
+   "rc": 0,
+   "total": {
+    "transacciones": 32,
+    "comprobadas": 32,
+    "sin_discrepancias": 32,
+    "discrepancias": 0,
+    "no_determinables": 0,
+    "indeterminado_dc1": 0,
+    "ambiguas": 0,
+    "consultas_dc1": 32,
+    "respuestas_dc1": 32,
+    "timeouts": 0,
+    "timeouts_con_consulta_dc1": 0,
+    "timeouts_con_consulta_sensor1": 0
+   },
+   "sin_transaccion": 6,
+   "tramas_ilegibles": 0,
+   "sin_transaccion_clasificacion": {
+    "explicados": 6,
+    "no_explicados": 0,
+    "inciertos": 0,
+    "por_motivo": {
+     "sonda_preflight_reconstruido": 6
+    },
+    "por_fuente_registro": {
+     "reconstruido": 6
+    },
+    "claves_explicadas": [
+     [
+      "10.10.20.21",
+      48716,
+      17611
+     ]
+    ],
+    "relaciones": [
+     {
+      "clave": [
+       "10.10.20.21",
+       48716,
+       17611
+      ],
+      "fuente_evento": "dc1",
+      "t": 1795632976.635532,
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T18:56:14.000000Z",
+      "sonda_fin_utc": "2026-11-25T18:56:16.786045Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       48716,
+       17611
+      ],
+      "fuente_evento": "dc1",
+      "t": 1795632976.636071,
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T18:56:14.000000Z",
+      "sonda_fin_utc": "2026-11-25T18:56:16.786045Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       48716,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795632976.640599,
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T18:56:14.000000Z",
+      "sonda_fin_utc": "2026-11-25T18:56:16.786045Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       48716,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795632976.64064,
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T18:56:14.000000Z",
+      "sonda_fin_utc": "2026-11-25T18:56:16.786045Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       48716,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795632976.641507,
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T18:56:14.000000Z",
+      "sonda_fin_utc": "2026-11-25T18:56:16.786045Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       48716,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795632976.642008,
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T18:56:14.000000Z",
+      "sonda_fin_utc": "2026-11-25T18:56:16.786045Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     }
+    ],
+    "no_explicados_detalle": [],
+    "sondas_registradas": 1,
+    "regla": "sonda DNS registrada en preflight.jsonl de la misma ejecución con igual origen, puerto, id y nombre completo, y el evento dentro de [inicio − 0.5 s, fin + 0.5 s]"
+   },
+   "tramas_recortadas_no_dns": 118580,
+   "clasificacion_igual_al_laboratorio": true,
+   "igual_al_laboratorio": true,
+   "referencia": "evidencias/bloque1/reanalisis/dns-V2-E1-20261125T185323Z.json"
+  },
+  {
+   "ejecucion": "V2-E2-20261125T194609Z",
+   "pcap_dc1": false,
+   "rc": 0,
+   "total": {
+    "transacciones": 182,
+    "comprobadas": 182,
+    "sin_discrepancias": 182,
+    "discrepancias": 0,
+    "no_determinables": 0,
+    "indeterminado_dc1": 0,
+    "ambiguas": 0,
+    "consultas_dc1": 182,
+    "respuestas_dc1": 182,
+    "timeouts": 0,
+    "timeouts_con_consulta_dc1": 0,
+    "timeouts_con_consulta_sensor1": 0
+   },
+   "sin_transaccion": 6,
+   "tramas_ilegibles": 0,
+   "sin_transaccion_clasificacion": {
+    "explicados": 6,
+    "no_explicados": 0,
+    "inciertos": 0,
+    "por_motivo": {
+     "sonda_preflight_reconstruido": 6
+    },
+    "por_fuente_registro": {
+     "reconstruido": 6
+    },
+    "claves_explicadas": [
+     [
+      "10.10.20.21",
+      44833,
+      17611
+     ]
+    ],
+    "relaciones": [
+     {
+      "clave": [
+       "10.10.20.21",
+       44833,
+       17611
+      ],
+      "fuente_evento": "dc1",
+      "t": 1795636136.947023,
+      "ejecucion_id": "V2-E2-20261125T194609Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T19:48:54.000000Z",
+      "sonda_fin_utc": "2026-11-25T19:48:57.102070Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       44833,
+       17611
+      ],
+      "fuente_evento": "dc1",
+      "t": 1795636136.948247,
+      "ejecucion_id": "V2-E2-20261125T194609Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T19:48:54.000000Z",
+      "sonda_fin_utc": "2026-11-25T19:48:57.102070Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       44833,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795636136.95167,
+      "ejecucion_id": "V2-E2-20261125T194609Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T19:48:54.000000Z",
+      "sonda_fin_utc": "2026-11-25T19:48:57.102070Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       44833,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795636136.95186,
+      "ejecucion_id": "V2-E2-20261125T194609Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T19:48:54.000000Z",
+      "sonda_fin_utc": "2026-11-25T19:48:57.102070Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       44833,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795636136.953537,
+      "ejecucion_id": "V2-E2-20261125T194609Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T19:48:54.000000Z",
+      "sonda_fin_utc": "2026-11-25T19:48:57.102070Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       44833,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795636136.954006,
+      "ejecucion_id": "V2-E2-20261125T194609Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T19:48:54.000000Z",
+      "sonda_fin_utc": "2026-11-25T19:48:57.102070Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     }
+    ],
+    "no_explicados_detalle": [],
+    "sondas_registradas": 1,
+    "regla": "sonda DNS registrada en preflight.jsonl de la misma ejecución con igual origen, puerto, id y nombre completo, y el evento dentro de [inicio − 0.5 s, fin + 0.5 s]"
+   },
+   "tramas_recortadas_no_dns": 98564,
+   "clasificacion_igual_al_laboratorio": true,
+   "igual_al_laboratorio": true,
+   "referencia": "evidencias/bloque1/reanalisis/dns-V2-E2-20261125T194609Z.json"
+  },
+  {
+   "ejecucion": "V2-E3-20261125T230032Z",
+   "pcap_dc1": false,
+   "rc": 0,
+   "total": {
+    "transacciones": 182,
+    "comprobadas": 182,
+    "sin_discrepancias": 182,
+    "discrepancias": 0,
+    "no_determinables": 0,
+    "indeterminado_dc1": 0,
+    "ambiguas": 0,
+    "consultas_dc1": 182,
+    "respuestas_dc1": 182,
+    "timeouts": 0,
+    "timeouts_con_consulta_dc1": 0,
+    "timeouts_con_consulta_sensor1": 0
+   },
+   "sin_transaccion": 6,
+   "tramas_ilegibles": 0,
+   "sin_transaccion_clasificacion": {
+    "explicados": 6,
+    "no_explicados": 0,
+    "inciertos": 0,
+    "por_motivo": {
+     "sonda_preflight_reconstruido": 6
+    },
+    "por_fuente_registro": {
+     "reconstruido": 6
+    },
+    "claves_explicadas": [
+     [
+      "10.10.20.21",
+      53580,
+      17611
+     ]
+    ],
+    "relaciones": [
+     {
+      "clave": [
+       "10.10.20.21",
+       53580,
+       17611
+      ],
+      "fuente_evento": "dc1",
+      "t": 1795647813.014755,
+      "ejecucion_id": "V2-E3-20261125T230032Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T23:03:30.000000Z",
+      "sonda_fin_utc": "2026-11-25T23:03:33.177694Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       53580,
+       17611
+      ],
+      "fuente_evento": "dc1",
+      "t": 1795647813.0153878,
+      "ejecucion_id": "V2-E3-20261125T230032Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T23:03:30.000000Z",
+      "sonda_fin_utc": "2026-11-25T23:03:33.177694Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       53580,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795647813.020994,
+      "ejecucion_id": "V2-E3-20261125T230032Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T23:03:30.000000Z",
+      "sonda_fin_utc": "2026-11-25T23:03:33.177694Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       53580,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795647813.021116,
+      "ejecucion_id": "V2-E3-20261125T230032Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T23:03:30.000000Z",
+      "sonda_fin_utc": "2026-11-25T23:03:33.177694Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       53580,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795647813.021894,
+      "ejecucion_id": "V2-E3-20261125T230032Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T23:03:30.000000Z",
+      "sonda_fin_utc": "2026-11-25T23:03:33.177694Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       53580,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795647813.022356,
+      "ejecucion_id": "V2-E3-20261125T230032Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T23:03:30.000000Z",
+      "sonda_fin_utc": "2026-11-25T23:03:33.177694Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     }
+    ],
+    "no_explicados_detalle": [],
+    "sondas_registradas": 1,
+    "regla": "sonda DNS registrada en preflight.jsonl de la misma ejecución con igual origen, puerto, id y nombre completo, y el evento dentro de [inicio − 0.5 s, fin + 0.5 s]"
+   },
+   "tramas_recortadas_no_dns": 98712,
+   "clasificacion_igual_al_laboratorio": true,
+   "igual_al_laboratorio": true,
+   "referencia": "evidencias/bloque1/reanalisis/dns-V2-E3-20261125T230032Z.json"
+  },
+  {
+   "ejecucion": "V2-E3-20261125T230032Z",
+   "pcap_dc1": true,
+   "rc": 0,
+   "total": {
+    "transacciones": 182,
+    "comprobadas": 182,
+    "sin_discrepancias": 182,
+    "discrepancias": 0,
+    "no_determinables": 0,
+    "indeterminado_dc1": 0,
+    "ambiguas": 0,
+    "consultas_dc1": 182,
+    "respuestas_dc1": 182,
+    "timeouts": 0,
+    "timeouts_con_consulta_dc1": 0,
+    "timeouts_con_consulta_sensor1": 0
+   },
+   "sin_transaccion": 8,
+   "tramas_ilegibles": 0,
+   "sin_transaccion_clasificacion": {
+    "explicados": 8,
+    "no_explicados": 0,
+    "inciertos": 0,
+    "por_motivo": {
+     "sonda_preflight_reconstruido": 8
+    },
+    "por_fuente_registro": {
+     "reconstruido": 8
+    },
+    "claves_explicadas": [
+     [
+      "10.10.20.21",
+      53580,
+      17611
+     ]
+    ],
+    "relaciones": [
+     {
+      "clave": [
+       "10.10.20.21",
+       53580,
+       17611
+      ],
+      "fuente_evento": "dc1",
+      "t": 1795647813.014755,
+      "ejecucion_id": "V2-E3-20261125T230032Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T23:03:30.000000Z",
+      "sonda_fin_utc": "2026-11-25T23:03:33.177694Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       53580,
+       17611
+      ],
+      "fuente_evento": "dc1",
+      "t": 1795647813.0153878,
+      "ejecucion_id": "V2-E3-20261125T230032Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T23:03:30.000000Z",
+      "sonda_fin_utc": "2026-11-25T23:03:33.177694Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       53580,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795647813.020994,
+      "ejecucion_id": "V2-E3-20261125T230032Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T23:03:30.000000Z",
+      "sonda_fin_utc": "2026-11-25T23:03:33.177694Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       53580,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795647813.021116,
+      "ejecucion_id": "V2-E3-20261125T230032Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T23:03:30.000000Z",
+      "sonda_fin_utc": "2026-11-25T23:03:33.177694Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       53580,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795647813.021894,
+      "ejecucion_id": "V2-E3-20261125T230032Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T23:03:30.000000Z",
+      "sonda_fin_utc": "2026-11-25T23:03:33.177694Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       53580,
+       17611
+      ],
+      "fuente_evento": "sensor1",
+      "t": 1795647813.022356,
+      "ejecucion_id": "V2-E3-20261125T230032Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T23:03:30.000000Z",
+      "sonda_fin_utc": "2026-11-25T23:03:33.177694Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       53580,
+       17611
+      ],
+      "fuente_evento": "pcap_dc1",
+      "t": 1795647813.014755,
+      "ejecucion_id": "V2-E3-20261125T230032Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T23:03:30.000000Z",
+      "sonda_fin_utc": "2026-11-25T23:03:33.177694Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     },
+     {
+      "clave": [
+       "10.10.20.21",
+       53580,
+       17611
+      ],
+      "fuente_evento": "pcap_dc1",
+      "t": 1795647813.0153878,
+      "ejecucion_id": "V2-E3-20261125T230032Z",
+      "contexto": "iniciar",
+      "sonda_inicio_utc": "2026-11-25T23:03:30.000000Z",
+      "sonda_fin_utc": "2026-11-25T23:03:33.177694Z",
+      "nombre": "portal.cf-v2.lab",
+      "fuente_registro": "reconstruido"
+     }
+    ],
+    "no_explicados_detalle": [],
+    "sondas_registradas": 1,
+    "regla": "sonda DNS registrada en preflight.jsonl de la misma ejecución con igual origen, puerto, id y nombre completo, y el evento dentro de [inicio − 0.5 s, fin + 0.5 s]"
+   },
+   "tramas_recortadas_no_dns": 98712,
+   "clasificacion_igual_al_laboratorio": true,
+   "igual_al_laboratorio": true,
+   "referencia": "evidencias/bloque1/dns-entradas/dns-e3-pcap/dns-V2-E3-20261125T230032Z-pcap-saneado.json"
+  }
+ ],
+ "todo_igual": true
+}

@@ -10,6 +10,12 @@
 > - **Alcance:** B1 **no tiene eventos experimentales**. Las cifras experimentales son de las cinco
 >   ejecuciones con generador.
 > - **Estado:** el de REVISION, «Estado del Bloque 1». La matriz del §13 está actualizada.
+>
+> **Segunda revisión del 26-nov (`BLOQUE1-REVISION-2-2026-11-26.md`)**, que prevalece sobre la
+> primera: sondas identificadas por ejecución, clave e instante; sondas antes del periodo útil;
+> referencia de srv-dmz y DC1 obligatoria; criterio conservador sin fracción de exclusión; §5.1
+> repetido con PCAP archivados; §5.2 localizado en el switch (ESXi descartado). T1–E3 quedan
+> `no_aprobada` (sonda en ventanas útiles). Paquete: https://github.com/marksato13/inv-cyberflow-v2/releases/tag/bloque1-cierre-2026-11-26
 
 Continúa `BLOQUE1-CALIDAD-CAPTURA.md`, que se conserva como estaba. Lo que este documento corrige
 de aquel está en el §12.

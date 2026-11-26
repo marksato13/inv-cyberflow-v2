@@ -1,0 +1,5 @@
+# PCAP de VD2 que no se publican (tráfico del laboratorio). Rutas en Sensor1 (copias) y origen.
+c693d2f04073d320bab72ca18caccb3622511aa5d2bbbf22ab0e1b1b48a823c9  pruebas/V2-VD2-20261126T090705Z/registros/extremo-V2-VD2-20261126T090705Z.pcap  (origen srv-dmz, mismo sha256)
+6f76fb1e196a133fa472ddf7d2a3d1ece558a8a532d5318bde8a03e68ccb2a99  pruebas/V2-VD2-20261126T090705Z/registros/dns-V2-VD2-20261126T090705Z.pcap  (registrador DC1)
+02881a9c1cd6900be124cf36189d233eb39c3b59e44f441e9bbd65e58e242c19  capturas/V2-VD2-20261126T090705Z/inventario  (368 PCAP del espejo; sha256 de cada uno en el inventario)
+66184e3c7b1740f59c302981db069ea6526868854d241d5db298a41216dfe5c7  capturas/V2-VD2-20261126T090705Z/eve  (EVE de Suricata)

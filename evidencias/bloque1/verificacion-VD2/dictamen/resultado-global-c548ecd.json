@@ -1,0 +1,53 @@
+{
+  "ejecucion": "V2-VD2-20261126T090705Z",
+  "generador": "completa",
+  "archivador": "completa",
+  "vigia": "sin_paradas",
+  "supervision": "sin_invalidaciones",
+  "espejo": "indeterminado",
+  "calidad_copias": "completo",
+  "calidad_dns": "completo",
+  "calidad_extremo": "completo",
+  "calidad_sonda": "sin_datos",
+  "analisis": "completo",
+  "exclusion_v1": "cubre",
+  "global": "indeterminada",
+  "dictamen": "indeterminado",
+  "codigo_salida": 2,
+  "motivos": [
+    "falta:espejo",
+    "falta:calidad_sonda",
+    "falta:criterio:C7",
+    "falta:criterio:C9",
+    "falta:criterio:C10",
+    "falta:criterio:C11",
+    "falta:criterio:C12",
+    "falta:criterio:C13"
+  ],
+  "pasos": {
+    "conciliar": "0",
+    "cobertura": "0",
+    "fronteras": "0",
+    "extraer": "0",
+    "verificar": "0",
+    "calidad_copias": "0",
+    "calidad_dns": "0",
+    "calidad_extremo": "0",
+    "metadatos": "0",
+    "calidad_sonda": "0"
+  },
+  "fuente_pasos": "pasos-analisis.jsonl",
+  "exclusiones": {
+    "ventanas": 664,
+    "excluidas": 386,
+    "guardas_planificadas": {
+      "E1": 365,
+      "E5": 26
+    },
+    "por_incidente": {
+      "E3": 23
+    },
+    "otras_reglas": {},
+    "invalidaciones_supervision": 0
+  }
+}

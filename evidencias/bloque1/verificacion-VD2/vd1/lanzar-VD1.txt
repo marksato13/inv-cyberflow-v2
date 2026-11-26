@@ -1,0 +1,8 @@
+{"utc":"2026-11-26T08:59:11.463Z","paso":"identificador","detalle":"V2-VD1-20261126T085911Z programa=prueba-niveles-transiciones.json sha256=3089fc531745d9271818ee20c0d9915bd045801669dd2042a766e269cd7ee160 duracion=1440 tope_inicial=1795692461 retraso_prueba=0 "}
+{"utc":"2026-11-26T08:59:11.872Z","paso":"exclusion_v1","detalle":"{cubierto: true, regla: *@2026-11-26T08:49:11+00:00/2026-11-26T11:37:41+00:00, cambio: true, respaldo: /home/m4rk/cyberflow/configs/cyberflow.local.toml.antes-v2-20261126T085911Z} "}
+{"utc":"2026-11-26T08:59:20.500Z","paso":"preflight","detalle":"ok "}
+{"utc":"2026-11-26T08:59:32.182Z","paso":"relojes","detalle":"srvdmz y dc1 "}
+{"utc":"2026-11-26T08:59:38.145Z","paso":"contadores","detalle":"inicio "}
+Running as unit: cf-v2-dns-v2-vd1-20261126t085911z.service; invocation ID: 2495b58e4c5e469a8ae40872b078e440
+{"utc":"2026-11-26T08:59:38.380Z","paso":"registro_dns","detalle":"cf-v2-dns-v2-vd1-20261126t085911z "}
+{"utc":"2026-11-26T09:04:20.022Z","paso":"deshacer","detalle":"no arrancó la captura del extremo "}

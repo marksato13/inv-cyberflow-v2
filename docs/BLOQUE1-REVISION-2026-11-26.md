@@ -1,5 +1,12 @@
 # Bloque 1: respuesta a la revisión del 26-nov-2026
 
+> **Corregido por `BLOQUE1-REVISION-2-2026-11-26.md`.** En particular: el §2 explicaba la sonda
+> solo por id y prefijo (ahora hace falta la sonda registrada con clave e instante); las «23
+> ventanas por sonda» se cuentan ahora como ventanas distintas y dejan T1–E3 en `no_aprobada`; la
+> fracción máxima de exclusión del §3 desaparece (criterio conservador); el PCAP de DC1 del §1 no
+> estaba en el repositorio (`.gitignore`); el §6 (rx_dropped) y el §8 (ESXi) están hechos; el
+> código de esta revisión ya está desplegado (§8 de la segunda).
+
 La revisión reprodujo los conteos de copias y el contraste HTTP/HTTPS. Esos resultados **se
 conservan tal cual** y no se repitieron. Este documento responde a los siete puntos pendientes.
 

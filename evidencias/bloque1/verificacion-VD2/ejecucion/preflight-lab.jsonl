@@ -1,0 +1,18 @@
+{"comprobacion":"span_sesion","resultado":"ok","detalle":"Gi1/0/23,Gi2/0/23 both -> Gi2/0/19 "}
+{"comprobacion":"span_destino_velocidad","resultado":"ok","detalle":"Gi2/0/19     SPAN:SONDA-SPAN:NI monitoring   999        a-full a-1000 10/100/1000BaseTX "}
+{"comprobacion":"span_destino_mtu","resultado":"ok","detalle":"MTU 9198 "}
+{"comprobacion":"vmnic2_velocidad","resultado":"ok","detalle":"1000 "}
+{"comprobacion":"ens37","resultado":"ok","detalle":"UP PROMISC "}
+{"comprobacion":"sensor1_servicios","resultado":"ok","detalle":"captura, suricata, limpieza "}
+{"comprobacion":"sensor1_espacio","resultado":"ok","detalle":"libre 22 GB >= necesario 3 + 4 GB "}
+{"comprobacion":"ntp_sensor1","resultado":"ok","detalle":"yes "}
+{"comprobacion":"exclusion_v1","resultado":"ok","detalle":"*@2026-11-26T08:49:11+00:00/2026-11-26T11:37:41+00:00 "}
+{"comprobacion":"servidor_v2","resultado":"ok","detalle":"http y https con registro y limite 5 MB/s "}
+{"comprobacion":"srvdmz_sets_vacios","resultado":"ok","detalle":"limitados y bloqueados vacios "}
+{"comprobacion":"agente_v1_sombra","resultado":"ok","detalle":"sin --aplicar "}
+{"comprobacion":"ntp_srvdmz","resultado":"ok","detalle":"yes "}
+{"comprobacion":"dc1_sin_restricciones","resultado":"ok","detalle":"nft vacio "}
+{"comprobacion":"ntp_dc1","resultado":"ok","detalle":"yes "}
+{"comprobacion":"ntp_clientes","resultado":"ok","detalle":"yes "}
+{"comprobacion":"clientes_libre","resultado":"ok","detalle":"sin generadores vivos "}
+{"preflight":"ok","fallos":0}
