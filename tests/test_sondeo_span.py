@@ -13,7 +13,9 @@ ANALIZAR = RAIZ / "operacion" / "analizar_sondeo.py"
 FALSO = RAIZ / "tests" / "falso_switch.py"
 
 
-def ejecutar(tmp_path, pasos, duracion=1.2, cada=0.08, tiempo_max=1):
+def ejecutar(tmp_path, pasos, duracion=3.0, cada=0.08, tiempo_max=1):
+    # 3 s (antes 1,2): en Windows con carga, arrancar el switch falso (otro Python) se comía la
+    # ventana y salían 0–1 muestras; las aserciones no dependen del número exacto de muestras
     guion = tmp_path / "guion.json"
     guion.write_text(json.dumps({"pasos": pasos}), encoding="utf-8")
     registro = tmp_path / "sondeo.jsonl"
@@ -92,7 +94,7 @@ def test_timeout_reconecta_y_registra_hueco(tmp_path):
 
 def test_respuesta_invalida_no_cuenta_como_sin_descartes(tmp_path):
     registro, eventos = ejecutar(tmp_path, [{"drops": 10}, {"accion": "basura"}, {"drops": 10}],
-                                  duracion=1.2)
+                                  duracion=3.0)
     assert any(e["tipo"] == "respuesta_invalida" for e in eventos)
     assert any(e["tipo"] == "hueco" and e["causa"] == "respuesta_invalida" for e in eventos)
     assert analizar(registro)[0] == 2

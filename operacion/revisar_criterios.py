@@ -177,17 +177,23 @@ def suricata(CAP, c7_ok=None, P=None):
     que = "Suricata capture.kernel_drops (eventos stats de la EVE dedicada)"
     fuente = "capturas/<ID>/eve (stats), registros/suricata-stats-ventana, manifiesto.json"
     if r["estado"] == "presente":
-        x = c(que, r["delta_kernel_drops"] == 0, r, fuente)
-        if r["delta_kernel_drops"]:
-            x["nota"] = ("Δ %d descartes de Suricata en el periodo: fallo (no lo decide C7, que mide el PCAP; "
-                         "C7 = %s)" % (r["delta_kernel_drops"], c7_ok))
+        return c(que, True, r, fuente)
+    if r["estado"] == "perdida":
+        x = c(que, False, r, fuente)
+        x["nota"] = ("Δ %d descartes de Suricata atribuibles al periodo: fallo (no lo decide C7, que mide el "
+                     "PCAP; C7 = %s)%s" % (r["delta_kernel_drops"], c7_ok,
+                                           ("; además falta: " + ", ".join(r["falta_evidencia"])) if r.get("falta_evidencia") else ""))
         return x
     if r["estado"] == "reinicio":
         x = c(que, False, r, fuente)
         x["nota"] = "Suricata se reinició durante la captura: pérdida no cuantificable"
         return x
-    x = c(que, None, r, fuente)       # ausente, sin eventos o insuficiente: falta evidencia, nunca 0
-    x["nota"] = "contador %s%s: falta evidencia" % (r["estado"], (" (%s)" % r["motivo"]) if r.get("motivo") else "")
+    x = c(que, None, r, fuente)       # pérdida no localizada, ausente, sin eventos o insuficiente
+    if r["estado"] == "perdida_no_localizada":
+        x["nota"] = ("%d descartes en intervalos que cruzan un borde del periodo: no se puede atribuir al "
+                     "periodo ni descartar; falta evidencia" % r["delta_kernel_drops_ampliado"])
+    else:
+        x["nota"] = "contador %s%s: falta evidencia" % (r["estado"], (" (%s)" % r["motivo"]) if r.get("motivo") else "")
     return x
 
 def c9(P, E, c7_ok=None, CAP=None):

@@ -7,14 +7,14 @@ Por qué de la EVE y no de stats.log: stats.log tiene `null-values` en su valor 
 OMITE los contadores que valen 0; la EVE sí los escribe. «No aparece en stats.log» significaba «vale
 0», no «no se mide» (Bloque 1, revisión 5).
 
-Estados de una serie de eventos (nunca se sustituye un dato ausente por cero):
-  presente      todos los eventos traen capture.kernel_drops (puede valer 0)
-  ausente       al menos un evento stats sin capture.kernel_drops
-  sin_eventos   ningún evento stats
-  insuficiente  sin muestras que acoten el periodo, con huecos mayores de 16 s o una sola muestra:
-                no certifica nada (ok None), nunca «0 descartes»
-  reinicio      uptime no avanza como el reloj o kernel_packets retroceden: el proceso se reinició y los contadores volvieron
-                a cero; la pérdida durante el reinicio no es cuantificable
+Estados (nunca se sustituye un dato ausente por cero; ver evaluar() para la precedencia):
+  perdida                aumento de kernel_drops dentro del periodo (fallo)
+  reinicio               uptime discontinuo o contadores que retroceden (fallo)
+  perdida_no_localizada  aumento solo en intervalos que cruzan un borde (sin decidir)
+  ausente                alguna muestra sin capture.kernel_drops (sin decidir)
+  insuficiente           sin acotar, huecos > 16 s, una sola muestra o sin uptime (sin decidir)
+  sin_eventos            ningún evento stats
+  presente               acotado, continuo y Δ 0 (aprobado)
 La lectura fallida (no se pudo leer la EVE) la registra quien lee: vigia_v2 (eve_error) o
 revisar_criterios (fichero ausente => sin_eventos con falta de evidencia).
 
@@ -29,6 +29,7 @@ import datetime as dt
 import hashlib
 import json
 import sys
+import time
 from pathlib import Path
 
 INTERVALO_STATS_S = 8           # stats.interval de /etc/suricata/suricata.yaml en Sensor1
@@ -87,13 +88,34 @@ def lectura(e: dict) -> dict:
 
 
 def evaluar(eventos: list[dict], desde: float | None = None, hasta: float | None = None) -> dict:
-    """Estado de kernel_drops en [desde, hasta]. Sin periodo no se certifica nada (insuficiente)."""
+    """Estado de kernel_drops en [desde, hasta], por intervalos entre muestras consecutivas (rev. 7).
+
+    Cada intervalo [t_i, t_i+1] de las muestras usadas (de la última en o antes de `desde` a la primera
+    en o después de `hasta`) se clasifica:
+      - atribuible: está entero dentro de [desde, hasta]; lo que aumente kernel_drops ocurrió en el
+        periodo;
+      - ampliado: cruza un borde; un aumento solo se localiza en el intervalo exterior ampliado, no
+        necesariamente en el periodo.
+    Un aumento de kernel_drops entre dos muestras es pérdida DEMOSTRADA en ese intervalo aunque falte
+    continuidad u otra evidencia: si el proceso se hubiera reiniciado, el contador nuevo también cuenta
+    descartes de dentro del intervalo.
+
+    Precedencia (el fallo manda sobre la falta de evidencia):
+      perdida               aumento en un intervalo atribuible                       -> fallo
+      reinicio              uptime discontinuo o contadores que retroceden          -> fallo
+      perdida_no_localizada solo aumentos en intervalos ampliados                    -> sin decidir
+      ausente               alguna muestra sin kernel_drops/kernel_packets           -> sin decidir
+      insuficiente          sin acotar, huecos > HUECO_MAXIMO_S, una sola muestra o
+                            sin uptime (continuidad no verificable)                  -> sin decidir
+      presente              acotado, continuo, sin huecos y Δ 0                       -> aprobado
+    """
     L = sorted((lectura(e) for e in eventos), key=lambda x: epoch(x["timestamp"]))
     r = {"eventos": len(L), "intervalo_stats_s": INTERVALO_STATS_S, "hueco_maximo_admitido_s": HUECO_MAXIMO_S,
          "periodo": [desde, hasta]}
     if not L:
         r.update(estado="sin_eventos", delta_kernel_drops=None)
         return r
+    acotado = False
     if desde is not None and hasta is not None:
         antes = [i for i, x in enumerate(L) if epoch(x["timestamp"]) <= desde]
         despues = [i for i, x in enumerate(L) if epoch(x["timestamp"]) >= hasta]
@@ -104,54 +126,115 @@ def evaluar(eventos: list[dict], desde: float | None = None, hasta: float | None
         L = L[a:b + 1]
         r["eventos_usados"] = len(L)
         acotado = bool(antes) and bool(despues)
-    else:
-        acotado = False
     r["primero"], r["ultimo"] = L[0]["timestamp"], L[-1]["timestamp"]
     t = [epoch(x["timestamp"]) for x in L]
-    r["hueco_maximo_s"] = round(max((b - a for a, b in zip(t, t[1:])), default=0), 3)
-    huecos = [[L[i]["timestamp"], round(t[i + 1] - t[i], 3)] for i in range(len(t) - 1) if t[i + 1] - t[i] > HUECO_MAXIMO_S]
-    ausentes = [x["timestamp"] for x in L if x["kernel_drops"] is None or x["kernel_packets"] is None]
-    if ausentes:
-        r.update(estado="ausente", sin_kernel_drops=len(ausentes), primer_ausente=ausentes[0], delta_kernel_drops=None)
-        return r
-    reinicios, tramos, ini = [], [], 0
-    for i in range(1, len(L)):
-        x, y = L[i - 1], L[i]
-        salto = None
-        if x["uptime"] is not None and y["uptime"] is not None:
-            salto = abs((y["uptime"] - x["uptime"]) - (t[i] - t[i - 1])) > TOLERANCIA_UPTIME_S
-        if salto or y["kernel_packets"] < x["kernel_packets"] or y["kernel_drops"] < x["kernel_drops"]:
+    r["hueco_maximo_s"] = round(max((y - x for x, y in zip(t, t[1:])), default=0), 3)
+    huecos, reinicios, sin_uptime, ausentes, con_perdida = [], [], [], [], []
+    atrib = ampl = 0
+    for x in L:
+        if x["kernel_drops"] is None or x["kernel_packets"] is None:
+            ausentes.append(x["timestamp"])
+        if not isinstance(x["uptime"], (int, float)):
+            sin_uptime.append(x["timestamp"])
+    for i in range(len(L) - 1):
+        x, y, dt_ = L[i], L[i + 1], t[i + 1] - t[i]
+        if dt_ > HUECO_MAXIMO_S:
+            huecos.append([x["timestamp"], round(dt_, 3)])
+        kd0, kd1, kp0, kp1 = x["kernel_drops"], y["kernel_drops"], x["kernel_packets"], y["kernel_packets"]
+        retrocede = (kd0 is not None and kd1 is not None and kd1 < kd0) or \
+                    (kp0 is not None and kp1 is not None and kp1 < kp0)
+        salto = (isinstance(x["uptime"], (int, float)) and isinstance(y["uptime"], (int, float))
+                 and abs((y["uptime"] - x["uptime"]) - dt_) > TOLERANCIA_UPTIME_S)
+        if retrocede or salto:
             reinicios.append(y["timestamp"])
-            tramos.append((ini, i - 1))
-            ini = i
-    tramos.append((ini, len(L) - 1))
-    r.update(delta_kernel_drops=sum(L[j]["kernel_drops"] - L[i]["kernel_drops"] for i, j in tramos),
-             delta_kernel_packets=sum(L[j]["kernel_packets"] - L[i]["kernel_packets"] for i, j in tramos),
+        if kd0 is None or kd1 is None:
+            continue
+        # tras un reinicio el contador nuevo empezó dentro del intervalo: lo que muestra es pérdida
+        # del intervalo (cota inferior); sin reinicio, la diferencia
+        inc = kd1 if (retrocede or salto) else kd1 - kd0
+        if inc > 0:
+            clase = "atribuible" if desde is not None and hasta is not None and desde <= t[i] and t[i + 1] <= hasta else "ampliado"
+            con_perdida.append({"desde": x["timestamp"], "hasta": y["timestamp"], "kernel_drops": inc, "clase": clase})
+            if clase == "atribuible":
+                atrib += inc
+            else:
+                ampl += inc
+    r.update(delta_kernel_drops_atribuible=atrib, delta_kernel_drops_ampliado=ampl,
+             intervalos_con_perdida=con_perdida[:20],
              kernel_drops=[L[0]["kernel_drops"], L[-1]["kernel_drops"]],
              kernel_packets=[L[0]["kernel_packets"], L[-1]["kernel_packets"]],
              uptime=[L[0]["uptime"], L[-1]["uptime"]], errors=[L[0]["errors"], L[-1]["errors"]])
-    if reinicios:
-        r.update(estado="reinicio", reinicios=reinicios)        # aunque falte cobertura: es un hecho
-    elif not acotado or huecos or len(L) < 2:
-        motivo = ("sin periodo" if desde is None or hasta is None else
-                  "sin muestra en o antes del inicio" if r.get("muestra_antes_s") is None else
-                  "sin muestra en o después del fin" if r.get("muestra_despues_s") is None else
-                  "huecos mayores de %d s" % HUECO_MAXIMO_S if huecos else "una sola muestra")
-        r.update(estado="insuficiente", motivo=motivo, huecos=huecos[:10], delta_kernel_drops_observado=r["delta_kernel_drops"],
-                 delta_kernel_drops=None)
+    if not ausentes and not reinicios:
+        r["delta_kernel_packets"] = L[-1]["kernel_packets"] - L[0]["kernel_packets"]
+    falta = []
+    if desde is None or hasta is None:
+        falta.append("sin periodo")
+    elif r.get("muestra_antes_s") is None:
+        falta.append("sin muestra en o antes del inicio")
+    elif r.get("muestra_despues_s") is None:
+        falta.append("sin muestra en o después del fin")
+    if huecos:
+        falta.append("huecos mayores de %d s" % HUECO_MAXIMO_S)
+    if len(L) < 2:
+        falta.append("una sola muestra")
+    if sin_uptime:
+        falta.append("sin uptime en %d muestras: continuidad no verificable" % len(sin_uptime))
+    if ausentes:
+        falta.append("sin kernel_drops/kernel_packets en %d muestras" % len(ausentes))
+    r["falta_evidencia"] = falta
+    if huecos:
+        r["huecos"] = huecos[:10]
+    if atrib:
+        r.update(estado="perdida", delta_kernel_drops=atrib)
+    elif reinicios:
+        r.update(estado="reinicio", reinicios=reinicios, delta_kernel_drops=None)
+    elif ampl:
+        r.update(estado="perdida_no_localizada", delta_kernel_drops=None,
+                 motivo="aumento solo en intervalos que cruzan un borde del periodo")
+    elif ausentes:
+        r.update(estado="ausente", sin_kernel_drops=len(ausentes), primer_ausente=ausentes[0], delta_kernel_drops=None)
+    elif falta:
+        r.update(estado="insuficiente", motivo=falta[0], delta_kernel_drops=None)
     else:
-        r["estado"] = "presente"
+        r.update(estado="presente", delta_kernel_drops=0)
     return r
-
 
 def ventana(rutas, desde: float, hasta: float, margen: float, salida: Path) -> dict:
     """Eventos stats de la EVE dedicada COMPLETA en [desde − margen, hasta + margen]: aportan las
     muestras que acotan el periodo y que el recorte del archivador (interior) no lleva."""
     ev = [e for e in eventos_stats(rutas) if desde - margen <= epoch(e["timestamp"]) <= hasta + margen]
     datos = "".join(json.dumps(e, sort_keys=True, ensure_ascii=False) + "\n" for e in ev).encode("utf-8")
-    salida.write_bytes(datos)
+    temporal = salida.with_name(salida.name + ".parcial")
+    temporal.write_bytes(datos)
+    temporal.replace(salida)                       # nunca queda un fichero a medias con el nombre final
     return {"salida": salida.name, "eventos": len(ev), "desde": desde, "hasta": hasta, "margen_s": margen,
             "sha256": hashlib.sha256(datos).hexdigest(), "evaluacion": evaluar(ev, desde, hasta)}
+
+
+def ventana_cierre(rutas, desde, hasta, margen, salida: Path, reintentos=3, espera=10.0, dormir=time.sleep) -> tuple[int, dict]:
+    """El paso de cerrar_v2.sh. Suricata escribe stats cada 8 s, así que la muestra posterior al fin
+    puede no existir todavía al cerrar: se repite la lectura mientras falte SOLO esa muestra.
+    rc 0 = decidido (presente, perdida, reinicio), 3 = sin decidir al agotar los intentos,
+    4 = EVE ausente o ilegible (no se escribe salida, y se borra una anterior, para que C9 no use datos
+    viejos). C9 trata 3 y 4 como falta de evidencia."""
+    intentos = []
+    for n in range(1, max(1, reintentos) + 1):
+        try:
+            r = ventana(rutas, desde, hasta, margen, salida)
+        except (OSError, UnicodeError) as e:
+            if salida.exists():
+                salida.unlink()
+            intentos.append({"intento": n, "error": "%s: %s" % (type(e).__name__, e)})
+            return 4, {"estado": "eve_ilegible", "intentos": intentos}
+        ev = r["evaluacion"]
+        intentos.append({"intento": n, "estado": ev["estado"], "eventos": r["eventos"],
+                         "muestra_despues_s": ev.get("muestra_despues_s")})
+        falta_posterior = ev["estado"] == "insuficiente" and ev.get("motivo") == "sin muestra en o después del fin"
+        if not falta_posterior or n == max(1, reintentos):
+            break
+        dormir(espera)
+    r["intentos"] = intentos
+    return (0 if ev["estado"] in ("presente", "perdida", "reinicio") else 3), r
 
 def extraer(rutas, salida: Path, desde=None, hasta=None) -> dict:
     ev = eventos_stats(rutas)
@@ -171,18 +254,23 @@ def main(argv=None):
     w.add_argument("--desde", type=float); w.add_argument("--hasta", type=float)
     w.add_argument("--manifiesto", type=Path, help="capturas/<ID>/manifiesto.json: toma inicio y fin del archivador")
     w.add_argument("--margen", type=float, default=30.0); w.add_argument("--salida", type=Path, required=True)
+    w.add_argument("--reintentos", type=int, default=1); w.add_argument("--espera", type=float, default=10.0)
     a = ap.parse_args(argv)
     if a.orden == "extraer":
         print(json.dumps(extraer(a.eve, a.salida), ensure_ascii=False))
     elif a.orden == "ventana":
         if a.manifiesto is not None:
-            m = json.loads(a.manifiesto.read_text(encoding="utf-8"))
-            a.desde, a.hasta = epoch(m["inicio"]), epoch(m["fin"])
+            try:
+                m = json.loads(a.manifiesto.read_text(encoding="utf-8"))
+                a.desde, a.hasta = epoch(m["inicio"]), epoch(m["fin"])
+            except (OSError, ValueError, KeyError, TypeError) as e:
+                print(json.dumps({"estado": "manifiesto_ilegible", "error": str(e)}, ensure_ascii=False))
+                return 5
         if a.desde is None or a.hasta is None:
             ap.error("ventana necesita --manifiesto o --desde y --hasta")
-        r = ventana(a.eve, a.desde, a.hasta, a.margen, a.salida)
+        rc, r = ventana_cierre(a.eve, a.desde, a.hasta, a.margen, a.salida, a.reintentos, a.espera)
         print(json.dumps(r, ensure_ascii=False))
-        return 0 if r["evaluacion"]["estado"] != "insuficiente" else 3
+        return rc
     else:
         print(json.dumps(evaluar(eventos_stats(a.ficheros), a.desde, a.hasta), ensure_ascii=False))
     return 0

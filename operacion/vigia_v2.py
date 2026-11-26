@@ -169,17 +169,32 @@ class Vigia:
             if edad is None or edad > suricata_stats.ANTIGUEDAD_MAXIMA_S:
                 reg["kernel_drops_leido"] = reg["kernel_drops"]
                 reg["kernel_drops_estado"], reg["kernel_drops"] = "obsoleta", None
+        # Sin uptime no se puede verificar la continuidad (un reinicio podría ocultar descartes): la
+        # lectura no completa la supervisión. Un aumento de kernel_drops sigue siendo pérdida
+        # demostrada y se invalida abajo con kernel_drops_leido.
+        if reg.get("kernel_drops_estado") == "presente" and not isinstance(reg.get("suricata_uptime_s"), (int, float)):
+            reg["kernel_drops_leido"] = reg["kernel_drops"]
+            reg["kernel_drops_estado"], reg["kernel_drops"] = "sin_uptime", None
+        # Continuidad: entre dos lecturas el uptime debe avanzar lo que avanzan sus marcas de tiempo.
+        up, ts = reg.get("suricata_uptime_s"), reg.get("stats_timestamp")
+        up0, ts0 = self.previos.get("suricata_uptime_s"), self.previos.get("stats_timestamp")
+        salto = False
+        if isinstance(up, (int, float)) and isinstance(up0, (int, float)) and ts and ts0:
+            try:
+                salto = abs((up - up0) - (suricata_stats.epoch(ts) - suricata_stats.epoch(ts0))) > suricata_stats.TOLERANCIA_UPTIME_S
+            except ValueError:
+                salto = False
         # Reinicio de Suricata: uptime o kernel_packets retroceden y los contadores vuelven a 0. Se
         # invalida el tramo (pérdida no cuantificable) y la base de comparación pasa a la lectura
         # nueva: sin esto, descartes posteriores por debajo del valor previo quedarían ocultos.
         up, kp = reg.get("suricata_uptime_s"), reg.get("kernel_packets")
         up0, kp0 = self.previos.get("suricata_uptime_s"), self.previos.get("kernel_packets")
-        if (up is not None and up0 is not None and up < up0) or (kp is not None and kp0 is not None and kp < kp0):
+        if salto or (up is not None and up0 is not None and up < up0) or (kp is not None and kp0 is not None and kp < kp0):
             reg["suricata_reinicio"] = True
             self.invalidar("reinicio_suricata", desde, ahora, uptime_anterior=up0, uptime_nuevo=up,
                            kernel_packets_anterior=kp0, kernel_packets_nuevo=kp)
             self.previos.pop("kernel_drops", None)
-        for k in ("suricata_uptime_s", "kernel_packets"):
+        for k in ("suricata_uptime_s", "kernel_packets", "stats_timestamp"):
             if reg.get(k) is not None:
                 self.previos[k] = reg[k]
         reg["libre_gb"] = estado.get("libre_gb")
@@ -203,6 +218,11 @@ class Vigia:
                 self.invalidar(condicion, desde, ahora, anterior=anterior, nuevo=valor)
             if valor is not None:
                 self.previos[campo] = valor
+        leido, anterior = reg.get("kernel_drops_leido"), self.previos.get("kernel_drops")
+        if reg.get("kernel_drops_estado") == "sin_uptime" and leido is not None:
+            if anterior is not None and leido > anterior:
+                self.invalidar("kernel_drops", desde, ahora, anterior=anterior, nuevo=leido, sin_uptime=True)
+            self.previos["kernel_drops"] = leido
         for host in ("sensor1", "clientes"):
             desfase = reg.get("desfase_" + host + "_s")
             if desfase is not None and abs(desfase) > 1:
