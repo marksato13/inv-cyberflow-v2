@@ -1,6 +1,9 @@
 # Capturas y registros de ejecución: privados, nunca en el repositorio
 *.pcap
 *.pcapng
+# Excepciones: PCAP saneados y revisados, publicados como evidencia (BLOQUE1-REVISION-2-2026-11-26.md)
+!evidencias/bloque1/dns-entradas/dns-e3-pcap/dns-dc1-V2-E3-20261125T230032Z.saneado.pcap
+!evidencias/bloque1/rx-dropped-r2/extracto-sin-manejador.pcap
 eve*.json
 ejecuciones/
 capturas/

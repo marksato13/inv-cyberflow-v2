@@ -1,0 +1,36 @@
+{
+ "prueba": "1 x scp de 20 MB bastion->Sensor1 sin limite, contadores de colas de Gi2/0/19 antes y despues",
+ "scp_epoch": [
+  1795683102.719,
+  1795683103.9
+ ],
+ "incrementos_gi2_0_19": {
+  "encolado_bytes_q0": [
+   0,
+   35758,
+   29716,
+   23263
+  ],
+  "encolado_bytes_q1": [
+   0,
+   0,
+   0,
+   25266096
+  ],
+  "descartado_bytes_q1": [
+   0,
+   0,
+   58144,
+   0,
+   0
+  ],
+  "total_output_drops": 40,
+  "packets_output": 19133
+ },
+ "copias_gestion_faltantes_par_bastion_sensor1": 11917,
+ "columnas": {
+  "encolado_bytes": "Buffers, Enqueue-TH0, TH1, TH2",
+  "descartado_bytes": "Drop-TH0, TH1, TH2, SBufDrop, QebDrop"
+ },
+ "lectura": "la cola 1 encola 25,3 MB (una sola copia de la subida ~20 MB + resto); el par de copias son ~40 MB; descarta 58 KB = +40 paquetes; faltan 11917 copias (~17 MB) que no llegan a encolarse"
+}

@@ -1,0 +1,29 @@
+## despues 1795683106.906749429
+Asic:0 Core:0 DATA Port:18 Hardware Enqueue Counters
+-------------------------------------------------------------------------
+ Q Buffers          Enqueue-TH0          Enqueue-TH1          Enqueue-TH2
+   (Count)              (Bytes)              (Bytes)              (Bytes)
+-- ------- -------------------- -------------------- --------------------
+ 0       0            539997886            725343057            434887741
+ 1       0                    0                    0          12437598292
+ 2       0                    0                    0                    0
+ 3       0                    0                    0                    0
+ 4       0                    0                    0                    0
+ 5       0                    0                    0                    0
+ 6       0                    0                    0                    0
+ 7       0                    0                    0                    0
+Asic:0 Core:0 DATA Port:18 Hardware Drop Counters
+-----------------------------------------------------------------------------------------------------------
+ Q             Drop-TH0             Drop-TH1             Drop-TH2             SBufDrop              QebDrop
+                (Bytes)              (Bytes)              (Bytes)              (Bytes)              (Bytes)
+-- -------------------- -------------------- -------------------- -------------------- --------------------
+ 0                    0                    0                    0                    0                    0
+ 1                    0                    0            323365254                    0                    0
+ 2                    0                    0                    0                    0                    0
+ 3                    0                    0                    0                    0                    0
+ 4                    0                    0                    0                    0                    0
+ 5                    0                    0                    0                    0                    0
+ 6                    0                    0                    0                    0                    0
+ 7                    0                    0                    0                    0                    0Connection to 10.10.99.10 closed by remote host.
+  Input queue: 0/2000/0/0 (size/max/drops/flushes); Total output drops: 216834
+     61657585 packets output, 13033537100 bytes, 0 underruns

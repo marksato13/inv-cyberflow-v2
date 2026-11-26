@@ -1,0 +1,28 @@
+{
+ "version": 2,
+ "prueba": "rx-dropped-r2.json",
+ "desde_epoch": 1795682379.2030568,
+ "hasta_epoch": 1795682500.0006523,
+ "incremento_prueba": {
+  "rx_packets": 19447,
+  "rx_dropped": 1688,
+  "rx_nohandler": 0
+ },
+ "tramas_sin_manejador": 1712,
+ "por_clase": {
+  "sin_vlan/loopback": 24,
+  "vlan/802.3_llc_snap": 1688
+ },
+ "por_protocolo": {
+  "cdp": 4,
+  "pvst+": 1684,
+  "sin_vlan/loopback": 24
+ },
+ "clases_iguales_a_rx_dropped": [
+  "vlan/802.3_llc_snap"
+ ],
+ "snap_802_3_igual_a_rx_dropped": true,
+ "ficheros_faltan": [],
+ "macs_seudonimizadas": 2,
+ "saneado": "MAC unicast -> 02:00:00:xx:xx:xx; contenido tras LLC/SNAP a ceros; longitud conservada"
+}

@@ -1,0 +1,16 @@
+{
+ "incremento": {
+  "rx_packets": 19447,
+  "rx_dropped": 1688,
+  "rx_nohandler": 0
+ },
+ "tramas_en_pcap": 19447,
+ "por_clase": {
+  "sin_vlan/loopback": 24,
+  "vlan/802.3_llc_snap": 1688,
+  "vlan/arp": 1355,
+  "vlan/ipv4": 16378,
+  "vlan/ipv6": 2
+ },
+ "tramas_sin_manejador": 1712
+}

@@ -1,0 +1,11 @@
+{
+ "fichero_origen": "/home/adminsrvdmz/bloque1/E2-20261125T194605Z.pcap",
+ "capturados": 8068,
+ "recibidos_por_filtro": 8068,
+ "descartados_nucleo": 0,
+ "sha256_origen": "8a75fc96d7fdb7976e6e704f32d54a2d805e9ea90a89446ce79f586c3d831482",
+ "bytes": 13300072,
+ "sigue_vivo": false,
+ "filtro": "host 10.10.30.10 and tcp and (port 80 or port 443) (sin restringir a la poblaci\u00f3n)",
+ "estado": "ok"
+}

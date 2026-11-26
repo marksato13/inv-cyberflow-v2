@@ -1,0 +1,4021 @@
+{
+  "total": {
+    "transacciones": 32,
+    "comprobadas": 32,
+    "sin_discrepancias": 32,
+    "discrepancias": 0,
+    "no_determinables": 0,
+    "indeterminado_dc1": 0,
+    "ambiguas": 0,
+    "consultas_dc1": 32,
+    "respuestas_dc1": 32,
+    "timeouts": 0,
+    "timeouts_con_consulta_dc1": 0,
+    "timeouts_con_consulta_sensor1": 0
+  },
+  "por_clase": {
+    "ok": {
+      "transacciones": 32,
+      "comprobadas": 32,
+      "sin_discrepancias": 32,
+      "discrepancias": 0,
+      "no_determinables": 0,
+      "indeterminado_dc1": 0,
+      "ambiguas": 0,
+      "consultas_dc1": 32,
+      "respuestas_dc1": 32,
+      "timeouts": 0,
+      "timeouts_con_consulta_dc1": 0,
+      "timeouts_con_consulta_sensor1": 0
+    }
+  },
+  "desfases": {
+    "dc1_menos_sensor1": {
+      "n": 0,
+      "p50_s": null,
+      "p99_s": null,
+      "max_s": null,
+      "max_abs_s": null
+    },
+    "generador_inicio_menos_dc1_consulta": {
+      "n": 0,
+      "p50_s": null,
+      "p99_s": null,
+      "max_s": null,
+      "max_abs_s": null
+    },
+    "generador_fin_menos_dc1_respuesta": {
+      "n": 0,
+      "p50_s": null,
+      "p99_s": null,
+      "max_s": null,
+      "max_abs_s": null
+    }
+  },
+  "por_transaccion": [
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P1-000000001",
+      "perfil": "P1",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.21",
+        47384,
+        499
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795632985.405623,
+        "generador_fin": 1795632985.408073,
+        "dc1_consulta": 1795632985.401307,
+        "dc1_respuesta": 1795632985.402197,
+        "sensor1_consulta_primera": 1795632985.406314,
+        "sensor1_consulta_segunda": 1795632985.406392,
+        "sensor1_respuesta_primera": 1795632985.407677,
+        "sensor1_respuesta_segunda": 1795632985.407901
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.004315853118896484,
+        "dc1_respuesta_a_generador_fin": 0.005876064300537109,
+        "dc1_consulta_a_respuesta": 0.0008897781372070312,
+        "sensor1_consulta_a_dc1": -0.0050067901611328125,
+        "sensor1_respuesta_a_dc1": -0.005480051040649414
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P1-000000003",
+      "perfil": "P1",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.21",
+        41319,
+        34983
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633085.481596,
+        "generador_fin": 1795633085.483377,
+        "dc1_consulta": 1795633085.477142,
+        "dc1_respuesta": 1795633085.477606,
+        "sensor1_consulta_primera": 1795633085.482025,
+        "sensor1_consulta_segunda": 1795633085.482233,
+        "sensor1_respuesta_primera": 1795633085.483062,
+        "sensor1_respuesta_segunda": 1795633085.483224
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.004453897476196289,
+        "dc1_respuesta_a_generador_fin": 0.00577092170715332,
+        "dc1_consulta_a_respuesta": 0.0004639625549316406,
+        "sensor1_consulta_a_dc1": -0.0048828125,
+        "sensor1_respuesta_a_dc1": -0.005455970764160156
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P1-000000005",
+      "perfil": "P1",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.21",
+        33081,
+        20714
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633120.42633,
+        "generador_fin": 1795633120.427987,
+        "dc1_consulta": 1795633120.421716,
+        "dc1_respuesta": 1795633120.422321,
+        "sensor1_consulta_primera": 1795633120.426904,
+        "sensor1_consulta_segunda": 1795633120.426904,
+        "sensor1_respuesta_primera": 1795633120.42774,
+        "sensor1_respuesta_segunda": 1795633120.427827
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.004614114761352539,
+        "dc1_respuesta_a_generador_fin": 0.005666017532348633,
+        "dc1_consulta_a_respuesta": 0.0006051063537597656,
+        "sensor1_consulta_a_dc1": -0.00518798828125,
+        "sensor1_respuesta_a_dc1": -0.005419015884399414
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P1-000000007",
+      "perfil": "P1",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.21",
+        60329,
+        15843
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633172.58773,
+        "generador_fin": 1795633172.589589,
+        "dc1_consulta": 1795633172.583059,
+        "dc1_respuesta": 1795633172.583661,
+        "sensor1_consulta_primera": 1795633172.588081,
+        "sensor1_consulta_segunda": 1795633172.588161,
+        "sensor1_respuesta_primera": 1795633172.589217,
+        "sensor1_respuesta_segunda": 1795633172.589217
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.004670858383178711,
+        "dc1_respuesta_a_generador_fin": 0.00592803955078125,
+        "dc1_consulta_a_respuesta": 0.0006020069122314453,
+        "sensor1_consulta_a_dc1": -0.005021810531616211,
+        "sensor1_respuesta_a_dc1": -0.005555868148803711
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P1-000000009",
+      "perfil": "P1",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.21",
+        36904,
+        4215
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633178.814795,
+        "generador_fin": 1795633178.816958,
+        "dc1_consulta": 1795633178.810387,
+        "dc1_respuesta": 1795633178.81092,
+        "sensor1_consulta_primera": 1795633178.815357,
+        "sensor1_consulta_segunda": 1795633178.815523,
+        "sensor1_respuesta_primera": 1795633178.816428,
+        "sensor1_respuesta_segunda": 1795633178.816618
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.004408121109008789,
+        "dc1_respuesta_a_generador_fin": 0.00603795051574707,
+        "dc1_consulta_a_respuesta": 0.0005331039428710938,
+        "sensor1_consulta_a_dc1": -0.004970073699951172,
+        "sensor1_respuesta_a_dc1": -0.005507946014404297
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P1-000000011",
+      "perfil": "P1",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.21",
+        40075,
+        23540
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633182.616781,
+        "generador_fin": 1795633182.618361,
+        "dc1_consulta": 1795633182.611828,
+        "dc1_respuesta": 1795633182.612285,
+        "sensor1_consulta_primera": 1795633182.616981,
+        "sensor1_consulta_segunda": 1795633182.617105,
+        "sensor1_respuesta_primera": 1795633182.617945,
+        "sensor1_respuesta_segunda": 1795633182.617945
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.004952907562255859,
+        "dc1_respuesta_a_generador_fin": 0.00607609748840332,
+        "dc1_consulta_a_respuesta": 0.00045680999755859375,
+        "sensor1_consulta_a_dc1": -0.00515294075012207,
+        "sensor1_respuesta_a_dc1": -0.005660057067871094
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P1-000000013",
+      "perfil": "P1",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.21",
+        41561,
+        14083
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633188.395492,
+        "generador_fin": 1795633188.397374,
+        "dc1_consulta": 1795633188.391059,
+        "dc1_respuesta": 1795633188.391396,
+        "sensor1_consulta_primera": 1795633188.395722,
+        "sensor1_consulta_segunda": 1795633188.395994,
+        "sensor1_respuesta_primera": 1795633188.396828,
+        "sensor1_respuesta_segunda": 1795633188.396984
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.004433155059814453,
+        "dc1_respuesta_a_generador_fin": 0.0059778690338134766,
+        "dc1_consulta_a_respuesta": 0.0003371238708496094,
+        "sensor1_consulta_a_dc1": -0.004662990570068359,
+        "sensor1_respuesta_a_dc1": -0.0054318904876708984
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P1-000000015",
+      "perfil": "P1",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.21",
+        43559,
+        64215
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633220.662608,
+        "generador_fin": 1795633220.66454,
+        "dc1_consulta": 1795633220.657908,
+        "dc1_respuesta": 1795633220.6585,
+        "sensor1_consulta_primera": 1795633220.663185,
+        "sensor1_consulta_segunda": 1795633220.663186,
+        "sensor1_respuesta_primera": 1795633220.663954,
+        "sensor1_respuesta_segunda": 1795633220.664153
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.0046999454498291016,
+        "dc1_respuesta_a_generador_fin": 0.006040096282958984,
+        "dc1_consulta_a_respuesta": 0.0005919933319091797,
+        "sensor1_consulta_a_dc1": -0.005276918411254883,
+        "sensor1_respuesta_a_dc1": -0.005454063415527344
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P1-000000017",
+      "perfil": "P1",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.21",
+        37067,
+        55947
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633227.431595,
+        "generador_fin": 1795633227.43309,
+        "dc1_consulta": 1795633227.426535,
+        "dc1_respuesta": 1795633227.427273,
+        "sensor1_consulta_primera": 1795633227.431802,
+        "sensor1_consulta_segunda": 1795633227.431825,
+        "sensor1_respuesta_primera": 1795633227.432477,
+        "sensor1_respuesta_segunda": 1795633227.432561
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.0050601959228515625,
+        "dc1_respuesta_a_generador_fin": 0.005816936492919922,
+        "dc1_consulta_a_respuesta": 0.0007381439208984375,
+        "sensor1_consulta_a_dc1": -0.005267143249511719,
+        "sensor1_respuesta_a_dc1": -0.005203962326049805
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P1-000000019",
+      "perfil": "P1",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.21",
+        37030,
+        54417
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633233.2585,
+        "generador_fin": 1795633233.260825,
+        "dc1_consulta": 1795633233.254005,
+        "dc1_respuesta": 1795633233.254833,
+        "sensor1_consulta_primera": 1795633233.2588,
+        "sensor1_consulta_segunda": 1795633233.259125,
+        "sensor1_respuesta_primera": 1795633233.260239,
+        "sensor1_respuesta_segunda": 1795633233.260419
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.004495143890380859,
+        "dc1_respuesta_a_generador_fin": 0.005991935729980469,
+        "dc1_consulta_a_respuesta": 0.0008280277252197266,
+        "sensor1_consulta_a_dc1": -0.004795074462890625,
+        "sensor1_respuesta_a_dc1": -0.005405902862548828
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P1-000000021",
+      "perfil": "P1",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.21",
+        52003,
+        36361
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633248.866261,
+        "generador_fin": 1795633248.868025,
+        "dc1_consulta": 1795633248.861522,
+        "dc1_respuesta": 1795633248.862071,
+        "sensor1_consulta_primera": 1795633248.866561,
+        "sensor1_consulta_segunda": 1795633248.86675,
+        "sensor1_respuesta_primera": 1795633248.867624,
+        "sensor1_respuesta_segunda": 1795633248.86768
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.004739046096801758,
+        "dc1_respuesta_a_generador_fin": 0.00595402717590332,
+        "dc1_consulta_a_respuesta": 0.0005490779876708984,
+        "sensor1_consulta_a_dc1": -0.0050389766693115234,
+        "sensor1_respuesta_a_dc1": -0.005553007125854492
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P2-000000001",
+      "perfil": "P2",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.22",
+        58208,
+        41450
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633341.644142,
+        "generador_fin": 1795633341.647695,
+        "dc1_consulta": 1795633341.639727,
+        "dc1_respuesta": 1795633341.640891,
+        "sensor1_consulta_primera": 1795633341.644771,
+        "sensor1_consulta_segunda": 1795633341.644912,
+        "sensor1_respuesta_primera": 1795633341.646472,
+        "sensor1_respuesta_segunda": 1795633341.647176
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.004414796829223633,
+        "dc1_respuesta_a_generador_fin": 0.006803989410400391,
+        "dc1_consulta_a_respuesta": 0.0011639595031738281,
+        "sensor1_consulta_a_dc1": -0.005043983459472656,
+        "sensor1_respuesta_a_dc1": -0.005580902099609375
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P2-000000005",
+      "perfil": "P2",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.22",
+        56918,
+        22519
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633420.661602,
+        "generador_fin": 1795633420.664065,
+        "dc1_consulta": 1795633420.656617,
+        "dc1_respuesta": 1795633420.657692,
+        "sensor1_consulta_primera": 1795633420.661702,
+        "sensor1_consulta_segunda": 1795633420.661785,
+        "sensor1_respuesta_primera": 1795633420.663222,
+        "sensor1_respuesta_segunda": 1795633420.663444
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.00498509407043457,
+        "dc1_respuesta_a_generador_fin": 0.006372928619384766,
+        "dc1_consulta_a_respuesta": 0.0010750293731689453,
+        "sensor1_consulta_a_dc1": -0.005084991455078125,
+        "sensor1_respuesta_a_dc1": -0.005530118942260742
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P2-000000009",
+      "perfil": "P2",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.22",
+        43573,
+        36028
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633493.497529,
+        "generador_fin": 1795633493.499165,
+        "dc1_consulta": 1795633493.492465,
+        "dc1_respuesta": 1795633493.492934,
+        "sensor1_consulta_primera": 1795633493.497605,
+        "sensor1_consulta_segunda": 1795633493.49773,
+        "sensor1_respuesta_primera": 1795633493.498476,
+        "sensor1_respuesta_segunda": 1795633493.498561
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.0050640106201171875,
+        "dc1_respuesta_a_generador_fin": 0.006231069564819336,
+        "dc1_consulta_a_respuesta": 0.00046896934509277344,
+        "sensor1_consulta_a_dc1": -0.005140066146850586,
+        "sensor1_respuesta_a_dc1": -0.00554203987121582
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P3-000000001",
+      "perfil": "P3",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.23",
+        43220,
+        44408
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633745.816805,
+        "generador_fin": 1795633745.819063,
+        "dc1_consulta": 1795633745.811626,
+        "dc1_respuesta": 1795633745.812304,
+        "sensor1_consulta_primera": 1795633745.81677,
+        "sensor1_consulta_segunda": 1795633745.816831,
+        "sensor1_respuesta_primera": 1795633745.817795,
+        "sensor1_respuesta_segunda": 1795633745.818288
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.005178928375244141,
+        "dc1_respuesta_a_generador_fin": 0.006758928298950195,
+        "dc1_consulta_a_respuesta": 0.0006780624389648438,
+        "sensor1_consulta_a_dc1": -0.0051441192626953125,
+        "sensor1_respuesta_a_dc1": -0.005491018295288086
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P4-000000001",
+      "perfil": "P4",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.24",
+        54064,
+        15774
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633889.355271,
+        "generador_fin": 1795633889.357971,
+        "dc1_consulta": 1795633889.350133,
+        "dc1_respuesta": 1795633889.351059,
+        "sensor1_consulta_primera": 1795633889.355165,
+        "sensor1_consulta_segunda": 1795633889.355271,
+        "sensor1_respuesta_primera": 1795633889.356594,
+        "sensor1_respuesta_segunda": 1795633889.357081
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.0051381587982177734,
+        "dc1_respuesta_a_generador_fin": 0.0069119930267333984,
+        "dc1_consulta_a_respuesta": 0.0009260177612304688,
+        "sensor1_consulta_a_dc1": -0.005032062530517578,
+        "sensor1_respuesta_a_dc1": -0.005535125732421875
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P4-000000005",
+      "perfil": "P4",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.24",
+        42450,
+        25185
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633915.86892,
+        "generador_fin": 1795633915.871103,
+        "dc1_consulta": 1795633915.863935,
+        "dc1_respuesta": 1795633915.864481,
+        "sensor1_consulta_primera": 1795633915.868808,
+        "sensor1_consulta_segunda": 1795633915.869127,
+        "sensor1_respuesta_primera": 1795633915.870029,
+        "sensor1_respuesta_segunda": 1795633915.870121
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.00498509407043457,
+        "dc1_respuesta_a_generador_fin": 0.0066220760345458984,
+        "dc1_consulta_a_respuesta": 0.0005459785461425781,
+        "sensor1_consulta_a_dc1": -0.004873037338256836,
+        "sensor1_respuesta_a_dc1": -0.005548000335693359
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P4-000000009",
+      "perfil": "P4",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.24",
+        43148,
+        8073
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633924.355893,
+        "generador_fin": 1795633924.357567,
+        "dc1_consulta": 1795633924.350557,
+        "dc1_respuesta": 1795633924.351035,
+        "sensor1_consulta_primera": 1795633924.355508,
+        "sensor1_consulta_segunda": 1795633924.35585,
+        "sensor1_respuesta_primera": 1795633924.35648,
+        "sensor1_respuesta_segunda": 1795633924.356595
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.005335807800292969,
+        "dc1_respuesta_a_generador_fin": 0.006531953811645508,
+        "dc1_consulta_a_respuesta": 0.0004780292510986328,
+        "sensor1_consulta_a_dc1": -0.004951000213623047,
+        "sensor1_respuesta_a_dc1": -0.005444765090942383
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P4-000000013",
+      "perfil": "P4",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.24",
+        51015,
+        28338
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795633940.455559,
+        "generador_fin": 1795633940.457751,
+        "dc1_consulta": 1795633940.450285,
+        "dc1_respuesta": 1795633940.451108,
+        "sensor1_consulta_primera": 1795633940.45525,
+        "sensor1_consulta_segunda": 1795633940.455374,
+        "sensor1_respuesta_primera": 1795633940.45654,
+        "sensor1_respuesta_segunda": 1795633940.456682
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.005274057388305664,
+        "dc1_respuesta_a_generador_fin": 0.006643056869506836,
+        "dc1_consulta_a_respuesta": 0.0008230209350585938,
+        "sensor1_consulta_a_dc1": -0.004965066909790039,
+        "sensor1_respuesta_a_dc1": -0.00543212890625
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P4-000000017",
+      "perfil": "P4",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.24",
+        40233,
+        29199
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795634035.462478,
+        "generador_fin": 1795634035.46465,
+        "dc1_consulta": 1795634035.457383,
+        "dc1_respuesta": 1795634035.457971,
+        "sensor1_consulta_primera": 1795634035.462075,
+        "sensor1_consulta_segunda": 1795634035.462395,
+        "sensor1_respuesta_primera": 1795634035.463493,
+        "sensor1_respuesta_segunda": 1795634035.463564
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.005095005035400391,
+        "dc1_respuesta_a_generador_fin": 0.00667881965637207,
+        "dc1_consulta_a_respuesta": 0.0005881786346435547,
+        "sensor1_consulta_a_dc1": -0.00469207763671875,
+        "sensor1_respuesta_a_dc1": -0.005522012710571289
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P4-000000021",
+      "perfil": "P4",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.24",
+        48941,
+        55105
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795634065.931545,
+        "generador_fin": 1795634065.933243,
+        "dc1_consulta": 1795634065.925995,
+        "dc1_respuesta": 1795634065.926628,
+        "sensor1_consulta_primera": 1795634065.931111,
+        "sensor1_consulta_segunda": 1795634065.931189,
+        "sensor1_respuesta_primera": 1795634065.93231,
+        "sensor1_respuesta_segunda": 1795634065.93231
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.005549907684326172,
+        "dc1_respuesta_a_generador_fin": 0.0066149234771728516,
+        "dc1_consulta_a_respuesta": 0.0006330013275146484,
+        "sensor1_consulta_a_dc1": -0.005115985870361328,
+        "sensor1_respuesta_a_dc1": -0.0056819915771484375
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P4-000000025",
+      "perfil": "P4",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.24",
+        58593,
+        41454
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795634078.580943,
+        "generador_fin": 1795634078.582603,
+        "dc1_consulta": 1795634078.575315,
+        "dc1_respuesta": 1795634078.575807,
+        "sensor1_consulta_primera": 1795634078.580496,
+        "sensor1_consulta_segunda": 1795634078.580612,
+        "sensor1_respuesta_primera": 1795634078.581301,
+        "sensor1_respuesta_segunda": 1795634078.581396
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.005628108978271484,
+        "dc1_respuesta_a_generador_fin": 0.0067958831787109375,
+        "dc1_consulta_a_respuesta": 0.000492095947265625,
+        "sensor1_consulta_a_dc1": -0.005181074142456055,
+        "sensor1_respuesta_a_dc1": -0.005493879318237305
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P4-000000029",
+      "perfil": "P4",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.24",
+        53581,
+        55882
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795634097.362652,
+        "generador_fin": 1795634097.364369,
+        "dc1_consulta": 1795634097.357235,
+        "dc1_respuesta": 1795634097.357726,
+        "sensor1_consulta_primera": 1795634097.362417,
+        "sensor1_consulta_segunda": 1795634097.362552,
+        "sensor1_respuesta_primera": 1795634097.363288,
+        "sensor1_respuesta_segunda": 1795634097.363289
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.0054171085357666016,
+        "dc1_respuesta_a_generador_fin": 0.006642818450927734,
+        "dc1_consulta_a_respuesta": 0.0004911422729492188,
+        "sensor1_consulta_a_dc1": -0.005182027816772461,
+        "sensor1_respuesta_a_dc1": -0.00556182861328125
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P4-000000033",
+      "perfil": "P4",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.24",
+        55011,
+        20176
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795634160.857051,
+        "generador_fin": 1795634160.858717,
+        "dc1_consulta": 1795634160.851747,
+        "dc1_respuesta": 1795634160.852241,
+        "sensor1_consulta_primera": 1795634160.856741,
+        "sensor1_consulta_segunda": 1795634160.856963,
+        "sensor1_respuesta_primera": 1795634160.857799,
+        "sensor1_respuesta_segunda": 1795634160.857799
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.005303859710693359,
+        "dc1_respuesta_a_generador_fin": 0.006475925445556641,
+        "dc1_consulta_a_respuesta": 0.0004940032958984375,
+        "sensor1_consulta_a_dc1": -0.004993915557861328,
+        "sensor1_respuesta_a_dc1": -0.005558013916015625
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P5-000000001",
+      "perfil": "P5",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.25",
+        34941,
+        63743
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795634225.119939,
+        "generador_fin": 1795634225.122417,
+        "dc1_consulta": 1795634225.114942,
+        "dc1_respuesta": 1795634225.115667,
+        "sensor1_consulta_primera": 1795634225.119782,
+        "sensor1_consulta_segunda": 1795634225.120011,
+        "sensor1_respuesta_primera": 1795634225.121137,
+        "sensor1_respuesta_segunda": 1795634225.121528
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.0049970149993896484,
+        "dc1_respuesta_a_generador_fin": 0.006749868392944336,
+        "dc1_consulta_a_respuesta": 0.0007250308990478516,
+        "sensor1_consulta_a_dc1": -0.004839897155761719,
+        "sensor1_respuesta_a_dc1": -0.005469799041748047
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P5-000000003",
+      "perfil": "P5",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.25",
+        38732,
+        46347
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795634278.866354,
+        "generador_fin": 1795634278.868865,
+        "dc1_consulta": 1795634278.861222,
+        "dc1_respuesta": 1795634278.862472,
+        "sensor1_consulta_primera": 1795634278.866192,
+        "sensor1_consulta_segunda": 1795634278.866406,
+        "sensor1_respuesta_primera": 1795634278.868037,
+        "sensor1_respuesta_segunda": 1795634278.868134
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.005131959915161133,
+        "dc1_respuesta_a_generador_fin": 0.006392955780029297,
+        "dc1_consulta_a_respuesta": 0.0012500286102294922,
+        "sensor1_consulta_a_dc1": -0.004970073699951172,
+        "sensor1_respuesta_a_dc1": -0.00556492805480957
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P5-000000005",
+      "perfil": "P5",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.25",
+        55867,
+        11595
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795634315.776604,
+        "generador_fin": 1795634315.779102,
+        "dc1_consulta": 1795634315.771505,
+        "dc1_respuesta": 1795634315.772684,
+        "sensor1_consulta_primera": 1795634315.776433,
+        "sensor1_consulta_segunda": 1795634315.776531,
+        "sensor1_respuesta_primera": 1795634315.778183,
+        "sensor1_respuesta_segunda": 1795634315.778404
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.005098819732666016,
+        "dc1_respuesta_a_generador_fin": 0.006417989730834961,
+        "dc1_consulta_a_respuesta": 0.0011789798736572266,
+        "sensor1_consulta_a_dc1": -0.004927873611450195,
+        "sensor1_respuesta_a_dc1": -0.0054988861083984375
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P6-000000001",
+      "perfil": "P6",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.26",
+        44429,
+        1573
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795634602.942354,
+        "generador_fin": 1795634602.944757,
+        "dc1_consulta": 1795634602.937822,
+        "dc1_respuesta": 1795634602.938574,
+        "sensor1_consulta_primera": 1795634602.942611,
+        "sensor1_consulta_segunda": 1795634602.942782,
+        "sensor1_respuesta_primera": 1795634602.943945,
+        "sensor1_respuesta_segunda": 1795634602.944383
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.0045318603515625,
+        "dc1_respuesta_a_generador_fin": 0.00618290901184082,
+        "dc1_consulta_a_respuesta": 0.0007519721984863281,
+        "sensor1_consulta_a_dc1": -0.004788875579833984,
+        "sensor1_respuesta_a_dc1": -0.0053708553314208984
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P6-000000003",
+      "perfil": "P6",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.26",
+        57702,
+        13347
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795634606.977228,
+        "generador_fin": 1795634606.979369,
+        "dc1_consulta": 1795634606.972686,
+        "dc1_respuesta": 1795634606.973305,
+        "sensor1_consulta_primera": 1795634606.977442,
+        "sensor1_consulta_segunda": 1795634606.977698,
+        "sensor1_respuesta_primera": 1795634606.978706,
+        "sensor1_respuesta_segunda": 1795634606.978885
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.004541873931884766,
+        "dc1_respuesta_a_generador_fin": 0.006063938140869141,
+        "dc1_consulta_a_respuesta": 0.0006189346313476562,
+        "sensor1_consulta_a_dc1": -0.004755973815917969,
+        "sensor1_respuesta_a_dc1": -0.005400896072387695
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P6-000000005",
+      "perfil": "P6",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.26",
+        37506,
+        53739
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795634632.561929,
+        "generador_fin": 1795634632.563844,
+        "dc1_consulta": 1795634632.557416,
+        "dc1_respuesta": 1795634632.557897,
+        "sensor1_consulta_primera": 1795634632.562421,
+        "sensor1_consulta_segunda": 1795634632.562539,
+        "sensor1_respuesta_primera": 1795634632.563339,
+        "sensor1_respuesta_segunda": 1795634632.563391
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.0045130252838134766,
+        "dc1_respuesta_a_generador_fin": 0.0059468746185302734,
+        "dc1_consulta_a_respuesta": 0.0004811286926269531,
+        "sensor1_consulta_a_dc1": -0.0050051212310791016,
+        "sensor1_respuesta_a_dc1": -0.005441904067993164
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P6-000000007",
+      "perfil": "P6",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.26",
+        60958,
+        64024
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795634639.075542,
+        "generador_fin": 1795634639.077547,
+        "dc1_consulta": 1795634639.070836,
+        "dc1_respuesta": 1795634639.071342,
+        "sensor1_consulta_primera": 1795634639.075963,
+        "sensor1_consulta_segunda": 1795634639.075963,
+        "sensor1_respuesta_primera": 1795634639.07689,
+        "sensor1_respuesta_segunda": 1795634639.077031
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.004705905914306641,
+        "dc1_respuesta_a_generador_fin": 0.006205081939697266,
+        "dc1_consulta_a_respuesta": 0.0005059242248535156,
+        "sensor1_consulta_a_dc1": -0.005126953125,
+        "sensor1_respuesta_a_dc1": -0.005548000335693359
+      },
+      "duplicado_o_reintento": false
+    },
+    {
+      "transaccion_id": "V2-E1-20261125T185323Z-P6-000000009",
+      "perfil": "P6",
+      "ejecucion_id": "V2-E1-20261125T185323Z",
+      "clase": "ok",
+      "clave": [
+        "10.10.20.26",
+        34699,
+        38039
+      ],
+      "timeout": false,
+      "estado": "comprobado",
+      "discrepancias": [],
+      "comprobado": [
+        "consulta_ttl_ip_entre_vlan",
+        "respuesta_ttl_ip_entre_vlan",
+        "consulta_nombre_generador_dc1",
+        "consulta_tipo_generador_dc1",
+        "consulta_nombre_dc1_sensor1_1",
+        "consulta_nombre_dc1_sensor1_2",
+        "consulta_tipo_dc1_sensor1_1",
+        "consulta_tipo_dc1_sensor1_2",
+        "respuesta_nombre_generador_dc1",
+        "respuesta_tipo_generador_dc1",
+        "respuesta_nombre_dc1_sensor1_1",
+        "respuesta_nombre_dc1_sensor1_2",
+        "respuesta_tipo_dc1_sensor1_1",
+        "respuesta_tipo_dc1_sensor1_2",
+        "respuesta_rcode_dc1_sensor1_1",
+        "respuesta_rcode_dc1_sensor1_2",
+        "respuesta_a_dc1_sensor1_1",
+        "respuesta_a_dc1_sensor1_2",
+        "rcode_generador_dc1",
+        "a_generador_dc1",
+        "rcode_generador_sensor1",
+        "a_generador_sensor1",
+        "ttl_generador_sensor1"
+      ],
+      "no_comprobado": [
+        {
+          "campo": "ttl_dc1",
+          "motivo": "registro v1 sin TTL"
+        },
+        {
+          "campo": "instante_nucleo_dc1",
+          "motivo": "registro v1 solo tiene utc de lectura"
+        },
+        {
+          "campo": "descartes_socket",
+          "motivo": "registro v1 sin estadísticas"
+        },
+        {
+          "campo": "pcap_dc1",
+          "motivo": "PCAP DC1 no suministrado"
+        }
+      ],
+      "coincidencias": {
+        "consulta_ttl_ip_entre_vlan": true,
+        "respuesta_ttl_ip_entre_vlan": true,
+        "consulta_nombre_generador_dc1": true,
+        "consulta_tipo_generador_dc1": true,
+        "consulta_nombre_dc1_sensor1_1": true,
+        "consulta_nombre_dc1_sensor1_2": true,
+        "consulta_tipo_dc1_sensor1_1": true,
+        "consulta_tipo_dc1_sensor1_2": true,
+        "respuesta_nombre_generador_dc1": true,
+        "respuesta_tipo_generador_dc1": true,
+        "respuesta_nombre_dc1_sensor1_1": true,
+        "respuesta_nombre_dc1_sensor1_2": true,
+        "respuesta_tipo_dc1_sensor1_1": true,
+        "respuesta_tipo_dc1_sensor1_2": true,
+        "respuesta_rcode_dc1_sensor1_1": true,
+        "respuesta_rcode_dc1_sensor1_2": true,
+        "respuesta_a_dc1_sensor1_1": true,
+        "respuesta_a_dc1_sensor1_2": true,
+        "rcode_generador_dc1": true,
+        "a_generador_dc1": true,
+        "rcode_generador_sensor1": true,
+        "a_generador_sensor1": true,
+        "ttl_generador_sensor1": true
+      },
+      "consulta_dc1": true,
+      "respuesta_dc1": true,
+      "consultas_dc1": 1,
+      "copias_consulta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "copias_respuesta_sensor1": {
+        "n": 2,
+        "vlan": {
+          "10": 1,
+          "20": 1
+        }
+      },
+      "instantes": {
+        "generador_inicio": 1795634650.582769,
+        "generador_fin": 1795634650.584473,
+        "dc1_consulta": 1795634650.577992,
+        "dc1_respuesta": 1795634650.578568,
+        "sensor1_consulta_primera": 1795634650.582996,
+        "sensor1_consulta_segunda": 1795634650.583174,
+        "sensor1_respuesta_primera": 1795634650.583971,
+        "sensor1_respuesta_segunda": 1795634650.584086
+      },
+      "retardos_s": {
+        "generador_inicio_a_dc1_consulta": -0.004776954650878906,
+        "dc1_respuesta_a_generador_fin": 0.0059049129486083984,
+        "dc1_consulta_a_respuesta": 0.000576019287109375,
+        "sensor1_consulta_a_dc1": -0.005003929138183594,
+        "sensor1_respuesta_a_dc1": -0.005403041839599609
+      },
+      "duplicado_o_reintento": false
+    }
+  ],
+  "sin_transaccion": {
+    "total": 6,
+    "items": [
+      {
+        "fuente": "dc1",
+        "clave": [
+          "10.10.20.21",
+          48716,
+          17611
+        ],
+        "sentido": "consulta",
+        "t": 1795632976.635532,
+        "vlan": null
+      },
+      {
+        "fuente": "dc1",
+        "clave": [
+          "10.10.20.21",
+          48716,
+          17611
+        ],
+        "sentido": "respuesta",
+        "t": 1795632976.636071,
+        "vlan": null
+      },
+      {
+        "fuente": "sensor1",
+        "clave": [
+          "10.10.20.21",
+          48716,
+          17611
+        ],
+        "sentido": "consulta",
+        "t": 1795632976.640599,
+        "vlan": 20
+      },
+      {
+        "fuente": "sensor1",
+        "clave": [
+          "10.10.20.21",
+          48716,
+          17611
+        ],
+        "sentido": "consulta",
+        "t": 1795632976.64064,
+        "vlan": 10
+      },
+      {
+        "fuente": "sensor1",
+        "clave": [
+          "10.10.20.21",
+          48716,
+          17611
+        ],
+        "sentido": "respuesta",
+        "t": 1795632976.641507,
+        "vlan": 10
+      },
+      {
+        "fuente": "sensor1",
+        "clave": [
+          "10.10.20.21",
+          48716,
+          17611
+        ],
+        "sentido": "respuesta",
+        "t": 1795632976.642008,
+        "vlan": 20
+      }
+    ],
+    "truncados": 0
+  },
+  "sin_transaccion_clasificacion": {
+    "explicados": 6,
+    "no_explicados": 0,
+    "inciertos": 0,
+    "por_motivo": {
+      "sonda_preflight_reconstruido": 6
+    },
+    "por_fuente_registro": {
+      "reconstruido": 6
+    },
+    "claves_explicadas": [
+      [
+        "10.10.20.21",
+        48716,
+        17611
+      ]
+    ],
+    "relaciones": [
+      {
+        "clave": [
+          "10.10.20.21",
+          48716,
+          17611
+        ],
+        "fuente_evento": "dc1",
+        "t": 1795632976.635532,
+        "ejecucion_id": "V2-E1-20261125T185323Z",
+        "contexto": "iniciar",
+        "sonda_inicio_utc": "2026-11-25T18:56:14.000000Z",
+        "sonda_fin_utc": "2026-11-25T18:56:16.786045Z",
+        "nombre": "portal.cf-v2.lab",
+        "fuente_registro": "reconstruido"
+      },
+      {
+        "clave": [
+          "10.10.20.21",
+          48716,
+          17611
+        ],
+        "fuente_evento": "dc1",
+        "t": 1795632976.636071,
+        "ejecucion_id": "V2-E1-20261125T185323Z",
+        "contexto": "iniciar",
+        "sonda_inicio_utc": "2026-11-25T18:56:14.000000Z",
+        "sonda_fin_utc": "2026-11-25T18:56:16.786045Z",
+        "nombre": "portal.cf-v2.lab",
+        "fuente_registro": "reconstruido"
+      },
+      {
+        "clave": [
+          "10.10.20.21",
+          48716,
+          17611
+        ],
+        "fuente_evento": "sensor1",
+        "t": 1795632976.640599,
+        "ejecucion_id": "V2-E1-20261125T185323Z",
+        "contexto": "iniciar",
+        "sonda_inicio_utc": "2026-11-25T18:56:14.000000Z",
+        "sonda_fin_utc": "2026-11-25T18:56:16.786045Z",
+        "nombre": "portal.cf-v2.lab",
+        "fuente_registro": "reconstruido"
+      },
+      {
+        "clave": [
+          "10.10.20.21",
+          48716,
+          17611
+        ],
+        "fuente_evento": "sensor1",
+        "t": 1795632976.64064,
+        "ejecucion_id": "V2-E1-20261125T185323Z",
+        "contexto": "iniciar",
+        "sonda_inicio_utc": "2026-11-25T18:56:14.000000Z",
+        "sonda_fin_utc": "2026-11-25T18:56:16.786045Z",
+        "nombre": "portal.cf-v2.lab",
+        "fuente_registro": "reconstruido"
+      },
+      {
+        "clave": [
+          "10.10.20.21",
+          48716,
+          17611
+        ],
+        "fuente_evento": "sensor1",
+        "t": 1795632976.641507,
+        "ejecucion_id": "V2-E1-20261125T185323Z",
+        "contexto": "iniciar",
+        "sonda_inicio_utc": "2026-11-25T18:56:14.000000Z",
+        "sonda_fin_utc": "2026-11-25T18:56:16.786045Z",
+        "nombre": "portal.cf-v2.lab",
+        "fuente_registro": "reconstruido"
+      },
+      {
+        "clave": [
+          "10.10.20.21",
+          48716,
+          17611
+        ],
+        "fuente_evento": "sensor1",
+        "t": 1795632976.642008,
+        "ejecucion_id": "V2-E1-20261125T185323Z",
+        "contexto": "iniciar",
+        "sonda_inicio_utc": "2026-11-25T18:56:14.000000Z",
+        "sonda_fin_utc": "2026-11-25T18:56:16.786045Z",
+        "nombre": "portal.cf-v2.lab",
+        "fuente_registro": "reconstruido"
+      }
+    ],
+    "no_explicados_detalle": [],
+    "sondas_registradas": 1,
+    "regla": "sonda DNS registrada en preflight.jsonl de la misma ejecución con igual origen, puerto, id y nombre completo, y el evento dentro de [inicio − 0.5 s, fin + 0.5 s]"
+  },
+  "ambiguos": {
+    "total": 0,
+    "items": [],
+    "truncados": 0
+  },
+  "parametros": {
+    "margen_s": 0.5,
+    "ventanas_dc1": [
+      [
+        1795632823.881043,
+        1795634940.328819
+      ]
+    ],
+    "intervalos_socket_descartadas": [],
+    "registro_v1": true,
+    "pcap_dc1": false,
+    "sensor1_tramas_dns_poblacion": 132,
+    "dc1_tramas_dns_poblacion": 66,
+    "poblacion": [
+      "10.10.20.21",
+      "10.10.20.22",
+      "10.10.20.23",
+      "10.10.20.24",
+      "10.10.20.25",
+      "10.10.20.26"
+    ],
+    "sondas": [
+      "sondas-reconstruidas-V2-E1-20261125T185323Z.jsonl"
+    ]
+  },
+  "tramas_ilegibles": {
+    "total": 0,
+    "items": [],
+    "truncados": 0
+  }
+}

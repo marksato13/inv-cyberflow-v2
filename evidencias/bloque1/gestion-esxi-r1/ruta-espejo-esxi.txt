@@ -1,0 +1,37 @@
+VMware ESXi 8.0.3 build-24280767
+== nic vmnic2
+Name    PCI Device    Driver  Admin Status  Link Status  Speed  Duplex  MAC Address         MTU  Description
+------  ------------  ------  ------------  -----------  -----  ------  -----------------  ----  -----------
+vmnic2  0000:65:00.0  igbn    Up            Up            1000  Full    xx:xx:xx:xx:xx:xx  1500  Intel Corporation Ethernet Server Adapter I210-T1
+== vswitch2
+vSwitch2
+   Name: vSwitch2
+   Class: cswitch
+   Num Ports: 2970
+   Used Ports: 5
+   Configured Ports: 128
+   MTU: 1500
+   CDP Status: listen
+   Beacon Enabled: false
+   Beacon Interval: 1
+   Beacon Threshold: 3
+   Beacon Required By: 
+   Uplinks: vmnic2
+   Portgroups: PG-CYBERFLOW-SPAN
+== portgroups
+Name                Virtual Switch  Active Clients  VLAN ID
+------------------  --------------  --------------  -------
+PG-CYBERFLOW-SPAN   vSwitch2                     2     4095
+== politica espejo
+   Allow Promiscuous: true
+   Allow MAC Address Change: true
+   Allow Forged Transmits: true
+   Override Vswitch Allow Promiscuous: false
+   Override Vswitch Allow MAC Address Change: false
+   Override Vswitch Allow Forged Transmits: false
+== net-stats vSwitch2
+PortNum          Type SubType SwitchName       MACAddress         ClientName
+2281701388          4       0 vSwitch2         xx:xx:xx:xx:xx:xx  vmnic2
+134217746           5       9 vSwitch2         xx:xx:xx:xx:xx:xx  ------------------------------------------------------------SENSOR1-CYBERFLOW
+134217750           5       9 vSwitch2         xx:xx:xx:xx:xx:xx  VM-SURICATA
+bash: line 9: $'\r': command not found

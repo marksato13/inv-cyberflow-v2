@@ -9,11 +9,15 @@ Los repositorios y las evidencias de V1 se mantienen intactos:
 
 V2 vuelve a capturar los datos y vuelve a entrenar el escalador y el IF, a calibrar y a fijar los umbrales. El código que reutiliza de V1 indica su repositorio, su commit y los cambios hechos (`docs/PROCEDENCIA.md`). V2 no usa los datos, el modelo, el umbral ni los resultados de V1.
 
-**Estado (24-nov-2026): preparación.**
+**Repositorio:** https://github.com/marksato13/inv-cyberflow-v2 · **Paquete reproducible del
+Bloque 1:** https://github.com/marksato13/inv-cyberflow-v2/releases/tag/bloque1-cierre-2026-11-26
+(`paquete-bloque1.tgz`, sha256 `cc21f054…`).
 
-- El piloto de 30 min está preparado y **no iniciado**.
-- Las 42 h definitivas, los ataques y las campañas A/B **no se han iniciado**.
-- Hay un bloqueante abierto: el espejo del sensor no entrega las tramas de tamaño completo (`docs/INFORME-PRUEBAS-2026-11-24.md` §5).
+**Estado (26-nov-2026): Bloque 1 (calidad de captura) en revisión; preparación.**
+
+- El piloto final y las 49 h definitivas, los ataques y las campañas A/B **no se han iniciado**.
+- Estado del Bloque 1: `docs/BLOQUE1-REVISION-2-2026-11-26.md` (lo vigente), `docs/BLOQUE1-POLITICA-CALIDAD.md`
+  (criterio del dictamen), `docs/PENDIENTES.md` y `docs/MATRIZ-OBSERVACIONES.md`.
 
 | Carpeta | Contenido |
 |---|---|

@@ -1,0 +1,57 @@
+## utc 2026-11-26T08:46:21.520002393Z epoch 1795682781.521512351
+## switch Gi2/0/19
+  Input queue: 0/2000/0/0 (size/max/drops/flushes); Total output drops: 216770
+     48 packets input, 3324 bytes, 0 no buffer
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     61462872 packets output, 12855593112 bytes, 0 underruns
+     0 output errors, 0 collisions, 5 interface resets
+## switch Gi1/0/23
+  Input queue: 0/2000/0/0 (size/max/drops/flushes); Total output drops: 0
+     3450156 packets input, 646478262 bytes, 0 no buffer
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     11213273 packets output, 1893289983 bytes, 0 underruns
+     0 output errors, 0 collisions, 2 interface resets
+## switch Gi2/0/23
+  Input queue: 0/2000/0/0 (size/max/drops/flushes); Total output drops: 24
+     25006142 packets input, 6493465216 bytes, 0 no buffer
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     23507568 packets output, 5769010339 bytes, 0 underruns
+     0 output errors, 0 collisions, 2 interface resets
+## esxi
+   Packets received: 40703884
+   Receive packets dropped: 0
+   Total receive errors: 0
+   Receive FIFO errors: 0
+   Receive missed errors: 0
+port 2281701388
+   pktsRx:40703886
+   droppedRx:0
+port 134217746
+   pktsRx:40627972
+   droppedRx:1070
+port 134217750
+   pktsRx:40624115
+   droppedRx:8
+vmxnet3 134217746
+   LRO pkts rx ok:0
+   pkts rx ok:35994911
+   unicast pkts rx ok:26907948
+   multicast pkts rx ok:7322043
+   broadcast pkts rx ok:1764920
+   running out of buffers:0
+   # of times the 1st ring is full:0
+   # of times the 2nd ring is full:0
+   # of pkts dropped due to large hdrs:0
+   # of pkts dropped due to max number of SG limits:0
+   aggregate number of times packets are dropped by PktAgingList:0
+   # of pkts dropped due to large inner (encap) hdrs:0
+   number of times packets are dropped by burst queue:0
+   number of times packets are dropped by rx try lock queueing:0
+   number of packets dropped by packet steering:0
+   number of packets dropped due to pkt length exceeds vNic mtu:0
+   number of packets dropped due to pkt truncation:0
+## sensor1
+rx_packets 35994993
+rx_dropped 2898898
+rx_nohandler 0
+rx_missed_errors 0

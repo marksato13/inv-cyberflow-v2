@@ -1,0 +1,191 @@
+{
+ "version": 1,
+ "tramos": [
+  {
+   "desde": "C0-inicio",
+   "hasta": "C1-fin-F0",
+   "segundos": 65.4,
+   "copias_gestion_faltantes": 0,
+   "faltantes_por_vlan": {},
+   "segundos_con_faltantes": 0,
+   "faltantes_rel_inicio_tramo_s": [],
+   "incrementos": {
+    "invitado_ens37.rx_dropped": 927,
+    "invitado_ens37.rx_packets": 11747,
+    "switch_destino_span.paquetes_salida": 11857,
+    "switch_origen_1.paquetes_entrada": 630,
+    "switch_origen_1.paquetes_salida": 2210,
+    "switch_origen_2.paquetes_entrada": 4438,
+    "switch_origen_2.paquetes_salida": 4355,
+    "uplink_vmnic2.pktsRx": 11597,
+    "vmnic2.Packets received": 11555,
+    "vmxnet3_sensor1.broadcast pkts rx ok": 662,
+    "vmxnet3_sensor1.multicast pkts rx ok": 2695,
+    "vmxnet3_sensor1.pkts rx ok": 11595,
+    "vmxnet3_sensor1.unicast pkts rx ok": 8238,
+    "vnic_sensor1_espejo.pktsRx": 11596,
+    "vnic_suricata_espejo.pktsRx": 11597
+   }
+  },
+  {
+   "desde": "C1-fin-F0",
+   "hasta": "C2-fin-R3",
+   "segundos": 11.5,
+   "copias_gestion_faltantes": 13691,
+   "faltantes_por_vlan": {
+    "60": 12615,
+    "10": 1076
+   },
+   "segundos_con_faltantes": 2,
+   "faltantes_rel_inicio_tramo_s": [
+    5,
+    6
+   ],
+   "incrementos": {
+    "invitado_ens37.rx_dropped": 144,
+    "invitado_ens37.rx_packets": 19330,
+    "switch_destino_span.descartes_salida": 38,
+    "switch_destino_span.paquetes_salida": 19564,
+    "switch_origen_1.paquetes_entrada": 125,
+    "switch_origen_1.paquetes_salida": 650,
+    "switch_origen_2.paquetes_entrada": 16117,
+    "switch_origen_2.paquetes_salida": 15869,
+    "uplink_vmnic2.pktsRx": 19474,
+    "vmnic2.Packets received": 19535,
+    "vmxnet3_sensor1.broadcast pkts rx ok": 114,
+    "vmxnet3_sensor1.multicast pkts rx ok": 488,
+    "vmxnet3_sensor1.pkts rx ok": 19470,
+    "vmxnet3_sensor1.unicast pkts rx ok": 18868,
+    "vnic_sensor1_espejo.pktsRx": 19472,
+    "vnic_suricata_espejo.pktsRx": 19470
+   }
+  },
+  {
+   "desde": "C2-fin-R3",
+   "hasta": "C3-inicio-R4",
+   "segundos": 35.4,
+   "copias_gestion_faltantes": 0,
+   "faltantes_por_vlan": {},
+   "segundos_con_faltantes": 0,
+   "faltantes_rel_inicio_tramo_s": [],
+   "incrementos": {
+    "invitado_ens37.rx_dropped": 501,
+    "invitado_ens37.rx_packets": 6586,
+    "switch_destino_span.paquetes_salida": 6194,
+    "switch_origen_1.paquetes_entrada": 350,
+    "switch_origen_1.paquetes_salida": 1318,
+    "switch_origen_2.paquetes_entrada": 2576,
+    "switch_origen_2.paquetes_salida": 2530,
+    "uplink_vmnic2.pktsRx": 6656,
+    "vmnic2.Packets received": 6659,
+    "vmxnet3_sensor1.broadcast pkts rx ok": 432,
+    "vmxnet3_sensor1.multicast pkts rx ok": 1471,
+    "vmxnet3_sensor1.pkts rx ok": 6658,
+    "vmxnet3_sensor1.unicast pkts rx ok": 4755,
+    "vnic_sensor1_espejo.pktsRx": 6656,
+    "vnic_suricata_espejo.pktsRx": 6656
+   }
+  },
+  {
+   "desde": "C3-inicio-R4",
+   "hasta": "C4-fin-R4",
+   "segundos": 69.8,
+   "copias_gestion_faltantes": 3902,
+   "faltantes_por_vlan": {
+    "60": 3295,
+    "10": 607
+   },
+   "segundos_con_faltantes": 4,
+   "faltantes_rel_inicio_tramo_s": [
+    5,
+    6,
+    27,
+    49
+   ],
+   "incrementos": {
+    "invitado_ens37.rx_dropped": 983,
+    "invitado_ens37.rx_packets": 108821,
+    "switch_destino_span.descartes_salida": 1,
+    "switch_destino_span.paquetes_salida": 108977,
+    "switch_origen_1.paquetes_entrada": 687,
+    "switch_origen_1.paquetes_salida": 3180,
+    "switch_origen_2.paquetes_entrada": 54947,
+    "switch_origen_2.paquetes_salida": 54045,
+    "uplink_vmnic2.pktsRx": 108749,
+    "vmnic2.Packets received": 108745,
+    "vmxnet3_sensor1.broadcast pkts rx ok": 778,
+    "vmxnet3_sensor1.multicast pkts rx ok": 2873,
+    "vmxnet3_sensor1.pkts rx ok": 108747,
+    "vmxnet3_sensor1.unicast pkts rx ok": 105096,
+    "vnic_sensor1_espejo.pktsRx": 108749,
+    "vnic_suricata_espejo.pktsRx": 108749
+   }
+  },
+  {
+   "desde": "C4-fin-R4",
+   "hasta": "C5-fin-F1",
+   "segundos": 65.4,
+   "copias_gestion_faltantes": 0,
+   "faltantes_por_vlan": {},
+   "segundos_con_faltantes": 0,
+   "faltantes_rel_inicio_tramo_s": [],
+   "incrementos": {
+    "invitado_ens37.rx_dropped": 926,
+    "invitado_ens37.rx_packets": 10913,
+    "switch_destino_span.paquetes_salida": 10931,
+    "switch_origen_1.paquetes_entrada": 693,
+    "switch_origen_1.paquetes_salida": 2323,
+    "switch_origen_2.paquetes_entrada": 4118,
+    "switch_origen_2.paquetes_salida": 3912,
+    "uplink_vmnic2.pktsRx": 10859,
+    "vmnic2.Packets received": 10855,
+    "vmxnet3_sensor1.broadcast pkts rx ok": 654,
+    "vmxnet3_sensor1.multicast pkts rx ok": 2682,
+    "vmxnet3_sensor1.pkts rx ok": 10859,
+    "vmxnet3_sensor1.unicast pkts rx ok": 7523,
+    "vnic_sensor1_espejo.pktsRx": 10859,
+    "vnic_suricata_espejo.pktsRx": 10859
+   }
+  }
+ ],
+ "copias_resumen": {
+  "resultado_global": "examinado_completo",
+  "entrada_completa": true,
+  "integridad_entrada": {
+   "problemas": [],
+   "ficheros_esperados": 55,
+   "ficheros_con_problemas": 0
+  },
+  "eventos_por_clase_todo_el_bastion": {
+   "no_determinable": 873,
+   "completo": 58181,
+   "falta_copia": 17642,
+   "inesperado": 37,
+   "ambiguo": 27
+  },
+  "por_vlan_faltante_todo_el_bastion": {
+   "60": 15959,
+   "10": 1683
+  },
+  "indicios": {
+   "ttl_incorrecto": 1969,
+   "orden_incorrecto": 1969,
+   "carga_distinta": 0,
+   "mac_igual": 0
+  },
+  "pico_1s": {
+   "s": 1795682809,
+   "tramas": 31523,
+   "bytes": 40849326,
+   "mbps": 326.79
+  },
+  "pico_10ms": {
+   "t": 1795682741.08,
+   "bytes": 1272206,
+   "mbps_equivalentes": 1017.8
+  },
+  "intervalos_10ms_a_linea": 9
+ },
+ "faltantes_par_bastion_sensor1": 17593,
+ "nota": "puertos vSwitch por función; sin MAC ni direcciones de gestión del ESXi"
+}
