@@ -103,6 +103,21 @@ class CompararExtremo(unittest.TestCase):
         self.assertEqual(r["por_clase"]["datos"]["sin_extremo"]["total"], 0)
         self.assertEqual(codigo, 0, r["discrepancias"])
 
+    def test_syn_reordenado_tras_syn_ack(self):
+        # E2: en Sensor1 las dos copias del SYN llegaron 0,85 ms después del SYN-ACK
+        filas = base()
+        filas[1] = (10.0005, filas[1][1])          # SYN-ACK 0,5 ms después del SYN en srv-dmz
+        sensor = sensor_de(filas)
+        sensor = [(ts + (.0015 if i < 2 else 0), d) for i, (ts, d) in enumerate(sensor)]
+        # una trama anterior de otra conexión fija el periodo común antes del SYN
+        previa = [trama(9.0, po=40000, seq=5, ipid=99)]
+        filas, sensor = previa + filas, sensor_de(previa) + sensor
+        codigo, r = self.correr(filas, sensor, margen=0)
+        # solo la conexión previa (sin SYN) queda parcial; la del SYN reordenado no
+        self.assertEqual([x["puerto_cliente"] for x in r["parciales_sensor"]["detalles"]], [40000])
+        self.assertEqual(r["por_clase"]["syn_ack"]["sin_sensor"]["total"], 0)
+        self.assertEqual(codigo, 0, r["discrepancias"])
+
     def test_dato_sin_evento_sensor(self):
         filas = base()
         codigo, r = self.correr(filas, sensor_de([x for i, x in enumerate(filas) if i != 3]))

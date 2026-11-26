@@ -88,7 +88,9 @@ def base_y_sentido(p, servidor):
     return (p.destino, p.puerto_destino, p.puerto_origen), "s2c"
 
 
-def separar(eventos, servidor, inicio, fin):
+def separar(eventos, servidor, inicio, fin, adelanto_syn=0.0):
+    """adelanto_syn: el espejo puede entregar el SYN después del SYN-ACK (E2: 0,85 ms); el SYN se
+    ordena como si llegara adelanto_syn s antes para que abra su conexión."""
     por_base = collections.defaultdict(list)
     for e in eventos:
         base, sentido = base_y_sentido(e.p, servidor)
@@ -97,7 +99,8 @@ def separar(eventos, servidor, inicio, fin):
     parciales, fuera = collections.defaultdict(list), []
     for base, filas in por_base.items():
         isn, syn_dentro = None, False
-        for e, sentido in sorted(filas, key=lambda x: x[0].ts):
+        for e, sentido in sorted(filas, key=lambda x: x[0].ts - (
+                adelanto_syn if x[1] == "c2s" and clase(x[0].p) == "syn" else 0)):
             dentro = inicio <= e.ts <= fin
             if sentido == "c2s" and clase(e.p) == "syn":
                 if isn != e.p.seq:
@@ -310,7 +313,7 @@ def ejecutar(a):
     if sin_periodo:
         inicio, fin = float("inf"), float("-inf")
     ext, pe, fe = separar([Evento(p) for p in ep], a.servidor, inicio, fin)
-    sen, ps, fs = separar(eventos, a.servidor, inicio, fin)
+    sen, ps, fs = separar(eventos, a.servidor, inicio, fin, a.margen_par_s)
     desfase = estimar(ext, sen)
     r = comparar(ext, sen, modo, desfase, a.margen_par_s)
     if sin_periodo:
