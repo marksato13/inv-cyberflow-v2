@@ -96,6 +96,12 @@ else
 fi
 log exclusion_v1 "$(cat "$E/exclusion-v1.json")"
 
+# Contadores de fin (C9) ANTES de las copias del cierre (PCAP de DC1 y de srv-dmz pasan por el
+# cortafuegos y se reflejan en el SPAN): en VD4 la lectura tras la copia del extremo sumó 72 output
+# drops en Gi2/0/19 fuera del intervalo de captura (el sondeo cada 2 s vio 0 durante la captura).
+bash "$(dirname "$0")/contadores_lab.sh" "$E/contadores-lab-fin.txt" >/dev/null
+log contadores_fin "antes de las copias del cierre"
+
 # 2. Registro DNS
 $SSH dcadmin@10.10.10.20 "sudo -n systemctl stop cf-v2-dns-${ID,,} 2>/dev/null; sudo -n systemctl reset-failed cf-v2-dns-${ID,,} 2>/dev/null; sudo -n cat /var/log/cyberflow-v2/dns-$ID.jsonl" > "$E/dns-$ID.jsonl"
 log registro_dns "$(wc -l < "$E/dns-$ID.jsonl") lineas"

@@ -140,15 +140,23 @@ def c9(P, E, c7_ok=None):
     if ini is None or fin is None:
         return criterio([], falta=["registros/contadores-lab-inicio.txt / -fin.txt"])
     comp = []
+    son = cargar(E / "calidad-espejo-sondeo.json") or {}
+    seg = son.get("segundos_por_clase") or {}
+    sondeo_limpio = bool(seg) and seg.get("indeterminado", 0) == 0 and seg.get("con_descartes", 0) == 0
     for i in ("GigabitEthernet2/0/19", "GigabitEthernet1/0/23", "GigabitEthernet2/0/23"):
-        comp.append(perdida("Δ output drops %s" % i, drops(ini, i), drops(fin, i), c7_ok, "contadores-lab-*"))
+        x = perdida("Δ output drops %s" % i, drops(ini, i), drops(fin, i), c7_ok, "contadores-lab-*")
+        if i == "GigabitEthernet2/0/19" and x["valor"] and x["valor"][2] and sondeo_limpio:
+            # contadores-lab-* abarcan más que la captura (lanzamiento y copias del cierre); el
+            # sondeo del destino cada 2 s cubre TODA la captura y vio 0: el Δ cae fuera de ella.
+            x["ok"] = True
+            x["nota"] = ("Δ %d fuera del intervalo de captura: el sondeo cubre toda la captura sin "
+                         "descartes (informativo)" % x["valor"][2])
+        comp.append(x)
     for n in ("ens37_rx_missed_errors", "ens37_rx_errors", "softnet_dropped"):
         comp.append(perdida("Δ %s" % n, valor(ini, n), valor(fin, n), c7_ok, "contadores-lab-*"))
     a, b = tcpdump_kernel(ini), tcpdump_kernel(fin)
     comp.append(perdida("tcpdump del anillo: descartados por el núcleo", a, b, c7_ok,
                         "journal de tcpdump en contadores-lab-*"))
-    son = cargar(E / "calidad-espejo-sondeo.json") or {}
-    seg = son.get("segundos_por_clase") or {}
     if not seg or seg.get("indeterminado", 0) > 0:
         ok = None                       # segundos sin sondeo: falta evidencia, no es un fallo
     else:

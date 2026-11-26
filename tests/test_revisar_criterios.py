@@ -65,7 +65,9 @@ class Revisar(unittest.TestCase):
         P = self.carpeta()
         self.assertIs(rc.c9(P, P / "registros", True)["ok"], True)
         P = self.carpeta(d19_fin=101)
-        # Δ != 0: se cuantifica y decide C7 (PROTOCOLO §10)
+        (P / "registros" / "calidad-espejo-sondeo.json").write_text(json.dumps(
+            {"segundos_por_clase": {"sin_descartes": 100, "con_descartes": 1, "indeterminado": 0}}))
+        # Δ != 0 con descartes también en la captura: se cuantifica y decide C7 (PROTOCOLO §10)
         self.assertIs(rc.c9(P, P / "registros", False)["ok"], False)
         r = rc.c9(P, P / "registros", True)
         self.assertIs(r["ok"], True)
@@ -73,6 +75,15 @@ class Revisar(unittest.TestCase):
         self.assertIsNone(rc.c9(P, P / "registros", None)["ok"])
         self.assertTrue(r["requiere_duracion_prolongada"])
         self.assertTrue(r["pendiente_otra_comprobacion"])   # Suricata kernel_drops no medible
+
+    def test_c9_delta_fuera_de_la_captura_con_sondeo_limpio_vd4(self):
+        P = self.carpeta(d19_fin=172)
+        r = rc.c9(P, P / "registros", False)       # aunque C7 fallara: el Δ no es de la captura
+        self.assertIs(r["comprobaciones"][0]["ok"], True)
+        self.assertIn("fuera del intervalo", r["comprobaciones"][0]["nota"])
+        (P / "registros" / "calidad-espejo-sondeo.json").write_text(json.dumps(
+            {"segundos_por_clase": {"sin_descartes": 100, "con_descartes": 2, "indeterminado": 0}}))
+        self.assertIs(rc.c9(P, P / "registros", False)["ok"], False)
 
     def test_c9_segundos_sin_sondeo_es_falta_no_fallo(self):
         P = self.carpeta()

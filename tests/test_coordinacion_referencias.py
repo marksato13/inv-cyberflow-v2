@@ -318,6 +318,9 @@ class Guiones(unittest.TestCase):
         self.assertGreater(quitar, t.index("solapes --desde"))
         self.assertLess(quitar, t.rindex("tar -C \"$E\" -cf - ."))     # antes de reunir (paso 4)
         self.assertIn("revisar_criterios.py", t)
+        # VD4: contadores de fin antes de las copias del cierre (DC1 y srv-dmz)
+        self.assertLess(t.index('contadores_lab.sh" "$E/contadores-lab-fin.txt"'), t.index("sudo -n cat /var/log/cyberflow-v2/dns-$ID.pcap"))
+        self.assertLess(t.index('contadores_lab.sh" "$E/contadores-lab-fin.txt"'), t.index('cat $EXT/$ID.pcap" | ssh'))
         self.assertTrue(re.search(r"for h in srvdmz dcadmin@10.10.10.20 sensor1 clientes", t))
 
 
