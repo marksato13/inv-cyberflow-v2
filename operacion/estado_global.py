@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import collections
 import json
 import re
 from pathlib import Path
@@ -58,6 +59,18 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
     estados["supervision"] = (
         "con_invalidaciones" if invalidaciones else
         "sin_invalidaciones" if completos else "sin_datos")
+    # Sondeo del destino del SPAN (analizar_sondeo.py sobre el periodo de captura). Que no haya
+    # sondeo, o que haya huecos, NUNCA se lee como «sin pérdidas»: es «sin_datos»/«indeterminado».
+    sondeo = leer(e / "calidad-espejo-sondeo.json")
+    if not isinstance(sondeo, dict) or "error" in sondeo or not sondeo.get("intervalos"):
+        estados["espejo"] = "sin_datos"
+    else:
+        seg = collections.Counter()
+        for iv in sondeo["intervalos"]:
+            seg[iv.get("clase")] += max(0.0, float(iv["hasta"]) - float(iv["desde"]))
+        estados["espejo"] = ("con_descartes" if seg["con_descartes"] > 0 else
+                             "indeterminado" if seg["indeterminado"] > 0 or set(seg) - {"sin_descartes", "con_descartes", "indeterminado"}
+                             else "sin_descartes")
     evidencias = [
         pruebas / "extraccion" / "resumen.json",
         pruebas / "extraccion" / "verificacion.json",
@@ -101,6 +114,7 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
         "vigia": ("paro",),
         "supervision": ("con_invalidaciones",),
         "exclusion_v1": ("no_cubre",),
+        "espejo": ("con_descartes",),
     }
     for nombre, valores in fallos.items():
         if estados[nombre] in valores:
@@ -123,7 +137,7 @@ def evaluar(identificador: str, pruebas: Path, ejecucion: Path | None = None,
     if prueba:
         motivos.append("prueba_parada:%s" % prueba[-1].get("provocado", "desconocido"))
     faltantes = [k for k, v in estados.items() if v in
-                 ("ausente", "sin_datos", "desconocido")]
+                 ("ausente", "sin_datos", "desconocido", "indeterminado")]
     if estados["analisis"] == "incompleto":
         faltantes.append("analisis")
     if not criterios:

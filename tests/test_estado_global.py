@@ -45,6 +45,11 @@ class TestEstadoGlobal(unittest.TestCase):
             "conciliar rc=0\nextraer rc=0\nverificar rc=0\nmetadatos rc=0\n")
         self.escribir(self.p / "criterios.json", {
             **{f"C{i}": {"ok": True} for i in range(1, 14)}, "C11b": {"ok": True}})
+        self.sondeo(("sin_descartes", 0, 100))
+
+    def sondeo(self, *tramos):
+        self.escribir(self.e / "calidad-espejo-sondeo.json", {"intervalos": [
+            {"clase": c, "desde": d, "hasta": h} for c, d, h in tramos]})
 
     def escribir(self, p, obj):
         p.write_text(json.dumps(obj))
@@ -68,6 +73,27 @@ class TestEstadoGlobal(unittest.TestCase):
         self.pasos()
         r = self.evaluar()
         self.assertEqual((r["global"], r["dictamen"], r["codigo_salida"]), ("aprobada", "aprobado", 0))
+
+    def test_sin_sondeo_nunca_es_sin_perdidas(self):
+        self.pasos()
+        for caso in ({"error": "registro ausente o vacío"}, None):
+            if caso is None:
+                (self.e / "calidad-espejo-sondeo.json").unlink()
+            else:
+                self.escribir(self.e / "calidad-espejo-sondeo.json", caso)
+            r = self.evaluar()
+            self.assertEqual((r["espejo"], r["global"]), ("sin_datos", "indeterminada"))
+            self.assertIn("falta:espejo", r["motivos"])
+
+    def test_sondeo_con_hueco_y_con_descartes(self):
+        self.pasos()
+        self.sondeo(("indeterminado", 0, 30), ("sin_descartes", 30, 100))
+        r = self.evaluar()
+        self.assertEqual((r["espejo"], r["global"]), ("indeterminado", "indeterminada"))
+        self.sondeo(("sin_descartes", 0, 30), ("con_descartes", 30, 32))
+        r = self.evaluar()
+        self.assertEqual((r["espejo"], r["global"]), ("con_descartes", "no_aprobada"))
+        self.assertIn("espejo:con_descartes", r["motivos"])
 
     def test_fallo_cobertura_no_queda_oculto(self):
         # antes de 26-nov cobertura y fronteras no entraban en el dictamen
