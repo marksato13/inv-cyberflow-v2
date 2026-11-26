@@ -64,7 +64,7 @@ log registro_dns "cf-v2-dns-${ID,,}"
 # 4a. Referencia independiente en el extremo: tcpdump en srv-dmz (ens35), solo población <-> srv-dmz
 # HTTP/HTTPS, sin recorte (-s 0), escritura sin búfer (-U). Se para en cerrar_v2.sh (SIGINT: escribe
 # sus estadísticas de descartes del núcleo en el .log); cerrar_v2 calcula el sha256 y lo contrasta.
-$SSH srvdmz "mkdir -p $EXT && sudo -n setsid nohup tcpdump -i ens35 -n -s 0 -U -w $EXT/$ID.pcap '$FILTRO_EXT' > $EXT/$ID.log 2>&1 < /dev/null &" \
+$SSH srvdmz "mkdir -p $EXT; sudo -n setsid nohup tcpdump -i ens35 -n -s 0 -U -w $EXT/$ID.pcap '$FILTRO_EXT' > $EXT/$ID.log 2>&1 < /dev/null &" \
   || deshacer "no arrancó la captura del extremo"
 sleep 2
 $SSH srvdmz "pgrep -f '[t]cpdump .* -w $EXT/$ID.pcap' >/dev/null" || deshacer "la captura del extremo no sigue viva: $($SSH srvdmz "cat $EXT/$ID.log" 2>&1)"
