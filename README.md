@@ -37,10 +37,12 @@ V2 vuelve a capturar los datos y vuelve a entrenar el escalador y el IF, a calib
 ### Reproducir el Bloque 1 (desde un clon nuevo)
 
 Hace falta Python 3.12 o posterior, solo con la biblioteca estándar. Para descargar, `gh` o el
-navegador.
+navegador. **En Windows**, clona en una carpeta de ruta corta (por ejemplo `C:\r4`) y con
+`core.longpaths=true`: algunas rutas de `evidencias/` superan los 260 caracteres. Sin eso, el checkout
+queda incompleto (primer intento, `evidencias/bloque1/entradas-r4/REPRODUCCION-CLON-LIMPIO-intento1-fallido.txt`).
 
 ```
-git clone https://github.com/marksato13/inv-cyberflow-v2.git
+git clone -c core.longpaths=true https://github.com/marksato13/inv-cyberflow-v2.git
 cd inv-cyberflow-v2
 gh release download bloque1-r4-2026-11-26 -D descargas
 python -X utf8 operacion/verificar_paquetes.py descargas
@@ -57,8 +59,7 @@ Resultado esperado: cada guion termina en `GLOBAL SATISFACTORIO` (rc 0).
 - `recalcular_desde_capturas.py` rehace cobertura, extremo, DNS, copias y extracción desde los
   PCAP/EVE, y las 45 transacciones de P2.
 
-Qué no puede rehacerse, y por qué, está en `evidencias/bloque1/entradas-r4/LEEME.md`. El registro de
-la comprobación desde una carpeta vacía está en `evidencias/bloque1/entradas-r4/REPRODUCCION-CLON-LIMPIO.txt`.
+Qué no puede rehacerse, y por qué, está en `evidencias/bloque1/entradas-r4/LEEME.md`. La comprobación desde una carpeta vacía con estos mismos comandos **está pendiente de repetirse**. El primer intento falló por la longitud de las rutas en Windows y su registro se conserva.
 
 | Carpeta | Contenido |
 |---|---|

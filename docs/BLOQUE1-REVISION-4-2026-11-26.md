@@ -57,7 +57,7 @@ experimento y todas las MAC son seudónimos. Los únicos nombres del EVE son `cf
 Desde un clon nuevo, con Python 3.12 o posterior y solo la biblioteca estándar:
 
 ```
-git clone https://github.com/marksato13/inv-cyberflow-v2.git
+git clone -c core.longpaths=true https://github.com/marksato13/inv-cyberflow-v2.git
 cd inv-cyberflow-v2
 # descargar los 5 ficheros de la release en ./descargas (gh o navegador)
 gh release download bloque1-r4-2026-11-26 -D descargas
@@ -88,7 +88,7 @@ en `DEPENDEN_DEL_TRAFICO_AJENO` con su motivo:
 También acepta las rutas de fichero que solo cambian de carpeta. Ninguno de esos campos interviene en
 el dictamen. Lo que queda sin revisión independiente está en el LEEME.
 
-**Registro de la comprobación desde una carpeta vacía:** `evidencias/bloque1/entradas-r4/REPRODUCCION-CLON-LIMPIO.txt`.
+**Dónde se ha comprobado de verdad.** A, con los paquetes de la release extraídos, en el portátil (copia de trabajo) y en Sensor1. B en Sensor1, y su modo P2 en el portátil. **La comprobación desde una carpeta vacía (clon nuevo y release) sigue pendiente.** El primer intento falló al clonar: Windows no admite rutas de más de 260 caracteres sin `core.longpaths`, el checkout quedó incompleto (falta incluso `operacion/estado_global.py`) y los tres guiones dieron rc 2. El registro está en `evidencias/bloque1/entradas-r4/REPRODUCCION-CLON-LIMPIO-intento1-fallido.txt`. El README ya indica `-c core.longpaths=true` y una carpeta corta.
 
 ## 4. Defectos encontrados y corregidos en esta revisión
 

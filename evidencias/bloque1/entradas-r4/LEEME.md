@@ -66,8 +66,9 @@ Barridos de la publicación:
 
 ## Qué se reproduce desde aquí
 
-`docs/BLOQUE1-REVISION-4-2026-11-26.md` §3 da los comandos, y el registro de la comprobación desde
-una carpeta vacía está en `REPRODUCCION-CLON-LIMPIO.txt`.
+`docs/BLOQUE1-REVISION-4-2026-11-26.md` §3 da los comandos. La comprobación desde una carpeta vacía **sigue pendiente**: el primer intento falló por la longitud de las rutas en Windows
+(`REPRODUCCION-CLON-LIMPIO-intento1-fallido.txt`). Lo de abajo se comprobó en Sensor1 y en la copia de
+trabajo del portátil.
 
 1. **El dictamen desde resultados intermedios** (`operacion/reproducir_dictamen.py`): dictamen,
    estados, motivos, C7 y C9–C13, pendientes y los ocho casos coinciden en las cuatro ejecuciones.
