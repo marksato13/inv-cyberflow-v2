@@ -53,7 +53,8 @@ def es_guarda(motivos: str) -> bool:
 
 
 def evaluar(ventanas, por_ip, historia_s=230.0):
-    filas, utiles_total, guardadas_total = [], 0, 0
+    # Totales = ventanas DISTINTAS: varias sondas del mismo origen tocan las mismas ventanas.
+    filas, utiles_total, guardadas_total = [], set(), set()
     for ip, ivs in sorted(por_ip.items()):
         propias = [v for v in ventanas if v["entidad_ip"] == ip]
         t0s = [ep(v["ventana_cierre_utc"]) - float(v["t_programa_s"]) for v in propias if v.get("t_programa_s")]
@@ -66,13 +67,13 @@ def evaluar(ventanas, por_ip, historia_s=230.0):
                 antes = min(antes, cierre - historia_s)
                 if antes <= hasta and desde <= cierre:
                     (guardadas if es_guarda(v.get("motivos_exclusion")) else utiles).append(v["ventana_id"])
-            utiles_total += len(utiles)
-            guardadas_total += len(guardadas)
+            utiles_total.update(utiles)
+            guardadas_total.update(guardadas)
             filas.append({"origen_ip": ip, "sonda": etiqueta, "desde_epoch": desde, "hasta_epoch": hasta,
                           "t0_perfil_epoch": t0, "margen_hasta_t0_s": None if t0 is None else t0 - hasta,
                           "ventanas_entidad": len(propias), "tocadas_en_guarda_planificada": len(guardadas),
                           "tocadas_utiles": len(utiles), "ids_utiles": utiles[:200]})
-    return filas, utiles_total, guardadas_total
+    return filas, len(utiles_total), len(guardadas_total - utiles_total)
 
 
 def main(argv=None) -> int:
@@ -102,7 +103,7 @@ def main(argv=None) -> int:
         estado = "sin_ventanas"
     else:
         estado = "sin_contaminacion" if utiles == 0 else "contaminacion_en_periodo_util"
-    out = {"version": 2, "estado": estado, "fuentes_registro": fuentes, "historia_s": a.historia_s,
+    out = {"version": 3, "estado": estado, "recuento": "ventanas distintas (version 2 sumaba por sonda)", "fuentes_registro": fuentes, "historia_s": a.historia_s,
            "cola_s": a.cola_s, "guardas_planificadas": list(GUARDAS_PLANIFICADAS),
            "ventanas_poblacion": len(ventanas), "tocadas_utiles": utiles,
            "tocadas_en_guarda_planificada": guardadas, "sondas": filas}

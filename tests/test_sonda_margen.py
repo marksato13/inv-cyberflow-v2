@@ -80,6 +80,18 @@ def test_sonda_al_arrancar_contamina_23_ventanas_como_en_t1_e3():
     assert utiles + guardadas == 23 and utiles in (22, 23)
 
 
+def test_varias_sondas_del_mismo_origen_cuentan_ventanas_distintas():
+    captura = 1_000_000.0
+    t0 = captura + 243.0
+    v = ventanas(captura, t0, 1440)
+    _, una, g1 = vs.evaluar(v, vs.intervalos([sonda(t0 - 0.2, t0 - 0.15)]))
+    cinco = [sonda(t0 - 0.2 + i * 0.01, t0 - 0.15 + i * 0.01) for i in range(5)]
+    for i, x in enumerate(cinco):
+        x["sonda"] = "s%d" % i
+    filas, utiles, guardadas = vs.evaluar(v, vs.intervalos(cinco))
+    assert len(filas) == 5 and utiles == una and guardadas == g1
+
+
 def test_justo_por_debajo_del_margen_contamina():
     captura = 1_000_000.0
     t0 = captura + 250.0
