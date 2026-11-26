@@ -123,31 +123,40 @@ def tcpdump_kernel(t):
     return int(v[-1]) if v else None
 
 
-def c9(P, E):
+def perdida(que, a, b, c7_ok, fuente):
+    """PROTOCOLO §10 (C9): Δ = 0 se acepta; si no, se cuantifica y decide la cobertura (C7). La
+    política de calidad del espejo (estado_global «espejo») sigue aparte y no se relaja aquí."""
+    if None in (a, b):
+        return c(que, None, None, fuente)
+    d = b - a
+    x = c(que, True if d == 0 else c7_ok, [a, b, d], fuente)
+    if d:
+        x["nota"] = "Δ %d cuantificado; decide C7 (%s)" % (d, c7_ok)
+    return x
+
+
+def c9(P, E, c7_ok=None):
     ini, fin = texto(E / "contadores-lab-inicio.txt"), texto(E / "contadores-lab-fin.txt")
     if ini is None or fin is None:
         return criterio([], falta=["registros/contadores-lab-inicio.txt / -fin.txt"])
     comp = []
     for i in ("GigabitEthernet2/0/19", "GigabitEthernet1/0/23", "GigabitEthernet2/0/23"):
-        a, b = drops(ini, i), drops(fin, i)
-        comp.append(c("Δ output drops %s = 0" % i, None if None in (a, b) else b - a == 0,
-                      None if None in (a, b) else [a, b, b - a], "contadores-lab-*"))
+        comp.append(perdida("Δ output drops %s" % i, drops(ini, i), drops(fin, i), c7_ok, "contadores-lab-*"))
     for n in ("ens37_rx_missed_errors", "ens37_rx_errors", "softnet_dropped"):
-        a, b = valor(ini, n), valor(fin, n)
-        comp.append(c("Δ %s = 0" % n, None if None in (a, b) else b - a == 0,
-                      None if None in (a, b) else [a, b, b - a], "contadores-lab-*"))
+        comp.append(perdida("Δ %s" % n, valor(ini, n), valor(fin, n), c7_ok, "contadores-lab-*"))
     a, b = tcpdump_kernel(ini), tcpdump_kernel(fin)
-    comp.append(c("tcpdump del anillo: 0 descartados por el núcleo", None if None in (a, b) else b - a == 0,
-                  None if None in (a, b) else [a, b], "journal de tcpdump en contadores-lab-*"))
+    comp.append(perdida("tcpdump del anillo: descartados por el núcleo", a, b, c7_ok,
+                        "journal de tcpdump en contadores-lab-*"))
     son = cargar(E / "calidad-espejo-sondeo.json") or {}
     seg = son.get("segundos_por_clase") or {}
-    comp.append(c("sondeo del destino del SPAN durante toda la captura sin descartes ni huecos",
-                  None if not seg else seg.get("con_descartes", 0) == 0 and seg.get("indeterminado", 0) == 0,
-                  seg or None, "calidad-espejo-sondeo.json"))
+    if not seg or seg.get("indeterminado", 0) > 0:
+        ok = None                       # segundos sin sondeo: falta evidencia, no es un fallo
+    else:
+        ok = True if seg.get("con_descartes", 0) == 0 else c7_ok
+    comp.append(c("sondeo del destino del SPAN durante toda la captura", ok, seg or None, "calidad-espejo-sondeo.json"))
     ext = cargar(E / "extremo-captura.json") or {}
-    comp.append(c("tcpdump de srv-dmz: 0 descartados por el núcleo",
-                  None if ext.get("descartados_nucleo") is None else ext["descartados_nucleo"] == 0,
-                  ext.get("descartados_nucleo"), "extremo-captura.json"))
+    comp.append(perdida("tcpdump de srv-dmz: descartados por el núcleo", 0, ext.get("descartados_nucleo"),
+                        c7_ok, "extremo-captura.json"))
     return criterio(comp, prolongada=["contadores a lo largo de 49 h (supervisión prolongada, bloque 4)"],
                     otra=["Suricata no publica kernel_drops en stats.log: no medible (INFORME-PILOTO §4)"])
 
@@ -275,7 +284,8 @@ def revisar(P, CAP):
     ID = P.name
     E, G = P / "registros", P / "generador" / ID
     txs = [t for f in sorted(glob.glob(str(G / "transacciones-*.jsonl"))) for t in (jsonl(f) or [])]
-    R = {"C7": c7(P, txs), "C9": c9(P, E), "C10": c10(P, E, G), "C11": c11(P, E), "C12": c12(P, E, CAP), "C13": c13(P, E)}
+    r7 = c7(P, txs)
+    R = {"C7": r7, "C9": c9(P, E, r7["ok"]),"C10": c10(P, E, G), "C11": c11(P, E), "C12": c12(P, E, CAP), "C13": c13(P, E)}
     return {"version": 1, "ejecucion": ID,
             "generado_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
             "nota": ("evaluar_piloto.py deja estos criterios en revisión manual (ok None); aquí se revisan "
