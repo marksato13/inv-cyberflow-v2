@@ -4,8 +4,8 @@
     python3 dictamen_casos.py --pruebas ~/cyberflow-v2/pruebas/<ID> --capturas ~/cyberflow-v2/capturas/<ID> \
         --salida <carpeta nueva> <ID>
 
-No escribe en la ejecución: copia a <salida>/<caso>/ solo los ficheros pequeños que lee
-estado_global.evaluar() (JSON/JSONL, sin PCAP ni CSV) y modifica la copia. Casos:
+No escribe en la ejecución: copia a <salida>/<caso>/ los ficheros que lee estado_global.evaluar()
+(JSON, JSONL y CSV; sin PCAP) y modifica la copia. Casos:
 
   correcta                 la copia tal cual (debe dar el mismo dictamen que resultado-global.json)
   perdida_extremo          una conexión que vio srv-dmz y Sensor1 no (conexiones_solo_extremo = 1)
@@ -30,7 +30,8 @@ import estado_global as eg  # noqa: E402
 
 def copiar(origen: Path, destino: Path):
     for f in origen.rglob("*"):
-        if f.is_file() and f.suffix in (".json", ".jsonl") and f.stat().st_size < 50_000_000:
+        # .csv: el dictamen exige entradas_if.csv y ventanas_meta.csv como evidencia del análisis
+        if f.is_file() and f.suffix in (".json", ".jsonl", ".csv") and f.stat().st_size < 200_000_000:
             d = destino / f.relative_to(origen)
             d.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(f, d)
