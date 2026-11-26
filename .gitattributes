@@ -5,3 +5,4 @@
 *.gz binary
 *.png binary
 *.pdf binary
+evidencias/** -text
