@@ -15,11 +15,14 @@ Reglas V2, las mismas que verificó el comprobador ``captura/copias_espejo.py``:
   e identificador ICMP.
 - **Ventana:** 20 ms desde la primera trama del grupo.
 - **Copia del espejo:** misma clave dentro de la ventana, con un TTL a ≤ 1 de todos los del grupo.
-- **Unidifusión:** dentro de un grupo no se repite el par (VLAN, TTL). El espejo enseña cada trama
-  una vez por VLAN recorrida (con TTL−1 tras el enrutador), así que una segunda trama con la misma
-  VLAN y el mismo TTL es otra transmisión idéntica.
-- **Difusión y multidifusión:** el espejo enseña dos copias idénticas (misma VLAN y TTL, una por
-  troncal), así que un grupo admite como mucho 2 tramas.
+- **Unidifusión enrutada** (extremos en /24 distintos): dentro de un grupo no se repite el par (VLAN,
+  TTL). El espejo enseña cada trama una vez por VLAN recorrida (con TTL−1 tras el enrutador), así que
+  una segunda trama con la misma VLAN y el mismo TTL es otra transmisión idéntica.
+- **Sin enrutar** (difusión, multidifusión, o extremos en el mismo /24): el espejo enseña dos copias
+  idénticas, misma VLAN y TTL, una por troncal. Un grupo admite como mucho 2 tramas. Medido en VD4: unas
+  40 000 copias así, dentro de 10.10.10.0/24 y 10.10.20.0/24, de las VLAN 70 y 95 y de pfsync en la 100.
+  Límite: dos transmisiones idénticas sin enrutar que el espejo vea una sola vez cada una se funden, igual
+  que en V1.
 - **Se conserva la copia de mayor TTL** (la del emisor, la que mide ``ttl_mean_10s``); en empate, la
   primera en el orden de entrada. Es lo mismo que V1.
 
@@ -42,9 +45,9 @@ from dataclasses import dataclass
 
 import extract_multilayer_v3 as v3
 
-VERSION = 2
+VERSION = 3
 VENTANA_COPIA_S = 0.020
-MAX_COPIAS_DIFUSION = 2
+MAX_COPIAS_IDENTICAS = 2
 
 
 @dataclass(frozen=True)
@@ -85,6 +88,11 @@ def es_difusion(ip: str) -> bool:
         return False
 
 
+def sin_enrutar(origen: str, destino: str) -> bool:
+    """Difusión, multidifusión o los dos extremos en el mismo /24: el espejo ve copias idénticas."""
+    return es_difusion(destino) or origen.rsplit(".", 1)[0] == destino.rsplit(".", 1)[0]
+
+
 def deduplicar_espejo_v2(contextos: list, ventana_segundos: float = VENTANA_COPIA_S) -> tuple[list, int]:
     orden = sorted(range(len(contextos)), key=lambda i: contextos[i].packet.timestamp)
     abiertos: dict[tuple, list] = {}
@@ -96,12 +104,12 @@ def deduplicar_espejo_v2(contextos: list, ventana_segundos: float = VENTANA_COPI
         lista = abiertos.setdefault(k, [])
         while lista and p.timestamp - lista[0]["t0"] > ventana_segundos:
             lista.pop(0)                         # ya no admite más copias
-        difusion = es_difusion(p.dst_ip)
+        identicas = sin_enrutar(p.src_ip, p.dst_ip)
         destino = None
         for g in lista:                          # el grupo abierto más antiguo que la admita
             if any(abs(p.ttl - t) > 1 for t in g["ttl"]):
                 continue
-            if (len(g["m"]) < MAX_COPIAS_DIFUSION) if difusion else ((c.vlan, p.ttl) not in g["vt"]):
+            if (len(g["m"]) < MAX_COPIAS_IDENTICAS) if identicas else ((c.vlan, p.ttl) not in g["vt"]):
                 destino = g
                 break
         if destino is None:

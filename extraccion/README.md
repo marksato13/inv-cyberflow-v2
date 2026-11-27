@@ -66,15 +66,25 @@ descartado se cuenta en `copias_espejo_quitadas`.
 - **Clave:** protocolo, IP y puertos, IP ID, longitud IP, TCP seq, **TCP ack**, **flags**, y tipo e ID ICMP.
   `parse_con_contexto_v2` lee el `ack`, porque el parser de V1 no lo conserva.
 - **Copia:** misma clave a ≤ 20 ms de la primera trama del grupo, con un TTL a ≤ 1 de todos los del grupo.
-- **Unidifusión:** dentro de un grupo no se repite el par (VLAN, TTL). Una segunda trama con la misma
-  VLAN y el mismo TTL es otra transmisión idéntica; por ejemplo, el cliente que envía dos RST iguales
-  con ipid 0.
-- **Difusión y multidifusión:** el espejo enseña dos copias idénticas, así que el grupo admite 2.
+- **Unidifusión enrutada** (extremos en /24 distintos): dentro de un grupo no se repite el par (VLAN,
+  TTL). Una segunda trama con la misma VLAN y el mismo TTL es otra transmisión idéntica; por ejemplo, el
+  cliente que envía dos RST iguales con ipid 0.
+- **Sin enrutar** (difusión, multidifusión o extremos en el mismo /24): el espejo enseña dos copias
+  idénticas, una por troncal, así que el grupo admite 2. La primera versión de esta regla (código
+  bbc2e3b, no publicado) solo dejaba repetir el par (VLAN, TTL) en la difusión. En el anillo completo de
+  VD4 trataba como transmisiones distintas unas 40 000 copias de tráfico dentro de un mismo /24 y de
+  pfsync. En la población apenas se notaba, porque casi todo su tráfico se enruta.
 - **Se conserva** el `ParsedPacket` de mayor TTL y, en empate, el primero. Su instante es el de esa copia:
   puede desplazarse hasta 20 ms, y en la práctica son microsegundos.
 
-Medido en los extractos publicados de VD2–VD6, V1 fundía 15–16 transmisiones por ejecución (de unas
-16 000), todas pares de RST idénticos. V1 no dejó copias a más de 5 ms en esas cuatro ejecuciones;
+Medido en los extractos publicados de VD2–VD6, V1 fundía 15–16 transmisiones de la población por
+ejecución, de unas 16 000, y todas las identificables eran RST (flags 0x04). En el anillo completo de
+VD4, V2 conserva 3 495 tramas más que V1. Se reparten así:
+
+- 3 467 son pfsync, que la extracción excluye;
+- 15 son los RST dobles;
+- 15 son UDP desde fuera de las subredes del laboratorio con dos tramas idénticas en la misma VLAN. Son
+  ambiguas: pueden ser dos transmisiones o dos copias. V1 no dejó copias a más de 5 ms en esas cuatro ejecuciones;
 en E3 había 4 tramas así. `resumen.json` registra la función, la versión, la ventana y el sha256 del
 módulo. `verificacion.json` registra si el motor de referencia (`origen_v1`) usa el mismo módulo, byte a
 byte (`deduplicacion.motor_misma_funcion`). `tests/test_deduplicacion.py` cubre los casos directamente y

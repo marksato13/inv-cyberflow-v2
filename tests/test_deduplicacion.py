@@ -85,6 +85,15 @@ class DeduplicacionTest(unittest.TestCase):
         self.comprobar("difusión", [contexto(100, **b), contexto(100.0001, **b)], 1, 64, 100)
         self.comprobar("difusión ×3", [contexto(100, **b), contexto(100.0001, **b), contexto(100.0002, **b)], 2)
 
+    def test_mismo_segmento_dos_copias_identicas(self):
+        # tráfico sin enrutar (mismo /24): una copia por troncal, misma VLAN y TTL (≈40 000 en VD4)
+        s = dict(vlan=20, destino="10.10.20.40")
+        self.comprobar("mismo /24", [contexto(100, **s), contexto(100.00002, **s)], 1, 64, 100)
+        rst = dict(s, ipid=0, flags=0x14)
+        self.comprobar("dos RST idénticos en el mismo /24",
+                       [contexto(100, **rst), contexto(100.00001, **rst), contexto(100.00002, **rst),
+                        contexto(100.00003, **rst)], 2)
+
     def test_cierre_con_espera_de_20_ms(self):
         # la copia a 15 ms del corte todavía no se cierra con el corte del extractor (ancla − 20 ms)
         c = [contexto(100, vlan=20, ttl=64), contexto(100.015, vlan=30, ttl=63)]
