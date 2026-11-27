@@ -34,6 +34,9 @@ import tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
+# Bloque 3: la extracción del paquete r4 se hizo con la deduplicación de V1; el código actual usa la V2,
+# y su referencia es la extracción repetida en el laboratorio sobre los originales.
+REF_EXTRACCION = REPO / "evidencias" / "bloque3" / "deduplicacion"
 POBLACION = "10.10.20.21,10.10.20.22,10.10.20.23,10.10.20.24,10.10.20.25,10.10.20.26"
 
 # campo (ruta con «/») -> por qué depende del tráfico que el extracto quitó
@@ -133,7 +136,7 @@ def ejecutar(cmd, cwd):
     return r.returncode, (r.stdout + r.stderr)[-2000:]
 
 
-def una(base: Path, ID: str):
+def una(base: Path, ID: str, ref_extraccion: Path | None = None):
     P0, K0 = base / "pruebas" / ID, base / "capturas" / ID
     res = {"ejecucion": ID, "comprobaciones": {}, "entradas_ausentes": []}
     necesarias = [K0 / "pcap", K0 / "eve" / ("eve-%s.json" % ID), P0 / "registros" / ("extremo-%s.pcap" % ID),
@@ -207,7 +210,10 @@ def una(base: Path, ID: str):
             rc, s = ejecutar([ext / "metadatos_v2.py", "metadatos", "--capturas", K0, "--extraccion", E,
                               "--generador", gen, "--cobertura", T / "cobertura.csv",
                               "--conciliacion", P0 / "conciliacion" / "conciliacion.jsonl"], T)
-        X = P0 / "extraccion"
+        # Referencia de la extracción: la del laboratorio en el paquete, o la del complemento del
+        # Bloque 3 (extracción repetida en el laboratorio con deduplicar_v2) si se indica.
+        X = ref_extraccion / "pruebas" / ID / "extraccion" if ref_extraccion else P0 / "extraccion"
+        res["referencia_extraccion"] = str(X.relative_to(ref_extraccion.parent)) if ref_extraccion else "paquete"
         nombres = ["resumen.json", "verificacion.json", "filas.csv", "entradas_if.csv", "ventanas_meta.csv"]
         registrar("extraccion", rc, s, [X / n for n in nombres], [E / n for n in nombres])
     res["satisfactorio"] = all(c["reproducido"] for c in res["comprobaciones"].values())
@@ -253,6 +259,9 @@ def main(argv=None):
     ap.add_argument("--id", action="append", help="limitar a estas ejecuciones")
     ap.add_argument("--salida", type=Path)
     ap.add_argument("--p2", type=Path, help="carpeta del extracto de P2 (se comprueba además de las ejecuciones)")
+    ap.add_argument("--referencia-extraccion", type=Path, default=REF_EXTRACCION,
+                    help="carpeta con <ID>/pruebas/<ID>/extraccion/ del laboratorio con la deduplicación V2 "
+                         "(por omisión evidencias/bloque3/deduplicacion); «paquete» usa la del paquete (V1)")
     a = ap.parse_args(argv)
     a.paquetes = a.paquetes.resolve()          # los programas se ejecutan en una carpeta temporal
     a.p2 = a.p2.resolve() if a.p2 else None
@@ -263,7 +272,8 @@ def main(argv=None):
     informe = {"version": 1, "codigo": (REPO / "VERSION").read_text().strip() if (REPO / "VERSION").exists() else None,
                "ejecuciones": []}
     for ID in ids:
-        r = una(a.paquetes / ID, ID)
+        ref = None if str(a.referencia_extraccion) == "paquete" else a.referencia_extraccion.resolve() / ID
+        r = una(a.paquetes / ID, ID, ref)
         informe["ejecuciones"].append(r)
         print(ID, "SATISFACTORIO" if r["satisfactorio"] else "NO SATISFACTORIO",
               {k: ("reproducido" if v["reproducido"] else "DIFIERE") + " (%d esperadas, %d inesperadas)" % (

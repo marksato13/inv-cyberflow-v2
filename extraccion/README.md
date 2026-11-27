@@ -1,6 +1,6 @@
 # Extracción V2 desde originales archivados
 
-`extraer_v2.py` importa parser, atribución y `build_rows` de `origen_v1/scripts/features/extract_multilayer_v2.py`; usa `deduplicar_espejo` de V1 v3. No modifica los originales. Lee `capturas/<ID>/pcap/live-*.pcap` (también PCAP directamente bajo `<ID>`) y `capturas/<ID>/eve/eve-*.json`. Filtra cada paquete antes de atribuirlo: conserva ambos sentidos si cualquiera de sus extremos pertenece a la población. Solo emite filas de esa población (por omisión `10.10.20.21`–`26`).
+`extraer_v2.py` importa parser, atribución y `build_rows` de `origen_v1/scripts/features/extract_multilayer_v2.py`; deduplica con `deduplicar_v2.py` (Bloque 3), el mismo módulo que usa el motor del producto con `--deduplicacion v2`. No modifica los originales. Lee `capturas/<ID>/pcap/live-*.pcap` (también PCAP directamente bajo `<ID>`) y `capturas/<ID>/eve/eve-*.json`. Filtra cada paquete antes de atribuirlo: conserva ambos sentidos si cualquiera de sus extremos pertenece a la población. Solo emite filas de esa población (por omisión `10.10.20.21`–`26`).
 
 ```sh
 python extraccion/extraer_v2.py capturas/ID --salida resultados/ID --poblacion poblacion.csv --fronteras fronteras.json
@@ -53,12 +53,30 @@ En **cada fila** de esta tabla, «sin datos» produce **0.0, nunca NaN** según 
 
 `comparar_modos.py` ejecuta ambos modos o compara CSV existentes con `--continuo F --por-bloque F`. Empareja por `(ip, ventana_fin)` mediante SQLite, sin cargar los CSV completos en RAM, y escribe `comparacion_modos.json` con las columnas diferentes, el número de filas distintas fuera de la guarda y la máxima distancia frontera→ancla. Una diferencia fuera de la guarda indica un problema de paridad.
 
-`load_packet_observations` de V1 carga el PCAP completo y `load_app_observations` el EVE completo. El extractor procesa PCAP fichero a fichero, deduplica con 5 ms de espera, conserva 60 s de paquetes y EVE y persiste en SQLite los paquetes de flujos y secuencias TCP del horizonte de 230 s necesarios para atribución y retransmisión. Las filas intermedias van a disco. RAM depende de la tasa de 60 s y del número de IP del inventario, no del tamaño total (~30 GB); SQLite y las filas temporales requieren espacio adicional en `--salida`. `test_flujo_cruza_frontera_y_compara_modos` coteja las filas con las funciones V1 sobre el prefijo de 230 s, incluido un flujo que cruza un bloque. El lector reordena PCAP hasta 1 s y EVE hasta 60 s; descarta y cuenta llegadas más tardías.
+`load_packet_observations` de V1 carga el PCAP completo y `load_app_observations` el EVE completo. El extractor procesa PCAP fichero a fichero, deduplica con 20 ms de espera, conserva 60 s de paquetes y EVE y persiste en SQLite los paquetes de flujos y secuencias TCP del horizonte de 230 s necesarios para atribución y retransmisión. Las filas intermedias van a disco. RAM depende de la tasa de 60 s y del número de IP del inventario, no del tamaño total (~30 GB); SQLite y las filas temporales requieren espacio adicional en `--salida`. `test_flujo_cruza_frontera_y_compara_modos` coteja las filas con las funciones V1 sobre el prefijo de 230 s, incluido un flujo que cruza un bloque. El lector reordena PCAP hasta 1 s y EVE hasta 60 s; descarta y cuenta llegadas más tardías.
 
 La paridad se refiere a las funciones V1 que el motor invoca sobre la **misma entrada filtrada y deduplicada**. Una ejecución V1 sin ese preprocesado todavía incluye gestión y duplicados. Los límites del espejo y de EVE no se rellenan con datos fabricados.
 
 ## Deduplicación de copias SPAN
 
-`finalizar_pendientes` llama a `deduplicar_espejo` con ventana de 5 ms y cuenta en `copias_espejo_quitadas` cada contexto descartado. La clave incluye protocolo, IP y puertos, IP ID, longitud IP, TCP seq, tipo e ID ICMP. Una clave repetida dentro de 5 ms con diferencia de TTL de 0 o 1 se considera copia. Se conserva el objeto `ParsedPacket` de mayor TTL; en empate, la primera copia por instante. Por tanto, su marca temporal es la de la copia conservada, que puede ser la posterior si ésta tiene mayor TTL. El TTL suele representar el del emisor en una ruta entre VLAN. La MAC y la VLAN pertenecen al contexto de esa copia, pero `ParsedPacket` no almacena esos campos y las filas de 28 variables no los reciben.
+Desde el Bloque 3 (PENDIENTES 37), `extraccion/deduplicar_v2.py` sustituye a `deduplicar_espejo` de V1.
+`finalizar_pendientes` y el cálculo de cada ventana llaman a `deduplicar_espejo_v2`, y cada contexto
+descartado se cuenta en `copias_espejo_quitadas`.
 
-La deduplicación evita que una copia incremente conteos, tasas de retransmisión y sumas de bytes IP. `ttl_mean_10s` usa el TTL conservado; las ventanas y tiempos usan el instante conservado, que puede desplazarse hasta 5 ms. Los tamaños IP son iguales para las copias normales. Una retransmisión con IP ID distinto se conserva. Dos eventos verdaderamente distintos que repitan toda la clave dentro de 5 ms y con TTL cercano pueden confundirse: la clave no incluye carga, TCP ack ni flags. `tests/test_deduplicacion.py` prueba los conteos tanto directamente como por `finalizar_pendientes`.
+- **Clave:** protocolo, IP y puertos, IP ID, longitud IP, TCP seq, **TCP ack**, **flags**, y tipo e ID ICMP.
+  `parse_con_contexto_v2` lee el `ack`, porque el parser de V1 no lo conserva.
+- **Copia:** misma clave a ≤ 20 ms de la primera trama del grupo, con un TTL a ≤ 1 de todos los del grupo.
+- **Unidifusión:** dentro de un grupo no se repite el par (VLAN, TTL). Una segunda trama con la misma
+  VLAN y el mismo TTL es otra transmisión idéntica; por ejemplo, el cliente que envía dos RST iguales
+  con ipid 0.
+- **Difusión y multidifusión:** el espejo enseña dos copias idénticas, así que el grupo admite 2.
+- **Se conserva** el `ParsedPacket` de mayor TTL y, en empate, el primero. Su instante es el de esa copia:
+  puede desplazarse hasta 20 ms, y en la práctica son microsegundos.
+
+Medido en los extractos publicados de VD2–VD6, V1 fundía 15–16 transmisiones por ejecución (de unas
+16 000), todas pares de RST idénticos. V1 no dejó copias a más de 5 ms en esas cuatro ejecuciones;
+en E3 había 4 tramas así. `resumen.json` registra la función, la versión, la ventana y el sha256 del
+módulo. `verificacion.json` registra si el motor de referencia (`origen_v1`) usa el mismo módulo, byte a
+byte (`deduplicacion.motor_misma_funcion`). `tests/test_deduplicacion.py` cubre los casos directamente y
+a través de `finalizar_pendientes`. La equivalencia con el `Deduplicador` incremental del motor está en
+`tests/test_deduplicar_v2.py` del producto.

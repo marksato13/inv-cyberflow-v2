@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import ast
 import csv
+import hashlib
 import ipaddress
 import json
 import math
@@ -70,7 +71,7 @@ def referencia(archivo, ip, anchor, poblacion, fronteras, temp_dir=None,
             break
         if ctx.packet.timestamp >= piso:
             contextos.append(ctx)
-    deduplicados, _ = ex.v3.deduplicar_espejo(contextos)
+    deduplicados, _ = ex.dv2.deduplicar_espejo_v2(contextos)
     packets = [p for p in deduplicados if p.src_ip in poblacion or p.dst_ip in poblacion]
     obs = [o for o in v2.attribute_packets(packets, ipaddress.ip_network("0.0.0.0/0"))
            if o.entity_ip == ip]
@@ -138,10 +139,23 @@ def verificar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[
     motor = MOTOR.read_text(encoding="utf-8")
     funciones_motor = all(s in motor for s in ("import extract_multilayer_v2 as extractor", "extractor.build_rows",
                                                "extractor.attribute_packets"))
+    # Deduplicación: el extractor usa deduplicar_v2; la paridad exige que el motor de referencia
+    # (origen_v1, copia sin modificar del producto) use la misma función y un módulo idéntico.
+    copia_motor = MOTOR.parents[1] / "features" / "deduplicar_v2.py"
+    sha_ext = hashlib.sha256(Path(ex.dv2.__file__).read_bytes()).hexdigest()
+    sha_motor = hashlib.sha256(copia_motor.read_bytes()).hexdigest() if copia_motor.exists() else None
+    usa_v2 = "deduplicar_espejo_v2" in motor and "parse_con_contexto_v2" in motor
+    deduplicacion = {"extractor": "deduplicar_v2.deduplicar_espejo_v2", "sha256_extractor": sha_ext,
+                     "motor_referencia": ("deduplicar_v2.deduplicar_espejo_v2" if usa_v2 else
+                                          "v3.deduplicar_espejo" if "v3.deduplicar_espejo" in motor else "desconocida"),
+                     "sha256_motor": sha_motor, "motor_misma_funcion": bool(usa_v2 and sha_motor == sha_ext),
+                     # el motor la usa solo con esta opción; sin ella sigue con la de V1 (modelo actual)
+                     "motor_opcion": "--deduplicacion v2" if '"--deduplicacion"' in motor else None}
     resumen = json.loads((salida / "resumen.json").read_text(encoding="utf-8"))
     informe = {"esquema_ok": esquema_ok, "columnas": tabla, "constantes": constantes,
                "sin_futuro_ok": not errores, "paridad_motor_ok": funciones_motor and not errores,
                "camino_motor_mismas_funciones": funciones_motor,
+               "deduplicacion": deduplicacion,
                "referencia": ("prefijo completo hasta t_fin" if historia_s is None else
                               "solo [t_fin - %g s, t_fin], como el motor en operación" % historia_s),
                "filas_muestreadas": "repartidas a lo largo de la ejecución" if max_filas else "todas",

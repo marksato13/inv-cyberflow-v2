@@ -293,8 +293,20 @@ def c11(P, E):
     if inv:
         sin_regla = [x.get("ip") for x in inv if not x.get("regla")]
         comp.append(c("inventario: todas las IP con regla", not sin_regla, {"ip": len(inv), "sin_regla": len(sin_regla)}))
+    # Deduplicación (Bloque 3): con deduplicar_v2 el extractor ya no funde transmisiones ni deja copias
+    # a > 5 ms; queda pendiente que el motor de producción use la misma función (paridad
+    # entrenamiento/operación), lo que se exige al piloto final. Sin el dato (extracción anterior a
+    # deduplicar_v2), el defecto de V1 sigue pendiente.
+    d = (ver or {}).get("deduplicacion")
+    if not d:
+        otra = ["deduplicación del extractor: RST idénticos y copias a >5 ms (bloque 3)"]
+    elif d.get("motor_misma_funcion") is True:
+        otra = []
+    else:
+        otra = ["paridad de la deduplicación: el motor de referencia usa %s; adoptar deduplicar_v2 en el "
+                "motor del producto antes de operar el modelo V2" % d.get("motor_referencia")]
     return criterio(comp, falta, prolongada=["orden del EVE a través de su rotación a las 00:00 UTC (bloque 4)"],
-                    otra=["deduplicación del extractor: RST idénticos y copias a >5 ms (bloque 3)"])
+                    otra=otra)
 
 
 # ---------------------------------------------------------------- C12 volumen

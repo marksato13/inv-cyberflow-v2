@@ -136,8 +136,8 @@ El servidor no lleva registro propio; el resultado real lo registra el cliente.
 - historias de 10, 30 y 60 s;
 - denominadores, cero frente a ausente, columnas constantes, inactividad;
 - arranque en frío (margen de 60 s) y bordes de partición;
-- deduplicación del espejo: cada paquete aparece dos veces, en la VLAN 20 y en la VLAN 30 (comprobado en T1);
-- paridad entre entrenamiento y operación;
+- deduplicación del espejo: cada paquete aparece dos veces, en la VLAN 20 y en la VLAN 30 (comprobado en T1). Desde el Bloque 3 (27-nov) se usa `deduplicar_v2`: clave con `ack` y `flags`, 20 ms, (VLAN, TTL) único por grupo y 2 copias en difusión (`extraccion/README.md`);
+- paridad entre entrenamiento y operación. La deduplicación es el mismo módulo, byte a byte, en el extractor y en el motor del producto, que lo usa con `--deduplicacion v2`. Operar un modelo entrenado con V2 exige esa opción; la omisión `v1` es la del modelo actual;
 - que no haya fugas de futuro.
 
 **Trazabilidad de cada ventana (implementada el 24-nov, `extraccion/metadatos_v2.py`).**
@@ -249,7 +249,7 @@ se corrige y se registra el intento fallido. Ningún criterio mira resultados de
 | C8 | Archivado | Manifiesto del archivador `completa`: 0 huecos PCAP, 0 huecos EVE, 0 líneas corruptas | `capturas/<ID>/manifiesto.json` |
 | C9 | Pérdidas en toda la cadena | Δ output drops de Gi2/0/19 y de los orígenes, Δ`rx_missed_errors`/softnet y descartes de tcpdump registrados antes y después: se acepta Δ = 0; si no, se cuantifica y C7 decide, porque C7 mide en el PCAP del anillo si esas pérdidas tocaron al tráfico experimental. **Suricata** (`capture.kernel_drops`, eventos `stats` de la EVE dedicada), por intervalos entre muestras consecutivas. Un aumento en un intervalo **dentro** del periodo del archivador es pérdida demostrada y **fallo**, aunque además falte evidencia (huecos, `uptime`); un reinicio también es fallo. Un aumento solo en intervalos que **cruzan** un borde no se atribuye al periodo ni se descarta: falta evidencia. Se aprueba solo un periodo acotado (muestra en o antes del inicio y en o después del fin), con huecos ≤ 16 s, `uptime` en todas las muestras y continuo, y Δ 0. C7 no decide Suricata (revisiones 6 y 7) | `contadores-lab-*.txt`, `capturas/<ID>/eve`, `registros/suricata-stats-ventana-<ID>.jsonl` |
 | C10 | Relojes | NTP sincronizado en los cuatro equipos al principio y al final; \|desfase aparente\| mediano ≤ 5 ms | `relojes-*`, `cobertura/` |
-| C11 | Extracción | `extraer_v2` y `verificar_v2` con rc 0; verificación 40/40 sin diferencias (historia del motor 230 s); inventario con todas las IP y su regla; constantes justificadas; tardías descartadas = 0 | `extraccion/` |
+| C11 | Extracción | `extraer_v2` y `verificar_v2` con rc 0; verificación 40/40 sin diferencias (historia del motor 230 s); inventario con todas las IP y su regla; constantes justificadas; tardías descartadas = 0. Pendiente de otra comprobación mientras el motor de referencia no use la misma deduplicación (`verificacion.json` → `deduplicacion.motor_misma_funcion`) | `extraccion/` |
 | C11b | Trazabilidad de ventanas (añadido a las 23:05 UTC, durante el piloto y antes de cerrarlo, a petición de Mark) | `trazabilidad_ok`: cada ventana con ejecución, entidad, perfil, cierre, bloque, partición, fase, PCAP/EVE, cobertura, conciliación y exclusión; 1:1 con `entradas_if.csv`, que tiene exactamente las 28 columnas | `extraccion/trazabilidad.json` |
 | C12 | Volumen | GB/h de PCAP comprimido, EVE y registros por fase medidos; se recalcula la estimación de 42 h con estos valores | `volumen.jsonl` |
 | C13 | Aislamiento de V1 | Regla `*@` que cubre la ejecución; sets de srv-dmz vacíos, DC1 sin reglas y agente sin `--aplicar` al principio y al final | `preflight-lab.jsonl`, `contadores-lab-*.txt` |

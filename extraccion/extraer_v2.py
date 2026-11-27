@@ -2,11 +2,13 @@
 """Extracción V2 en ventanas a partir de un archivo de captura."""
 # derivado de origen_v1/scripts/features/extract_multilayer_v2.py y
 # origen_v1/scripts/features/extract_multilayer_v3.py @ d2c9772;
-# cambios: filtro por paquete, lectura incremental, marcas e inventario.
+# cambios: filtro por paquete, lectura incremental, marcas e inventario; deduplicación V2
+# (extraccion/deduplicar_v2.py, Bloque 3, PENDIENTES 37) en lugar de v3.deduplicar_espejo.
 from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import ipaddress
 import json
 import math
@@ -22,6 +24,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "origen_v1" / "scripts" / "features"))
 import extract_multilayer_v2 as v2  # noqa: E402
 import extract_multilayer_v3 as v3  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import deduplicar_v2 as dv2  # noqa: E402
 
 # --history-seconds del motor V1 en operación (Sensor1). Fija el horizonte del estado de flujos.
 HORIZONTE_MOTOR_S = 230.0
@@ -184,7 +188,7 @@ def leer_contextos_crudos(rutas, inventario):
     """Lee fichero a fichero y registra todas las IP antes de deduplicar."""
     for ts, frame in tramas_ordenadas(rutas):
         if True:
-            ctx = v3.parse_con_contexto(ts, frame)
+            ctx = dv2.parse_con_contexto_v2(ts, frame)
             if ctx is None:
                 continue
             p = ctx.packet
@@ -201,7 +205,7 @@ def leer_contextos_crudos(rutas, inventario):
 
 
 def finalizar_pendientes(pendientes, corte, cuentas, fronteras=(), estado="continuo"):
-    """Cierra copias anteriores a corte, dejando 5 ms de solape."""
+    """Cierra copias anteriores a corte; quien llama deja dv2.VENTANA_COPIA_S (20 ms) de solape."""
     if not pendientes or pendientes[0].packet.timestamp >= corte:
         return [], pendientes
     por_bloque = {}
@@ -210,7 +214,7 @@ def finalizar_pendientes(pendientes, corte, cuentas, fronteras=(), estado="conti
         por_bloque.setdefault(bloque, []).append(ctx)
     conservados = []
     for grupo in por_bloque.values():
-        conservados.extend(v3.deduplicar_espejo(grupo)[0])
+        conservados.extend(dv2.deduplicar_espejo_v2(grupo)[0])
     ids = {id(p) for p in conservados}
     terminados, siguientes = [], []
     for item in pendientes:
@@ -330,7 +334,7 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
                 contextos.append(p_next)
                 pendientes.append(p_next)
                 p_next = next(p_iter, None)
-            terminados, pendientes = finalizar_pendientes(pendientes, anchor - 0.005, cuentas, fronteras, estado_modo)
+            terminados, pendientes = finalizar_pendientes(pendientes, anchor - dv2.VENTANA_COPIA_S, cuentas, fronteras, estado_modo)
             registrar_finalizados(terminados)
             while e_next is not None and e_next[0] <= anchor:
                 ts, line, ev = e_next
@@ -341,13 +345,13 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
                     cuentas["eventos_descartados_poblacion"] += 1
                 e_next = next(e_iter, None)
             bloque, motivo, piso = marcar(anchor, inicio, fronteras, guarda_s, estado_modo)
-            while contextos and (contextos[0].packet.timestamp < anchor - 60 - 0.005 or
+            while contextos and (contextos[0].packet.timestamp < anchor - 60 - dv2.VENTANA_COPIA_S or
                                  contextos[0].packet.timestamp < piso):
                 contextos.popleft()
             while eventos and (eventos[0][0] <= anchor - 60 or eventos[0][0] < piso):
                 eventos.popleft()
             # La atribución y las 28 fórmulas son exactamente las de V1.
-            deduplicados, _ = v3.deduplicar_espejo(list(contextos))
+            deduplicados, _ = dv2.deduplicar_espejo_v2(list(contextos))
             paquetes = [p for p in deduplicados if p.timestamp > anchor - 60 and p.timestamp >= piso
                         and (p.src_ip in poblacion or p.dst_ip in poblacion)]
             for tabla in ("flujos", "secuencias"):
@@ -421,7 +425,10 @@ def procesar(archivo: Path, salida: Path, poblacion: set[str], fronteras: list[f
     resumen.update({"ejecucion": archivo.name, "poblacion": sorted(poblacion), "fronteras_utc": [utc(f) for f in fronteras],
                     "pcap_ficheros": len(rutas), "paso_s": 10, "historia_maxima_s": 60,
                     "horizonte_estado_flujos_s": horizonte_s, "guarda_estado_s": guarda_s,
-                    "estado": estado_modo})
+                    "estado": estado_modo,
+                    "deduplicacion": {"funcion": "deduplicar_v2.deduplicar_espejo_v2", "version": dv2.VERSION,
+                                      "ventana_copia_s": dv2.VENTANA_COPIA_S,
+                                      "sha256": hashlib.sha256(Path(dv2.__file__).read_bytes()).hexdigest()}})
     (salida / "resumen.json").write_text(json.dumps(resumen, indent=2, ensure_ascii=False), encoding="utf-8")
     return resumen
 

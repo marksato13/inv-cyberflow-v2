@@ -186,6 +186,13 @@ class ExtraccionTest(unittest.TestCase):
         self.assertTrue(informe["esquema_ok"])
         self.assertTrue(informe["sin_futuro_ok"])
         self.assertTrue(informe["paridad_motor_ok"])
+        # Bloque 3: el motor de referencia (origen_v1) tiene la misma deduplicación, byte a byte
+        d = informe["deduplicacion"]
+        self.assertEqual((d["motor_referencia"], d["motor_misma_funcion"], d["motor_opcion"]),
+                         ("deduplicar_v2.deduplicar_espejo_v2", True, "--deduplicacion v2"))
+        self.assertEqual(d["sha256_motor"], d["sha256_extractor"])
+        self.assertEqual(json.loads((salida / "resumen.json").read_text(encoding="utf-8"))["deduplicacion"]["sha256"],
+                         d["sha256_extractor"])
         self.assertEqual(informe["filas_verificadas"], len(filas))
         # El último paquete del flujo sigue atribuido al iniciador y usa su inicio real.
         f = next(r for r in filas if r["ventana_fin"] == ex.utc(180))

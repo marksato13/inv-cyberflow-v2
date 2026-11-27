@@ -67,6 +67,7 @@ sys.path.insert(0, str(REPO_ROOT / "scripts" / "features"))
 
 import extract_multilayer_v2 as extractor  # noqa: E402
 import extract_multilayer_v3 as v3  # noqa: E402  (capa 2 y deduplicacion)
+import deduplicar_v2 as dv2  # noqa: E402  (deduplicacion V2: --deduplicacion v2)
 import heuristicos  # noqa: E402  (heuristicos deterministas para el feed de enforcement)
 import dns_heuristica  # noqa: E402  (vista DNS de los heuristicos, Etapa 3; no toca el IF)
 import http_heuristica  # noqa: E402  (vista HTTP de los heuristicos, Etapa 3; no toca el IF)
@@ -174,6 +175,14 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="SOLO para validar: escribe (entidad, ventana, 28 caracteristicas, score) "
              "de cada ventana puntuada, para comparar configuraciones en el replay",
+    )
+    parser.add_argument(
+        "--deduplicacion",
+        choices=("v1", "v2"),
+        default="v1",
+        help="copias del espejo: v1 = v3.deduplicar_espejo (la del modelo en operacion); "
+             "v2 = deduplicar_v2.deduplicar_espejo_v2 (clave con ack y flags, 20 ms, VLAN+TTL), "
+             "la que usa el extractor V2: obligatoria para operar un modelo entrenado con V2",
     )
     parser.add_argument("--history-seconds", type=int, default=110)
     parser.add_argument(
@@ -448,7 +457,7 @@ def claves_ya_registradas(log_path: Path, max_bytes: int = 16 * 1024 * 1024) -> 
     return claves
 
 
-def parse_pcap_to_packets(path: Path) -> list:
+def parse_pcap_to_packets(path: Path, parse=v3.parse_con_contexto) -> list:
     """Decodifica un PCAP a FrameContext (parseo, sin atribucion de flujo).
 
     Reusa las funciones publicas del extractor congelado -- NO reimplementa la
@@ -463,7 +472,7 @@ def parse_pcap_to_packets(path: Path) -> list:
     """
     out = []
     for timestamp, frame in extractor.iter_pcap_frames(path):
-        contexto = v3.parse_con_contexto(timestamp, frame)
+        contexto = parse(timestamp, frame)
         if contexto is not None:
             out.append(contexto)
     return out
@@ -599,7 +608,11 @@ def main() -> int:
     llegada: dict[int, int] = {}
     llegada_paquete: dict[int, int] = {}
     siguiente_llegada = 0
-    deduplicador = incremental.Deduplicador(v3.deduplicar_espejo)
+    # La deduplicacion tiene que ser la misma que la del extractor con que se entreno el modelo
+    # (paridad entrenamiento/operacion): v1 para el modelo actual, v2 para uno entrenado con V2.
+    dedup_v2 = args.deduplicacion == "v2"
+    parse_contexto = dv2.parse_con_contexto_v2 if dedup_v2 else v3.parse_con_contexto
+    deduplicador = incremental.Deduplicador(dv2.deduplicar_espejo_v2 if dedup_v2 else v3.deduplicar_espejo)
     atribuidor = incremental.Atribuidor(extractor.attribute_packets, extractor.canonical_flow_key)
 
     def orden_paquete(paquete) -> tuple[float, int]:
@@ -754,7 +767,7 @@ def main() -> int:
             if pcap.name in parsed_pcaps:
                 continue
             try:
-                nuevos = parse_pcap_to_packets(pcap)
+                nuevos = parse_pcap_to_packets(pcap, parse_contexto)
                 pcaps_nuevos += 1
                 for pk in nuevos:
                     llegada[id(pk)] = siguiente_llegada
