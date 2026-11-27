@@ -1,0 +1,13 @@
+V2-VD2-20261126T090705Z viejo rc=0 t_s,RSS_kB=9.28 1043328 sha=33628441d0345cca estado=presente
+V2-VD2-20261126T090705Z nuevo rc=0 t_s,RSS_kB=6.86 32688 sha=33628441d0345cca estado=presente
+  V2-VD2-20261126T090705Z identicos
+V2-VD3-20261126T104230Z viejo rc=0 t_s,RSS_kB=9.03 1043328 sha=d56c5480c1ccdf31 estado=presente
+V2-VD3-20261126T104230Z nuevo rc=0 t_s,RSS_kB=6.54 32516 sha=d56c5480c1ccdf31 estado=presente
+  V2-VD3-20261126T104230Z identicos
+V2-VD4-20261126T141333Z viejo rc=0 t_s,RSS_kB=9.02 1043456 sha=57345950184311bb estado=presente
+V2-VD4-20261126T141333Z nuevo rc=0 t_s,RSS_kB=6.41 32660 sha=57345950184311bb estado=presente
+  V2-VD4-20261126T141333Z identicos
+V2-VD6-20261126T151456Z viejo rc=0 t_s,RSS_kB=8.92 1043584 sha=19c7d4a69e1e9ede estado=presente
+V2-VD6-20261126T151456Z nuevo rc=0 t_s,RSS_kB=6.38 32372 sha=19c7d4a69e1e9ede estado=presente
+  V2-VD6-20261126T151456Z identicos
+eve=449231344

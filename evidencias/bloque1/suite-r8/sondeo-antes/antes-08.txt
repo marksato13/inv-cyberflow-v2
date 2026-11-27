@@ -1,0 +1,33 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.3, pytest-9.0.3, pluggy-1.6.0 -- <HOME>\AppData\Local\Python\pythoncore-3.14-64\python.exe
+rootdir: <REPO>
+plugins: anyio-4.13.0, platformdirs-4.12.1, cov-7.1.0
+collecting ... collected 11 items
+
+tests/test_sondeo_span.py::test_normal_mide_intervalo_real PASSED        [  9%]
+tests/test_sondeo_span.py::test_descartes_usan_intervalo_de_incertidumbre PASSED [ 18%]
+tests/test_sondeo_span.py::test_corte_reconecta_y_registra_hueco PASSED  [ 27%]
+tests/test_sondeo_span.py::test_timeout_reconecta_y_registra_hueco PASSED [ 36%]
+tests/test_sondeo_span.py::test_respuesta_invalida_no_cuenta_como_sin_descartes PASSED [ 45%]
+tests/test_sondeo_span.py::test_contador_disminuye_es_indeterminado PASSED [ 54%]
+tests/test_sondeo_span.py::test_registro_interrumpido_tiene_margen_final_indeterminado PASSED [ 63%]
+tests/test_sondeo_span.py::test_margen_inicial_es_indeterminado PASSED   [ 72%]
+tests/test_sondeo_span.py::test_registro_vacio_da_codigo_3 PASSED        [ 81%]
+tests/test_sondeo_span.py::test_una_muestra_no_acredita_ausencia_de_descartes PASSED [ 90%]
+tests/test_sondeo_span.py::test_intervalo_excesivo_es_indeterminado PASSED [100%]
+
+=================================== PASSES ====================================
+- generated xml file: <REPO>\evidencias\bloque1\suite-r8\sondeo-antes\antes-08.xml -
+=========================== short test summary info ===========================
+PASSED tests/test_sondeo_span.py::test_normal_mide_intervalo_real
+PASSED tests/test_sondeo_span.py::test_descartes_usan_intervalo_de_incertidumbre
+PASSED tests/test_sondeo_span.py::test_corte_reconecta_y_registra_hueco
+PASSED tests/test_sondeo_span.py::test_timeout_reconecta_y_registra_hueco
+PASSED tests/test_sondeo_span.py::test_respuesta_invalida_no_cuenta_como_sin_descartes
+PASSED tests/test_sondeo_span.py::test_contador_disminuye_es_indeterminado
+PASSED tests/test_sondeo_span.py::test_registro_interrumpido_tiene_margen_final_indeterminado
+PASSED tests/test_sondeo_span.py::test_margen_inicial_es_indeterminado
+PASSED tests/test_sondeo_span.py::test_registro_vacio_da_codigo_3
+PASSED tests/test_sondeo_span.py::test_una_muestra_no_acredita_ausencia_de_descartes
+PASSED tests/test_sondeo_span.py::test_intervalo_excesivo_es_indeterminado
+============================= 11 passed in 31.17s =============================

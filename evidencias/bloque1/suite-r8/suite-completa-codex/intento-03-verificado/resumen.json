@@ -1,0 +1,14 @@
+{
+ "cpu": 14,
+ "procesos_de_carga": 0,
+ "factor": 0.0,
+ "pasadas": [
+  {
+   "pasada": 1,
+   "rc": 0,
+   "duracion_s": 51.2,
+   "fallidas": [],
+   "error_de_sesion": false
+  }
+ ]
+}

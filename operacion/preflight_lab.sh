@@ -27,6 +27,10 @@ echo "$s" | head -1 | grep -q "PROMISC" && echo "$s" | head -1 | grep -q "UP" &&
 libre=$(echo "$s" | sed -n 5p); need=$(awk -v g="$GB" 'BEGIN{printf "%d", (g+4)*1e9}')
 [ "$libre" -ge "$need" ] && ok sensor1_espacio ok "libre $((libre/1000000000)) GB >= necesario ${GB} + 4 GB" || ok sensor1_espacio fallo "libre $((libre/1000000000)) GB < ${GB}+4"
 [ "$(echo "$s" | sed -n 6p)" = yes ] && ok ntp_sensor1 ok yes || ok ntp_sensor1 fallo "$(echo "$s" | sed -n 6p)"
+# El anillo que copia el archivador V2 (/var/lib/ppi-motor-capture, tcpdump -G 5 de ppi-motor-capture):
+# «active» en systemd no basta; el fichero más reciente tiene que tener menos de 15 s (3 rotaciones).
+a=$(ssh -n sensor1 'f=$(ls -t /var/lib/ppi-motor-capture/live-*.pcap* 2>/dev/null | head -1); [ -n "$f" ] && echo $(( $(date +%s) - $(stat -c %Y "$f") )) || echo sin_ficheros')
+case "$a" in ''|*[!0-9]*) ok sensor1_anillo fallo "anillo: $a" ;; *) [ "$a" -lt 15 ] && ok sensor1_anillo ok "ultimo PCAP hace ${a} s" || ok sensor1_anillo fallo "ultimo PCAP hace ${a} s" ;; esac
 
 # 3. Exclusión V1: una regla *@a/b del toml debe cubrir [inicio, fin]
 cub=$(ssh -o BatchMode=yes sensor1 "python3 - $INI $FIN" <<'PY'

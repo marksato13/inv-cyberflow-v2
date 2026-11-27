@@ -1,0 +1,25 @@
+Pasada de la suite de la 7.ª revisión que dio un fallo sin identificar (registro de la sesión de Claude
+Code que hizo la revisión 7; se copian aquí el comando y su resultado tal como quedaron).
+
+Inicio del comando: 2026-11-26T21:25:32Z   Resultado registrado: 2026-11-26T21:28:34Z
+Comando (PowerShell, final):
+  cmd /c "python -m pytest -q -p no:cacheprovider tests < NUL 2>&1" | Select -Last 1
+Resultado conservado (completo; es todo lo que se guardó):
+  Exit code 1
+  1 failed, 334 passed, 38 subtests passed in 175.48s (0:02:55)
+
+Por qué no se puede identificar la prueba:
+  - `| Select -Last 1` descartó toda la salida salvo la última línea (sin «FAILED ...» ni traza);
+  - `-p no:cacheprovider` impide que pytest guarde .pytest_cache/v/cache/lastfailed;
+  - la suite no escribía ningún otro registro (no había junit ni registro propio);
+  - el árbol de aquella pasada (21:25 UTC = 16:25 −05:00) era f0f10e8 (16:17) más cambios sin
+    comitear que entraron en 8328032 (16:29): documentación, complemento suricata-r7 y la prueba de
+    sintaxis de los guiones. Repetir 8328032 con carga muestra qué pruebas fallan con carga en ese
+    árbol (§1 de BLOQUE1-REVISION-8), pero no cuál falló aquella vez.
+Lo único que se sabe: tardó 175 s frente a 61 s de la pasada siguiente (máquina cargada, unas tres
+veces más lenta). Eso es compatible con las pruebas de sondeo que fallan con carga (§2 de
+BLOQUE1-REVISION-8), pero NO lo demuestra: no se atribuye el fallo a ninguna prueba concreta.
+
+Desde la 8.ª revisión tests/conftest.py escribe en cada pasada tests/_registros_pytest/<UTC>-<pid>/
+(informes.jsonl con la traza completa de cada fallo, resultados.tsv con todas las pruebas y
+resumen.json), con independencia de cómo se recorte la consola.

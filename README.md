@@ -19,11 +19,12 @@ V2 vuelve a capturar los datos y vuelve a entrenar el escalador y el IF, a calib
   están en `evidencias/bloque1/entradas-r4/SHA256SUMS-bloque1-r4.txt`;
 - anterior: https://github.com/marksato13/inv-cyberflow-v2/releases/tag/bloque1-cierre-2026-11-26.
 
-**Estado (26-nov-2026): Bloque 1 (calidad de captura) en revisión; preparación.**
+**Estado (27-nov-2026): Bloque 1 (calidad de captura) en revisión; preparación.**
 
 - El piloto final y las 49 h definitivas, los ataques y las campañas A/B **no se han iniciado**.
 - Estado del Bloque 1:
   - `docs/BLOQUE1-REVISION-7-2026-11-26.md`: Suricata por intervalos (pérdida atribuible frente a no localizada, el fallo manda sobre la falta de evidencia), continuidad con `uptime` y paso de cierre comprobado (lo vigente);
+  - `docs/BLOQUE1-REVISION-8-2026-11-27.md`: fallo de la suite de r7 (no recuperable, registro completo desde r8), pruebas del sondeo estables con carga, «tcpdump-ring» aclarado (el anillo es `ppi-motor-capture`), memoria de la lectura de la EVE en el cierre y criterios V4-a/V4-b del bloque 4;
   - `docs/BLOQUE1-REVISION-6-2026-11-26.md`: suficiencia temporal de Suricata (el periodo debe quedar acotado), C9 sin depender de C7, `dictamen_casos` sin copia recursiva, qué valores publicados deciden el dictamen, y dependencias;
   - `docs/BLOQUE1-REVISION-5-2026-11-26.md`: reproducción limpia, Suricata `kernel_drops` (sí se mide),
     conciliación de pendientes y **matriz final del Bloque 1**;
@@ -69,7 +70,7 @@ python -m pip install pytest
 python -m pytest -q -p no:cacheprovider tests
 ```
 
-Resultado esperado con el código de la 7.ª revisión: `335 passed, 38 subtests passed`. Las pruebas del fragmento de `cerrar_v2.sh` necesitan bash (en Windows, Git Bash); sin él se omiten. `test_sondeo_span` puede fallar alguna vez si la máquina va muy cargada (REVISION-7 §4).
+Resultado esperado con el código de la 8.ª revisión: `348 passed, 38 subtests passed`. Las pruebas del fragmento de `cerrar_v2.sh` y del preflight necesitan bash (en Windows, Git Bash); sin él se omiten. Cada pasada deja su registro completo (traza de cada fallo, todas las pruebas y un resumen) en `tests/_registros_pytest/<UTC>-<pid>/`, aunque la consola se recorte (REVISION-8 §1). `python tests/carga_sondeo.py --factor 3 ...` repite las pruebas con la máquina cargada.
 
 - `verificar_paquetes.py` comprueba los sha256 frente al manifiesto versionado y extrae los paquetes.
 - `reproducir_dictamen.py` rehace el dictamen desde los resultados intermedios: dictamen, motivos,

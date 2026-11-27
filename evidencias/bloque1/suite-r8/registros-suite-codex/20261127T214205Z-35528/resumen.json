@@ -1,0 +1,211 @@
+{
+ "codigo_salida": 1,
+ "cuentas": {
+  "passed": 340,
+  "failed": 7,
+  "error": 39
+ },
+ "fallidas": [
+  {
+   "id": "tests/test_cierre_ventana.py::FragmentoCerrar::test_fragmento_eve_ausente_registra_rc4_y_continua",
+   "fase": "call"
+  },
+  {
+   "id": "tests/test_cierre_ventana.py::FragmentoCerrar::test_fragmento_extrae_y_c9_lo_usa",
+   "fase": "call"
+  },
+  {
+   "id": "tests/test_cierre_ventana.py::FragmentoCerrar::test_fragmento_manifiesto_ilegible_registra_rc5_y_continua",
+   "fase": "call"
+  },
+  {
+   "id": "tests/test_cierre_ventana.py::FragmentoCerrar::test_sintaxis_de_todos_los_guiones",
+   "fase": "call"
+  },
+  {
+   "id": "tests/test_contraste_dns.py::test_todo_coincide_y_pcap_dc1",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns.py::test_dc1_sin_copias_sensor1",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns.py::test_falta_solo_vlan_10_respuesta",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns.py::test_timeout_sin_consulta_dc1",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns.py::test_misma_clave_repetida_es_duplicado",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns.py::test_ttl_distinto_dc1_generador",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns.py::test_v1_informa_campo_no_comprobado",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns.py::test_socket_descartadas_indetermina_intervalo",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns.py::test_pcap_truncado_da_codigo_3",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns.py::test_trafico_poblacion_sin_transaccion",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns.py::test_gzip_nano_y_csv",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns_recortadas.py::test_tcp_recortado_no_es_ilegible",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns_recortadas.py::test_udp_no_dns_recortado_no_es_ilegible",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns_recortadas.py::test_udp_53_recortado_si_es_ilegible",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns_recortadas.py::test_trama_danada_sin_recorte_declarado_sigue_ilegible",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns_sonda.py::test_sonda_registrada_se_explica_y_queda_relacionada",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns_sonda.py::test_sin_registro_la_firma_no_basta",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns_sonda.py::test_coincidencia_accidental_otro_puerto",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns_sonda.py::test_coincidencia_accidental_otro_nombre_mismo_prefijo",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns_sonda.py::test_evento_fuera_del_intervalo_de_la_sonda",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns_sonda.py::test_registro_de_otra_ejecucion_no_explica",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns_sonda.py::test_otro_evento_sin_transaccion_sigue_dando_1",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns_sonda.py::test_reconstruido_solo_con_clave_unica_en_su_intervalo",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_contraste_dns_sonda.py::test_sonda_antigua_de_t1_queda_incierta",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_extracto_rx_dropped.py::test_extracto",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_preflight_anillo.py::PreflightAnillo::test_anillo_al_dia",
+   "fase": "call"
+  },
+  {
+   "id": "tests/test_preflight_anillo.py::PreflightAnillo::test_anillo_parado_aunque_la_unidad_siga_activa",
+   "fase": "call"
+  },
+  {
+   "id": "tests/test_preflight_anillo.py::PreflightAnillo::test_anillo_vacio",
+   "fase": "call"
+  },
+  {
+   "id": "tests/test_sonda_margen.py::test_cli_estados",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sonda_margen.py::test_salida_real_de_ventanas_sonda_la_entiende_el_dictamen",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sonda_margen.py::test_validar_sondas_previas",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_normal_mide_intervalo_real",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_descartes_usan_intervalo_de_incertidumbre",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_corte_reconecta_y_registra_hueco",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_timeout_reconecta_y_registra_hueco",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_respuesta_invalida_no_cuenta_como_sin_descartes",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_contador_disminuye_es_indeterminado",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_registro_interrumpido_tiene_margen_final_indeterminado",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_margen_inicial_es_indeterminado",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_registro_vacio_da_codigo_3",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_una_muestra_no_acredita_ausencia_de_descartes",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_intervalo_excesivo_es_indeterminado",
+   "fase": "setup"
+  }
+ ],
+ "duracion_s": 28.55,
+ "inicio_utc": "2026-11-27T21:42:05Z",
+ "argumentos": [
+  "-v",
+  "-rA",
+  "-p",
+  "no:cacheprovider",
+  "--junitxml",
+  "<REPO>\\..\\privado-r8\\suite-r8-original\\suite-completa-codex2\\codex-01.xml",
+  "tests"
+ ],
+ "python": "3.14.3",
+ "pytest": "9.0.3",
+ "plataforma": "Windows-11-10.0.26300-SP0",
+ "cpu": 14,
+ "commit": "91b97984fbb7bf75d3f49e8f4e7f75e5ef9355b3",
+ "arbol_con_cambios": true
+}

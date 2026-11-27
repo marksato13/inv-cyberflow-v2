@@ -1,0 +1,133 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.3, pytest-9.0.3, pluggy-1.6.0
+rootdir: <REPO>
+plugins: anyio-4.13.0, platformdirs-4.12.1, cov-7.1.0
+collected 11 items / 9 deselected / 2 selected
+
+tests\test_sondeo_span.py FF                                             [100%]
+
+================================== FAILURES ===================================
+____________________ test_corte_reconecta_y_registra_hueco ____________________
+
+tmp_path = WindowsPath('<REPO>/tests/_temporales_pytest/pytest-of-<usuario>/pytest-88/test_corte_reconecta_y_registr0')
+
+    def test_corte_reconecta_y_registra_hueco(tmp_path):
+>       registro, eventos = ejecutar(tmp_path, [{"drops": 10}, {"accion": "corte"}, {"drops": 10}],
+                                      duracion=4.6)
+
+tests\test_sondeo_span.py:111: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('<REPO>/tests/_temporales_pytest/pytest-of-<usuario>/pytest-88/test_corte_reconecta_y_registr0')
+pasos = [{'drops': 10}, {'accion': 'corte'}, {'drops': 10}], duracion = 4.6
+cada = 0.08, tiempo_max = 1, tiempo_conexion = 10
+
+    def ejecutar(tmp_path, pasos, duracion=3.0, cada=0.08, tiempo_max=1, tiempo_conexion=10):
+        # tiempo_conexion: plazo del prompt inicial de cada switch falso NUEVO. Con tiempo_max 0,35 s
+        # (prueba de timeout) y la máquina cargada, el arranque de otro Python superaba ese plazo y la
+        # reconexión fallaba por el entorno, no por el sondeo (antes-06 y antes-x3-03 de suite-r8).
+        intentos = []
+        eventos = []
+        for n, factor in enumerate(FACTORES_VENTANA, 1):
+            ventana = duracion * factor
+            d = tmp_path / ("intento-%d" % n)
+            d.mkdir()
+            guion = d / "guion.json"
+            guion.write_text(json.dumps({"pasos": pasos}), encoding="utf-8")
+            registro = d / "sondeo.jsonl"
+            pid = d / "sondeo.pid"
+            comando = f'"{sys.executable}" "{FALSO}" --guion "{guion}"'
+            t0 = time.time()
+            proceso = subprocess.run([
+                sys.executable, str(SONDEO), "--salida", str(registro),
+                "--hasta-epoch", str(t0 + ventana), "--cada-s", str(cada),
+                "--tiempo-max-respuesta-s", str(tiempo_max),
+                "--tiempo-max-conexion-s", str(tiempo_conexion), "--comando-ssh", comando,
+                "--pid", str(pid),
+            ], cwd=RAIZ, capture_output=True, text=True, timeout=2 * ventana + tiempo_conexion + 20,
+                stdin=subprocess.DEVNULL)
+            assert proceso.returncode == 0, proceso.stderr
+            assert not pid.exists()
+            eventos = [json.loads(linea) for linea in registro.read_text(encoding="utf-8").splitlines()]
+            assert eventos[0]["tipo"] == "arranque"
+            assert eventos[-1]["tipo"] == "fin"
+            assert eventos[-1]["motivo"] == "hasta_epoch"
+            servidas = peticiones_servidas(guion)
+            intentos.append({"intento": n, "ventana_s": ventana, "duracion_real_s": round(time.time() - t0, 3),
+                             "peticiones_servidas": servidas, "pasos": len(pasos),
+                             "muestras": len(muestras(eventos))})
+            # Se pidió la muestra siguiente al último paso: todos los pasos se sirvieron y el sondeo
+            # recibió la respuesta del último (solo pide otra tras recibirla).
+            if servidas >= len(pasos) + 1:
+                print("intentos del escenario:", json.dumps(intentos))
+                return registro, eventos
+>       pytest.fail("el guion del switch falso no se completó en ninguna ventana %s: %s\nultimos eventos: %s"
+                    % ([duracion * f for f in FACTORES_VENTANA], json.dumps(intentos), json.dumps(eventos[-8:])))
+E       Failed: el guion del switch falso no se completó en ninguna ventana [4.6, 13.799999999999999, 41.4]: [{"intento": 1, "ventana_s": 4.6, "duracion_real_s": 4.686, "peticiones_servidas": 2, "pasos": 3, "muestras": 1}, {"intento": 2, "ventana_s": 13.799999999999999, "duracion_real_s": 13.892, "peticiones_servidas": 2, "pasos": 3, "muestras": 1}, {"intento": 3, "ventana_s": 41.4, "duracion_real_s": 41.534, "peticiones_servidas": 2, "pasos": 3, "muestras": 1}]
+E       ultimos eventos: [{"t": 1795764860.8717592, "tipo": "arranque", "version": "1.1", "parametros": {"salida": "<REPO>\\tests\\_temporales_pytest\\pytest-of-<usuario>\\pytest-88\\test_corte_reconecta_y_registr0\\intento-3\\sondeo.jsonl", "hasta_epoch": 1795764902.1892464, "cada_s": 0.08, "comando_ssh": "\"<HOME>\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe\" \"<REPO>\\tests\\falso_switch.py\" --guion \"<REPO>\\tests\\_temporales_pytest\\pytest-of-<usuario>\\pytest-88\\test_corte_reconecta_y_registr0\\intento-3\\guion.json\"", "pid": "<REPO>\\tests\\_temporales_pytest\\pytest-of-<usuario>\\pytest-88\\test_corte_reconecta_y_registr0\\intento-3\\sondeo.pid", "tiempo_max_respuesta_s": 1.0, "tiempo_max_conexion_s": 10.0}, "pid": 40012, "host": "<equipo>"}, {"t": 1795764860.9386325, "tipo": "conexion", "intento": 1, "ok": true, "error": null}, {"t": 1795764860.9411569, "tipo": "muestra", "envio": 1795764860.9397414, "recepcion": 1795764860.9411304, "drops": 10, "paquetes_salida": 123456, "bytes_salida": 98765432, "cola1_filas": " 1 100 200 300", "latencia_s": 0.0013890266418457031, "intervalo_desde_anterior_s": null}, {"t": 1795764902.3043864, "tipo": "fin", "motivo": "hasta_epoch"}]
+
+tests\test_sondeo_span.py:71: Failed
+___________________ test_timeout_reconecta_y_registra_hueco ___________________
+
+tmp_path = WindowsPath('<REPO>/tests/_temporales_pytest/pytest-of-<usuario>/pytest-88/test_timeout_reconecta_y_regis0')
+
+    def test_timeout_reconecta_y_registra_hueco(tmp_path):
+>       registro, eventos = ejecutar(tmp_path, [{"drops": 10}, {"accion": "timeout"}, {"drops": 10}],
+                                      duracion=4.6, tiempo_max=0.35)
+
+tests\test_sondeo_span.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('<REPO>/tests/_temporales_pytest/pytest-of-<usuario>/pytest-88/test_timeout_reconecta_y_regis0')
+pasos = [{'drops': 10}, {'accion': 'timeout'}, {'drops': 10}], duracion = 4.6
+cada = 0.08, tiempo_max = 0.35, tiempo_conexion = 10
+
+    def ejecutar(tmp_path, pasos, duracion=3.0, cada=0.08, tiempo_max=1, tiempo_conexion=10):
+        # tiempo_conexion: plazo del prompt inicial de cada switch falso NUEVO. Con tiempo_max 0,35 s
+        # (prueba de timeout) y la máquina cargada, el arranque de otro Python superaba ese plazo y la
+        # reconexión fallaba por el entorno, no por el sondeo (antes-06 y antes-x3-03 de suite-r8).
+        intentos = []
+        eventos = []
+        for n, factor in enumerate(FACTORES_VENTANA, 1):
+            ventana = duracion * factor
+            d = tmp_path / ("intento-%d" % n)
+            d.mkdir()
+            guion = d / "guion.json"
+            guion.write_text(json.dumps({"pasos": pasos}), encoding="utf-8")
+            registro = d / "sondeo.jsonl"
+            pid = d / "sondeo.pid"
+            comando = f'"{sys.executable}" "{FALSO}" --guion "{guion}"'
+            t0 = time.time()
+            proceso = subprocess.run([
+                sys.executable, str(SONDEO), "--salida", str(registro),
+                "--hasta-epoch", str(t0 + ventana), "--cada-s", str(cada),
+                "--tiempo-max-respuesta-s", str(tiempo_max),
+                "--tiempo-max-conexion-s", str(tiempo_conexion), "--comando-ssh", comando,
+                "--pid", str(pid),
+            ], cwd=RAIZ, capture_output=True, text=True, timeout=2 * ventana + tiempo_conexion + 20,
+                stdin=subprocess.DEVNULL)
+            assert proceso.returncode == 0, proceso.stderr
+            assert not pid.exists()
+            eventos = [json.loads(linea) for linea in registro.read_text(encoding="utf-8").splitlines()]
+            assert eventos[0]["tipo"] == "arranque"
+            assert eventos[-1]["tipo"] == "fin"
+            assert eventos[-1]["motivo"] == "hasta_epoch"
+            servidas = peticiones_servidas(guion)
+            intentos.append({"intento": n, "ventana_s": ventana, "duracion_real_s": round(time.time() - t0, 3),
+                             "peticiones_servidas": servidas, "pasos": len(pasos),
+                             "muestras": len(muestras(eventos))})
+            # Se pidió la muestra siguiente al último paso: todos los pasos se sirvieron y el sondeo
+            # recibió la respuesta del último (solo pide otra tras recibirla).
+            if servidas >= len(pasos) + 1:
+                print("intentos del escenario:", json.dumps(intentos))
+                return registro, eventos
+>       pytest.fail("el guion del switch falso no se completó en ninguna ventana %s: %s\nultimos eventos: %s"
+                    % ([duracion * f for f in FACTORES_VENTANA], json.dumps(intentos), json.dumps(eventos[-8:])))
+E       Failed: el guion del switch falso no se completó en ninguna ventana [4.6, 13.799999999999999, 41.4]: [{"intento": 1, "ventana_s": 4.6, "duracion_real_s": 4.697, "peticiones_servidas": 2, "pasos": 3, "muestras": 1}, {"intento": 2, "ventana_s": 13.799999999999999, "duracion_real_s": 13.902, "peticiones_servidas": 2, "pasos": 3, "muestras": 1}, {"intento": 3, "ventana_s": 41.4, "duracion_real_s": 41.532, "peticiones_servidas": 2, "pasos": 3, "muestras": 1}]
+E       ultimos eventos: [{"t": 1795764921.1260188, "tipo": "arranque", "version": "1.1", "parametros": {"salida": "<REPO>\\tests\\_temporales_pytest\\pytest-of-<usuario>\\pytest-88\\test_timeout_reconecta_y_regis0\\intento-3\\sondeo.jsonl", "hasta_epoch": 1795764962.433205, "cada_s": 0.08, "comando_ssh": "\"<HOME>\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe\" \"<REPO>\\tests\\falso_switch.py\" --guion \"<REPO>\\tests\\_temporales_pytest\\pytest-of-<usuario>\\pytest-88\\test_timeout_reconecta_y_regis0\\intento-3\\guion.json\"", "pid": "<REPO>\\tests\\_temporales_pytest\\pytest-of-<usuario>\\pytest-88\\test_timeout_reconecta_y_regis0\\intento-3\\sondeo.pid", "tiempo_max_respuesta_s": 0.35, "tiempo_max_conexion_s": 10.0}, "pid": 21264, "host": "<equipo>"}, {"t": 1795764921.2103264, "tipo": "conexion", "intento": 1, "ok": true, "error": null}, {"t": 1795764921.2132576, "tipo": "hueco", "desde": 1795764921.1239731, "hasta": 1795764921.2112215, "causa": "arranque_retrasado"}, {"t": 1795764921.2137973, "tipo": "muestra", "envio": 1795764921.2112215, "recepcion": 1795764921.2132132, "drops": 10, "paquetes_salida": 123456, "bytes_salida": 98765432, "cola1_filas": " 1 100 200 300", "latencia_s": 0.001991748809814453, "intervalo_desde_anterior_s": null}, {"t": 1795764962.5445144, "tipo": "fin", "motivo": "hasta_epoch"}]
+
+tests\test_sondeo_span.py:71: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_sondeo_span.py::test_corte_reconecta_y_registra_hueco - Fai...
+FAILED tests/test_sondeo_span.py::test_timeout_reconecta_y_registra_hueco - F...
+================= 2 failed, 9 deselected in 120.41s (0:02:00) =================

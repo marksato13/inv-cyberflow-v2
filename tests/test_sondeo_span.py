@@ -6,6 +6,8 @@ import subprocess
 import sys
 import time
 
+import pytest
+
 
 RAIZ = Path(__file__).resolve().parents[1]
 SONDEO = RAIZ / "operacion" / "sondeo_span.py"
@@ -13,28 +15,61 @@ ANALIZAR = RAIZ / "operacion" / "analizar_sondeo.py"
 FALSO = RAIZ / "tests" / "falso_switch.py"
 
 
-def ejecutar(tmp_path, pasos, duracion=3.0, cada=0.08, tiempo_max=1):
-    # 3 s (antes 1,2): en Windows con carga, arrancar el switch falso (otro Python) se comía la
-    # ventana y salían 0–1 muestras; las aserciones no dependen del número exacto de muestras
-    guion = tmp_path / "guion.json"
-    guion.write_text(json.dumps({"pasos": pasos}), encoding="utf-8")
-    registro = tmp_path / "sondeo.jsonl"
-    pid = tmp_path / "sondeo.pid"
-    comando = f'"{sys.executable}" "{FALSO}" --guion "{guion}"'
-    proceso = subprocess.run([
-        sys.executable, str(SONDEO), "--salida", str(registro),
-        "--hasta-epoch", str(time.time() + duracion), "--cada-s", str(cada),
-        "--tiempo-max-respuesta-s", str(tiempo_max), "--comando-ssh", comando,
-        "--pid", str(pid),
-    ], cwd=RAIZ, capture_output=True, text=True, timeout=duracion + 8,
-        stdin=subprocess.DEVNULL)
-    assert proceso.returncode == 0, proceso.stderr
-    assert not pid.exists()
-    eventos = [json.loads(linea) for linea in registro.read_text(encoding="utf-8").splitlines()]
-    assert eventos[0]["tipo"] == "arranque"
-    assert eventos[-1]["tipo"] == "fin"
-    assert eventos[-1]["motivo"] == "hasta_epoch"
-    return registro, eventos
+# Ventanas sucesivas (factor sobre la duración pedida). Cada prueba exige que el guion del switch falso
+# se haya recorrido ENTERO dentro de la ventana; si no, la pasada no ejercita el escenario y se repite
+# con una ventana mayor. Las aserciones de cada prueba no cambian y se aplican a esa pasada completa.
+# Si ni la mayor alcanza, la prueba falla con el motivo y los intentos (nunca pasa sin escenario).
+# Antes (r7) la ventana era fija y, con la máquina cargada, las pasadas incompletas fallaban en una
+# aserción que no tenía nada que ver con lo que se probaba (BLOQUE1-REVISION-8, §1).
+FACTORES_VENTANA = (1, 3, 9)
+
+
+def peticiones_servidas(guion):
+    estado = Path(str(guion) + ".estado")
+    return int(estado.read_text(encoding="ascii")) if estado.exists() else 0
+
+
+def ejecutar(tmp_path, pasos, duracion=3.0, cada=0.08, tiempo_max=1, tiempo_conexion=10):
+    # tiempo_conexion: plazo del prompt inicial de cada switch falso NUEVO. Con tiempo_max 0,35 s
+    # (prueba de timeout) y la máquina cargada, el arranque de otro Python superaba ese plazo y la
+    # reconexión fallaba por el entorno, no por el sondeo (antes-06 y antes-x3-03 de suite-r8).
+    intentos = []
+    eventos = []
+    for n, factor in enumerate(FACTORES_VENTANA, 1):
+        ventana = duracion * factor
+        d = tmp_path / ("intento-%d" % n)
+        d.mkdir()
+        guion = d / "guion.json"
+        guion.write_text(json.dumps({"pasos": pasos}), encoding="utf-8")
+        registro = d / "sondeo.jsonl"
+        pid = d / "sondeo.pid"
+        comando = f'"{sys.executable}" "{FALSO}" --guion "{guion}"'
+        t0 = time.time()
+        proceso = subprocess.run([
+            sys.executable, str(SONDEO), "--salida", str(registro),
+            "--hasta-epoch", str(t0 + ventana), "--cada-s", str(cada),
+            "--tiempo-max-respuesta-s", str(tiempo_max),
+            "--tiempo-max-conexion-s", str(tiempo_conexion), "--comando-ssh", comando,
+            "--pid", str(pid),
+        ], cwd=RAIZ, capture_output=True, text=True, timeout=2 * ventana + tiempo_conexion + 20,
+            stdin=subprocess.DEVNULL)
+        assert proceso.returncode == 0, proceso.stderr
+        assert not pid.exists()
+        eventos = [json.loads(linea) for linea in registro.read_text(encoding="utf-8").splitlines()]
+        assert eventos[0]["tipo"] == "arranque"
+        assert eventos[-1]["tipo"] == "fin"
+        assert eventos[-1]["motivo"] == "hasta_epoch"
+        servidas = peticiones_servidas(guion)
+        intentos.append({"intento": n, "ventana_s": round(ventana, 1), "duracion_real_s": round(time.time() - t0, 3),
+                         "peticiones_servidas": servidas, "pasos": len(pasos),
+                         "muestras": len(muestras(eventos))})
+        # Se pidió la muestra siguiente al último paso: todos los pasos se sirvieron y el sondeo
+        # recibió la respuesta del último (solo pide otra tras recibirla).
+        if servidas >= len(pasos) + 1:
+            print("intentos del escenario:", json.dumps(intentos))
+            return registro, eventos
+    pytest.fail("el guion del switch falso no se completó en ninguna ventana %s: %s\nultimos eventos: %s"
+                % ([round(duracion * f, 1) for f in FACTORES_VENTANA], json.dumps(intentos), json.dumps(eventos[-8:])))
 
 
 def analizar(registro, *opciones):

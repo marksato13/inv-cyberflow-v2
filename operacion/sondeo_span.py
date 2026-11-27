@@ -20,7 +20,7 @@ import threading
 import time
 import traceback
 
-VERSION = "1.0"
+VERSION = "1.1"
 INTERFAZ = "show interfaces GigabitEthernet2/0/19 | include output drops|packets output"
 COLA = "show platform hardware fed switch 2 qos queue stats interface GigabitEthernet2/0/19 | include ^ 1 "
 PROMPT = re.compile(r"(?:^|\n)[^\r\n]*#\s*$")
@@ -122,8 +122,14 @@ def main(argv=None):
     parser.add_argument("--comando-ssh", default="ssh -tt -o BatchMode=yes sw-core-stack")
     parser.add_argument("--pid")
     parser.add_argument("--tiempo-max-respuesta-s", type=float, default=20)
+    # Plazo para el prompt inicial y «terminal length 0» de una sesión NUEVA. Por omisión, el mismo
+    # que el de respuesta (comportamiento anterior). Separado porque abrir la sesión (ssh, o el
+    # switch falso de las pruebas) puede tardar más que responder a un comando.
+    parser.add_argument("--tiempo-max-conexion-s", type=float, default=None)
     args = parser.parse_args(argv)
-    if args.cada_s <= 0 or args.tiempo_max_respuesta_s <= 0:
+    if args.tiempo_max_conexion_s is None:
+        args.tiempo_max_conexion_s = args.tiempo_max_respuesta_s
+    if args.cada_s <= 0 or args.tiempo_max_respuesta_s <= 0 or args.tiempo_max_conexion_s <= 0:
         parser.error("los tiempos deben ser positivos")
 
     detenido = [False]
@@ -177,6 +183,7 @@ def main(argv=None):
             "salida": args.salida, "hasta_epoch": args.hasta_epoch,
             "cada_s": args.cada_s, "comando_ssh": args.comando_ssh,
             "pid": args.pid, "tiempo_max_respuesta_s": args.tiempo_max_respuesta_s,
+            "tiempo_max_conexion_s": args.tiempo_max_conexion_s,
         }, pid=os.getpid(), host=socket.gethostname())
 
         while True:
@@ -185,8 +192,8 @@ def main(argv=None):
                 intento += 1
                 try:
                     sesion = Sesion(args.comando_ssh)
-                    sesion.respuesta(time.monotonic() + args.tiempo_max_respuesta_s, mantener_vivo)
-                    sesion.comando("terminal length 0", args.tiempo_max_respuesta_s, mantener_vivo)
+                    sesion.respuesta(time.monotonic() + args.tiempo_max_conexion_s, mantener_vivo)
+                    sesion.comando("terminal length 0", args.tiempo_max_conexion_s, mantener_vivo)
                     registrar("conexion", intento=intento, ok=True, error=None)
                     espera_reconexion = 2
                     siguiente = time.monotonic()

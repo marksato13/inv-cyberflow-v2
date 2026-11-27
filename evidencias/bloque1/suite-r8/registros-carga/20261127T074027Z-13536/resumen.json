@@ -1,0 +1,24 @@
+{
+ "codigo_salida": 0,
+ "cuentas": {
+  "passed": 11
+ },
+ "fallidas": [],
+ "duracion_s": 30.61,
+ "inicio_utc": "2026-11-27T07:40:27Z",
+ "argumentos": [
+  "-v",
+  "-rA",
+  "-p",
+  "no:cacheprovider",
+  "--junitxml",
+  "<REPO>\\evidencias\\bloque1\\suite-r8\\sondeo-despues\\despues-06.xml",
+  "tests/test_sondeo_span.py"
+ ],
+ "python": "3.14.3",
+ "pytest": "9.0.3",
+ "plataforma": "Windows-11-10.0.26300-SP0",
+ "cpu": 14,
+ "commit": "91b97984fbb7bf75d3f49e8f4e7f75e5ef9355b3",
+ "arbol_con_cambios": true
+}

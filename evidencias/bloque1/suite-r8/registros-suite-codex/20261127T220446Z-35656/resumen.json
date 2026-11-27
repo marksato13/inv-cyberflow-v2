@@ -1,0 +1,24 @@
+{
+ "codigo_salida": 0,
+ "cuentas": {
+  "passed": 386
+ },
+ "fallidas": [],
+ "duracion_s": 50.59,
+ "inicio_utc": "2026-11-27T22:04:46Z",
+ "argumentos": [
+  "-v",
+  "-rA",
+  "-p",
+  "no:cacheprovider",
+  "--junitxml",
+  "<REPO>\\..\\privado-r8\\suite-r8-original\\suite-completa-codex3\\codex-01.xml",
+  "tests"
+ ],
+ "python": "3.14.3",
+ "pytest": "9.0.3",
+ "plataforma": "Windows-11-10.0.26300-SP0",
+ "cpu": 14,
+ "commit": "91b97984fbb7bf75d3f49e8f4e7f75e5ef9355b3",
+ "arbol_con_cambios": true
+}

@@ -1,0 +1,25 @@
+{
+ "cpu": 14,
+ "procesos_de_carga": 42,
+ "factor": 3.0,
+ "pasadas": [
+  {
+   "pasada": 1,
+   "rc": 0,
+   "duracion_s": 161.4,
+   "fallidas": []
+  },
+  {
+   "pasada": 2,
+   "rc": 0,
+   "duracion_s": 103.8,
+   "fallidas": []
+  },
+  {
+   "pasada": 3,
+   "rc": 0,
+   "duracion_s": 150.8,
+   "fallidas": []
+  }
+ ]
+}

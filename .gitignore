@@ -20,6 +20,8 @@ tests/tmp*/
 tests/_scratch/
 tests/_trymkdir/
 tests/_temporales_pytest/
+# Registro completo de cada pasada de pytest (tests/conftest.py); las que importan se copian a evidencias/
+tests/_registros_pytest/
 
 # --- Excepciones: al final, porque en .gitignore manda la última regla que coincide ---
 # Bloque 1, revisión 4 (docs/BLOQUE1-REVISION-4-2026-11-26.md). Solo estas carpetas, ya saneadas y

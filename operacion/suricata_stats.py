@@ -58,9 +58,12 @@ def epoch(ts: str) -> float:
     return dt.datetime.fromisoformat(ts).timestamp()
 
 
-def eventos_stats(rutas) -> list[dict]:
+def eventos_stats(rutas, desde: float | None = None, hasta: float | None = None) -> list[dict]:
     """Eventos stats de uno o varios EVE/JSONL, en orden de timestamp. Líneas ilegibles se ignoran
-    (la EVE puede cortarse a mitad de línea en la copia del archivador)."""
+    (la EVE puede cortarse a mitad de línea en la copia del archivador).
+
+    Con desde/hasta solo se GUARDAN los de [desde, hasta] (rev. 8): la EVE dedicada no rota y
+    guardarlos todos para filtrar después llevaba el proceso a 1,04 GB con 449 MB de EVE."""
     ev = []
     for r in rutas:
         with open(r, encoding="utf-8", errors="replace") as f:
@@ -72,6 +75,10 @@ def eventos_stats(rutas) -> list[dict]:
                 except ValueError:
                     continue
                 if e.get("event_type") == "stats" and isinstance(e.get("stats"), dict):
+                    if desde is not None or hasta is not None:
+                        t = epoch(e["timestamp"])
+                        if (desde is not None and t < desde) or (hasta is not None and t > hasta):
+                            continue
                     ev.append(e)
     ev.sort(key=lambda e: epoch(e["timestamp"]))
     return ev
@@ -202,7 +209,7 @@ def evaluar(eventos: list[dict], desde: float | None = None, hasta: float | None
 def ventana(rutas, desde: float, hasta: float, margen: float, salida: Path) -> dict:
     """Eventos stats de la EVE dedicada COMPLETA en [desde − margen, hasta + margen]: aportan las
     muestras que acotan el periodo y que el recorte del archivador (interior) no lleva."""
-    ev = [e for e in eventos_stats(rutas) if desde - margen <= epoch(e["timestamp"]) <= hasta + margen]
+    ev = eventos_stats(rutas, desde - margen, hasta + margen)
     datos = "".join(json.dumps(e, sort_keys=True, ensure_ascii=False) + "\n" for e in ev).encode("utf-8")
     temporal = salida.with_name(salida.name + ".parcial")
     temporal.write_bytes(datos)

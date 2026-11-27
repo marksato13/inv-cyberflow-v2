@@ -1,0 +1,69 @@
+{
+ "codigo_salida": 1,
+ "cuentas": {
+  "error": 11
+ },
+ "fallidas": [
+  {
+   "id": "tests/test_sondeo_span.py::test_normal_mide_intervalo_real",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_descartes_usan_intervalo_de_incertidumbre",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_corte_reconecta_y_registra_hueco",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_timeout_reconecta_y_registra_hueco",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_respuesta_invalida_no_cuenta_como_sin_descartes",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_contador_disminuye_es_indeterminado",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_registro_interrumpido_tiene_margen_final_indeterminado",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_margen_inicial_es_indeterminado",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_registro_vacio_da_codigo_3",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_una_muestra_no_acredita_ausencia_de_descartes",
+   "fase": "setup"
+  },
+  {
+   "id": "tests/test_sondeo_span.py::test_intervalo_excesivo_es_indeterminado",
+   "fase": "setup"
+  }
+ ],
+ "duracion_s": 2.79,
+ "inicio_utc": "2026-11-27T21:41:12Z",
+ "argumentos": [
+  "-v",
+  "-rA",
+  "-p",
+  "no:cacheprovider",
+  "--junitxml",
+  "<REPO>\\..\\privado-r8\\suite-r8-original\\suite-completa-codex\\codex-01.xml",
+  "tests/test_sondeo_span.py"
+ ],
+ "python": "3.14.3",
+ "pytest": "9.0.3",
+ "plataforma": "Windows-11-10.0.26300-SP0",
+ "cpu": 14,
+ "commit": "91b97984fbb7bf75d3f49e8f4e7f75e5ef9355b3",
+ "arbol_con_cambios": true
+}

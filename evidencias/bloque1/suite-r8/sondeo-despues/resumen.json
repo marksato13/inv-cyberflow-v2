@@ -1,0 +1,55 @@
+{
+ "cpu": 14,
+ "procesos_de_carga": 14,
+ "factor": 1.0,
+ "pasadas": [
+  {
+   "pasada": 1,
+   "rc": 0,
+   "duracion_s": 32.7,
+   "fallidas": []
+  },
+  {
+   "pasada": 2,
+   "rc": 0,
+   "duracion_s": 32.9,
+   "fallidas": []
+  },
+  {
+   "pasada": 3,
+   "rc": 0,
+   "duracion_s": 33.2,
+   "fallidas": []
+  },
+  {
+   "pasada": 4,
+   "rc": 0,
+   "duracion_s": 32.7,
+   "fallidas": []
+  },
+  {
+   "pasada": 5,
+   "rc": 0,
+   "duracion_s": 33.1,
+   "fallidas": []
+  },
+  {
+   "pasada": 6,
+   "rc": 0,
+   "duracion_s": 32.4,
+   "fallidas": []
+  },
+  {
+   "pasada": 7,
+   "rc": 0,
+   "duracion_s": 32.5,
+   "fallidas": []
+  },
+  {
+   "pasada": 8,
+   "rc": 0,
+   "duracion_s": 32.6,
+   "fallidas": []
+  }
+ ]
+}
