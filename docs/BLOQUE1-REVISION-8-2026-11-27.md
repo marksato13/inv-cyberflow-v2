@@ -145,6 +145,11 @@ Se conservan también dos intentos de verificación en el sandbox de Windows:
    `signal pipe` (Win32 error 5). Pytest terminó además con `PermissionError` al limpiar el temporal.
    Las 46 pruebas afectadas están identificadas en `registros-suite-codex/.../informes.jsonl`.
 
+Los `resumen.json` del reproductor de esos dos intentos tienen `rc=1` pero `fallidas=[]`: los escribió
+la versión previa de `carga_sondeo.py`, que solo buscaba la sección final `FAILED` y no los errores de
+preparación ni una sesión abortada. Para esos intentos mandan la salida `.txt` y los
+`informes.jsonl` (11 y 46 IDs, respectivamente). El reproductor corregido ya registra esos IDs.
+
 Son restricciones de acceso de los procesos del sandbox, no evidencia de un defecto funcional del
 código. La misma suite, fuera del sandbox, dio rc 0. Los intentos fallidos, su salida íntegra y sus
 registros quedan publicados junto a la pasada correcta. `tests/carga_sondeo.py` ahora recoge también
