@@ -26,6 +26,7 @@ V2 vuelve a capturar los datos y vuelve a entrenar el escalador y el IF, a calib
   - `docs/BLOQUE1-REVISION-7-2026-11-26.md`: Suricata por intervalos (pérdida atribuible frente a no localizada, el fallo manda sobre la falta de evidencia), continuidad con `uptime` y paso de cierre comprobado (lo vigente);
   - `docs/BLOQUE1-REVISION-8-2026-11-27.md`: fallo de la suite de r7 (no recuperable, registro completo desde r8), pruebas del sondeo estables con carga, «tcpdump-ring» aclarado (el anillo es `ppi-motor-capture`), memoria de la lectura de la EVE en el cierre y criterios V4-a/V4-b del bloque 4;
   - `docs/BLOQUE1-BLOQUE3-INTEGRACION-2026-11-27.md`: reproducción publicada con las referencias del Bloque 3 y prueba técnica sintética de 49 h sobre 2,8 GB; el despliegue y el cierre real siguen pendientes;
+  - `docs/BLOQUE2-REVISION-2026-11-28.md`: matriz del Excel frente a los seis perfiles y las siete jornadas de 7 h, T1/T2 y pruebas dirigidas; las jornadas reales siguen pendientes;
   - `docs/BLOQUE1-REVISION-6-2026-11-26.md`: suficiencia temporal de Suricata (el periodo debe quedar acotado), C9 sin depender de C7, `dictamen_casos` sin copia recursiva, qué valores publicados deciden el dictamen, y dependencias;
   - `docs/BLOQUE1-REVISION-5-2026-11-26.md`: reproducción limpia, Suricata `kernel_drops` (sí se mide),
     conciliación de pendientes y **matriz final del Bloque 1**;
@@ -92,7 +93,7 @@ El primer intento falló por la longitud de las rutas, y su registro se conserva
 | Carpeta | Contenido |
 |---|---|
 | `generador/` | Generador V2: un proceso por perfil, duración finita, semillas, programa por tiempo monotónico, registro por transacción |
-| `programas/` | Programas JSON de las siete jornadas de 6 h, del piloto de 30 min y de la prueba corta, con su generador reproducible |
+| `programas/` | Programa de siete jornadas de 7 h (49 h, sin ejecutar), piloto abreviado y pruebas dirigidas T1/T2, con su generador reproducible |
 | `operacion/` | `v2ctl.py`: preflight, iniciar, estado y parar, con un supervisor sin reinicio automático |
 | `captura/` | Archivador de PCAP y EVE fuera del anillo de V1 y cruce del registro con la captura |
 | `extraccion/` | Extracción V2 (`extraer_v2`, `verificar_v2`, `metadatos_v2`) a partir de los originales |

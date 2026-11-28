@@ -1,0 +1,61 @@
+{
+  "tipo": "auditoria de evidencia historica dirigida; no captura nueva",
+  "ejecuciones": [
+    {
+      "id": "V2-T1-20261125T062528Z",
+      "programa": "prueba-perfiles-aislados.json",
+      "sha256_programa": "d93f81a808491838eb685460a9f3e9ef2f1353b160339961695f1e4c0a893603",
+      "transacciones": 84,
+      "errores": 0,
+      "por_perfil": {
+        "P1": 22,
+        "P2": 10,
+        "P3": 2,
+        "P4": 34,
+        "P5": 6,
+        "P6": 10
+      },
+      "por_accion": {
+        "consulta": 17,
+        "dns": 32,
+        "envio": 8,
+        "obtener": 27
+      },
+      "por_nivel": {
+        "base": 84
+      },
+      "p2_paginas": 3,
+      "p2_http": 4,
+      "p2_https": 3
+    },
+    {
+      "id": "V2-T2-20261125T070500Z",
+      "programa": "prueba-niveles-transiciones.json",
+      "sha256_programa": "3089fc531745d9271818ee20c0d9915bd045801669dd2042a766e269cd7ee160",
+      "transacciones": 598,
+      "errores": 0,
+      "por_perfil": {
+        "P1": 100,
+        "P2": 219,
+        "P3": 8,
+        "P4": 167,
+        "P5": 14,
+        "P6": 90
+      },
+      "por_accion": {
+        "consulta": 83,
+        "dns": 182,
+        "envio": 42,
+        "obtener": 291
+      },
+      "por_nivel": {
+        "aumentado": 291,
+        "base": 195,
+        "reducido": 112
+      },
+      "p2_paginas": 34,
+      "p2_http": 93,
+      "p2_https": 92
+    }
+  ]
+}

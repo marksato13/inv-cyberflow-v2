@@ -3,7 +3,7 @@
 #   bash lanzar_v2.sh <programa.json> <ETIQUETA> <gb_necesarios>
 # Ejemplos:
 #   bash lanzar_v2.sh piloto-30min.json PILOTO 2
-#   bash lanzar_v2.sh captura-42h.json C42 12
+#   CF_TIPO_EJECUCION=captura_definitiva bash lanzar_v2.sh captura-49h.json C49 <gb_necesarios>
 # Orden: identificador -> exclusión V1 -> preflight -> relojes -> registro DNS + PCAP (DC1) ->
 #        referencia del extremo (tcpdump en srv-dmz) -> sondeo del espejo (bastión) -> archivador (Sensor1) ->
 #        sondas del preflight (Clientes, registradas) -> espera: captura previa >= 2 min Y margen de sonda

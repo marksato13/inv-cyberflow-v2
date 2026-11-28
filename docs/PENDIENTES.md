@@ -18,7 +18,7 @@ Preparar una prueba no es pasarla, y pasarla no cierra una observación de los r
 | 4 | Cifras del 58 % y las 38 IP con fichero y denominador | Comprobado | ACLARACIONES §2.6 (sha256 `bdf6f641…`) |
 | 5 | `--history-seconds 230` frente a 10/30/60 s | Comprobado | ACLARACIONES §2.5 |
 | 6 | Generador V2: duración, IDs, semillas, programa monotónico, parada, sin reinicio | Comprobado | T1, T2 y 20 pruebas unitarias |
-| 7 | Programas J1–J7, P0 y prueba corta | Implementado sin verificar (J1–J7, P0); comprobado (prueba corta) | J1–J7 validados por esquema y pruebas unitarias; nunca ejecutados |
+| 7 | Programa V3 de siete jornadas de 7 h y piloto abreviado | Configuración contrastada con Excel; pruebas dirigidas superadas; ejecución definitiva pendiente | `CONTRATO-GENERADOR-49H.md`, `captura-49h.json`, contraste de 15 puntos con Excel, prueba exacta de ventanas y T1/T2 con hashes vigentes (`BLOQUE2-REVISION-2026-11-28.md`). Las siete jornadas de 7 h y el piloto final no se han ejecutado |
 | 8 | Zona DNS controlada `cf-v2.lab` y NXDOMAIN real | Comprobado | Preflight; T1: 3 de 3 NXDOMAIN en el registro y en el EVE |
 | 9 | Registro por transacción con lo esperado frente a lo observado | Comprobado | T1: 395 transacciones, 0 fallos inesperados |
 | 10 | Archivado de PCAP y EVE fuera del anillo, con hashes | Comprobado | T1 y T2: manifiesto e inventario |
@@ -28,8 +28,8 @@ Preparar una prueba no es pasarla, y pasarla no cierra una observación de los r
 | 12c | Carga útil en descargas a velocidad de línea | Comprobado (limitación) | T8: 85,96 % del servidor. La saturación del destino del SPAN con dos copias está en `web_grande`; aceptar, limitar o espejar un sentido es decisión de Mark |
 | 13 | Configuración del SPAN (orígenes, destino, VLAN, camino en ESXi) | Comprobado | T6/T7: SPAN 1 de CORE-STACK, Gi1/0/23 y Gi2/0/23 (both) → Gi2/0/19 → vmnic2 → vSwitch2 → PG-CYBERFLOW-SPAN (VLAN 4095); estándar, sin vDS; VLAN 20 y 30 observadas |
 | 14 | Discrepancia de `rx_dropped` | Comprobado (26-nov) | ~~T9: 2,74 % frente a 2,90 %~~ (parecido de porcentajes, sustituido). Prueba de 120 s: Δ`rx_dropped` 1 708 = exactamente las tramas SNAP etiquetadas (PVST+/CDP) del PCAP; no es pérdida. `BLOQUE1-CIERRE.md` §5.1 |
-| 15 | Truncado del EVE por copytruncate a las 00:00 UTC | Implementado sin verificar | El archivador lo registra; programar las jornadas sin cruzar las 00:00 UTC |
-| 16 | Volumen GB/h con carga sostenida y destino del almacenamiento privado | Pendiente (**bloqueante para las 42 h**) | T8: 0,78 GB/h con la prueba corta, que da ~33 GB para 42 h, y Sensor1 tiene 23 GB libres. Hay que medirlo con el programa del piloto y decidir el disco destino (Mark) |
+| 15 | Truncado del EVE por copytruncate a las 00:00 UTC | Implementado; verificación prolongada pendiente | El archivador registra la rotación y los huecos; el programa continuo de 49 h puede cruzar las 00:00 UTC. Se verifica en el bloque 4, sin restringir artificialmente el calendario |
+| 16 | Volumen GB/h con carga sostenida y destino del almacenamiento privado | Pendiente (**bloqueante para las 49 h**) | T8: 0,78 GB/h con la prueba corta, extrapolación simple ~38,2 GB para 49 h antes de márgenes y EVE. No es una medida del programa definitivo. Medir por nivel y resolver espacio/destino en el bloque 4 antes de capturar |
 | 17 | Condición de parada por espacio | Implementado sin verificar | `--libre-minimo-gb 4` |
 | 18 | Relojes: desfase entre Clientes y Sensor1 | Comprobado | \|desfase\| ≤ 0,52 ms en T1 y T2 |
 | 19 | Reloj de srv-dmz y DC1 frente a Sensor1 | Comprobado (puntual) | T10: srv-dmz −0,15 ms, DC1 +2,7 ms, Clientes −0,23 ms frente a NTP. Falta automatizar la medida antes y después de cada jornada |

@@ -67,6 +67,22 @@ def simular(prog, perfil, duracion_accion=0.01, parar_en=None, parche_h3=None):
 
 
 class TestPrograma(unittest.TestCase):
+    def test_piloto_abreviado_dura_30_minutos_y_cubre_siete_patrones(self):
+        p = gp.piloto()
+        prg.validar(p)
+        self.assertEqual(p["duracion_s"], 1800)
+        self.assertEqual([j["fin_s"] - j["inicio_s"] for j in p["jornadas"]],
+                         [360] + [240] * 6)
+        self.assertEqual([b["fin_s"] - b["inicio_s"] for b in p["bloques"]],
+                         [180, 180] + [120] * 12)
+        self.assertEqual([j["patron"] for j in p["jornadas"]],
+                         [j["patron"] for j in gp.captura()["jornadas"]])
+        for perfil in prg.PERFILES:
+            estado, txs, _ = simular(p, perfil)
+            self.assertEqual(estado, "completa")
+            self.assertTrue(txs)
+            self.assertTrue(all(t["inicio_t_s"] < 1800 and t["clase"] == "ok" for t in txs))
+
     def test_calendario(self):
         p = gp.captura()
         prg.validar(p)
@@ -85,6 +101,46 @@ class TestPrograma(unittest.TestCase):
             prg.validar(programa)
             self.assertEqual((RAIZ / "programas" / nombre).read_bytes(),
                              gp.serializar(programa))
+
+    def test_ventanas_exactas_de_las_siete_jornadas(self):
+        """Contrasta inicios, fines y perfiles con «3 Jornadas», filas 6–11 del contrato Excel."""
+        p = gp.captura()
+        base = 25200
+        def tramos(jornada, perfil, nivel):
+            inicio = (jornada - 1) * base
+            fin = jornada * base
+            return [(max(n["inicio_s"], inicio) - inicio, min(n["fin_s"], fin) - inicio)
+                    for n in p["niveles"] if n["inicio_s"] < fin and n["fin_s"] > inicio
+                    and n["perfiles"][perfil] == nivel]
+        def unir(ventanas):
+            juntas = []
+            for a, b in ventanas:
+                if juntas and juntas[-1][1] == a:
+                    juntas[-1] = (juntas[-1][0], b)
+                else:
+                    juntas.append((a, b))
+            return juntas
+        for j in (1, 5):
+            for perfil in prg.PERFILES:
+                self.assertEqual(unir(tramos(j, perfil, "base")), [(0, base)])
+        for j, activos in ((2, {"P1", "P2"}), (3, {"P3", "P4"})):
+            for perfil in prg.PERFILES:
+                self.assertEqual(unir(tramos(j, perfil, "aumentado")),
+                                 [(0, base)] if perfil in activos else [])
+        rafagas_j4 = [(h * 3600 - 300, h * 3600) for h in range(1, 8)]
+        for perfil in prg.PERFILES:
+            self.assertEqual(unir(tramos(4, perfil, "aumentado")),
+                             rafagas_j4 if perfil in {"P1", "P2", "P4"} else [])
+        periodos_j6 = [(mitad + m * 60, mitad + (m + 15) * 60)
+                       for mitad in (0, 12600) for m in (30, 120)]
+        rafagas_j7 = [(mitad + m * 60, mitad + (m + 3) * 60)
+                      for mitad in (0, 12600) for m in (40, 100, 160)]
+        for perfil in prg.PERFILES:
+            self.assertEqual(tramos(6, perfil, "base"), periodos_j6)
+            self.assertEqual(tramos(7, perfil, "base"), rafagas_j7)
+        self.assertEqual([(b["inicio_s"], b["fin_s"], b["particion"]) for b in p["bloques"]],
+                         [(j * base + h * 12600, j * base + (h + 1) * 12600,
+                           gp.PARTICIONES[j][h]) for j in range(7) for h in range(2)])
 
     def test_rechazos_y_bordes(self):
         p = gp.transiciones()

@@ -1,6 +1,6 @@
 # Protocolo de recolección de CyberFlow V2
 
-Versión 0.1, 24-nov-2026. **Preparación**: aún no se ha iniciado ni el piloto de 30 min ni ninguna captura definitiva.
+Versión 0.2, 27-nov-2026. **Preparación**: aún no se ha iniciado ni el piloto final ni la captura definitiva. El contrato vigente de perfiles y calendario es `CONTRATO-GENERADOR-49H.md` v3; los resultados históricos de V1 y de las pruebas cortas conservan su propia versión.
 
 CyberFlow V2 es un **estudio nuevo**:
 
@@ -22,30 +22,30 @@ Fuera de alcance: Wazuh, Zabbix, VM-BACKUP y los equipos de otros proyectos.
 
 ## 2. Presupuesto y calendario
 
-- **Captura legítima de desarrollo:** 42 h brutas en siete jornadas de 6 h. Cada jornada tiene dos bloques de 3 h. Reparto nominal: 24 h de entrenamiento, 9 de calibración y 9 de desarrollo (`programas/`).
+- **Captura legítima de desarrollo:** 49 h brutas continuas en siete jornadas de 7 h. Cada jornada tiene dos bloques de 3,5 h. Reparto nominal: 28 h de entrenamiento, 10,5 h de calibración y 10,5 h de desarrollo (`programas/captura-49h.json`). El programa está definido, no ejecutado.
 - **Tras congelar:** 18 h nuevas de control legítimo independiente (E1–E3, todavía por definir). Los ataques y las campañas A/B van aparte, con su propio presupuesto.
 - **Horas útiles.** Se publican tres cifras: horas brutas, utilizables y excluidas (con su motivo). No se fijan de antemano.
 - **Qué representan.** Las jornadas son sesiones sintéticas parciales, no una semana de 168 h.
-- **Asignación de particiones (hoja Calendario del plan):**
+- **Asignación de particiones (hoja «3 Jornadas» del Excel):**
   - J1: entrenamiento / entrenamiento;
   - J2, J4, J6: entrenamiento / calibración;
   - J3, J5, J7: entrenamiento / desarrollo.
 
 ## 3. Generador
 
-`generador/clientes_lab_v2.py`. Cada parámetro de los programas indica su procedencia: V1, PLAN o NUEVA.
+`generador/clientes_lab_v2.py` v3. El contrato y la procedencia de cada parámetro están en `CONTRATO-GENERADOR-49H.md` y en `programas/captura-49h.json`.
 
 - **Duración finita.** Se lanza un proceso por perfil y se lleva un registro JSONL por transacción y otro de eventos.
-- **Semillas.** Hay una por perfil y bloque, fijada antes de capturar.
+- **Semillas.** Hay tres flujos independientes (`espera`, `contenido`, `red`) por perfil y bloque, derivados por SHA-256 de la semilla maestra, el programa, el bloque, el perfil y el flujo; se registran al entrar en cada bloque.
 - **Programa por tiempo transcurrido.** Se mide con reloj monotónico y sustituye al factor horario y al de fin de semana de V1.
-- **Espera** (V1): `expovariate(1/max(ritmo/factor, 0.05))`. El piso de 0,05 s se aplica a la media, no a cada espera. Cambio documentado: si una espera cruza un cambio de fase, se corta en el borde y se vuelve a sortear.
-- **Ráfagas de errático** (V1): probabilidad 0,02 por iteración, 20–90 s, ×6. No equivale a un 2 % del tiempo.
+- **Espera** (v3): exponencial de media `media_base/factor`, sorteada tras terminar la acción. Se corta y resortea al cambiar nivel, bloque, jornada u ON/OFF. El parsing de P2 conserva media 0,13 s y no se escala.
+- **P6** (v3): ON 60 s y OFF 120 s; durante OFF no comienza una acción nueva. Una acción iniciada en ON puede terminar en OFF y se registra el cruce.
 - **Parada controlada** con SIGTERM: termina y registra la acción en curso. **Sin reinicio automático.**
-- **Cuándo se modifica.** Las acciones, los pesos, los ritmos, las rutas y los tamaños son los de V1. Solo pueden cambiarse por una decisión registrada en `docs/PENDIENTES.md`, nunca a partir de métricas del detector.
+- **Cuándo se modifica.** Los perfiles v3 sustituyen las acciones de V1. Toda modificación requiere una decisión registrada antes de capturar y un programa con nuevo hash; nunca se elige mirando métricas del detector.
 
 ## 4. Programas de las siete jornadas
 
-Ver `programas/README.md`. Los multiplicadores del plan (×1,25, pulsos ×1,5, ×0,30) son **propuestas a validar** en el piloto, no estándares. No se ajustan con métricas del detector.
+Ver `programas/README.md` y el contrato §7. Los niveles son `reducido` (factor 1/3), `base` (1) y `aumentado` (2), aplicados a las pausas de interacción. J1 y J5 son base; J2 aumenta P1/P2; J3 aumenta P3/P4; J4 tiene siete ráfagas de cinco minutos de P1/P2/P4; J6 tiene cuatro periodos de 15 minutos en base sobre fondo reducido; J7 tiene seis ráfagas de tres minutos en base sobre fondo reducido. Cada bloque tiene semillas distintas. Son contrastes sintéticos del diseño, no medias de usuarios reales.
 
 ## 5. Servicios y registro por transacción
 
@@ -61,10 +61,11 @@ Ver `programas/README.md`. Los multiplicadores del plan (×1,25, pulsos ×1,5, �
 
 - Cualquier otro nombre de la zona devuelve NXDOMAIN (comprobado).
 - Un NOERROR **no** cuenta como éxito si la respuesta no contiene la A esperada.
+- El generador v3 consulta directamente a DC1 por UDP antes de cada ciclo; no usa caché local. P2 consulta una vez por página y P4 una vez por secuencia. Las sondas del preflight quedan separadas del periodo útil.
 
 **Registro.** Cada transacción guarda:
 
-- ejecución, jornada, perfil, bloque, fase, pulsos y ráfaga;
+- ejecución, jornada, perfil, bloque, partición y nivel;
 - id de transacción y acción;
 - origen (IP:puerto) y destino (IP:puerto);
 - inicio y fin en UTC, duración monotónica, bytes de aplicación enviados y recibidos;
@@ -76,15 +77,10 @@ Ver `programas/README.md`. Los multiplicadores del plan (×1,25, pulsos ×1,5, �
 
 - `ok`;
 - `error_intencional` (401, 404 y 500 provocados, NXDOMAIN, puerto cerrado, abandono);
-- `variacion_servidor` (POST con 500: el servidor de V1 responde 500 al 10 % de los POST);
+- `variacion_servidor` solo para registros históricos de V1; el POST normal de v3 no sortea errores;
 - `fallo_inesperado` (todo lo demás).
 
-**Aleatoriedad del servidor** (`servidor_lab.py`, sin cambios):
-
-- POST → 500 con probabilidad 0,1;
-- `/api/lento` espera entre 1,5 y 4 s.
-
-El servidor no lleva registro propio; el resultado real lo registra el cliente.
+**Servidor v3** (`servidor/servidor_lab_v2.py`): `GET /contenido/<n>` devuelve 200 y exactamente `n` bytes con límite de 5 MB/s por conexión; `GET /app/consulta?ref=<k>` devuelve 200 y 512 bytes; `POST /app/envio` devuelve 201 con longitud y SHA-256 recibidos. Las rutas inválidas generan 400 solo en pruebas dirigidas. Las rutas V1 se conservan para compatibilidad, fuera del programa v3. El servidor registra cada petición y su resultado; se concilia con el registro del cliente. El contrato §3 detalla tamaños, límites y respuestas.
 
 ## 6. Captura y conservación
 
@@ -135,7 +131,7 @@ El servidor no lleva registro propio; el resultado real lo registra el cliente.
 - paso de 10 s;
 - historias de 10, 30 y 60 s;
 - denominadores, cero frente a ausente, columnas constantes, inactividad;
-- arranque en frío (margen de 60 s) y bordes de partición;
+- arranque en frío y bordes de partición con horizonte de estado de 230 s, además de las ventanas de 10/30/60 s;
 - deduplicación del espejo: cada paquete aparece dos veces, en la VLAN 20 y en la VLAN 30 (comprobado en T1). Desde el Bloque 3 (27-nov) se usa `deduplicar_v2`: clave con `ack` y `flags`, 20 ms, (VLAN, TTL) único por grupo y 2 copias en difusión (`extraccion/README.md`);
 - paridad entre entrenamiento y operación. La deduplicación es el mismo módulo, byte a byte, en el extractor y en el motor del producto, que lo usa con `--deduplicacion v2`. Operar un modelo entrenado con V2 exige esa opción; la omisión `v1` es la del modelo actual;
 - que no haya fugas de futuro.
@@ -147,7 +143,7 @@ Las 28 entradas del IF y los metadatos van en ficheros distintos, unidos solo po
 | Fichero | Contenido |
 |---|---|
 | `extraccion/entradas_if.csv` | `ventana_id` + las 28 columnas del contrato, en su orden. Nada más |
-| `extraccion/ventanas_meta.csv` | ejecución, entidad, perfil, regla de población, inicio y cierre UTC, t del programa, bloque, partición, segmento, fase (y si la ventana cruza fase), pulsos, marca de la extracción, PCAP de la ventana y primero/último de la historia de 60 s, EVE y su sha256, transacciones en la ventana, estado de cobertura, estado de conciliación, hueco de captura, `excluir_entrenamiento` y sus motivos |
+| `extraccion/ventanas_meta.csv` | ejecución, entidad, perfil, regla de población, inicio y cierre UTC, t del programa, bloque, partición, jornada, nivel y cruce de nivel, P6 ON, marca de la extracción, PCAP de la ventana e historia, EVE y su sha256, transacciones en la ventana, cobertura, conciliación, hueco de captura, `excluir_entrenamiento` y sus motivos |
 | `extraccion/trazabilidad.json` | comprobación: ids únicos, relación 1:1 en el mismo orden, cabecera de entradas = las 28, ningún metadato entre las 28, campos obligatorios llenos; conteos por partición, bloque, perfil, cobertura, conciliación y regla de exclusión |
 
 Las fronteras de bloque salen del programa y del evento `inicio` de cada perfil
@@ -159,7 +155,7 @@ correcta, 0 obligatorios vacíos, desfase de arranque entre perfiles 18 ms.
 
 | Regla | Motivo |
 |---|---|
-| E1 | marca de arranque o de frontera de bloque: la historia de 60 s está incompleta |
+| E1 | marca de arranque o de frontera de bloque: el horizonte de estado de 230 s está incompleto |
 | E2 | hueco de captura PCAP o EVE que toca [cierre − 60 s, cierre] |
 | E3 | alguna transacción del perfil en la ventana con cobertura incompleta o no verificable |
 | E4 | alguna transacción del perfil en la ventana conciliada como `fallo_imprevisto` o no verificable |
@@ -217,32 +213,21 @@ Para que V2 no entre en el aprendizaje de V1, cada ejecución añade a `excluir_
 
 ## 10. Piloto de 30 min
 
-Programa `programas/piloto-30min.json` (sha256 en el manifiesto): seis perfiles, dos bloques (resiembra a los 900 s) y estas fases:
+Programa `programas/piloto-30min.json`: **1800 s (30 min de programa)**, siete jornadas abreviadas: J1 de 360 s y J2–J7 de 240 s, con catorce bloques (dos de 180 s y doce de 120 s). J1 contiene los dos minutos adicionales de referencia base; las ventanas abreviadas J2–J7 no cambiaron. El programa prueba niveles, cambios y resiembra; no sustituye la captura de 49 h ni valida sus duraciones. Los niveles y ventanas exactos están en el JSON y en `CONTRATO-GENERADOR-49H.md` §7. No se ha iniciado el piloto final.
 
-| Fase | Tramo | Factor | Notas |
-|---|---|---|---|
-| F1 | 0–300 s | ×1,00 | |
-| F2 | 300–600 s | ×0,55 | |
-| F3 | 600–900 s | ×0,90 | |
-| F4 | 900–1080 s | ×0 | parada total |
-| F5 | 1080–1500 s | ×0,30 | periodo activo A1 en 1200–1260 s; pulso P1 ×1,5 en 1320–1440 s |
-| F6 | 1500–1800 s | ×1,00 | |
+### Comprobaciones del piloto y criterio de aceptación (versión 3, actualizada el 28-nov antes del piloto final)
 
-Ofimática y navegación van a ×1,25. **No se usa en métricas.** Comandos en `docs/COMANDOS.md`.
-
-### Comprobaciones del piloto y criterio de aceptación (versión 2, fijada el 24-nov a las 22:45 UTC, antes de lanzarlo)
-
-Sustituye a la versión 1 (C7 «hoy fallaría», C8 «sin cruzar las 00:00»). Se lanza con
-`bash lanzar_v2.sh piloto-30min.json PILOTO 2` y se cierra con `bash cerrar_v2.sh <ID>`.
+Sustituye la tabla de fases de V1. Su actualización precede al piloto final V3, aún no iniciado. Se lanzará con
+`CF_TIPO_EJECUCION=piloto_final bash lanzar_v2.sh piloto-30min.json PILOTO 2` y se cerrará con `bash cerrar_v2.sh <ID>`.
 Un criterio que falle no se corrige repitiendo el piloto hasta que pase: se documenta la causa,
 se corrige y se registra el intento fallido. Ningún criterio mira resultados del detector.
 
 | # | Comprobación | Criterio de aceptación | Fuente |
 |---|---|---|---|
 | C1 | Los seis perfiles terminan solos | Seis `perfil_terminado` con código 0; `manifiesto-fin` estado `completa` | `supervisor.jsonl`, `manifiesto-fin.json` |
-| C2 | Fases y pausa | Ninguna transacción con `inicio_t_s` en [900, 1080); un evento `fase` por fase y perfil (6 × 6) | `transacciones-*`, `eventos-*` |
-| C3 | Pulsos y periodo activo | Transacciones con `pulsos` que incluyen P1 solo en [1320, 1440) y A1 solo en [1200, 1260); su factor coincide con el programa | `transacciones-*` frente a `programa.json` |
-| C4 | Resiembra | Dos eventos `bloque` por perfil, con las semillas del programa | `eventos-*` |
+| C2 | Niveles y pausas | Cada transacción se asigna al nivel y factor vigentes en su `inicio_t_s`; las pausas se cortan en bordes y P6 no inicia en OFF; los eventos `nivel` y `on/off` concuerdan con el programa | `transacciones-*`, `eventos-*`, `programa.json` |
+| C3 | Patrones abreviados J1–J7 | Se observan las siete jornadas, las ventanas de énfasis J2/J3, dos ráfagas J4, dos periodos J6 y dos ráfagas J7 exactamente donde el programa abreviado las define; las acciones en curso pueden cruzar bordes y conservan el nivel de inicio | `transacciones-*` frente a `programa.json` |
+| C4 | Resiembra | Catorce eventos `bloque` por perfil, con las tres semillas del bloque correspondiente | `eventos-*`, `programa.json` |
 | C5 | Clasificación del cliente | 0 `fallo_inesperado` | `transacciones-*` |
 | C6 | Conciliación con el registro independiente | 0 `fallo_imprevisto` y 0 `incompleta_no_verificable` entre cliente y srv-dmz/DC1 | `conciliacion/` |
 | C7 | Cobertura de la captura | Fases: conexión, petición y respuesta vistas en el 100 % de lo que aplica; bytes de respuesta vistos / bytes TCP recibidos ≥ 95 % **en el total, en cada acción comparable y en cada perfil**; 0 `no verificable` | `cobertura/` |
@@ -250,14 +235,14 @@ se corrige y se registra el intento fallido. Ningún criterio mira resultados de
 | C9 | Pérdidas en toda la cadena | Δ output drops de Gi2/0/19 y de los orígenes, Δ`rx_missed_errors`/softnet y descartes de tcpdump registrados antes y después: se acepta Δ = 0; si no, se cuantifica y C7 decide, porque C7 mide en el PCAP del anillo si esas pérdidas tocaron al tráfico experimental. **Suricata** (`capture.kernel_drops`, eventos `stats` de la EVE dedicada), por intervalos entre muestras consecutivas. Un aumento en un intervalo **dentro** del periodo del archivador es pérdida demostrada y **fallo**, aunque además falte evidencia (huecos, `uptime`); un reinicio también es fallo. Un aumento solo en intervalos que **cruzan** un borde no se atribuye al periodo ni se descarta: falta evidencia. Se aprueba solo un periodo acotado (muestra en o antes del inicio y en o después del fin), con huecos ≤ 16 s, `uptime` en todas las muestras y continuo, y Δ 0. C7 no decide Suricata (revisiones 6 y 7) | `contadores-lab-*.txt`, `capturas/<ID>/eve`, `registros/suricata-stats-ventana-<ID>.jsonl` |
 | C10 | Relojes | NTP sincronizado en los cuatro equipos al principio y al final; \|desfase aparente\| mediano ≤ 5 ms | `relojes-*`, `cobertura/` |
 | C11 | Extracción | `extraer_v2` y `verificar_v2` con rc 0; verificación 40/40 sin diferencias (historia del motor 230 s); inventario con todas las IP y su regla; constantes justificadas; tardías descartadas = 0. Pendiente de otra comprobación mientras el motor de referencia no use la misma deduplicación (`verificacion.json` → `deduplicacion.motor_misma_funcion`) | `extraccion/` |
-| C11b | Trazabilidad de ventanas (añadido a las 23:05 UTC, durante el piloto y antes de cerrarlo, a petición de Mark) | `trazabilidad_ok`: cada ventana con ejecución, entidad, perfil, cierre, bloque, partición, fase, PCAP/EVE, cobertura, conciliación y exclusión; 1:1 con `entradas_if.csv`, que tiene exactamente las 28 columnas | `extraccion/trazabilidad.json` |
-| C12 | Volumen | GB/h de PCAP comprimido, EVE y registros por fase medidos; se recalcula la estimación de 42 h con estos valores | `volumen.jsonl` |
+| C11b | Trazabilidad de ventanas | `trazabilidad_ok`: cada ventana con ejecución, entidad, perfil, cierre, bloque, partición, jornada, nivel, PCAP/EVE, cobertura, conciliación y exclusión; relación 1:1 con `entradas_if.csv`, que tiene exactamente las 28 columnas | `extraccion/trazabilidad.json` |
+| C12 | Volumen | GB/h de PCAP comprimido, EVE y registros por nivel medidos; se recalcula el presupuesto de 49 h con estos valores y el destino disponible | `volumen.jsonl` |
 | C13 | Aislamiento de V1 | Regla `*@` que cubre la ejecución; sets de srv-dmz vacíos, DC1 sin reglas y agente sin `--aplicar` al principio y al final | `preflight-lab.jsonl`, `contadores-lab-*.txt` |
 
 Lo que el piloto no puede mostrar se prueba aparte: rotación y sustitución del EVE, PCAP borrado
 antes de copiarse y línea partida o corrupta (`captura/prueba_rotacion_lab.py`); parada por
 espacio y por caída del archivador (prueba de parada coordinada); cruce de las 00:00 UTC (la
-rotación real ocurre en la primera noche de las 42 h y se clasifica con `eve/huecos.jsonl`).
+rotación real puede ocurrir durante las 49 h y se clasifica con `eve/huecos.jsonl`).
 
 ## Tiempos, fin dinámico y condiciones de parada/invalidación
 

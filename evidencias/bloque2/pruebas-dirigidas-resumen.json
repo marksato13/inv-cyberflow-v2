@@ -1,0 +1,23 @@
+{
+ "codigo_salida": 0,
+ "cuentas": {
+  "passed": 35
+ },
+ "fallidas": [],
+ "duracion_s": 22.22,
+ "inicio_utc": "2026-11-28T05:00:06Z",
+ "argumentos": [
+  "-q",
+  "-p",
+  "no:cacheprovider",
+  "tests/test_distribuciones.py",
+  "tests/test_generador_v3.py",
+  "tests/test_servidor.py"
+ ],
+ "python": "3.14.3",
+ "pytest": "9.0.3",
+ "plataforma": "Windows-11-10.0.26300-SP0",
+ "cpu": 14,
+ "commit": "d0bbf5c2842596adac454e8d9b7c1a8944c29745",
+ "arbol_con_cambios": true
+}

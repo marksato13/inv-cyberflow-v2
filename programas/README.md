@@ -7,7 +7,7 @@ python programas/generar_programas.py --comprobar para verificar sus bytes.
 | Programa | ID | Duración | Uso |
 |---|---|---:|---|
 | captura-49h.json | V2-C49 | 176 400 s | Siete jornadas de 7 h, 14 bloques de 3,5 h |
-| piloto-30min.json | V2-P49 | 1 680 s | Siete jornadas abreviadas de 240 s |
+| piloto-30min.json | V2-P49 | 1 800 s | J1 de 360 s y J2–J7 de 240 s; catorce bloques |
 | prueba-perfiles-aislados.json | V2-T1 | 1 800 s | Un perfil activo en cada tramo de 300 s |
 | prueba-niveles-transiciones.json | V2-T2 | 1 440 s | Niveles, bordes internos y ráfagas |
 

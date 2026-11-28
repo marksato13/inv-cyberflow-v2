@@ -142,25 +142,30 @@ def captura():
 
 
 def piloto():
-    prog = comun("V2-P49", "piloto", 1680)
+    prog = comun("V2-P49", "piloto", 1800)
     ventanas = []
     bases = {}
+    cursor = 0
     for i in range(7):
-        jid, a = "J%d" % (i + 1), i * 240
+        jid, a = "J%d" % (i + 1), cursor
+        duracion = 360 if i == 0 else 240  # 2 min adicionales de referencia base: piloto de 30 min
+        mitad = duracion // 2
+        cursor += duracion
         patron = ("base", "web_aumentado", "archivo_app_aumentado", "rafagas_web_app",
                   "base_repetida", "reducido_periodos", "reducido_rafagas")[i]
-        jornada(prog, jid, a, a + 240, patron)
-        bloque(prog, jid + "-B1", jid, a, a + 120, "piloto")
-        bloque(prog, jid + "-B2", jid, a + 120, a + 240, "piloto")
+        jornada(prog, jid, a, cursor, patron)
+        bloque(prog, jid + "-B1", jid, a, a + mitad, "piloto")
+        bloque(prog, jid + "-B2", jid, a + mitad, cursor, "piloto")
         bases[jid] = "reducido" if i >= 5 else "base"
         prog["equivalencia"][jid] = {
             "tipo": "prueba abreviada", "programa_definitivo": "V2-C49",
             "jornada_definitiva": jid, "patron": patron,
-            "compresion": "7 h a 240 s; bloques de 3,5 h a 120 s; ventanas abreviadas"}
+            "compresion": "7 h a %d s; bloques de 3,5 h a %d s; ventanas abreviadas" %
+                         (duracion, mitad)}
         if i == 1:
-            ventanas.append((a, a + 240, ("P1", "P2"), "aumentado"))
+            ventanas.append((a, cursor, ("P1", "P2"), "aumentado"))
         if i == 2:
-            ventanas.append((a, a + 240, ("P3", "P4"), "aumentado"))
+            ventanas.append((a, cursor, ("P3", "P4"), "aumentado"))
         if i == 3:
             for x, y in ((90, 120), (210, 240)):
                 ventanas.append((a + x, a + y, ("P1", "P2", "P4"), "aumentado"))
@@ -171,6 +176,7 @@ def piloto():
             for x, y in ((40, 55), (160, 175)):
                 ventanas.append((a + x, a + y, PERFILES, "base"))
     niveles(prog, bases, ventanas)
+    assert cursor == prog["duracion_s"]
     return prog
 
 

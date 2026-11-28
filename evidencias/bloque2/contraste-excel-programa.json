@@ -1,0 +1,67 @@
+{
+  "tipo": "contraste de configuración; no valida ejecución de 49 h",
+  "excel_sha256": "3bdbc1f29c92578a38cacf75daf394f35e6a3f9026e70649c431b3f5952716e4",
+  "programa_sha256": "3fc7b0331f9b0d89ce0ad2c00e305ad944739a262715d5600cda5c186016652c",
+  "comprobaciones": {
+    "P1": {
+      "excel": "2 Perfiles!A6:D6",
+      "resultado": "coincide"
+    },
+    "P2": {
+      "excel": "2 Perfiles!A7:D7",
+      "resultado": "coincide"
+    },
+    "P3": {
+      "excel": "2 Perfiles!A8:D8",
+      "resultado": "coincide"
+    },
+    "P4": {
+      "excel": "2 Perfiles!A9:D9",
+      "resultado": "coincide"
+    },
+    "P5": {
+      "excel": "2 Perfiles!A10:D10",
+      "resultado": "coincide"
+    },
+    "P6": {
+      "excel": "2 Perfiles!A11:D11",
+      "resultado": "coincide"
+    },
+    "P2 parsing y alternancia": {
+      "excel": "2 Perfiles!C7:F7, contrato §5",
+      "resultado": "coincide"
+    },
+    "P6 ON/OFF": {
+      "excel": "2 Perfiles!C11:F11",
+      "resultado": "coincide"
+    },
+    "H1": {
+      "excel": "2 Perfiles!A18:G18",
+      "resultado": "coincide"
+    },
+    "H2": {
+      "excel": "2 Perfiles!A19:G19",
+      "resultado": "coincide"
+    },
+    "H3": {
+      "excel": "2 Perfiles!A20:G20",
+      "resultado": "coincide"
+    },
+    "F1": {
+      "excel": "2 Perfiles!A21:G21",
+      "resultado": "coincide"
+    },
+    "siete jornadas de siete horas": {
+      "excel": "3 Jornadas!A6:G14",
+      "resultado": "coincide"
+    },
+    "niveles": {
+      "excel": "3 Jornadas!A20:G22",
+      "resultado": "coincide"
+    },
+    "particiones": {
+      "excel": "3 Jornadas!A29:G31; contrato §7",
+      "resultado": "coincide"
+    }
+  }
+}
