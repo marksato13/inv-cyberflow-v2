@@ -1,0 +1,13 @@
+{
+  "tipo": "prueba tecnica sintetica; excluida del conjunto de investigacion",
+  "codigo": "78bcc2000894f072d035f09aa2c65f06910c22b7:operacion/suricata_stats.py",
+  "fuente": "manifiesto-sintetico.json",
+  "comando": "python3 baseline-r8.py (ventana sobre EVE sintetica de 2,8 GB)",
+  "elapsed_s": 21.971,
+  "maxrss_kb": 1686068,
+  "eventos": 22051,
+  "estado": "presente",
+  "sha256_salida": "2ee45968cecab2d5435804e4560a7df14302b30bbfe0d972c6f9550bd8aa8e94",
+  "criterio_rss_kb": 262144,
+  "resultado": "fallido: supera el limite de 256 MiB de RSS"
+}

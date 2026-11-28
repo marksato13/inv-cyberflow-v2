@@ -27,6 +27,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import hashlib
+import heapq
 import json
 import sys
 import time
@@ -82,6 +83,30 @@ def eventos_stats(rutas, desde: float | None = None, hasta: float | None = None)
                     ev.append(e)
     ev.sort(key=lambda e: epoch(e["timestamp"]))
     return ev
+
+
+class _Desordenados(Exception):
+    """Un EVE no está en orden temporal; ventana() vuelve al ordenamiento anterior."""
+
+
+def _eventos_ordenados(ruta, desde, hasta):
+    anterior = None
+    with open(ruta, encoding="utf-8", errors="replace") as f:
+        for linea in f:
+            if '"stats"' not in linea:
+                continue
+            try:
+                e = json.loads(linea)
+            except ValueError:
+                continue
+            if e.get("event_type") != "stats" or not isinstance(e.get("stats"), dict):
+                continue
+            t = epoch(e["timestamp"])
+            if anterior is not None and t < anterior:
+                raise _Desordenados(ruta)
+            anterior = t
+            if desde <= t <= hasta:
+                yield t, e
 
 
 def lectura(e: dict) -> dict:
@@ -206,19 +231,62 @@ def evaluar(eventos: list[dict], desde: float | None = None, hasta: float | None
         r.update(estado="presente", delta_kernel_drops=0)
     return r
 
-def ventana(rutas, desde: float, hasta: float, margen: float, salida: Path) -> dict:
+def _rss_kb():
+    """RSS actual y máximo del proceso en Linux, solo para la medición opcional."""
+    try:
+        campos = dict(linea.split(":", 1) for linea in Path("/proc/self/status").read_text().splitlines()
+                      if linea.startswith(("VmRSS:", "VmHWM:")))
+        return {k: int(v.split()[0]) for k, v in campos.items()}
+    except OSError:
+        return {}
+
+
+def ventana(rutas, desde: float, hasta: float, margen: float, salida: Path, perfil: dict | None = None) -> dict:
     """Eventos stats de la EVE dedicada COMPLETA en [desde − margen, hasta + margen]: aportan las
     muestras que acotan el periodo y que el recorte del archivador (interior) no lleva."""
-    ev = eventos_stats(rutas, desde - margen, hasta + margen)
-    datos = "".join(json.dumps(e, sort_keys=True, ensure_ascii=False) + "\n" for e in ev).encode("utf-8")
+    rutas = tuple(rutas)
     temporal = salida.with_name(salida.name + ".parcial")
-    temporal.write_bytes(datos)
+    def escribir(eventos):
+        compactos, sha = [], hashlib.sha256()
+        escritura_s, inicio = 0.0, time.perf_counter()
+        with temporal.open("wb") as f:
+            for e in eventos:
+                # Se conserva solo lo que evaluar() lee; un evento stats completo ocupa ~11 KB.
+                x = lectura(e)
+                compactos.append({"timestamp": x["timestamp"], "stats": {"uptime": x["uptime"],
+                                  "capture": {"kernel_packets": x["kernel_packets"],
+                                              "kernel_drops": x["kernel_drops"], "errors": x["errors"]}}})
+                b = (json.dumps(e, sort_keys=True, ensure_ascii=False) + "\n").encode("utf-8")
+                t = time.perf_counter()
+                f.write(b)
+                sha.update(b)
+                escritura_s += time.perf_counter() - t
+        total = time.perf_counter() - inicio
+        return compactos, sha.hexdigest(), total - escritura_s, escritura_s
+
+    try:
+        ordenados = heapq.merge(*(_eventos_ordenados(r, desde - margen, hasta + margen) for r in rutas),
+                                key=lambda x: x[0])
+        compactos, sha, lectura_s, escritura_s = escribir(e for _, e in ordenados)
+        retroceso = False
+    except _Desordenados:
+        # Conserva la semántica previa para un fichero anómalo con timestamps fuera de orden.
+        compactos, sha, lectura_s, escritura_s = escribir(eventos_stats(rutas, desde - margen, hasta + margen))
+        retroceso = True
     temporal.replace(salida)                       # nunca queda un fichero a medias con el nombre final
-    return {"salida": salida.name, "eventos": len(ev), "desde": desde, "hasta": hasta, "margen_s": margen,
-            "sha256": hashlib.sha256(datos).hexdigest(), "evaluacion": evaluar(ev, desde, hasta)}
+    if perfil is not None:
+        perfil.update(lectura_s=round(lectura_s, 3), escritura_s=round(escritura_s, 3),
+                      rss_tras_lectura_escritura_kb=_rss_kb(), retroceso_por_desorden=retroceso)
+    t = time.perf_counter()
+    evaluacion = evaluar(compactos, desde, hasta)
+    if perfil is not None:
+        perfil.update(evaluacion_s=round(time.perf_counter() - t, 3), rss_tras_evaluacion_kb=_rss_kb())
+    return {"salida": salida.name, "eventos": len(compactos), "desde": desde, "hasta": hasta, "margen_s": margen,
+            "sha256": sha, "evaluacion": evaluacion}
 
 
-def ventana_cierre(rutas, desde, hasta, margen, salida: Path, reintentos=3, espera=10.0, dormir=time.sleep) -> tuple[int, dict]:
+def ventana_cierre(rutas, desde, hasta, margen, salida: Path, reintentos=3, espera=10.0, dormir=time.sleep,
+                   perfiles: list | None = None) -> tuple[int, dict]:
     """El paso de cerrar_v2.sh. Suricata escribe stats cada 8 s, así que la muestra posterior al fin
     puede no existir todavía al cerrar: se repite la lectura mientras falte SOLO esa muestra.
     rc 0 = decidido (presente, perdida, reinicio), 3 = sin decidir al agotar los intentos,
@@ -226,13 +294,18 @@ def ventana_cierre(rutas, desde, hasta, margen, salida: Path, reintentos=3, espe
     viejos). C9 trata 3 y 4 como falta de evidencia."""
     intentos = []
     for n in range(1, max(1, reintentos) + 1):
+        perfil = {} if perfiles is not None else None
         try:
-            r = ventana(rutas, desde, hasta, margen, salida)
+            r = ventana(rutas, desde, hasta, margen, salida, perfil)
         except (OSError, UnicodeError) as e:
             if salida.exists():
                 salida.unlink()
             intentos.append({"intento": n, "error": "%s: %s" % (type(e).__name__, e)})
+            if perfiles is not None:
+                perfiles.append({"intento": n, "error": str(e), **perfil})
             return 4, {"estado": "eve_ilegible", "intentos": intentos}
+        if perfiles is not None:
+            perfiles.append({"intento": n, **perfil})
         ev = r["evaluacion"]
         intentos.append({"intento": n, "estado": ev["estado"], "eventos": r["eventos"],
                          "muestra_despues_s": ev.get("muestra_despues_s")})

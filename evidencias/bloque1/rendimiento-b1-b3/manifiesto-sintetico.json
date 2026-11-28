@@ -1,0 +1,25 @@
+{
+  "tipo": "prueba tecnica sintetica; excluida del conjunto de investigacion",
+  "fuente_forma": "evento stats publicado de VD6; valores sustituidos",
+  "muestras_stats": 22051,
+  "periodo_s": 176400,
+  "intervalo_s": 8,
+  "desde": 1767225600.0,
+  "hasta": 1767402000.0,
+  "kernel_drops": [
+    0,
+    0
+  ],
+  "kernel_packets": [
+    1000000,
+    23050000
+  ],
+  "uptime": [
+    100000,
+    276400
+  ],
+  "bytes": 2799997693,
+  "stats_bytes": 242177133,
+  "sha256_eve": "6fd4071acffea74aa3e5836075816da3aa79109e483f4b05c5d91f7f070af70e",
+  "sha256_stats": "2ee45968cecab2d5435804e4560a7df14302b30bbfe0d972c6f9550bd8aa8e94"
+}

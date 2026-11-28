@@ -1,0 +1,9 @@
+# Complemento de deduplicación del Bloque 3
+
+Estas 32 entradas de texto son el subconjunto necesario para reproducir el dictamen y la extracción integrados de VD2, VD3, VD4 y VD6 desde un clon publicado. Proceden del reanálisis del laboratorio `~/cyberflow-v2/reanalisis/91b9798/`, ejecutado sobre los originales con `deduplicar_v2`. Se copiaron byte a byte, sin alterar los originales; `SHA256SUMS` registra cada entrada. La copia privada del conjunto recuperado y su tar original se conservan fuera del repositorio.
+
+Por ejecución se publican `extraccion/{resumen.json,verificacion.json,filas.csv,entradas_if.csv,ventanas_meta.csv}` y `referencia/{resultado-global.json,criterios-revisados.json,dictamen-casos.json}`. `calidad-sonda.json` del reanálisis era idéntico al ya publicado en `entradas-r4` y no se duplicó. No se publican PCAP, EVE completos ni datos del conjunto de investigación nuevos. Los ficheros se revisaron para excluir identificadores de gestión ajenos al experimento.
+
+`python -X utf8 operacion/reproducir_dictamen.py` aplica por omisión este complemento después de `suricata-r5`, `suricata-r6` y `suricata-r7`. `python -X utf8 operacion/recalcular_desde_capturas.py descargas --p2 evidencias/bloque1/extractos-539c48e/p2-V2-VD2-20261126T090705Z` compara la extracción con la referencia de este complemento. Ambos comandos requieren los paquetes filtrados de la release Bloque 1 r4 solo para el segundo recálculo. La reproducción histórica de r4 puede seleccionarse con `--sin-complemento` para el dictamen y `--referencia-extraccion paquete` para la extracción; esos modos corresponden al código y los criterios de aquella revisión, no al dictamen integrado actual.
+
+La reproducción desde un clon remoto limpio, sus comandos exactos, salidas y límite de lo que los extractos filtrados permiten verificar se documentan en `docs/BLOQUE1-BLOQUE3-INTEGRACION-2026-11-27.md`.

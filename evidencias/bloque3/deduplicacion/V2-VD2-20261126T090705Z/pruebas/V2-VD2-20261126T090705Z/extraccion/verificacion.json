@@ -1,0 +1,437 @@
+{
+  "esquema_ok": true,
+  "columnas": [
+    {
+      "orden": 1,
+      "nombre": "packet_rate_10s",
+      "formula_codigo": "packet_count / 10.0",
+      "unidad": "packets_per_second",
+      "denominador": "10.0",
+      "ventana_s": 10,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 2,
+      "nombre": "byte_rate_10s",
+      "formula_codigo": "total_bytes / 10.0",
+      "unidad": "ip_bytes_per_second",
+      "denominador": "10.0",
+      "ventana_s": 10,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 3,
+      "nombre": "mean_ip_len_10s",
+      "formula_codigo": "safe_ratio(total_bytes, packet_count)",
+      "unidad": "bytes",
+      "denominador": "packet_count",
+      "ventana_s": 10,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 4,
+      "nombre": "large_ip_ratio_10s",
+      "formula_codigo": "safe_ratio(sum((500 <= item.ip_length <= 1500 for item in p10)), packet_count)",
+      "unidad": "ratio",
+      "denominador": "packet_count",
+      "ventana_s": 10,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 5,
+      "nombre": "unique_dst_ip_ratio_30s",
+      "formula_codigo": "safe_ratio(len({item.peer_ip for item in attempts30}), len(attempts30))",
+      "unidad": "ratio",
+      "denominador": "len(attempts30)",
+      "ventana_s": 30,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 6,
+      "nombre": "icmp_ratio_10s",
+      "formula_codigo": "safe_ratio(sum((item.protocol == 1 for item in p10)), packet_count)",
+      "unidad": "ratio",
+      "denominador": "packet_count",
+      "ventana_s": 10,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 7,
+      "nombre": "flow_attempt_rate_10s",
+      "formula_codigo": "len(attempts10) / 10.0",
+      "unidad": "attempts_per_second",
+      "denominador": "10.0",
+      "ventana_s": 10,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 8,
+      "nombre": "syn_rate_10s",
+      "formula_codigo": "syn_count / 10.0",
+      "unidad": "syn_per_second",
+      "denominador": "10.0",
+      "ventana_s": 10,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 9,
+      "nombre": "syn_completion_ratio_10s",
+      "formula_codigo": "safe_ratio(min(syn_count, syn_ack_count), syn_count)",
+      "unidad": "ratio",
+      "denominador": "syn_count",
+      "ventana_s": 10,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 10,
+      "nombre": "rst_ratio_10s",
+      "formula_codigo": "safe_ratio(sum((item.rst for item in tcp10)), len(tcp10))",
+      "unidad": "ratio",
+      "denominador": "len(tcp10)",
+      "ventana_s": 10,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 11,
+      "nombre": "unique_dst_port_ratio_30s",
+      "formula_codigo": "safe_ratio(len({item.target_port for item in transport_attempts30}), len(transport_attempts30))",
+      "unidad": "ratio",
+      "denominador": "len(transport_attempts30)",
+      "ventana_s": 30,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 12,
+      "nombre": "http_error_ratio_60s",
+      "formula_codigo": "safe_ratio(sum((item.error for item in http_all60)), len(http_all60))",
+      "unidad": "ratio",
+      "denominador": "len(http_all60)",
+      "ventana_s": 60,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 13,
+      "nombre": "dns_nxdomain_ratio_60s",
+      "formula_codigo": "min(1.0, safe_ratio(len(dns_nxdomain60), len(dns_query60)))",
+      "unidad": "ratio",
+      "denominador": "len(dns_query60)",
+      "ventana_s": 60,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 14,
+      "nombre": "tls_session_rate_60s",
+      "formula_codigo": "tls_session_count / 60.0",
+      "unidad": "sessions_per_second",
+      "denominador": "60.0",
+      "ventana_s": 60,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 15,
+      "nombre": "ttl_mean_10s",
+      "formula_codigo": "mean([float(item.ttl) for item in p10])",
+      "unidad": "ip_ttl_mean",
+      "denominador": "cantidad de valores de [float(item.ttl) for item in p10]",
+      "ventana_s": 10,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 16,
+      "nombre": "fragment_ratio_10s",
+      "formula_codigo": "safe_ratio(sum((item.fragmented for item in p10)), packet_count)",
+      "unidad": "ratio",
+      "denominador": "packet_count",
+      "ventana_s": 10,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 17,
+      "nombre": "protocol_diversity_30s",
+      "formula_codigo": "safe_ratio(len({item.protocol for item in p30}), len(p30))",
+      "unidad": "ratio",
+      "denominador": "len(p30)",
+      "ventana_s": 30,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 18,
+      "nombre": "tcp_retransmission_ratio_10s",
+      "formula_codigo": "safe_ratio(sum((item.retransmission for item in tcp_data10)), len(tcp_data10))",
+      "unidad": "ratio",
+      "denominador": "len(tcp_data10)",
+      "ventana_s": 10,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 19,
+      "nombre": "flow_duration_mean_30s",
+      "formula_codigo": "mean(list(flow_groups.values()))",
+      "unidad": "seconds",
+      "denominador": "cantidad de valores de list(flow_groups.values())",
+      "ventana_s": 30,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 20,
+      "nombre": "tx_rx_byte_ratio_30s",
+      "formula_codigo": "safe_ratio(tx_bytes, tx_bytes + rx_bytes)",
+      "unidad": "ratio",
+      "denominador": "tx_bytes + rx_bytes",
+      "ventana_s": 30,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 21,
+      "nombre": "http_request_rate_60s",
+      "formula_codigo": "len(http_all60) / 60.0",
+      "unidad": "requests_per_second",
+      "denominador": "60.0",
+      "ventana_s": 60,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 22,
+      "nombre": "http_method_entropy_60s",
+      "formula_codigo": "shannon_entropy_bits([item.method for item in http_all60])",
+      "unidad": "bits",
+      "denominador": "cantidad de valores de [item.method for item in http_all60]",
+      "ventana_s": 60,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 23,
+      "nombre": "http_auth_failure_ratio_60s",
+      "formula_codigo": "safe_ratio(sum((item.status in (401, 403) for item in http_all60)), len(http_all60))",
+      "unidad": "ratio",
+      "denominador": "len(http_all60)",
+      "ventana_s": 60,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 24,
+      "nombre": "dns_query_rate_60s",
+      "formula_codigo": "len(dns_query60) / 60.0",
+      "unidad": "queries_per_second",
+      "denominador": "60.0",
+      "ventana_s": 60,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 25,
+      "nombre": "unique_dns_name_ratio_60s",
+      "formula_codigo": "min(1.0, safe_ratio(len({item.dns_name for item in dns_query60 if item.dns_name}), len(dns_query60)))",
+      "unidad": "ratio",
+      "denominador": "len(dns_query60)",
+      "ventana_s": 60,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 26,
+      "nombre": "tls_handshake_failure_ratio_60s",
+      "formula_codigo": "safe_ratio(sum((item.tls_incomplete for item in tls60)), len(tls60))",
+      "unidad": "ratio",
+      "denominador": "len(tls60)",
+      "ventana_s": 60,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 27,
+      "nombre": "tls_version_ratio_60s",
+      "formula_codigo": "safe_ratio(sum(('1.3' in item.tls_version for item in tls_version_known)), len(tls_version_known))",
+      "unidad": "ratio",
+      "denominador": "len(tls_version_known)",
+      "ventana_s": 60,
+      "sin_datos": "0; V1 no emite NaN"
+    },
+    {
+      "orden": 28,
+      "nombre": "http_status_5xx_ratio_60s",
+      "formula_codigo": "safe_ratio(sum((500 <= item.status <= 599 for item in http_all60)), len(http_all60))",
+      "unidad": "ratio",
+      "denominador": "len(http_all60)",
+      "ventana_s": 60,
+      "sin_datos": "0; V1 no emite NaN"
+    }
+  ],
+  "constantes": [
+    {
+      "columna": "icmp_ratio_10s",
+      "valor": "0.0",
+      "todo_cero": true,
+      "causa_probable": "sin actividad observable o tráfico homogéneo en esta población"
+    },
+    {
+      "columna": "http_error_ratio_60s",
+      "valor": "0.0",
+      "todo_cero": true,
+      "causa_probable": "sin eventos EVE de ese tipo o sin señal en los perfiles"
+    },
+    {
+      "columna": "dns_nxdomain_ratio_60s",
+      "valor": "0.0",
+      "todo_cero": true,
+      "causa_probable": "sin eventos EVE de ese tipo o sin señal en los perfiles"
+    },
+    {
+      "columna": "fragment_ratio_10s",
+      "valor": "0.0",
+      "todo_cero": true,
+      "causa_probable": "sin actividad observable o tráfico homogéneo en esta población"
+    },
+    {
+      "columna": "tcp_retransmission_ratio_10s",
+      "valor": "0.0",
+      "todo_cero": true,
+      "causa_probable": "sin actividad observable o tráfico homogéneo en esta población"
+    },
+    {
+      "columna": "http_auth_failure_ratio_60s",
+      "valor": "0.0",
+      "todo_cero": true,
+      "causa_probable": "sin eventos EVE de ese tipo o sin señal en los perfiles"
+    },
+    {
+      "columna": "tls_handshake_failure_ratio_60s",
+      "valor": "0.0",
+      "todo_cero": true,
+      "causa_probable": "sin eventos EVE de ese tipo o sin señal en los perfiles"
+    },
+    {
+      "columna": "http_status_5xx_ratio_60s",
+      "valor": "0.0",
+      "todo_cero": true,
+      "causa_probable": "sin eventos EVE de ese tipo o sin señal en los perfiles"
+    }
+  ],
+  "sin_futuro_ok": true,
+  "paridad_motor_ok": true,
+  "camino_motor_mismas_funciones": true,
+  "deduplicacion": {
+    "extractor": "deduplicar_v2.deduplicar_espejo_v2",
+    "sha256_extractor": "6ec71ab60e8604605436d5ea73ffcd0e41f1246dcd93b4adf72f523168d04b2d",
+    "motor_referencia": "deduplicar_v2.deduplicar_espejo_v2",
+    "sha256_motor": "6ec71ab60e8604605436d5ea73ffcd0e41f1246dcd93b4adf72f523168d04b2d",
+    "motor_misma_funcion": true,
+    "motor_opcion": "--deduplicacion v2"
+  },
+  "referencia": "solo [t_fin - 230 s, t_fin], como el motor en operación",
+  "filas_muestreadas": "repartidas a lo largo de la ejecución",
+  "filas_verificadas": 40,
+  "filas_totales": 664,
+  "diferencias": [],
+  "filas_por_ip_bloque": [
+    {
+      "ip": "10.10.20.21",
+      "bloque": "0",
+      "filas": 61
+    },
+    {
+      "ip": "10.10.20.21",
+      "bloque": "1",
+      "filas": 36
+    },
+    {
+      "ip": "10.10.20.21",
+      "bloque": "2",
+      "filas": 36
+    },
+    {
+      "ip": "10.10.20.21",
+      "bloque": "3",
+      "filas": 36
+    },
+    {
+      "ip": "10.10.20.22",
+      "bloque": "0",
+      "filas": 21
+    },
+    {
+      "ip": "10.10.20.22",
+      "bloque": "1",
+      "filas": 36
+    },
+    {
+      "ip": "10.10.20.22",
+      "bloque": "2",
+      "filas": 36
+    },
+    {
+      "ip": "10.10.20.22",
+      "bloque": "3",
+      "filas": 15
+    },
+    {
+      "ip": "10.10.20.23",
+      "bloque": "0",
+      "filas": 9
+    },
+    {
+      "ip": "10.10.20.23",
+      "bloque": "1",
+      "filas": 36
+    },
+    {
+      "ip": "10.10.20.23",
+      "bloque": "2",
+      "filas": 10
+    },
+    {
+      "ip": "10.10.20.24",
+      "bloque": "0",
+      "filas": 34
+    },
+    {
+      "ip": "10.10.20.24",
+      "bloque": "1",
+      "filas": 36
+    },
+    {
+      "ip": "10.10.20.24",
+      "bloque": "2",
+      "filas": 36
+    },
+    {
+      "ip": "10.10.20.24",
+      "bloque": "3",
+      "filas": 28
+    },
+    {
+      "ip": "10.10.20.25",
+      "bloque": "1",
+      "filas": 29
+    },
+    {
+      "ip": "10.10.20.25",
+      "bloque": "2",
+      "filas": 36
+    },
+    {
+      "ip": "10.10.20.25",
+      "bloque": "3",
+      "filas": 5
+    },
+    {
+      "ip": "10.10.20.26",
+      "bloque": "0",
+      "filas": 32
+    },
+    {
+      "ip": "10.10.20.26",
+      "bloque": "1",
+      "filas": 36
+    },
+    {
+      "ip": "10.10.20.26",
+      "bloque": "2",
+      "filas": 36
+    },
+    {
+      "ip": "10.10.20.26",
+      "bloque": "3",
+      "filas": 24
+    }
+  ],
+  "copias_espejo_quitadas": 405145,
+  "paquetes_descartados_poblacion": 402476
+}

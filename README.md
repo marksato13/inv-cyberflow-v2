@@ -25,6 +25,7 @@ V2 vuelve a capturar los datos y vuelve a entrenar el escalador y el IF, a calib
 - Estado del Bloque 1:
   - `docs/BLOQUE1-REVISION-7-2026-11-26.md`: Suricata por intervalos (pérdida atribuible frente a no localizada, el fallo manda sobre la falta de evidencia), continuidad con `uptime` y paso de cierre comprobado (lo vigente);
   - `docs/BLOQUE1-REVISION-8-2026-11-27.md`: fallo de la suite de r7 (no recuperable, registro completo desde r8), pruebas del sondeo estables con carga, «tcpdump-ring» aclarado (el anillo es `ppi-motor-capture`), memoria de la lectura de la EVE en el cierre y criterios V4-a/V4-b del bloque 4;
+  - `docs/BLOQUE1-BLOQUE3-INTEGRACION-2026-11-27.md`: reproducción publicada con las referencias del Bloque 3 y prueba técnica sintética de 49 h sobre 2,8 GB; el despliegue y el cierre real siguen pendientes;
   - `docs/BLOQUE1-REVISION-6-2026-11-26.md`: suficiencia temporal de Suricata (el periodo debe quedar acotado), C9 sin depender de C7, `dictamen_casos` sin copia recursiva, qué valores publicados deciden el dictamen, y dependencias;
   - `docs/BLOQUE1-REVISION-5-2026-11-26.md`: reproducción limpia, Suricata `kernel_drops` (sí se mide),
     conciliación de pendientes y **matriz final del Bloque 1**;
@@ -37,7 +38,7 @@ V2 vuelve a capturar los datos y vuelve a entrenar el escalador y el IF, a calib
   las de otros bloques siguen pendientes aparte. VD3 se conserva como `no_aprobada`.
 - **Siguen abiertos:**
   - del propio bloque: la causa interna de la pérdida en el switch;
-  - del bloque 3: la deduplicación del extractor;
+  - del bloque 3: despliegue y comprobación integrada de la deduplicación en el cierre real;
   - del bloque 4: el reloj de DC1, la rotación del EVE y la supervisión prolongada.
 
   Suricata `kernel_drops` se mide y vale 0: la afirmación anterior de «no medible» era falsa
@@ -59,7 +60,7 @@ python -X utf8 operacion/reproducir_dictamen.py
 python -X utf8 operacion/recalcular_desde_capturas.py evidencias/bloque1/entradas-r4 --p2 evidencias/bloque1/extractos-539c48e/p2-V2-VD2-20261126T090705Z
 ```
 
-Resultado esperado: cada guion termina en `GLOBAL SATISFACTORIO` (rc 0). `reproducir_dictamen.py` aplica por omisión los complementos `suricata-r5`, `suricata-r6` y `suricata-r7` (REVISION-7 §5).
+Resultado esperado: cada guion termina en `GLOBAL SATISFACTORIO` (rc 0). `reproducir_dictamen.py` aplica por omisión `suricata-r5`, `suricata-r6`, `suricata-r7` y `evidencias/bloque3/deduplicacion/` (referencia integrada). Las 32 entradas de este último complemento y sus hashes están publicadas en `evidencias/bloque3/deduplicacion/`. La referencia histórica r4 se elige expresamente con `reproducir_dictamen.py --sin-complemento` o, para el recálculo de la extracción, `recalcular_desde_capturas.py ... --referencia-extraccion paquete`. Esos modos históricos se interpretan con los criterios de r4; el modo por omisión es el vigente.
 
 ### Pruebas
 
@@ -70,14 +71,13 @@ python -m pip install pytest
 python -m pytest -q -p no:cacheprovider tests
 ```
 
-Resultado esperado con el código de la 8.ª revisión: `348 passed, 38 subtests passed`. Las pruebas del fragmento de `cerrar_v2.sh` y del preflight necesitan bash (en Windows, Git Bash); sin él se omiten. Cada pasada deja su registro completo (traza de cada fallo, todas las pruebas y un resumen) en `tests/_registros_pytest/<UTC>-<pid>/`, aunque la consola se recorte (REVISION-8 §1). `python tests/carga_sondeo.py --factor 3 ...` repite las pruebas con la máquina cargada.
+Las pruebas del fragmento de `cerrar_v2.sh` y del preflight necesitan bash (en Windows, Git Bash); sin él se omiten. Cada pasada deja su registro completo (traza de cada fallo, todas las pruebas y un resumen) en `tests/_registros_pytest/<UTC>-<pid>/`, aunque la consola se recorte (REVISION-8 §1). `python tests/carga_sondeo.py --factor 3 ...` repite las pruebas con la máquina cargada. Los resultados del commit integrado están en `docs/BLOQUE1-BLOQUE3-INTEGRACION-2026-11-27.md`.
 
 - `verificar_paquetes.py` comprueba los sha256 frente al manifiesto versionado y extrae los paquetes.
 - `reproducir_dictamen.py` rehace el dictamen desde los resultados intermedios: dictamen, motivos,
   criterios y los ocho casos de VD2, VD3, VD4 y VD6 frente a la referencia del laboratorio. Usa por
-  omisión el complemento `evidencias/bloque1/suricata-r5/`: los eventos `stats` originales de Suricata y
-  la referencia recalculada (revisión 5). Comprueba además el componente de Suricata de C9 y que cada
-  lectura de la supervisión coincida con la EVE.
+  omisión los complementos de Suricata r5–r7 y la referencia de deduplicación del Bloque 3. Comprueba
+  además el componente de Suricata de C9 y que cada lectura de la supervisión coincida con la EVE.
   Resultados esperados: VD2 `indeterminada`, VD3 `no_aprobada`, VD4 y VD6 `aprobada`.
 - `recalcular_desde_capturas.py` rehace cobertura, extremo, DNS, copias y extracción desde los
   PCAP/EVE, y las 45 transacciones de P2.
@@ -87,7 +87,7 @@ Qué no puede rehacerse, y por qué, está en `evidencias/bloque1/entradas-r4/LE
 - `C:\r4` con r4: `evidencias/bloque1/entradas-r4/REPRODUCCION-CLON-LIMPIO-intento2.txt`;
 - `C:\r5` con r5: `evidencias/bloque1/suricata-r5/REPRODUCCION-CLON-LIMPIO-intento3.txt`.
 
-El primer intento falló por la longitud de las rutas, y su registro se conserva.
+El primer intento falló por la longitud de las rutas, y su registro se conserva. La comprobación de la referencia integrada actual, desde un clon del commit publicado y sin ficheros locales adicionales, se registra aparte en `docs/BLOQUE1-BLOQUE3-INTEGRACION-2026-11-27.md`.
 
 | Carpeta | Contenido |
 |---|---|

@@ -15,6 +15,11 @@ Para cada ejecución vuelve a ejecutar, en una carpeta temporal y con el código
 cobertura_v2 (C7), comparar_extremo (calidad_extremo), contraste_dns (calidad_dns), copias_espejo
 (calidad_copias) y extraer_v2 (C11). Compara cada salida con la del laboratorio campo a campo.
 
+La extracción se compara, por omisión, con la del complemento del Bloque 3
+(evidencias/bloque3/deduplicacion/<ID>/pruebas/<ID>/extraccion/), que el laboratorio repitió sobre los
+originales con deduplicar_v2. La del paquete r4 se hizo con la deduplicación de V1. Con
+`--referencia-extraccion paquete` se compara con esa.
+
 Cada campo que difiere se clasifica:
 - «esperada»: el campo cuenta tráfico que NO es experimental (gestión, equipos ajenos), que el
   extracto quitó a propósito. Esos campos están listados en DEPENDEN_DEL_TRAFICO_AJENO, con el

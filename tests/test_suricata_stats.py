@@ -97,6 +97,34 @@ class Suficiencia(unittest.TestCase):
             self.assertEqual(r["eventos"], 7)                 # 40, 48 … 88 s dentro de [34, 94]
             self.assertNotIn("10.10.20.21", (Path(t) / "v.jsonl").read_text())
 
+    def test_ventana_convarias_fuentes_conserva_orden_y_bytes(self):
+        with tempfile.TemporaryDirectory() as t:
+            rutas = [Path(t) / "a.jsonl", Path(t) / "b.jsonl"]
+            rutas[0].write_text("".join(json.dumps(x) + "\n" for x in (stats(0, 100, 0), stats(16, 120, 0))))
+            rutas[1].write_text("".join(json.dumps(x) + "\n" for x in (stats(8, 110, 0), stats(24, 130, 0))))
+            esperado = ss.eventos_stats(rutas, T0, T0 + 24)
+            salida = Path(t) / "ventana.jsonl"
+            r = ss.ventana(rutas, T0, T0 + 24, 0, salida)
+            self.assertEqual(salida.read_bytes(),
+                             "".join(json.dumps(e, sort_keys=True, ensure_ascii=False) + "\n"
+                                     for e in esperado).encode())
+            self.assertEqual(r["evaluacion"], ss.evaluar(esperado, T0, T0 + 24))
+
+    def test_ventana_desordenada_conserva_semantica_anterior(self):
+        with tempfile.TemporaryDirectory() as t:
+            ruta = Path(t) / "eve.jsonl"
+            ruta.write_text("".join(json.dumps(x) + "\n" for x in
+                                     (stats(0, 100, 0), stats(16, 120, 0), stats(8, 110, 0))))
+            esperado = ss.eventos_stats([ruta], T0, T0 + 16)
+            salida = Path(t) / "ventana.jsonl"
+            perfil = {}
+            r = ss.ventana([ruta], T0, T0 + 16, 0, salida, perfil)
+            self.assertTrue(perfil["retroceso_por_desorden"])
+            self.assertEqual(salida.read_bytes(),
+                             "".join(json.dumps(e, sort_keys=True, ensure_ascii=False) + "\n"
+                                     for e in esperado).encode())
+            self.assertEqual(r["evaluacion"], ss.evaluar(esperado, T0, T0 + 16))
+
 
 class C9(unittest.TestCase):
     def ejecucion(self, filas, inicio_s=4, fin_s=28, en_ventana=False):

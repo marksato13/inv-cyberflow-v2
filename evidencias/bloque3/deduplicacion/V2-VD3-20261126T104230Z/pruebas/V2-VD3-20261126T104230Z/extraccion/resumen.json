@@ -1,0 +1,46 @@
+{
+  "copias_espejo_quitadas": 413632,
+  "paquetes_descartados_poblacion": 415655,
+  "paquetes_incluidos": 15767,
+  "eventos_incluidos": 1416,
+  "eventos_descartados_poblacion": 431,
+  "filas": 645,
+  "orden_eve": {
+    "reordenados": 6,
+    "tardios_descartados": 0,
+    "desorden_max_s": 0.000782012939453125,
+    "ventana_s": 60.0
+  },
+  "orden_pcap": {
+    "reordenadas": 11574,
+    "tardias_descartadas": 0,
+    "desorden_max_s": 0.003615140914916992,
+    "ventana_s": 1.0
+  },
+  "ejecucion": "V2-VD3-20261126T104230Z",
+  "poblacion": [
+    "10.10.20.21",
+    "10.10.20.22",
+    "10.10.20.23",
+    "10.10.20.24",
+    "10.10.20.25",
+    "10.10.20.26"
+  ],
+  "fronteras_utc": [
+    "2026-11-26T10:53:46.370044+00:00",
+    "2026-11-26T10:59:46.370044+00:00",
+    "2026-11-26T11:05:46.370044+00:00"
+  ],
+  "pcap_ficheros": 369,
+  "paso_s": 10,
+  "historia_maxima_s": 60,
+  "horizonte_estado_flujos_s": 230.0,
+  "guarda_estado_s": 230.0,
+  "estado": "continuo",
+  "deduplicacion": {
+    "funcion": "deduplicar_v2.deduplicar_espejo_v2",
+    "version": 3,
+    "ventana_copia_s": 0.02,
+    "sha256": "6ec71ab60e8604605436d5ea73ffcd0e41f1246dcd93b4adf72f523168d04b2d"
+  }
+}

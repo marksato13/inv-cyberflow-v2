@@ -44,5 +44,7 @@ tests/_registros_pytest/
 # Bloque 1, revisión 7: misma ventana (idéntica a r6) y referencia recalculada
 !evidencias/bloque1/suricata-r7/*/pruebas/
 !evidencias/bloque1/suricata-r7/*/pruebas/*/registros/suricata-stats-ventana-*.jsonl
+# Integración Bloque 1 + Bloque 3: solo resultados tabulares y referencias saneadas.
+!evidencias/bloque3/deduplicacion/*/pruebas/
 # carpeta de descarga de la release al reproducir desde un clon
 descargas/

@@ -1,0 +1,21 @@
+{
+ "codigo_salida": 0,
+ "cuentas": {
+  "passed": 388
+ },
+ "fallidas": [],
+ "duracion_s": 54.45,
+ "inicio_utc": "2026-11-28T00:57:44Z",
+ "argumentos": [
+  "-q",
+  "-p",
+  "no:cacheprovider",
+  "tests"
+ ],
+ "python": "3.14.3",
+ "pytest": "9.0.3",
+ "plataforma": "Windows-11-10.0.26300-SP0",
+ "cpu": 14,
+ "commit": "78bcc2000894f072d035f09aa2c65f06910c22b7",
+ "arbol_con_cambios": true
+}
