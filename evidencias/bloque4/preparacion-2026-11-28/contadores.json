@@ -1,0 +1,408 @@
+{
+  "tipo": "prueba tecnica sintetica; excluida del conjunto de investigacion",
+  "codigo_medido": "268083b",
+  "muestras": [
+    {
+      "fase": "antes",
+      "observado_utc": "2026-11-28T05:57:19.016704+00:00",
+      "unidades": {
+        "ppi-motor-capture": {
+          "MainPID": "1391",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        },
+        "suricata": {
+          "MainPID": "339658",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        }
+      },
+      "tcpdump": {
+        "linea": "2026-11-28T05:57:00+00:00 cyberflow-sensor tcpdump[1391]: tcpdump: 70320407 packets captured, 70320439 packets received by filter, 0 packets dropped by kernel",
+        "capturados": 70320407,
+        "recibidos": 70320439,
+        "descartados_kernel": 0
+      },
+      "suricata": {
+        "timestamp": "2026-11-28T05:57:18.618319+0000",
+        "uptime": 279520,
+        "kernel_packets": 52690795,
+        "kernel_drops": 0
+      }
+    },
+    {
+      "fase": "durante",
+      "observado_utc": "2026-11-28T05:57:29.080026+00:00",
+      "unidades": {
+        "ppi-motor-capture": {
+          "MainPID": "1391",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        },
+        "suricata": {
+          "MainPID": "339658",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        }
+      },
+      "tcpdump": {
+        "linea": "2026-11-28T05:57:00+00:00 cyberflow-sensor tcpdump[1391]: tcpdump: 70320407 packets captured, 70320439 packets received by filter, 0 packets dropped by kernel",
+        "capturados": 70320407,
+        "recibidos": 70320439,
+        "descartados_kernel": 0
+      },
+      "suricata": {
+        "timestamp": "2026-11-28T05:57:26.619484+0000",
+        "uptime": 279528,
+        "kernel_packets": 52692419,
+        "kernel_drops": 0
+      }
+    },
+    {
+      "fase": "durante",
+      "observado_utc": "2026-11-28T05:57:39.145547+00:00",
+      "unidades": {
+        "ppi-motor-capture": {
+          "MainPID": "1391",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        },
+        "suricata": {
+          "MainPID": "339658",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        }
+      },
+      "tcpdump": {
+        "linea": "2026-11-28T05:57:30+00:00 cyberflow-sensor tcpdump[1391]: tcpdump: 70325769 packets captured, 70325775 packets received by filter, 0 packets dropped by kernel",
+        "capturados": 70325769,
+        "recibidos": 70325775,
+        "descartados_kernel": 0
+      },
+      "suricata": {
+        "timestamp": "2026-11-28T05:57:34.620641+0000",
+        "uptime": 279536,
+        "kernel_packets": 52693853,
+        "kernel_drops": 0
+      }
+    },
+    {
+      "fase": "durante",
+      "observado_utc": "2026-11-28T05:57:49.206675+00:00",
+      "unidades": {
+        "ppi-motor-capture": {
+          "MainPID": "1391",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        },
+        "suricata": {
+          "MainPID": "339658",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        }
+      },
+      "tcpdump": {
+        "linea": "2026-11-28T05:57:30+00:00 cyberflow-sensor tcpdump[1391]: tcpdump: 70325769 packets captured, 70325775 packets received by filter, 0 packets dropped by kernel",
+        "capturados": 70325769,
+        "recibidos": 70325775,
+        "descartados_kernel": 0
+      },
+      "suricata": {
+        "timestamp": "2026-11-28T05:57:42.621823+0000",
+        "uptime": 279544,
+        "kernel_packets": 52695138,
+        "kernel_drops": 0
+      }
+    },
+    {
+      "fase": "durante",
+      "observado_utc": "2026-11-28T05:57:59.266158+00:00",
+      "unidades": {
+        "ppi-motor-capture": {
+          "MainPID": "1391",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        },
+        "suricata": {
+          "MainPID": "339658",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        }
+      },
+      "tcpdump": {
+        "linea": "2026-11-28T05:57:30+00:00 cyberflow-sensor tcpdump[1391]: tcpdump: 70325769 packets captured, 70325775 packets received by filter, 0 packets dropped by kernel",
+        "capturados": 70325769,
+        "recibidos": 70325775,
+        "descartados_kernel": 0
+      },
+      "suricata": {
+        "timestamp": "2026-11-28T05:57:58.624045+0000",
+        "uptime": 279560,
+        "kernel_packets": 52698164,
+        "kernel_drops": 0
+      }
+    },
+    {
+      "fase": "durante",
+      "observado_utc": "2026-11-28T05:58:09.324684+00:00",
+      "unidades": {
+        "ppi-motor-capture": {
+          "MainPID": "1391",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        },
+        "suricata": {
+          "MainPID": "339658",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        }
+      },
+      "tcpdump": {
+        "linea": "2026-11-28T05:58:00+00:00 cyberflow-sensor tcpdump[1391]: tcpdump: 70330934 packets captured, 70331046 packets received by filter, 0 packets dropped by kernel",
+        "capturados": 70330934,
+        "recibidos": 70331046,
+        "descartados_kernel": 0
+      },
+      "suricata": {
+        "timestamp": "2026-11-28T05:58:06.625175+0000",
+        "uptime": 279568,
+        "kernel_packets": 52699179,
+        "kernel_drops": 0
+      }
+    },
+    {
+      "fase": "durante",
+      "observado_utc": "2026-11-28T05:58:19.382730+00:00",
+      "unidades": {
+        "ppi-motor-capture": {
+          "MainPID": "1391",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        },
+        "suricata": {
+          "MainPID": "339658",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        }
+      },
+      "tcpdump": {
+        "linea": "2026-11-28T05:58:00+00:00 cyberflow-sensor tcpdump[1391]: tcpdump: 70330934 packets captured, 70331046 packets received by filter, 0 packets dropped by kernel",
+        "capturados": 70330934,
+        "recibidos": 70331046,
+        "descartados_kernel": 0
+      },
+      "suricata": {
+        "timestamp": "2026-11-28T05:58:14.626293+0000",
+        "uptime": 279576,
+        "kernel_packets": 52700584,
+        "kernel_drops": 0
+      }
+    },
+    {
+      "fase": "durante",
+      "observado_utc": "2026-11-28T05:58:29.444533+00:00",
+      "unidades": {
+        "ppi-motor-capture": {
+          "MainPID": "1391",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        },
+        "suricata": {
+          "MainPID": "339658",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        }
+      },
+      "tcpdump": {
+        "linea": "2026-11-28T05:58:00+00:00 cyberflow-sensor tcpdump[1391]: tcpdump: 70330934 packets captured, 70331046 packets received by filter, 0 packets dropped by kernel",
+        "capturados": 70330934,
+        "recibidos": 70331046,
+        "descartados_kernel": 0
+      },
+      "suricata": {
+        "timestamp": "2026-11-28T05:58:22.627660+0000",
+        "uptime": 279584,
+        "kernel_packets": 52702257,
+        "kernel_drops": 0
+      }
+    },
+    {
+      "fase": "durante",
+      "observado_utc": "2026-11-28T05:58:39.510145+00:00",
+      "unidades": {
+        "ppi-motor-capture": {
+          "MainPID": "1391",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        },
+        "suricata": {
+          "MainPID": "339658",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        }
+      },
+      "tcpdump": {
+        "linea": "2026-11-28T05:58:30+00:00 cyberflow-sensor tcpdump[1391]: tcpdump: 70336121 packets captured, 70336123 packets received by filter, 0 packets dropped by kernel",
+        "capturados": 70336121,
+        "recibidos": 70336123,
+        "descartados_kernel": 0
+      },
+      "suricata": {
+        "timestamp": "2026-11-28T05:58:38.630010+0000",
+        "uptime": 279600,
+        "kernel_packets": 52704663,
+        "kernel_drops": 0
+      }
+    },
+    {
+      "fase": "durante",
+      "observado_utc": "2026-11-28T05:58:49.574253+00:00",
+      "unidades": {
+        "ppi-motor-capture": {
+          "MainPID": "1391",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        },
+        "suricata": {
+          "MainPID": "339658",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        }
+      },
+      "tcpdump": {
+        "linea": "2026-11-28T05:58:30+00:00 cyberflow-sensor tcpdump[1391]: tcpdump: 70336121 packets captured, 70336123 packets received by filter, 0 packets dropped by kernel",
+        "capturados": 70336121,
+        "recibidos": 70336123,
+        "descartados_kernel": 0
+      },
+      "suricata": {
+        "timestamp": "2026-11-28T05:58:46.631191+0000",
+        "uptime": 279608,
+        "kernel_packets": 52706121,
+        "kernel_drops": 0
+      }
+    },
+    {
+      "fase": "durante",
+      "observado_utc": "2026-11-28T05:58:59.638282+00:00",
+      "unidades": {
+        "ppi-motor-capture": {
+          "MainPID": "1391",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        },
+        "suricata": {
+          "MainPID": "339658",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        }
+      },
+      "tcpdump": {
+        "linea": "2026-11-28T05:58:30+00:00 cyberflow-sensor tcpdump[1391]: tcpdump: 70336121 packets captured, 70336123 packets received by filter, 0 packets dropped by kernel",
+        "capturados": 70336121,
+        "recibidos": 70336123,
+        "descartados_kernel": 0
+      },
+      "suricata": {
+        "timestamp": "2026-11-28T05:58:54.632398+0000",
+        "uptime": 279616,
+        "kernel_packets": 52707121,
+        "kernel_drops": 0
+      }
+    },
+    {
+      "fase": "durante",
+      "observado_utc": "2026-11-28T05:59:09.700198+00:00",
+      "unidades": {
+        "ppi-motor-capture": {
+          "MainPID": "1391",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        },
+        "suricata": {
+          "MainPID": "339658",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        }
+      },
+      "tcpdump": {
+        "linea": "2026-11-28T05:59:00+00:00 cyberflow-sensor tcpdump[1391]: tcpdump: 70340912 packets captured, 70340986 packets received by filter, 0 packets dropped by kernel",
+        "capturados": 70340912,
+        "recibidos": 70340986,
+        "descartados_kernel": 0
+      },
+      "suricata": {
+        "timestamp": "2026-11-28T05:59:02.633664+0000",
+        "uptime": 279624,
+        "kernel_packets": 52708544,
+        "kernel_drops": 0
+      }
+    },
+    {
+      "fase": "durante",
+      "observado_utc": "2026-11-28T05:59:19.760033+00:00",
+      "unidades": {
+        "ppi-motor-capture": {
+          "MainPID": "1391",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        },
+        "suricata": {
+          "MainPID": "339658",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        }
+      },
+      "tcpdump": {
+        "linea": "2026-11-28T05:59:00+00:00 cyberflow-sensor tcpdump[1391]: tcpdump: 70340912 packets captured, 70340986 packets received by filter, 0 packets dropped by kernel",
+        "capturados": 70340912,
+        "recibidos": 70340986,
+        "descartados_kernel": 0
+      },
+      "suricata": {
+        "timestamp": "2026-11-28T05:59:18.636011+0000",
+        "uptime": 279640,
+        "kernel_packets": 52710962,
+        "kernel_drops": 0
+      }
+    },
+    {
+      "fase": "despues",
+      "observado_utc": "2026-11-28T05:59:54.820139+00:00",
+      "unidades": {
+        "ppi-motor-capture": {
+          "MainPID": "1391",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        },
+        "suricata": {
+          "MainPID": "339658",
+          "NRestarts": "0",
+          "ActiveState": "active"
+        }
+      },
+      "tcpdump": {
+        "linea": "2026-11-28T05:59:30+00:00 cyberflow-sensor tcpdump[1391]: tcpdump: 70345613 packets captured, 70345741 packets received by filter, 0 packets dropped by kernel",
+        "capturados": 70345613,
+        "recibidos": 70345741,
+        "descartados_kernel": 0
+      },
+      "suricata": {
+        "timestamp": "2026-11-28T05:59:50.640662+0000",
+        "uptime": 279672,
+        "kernel_packets": 52716323,
+        "kernel_drops": 0
+      }
+    }
+  ],
+  "rc_medidor": 0,
+  "evaluacion_contadores": {
+    "muestras_durante": 12,
+    "delta_tcpdump_descartados": 0,
+    "delta_suricata_kernel_drops": 0,
+    "mismo_pid_tcpdump": true,
+    "mismo_pid_suricata": true,
+    "sin_reinicios": true,
+    "ambas_activas": true
+  }
+}

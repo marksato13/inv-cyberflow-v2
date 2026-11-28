@@ -1,0 +1,24 @@
+EQUIPO:local
+268083b
+/home/gadmin/cyberflow-v2/codigo-91b9798
+dd8384c26211987d948ecfb8938c903a4eb167e872146ddbcb392b1ba0814d3a  /home/gadmin/cyberflow-v2/codigo/operacion/suricata_stats.py
+6ec71ab60e8604605436d5ea73ffcd0e41f1246dcd93b4adf72f523168d04b2d  /home/gadmin/cyberflow-v2/codigo/extraccion/deduplicar_v2.py
+fa2e789e6e7ee0cf03bb9f32439cd80997f66bfc395a8f9bb5ab80fc4e5a9312  /home/gadmin/cyberflow-v2/codigo/programas/piloto-30min.json
+080f36c6c076b282607f6dfd4bffca20cea8d0f20691a0f8fa22187abdf4d787  /home/gadmin/cyberflow-v2/codigo-91b9798/operacion/suricata_stats.py
+EQUIPO:sensor1
+268083b
+/home/m4rk/cyberflow-v2/codigo-91b9798
+dd8384c26211987d948ecfb8938c903a4eb167e872146ddbcb392b1ba0814d3a  /home/m4rk/cyberflow-v2/codigo/operacion/suricata_stats.py
+6ec71ab60e8604605436d5ea73ffcd0e41f1246dcd93b4adf72f523168d04b2d  /home/m4rk/cyberflow-v2/codigo/extraccion/deduplicar_v2.py
+fa2e789e6e7ee0cf03bb9f32439cd80997f66bfc395a8f9bb5ab80fc4e5a9312  /home/m4rk/cyberflow-v2/codigo/programas/piloto-30min.json
+080f36c6c076b282607f6dfd4bffca20cea8d0f20691a0f8fa22187abdf4d787  /home/m4rk/cyberflow-v2/codigo-91b9798/operacion/suricata_stats.py
+EQUIPO:clientes
+268083b
+/home/adminclientes/cyberflow-v2/codigo-91b9798
+dd8384c26211987d948ecfb8938c903a4eb167e872146ddbcb392b1ba0814d3a  /home/adminclientes/cyberflow-v2/codigo/operacion/suricata_stats.py
+6ec71ab60e8604605436d5ea73ffcd0e41f1246dcd93b4adf72f523168d04b2d  /home/adminclientes/cyberflow-v2/codigo/extraccion/deduplicar_v2.py
+fa2e789e6e7ee0cf03bb9f32439cd80997f66bfc395a8f9bb5ab80fc4e5a9312  /home/adminclientes/cyberflow-v2/codigo/programas/piloto-30min.json
+080f36c6c076b282607f6dfd4bffca20cea8d0f20691a0f8fa22187abdf4d787  /home/adminclientes/cyberflow-v2/codigo-91b9798/operacion/suricata_stats.py
+DC1
+f4d17e4d01b5d81344785192c3c5632184a77d9b56a1a37d742a21f450c4c116  /home/dcadmin/cyberflow-v2/servidor/registro_dns_v2.py
+f4d17e4d01b5d81344785192c3c5632184a77d9b56a1a37d742a21f450c4c116  /home/dcadmin/cyberflow-v2/servidor/registro_dns_v2.py.antes-268083b

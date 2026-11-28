@@ -1,0 +1,143 @@
+{
+  "tipo": "prueba tecnica sintetica; excluida del conjunto de investigacion",
+  "eve_bytes": 2799997693,
+  "eve_sha256": "6fd4071acffea74aa3e5836075816da3aa79109e483f4b05c5d91f7f070af70e",
+  "stats_sha256": "2ee45968cecab2d5435804e4560a7df14302b30bbfe0d972c6f9550bd8aa8e94",
+  "resultados": [
+    {
+      "caso": "completo",
+      "rc": 0,
+      "estado": "presente",
+      "eventos": 22051,
+      "eventos_usados": 22051,
+      "intervalo_evaluado_s": 176400.0,
+      "intentos": [
+        {
+          "intento": 1,
+          "estado": "presente",
+          "eventos": 22051,
+          "muestra_despues_s": 0.0
+        }
+      ],
+      "duracion_total_s": 16.876,
+      "fases": [
+        {
+          "intento": 1,
+          "lectura_s": 15.284,
+          "escritura_s": 1.414,
+          "rss_tras_lectura_escritura_kb": {
+            "VmHWM": 34332,
+            "VmRSS": 34332
+          },
+          "retroceso_por_desorden": false,
+          "evaluacion_s": 0.17,
+          "rss_tras_evaluacion_kb": {
+            "VmHWM": 39452,
+            "VmRSS": 37420
+          }
+        }
+      ],
+      "pico_rss_kb": 39452,
+      "sha256_salida": "2ee45968cecab2d5435804e4560a7df14302b30bbfe0d972c6f9550bd8aa8e94"
+    },
+    {
+      "caso": "sin_muestra_posterior",
+      "rc": 3,
+      "estado": "insuficiente",
+      "eventos": 22051,
+      "eventos_usados": 22051,
+      "intervalo_evaluado_s": 176401.0,
+      "intentos": [
+        {
+          "intento": 1,
+          "estado": "insuficiente",
+          "eventos": 22051,
+          "muestra_despues_s": null
+        },
+        {
+          "intento": 2,
+          "estado": "insuficiente",
+          "eventos": 22051,
+          "muestra_despues_s": null
+        },
+        {
+          "intento": 3,
+          "estado": "insuficiente",
+          "eventos": 22051,
+          "muestra_despues_s": null
+        },
+        {
+          "intento": 4,
+          "estado": "insuficiente",
+          "eventos": 22051,
+          "muestra_despues_s": null
+        }
+      ],
+      "duracion_total_s": 88.06,
+      "fases": [
+        {
+          "intento": 1,
+          "lectura_s": 16.759,
+          "escritura_s": 1.442,
+          "rss_tras_lectura_escritura_kb": {
+            "VmHWM": 39452,
+            "VmRSS": 34340
+          },
+          "retroceso_por_desorden": false,
+          "evaluacion_s": 0.173,
+          "rss_tras_evaluacion_kb": {
+            "VmHWM": 39460,
+            "VmRSS": 37424
+          }
+        },
+        {
+          "intento": 2,
+          "lectura_s": 15.523,
+          "escritura_s": 1.42,
+          "rss_tras_lectura_escritura_kb": {
+            "VmHWM": 39460,
+            "VmRSS": 34736
+          },
+          "retroceso_por_desorden": false,
+          "evaluacion_s": 0.157,
+          "rss_tras_evaluacion_kb": {
+            "VmHWM": 39460,
+            "VmRSS": 37392
+          }
+        },
+        {
+          "intento": 3,
+          "lectura_s": 15.396,
+          "escritura_s": 1.392,
+          "rss_tras_lectura_escritura_kb": {
+            "VmHWM": 39460,
+            "VmRSS": 35728
+          },
+          "retroceso_por_desorden": false,
+          "evaluacion_s": 0.157,
+          "rss_tras_evaluacion_kb": {
+            "VmHWM": 39460,
+            "VmRSS": 37396
+          }
+        },
+        {
+          "intento": 4,
+          "lectura_s": 15.415,
+          "escritura_s": 1.41,
+          "rss_tras_lectura_escritura_kb": {
+            "VmHWM": 39460,
+            "VmRSS": 36372
+          },
+          "retroceso_por_desorden": false,
+          "evaluacion_s": 0.157,
+          "rss_tras_evaluacion_kb": {
+            "VmHWM": 39460,
+            "VmRSS": 38432
+          }
+        }
+      ],
+      "pico_rss_kb": 39460,
+      "sha256_salida": "2ee45968cecab2d5435804e4560a7df14302b30bbfe0d972c6f9550bd8aa8e94"
+    }
+  ]
+}

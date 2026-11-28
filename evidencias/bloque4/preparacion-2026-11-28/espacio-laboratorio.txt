@@ -1,0 +1,43 @@
+2026-11-28T06:02:02Z
+bastion
+Filesystem     Mounted on      Avail
+/dev/sda1      /          2570498048
+==== sensor1
+Filesystem                        Mounted on       Avail
+/dev/mapper/ubuntu--vg-ubuntu--lv /          16219566080
+NAME                       SIZE FSTYPE      MOUNTPOINTS
+sda                         80G
+├─sda1                       1G vfat        /boot/efi
+├─sda2                       2G ext4        /boot
+└─sda3                    76,9G LVM2_member
+  └─ubuntu--vg-ubuntu--lv 76,9G ext4        /
+sr0                       1024M
+==== srvdmz
+Filesystem                        Mounted on       Avail
+/dev/mapper/ubuntu--vg-ubuntu--lv /          10195836928
+NAME                       SIZE FSTYPE      MOUNTPOINTS
+sda                         20G
+├─sda1                     953M vfat        /boot/efi
+├─sda2                     1,8G ext4        /boot
+└─sda3                    17,3G LVM2_member
+  └─ubuntu--vg-ubuntu--lv 17,3G ext4        /
+sr0                       1024M
+==== clientes
+Filesystem                        Mounted on      Avail
+/dev/mapper/ubuntu--vg-ubuntu--lv /          5890629632
+NAME                       SIZE FSTYPE      MOUNTPOINTS
+sda                         30G
+├─sda1                       1G vfat        /boot/efi
+├─sda2                       2G ext4        /boot
+└─sda3                    26,9G LVM2_member
+  └─ubuntu--vg-ubuntu--lv 13,5G ext4        /
+sr0                       1024M
+==== dcadmin@10.10.10.20
+Filesystem     Mounted on       Avail
+/dev/sda1      /          35173699584
+NAME    SIZE FSTYPE MOUNTPOINTS
+sda      40G
+├─sda1 37.9G ext4   /
+├─sda2    1K
+└─sda5  2.1G swap   [SWAP]
+sr0    1024M

@@ -105,8 +105,8 @@ Ver `programas/README.md` y el contrato §7. Los niveles son `reducido` (factor 
 
 **Volumen y destino:**
 
-- El volumen por hora se mide en el piloto.
-- Sensor1 tiene unos 24 GB libres en `/`. Las capturas completas se sacan de Sensor1 al terminar cada jornada, hacia un almacenamiento privado (destino pendiente: ver PENDIENTES).
+- El volumen por hora y por nivel se mide en el piloto integrado; el C12 de 49 h exige la medición prolongada.
+- La revisión de preparación del 28-nov (`BLOQUE4-PREPARACION-2026-11-28.md`) encontró 16,22 GB libres en Sensor1 y una proyección conservadora provisional de ≈ 50 GB para 49 h, más 4 GB de reserva local. La capacidad local y el destino privado de las capturas siguen sin resolver; no se inicia la captura definitiva antes de probar una solución.
 - En el repositorio solo se publican los manifiestos y los hashes.
 
 **Bloqueante hallado el 24-nov.** El espejo no entrega a `ens37` las tramas de tamaño completo (802.1Q de 1518 bytes): falta casi toda la carga útil de las descargas (T3/T4 del informe). Hasta corregirlo no se pueden reconstruir las características de bytes a partir de los originales. Ver `docs/INFORME-PRUEBAS-2026-11-24.md` §4.

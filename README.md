@@ -19,14 +19,15 @@ V2 vuelve a capturar los datos y vuelve a entrenar el escalador y el IF, a calib
   están en `evidencias/bloque1/entradas-r4/SHA256SUMS-bloque1-r4.txt`;
 - anterior: https://github.com/marksato13/inv-cyberflow-v2/releases/tag/bloque1-cierre-2026-11-26.
 
-**Estado (27-nov-2026): Bloque 1 (calidad de captura) en revisión; preparación.**
+**Estado (28-nov-2026): Bloques 1–3 preparados y código integrado desplegado; Bloque 4 en preparación.**
 
 - El piloto final y las 49 h definitivas, los ataques y las campañas A/B **no se han iniciado**.
 - Estado del Bloque 1:
   - `docs/BLOQUE1-REVISION-7-2026-11-26.md`: Suricata por intervalos (pérdida atribuible frente a no localizada, el fallo manda sobre la falta de evidencia), continuidad con `uptime` y paso de cierre comprobado (lo vigente);
   - `docs/BLOQUE1-REVISION-8-2026-11-27.md`: fallo de la suite de r7 (no recuperable, registro completo desde r8), pruebas del sondeo estables con carga, «tcpdump-ring» aclarado (el anillo es `ppi-motor-capture`), memoria de la lectura de la EVE en el cierre y criterios V4-a/V4-b del bloque 4;
-  - `docs/BLOQUE1-BLOQUE3-INTEGRACION-2026-11-27.md`: reproducción publicada con las referencias del Bloque 3 y prueba técnica sintética de 49 h sobre 2,8 GB; el despliegue y el cierre real siguen pendientes;
+  - `docs/BLOQUE1-BLOQUE3-INTEGRACION-2026-11-27.md`: reproducción publicada con las referencias del Bloque 3 y primera prueba técnica sintética de 49 h sobre 2,8 GB;
   - `docs/BLOQUE2-REVISION-2026-11-28.md`: matriz del Excel frente a los seis perfiles y las siete jornadas de 7 h, T1/T2 y pruebas dirigidas; las jornadas reales siguen pendientes;
+  - `docs/BLOQUE4-PREPARACION-2026-11-28.md`: despliegue `268083b` con respaldos y hashes, repetición de V4-b con descartes concurrentes y capacidad que aún bloquea las 49 h; V4-a (cierre completo) sigue pendiente del piloto autorizado;
   - `docs/BLOQUE1-REVISION-6-2026-11-26.md`: suficiencia temporal de Suricata (el periodo debe quedar acotado), C9 sin depender de C7, `dictamen_casos` sin copia recursiva, qué valores publicados deciden el dictamen, y dependencias;
   - `docs/BLOQUE1-REVISION-5-2026-11-26.md`: reproducción limpia, Suricata `kernel_drops` (sí se mide),
     conciliación de pendientes y **matriz final del Bloque 1**;
@@ -39,8 +40,8 @@ V2 vuelve a capturar los datos y vuelve a entrenar el escalador y el IF, a calib
   las de otros bloques siguen pendientes aparte. VD3 se conserva como `no_aprobada`.
 - **Siguen abiertos:**
   - del propio bloque: la causa interna de la pérdida en el switch;
-  - del bloque 3: despliegue y comprobación integrada de la deduplicación en el cierre real;
-  - del bloque 4: el reloj de DC1, la rotación del EVE y la supervisión prolongada.
+  - del bloque 3: comprobación integrada de la deduplicación en el cierre real;
+  - del bloque 4: cierre completo V4-a, capacidad/almacenamiento para 49 h, reloj de DC1, rotación del EVE y supervisión prolongada.
 
   Suricata `kernel_drops` se mide y vale 0: la afirmación anterior de «no medible» era falsa
   (REVISION-5 §2).

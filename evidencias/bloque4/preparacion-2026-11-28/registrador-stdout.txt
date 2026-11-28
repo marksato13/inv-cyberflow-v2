@@ -1,0 +1,1 @@
+{"muestras_durante": 12, "delta_tcpdump_descartados": 0, "delta_suricata_kernel_drops": 0, "mismo_pid_tcpdump": true, "mismo_pid_suricata": true, "sin_reinicios": true, "ambas_activas": true}

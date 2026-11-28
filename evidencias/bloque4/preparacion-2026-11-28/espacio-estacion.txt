@@ -1,0 +1,19 @@
+2026-11-28T06:02:18.7649596Z
+
+DriveLetter   : D
+FileSystem    : exFAT
+Size          : 62910365696
+SizeRemaining : 61028958208
+HealthStatus  : Healthy
+
+DriveLetter   : C
+FileSystem    : NTFS
+Size          : 510906068992
+SizeRemaining : 54477443072
+HealthStatus  : Healthy
+
+
+
+FriendlyName      : VendorCo ProductCode
+BusType           : USB
+OperationalStatus : Online

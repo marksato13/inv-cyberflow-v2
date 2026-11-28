@@ -1,0 +1,2 @@
+programa válido: V2-C49 (176400 s)
+programa válido: V2-P49 (1800 s)

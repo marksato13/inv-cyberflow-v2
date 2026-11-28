@@ -1,0 +1,11 @@
+{"comprobacion":"bastion_candado","resultado":"ok","detalle":"sin candado "}
+{"comprobacion":"bastion_procesos","resultado":"ok","detalle":"ninguno "}
+{"comprobacion":"sensor1_procesos_v2","resultado":"ok","detalle":"ninguno "}
+{"comprobacion":"sensor1_v1_servicios","resultado":"ok","detalle":"ppi-motor-capture, suricata, limpieza activos "}
+{"comprobacion":"sensor1_anillo","resultado":"ok","detalle":"ultimo PCAP hace 1 s "}
+{"comprobacion":"sensor1_unidad_tcpdump_ring","resultado":"ok","detalle":"LoadState not-found (no es el anillo; solo informativo) "}
+{"comprobacion":"sensor1_codigo","resultado":"ok","detalle":"268083b "}
+{"comprobacion":"clientes_procesos","resultado":"ok","detalle":"ninguno "}
+{"comprobacion":"srvdmz_tcpdump_v2","resultado":"ok","detalle":"ninguno "}
+{"comprobacion":"dc1_registro_dns","resultado":"ok","detalle":"ninguna unidad cf-v2-dns-* activa "}
+{"parado":"si","fallos":0}
