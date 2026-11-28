@@ -1,0 +1,6 @@
+V2-VD2-20261126T090705Z SATISFACTORIO {'cobertura': 'reproducido (7 esperadas, 0 inesperadas)', 'extremo': 'reproducido (370 esperadas, 0 inesperadas)', 'dns': 'reproducido (1 esperadas, 0 inesperadas)', 'copias': 'reproducido (2126 esperadas, 0 inesperadas)', 'extraccion': 'reproducido (9 esperadas, 0 inesperadas)'} 
+V2-VD3-20261126T104230Z SATISFACTORIO {'cobertura': 'reproducido (7 esperadas, 0 inesperadas)', 'extremo': 'reproducido (371 esperadas, 0 inesperadas)', 'dns': 'reproducido (1 esperadas, 0 inesperadas)', 'copias': 'reproducido (2134 esperadas, 0 inesperadas)', 'extraccion': 'reproducido (9 esperadas, 0 inesperadas)'} 
+V2-VD4-20261126T141333Z SATISFACTORIO {'cobertura': 'reproducido (7 esperadas, 0 inesperadas)', 'extremo': 'reproducido (371 esperadas, 0 inesperadas)', 'dns': 'reproducido (1 esperadas, 0 inesperadas)', 'copias': 'reproducido (2123 esperadas, 0 inesperadas)', 'extraccion': 'reproducido (9 esperadas, 0 inesperadas)'} 
+V2-VD6-20261126T151456Z SATISFACTORIO {'cobertura': 'reproducido (7 esperadas, 0 inesperadas)', 'extremo': 'reproducido (371 esperadas, 0 inesperadas)', 'dns': 'reproducido (1 esperadas, 0 inesperadas)', 'copias': 'reproducido (2117 esperadas, 0 inesperadas)', 'extraccion': 'reproducido (9 esperadas, 0 inesperadas)'} 
+P2 p2-V2-VD2-20261126T090705Z SATISFACTORIO 45 transacciones, 0 diferencias 
+GLOBAL SATISFACTORIO

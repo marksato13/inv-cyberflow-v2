@@ -5,6 +5,8 @@ Esta carpeta **no es el conjunto de investigación ni evidencia de una captura V
 - `medicion-r8-fallida.json`: primera medición con el código anterior, que alcanzó 1 686 068 KiB de RSS, por encima de 256 MiB. El hash de salida fue correcto; el fallo fue de memoria. Se conserva como intento fallido.
 - `medicion-integrada.json`: lectura, escritura, evaluación, RSS y duración del paso con el código corregido, incluido el caso de cuatro intentos y tres esperas reales de 6 s. Los hashes verifican la salida contra las 22 051 muestras del generador.
 - `suite-resultados.tsv` y `suite-resumen.json`: registro completo de la suite local sobre el árbol de código integrado antes del commit. Los 38 subtests aparecen en el resumen de consola como subtests; el registro cuenta 388 resultados individuales aprobados.
+- `clon-limpio-*`: salidas del dictamen, verificación de paquetes, recálculo y suite desde el clon remoto de `da9c62a`; se conserva el intento fallido del recálculo con un directorio de entrada equivocado.
+- `laboratorio-parado*.jsonl`: comprobación final de solo lectura. Los dos primeros envíos del script tuvieron rc 127 por el `\r` final de PowerShell, aunque emitieron `parado: si`; el envío como bytes LF terminó rc 0. Se conservan los tres.
 
 Comandos para regenerar en Sensor1 desde un clon del repositorio, con espacio suficiente en `/tmp`:
 
