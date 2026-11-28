@@ -12,7 +12,7 @@ El código de extracción y deduplicación del Bloque 3 ya estaba en el árbol; 
 
 Antes de incorporar B3, `python -X utf8 operacion/reproducir_dictamen.py` terminaba `NO SATISFACTORIO` en los cuatro IDs: exigía por omisión `evidencias/bloque3/deduplicacion/<ID>`, ausente en el clon. Se conserva ese diagnóstico; no se interpreta una ejecución histórica r4 como la integrada.
 
-Con las 32 entradas, el mismo comando local termina rc 0: VD2 `indeterminada`, VD3 `no_aprobada`, VD4 y VD6 `aprobada`, cada uno `SATISFACTORIO`, y `GLOBAL SATISFACTORIO`. Esto coteja resultados publicados con las referencias del laboratorio. No verifica de forma independiente todos los campos que dependen del anillo completo privado. La comprobación desde un clon remoto limpio y la descarga de la release se documentan abajo cuando queden ejecutadas.
+Con las 32 entradas, el mismo comando local termina rc 0: VD2 `indeterminada`, VD3 `no_aprobada`, VD4 y VD6 `aprobada`, cada uno `SATISFACTORIO`, y `GLOBAL SATISFACTORIO`. Esto coteja resultados publicados con las referencias del laboratorio. No verifica de forma independiente todos los campos que dependen del anillo completo privado. La comprobación desde un clon remoto limpio y la descarga de la release se documentan abajo.
 
 ## V4-b: intervalo técnico sintético y fallo conservado
 
@@ -35,7 +35,7 @@ El hash coincide con el producido por el generador y por el código r8. En el ca
 
 Tras copiar manifiesto y mediciones al repositorio, se eliminó únicamente `/tmp/cf-b1b3-49h-20261127` de Sensor1 para recuperar el espacio. El generador y el manifiesto publicado permiten reconstruir la entrada sintética y verificar su hash.
 
-La suite local sobre el árbol de código integrado dio **350 passed, 38 subtests passed** en 54,59 s, rc 0. Se guardaron `suite-resultados.tsv` y `suite-resumen.json` (388 resultados individuales; ningún fallo) en la carpeta de evidencias. El registro indica el commit padre y `arbol_con_cambios=true`, porque se ejecutó antes de consolidar este commit; la prueba desde el clon publicado verificará el código consolidado.
+La suite local sobre el árbol de código integrado dio **350 passed, 38 subtests passed** en 54,59 s, rc 0. Se guardaron `suite-resultados.tsv` y `suite-resumen.json` (388 resultados individuales; ningún fallo) en la carpeta de evidencias. El registro indica el commit padre y `arbol_con_cambios=true`, porque se ejecutó antes de consolidar el código. La prueba posterior desde el clon publicado verificó el commit consolidado `da9c62a`.
 
 ## Verificación desde un clon publicado limpio
 
